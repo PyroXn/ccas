@@ -2,7 +2,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns ="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
     <head>
-        <title>Simulation boursiere</title>
+        <title>ccas</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="./css.css" media="screen" />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
@@ -60,29 +60,27 @@
             </div>
 
 
+        </div>
+        
+        
+        <div class="login">
 
-            <!--            <form name="loginform" class="login-form" id="adminbarlogin" action="https://fr.wordpress.com/wp-login.php" method="post">
-                            <label class="login userlogin-label" id="userlogin_label"><input class="adminbar-input user-login-input" type="text" name="log" id="user_login" value="" tabindex="1" placeholder="Email ou nom d&rsquo;utilisateur"/></label>
-                            <label class="login password-label" id="password_label"><input class="adminbar-input user-pass-input" type="password" name="pwd" id="user_pass" value="" tabindex="2" placeholder="Mot de passe" /></label>
-                            <input type="hidden" id="testcookie" class="testcookie" name="testcookie" value="0" />
-                            <input type="hidden" id="redirect_to" name="redirect_to" value="http://fr.wordpress.com/" />
-                            <button class="adminbar-button" type="submit" name="submit" id="login-form" tabindex="4"><span>Connexion</span></button>
-                            <span class="adminbar-loginmeta"><input name="rememberme" type="checkbox" id="rememberme" value="forever" tabindex="3" checked="checked" />
-                                <label for="rememberme">Se souvenir de moi</label>
-                                <a href="http://wordpress.com/wp-login.php?action=lostpassword">Forgot password?</a>
-                                <a class="adminbarsignup" href="http://wordpress.com/signup/?ref=wpcomadminbar">S'enregistrer</a>
-                            </span>
-                            <script type="text/javascript">
-                            
-                            document.cookie='TESTCOOKIE=home; expires=Mon, 27 Feb 2012 07:46:19 +0000; path=/';jQuery('.testcookie').val('1');
-                            // 
-                            </script>
-                        </form>-->
-            <!--            <span id='adminbarsearch-wrap'>
-                            <form id="adminbarsearch" name="adminbarsearch" action="http://fr.search.wordpress.com/" method="get">
-                                <input class='adminbar-search-input' name='q' id='q' type='text' maxlength="150" placeholder="Recherche Blogs Wordpress.com" />
-                            </form>
-                        </span>-->
+            <form name="loginform" id="loginform" action="http://localhost/wordpress/wp-login.php" method="post">
+                <p>
+                    <label for="user_login">Identifiant<br />
+                        <input type="text" name="log" id="user_login" class="input" value="" size="20" tabindex="10" /></label>
+                </p>
+                <p>
+                    <label for="user_pass">Mot de passe<br />
+                        <input type="password" name="pwd" id="user_pass" class="input" value="" size="20" tabindex="20" /></label>
+                </p>
+                <p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" tabindex="90" /> Se souvenir de moi</label></p>
+                <p class="submit">
+                    <input type="submit" name="wp-submit" id="wp-submit" class="button-primary" value="Se connecter" tabindex="100" />
+                    <input type="hidden" name="redirect_to" value="wp-admin/edit.php?post_type=page" />
+                    <input type="hidden" name="testcookie" value="1" />
+                </p>
+            </form>
         </div>
     </body>
 </html>

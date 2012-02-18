@@ -6,10 +6,10 @@ html, body, div, img, li, form, fieldset, input, textarea, h1, h2, h3, h4, h5, h
 a:link, a:visited, a:hover, a:active, a:focus {
     text-decoration: none;
 }
-/*
+
 body {
-    background-color: grey;
-}*/
+    background: #FBFBFB;
+}
 
 ul {
     list-style: none outside none;
@@ -75,7 +75,7 @@ ul {
 
 #navigationbar .actif .border_top {
     border-top: 0px solid #BEBEBE;
-/*    border-top-color: #BEBEBE;*/
+    /*    border-top-color: #BEBEBE;*/
 }
 
 
@@ -155,8 +155,53 @@ ul {
 }
 
 
-.gbto {
-    box-shadow: 0 2px 4px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
-    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+.login {
+    width: 320px;
+    padding: 114px 0 0;
+    margin: auto;
+}
+
+
+.login form {
+    margin-left: 8px;
+    padding: 26px 24px 46px;
+    font-weight: normal;
+    background: white;
+    border: 1px solid #E5E5E5;
+    -moz-box-shadow: rgba(200,200,200,0.7) 0 4px 10px -1px;
+    -webkit-box-shadow: rgba(200,200,200,0.7) 0 4px 10px -1px;
+    box-shadow: rgba(200,200,200,0.7) 0 4px 10px -1px;
+
+
+
+}
+
+.widefat, div.updated, div.error, .wrap .add-new-h2, textarea, input[type="text"], input[type="password"], input[type="file"], input[type="button"], input[type="submit"], input[type="reset"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="url"], select, .tablenav .tablenav-pages a, .tablenav-pages span.current, #titlediv #title, .postbox, #postcustomstuff table, #postcustomstuff input, #postcustomstuff textarea, .imgedit-menu div, .plugin-update-tr .update-message, #poststuff .inside .the-tagcloud, .login form, #login_error, .login .message, #menu-management .menu-edit, .nav-menus-php .list-container, .menu-item-handle, .link-to-original, .nav-menus-php .major-publishing-actions .form-invalid, .press-this #message, #TB_window, .tbtitle, .highlight, .feature-filter, #widget-list .widget-top, .editwidget .widget-inside {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.login form .input {
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 1;
+    width: 100%;
+    padding: 3px;
+    margin-top: 2px;
+    margin-right: 6px;
+    margin-bottom: 16px;
+    border: 1px solid #E5E5E5;
+    background: #FBFBFB;
+    outline: none;
+    -moz-box-shadow: inset 1px 1px 2px rgba(200,200,200,0.2);
+    -webkit-box-shadow: inset 1px 1px 2px rgba(200,200,200,0.2);
+    box-shadow: inset 1px 1px 2px rgba(200,200,200,0.2);
+}
+
+.login label {
+    color: #777;
+    font-size: 14px;
 }
