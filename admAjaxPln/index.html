@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+    <head>
+        <title>Interface d'administration</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="includes/style.css"  />
+    </head>
+    <body>
+        <h2 id="createPatch">Actions correctifs</h2>
+        <ol>
+            <li><a href="liste.php?action=lister">Lister les correctifs</a></li>
+            <li><a href="liste.php?action=selectionner">Cocher les correctifs choisis par les experts métiers</a></li>
+            <li>-----Après la preprod valider : validation des patchs</li>
+        </ol>
+		
+        <h2 id="db">Actions DB</h2>
+        <ol>
+            <li><a href="db.php?action=copie">Copier les tgz de prod</a></li>
+            <li><a href="db.php?action=importer">Importer les données de prod</a></li>
+            <li><a href="db.php?action=repliquerProd">Répliquer prod vers model (ou au choix)</a></li>
+            <li><a href="db.php?action=repliquerModel">Répliquer model vers daily (ou au choix)</a></li>
+        </ol>
+        
+        <h2 id="serveurs">Actions serveurs</h2>
+        <ol>
+            <li><a href="serveurs.php">Lister et redémarrer les serveurs</a></li>
+        </ol>
+		
+		<h2 id="ear">Actions EAR</h2>
+        <ol>
+			<li><a href="ear.php?action=genererDev">Générer EAR Dev</a></li>
+			<li><a href="ear.php?action=genererProd">Générer EAR Prod</a></li>
+			<li><a href="ear.php?action=copier">Copier l'EAR vers un serveur</a></li>
+			<li><a href="ear.php?action=copierFTP">Copier l'EAR sur le ftp</a></li>
+        </ol>
+		
+		<h2 id="sql">Actions SQL</h2>
+        <ol>
+			<li><a href="sql.php?action=ajouter">Ajouter un patch SQL</a></li>
+			<li><a href="sql.php?action=copier">Copier les patchs SQL sur le ftp</a></li>
+			<li><a href="sql.php?action=appliquer">Appliquer une sélection de sql sur une DB</a></li>
+        </ol>
+		
+		<h2 id="svn">Actions SVN</h2>
+        <ol>
+			<li><a href="svn.php?action=ajouter">Ajouter un patch</a></li>
+			<li><a href="svn.php?action=lister">Liste des commit</a></li>
+			<li><a href="svn.php?action=modifier">Modifier un commit</a></li>
+        </ol>
+    </body>
+</html>
