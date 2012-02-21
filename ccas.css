@@ -136,7 +136,7 @@ input[type=submit] {
 
 /***Header de la page***/
 #page_header {
-    width: 100%;
+    width: 80%;
     position: absolute;
     left: 20%;
     right: 0;
