@@ -105,12 +105,12 @@ input[type=submit] {
     width: 20%;
     background-color: #F3F3F3;
     border-right: 1px solid #DDD;
-    /*barre de defilement apparait si le contenu depasse (à voir si ca sert)*/
-    /*    overflow: auto; */
+    /*barre de defilement apparait si le contenu depasse (? voir si ca sert)*/
+/*    overflow: auto;*/
 }
 
 .search {
-    background: white url('./search.png') 6px 6px no-repeat;
+    background: white url('./img/search.png') 6px 6px no-repeat;
     font-size: 14px;
     height: 29px;
     width: 97%;
@@ -189,8 +189,58 @@ input[type=submit] {
     float: left;
 }
 
-#page_header .label {
+.label {
     font-weight: bold;
     line-height: 26px;
     padding: 0 5px;
+}
+
+
+/***Side Foyer***/
+#side_foyer {
+    position: absolute;
+    bottom: 0;
+    top: 38px;
+    right: 2px;
+    left: 4px;
+     /*barre de defilement apparait si le contenu depasse (? voir si ca sert)*/
+    overflow: auto;
+}
+
+#side_foyer ul {
+    
+    background-color: white;
+    font-family: "Lucida grande", Tahoma, Verdana, Arial, Sans-serif;
+    font-size: 11px;
+    border: 1px solid #9D9D9D;
+}
+
+#side_foyer li {
+    padding-bottom: 2px;
+    border-bottom: 1px dotted #9D9D9D;
+}
+
+#side_foyer li:last-child {
+border-bottom: none;
+}
+
+#side_foyer a {
+    display: block;
+    color: #222;
+}
+
+#side_foyer li:hover {
+/*    position: relative;
+    left: 2px;*/
+/*    width: 101%;*/
+    
+    background-color: white;
+}
+
+.pair {
+    background-color: #e2e9f1;
+}
+
+.impair {
+    background-color: #ebebeb;
 }
