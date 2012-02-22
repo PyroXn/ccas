@@ -16,7 +16,7 @@ if ($_POST) {
         }
         $retour .= '
                     <a href="#">
-                        <span class="label">' . utf8_encode($foyer->nom) . ' ' . utf8_encode($foyer->prenom) . '</span>
+                        <span class="label">' . $foyer->nom . ' ' . $foyer->prenom . '</span>
                     </a>
                 </li>';
         $i++;
