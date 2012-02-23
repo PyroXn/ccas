@@ -9,8 +9,8 @@
         <link rel="stylesheet" type="text/css" href="./templates/navigationbar.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/ccas.css" media="screen" />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-        <script type="text/javascript" src="../js/navigationbar.js"></script>
-        <script type="text/javascript" src="../js/search.js"></script>
+        <script type="text/javascript" src="./js/navigationbar.js"></script>
+        <script type="text/javascript" src="./js/search.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function(){
@@ -48,7 +48,7 @@
  
                         //On lance la fonction ajax
                         $.ajax({
-                            url: '../testInfiniteScroll/ajax.php',
+                            url: './scroll.php',
                             type: 'get',
                             data: 'last='+nb_foyer_total,
  
@@ -125,70 +125,3 @@
         </div>
 
 
-        <div id="menu_gauche">
-            <input class="search" type="text" placeholder="Search..."/>
-            <div id="side_foyer">
-                <ul id="list_foyer">
-                    <?php
-//                    include('../config.php');
-//                    $retour = '';
-//                    $foyers = Doctrine_Core::getTable('Foyer')->findAll();
-//                    $i = 0;
-//                    foreach ($foyers as $foyer) {
-//                        if ($i % 2 == 0) {
-//                            $retour .= '<li class="pair">';
-//                        } else {
-//                            $retour .= '<li class="impair">';
-//                        }
-//                        $retour .= '
-//                            <a href="#">
-//                                <span class="label">' . $foyer->nom . ' ' . $foyer->prenom . '</span>
-//                            </a>
-//                        </li>';
-//                        $i++;
-//                    }
-//                    echo $retour;
-                    ?>
-
-                    <?php
-                    include('../lib/config.php');
-                    $retour = '';
-                    $foyers = Doctrine_Core::getTable('foyer');
-                    $retour .= '<div class="nb_foyer">' . $foyers->count() . '</div>';
-
-                    $i = 1;
-                    foreach ($foyers->searchByLimitOffset(100, 0)->execute() as $foyer) {
-
-                        if ($i % 2 == 0) {
-                            $retour .= '<li class="pair foyer" id="' . $i . '">';
-                        } else {
-                            $retour .= '<li class="impair foyer" id="' . $i . '">';
-                        }
-                        $retour .= '
-                            <a href="#">
-                                <span class="label">' . $foyer->nom . ' ' . $foyer->prenom . ' ' . $foyer->id . '</span>
-                            </a>
-                        </li>';
-                        $i++;
-                    }
-                    echo $retour;
-                    ?>
-                </ul>
-<!--                <div class="loadmore">
-                    Chargement en cours...
-                </div>-->
-            </div>
-        </div>
-        <div id="page_header">
-            <div id="page_header_navigation">
-                <a href="#" class="page_header_link active">
-                    <span class="label">Opif</span>
-                </a>
-                <a href="#" class="page_header_link">
-                    <span class="label">Loulilou</span>
-                </a>
-            </div>
-
-        </div>
-    </body>
-</html>

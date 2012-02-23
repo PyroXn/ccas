@@ -5,7 +5,7 @@ $(function() {
             var dataString = 'searchword='+ searchbox;
             $.ajax({
                 type: "POST",
-                url: "../search.php",
+                url: "./search.php",
                 data: dataString,
                 cache: false,
                 success: function(html)

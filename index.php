@@ -14,17 +14,18 @@ function home() {
             <input class="search" type="text" placeholder="Search..."/>
             <div id="side_foyer">
                 <ul id="list_foyer">';
-    $foyers = Doctrine_Core::getTable('Foyer')->findAll();
-    $i = 0;
-    foreach ($foyers as $foyer) {
+    $foyers = Doctrine_Core::getTable('foyer');
+    $contenu .= '<div class="nb_foyer">' . $foyers->count() . '</div>';
+    $i = 1;
+    foreach ($foyers->searchByLimitOffset(100, 0)->execute() as $foyer) {
         if ($i % 2 == 0) {
-            $contenu .= '<li class="pair">';
+            $contenu .= '<li class="pair foyer" id="' . $i . '">';
         } else {
-            $contenu .= '<li class="impair">';
+            $contenu .= '<li class="impair foyer" id="' . $i . '">';
         }
         $contenu .= '
                             <a href="#">
-                                <span class="label">' . $foyer->nom . ' ' . $foyer->prenom . '</span>
+                                <span class="label">' . $foyer->nom . ' ' . $foyer->prenom . ' ' . $foyer->id . '</span>
                             </a>
                         </li>';
         $i++;

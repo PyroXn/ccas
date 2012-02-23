@@ -1,6 +1,6 @@
 <?php
 
-require('../lib/config.php');
+include('./lib/config.php');
 $retour = '';
 $foyers = Doctrine_Core::getTable('Foyer');
 $i = $_GET['last'] +1;

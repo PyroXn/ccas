@@ -12,19 +12,19 @@ class Foyer extends Doctrine_Record {
         $this->hasColumn('nom', 'string', 100);
         $this->hasColumn('prenom', 'string', 100);
 
-        $this->hasColumn('numRue', 'integer', 10);
-        $this->hasColumn('idRue', 'integer', 10);
-        $this->hasColumn('idSecteur', 'integer', 10);
-        $this->hasColumn('idVille', 'integer', 10);
-        $this->hasColumn('idSituationFamille', 'integer', 10);
-        $this->hasColumn('idBailleur', 'integer', 10);
-        $this->hasColumn('dateInscription', 'integer', 20); // timestamp
-        $this->hasColumn('typeLogement', 'integer', 5);
-        $this->hasColumn('typeAppartenance', 'integer', 5);
-        $this->hasColumn('logDateArrive', 'integer', 20); // timestamp
-        $this->hasColumn('logSurface', 'float');
-        $this->hasColumn('idReferent', 'integer', 5);
-        $this->hasColumn('notes', 'string', 255);
+//        $this->hasColumn('numRue', 'integer', 10);
+//        $this->hasColumn('idRue', 'integer', 10);
+//        $this->hasColumn('idSecteur', 'integer', 10);
+//        $this->hasColumn('idVille', 'integer', 10);
+//        $this->hasColumn('idSituationFamille', 'integer', 10);
+//        $this->hasColumn('idBailleur', 'integer', 10);
+//        $this->hasColumn('dateInscription', 'integer', 20); // timestamp
+//        $this->hasColumn('typeLogement', 'integer', 5);
+//        $this->hasColumn('typeAppartenance', 'integer', 5);
+//        $this->hasColumn('logDateArrive', 'integer', 20); // timestamp
+//        $this->hasColumn('logSurface', 'float');
+//        $this->hasColumn('idReferent', 'integer', 5);
+//        $this->hasColumn('notes', 'string', 255);
         $this->option('orderBy', 'nom ASC');
     }
 
