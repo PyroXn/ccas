@@ -9,8 +9,8 @@
         <link rel="stylesheet" type="text/css" href="./templates/navigationbar.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/ccas.css" media="screen" />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-        <script type="text/javascript" src="./js/navigationbar.js"></script>
-        <script type="text/javascript" src="./js/search.js"></script>
+        <script type="text/javascript" src="../js/navigationbar.js"></script>
+        <script type="text/javascript" src="../js/search.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function(){

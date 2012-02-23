@@ -77,7 +77,7 @@
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
     z-index: 1000;
-    background: url(./option.png) no-repeat center;
+    background: url(./img/option.png) no-repeat center;
     background-position: 5px 7px;
     display: block;
     height: 29px;
