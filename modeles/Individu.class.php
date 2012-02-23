@@ -37,7 +37,7 @@ class Individu extends Doctrine_Record
         $this->hasColumn('dateFinDroitPe', 'integer', 50);
         $this->hasColumn('numDossierPe', 'string', 20);
         $this->hasColumn('numAllocataireCaf', 'string', 20);
-        $this->hasColumn('idStatut', 'integer', 5);               //cle etrangere
+        $this->hasColumn('idLienFamille', 'integer', 5);               //cle etrangere
         $this->hasColumn('idCaisseCaf', 'integer', 5);            //cle etrangere
         $this->hasColumn('idNiveauEtude', 'integer', 5);          //cle etrangere
         $this->hasColumn('idProfession', 'integer', 5);           //cle etrangere

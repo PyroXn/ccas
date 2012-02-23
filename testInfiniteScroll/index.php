@@ -71,7 +71,7 @@
     <body>
             <ul id="list_foyer">
                 <?php
-                include('../config.php');
+                include('../lib/config.php');
                 $retour = '';
                 $foyers = Doctrine_Core::getTable('foyer');
                 $retour .= '<div class="nb_foyer">'. $foyers->count() .'</div>';
