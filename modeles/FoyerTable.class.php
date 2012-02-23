@@ -12,6 +12,14 @@ class FoyerTable extends Doctrine_Table {
                 ->orderBy('nom ASC');
         return $q;
     }
+    
+    public function searchByLimitOffset($limit, $offset) {
+        $q = Doctrine_Query::create()
+                ->from('foyer')
+                ->limit($limit)
+                ->offset($offset);
+        return $q;
+    }
 
 }
 
