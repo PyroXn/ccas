@@ -4,11 +4,32 @@
     <head>
         <title>ccas</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" href="./templates/navigationbar.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="./templates/ccas.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./navigationbar.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./ccas.css" media="screen" />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
         <script type="text/javascript" src="./js/navigationbar.js"></script>
-        <script type="text/javascript" src="./js/search.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                $(".search").keyup(function() 
+                {
+                    var searchbox = $(this).val();
+                    var dataString = 'searchword='+ searchbox;
+                    $.ajax({
+                        type: "POST",
+                        url: "../search.php",
+                        data: dataString,
+                        cache: false,
+                        success: function(html)
+                        {
+                            $("#list_foyer").html(html).show();	
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+
     </head>
     <body>
         <div id="navigationbar">
@@ -59,3 +80,45 @@
                 </ul>
             </div>
         </div>
+
+
+        <div id="menu_gauche">
+            <input class="search" type="text" placeholder="Search..."/>
+            <div id="side_foyer">
+                <ul id="list_foyer">
+                    <?php
+                    include('../config.php');
+                    $retour = '';
+                    $foyers = Doctrine_Core::getTable('Foyer')->findAll();
+                    $i = 0;
+                    foreach ($foyers as $foyer) {
+                        if ($i % 2 == 0) {
+                            $retour .= '<li class="pair">';
+                        } else {
+                            $retour .= '<li class="impair">';
+                        }
+                        $retour .= '
+                            <a href="#">
+                                <span class="label">' . $foyer->nom . ' ' . $foyer->prenom . '</span>
+                            </a>
+                        </li>';
+                        $i++;
+                    }
+                    echo $retour;
+                    ?>
+                </ul>
+            </div>
+        </div>
+        <div id="page_header">
+            <div id="page_header_navigation">
+                <a href="#" class="page_header_link active">
+                    <span class="label">Opif</span>
+                </a>
+                <a href="#" class="page_header_link">
+                    <span class="label">Loulilou</span>
+                </a>
+            </div>
+
+        </div>
+    </body>
+</html>
