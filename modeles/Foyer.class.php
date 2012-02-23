@@ -11,6 +11,7 @@ class Foyer extends Doctrine_Record {
             'autoincrement' => true));
         $this->hasColumn('nom', 'string', 100);
         $this->hasColumn('prenom', 'string', 100);
+        $this->option('orderBy', 'nom ASC');
     }
 
 }
