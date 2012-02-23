@@ -1,6 +1,6 @@
 <?php
 
-include('./lib/config.php');
+require_once './lib/config.php';
 if ($_POST) {
 
     $q = $_POST['searchword'];

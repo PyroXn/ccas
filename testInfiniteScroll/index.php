@@ -11,7 +11,7 @@
                 /* la fonction offset permet de récupérer la valeur X et Y d'un élément
                 dans une page. Ici on récupère la position de la derniere li qui 
                 a pour classe : ".foyer" */
-                var offset = $('.foyer:last').offset(); 
+                var offset = $('.foyer:last').offset();
  
                 $(window).scroll(function(){ // On surveille l'évènement scroll
  
@@ -19,6 +19,8 @@
                         n'est en cours, si le nombre de foyer affiché est supérieur 
                         à 10 et si tout les foyer ne sont pas affichés, alors on 
                         lance la fonction. */
+//        jQuery.error("\n offset.top" + offset.top + "\n " + "Height" + $(window).height() + "\n " + "scrollTop" +$(window).scrollTop()
+//    + "\n " + "total = " + (offset.top-$(window).height() <=$(window).scrollTop()) + "\n $('.foyer').size()" + $('.foyer').size());
                     if((offset.top-$(window).height() <= $(window).scrollTop()) 
                         && load==false && ($('.foyer').size()>=100) && 
                         ($('.foyer').size()!=$('.nb_foyer').text())){
