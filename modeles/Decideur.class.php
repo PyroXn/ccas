@@ -2,7 +2,7 @@
 
 class Decideur extends Doctrine_Record {
     public function setTableDefinition() {
-        $this->setTableDefinition('decideur');
+        $this->setTableName('decideur');
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));

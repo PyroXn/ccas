@@ -2,7 +2,7 @@
 
 class Etude extends Doctrine_Record {
     public function setTableDefinition() {
-        $this->setTableDefinition('etude');
+        $this->setTableName('etude');
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));

@@ -2,7 +2,7 @@
 
 class Rue extends Doctrine_Record {
     public function setTableDefinition() {
-        $this->setTableDefinition('rue');
+        $this->setTableName('rue');
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));

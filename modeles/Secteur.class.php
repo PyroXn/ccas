@@ -2,7 +2,7 @@
 
 class Secteur extends Doctrine_Record {
     public function setTableDefinition() {
-        $this->setTableDefinition('secteur');
+        $this->setTableName('secteur');
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));

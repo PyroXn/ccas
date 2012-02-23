@@ -2,7 +2,7 @@
 
 class Profession extends Doctrine_Record {
     public function setTableDefinition() {
-        $this->setTableDefinition('profession');
+        $this->setTableName('profession');
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));

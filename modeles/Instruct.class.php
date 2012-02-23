@@ -2,7 +2,7 @@
 
 class Instruct extends Doctrine_Record {
     public function setTableDefinition() {
-        $this->setTableDefinition('instruct');
+        $this->setTableName('instruct');
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
