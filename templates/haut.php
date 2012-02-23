@@ -42,8 +42,9 @@
  
                         //On récupère le nombre de foyer affiché global
                         var nb_foyer_total = $('.foyer:last').attr('id');
-                        //On affiche un loader
-                        $('.loadmore').show();
+                        
+//                        //On affiche un loader
+//                        $('.loadmore').show();
  
                         //On lance la fonction ajax
                         $.ajax({
@@ -54,8 +55,8 @@
                             //Succès de la requête
                             success: function(data) {
  
-                                //On masque le loader
-                                $('.loadmore').fadeOut(500);
+//                                //On masque le loader
+//                                $('.loadmore').fadeOut(500);
                                 /* On affiche le résultat après
                                         le dernier foyer */
                                 $('.foyer:last').after(data);
@@ -173,9 +174,9 @@
                     echo $retour;
                     ?>
                 </ul>
-                <div class="loadmore">
+<!--                <div class="loadmore">
                     Chargement en cours...
-                </div>
+                </div>-->
             </div>
         </div>
         <div id="page_header">
