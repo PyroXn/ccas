@@ -6,9 +6,11 @@ if ($_POST) {
     $q = $_POST['searchword'];
 
     $retour = '';
-    $individus = Doctrine_Core::getTable('individu');
+    $tableIndividus = Doctrine_Core::getTable('individu');
+    $individus = $tableIndividus->likeNom($q)->execute();
+    $retour .= '<div class="nb_individu">' . sizeof($individus) . '</div>';
     $i = 0;
-    foreach ($individus->likeNom($q)->execute() as $individu) {
+    foreach ($individus as $individu) {
         if ($i % 2 == 0) {
             $retour .= '<li class="pair">';
         } else {
