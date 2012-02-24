@@ -17,9 +17,7 @@ $(function() {
 
 
     });
-    
-    
-    
+     
     
     $("#side_individu").scroll(function(){ // On surveille l'évènement scroll
         /* la fonction offset permet de récupérer la valeur X et Y d'un élément
