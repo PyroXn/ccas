@@ -4,7 +4,9 @@ include('./lib/config.php');
 $retour = '';
 $individus = Doctrine_Core::getTable('individu');
 $i = $_GET['last'] +1;
-foreach ($individus->searchByLimitOffset(100, $_GET['last'])->execute() as $individu) {
+$q = $_GET['searchword'];
+
+foreach ($individus->searchLikeByLimitOffset($q, 100, $_GET['last'])->execute() as $individu) {
     if ($i % 2 == 0) {
         $retour .= '<li class="pair individu" id="' . $i . '">';
     } else {
@@ -18,4 +20,6 @@ foreach ($individus->searchByLimitOffset(100, $_GET['last'])->execute() as $indi
     $i++;
 }
 echo $retour;
+
+
 ?>

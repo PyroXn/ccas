@@ -22,6 +22,15 @@ class IndividuTable extends Doctrine_Table {
         return $q;
     }
 
+     public function searchLikeByLimitOffset($nom, $limit, $offset) {
+        $q = Doctrine_Query::create()
+                ->from('individu')
+                ->where('nom LIKE ? OR prenom LIKE ?', array($nom . '%', $nom . '%'))
+                ->orderBy('nom ASC')
+                ->limit($limit)
+                ->offset($offset);
+        return $q;
+    }
 }
 
 ?>

@@ -14,6 +14,8 @@ $(function() {
             }
         });
         return false;
+
+
     });
     
     
@@ -46,12 +48,16 @@ $(function() {
             //On affiche un loader (trop aps ca fait lag)
             //$('.loadmore').show();
  
+ 
+            var searchbox = $(".search").val();
+ 
+
             //On lance la fonction ajax
             $.ajax({
                 url: './scroll.php',
                 type: 'get',
-                data: 'last='+nb_individu_total,
- 
+//                data: 'last='+nb_individu_total,
+                data: "last=" + nb_individu_total+ "&searchword=" + searchbox,
                 //Succès de la requête
                 success: function(data) {
  

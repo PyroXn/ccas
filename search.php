@@ -7,14 +7,14 @@ if ($_POST) {
 
     $retour = '';
     $tableIndividus = Doctrine_Core::getTable('individu');
-    $individus = $tableIndividus->likeNom($q)->execute();
-    $retour .= '<div class="nb_individu">' . sizeof($individus) . '</div>';
+    $retour .= '<div class="nb_individu">' . $tableIndividus->likeNom($q)->count() . '</div>';
+    
     $i = 0;
-    foreach ($individus as $individu) {
+    foreach ($tableIndividus->searchLikeByLimitOffset($q, 100, 0)->execute() as $individu) {
         if ($i % 2 == 0) {
-            $retour .= '<li class="pair">';
+            $retour .= '<li class="pair individu">';
         } else {
-            $retour .= '<li class="impair">';
+            $retour .= '<li class="impair individu">';
         }
         $retour .= '
                     <a href="#">
