@@ -229,10 +229,7 @@ border-bottom: none;
     color: #222;
 }
 
-#side_individu .current {
-    background-color: black;
-    color: red;
-}
+
 #side_individu li:hover {
 /*    position: relative;
     left: 2px;*/
@@ -241,7 +238,25 @@ border-bottom: none;
     background-color: white;
 }
 
+#side_individu .current {
+    background-color: #2D2D2D;
+    background-image: -ms-linear-gradient(bottom, #2D2D2D, #5e5e5e 5px);
+    background-image: -moz-linear-gradient(bottom, #5e5e5e, #2D2D2D 5px);
+    background-image: -o-linear-gradient(bottom, #2D2D2D, #5e5e5e 5px);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#2D2D2D), to(#5e5e5e));
+    background-image: -webkit-linear-gradient(bottom, #5e5e5e, #2D2D2D 5px);
+    background-image: linear-gradient(bottom, #2D2D2D, #5e5e5e 5px);
+    
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+    -moz-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+    
+    padding-left: 20px;
+}
 
+#side_individu .current a {
+    color: #DDD;
+}
 
 .nb_individu {
     padding-left: 3px;
