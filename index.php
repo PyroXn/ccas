@@ -12,20 +12,20 @@ function home() {
     $title = 'Accueil';
     $contenu = '<div id="menu_gauche">
             <input class="search" type="text" placeholder="Search..."/>
-            <div id="side_foyer">
-                <ul id="list_foyer">';
-    $foyers = Doctrine_Core::getTable('foyer');
-    $contenu .= '<div class="nb_foyer">' . $foyers->count() . '</div>';
+            <div id="side_individu">
+                <ul id="list_individu">';
+    $individus = Doctrine_Core::getTable('individu');
+    $contenu .= '<div class="nb_individu">' . $individus->count() . '</div>';
     $i = 1;
-    foreach ($foyers->searchByLimitOffset(100, 0)->execute() as $foyer) {
+    foreach ($individus->searchByLimitOffset(100, 0)->execute() as $individu) {
         if ($i % 2 == 0) {
-            $contenu .= '<li class="pair foyer" id="' . $i . '">';
+            $contenu .= '<li class="pair individu" id="' . $i . '">';
         } else {
-            $contenu .= '<li class="impair foyer" id="' . $i . '">';
+            $contenu .= '<li class="impair individu" id="' . $i . '">';
         }
         $contenu .= '
                             <a href="#">
-                                <span class="label">' . $foyer->nom . ' ' . $foyer->prenom . ' ' . $foyer->id . '</span>
+                                <span class="label">' . $individu->nom . ' ' . $individu->prenom . '</span>
                             </a>
                         </li>';
         $i++;

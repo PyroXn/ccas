@@ -16,32 +16,32 @@
             $(document).ready(function(){
                 /* la fonction offset permet de récupérer la valeur X et Y d'un élément
             dans une page. Ici on récupère la position de la derniere li qui 
-            a pour classe : ".foyer" */
-                var offset = $("#list_foyer").height();
-                $("#side_foyer").scroll(function(){ // On surveille l'évènement scroll
+            a pour classe : ".individu" */
+                var offset = $("#list_individu").height();
+                $("#side_individu").scroll(function(){ // On surveille l'évènement scroll
                     //                alert("scrollheight" + $(this)[0].scrollHeight);
                     //                if ($(this)[0].scrollHeight - $(this).scrollTop() <= $(this).outerHeight()) {
                     //                         // We're at the bottom.
                     //                         alert("yeah !");
                     //                    }
-                    var load = false; // aucun chargement de foyer n'est en cours
+                    var load = false; // aucun chargement d'individu n'est en cours
 
                     
                     /* Si l'élément offset est en bas de scroll, si aucun chargement 
-                n'est en cours, si le nombre de foyer affiché est supérieur 
-                à 100 et si tout les foyer ne sont pas affichés, alors on 
+                n'est en cours, si le nombre d'individu affiché est supérieur 
+                à 100 et si tout les individus ne sont pas affichés, alors on 
                 lance la fonction. */
-                    console.log("\n offset.top" + offset + "\n " + "Height" + $("#side_foyer").height() + "\n " + "scrollTop" + $(this)[0].scrollTop
-                        + "\n " + "total = " + (offset-$("#side_foyer").height() <= $(this)[0].scrollTop));
+                    console.log("\n offset.top" + offset + "\n " + "Height" + $("#side_individu").height() + "\n " + "scrollTop" + $(this)[0].scrollTop
+                        + "\n " + "total = " + (offset-$("#side_individu").height() <= $(this)[0].scrollTop));
 
-                    if((offset-$("#side_foyer").height() <= $(this)[0].scrollTop) 
-                        && load==false && ($('.foyer').size()>=100) && 
-                        ($('.foyer').size()!=$('.nb_foyer').text())){
+                    if((offset-$("#side_individu").height() <= $(this)[0].scrollTop) 
+                        && load==false && ($('.individu').size()>=100) && 
+                        ($('.individu').size()!=$('.nb_individu').text())){
                         // la valeur passe à vrai, on va charger
                         load = true;
  
-                        //On récupère le nombre de foyer affiché global
-                        var nb_foyer_total = $('.foyer:last').attr('id');
+                        //On récupère le nombre d'individu affiché global
+                        var nb_individu_total = $('.individu:last').attr('id');
                         
 //                        //On affiche un loader
 //                        $('.loadmore').show();
@@ -50,7 +50,7 @@
                         $.ajax({
                             url: '../testInfiniteScroll/ajax.php',
                             type: 'get',
-                            data: 'last='+nb_foyer_total,
+                            data: 'last='+nb_individu_total,
  
                             //Succès de la requête
                             success: function(data) {
@@ -58,11 +58,11 @@
 //                                //On masque le loader
 //                                $('.loadmore').fadeOut(500);
                                 /* On affiche le résultat après
-                                        le dernier foyer */
-                                $('.foyer:last').after(data);
+                                        le dernier individu */
+                                $('.individu:last').after(data);
                                 /* On actualise la valeur offset
-                                        du dernier foyer */
-                                offset = $("#list_foyer").height();
+                                        du dernier individu */
+                                offset = $("#list_individu").height();
                                 //On remet la valeur à faux car c'est fini
                                 load = false;
                             }
@@ -127,8 +127,8 @@
 
         <div id="menu_gauche">
             <input class="search" type="text" placeholder="Search..."/>
-            <div id="side_foyer">
-                <ul id="list_foyer">
+            <div id="side_individu">
+                <ul id="list_individu">
                     <?php
 //                    include('../config.php');
 //                    $retour = '';
@@ -153,20 +153,20 @@
                     <?php
                     include('../lib/config.php');
                     $retour = '';
-                    $foyers = Doctrine_Core::getTable('foyer');
-                    $retour .= '<div class="nb_foyer">' . $foyers->count() . '</div>';
+                    $individus = Doctrine_Core::getTable('individu');
+                    $retour .= '<div class="nb_individu">' . $individus->count() . '</div>';
 
                     $i = 1;
-                    foreach ($foyers->searchByLimitOffset(100, 0)->execute() as $foyer) {
+                    foreach ($individus->searchByLimitOffset(100, 0)->execute() as $individu) {
 
                         if ($i % 2 == 0) {
-                            $retour .= '<li class="pair foyer" id="' . $i . '">';
+                            $retour .= '<li class="pair individu" id="' . $i . '">';
                         } else {
-                            $retour .= '<li class="impair foyer" id="' . $i . '">';
+                            $retour .= '<li class="impair individu" id="' . $i . '">';
                         }
                         $retour .= '
                             <a href="#">
-                                <span class="label">' . $foyer->nom . ' ' . $foyer->prenom . ' ' . $foyer->id . '</span>
+                                <span class="label">' . $individu->nom . ' ' . $individu->prenom . '</span>
                             </a>
                         </li>';
                         $i++;

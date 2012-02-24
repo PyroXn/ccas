@@ -6,9 +6,9 @@ if ($_POST) {
     $q = $_POST['searchword'];
 
     $retour = '';
-    $foyers = Doctrine_Core::getTable('Foyer');
+    $individus = Doctrine_Core::getTable('individu');
     $i = 0;
-    foreach ($foyers->likeNom($q)->execute() as $foyer) {
+    foreach ($individus->likeNom($q)->execute() as $individu) {
         if ($i % 2 == 0) {
             $retour .= '<li class="pair">';
         } else {
@@ -16,7 +16,7 @@ if ($_POST) {
         }
         $retour .= '
                     <a href="#">
-                        <span class="label">' . $foyer->nom . ' ' . $foyer->prenom . '</span>
+                        <span class="label">' . $individu->nom . ' ' . $individu->prenom . '</span>
                     </a>
                 </li>';
         $i++;

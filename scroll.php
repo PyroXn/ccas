@@ -2,17 +2,17 @@
 
 include('./lib/config.php');
 $retour = '';
-$foyers = Doctrine_Core::getTable('Foyer');
+$individus = Doctrine_Core::getTable('individu');
 $i = $_GET['last'] +1;
-foreach ($foyers->searchByLimitOffset(100, $_GET['last'])->execute() as $foyer) {
+foreach ($individus->searchByLimitOffset(100, $_GET['last'])->execute() as $individu) {
     if ($i % 2 == 0) {
-        $retour .= '<li class="pair foyer" id="' . $i . '">';
+        $retour .= '<li class="pair individu" id="' . $i . '">';
     } else {
-        $retour .= '<li class="impair foyer" id="' . $i . '">';
+        $retour .= '<li class="impair individu" id="' . $i . '">';
     }
     $retour .= '
                             <a href="#">
-                                <span class="label">' . $foyer->nom . ' ' . $foyer->prenom . ' ' . $foyer->id . '</span>
+                                <span class="label">' . $individu->nom . ' ' . $individu->prenom . '</span>
                             </a>
                         </li>';
     $i++;
