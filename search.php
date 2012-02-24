@@ -7,7 +7,12 @@ if ($_POST) {
 
     $retour = '';
     $tableIndividus = Doctrine_Core::getTable('individu');
-    $retour .= '<div class="nb_individu">' . $tableIndividus->likeNom($q)->count() . '</div>';
+    $nb = $tableIndividus->likeNom($q)->count();
+    if ($nb!=0) {
+        $retour .= '<div class="nb_individu">' . $nb . '</div>';
+    } else {
+        $retour .= '<div class="nb_individu">Aucun r&#233;sultat</div>';
+    }
     
     $i = 1;
     foreach ($tableIndividus->searchLikeByLimitOffset($q, 100, 0)->execute() as $individu) {

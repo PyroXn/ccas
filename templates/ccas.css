@@ -237,6 +237,11 @@ border-bottom: none;
     background-color: white;
 }
 
+.nb_individu {
+    padding-left: 3px;
+    font-style: italic;
+}
+
 .pair {
     background-color: #e2e9f1;
 }
