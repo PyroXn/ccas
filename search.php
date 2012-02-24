@@ -5,7 +5,7 @@ if ($_POST) {
 
     $q = $_POST['searchword'];
 
-    $retour = '';
+    $retour = '<script type="text/javascript" src="./js/jsDynamique.js"></script>';
     $tableIndividus = Doctrine_Core::getTable('individu');
     $nb = $tableIndividus->likeNom($q)->count();
     if ($nb!=0) {

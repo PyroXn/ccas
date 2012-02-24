@@ -1,7 +1,7 @@
 <?php
 
 include('./lib/config.php');
-$retour = '';
+$retour = '<script type="text/javascript" src="./js/jsDynamique.js"></script>';
 $individus = Doctrine_Core::getTable('individu');
 $i = $_GET['last'] +1;
 $q = $_GET['searchword'];

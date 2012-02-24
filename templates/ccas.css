@@ -229,6 +229,10 @@ border-bottom: none;
     color: #222;
 }
 
+#side_individu .current {
+    background-color: black;
+    color: red;
+}
 #side_individu li:hover {
 /*    position: relative;
     left: 2px;*/
@@ -236,6 +240,8 @@ border-bottom: none;
     
     background-color: white;
 }
+
+
 
 .nb_individu {
     padding-left: 3px;

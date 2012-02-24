@@ -18,6 +18,5 @@ $(function() {
             
          $(this).attr("name","passive");
       }
-  });  
-    
+  });    
 });
