@@ -10,7 +10,7 @@ $(function() {
                 cache: false,
                 success: function(html)
                 {
-                    $("#list_foyer").html(html).show();	
+                    $("#list_individu").html(html).show();	
                 }
             });
             return false;
