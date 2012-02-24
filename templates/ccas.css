@@ -109,21 +109,17 @@ input[type=submit] {
 /*    overflow: auto;*/
 }
 
-.search_add {
-
-}
 
 .search {
     background: white url('./img/search.png') 6px 6px no-repeat;
     font-size: 14px;
     height: 29px;
 /*    width: 97%;*/
-width: 85%;
+    width: 85%;
     padding: 4px 0 4px 30px;
     margin: 5px 0 5px 5px;
     border: 1px solid #D9D9D9;
     border-top: 1px solid silver;
-
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;

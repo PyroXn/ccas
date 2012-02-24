@@ -12,7 +12,7 @@ function home() {
     $title = 'Accueil';
     $contenu = '
         <div id="menu_gauche">
-            <div class="search_add"><input class="search" type="text" placeholder="Search..."/><a href="#" class="add"></a></div>
+            <input class="search" type="text" placeholder="Search..."/><a href="#" class="add"></a>
             <div id="side_individu">
                 <ul id="list_individu">';
     $individus = Doctrine_Core::getTable('individu');
