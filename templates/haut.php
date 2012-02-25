@@ -4,11 +4,9 @@
     <head>
         <title>ccas</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" href="./navigationbar.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="./ccas.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/navigationbar.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/ccas.css" media="screen" />
-        
+        <link rel="stylesheet" type="text/css" href="./templates/tipsy.css" media="screen" />
     </head>
     <body>
         <div id="navigationbar">

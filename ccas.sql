@@ -1,42 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 3.3.9
--- http://www.phpmyadmin.net
---
--- Serveur: localhost
--- Généré le : Mer 22 Février 2012 à 13:43
--- Version du serveur: 5.1.53
--- Version de PHP: 5.3.4
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Base de données: `ccas`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `foyer`
---
-
-CREATE TABLE IF NOT EXISTS `foyer` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(100) DEFAULT NULL,
-  `prenom` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4671 ;
-
---
--- Contenu de la table `foyer`
---
-
-INSERT INTO `foyer` (`id`, `nom`, `prenom`) VALUES
+INSERT INTO `individu` (`id`, `nom`, `prenom`) VALUES
 (1, 'Charrasse', 'Pierre'),
 (2, 'Batch', 'Automatique'),
 (3, 'ENTRINGER', 'Jean'),
@@ -1646,7 +1609,7 @@ INSERT INTO `foyer` (`id`, `nom`, `prenom`) VALUES
 (1775, 'LAROSCH', 'David Kurt'),
 (1777, 'LANG', 'Raphaël Daniel Sylvain'),
 (1778, 'JUNG', 'Steve');
-INSERT INTO `foyer` (`id`, `nom`, `prenom`) VALUES
+INSERT INTO `individu` (`id`, `nom`, `prenom`) VALUES
 (1779, 'LAZZERI', 'Jean Luc'),
 (1780, 'LEY', 'Jeff'),
 (1781, 'LEFEBRE', 'Steve Valentin Yves'),
@@ -3318,7 +3281,7 @@ INSERT INTO `foyer` (`id`, `nom`, `prenom`) VALUES
 (3554, 'SCHROEDER', 'René'),
 (3555, 'BETTENDORFF', 'Natacha'),
 (3557, 'OBERTO', 'Daniel');
-INSERT INTO `foyer` (`id`, `nom`, `prenom`) VALUES
+INSERT INTO `individu` (`id`, `nom`, `prenom`) VALUES
 (3558, 'BIRDEN', 'Christian'),
 (3559, 'COLBETT', 'Gilles'),
 (3560, 'HURT', 'Alain'),

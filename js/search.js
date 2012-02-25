@@ -71,4 +71,14 @@ $(function() {
             });
         }
     });
+    
+    /* retourne l'element sur lequel on clique */
+    $('#list_individu > li').live("click", function() {
+        /* recherche dans les enfants de l'id list_individu une class current */
+        var test = $('#list_individu').children('.current');
+        test.removeClass('current');
+        if (!test.is(this)) {
+            $(this).addClass('current');
+        }
+    });  
 });
