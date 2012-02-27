@@ -23,7 +23,7 @@ if ($_POST) {
         }
         $retour .= '
                     <a href="#">
-                        <span class="label">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                        <span class="label" id_foyer="'. $individu->idFoyer .'" id_individu="'. $individu->id .'">' . $individu->nom . ' ' . $individu->prenom . '</span>
                     </a>
                 </li>';
         $i++;

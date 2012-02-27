@@ -91,7 +91,7 @@ input[type=submit] {
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 }
 
-.login input[type="text"]:focus, .login input[type="password"]:focus, .search:focus {
+.login input[type="text"]:focus, .login input[type="password"]:focus, #search:focus {
     border: 1px solid #4D90FE;
     outline: none; /*Pour enlever la bordur automatique jaune de chrome*/
 }
@@ -111,7 +111,7 @@ input[type=submit] {
 }
 
 
-.search {
+#search {
     background: white url('./img/search.png') 6px 6px no-repeat;
     font-size: 14px;
     height: 29px;

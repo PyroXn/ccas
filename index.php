@@ -12,7 +12,7 @@ function home() {
     $title = 'Accueil';
     $contenu = '
         <div id="menu_gauche">
-            <input class="search" type="text" placeholder="Search..."/><a href="#" class="add" original-title="Ajouter un foyer"></a>
+            <input id="search" type="text" placeholder="Search..."/><a href="#" class="add" original-title="Ajouter un foyer"></a>
             <div id="side_individu">
                 <ul id="list_individu">';
     $individus = Doctrine_Core::getTable('individu');
@@ -26,7 +26,7 @@ function home() {
         }
         $contenu .= '
             <a href="#">
-                <span class="label">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                <span class="label" id_foyer="'. $individu->idFoyer .'" id_individu="'.$individu->id.'">' . $individu->nom . ' ' . $individu->prenom . '</span>
             </a>
         </li>';
         $i++;

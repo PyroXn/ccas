@@ -1,21 +1,8 @@
 $(function() {
-    $(".search").keyup(function() 
+    $("#search").keyup(function() 
     {
         var searchbox = $(this).val();
-        var dataString = 'searchword='+ searchbox;
-        $.ajax({
-            type: "POST",
-            url: "./search.php",
-            data: dataString,
-            cache: false,
-            success: function(html)
-            {
-                $("#list_individu").html(html).show();	
-            }
-        });
-        return false;
-
-
+        search(searchbox);
     });
      
     
@@ -47,14 +34,14 @@ $(function() {
             //$('.loadmore').show();
  
  
-            var searchbox = $(".search").val();
+            var searchbox = $("#search").val();
  
 
             //On lance la fonction ajax
             $.ajax({
                 url: './scroll.php',
                 type: 'get',
-//                data: 'last='+nb_individu_total,
+                //                data: 'last='+nb_individu_total,
                 data: "last=" + nb_individu_total+ "&searchword=" + searchbox,
                 //Succès de la requête
                 success: function(data) {
@@ -74,11 +61,43 @@ $(function() {
     
     /* retourne l'element sur lequel on clique */
     $('#list_individu > li').live("click", function() {
+        
         /* recherche dans les enfants de l'id list_individu une class current */
         var test = $('#list_individu').children('.current');
         test.removeClass('current');
+        
         if (!test.is(this)) {
             $(this).addClass('current');
+            var idFoyer = $(this).children().children().attr('id_foyer');
+            var idIndividu = $(this).children().children().attr('id_individu');
+            console.log(idIndividu);
+            console.log(idFoyer);
+            $.ajax({
+                type: "POST",
+                url: "./returnFoyer.php",
+                data: 'idFoyer='+ idFoyer + "&idIndividu=" + idIndividu,
+                success: function(html)
+                {
+                    $("#list_individu").html(html).show();	
+                }
+            });
+        } else {
+            var searchbox = $("#search").val();
+            search(searchbox);
         }
     });  
 });
+
+function search(searchbox) {
+    var dataString = 'searchword='+ searchbox;
+    $.ajax({
+        type: "POST",
+        url: "./search.php",
+        data: dataString,
+        cache: false,
+        success: function(html)
+        {
+            $("#list_individu").html(html).show();	
+        }
+    });
+}
