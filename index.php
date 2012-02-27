@@ -71,9 +71,9 @@ function login() {
     display($title,$contenu);
     } else {
         include_once('./lib/config.php');
-        $user = Doctrine_Core::getTable('user');
-        if($user->isMember($_POST['log'], md5($_POST['pwd'])) == 1) {
-            $_SESSION['user'] = serialize($user->loadMember($_POST['log'], md5($_POST['pwd'])));
+        $user = Doctrine_Core::getTable('user')->findOneByLoginAndPassword($_POST['log'], md5($_POST['pwd']));
+        if ($user != null) {
+            $_SESSION['userId'] = $user->id;
             header('Location: index.php?p=home');
         } else {
             $title = '';

@@ -1,3 +1,5 @@
+INSERT INTO `user` (`id`, `login`, `password`) VALUES
+(1, 'Florian', '56910c52ed70539e3ce0391edeb6d339');
 
 INSERT INTO `individu` (`id`, `nom`, `prenom`) VALUES
 (1, 'Charrasse', 'Pierre'),

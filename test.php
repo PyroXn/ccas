@@ -34,8 +34,19 @@ include_once('./lib/config.php');
 //    foreach($foyer->individu as $individu) {
 //        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong></div>';
 //    }
-$mdp = 'florian';
-echo md5($mdp);
+
+
+
+//$mdp = 'florian';
+//echo md5($mdp);
+
+
+$user = Doctrine_Core::getTable('user')->findOneByLoginAndPassword('Florian', md5('lorian'));
+if ($user != null) {
+    echo '<div> '.$user->login.' ' . $user->id . ' ' . $user->password . '</div>';
+} else {
+    echo "opif";
+}
     
 
 ?>
