@@ -20,12 +20,8 @@ class Depense extends Doctrine_Record {
         $this->hasColumn('television', 'float');
         $this->hasColumn('assurance', 'float');
         $this->hasColumn('credit', 'float');
-        $this->hasColumn('noteCredit', 'string', 255);
         $this->hasColumn('autreDepense', 'float');
-        $this->hasColumn('notreAutreDepense', 'string', 255);
         $this->hasColumn('loyer', 'float');
-        $this->hasColumn('aideLogement', 'float');
-        
         $this->hasColumn('idIndidivu', 'integer', 5);
         $this->hasColumn('dateCreation', 'integer', 20);
     }
