@@ -1,16 +1,30 @@
 <?php
+
+include_once('./lib/config.php');
 session_start();
-if (!isset($_GET['p'])) {
-    $_GET['p'] = "login";
-    login();
-} elseif($_GET['p'] == "login") {
-    login();
-} elseif ($_GET['p'] == "home") {
-    home();
+switch ($_GET['p']) {
+    case 'login':
+        login();
+        break;
+    case 'home':
+        home();
+        break;
+    case 'search':
+        search();
+        break;
+    case 'foyer':
+        foyer();
+        break;
+    case 'scroll':
+        scroll();
+        break;
+    default:
+        login();
+        break;
 }
 
 function home() {
-    include_once('./lib/config.php');
+
     $title = 'Accueil';
     $contenu = '
         <div id="menu_gauche">
@@ -28,7 +42,7 @@ function home() {
         }
         $contenu .= '
             <a href="#">
-                <span class="label" id_foyer="'. $individu->idFoyer .'" id_individu="'.$individu->id.'">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
             </a>
         </li>';
         $i++;
@@ -51,9 +65,9 @@ function home() {
 }
 
 function login() {
-    if(!isset($_POST['wp-submit'])) {
-    $title = '';
-    $contenu = '<div class="login">
+    if (!isset($_POST['wp-submit'])) {
+        $title = '';
+        $contenu = '<div class="login">
             <form name="loginform" id="loginform" action="index.php?p=login" method="post">
                 <p>
                     <label for="user_login">Identifiant<br />
@@ -68,7 +82,7 @@ function login() {
                 </p>
             </form>
         </div>';
-    display($title,$contenu);
+        display($title, $contenu);
     } else {
         include_once('./lib/config.php');
         $user = Doctrine_Core::getTable('user')->findOneByLoginAndPassword($_POST['log'], md5($_POST['pwd']));
@@ -78,10 +92,91 @@ function login() {
         } else {
             $title = '';
             $contenu = 'Non';
-            display($title,$contenu);
+            display($title, $contenu);
         }
     }
 }
+
+function search() {
+    $q = $_POST['searchword'];
+
+    $retour = '';
+    $tableIndividus = Doctrine_Core::getTable('individu');
+    $nb = $tableIndividus->likeNom($q)->count();
+    if ($nb != 0) {
+        $retour .= '<div class="nb_individu">' . $nb . '</div>';
+    } else {
+        $retour .= '<div class="nb_individu">Aucun r&#233;sultat</div>';
+    }
+
+    $i = 1;
+    foreach ($tableIndividus->searchLikeByLimitOffset($q, 100, 0)->execute() as $individu) {
+        if ($i % 2 == 0) {
+            $retour .= '<li class="pair individu" id="' . $i . '">';
+        } else {
+            $retour .= '<li class="impair individu" id="' . $i . '">';
+        }
+        $retour .= '
+                    <a href="#">
+                        <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                    </a>
+                </li>';
+        $i++;
+    }
+    echo $retour;
+}
+
+function foyer() {
+    $retour = '';
+    $foyer = Doctrine_Core::getTable('foyer')->find($_POST['idFoyer']);
+
+    $i = 1;
+    foreach ($foyer->individu as $individu) {
+        if ($i % 2 == 0) {
+            if ($individu->id == $_POST['idIndividu']) {
+                $retour .= '<li class="pair individu current" id="' . $i . '">';
+            } else {
+                $retour .= '<li class="pair individu" id="' . $i . '">';
+            }
+        } else {
+            if ($individu->id == $_POST['idIndividu']) {
+                $retour .= '<li class="impair individu current" id="' . $i . '">';
+            } else {
+                $retour .= '<li class="impair individu" id="' . $i . '">';
+            }
+        }
+        $retour .= '
+                    <a href="#">
+                        <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . ' </span>
+                    </a>
+                </li>';
+        $i++;
+    }
+    echo $retour;
+}
+
+function scroll() {
+    $retour = '';
+    $individus = Doctrine_Core::getTable('individu');
+    $i = $_POST['last'] + 1;
+    $q = $_POST['searchword'];
+
+    foreach ($individus->searchLikeByLimitOffset($q, 100, $_POST['last'])->execute() as $individu) {
+        if ($i % 2 == 0) {
+            $retour .= '<li class="pair individu" id="' . $i . '">';
+        } else {
+            $retour .= '<li class="impair individu" id="' . $i . '">';
+        }
+        $retour .= '
+                            <a href="#">
+                                <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                            </a>
+                        </li>';
+        $i++;
+    }
+    echo $retour;
+}
+
 function display($title, $contenu) {
     include('./templates/haut.php');
     echo $contenu;

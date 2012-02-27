@@ -39,8 +39,8 @@ $(function() {
 
             //On lance la fonction ajax
             $.ajax({
-                url: './scroll.php',
-                type: 'get',
+                url: './index.php?p=scroll',
+                type: 'post',
                 //                data: 'last='+nb_individu_total,
                 data: "last=" + nb_individu_total+ "&searchword=" + searchbox,
                 //Succès de la requête
@@ -74,7 +74,7 @@ $(function() {
             console.log(idFoyer);
             $.ajax({
                 type: "POST",
-                url: "./returnFoyer.php",
+                url: "./index.php?p=foyer",
                 data: 'idFoyer='+ idFoyer + "&idIndividu=" + idIndividu,
                 success: function(html)
                 {
@@ -92,7 +92,8 @@ function search(searchbox) {
     var dataString = 'searchword='+ searchbox;
     $.ajax({
         type: "POST",
-        url: "./search.php",
+        url: "./index.php?p=search",
+//        url: "./search.php",
         data: dataString,
         cache: false,
         success: function(html)
