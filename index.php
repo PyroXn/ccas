@@ -2,25 +2,29 @@
 
 include_once('./lib/config.php');
 session_start();
-switch ($_GET['p']) {
-    case 'login':
-        login();
-        break;
-    case 'home':
-        home();
-        break;
-    case 'search':
-        search();
-        break;
-    case 'foyer':
-        foyer();
-        break;
-    case 'scroll':
-        scroll();
-        break;
-    default:
-        login();
-        break;
+if(isset($_GET['p'])) {
+    switch ($_GET['p']) {
+        case 'login':
+            login();
+            break;
+        case 'home':
+            home();
+            break;
+        case 'search':
+            search();
+            break;
+        case 'foyer':
+            foyer();
+            break;
+        case 'scroll':
+            scroll();
+            break;
+        default:
+            login();
+            break;
+    }
+} else {
+    login();
 }
 
 function home() {
