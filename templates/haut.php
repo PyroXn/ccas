@@ -39,7 +39,7 @@
                             include_once('./lib/config.php');
                             if(isset($_SESSION['userId'])) {
                                 $user = Doctrine_Core::getTable('user')->find($_SESSION['userId']);
-                                echo '<span class="categorie">'.$user->login.'</span>';
+                                echo '<span class="categorie">'.$user->nomcomplet.'</span>';
                             } else {
                                 echo  '<span class="categorie">No Connect</span>';
                             }

@@ -2,7 +2,7 @@
 
 include_once('./lib/config.php');
 session_start();
-switch ($_GET['p']) {
+switch (@$_GET['p']) {
     case 'login':
         login();
         break;
