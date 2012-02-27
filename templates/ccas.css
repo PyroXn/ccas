@@ -291,11 +291,14 @@ border-bottom: none;
 /***CONTENU***/
 #contenu_wrapper {
     position: absolute;
-    top: 68px;
+    top: 7%;
     left: 20%;
     width: 80%;
+    height: 93%;
+    overflow: auto;
 }
 
 #contenu {
     padding: 20px;
+    
 }
