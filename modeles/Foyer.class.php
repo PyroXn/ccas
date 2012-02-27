@@ -25,7 +25,6 @@ class Foyer extends Doctrine_Record {
         $this->hasColumn('logSurface', 'float');
         $this->hasColumn('idReferent', 'integer', 5);
         $this->hasColumn('notes', 'string', 255);
-        $this->option('orderBy', 'nom ASC');
     }
     
     public function setUp() {
