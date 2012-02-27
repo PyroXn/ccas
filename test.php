@@ -29,11 +29,13 @@ include_once('./lib/config.php');
 //    echo '<div>'.$foyer->id;
 //}
 
-    $foyer = Doctrine_Core::getTable('foyer')->find(1);
-    echo $foyer->numRue ;
-    foreach($foyer->individu as $individu) {
-        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong></div>';
-    }
+//    $foyer = Doctrine_Core::getTable('foyer')->find(1);
+//    echo $foyer->numRue ;
+//    foreach($foyer->individu as $individu) {
+//        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong></div>';
+//    }
+$mdp = 'florian';
+echo md5($mdp);
     
 
 ?>
