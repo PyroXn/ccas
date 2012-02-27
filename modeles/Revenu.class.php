@@ -18,6 +18,7 @@ class Revenu extends Doctrine_Record {
         $this->hasColumn('autreRevenu', 'float');
         $this->hasColumn('natureAutre', 'string', 150); // Nature autre revenu
         $this->hasColumn('idIndividu', 'integer', 10);
+        $this->hasColumn('dateCreation', 'integer', 20);
     }
 
 }

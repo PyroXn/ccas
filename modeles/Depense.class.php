@@ -27,6 +27,7 @@ class Depense extends Doctrine_Record {
         $this->hasColumn('aideLogement', 'float');
         
         $this->hasColumn('idIndidivu', 'integer', 5);
+        $this->hasColumn('dateCreation', 'integer', 20);
     }
 
 }
