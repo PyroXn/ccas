@@ -7,8 +7,8 @@ class Revenu extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('montantRevenu', 'float');
-        $this->hasColumn('typeRevenu', 'integer', 5); // 1 : salaire ; 2 : chomage etc..
+        $this->hasColumn('salaire', 'float');
+        $this->hasColumn('chomage', 'float'); 
         $this->hasColumn('revenuAlloc', 'float');
         $this->hasColumn('rsaSocle', 'float');
         $this->hasColumn('rsaActivite', 'float');
