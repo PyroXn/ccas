@@ -19,6 +19,9 @@ switch (@$_GET['p']) {
     case 'scroll':
         scroll();
         break;
+    case 'deconnexion':
+        deconnexion();
+        break;
     default:
         login();
         break;
@@ -55,7 +58,7 @@ function home() {
                 <div id="page_header">
                     <div id="page_header_navigation">
                         <a href="#" class="page_header_link active">
-                            <span class="label">Opif</span>
+                            <span class="label">Accueil</span>
                         </a>
                         <a href="#" class="page_header_link">
                             <span class="label">Loulilou</span>
@@ -176,6 +179,11 @@ function scroll() {
         $i++;
     }
     echo $retour;
+}
+
+function deconnexion() {
+    unset($_SESSION['userId']);
+    header('Location: index.php');
 }
 
 function display($title, $contenu) {
