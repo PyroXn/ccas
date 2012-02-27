@@ -1,8 +1,10 @@
 <?php
-
+session_start();
 if (!isset($_GET['p'])) {
-    $_GET['p'] = "home";
-    home();
+    $_GET['p'] = "login";
+    login();
+} elseif($_GET['p'] == "login") {
+    login();
 } elseif ($_GET['p'] == "home") {
     home();
 }
@@ -48,6 +50,38 @@ function home() {
     display($title, $contenu);
 }
 
+function login() {
+    if(!isset($_POST['wp-submit'])) {
+    $title = '';
+    $contenu = '<div class="login">
+            <form name="loginform" id="loginform" action="index.php?p=login" method="post">
+                <p>
+                    <label for="user_login">Identifiant<br />
+                        <input type="text" name="log" id="user_login" class="input" value="" size="20" tabindex="10" /></label>
+                </p>
+                <p>
+                    <label for="user_pass">Mot de passe<br />
+                        <input type="password" name="pwd" id="user_pass" class="input" value="" size="20" tabindex="20" /></label>
+                </p>
+                <p class="submit">
+                    <input type="submit" name="wp-submit" id="wp-submit" class="button-primary" value="Se connecter" tabindex="100" />
+                </p>
+            </form>
+        </div>';
+    display($title,$contenu);
+    } else {
+        include_once('./lib/config.php');
+        $user = Doctrine_Core::getTable('user');
+        if($user->isMember($_POST['log'], md5($_POST['pwd'])) == 1) {
+            $_SESSION['user'] = serialize($user->loadMember($_POST['log'], md5($_POST['pwd'])));
+            header('Location: index.php?p=home');
+        } else {
+            $title = '';
+            $contenu = 'Non';
+            display($title,$contenu);
+        }
+    }
+}
 function display($title, $contenu) {
     include('./templates/haut.php');
     echo $contenu;

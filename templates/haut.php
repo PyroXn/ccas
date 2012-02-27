@@ -35,7 +35,14 @@
                     <li class="navigationligne">
                         <a class="lien_navigation" href="#" title="Connexion">
                             <span class="border_top"></span>
-                            <span class="categorie">Pierre Charrasse</span>
+                            <?php
+                            if(isset($_SESSION['user'])) {
+                                $user = unserialize($_SESSION['user']);
+                                echo '<span class="categorie">'.$user->login.'</span>';
+                            } else {
+                                echo  '<span class="categorie">No Connect</span>';
+                            }
+                            ?>
                         </a>
                     </li>
                     <li class="navigationligne">
