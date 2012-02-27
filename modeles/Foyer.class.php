@@ -27,6 +27,16 @@ class Foyer extends Doctrine_Record {
         $this->hasColumn('notes', 'string', 255);
         $this->option('orderBy', 'nom ASC');
     }
+    
+    public function setUp() {
+    	$this->hasMany(
+                'individu as individu',
+    		array(
+    			'local' => 'id', 
+    			'foreign' => 'idFoyer'
+    		)
+    	);
+    }
 
 }
 

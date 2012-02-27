@@ -46,7 +46,16 @@ class Individu extends Doctrine_Record
         $this->hasColumn('idSitFam', 'integer', 5);               //cle etrangere
         $this->hasColumn('idNationalite', 'integer', 5);          //cle etrangere
         $this->hasColumn('idLieuNaissance', 'integer', 20);       //cle etrangere
-
+        $this->hasColumn('idFoyer', 'integer', 8);       //cle etrangere
+    }
+    
+    public function setUp() {
+    	$this->hasOne('foyer as foyer',
+    		array(
+    			'local' => 'idFoyer', 
+    			'foreign' => 'id'
+    		)
+    	);
     }
 }
 ?>
