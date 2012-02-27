@@ -22,6 +22,10 @@ switch (@$_GET['p']) {
     case 'deconnexion':
         deconnexion();
         break;
+    case 'formFoyer':
+        include_once('./pages/form.php');
+        formFoyer();
+        break;
     default:
         login();
         break;
@@ -32,7 +36,7 @@ function home() {
     $title = 'Accueil';
     $contenu = '
         <div id="menu_gauche">
-            <input id="search" type="text" placeholder="Search..."/><a href="#" class="add" original-title="Ajouter un foyer"></a>
+            <input id="search" type="text" placeholder="Search..."/><a id="newfoyer" href="#" class="add" original-title="Ajouter un foyer"></a>
             <div id="side_individu">
                 <ul id="list_individu">';
     $individus = Doctrine_Core::getTable('individu');
