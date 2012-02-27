@@ -36,6 +36,7 @@
                         <a class="lien_navigation" href="#" title="Connexion">
                             <span class="border_top"></span>
                             <?php
+                            include_once('./lib/config.php');
                             if(isset($_SESSION['userId'])) {
                                 $user = Doctrine_Core::getTable('user')->find($_SESSION['userId']);
                                 echo '<span class="categorie">'.$user->login.'</span>';
