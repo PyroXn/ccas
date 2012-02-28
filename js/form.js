@@ -14,7 +14,7 @@ $(function() {
 
     });
     
-    $('.select').click(function() {
+    $('.select').live("click", function() {
         //permet de generaliser sur tous les select
         var attr = '.'+$(this).attr('role');
         console.log(attr);
@@ -24,6 +24,16 @@ $(function() {
         $(attr).offset({
             top:x.top+h,
             left:x.left
+        });
+        $(this).children('.option').toggleClass('en_attente');
+        $(attr + '>li').live("click", function() {
+            console.log($(this).children().text());
+            console.log( $(this).parent());
+            $(this).parent().toggle();
+            console.log( $(this).parent());
+            $('.en_attente').text($(this).children().text());
+            $('.en_attente').toggleClass('en_attente');
+            
         });
     });
     
