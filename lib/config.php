@@ -25,7 +25,7 @@ $connexion->setCharset('utf8');
  */
 function isAuthorized($level) {
     $find = false;
-    $i = 3;
+    $i = strlen($level)-1;
     while($level[$i] != 1) {
         $i--;
     }
