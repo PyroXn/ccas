@@ -54,7 +54,7 @@
                         <div class="menu_option">
                             <ul class="liste_menu_option">
                                 <?php
-                                if(isAuthorized(2)) { // On autorise à partir de l'user level 2
+                                if(isAuthorized("0100")) { // On autorise à partir de l'user level 2 soit 0010
                                 ?>
                                 <li>
                                     <a class="" href="index.php?p=admin" >Configuration</a>
