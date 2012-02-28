@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 3.4.5deb1
 -- http://www.phpmyadmin.net
 --
--- Serveur: localhost
--- Généré le : Lun 27 Février 2012 à 14:37
--- Version du serveur: 5.1.53
--- Version de PHP: 5.3.4
+-- Client: localhost
+-- Généré le : Mar 28 Février 2012 à 09:42
+-- Version du serveur: 5.1.58
+-- Version de PHP: 5.3.6-13ubuntu3.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -36,11 +37,6 @@ CREATE TABLE IF NOT EXISTS `aide` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `aide`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -53,11 +49,6 @@ CREATE TABLE IF NOT EXISTS `bailleur` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `bailleur`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -69,11 +60,6 @@ CREATE TABLE IF NOT EXISTS `decideur` (
   `decideur` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Contenu de la table `decideur`
---
-
 
 -- --------------------------------------------------------
 
@@ -105,11 +91,6 @@ CREATE TABLE IF NOT EXISTS `depense` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `depense`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -128,11 +109,6 @@ CREATE TABLE IF NOT EXISTS `dette` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `dette`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -144,11 +120,6 @@ CREATE TABLE IF NOT EXISTS `etude` (
   `etude` varchar(90) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Contenu de la table `etude`
---
-
 
 -- --------------------------------------------------------
 
@@ -4538,11 +4509,6 @@ CREATE TABLE IF NOT EXISTS `instruct` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `instruct`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -4553,12 +4519,14 @@ CREATE TABLE IF NOT EXISTS `lienfamille` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `lien` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `lienfamille`
 --
 
+INSERT INTO `lienfamille` (`id`, `lien`) VALUES
+(1, 'Père');
 
 -- --------------------------------------------------------
 
@@ -4570,12 +4538,14 @@ CREATE TABLE IF NOT EXISTS `nationalite` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nationalite` varchar(90) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `nationalite`
 --
 
+INSERT INTO `nationalite` (`id`, `nationalite`) VALUES
+(1, 'Française');
 
 -- --------------------------------------------------------
 
@@ -4589,11 +4559,6 @@ CREATE TABLE IF NOT EXISTS `profession` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `profession`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -4602,8 +4567,8 @@ CREATE TABLE IF NOT EXISTS `profession` (
 
 CREATE TABLE IF NOT EXISTS `revenu` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `montantrevenu` float(18,2) DEFAULT NULL,
-  `typerevenu` bigint(20) DEFAULT NULL,
+  `salaire` float(18,2) DEFAULT NULL,
+  `chomage` float(18,2) DEFAULT NULL,
   `revenualloc` float(18,2) DEFAULT NULL,
   `rsasocle` float(18,2) DEFAULT NULL,
   `rsaactivite` float(18,2) DEFAULT NULL,
@@ -4615,11 +4580,6 @@ CREATE TABLE IF NOT EXISTS `revenu` (
   `idindividu` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Contenu de la table `revenu`
---
-
 
 -- --------------------------------------------------------
 
@@ -4633,11 +4593,6 @@ CREATE TABLE IF NOT EXISTS `rue` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `rue`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -4650,11 +4605,6 @@ CREATE TABLE IF NOT EXISTS `secteur` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `secteur`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -4665,12 +4615,14 @@ CREATE TABLE IF NOT EXISTS `situationmatri` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `situation` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `situationmatri`
 --
 
+INSERT INTO `situationmatri` (`id`, `situation`) VALUES
+(1, 'Marié');
 
 -- --------------------------------------------------------
 
@@ -4685,11 +4637,6 @@ CREATE TABLE IF NOT EXISTS `type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `type`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -4701,8 +4648,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `login` varchar(50) DEFAULT NULL,
   `password` varchar(80) DEFAULT NULL,
   `nomcomplet` varchar(200) DEFAULT NULL,
-  `idinstruct` bigint(20) DEFAULT NULL,
   `level` smallint(6) DEFAULT NULL,
+  `idInstruct` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -4710,8 +4657,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Contenu de la table `user`
 --
 
-INSERT INTO `user` (`id`, `login`, `password`, `nomcomplet`, `idinstruct`, `level`) VALUES
-(1, 'Florian', '56910c52ed70539e3ce0391edeb6d339', NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `login`, `password`, `nomcomplet`, `level`, `idInstruct`) VALUES
+(1, 'Florian', '56910c52ed70539e3ce0391edeb6d339', 'Janson Florian', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -4726,7 +4673,6 @@ CREATE TABLE IF NOT EXISTS `ville` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `ville`
---
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
