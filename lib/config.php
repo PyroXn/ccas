@@ -18,4 +18,13 @@ $connexion = Doctrine_Manager::connection($dsn);
 $connexion->setCollate('utf8_unicode_ci');
 $connexion->setCharset('utf8');
 
+function isAuthorized($level) {
+    if(@$_SESSION['level'] >= $level) {
+        return true;
+    } else {
+        // Renvoyer vers page indiquant les droits
+        return false;
+    }
+}
+
 ?>

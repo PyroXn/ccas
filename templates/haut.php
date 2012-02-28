@@ -53,11 +53,17 @@
                         </a>
                         <div class="menu_option">
                             <ul class="liste_menu_option">
+                                <?php
+                                if(isAuthorized(2)) { // On autorise à partir de l'user level 2
+                                ?>
                                 <li>
-                                    <a class="" href="#" >Coucou c'est moi</a>
+                                    <a class="" href="index.php?p=admin" >Configuration</a>
                                 </li>
+                                <?php
+                                }
+                                ?>
                                 <li>
-                                    <a class="" href="#" >Coucou c'est moi2</a>
+                                    <a class="" href="#" >Deconnexion</a>
                                 </li>
                             </ul>
                         </div>
