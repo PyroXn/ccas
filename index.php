@@ -30,14 +30,10 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         homeAdmin();
         break;
-    case 'managepermission':
+    case 'manageuser':
         include_once('./pages/admin.php');
-        managePermission();
+        manageUser();
         break;    
-    case 'newuser':
-        include_once('./pages/admin.php');
-        addUser();
-        break;
     case 'deconnexion':
         deconnexion();
         break;
