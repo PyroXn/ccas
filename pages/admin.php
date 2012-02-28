@@ -36,11 +36,11 @@ function homeAdmin() {
 }
 
 function manageUser() {
-    if(!isset($_POST['submitpermission']) && !isset($_POST['submituser'])) {
-    include_once('./lib/config.php');
-    $users = Doctrine_Core::getTable('user')->findAll();
-    $title = 'Accueil';
-    $contenu = '
+    if (!isset($_POST['submitpermission']) && !isset($_POST['submituser'])) {
+        include_once('./lib/config.php');
+        $users = Doctrine_Core::getTable('user')->findAll();
+        $title = 'Accueil';
+        $contenu = '
         <div id="menu_gauche"></div>
                 <div id="page_header">
                     <div id="page_header_navigation">
@@ -81,20 +81,20 @@ function manageUser() {
                             <td width="20%">Configuration</td>
                             <td width="20%">Administration</td>
                        </tr>';
-    foreach($users as $user) {
-        $check0 = $user->level[3] == 1 ? "checked = checked":"";
-        $check1 = $user->level[2] == 1 ? "checked = checked":"";
-        $check2 = $user->level[1] == 1 ? "checked = checked":"";
-        $check3 = $user->level[0] == 1 ? "checked = checked":"";
+        foreach ($users as $user) {
+            $check0 = $user->level[3] == 1 ? "checked = checked" : "";
+            $check1 = $user->level[2] == 1 ? "checked = checked" : "";
+            $check2 = $user->level[1] == 1 ? "checked = checked" : "";
+            $check3 = $user->level[0] == 1 ? "checked = checked" : "";
 
-        $contenu .= '<tr>
-                                    <td width="20%">'.$user->nomcomplet.'</td>
-                                    <td width="20%"><input type="checkbox" name="use'.$user->id.'" '.$check0.' value="1"></td>
-                                    <td width="20%"><input type="checkbox" name="access'.$user->id.'" '.$check1.' value="1"></td>
-                                    <td width="20%"><input type="checkbox" name="config'.$user->id.'" '.$check2.' value="1"></td>
-                                    <td width="20%"><input type="checkbox" name="admin'.$user->id.'" '.$check3.' value="1"></td>                                          
+            $contenu .= '<tr>
+                                    <td width="20%">' . $user->nomcomplet . '</td>
+                                    <td width="20%"><input type="checkbox" name="use' . $user->id . '" ' . $check0 . ' value="1"></td>
+                                    <td width="20%"><input type="checkbox" name="access' . $user->id . '" ' . $check1 . ' value="1"></td>
+                                    <td width="20%"><input type="checkbox" name="config' . $user->id . '" ' . $check2 . ' value="1"></td>
+                                    <td width="20%"><input type="checkbox" name="admin' . $user->id . '" ' . $check3 . ' value="1"></td>                                          
                                 </tr>';
-    }
+        }
         $contenu .= '</table>
             <input type="submit" name="submitpermission" class="modif" value="Enregistrer" />
             <input type="reset" name="reset" class="classique" value="Annuler" />
@@ -102,32 +102,32 @@ function manageUser() {
             <div>
                 </div>
                 ';
-    display($title, $contenu);
-    } elseif(isset($_POST['submitpermission'])) {
+        display($title, $contenu);
+    } elseif (isset($_POST['submitpermission'])) {
         include_once('./lib/config.php');
         $users = Doctrine_Core::getTable('user')->findAll();
         $chaine = array();
-        foreach($users as $user) {
-            $check0 = (isset($_POST['use'.$user->id])) ? $_POST['use'.$user->id]:"0";
-            $check1 = (isset($_POST['access'.$user->id])) ? $_POST['access'.$user->id]:"0";
-            $check2 = (isset($_POST['config'.$user->id])) ? $_POST['config'.$user->id]:"0";
-            $check3 = (isset($_POST['admin'.$user->id])) ? $_POST['admin'.$user->id]:"0";
-            $chaine = $check3.$check2.$check1.$check0;
-            
+        foreach ($users as $user) {
+            $check0 = (isset($_POST['use' . $user->id])) ? $_POST['use' . $user->id] : "0";
+            $check1 = (isset($_POST['access' . $user->id])) ? $_POST['access' . $user->id] : "0";
+            $check2 = (isset($_POST['config' . $user->id])) ? $_POST['config' . $user->id] : "0";
+            $check3 = (isset($_POST['admin' . $user->id])) ? $_POST['admin' . $user->id] : "0";
+            $chaine = $check3 . $check2 . $check1 . $check0;
+
             // On met à jour
             $userUpdate = Doctrine_Core::getTable('user')->find($user->id);
             $userUpdate->level = $chaine;
             $userUpdate->save();
         }
         header("Location: index.php?p=manageuser");
-    } elseif(isset($_POST['submituser'])) {
-         $user = new User();
-         $user->login = $_POST['login'];
-         $user->password = md5($_POST['pwd']);
-         $user->nomcomplet = $_POST['nomcomplet'];
-         $user->save();
-         header("Location: index.php?p=manageuser");
+    } elseif (isset($_POST['submituser'])) {
+        $user = new User();
+        $user->login = $_POST['login'];
+        $user->password = md5($_POST['pwd']);
+        $user->nomcomplet = $_POST['nomcomplet'];
+        $user->save();
+        header("Location: index.php?p=manageuser");
     }
-    
 }
+
 ?>

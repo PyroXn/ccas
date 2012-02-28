@@ -55,9 +55,9 @@ $(function() {
             switch(table){
                 //unique pour la creation de foyer
                 case 'creation_foyer':
-                    datastring += '&civilite=' + $('#form_1').text;
+                    datastring += '&civilite=' + $('#form_1').text();
                     datastring += '&nom=' + $('#form_2').val();
-                    datastring += '&nom=' + $('#form_3').val();
+                    datastring += '&prenom=' + $('#form_3').val();
                     break;
             }
             $.ajax({
