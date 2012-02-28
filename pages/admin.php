@@ -135,7 +135,7 @@ function managePermission() {
             $userUpdate->level = $chaine;
             $userUpdate->save();
         }
-        print_r($chaine);
+        header("Location: index.php?p=managepermission");
     }
 }
 ?>
