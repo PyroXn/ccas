@@ -25,6 +25,13 @@ class Depense extends Doctrine_Record {
         $this->hasColumn('idIndidivu', 'integer', 5);
         $this->hasColumn('dateCreation', 'integer', 20);
     }
+    public function setUp() {
+        $this->hasOne('individu as individu', array(
+            'local' => 'idIndidivu',
+            'foreign' => 'id'
+                )
+        );
+    }
 
 }
 

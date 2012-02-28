@@ -23,18 +23,54 @@ class Foyer extends Doctrine_Record {
         $this->hasColumn('typeAppartenance', 'integer', 5);
         $this->hasColumn('logDateArrive', 'integer', 20); // timestamp
         $this->hasColumn('logSurface', 'float');
-        $this->hasColumn('idReferent', 'integer', 5);
+        $this->hasColumn('idInstruct', 'integer', 5);
         $this->hasColumn('notes', 'string', 255);
     }
-    
+
     public function setUp() {
-    	$this->hasMany(
-                'individu as individu',
-    		array(
-    			'local' => 'id', 
-    			'foreign' => 'idFoyer'
-    		)
-    	);
+        $this->hasMany(
+                'individu as individu', array(
+            'local' => 'id',
+            'foreign' => 'idFoyer'
+                )
+        );
+
+        $this->hasOne(
+                'rue as rue', array(
+            'local' => 'id',
+            'foreign' => 'idRue'
+                )
+        );
+        $this->hasOne(
+                'secteur as secteur', array(
+            'local' => 'id',
+            'foreign' => 'idSecteur'
+                )
+        );
+        $this->hasOne(
+                'ville as ville', array(
+            'local' => 'id',
+            'foreign' => 'idVille'
+                )
+        );
+        $this->hasOne(
+                'situationfamille as situationfamille', array(
+            'local' => 'id',
+            'foreign' => 'idSituationFamille'
+                )
+        );
+        $this->hasOne(
+                'bailleur as bailleur', array(
+            'local' => 'id',
+            'foreign' => 'idBailleur'
+                )
+        );
+        $this->hasOne(
+                'instruct as instruct', array(
+            'local' => 'id',
+            'foreign' => 'idInstruct'
+                )
+        );
     }
 
 }
