@@ -80,11 +80,14 @@ function managePermission() {
                 </div>
                 <div id="page_header">
                     <div id="page_header_navigation">
-                        <a href="#" class="page_header_link active">
+                        <a href="#" class="page_header_link">
                             <span class="label">Administration - Accueil</span>
                         </a>
-                        <a href="#" class="page_header_link">
-                            <span class="label">Loulilou</span>
+                        <a href="index.php?p=newuser" class="page_header_link">
+                            <span class="label">Ajouter un utilisateur</span>
+                        </a>
+                        <a href="index.php?p=managepermission" class="page_header_link active">
+                            <span class="label">G&eacute;rer les permissions</span>
                         </a>
                     </div>
                 </div>
@@ -114,7 +117,8 @@ function managePermission() {
                                 </tr>';
     }
         $contenu .= '</table>
-            <input type="submit" name="submitpermission" id="wp-submit" class="button-primary" value="Enregistrer" tabindex="100" />
+            <input type="submit" name="submitpermission" class="modif" value="Enregistrer" />
+            <input type="reset" name="reset" class="classique" value="Annuler" />
             <div>
                 </div>
                 ';
@@ -137,5 +141,59 @@ function managePermission() {
         }
         header("Location: index.php?p=managepermission");
     }
+}
+    function addUser() {
+     if(!isset($_POST['submituser'])) {
+        $title = 'Accueil';
+        $contenu = '
+            <div id="menu_gauche">
+            <ul>
+                <li>Cr&eacute;er/modifier des utilisateurs</li>
+                <li class="current">G&eacute;rer les permissions des utilisateurs</li>
+            </ul>
+
+                    </div>
+                    <div id="page_header">
+                        <div id="page_header_navigation">
+                            <a href="#" class="page_header_link">
+                                <span class="label">Administration - Accueil</span>
+                            </a>
+                            <a href="index.php?p=newuser" class="page_header_link active">
+                                <span class="label">Ajouter un utilisateur</span>
+                            </a>
+                            <a href="index.php?p=managepermission" class="page_header_link">
+                                <span class="label">G&eacute;rer les permissions</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="contenu_wrapper">
+                        <div id="contenu">
+                        <form method="POST">
+                            <div class="input_text">
+                                <input class="contour_field" type="text" title="Login" placeholder="Login" name="login">
+                            </div>
+                            <div class="input_text">
+                                <input class="contour_field" type="text" title="Password" placeholder="Password" name="pwd">
+                            </div>
+                            <div class="input_text">
+                                <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcomplet">
+                            </div>
+                            <div class="sauvegarder_annuler">
+                                <input type="submit" class="modif" name="submituser" value="Ajouter"/>
+                                <input type="reset" class="classique" name="reset" value="Annuler"/>
+                            </div>
+                            </form>
+                        </div>
+                    </div>';
+        display($title,$contenu);
+         } else {
+             $user = new User();
+             $user->login = $_POST['login'];
+             $user->password = md5($_POST['pwd']);
+             $user->nomcomplet = $_POST['nomcomplet'];
+             $user->save();
+             
+             header("Location: index.php?p=managepermission");
+         }
 }
 ?>

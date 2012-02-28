@@ -34,6 +34,10 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         managePermission();
         break;    
+    case 'newuser':
+        include_once('./pages/admin.php');
+        addUser();
+        break;
     case 'deconnexion':
         deconnexion();
         break;
@@ -160,7 +164,7 @@ function login() {
                         <input type="password" name="pwd" id="user_pass" class="input" value="" size="20" tabindex="20" /></label>
                 </p>
                 <p class="submit">
-                    <input type="submit" name="wp-submit" id="wp-submit" class="button-primary" value="Se connecter" tabindex="100" />
+                    <input type="submit" name="wp-submit" id="wp-submit" class="modif" value="Se connecter" tabindex="100" />
                 </p>
             </form>
         </div>';
