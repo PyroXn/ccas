@@ -33,7 +33,10 @@ switch (@$_GET['p']) {
     case 'managepermission':
         include_once('./pages/admin.php');
         managePermission();
-        break;       
+        break;    
+    case 'deconnexion':
+        deconnexion();
+        break;
     default:
         login();
         break;
