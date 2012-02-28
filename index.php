@@ -22,9 +22,9 @@ switch (@$_GET['p']) {
     case 'deconnexion':
         deconnexion();
         break;
-    case 'formFoyer':
+    case 'form':
         include_once('./pages/form.php');
-        formFoyer();
+        form();
         break;
     case 'admin':
         include_once('./pages/admin.php');
@@ -47,7 +47,7 @@ function home() {
     $title = 'Accueil';
     $contenu = '
         <div id="menu_gauche">
-            <input id="search" type="text" placeholder="Search..."/><a id="newfoyer" href="#" class="add" original-title="Ajouter un foyer"></a>
+            <input id="search" class="contour_field" type="text" placeholder="Search..."/><a id="newfoyer" href="#" class="add" original-title="Ajouter un foyer"></a>
             <div id="side_individu">
                 <ul id="list_individu">';
     $individus = Doctrine_Core::getTable('individu');
@@ -82,6 +82,16 @@ function home() {
                 </div>
                 <div id="contenu_wrapper">
                     <div id="contenu">
+                        <a class="bouton_modif">Modifier</a>
+                        <!--<div class="formulaire">
+                            <h2>Sexe</h2>
+                            <div class="colonne_droite">
+                                <div class="sauvegarder_annuler">
+                                    <div class="bouton modif">Enregistrer</div>
+                                    <div class="bouton classique">Annuler</div>
+                                </div>
+                            </div>
+                        </div>-->
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget libero vel massa sagittis adipiscing sed vitae enim. Praesent non eros nec nunc vestibulum pharetra in in nisl. Nulla et luctus ante. Donec et consequat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque laoreet facilisis egestas. Sed a ullamcorper risus.
                             In convallis turpis pharetra ante commodo convallis. In sit amet neque vitae libero luctus mollis. Morbi hendrerit, felis eu cursus ornare, arcu mi sodales mauris, non tincidunt justo odio a lacus. Maecenas vel sodales nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae velit ac est laoreet sollicitudin. Nullam suscipit porttitor pellentesque. Ut vehicula ligula at leo rhoncus tristique. Praesent scelerisque, orci at consectetur pretium, libero nisl mattis sapien, nec elementum tortor sem sed enim. Vestibulum vitae vulputate felis. Aliquam laoreet quam mollis velit gravida interdum lacinia orci sodales. Vivamus non placerat magna. Duis leo nunc, tincidunt vel pharetra sit amet, mollis id nunc. Etiam semper fermentum mauris nec sodales. Morbi tincidunt, nisi vitae pellentesque fringilla, ipsum turpis porta massa, at tincidunt mi tellus congue massa.
@@ -130,7 +140,7 @@ function home() {
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget libero vel massa sagittis adipiscing sed vitae enim. Praesent non eros nec nunc vestibulum pharetra in in nisl. Nulla et luctus ante. Donec et consequat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque laoreet facilisis egestas. Sed a ullamcorper risus.
                             In convallis turpis pharetra ante commodo convallis. In sit amet neque vitae libero luctus mollis. Morbi hendrerit, felis eu cursus ornare, arcu mi sodales mauris, non tincidunt justo odio a lacus. Maecenas vel sodales nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae velit ac est laoreet sollicitudin. Nullam suscipit porttitor pellentesque. Ut vehicula ligula at leo rhoncus tristique. Praesent scelerisque, orci at consectetur pretium, libero nisl mattis sapien, nec elementum tortor sem sed enim. Vestibulum vitae vulputate felis. Aliquam laoreet quam mollis velit gravida interdum lacinia orci sodales. Vivamus non placerat magna. Duis leo nunc, tincidunt vel pharetra sit amet, mollis id nunc. Etiam semper fermentum mauris nec sodales. Morbi tincidunt, nisi vitae pellentesque fringilla, ipsum turpis porta massa, at tincidunt mi tellus congue massa.
                         </p>
-                    <div>
+                    </div>
                 </div>
                 ';
     display($title, $contenu);
