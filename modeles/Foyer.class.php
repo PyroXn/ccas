@@ -16,7 +16,6 @@ class Foyer extends Doctrine_Record {
         $this->hasColumn('idRue', 'integer', 10);
         $this->hasColumn('idSecteur', 'integer', 10);
         $this->hasColumn('idVille', 'integer', 10);
-        $this->hasColumn('idSituationFamille', 'integer', 10);
         $this->hasColumn('idBailleur', 'integer', 10);
         $this->hasColumn('dateInscription', 'integer', 20); // timestamp
         $this->hasColumn('typeLogement', 'integer', 5);
@@ -51,12 +50,6 @@ class Foyer extends Doctrine_Record {
                 'ville as ville', array(
             'local' => 'id',
             'foreign' => 'idVille'
-                )
-        );
-        $this->hasOne(
-                'situationfamille as situationfamille', array(
-            'local' => 'id',
-            'foreign' => 'idSituationFamille'
                 )
         );
         $this->hasOne(
