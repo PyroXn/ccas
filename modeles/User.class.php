@@ -10,7 +10,7 @@ class User extends Doctrine_Record {
         $this->hasColumn('password', 'string', 80);
         $this->hasColumn('nomcomplet', 'string', 200);
         $this->hasColumn('idInstruct', 'integer', 5);
-        $this->hasColumn('level', 'integer', 2);
+        $this->hasColumn('level', 'string', 5);
         
     }
 

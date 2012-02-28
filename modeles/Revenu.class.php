@@ -23,6 +23,14 @@ class Revenu extends Doctrine_Record {
         $this->hasColumn('aideLogement', 'float');
         $this->hasColumn('dateCreation', 'integer', 20);
     }
+    
+    public function setUp() {
+        $this->hasOne('individu as individu', array(
+            'local' => 'idIndidivu',
+            'foreign' => 'id'
+                )
+        );
+}
 
 }
 
