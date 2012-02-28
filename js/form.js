@@ -14,7 +14,7 @@ $(function() {
 
     });
     
-    $('.select').click(function() {
+    $('.select').live("click", function() {
         //permet de generaliser sur tous les select
         var attr = '.'+$(this).attr('role');
         console.log(attr);
@@ -25,13 +25,27 @@ $(function() {
             top:x.top+h,
             left:x.left
         });
+        $(this).children('.option').toggleClass('en_attente');
+        $(attr).toggleClass('en_execution');
+    });
+    
+    $('.en_execution > li').live("click", function() {
+        console.log($(this).children().text());
+        $('.en_execution').toggle();
+        $('.en_attente').text($(this).children().text());
+        $('.en_attente').toggleClass('en_attente');
+        $('.en_execution').toggleClass('en_execution');   
     });
     
     $('.bouton').click(function() {
         var value = $(this).attr('value');
         if(value=='cancel') {
+            $('.en_execution').toggle();
+            $('.en_execution').toggleClass('en_execution');
+            $('.en_attente').toggleClass('en_attente');
             $('#ecran_gris').toggle();
             $('.formulaire').toggle();
+            
         } else if(value=='save') {
             //commun a tous les form
             var table = $('.formulaire').attr('action');
