@@ -40,8 +40,12 @@ $(function() {
     $('.bouton').click(function() {
         var value = $(this).attr('value');
         if(value=='cancel') {
+            $('.en_execution').toggle();
+            $('.en_execution').toggleClass('en_execution');
+            $('.en_attente').toggleClass('en_attente');
             $('#ecran_gris').toggle();
             $('.formulaire').toggle();
+            
         } else if(value=='save') {
             //commun a tous les form
             var table = $('.formulaire').attr('action');
