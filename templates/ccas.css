@@ -133,7 +133,7 @@ input[type=submit] , input[type=reset] {
     background: white url('./img/search.png') 6px 6px no-repeat;
     font-size: 14px;
     height: 29px;
-/*    width: 90%;*/
+/*    width: 100%;*/
     padding: 4px 0 4px 30px;
     margin: 5px 0 5px 5px;
     box-sizing: border-box;
@@ -153,6 +153,7 @@ input[type=submit] , input[type=reset] {
     padding: 4px 4px 4px 0px;
     margin: 5px 5px 5px 0;
 }
+
 
 .add:hover {
     background-position: 5px -19px;
