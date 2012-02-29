@@ -19,9 +19,6 @@ switch (@$_GET['p']) {
     case 'scroll':
         scroll();
         break;
-    case 'deconnexion':
-        deconnexion();
-        break;
     case 'form':
         include_once('./pages/form.php');
         form();
@@ -36,6 +33,10 @@ switch (@$_GET['p']) {
         break;    
     case 'deconnexion':
         deconnexion();
+        break;
+    case 'edituser':
+        include_once('./pages/admin.php');
+        editUser();
         break;
     default:
         login();
