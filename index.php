@@ -33,7 +33,7 @@ switch (@$_GET['p']) {
     case 'manageuser':
         include_once('./pages/admin.php');
         manageUser();
-        break;    
+        break;
     case 'deconnexion':
         deconnexion();
         break;
@@ -210,7 +210,10 @@ function search() {
 }
 
 function foyer() {
-    echo creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
+    $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
+    $menu = generationHeaderNavigation(1);
+    $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu);
+    echo json_encode($retour);
 }
 
 function creationListeByFoyer($idFoyer, $idIndividu) {
@@ -239,6 +242,32 @@ function creationListeByFoyer($idFoyer, $idIndividu) {
                 </li>';
         $i++;
     }
+    return $retour;
+}
+
+/* genere la barre de navigation de la page selon le mode 
+ * je pense à plusieurs mode de creation, si on doit générer le menu lorsqu'on click
+ * sur un individu (cas le plus commun je pense), mais aussi générer le menu quand 
+ * on est dans l'administration
+ */
+
+function generationHeaderNavigation($mode) {
+    $retour = '
+        <a href="#" class="page_header_link active">
+            <span class="label">Foyer</span>
+        </a>
+        <a href="#" class="page_header_link">
+            <span class="label">G&#233;n&#233;ralit&#233;s</span>
+        </a>
+        <a href="#" class="page_header_link">
+            <span class="label">Budget</span>
+        </a>
+        <a href="#" class="page_header_link">
+            <span class="label">Aides</span>
+        </a>
+        <a href="#" class="page_header_link">
+            <span class="label">Historique</span>
+        </a>';
     return $retour;
 }
 

@@ -4,7 +4,10 @@ function form() {
     $table = $_POST['table'];
     switch ($table) {
          case 'creation_foyer':
-             echo creationFoyer($_POST['civilite'], $_POST['nom'], $_POST['prenom']);
+             $listeIndividu = creationFoyer($_POST['civilite'], $_POST['nom'], $_POST['prenom']);
+             $menu = generationHeaderNavigation(1);
+             $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu);
+             echo json_encode($retour);
              break;
     }
 }

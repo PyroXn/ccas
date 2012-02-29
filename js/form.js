@@ -62,6 +62,7 @@ $(function() {
             }
             $.ajax({
                 type: 'post',
+                dataType:'json',
                 data: datastring,
                 url: './index.php?p=form',
                 //Succès de la requête
@@ -71,7 +72,8 @@ $(function() {
                     effacer();
                     
                     //CAS NON GENERIQUE
-                    $("#list_individu").html(data).show();
+                    $("#list_individu").html(data.listeIndividu);
+                    $("#page_header_navigation").html(data.menu);
                 }
             });
         }
