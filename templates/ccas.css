@@ -59,7 +59,10 @@ ul {
     -webkit-box-shadow: inset 0 1px 0 0 #aec3e5;
     box-shadow: inset 0 1px 0 0 #aec3e5;
 }*/
-
+#formaccess tr td {
+    text-align: center;
+    vertical-align: middle;
+}
 input[type=submit] , input[type=reset], input[type=button] {
     position: relative;
     display: inline-block;
@@ -326,4 +329,19 @@ legend {
  font-size: 12px;
  }
  
-
+.messageJS {
+    display: none;
+    background-color: white;
+    border: 1px solid #CCC;
+    color: black;
+    outline: 0 none;
+    padding: 10px;
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    z-index: 1001;
+    -moz-box-shadow: 0 1px 5px #ccc;
+    -ms-filter: "progid: DXImageTransform.Microsoft.Shadow(Strength=3, Direction=180, Color='#ccc')";
+    -o-box-shadow: 0 1px 5px #ccc;
+    -webkit-box-shadow: 0 1px 5px #ccc;
+}

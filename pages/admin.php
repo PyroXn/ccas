@@ -72,15 +72,15 @@ function manageUser() {
                     </form>
                     </fieldset>
                     <fieldset><legend>G&eacute;rer les permissions</legend>
-                    <form method="POST">
+                    <form method="POST" id="formaccess">
                     <table border="0">
                         <tr>
                             <td width="15%"></td>
                             <td width="5%"></td>
                             <td width="5%"></td>
                             <td width="20%">Utiliser le logiciel</td>
-                            <td width="20%">Acc&eacute;der aux documents vierges</td>
-                            <td width="20%">Configuration</td>
+                            <td width="20%">Upload des documents</td>
+                            <td width="20%">Configuration - Donn&eacute;es modulables</td>
                             <td width="20%">Administration</td>
                        </tr>';
         foreach ($users as $user) {
