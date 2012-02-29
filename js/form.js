@@ -45,7 +45,7 @@ $(function() {
             $('.en_attente').toggleClass('en_attente');
             $('#ecran_gris').toggle();
             $('.formulaire').toggle();
-            
+            effacer();
         } else if(value=='save') {
             //commun a tous les form
             var table = $('.formulaire').attr('action');
@@ -65,11 +65,25 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=form',
                 //Succès de la requête
-                success: function() {
+                success: function(data) {
                     $('#ecran_gris').toggle();
                     $('.formulaire').toggle();
+                    effacer();
+                    
+                    //NON GENERIQUE
+                    //reload la liste gauche et simuler le click sur le nouveau individu
+                    $('#search').trigger('keyup');
+                    
+                    var selector = '.label[id_individu="'+data+'"]';
+                    console.log(selector);
+                    $(selector).trigger("click");
+//                    $('.label[id_individu=16]').trigger("click");
                 }
             });
         }
     });
+    
+    function effacer() {
+        $('.input_text').children().val('');
+    }
 });
