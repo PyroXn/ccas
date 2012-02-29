@@ -34,7 +34,7 @@
             <div id="navigationright">
                 <ul id="connexionlist">
                     <li class="navigationligne">
-                        <a class="lien_navigation" href="#" title="Connexion">
+                        <a class="lien_navigation" href="index.php" title="Accueil">
                             <span class="border_top"></span>
                             <?php
                             include_once('./lib/config.php');

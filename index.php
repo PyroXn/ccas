@@ -2,7 +2,7 @@
 
 include_once('./lib/config.php');
 session_start();
-
+if(!isset($_SESSION['userId'])) { login(); exit(); }
 switch (@$_GET['p']) {
     case 'login':
         login();
@@ -39,7 +39,7 @@ switch (@$_GET['p']) {
         editUser();
         break;
     default:
-        login();
+        home();
         break;
 }
 
