@@ -63,7 +63,7 @@
                                 }
                                 ?>
                                 <li>
-                                    <a class="" href="index.php?p=deconnexion" >Deconnexion</a>
+                                    <a class="deconnexion" href="index.php?p=deconnexion" >Deconnexion</a>
                                 </li>
                             </ul>
                         </div>

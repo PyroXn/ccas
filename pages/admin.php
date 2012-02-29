@@ -90,7 +90,7 @@ function manageUser() {
             $check3 = $user->level[0] == 1 ? "checked = checked" : "";
 
             $contenu .= '<tr>
-                                    <td width="15%">' . $user->nomcomplet . '</td>
+                                    <td style="text-align: left;" width="15%">' . $user->nomcomplet . '</td>
                                     <td width="5%"><a href="index.php?p=manageuser&idDelete='.$user->id.'" class="delete" original-title="D&eacute;sactiver '.$user->login.'"><img src="./templates/img/delete.png"></img></a></td>
                                     <td width="5%"><a href="#" class="edituser" original-title="Modifier le compte" name="'.$user->id.'"><img src="./templates/img/edit.png"></img></a></td>
                                     <td width="20%"><input type="checkbox" name="use' . $user->id . '" ' . $check0 . ' value="1"></td>
