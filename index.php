@@ -210,19 +210,23 @@ function search() {
 }
 
 function foyer() {
+    echo creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
+}
+
+function creationListeByFoyer($idFoyer, $idIndividu) {
     $retour = '';
-    $foyer = Doctrine_Core::getTable('foyer')->find($_POST['idFoyer']);
+    $foyer = Doctrine_Core::getTable('foyer')->find($idFoyer);
 
     $i = 1;
     foreach ($foyer->individu as $individu) {
         if ($i % 2 == 0) {
-            if ($individu->id == $_POST['idIndividu']) {
+            if ($individu->id == $idIndividu) {
                 $retour .= '<li class="pair individu current" id="' . $i . '">';
             } else {
                 $retour .= '<li class="pair individu" id="' . $i . '">';
             }
         } else {
-            if ($individu->id == $_POST['idIndividu']) {
+            if ($individu->id == $idIndividu) {
                 $retour .= '<li class="impair individu current" id="' . $i . '">';
             } else {
                 $retour .= '<li class="impair individu" id="' . $i . '">';
@@ -235,7 +239,7 @@ function foyer() {
                 </li>';
         $i++;
     }
-    echo $retour;
+    return $retour;
 }
 
 function scroll() {

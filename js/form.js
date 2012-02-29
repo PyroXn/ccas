@@ -70,14 +70,8 @@ $(function() {
                     $('.formulaire').toggle();
                     effacer();
                     
-                    //NON GENERIQUE
-                    //reload la liste gauche et simuler le click sur le nouveau individu
-                    //un vrai reload semble obligatoire
-                    $('#search').trigger('keyup');
-                    var selector = '.label[id_foyer="'+data+'"]';
-                    console.log(selector);
-//                    $(selector).trigger("click");
-                    $(selector).trigger("click");
+                    //CAS NON GENERIQUE
+                    $("#list_individu").html(data).show();
                 }
             });
         }

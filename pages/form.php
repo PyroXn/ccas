@@ -21,7 +21,7 @@ function creationFoyer($civilite, $nom, $prenom) {
     $individu->idFoyer = $foyer->id;
     $individu->save();
     
-    echo $individu->id;
+    return creationListeByFoyer($foyer->id, $individu->id);
 }
 
 ?>
