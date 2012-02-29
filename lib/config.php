@@ -18,4 +18,23 @@ $connexion = Doctrine_Manager::connection($dsn);
 $connexion->setCollate('utf8_unicode_ci');
 $connexion->setCharset('utf8');
 
+/**
+ *
+ * @param type $level Indiquer l'autorisation spécifique : 0010 - 1000 - 0100 - 0001
+ * @return Vrai si user autorisé
+ */
+function isAuthorized($level) {
+    $find = false;
+    $i = strlen($level)-1;
+    while($level[$i] != 1) {
+        $i--;
+    }
+    if(@$_SESSION['level'][$i] == 1) {
+        return true;
+    } else {
+        // Renvoyer vers page indiquant les droits
+        return false;
+    }
+}
+
 ?>

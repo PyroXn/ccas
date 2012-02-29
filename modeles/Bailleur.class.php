@@ -8,11 +8,19 @@ class Bailleur extends Doctrine_Record {
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
         $this->hasColumn('nomBailleur', 'string', 100);
-//        $this->hasColumn('adresse', 'string', 255);
-//        $this->hasColumn('idVille', 'integer', 10);
-//        $this->hasColumn('telephone', 'string', 30);
-//        $this->hasColumn('fax', 'string', 30);
-//        $this->hasColumn('email', 'string', 30);
+        $this->hasColumn('adresse', 'string', 255);
+        $this->hasColumn('idVille', 'integer', 10);
+        $this->hasColumn('telephone', 'string', 30);
+        $this->hasColumn('fax', 'string', 30);
+        $this->hasColumn('email', 'string', 30);
+    }
+
+    public function setUp() {
+        $this->hasOne('ville as ville', array(
+            'local' => 'idVille',
+            'foreign' => 'id'
+                )
+        );
     }
 
 }

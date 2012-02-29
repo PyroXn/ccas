@@ -41,7 +41,7 @@ ul {
 }
 
 
-input[type=submit] {
+/*input[type=submit] {
     height: auto;
     font-weight: bold;
     padding: 6px 10px;
@@ -58,6 +58,24 @@ input[type=submit] {
     -moz-box-shadow: inset 0 1px 0 0 #aec3e5;
     -webkit-box-shadow: inset 0 1px 0 0 #aec3e5;
     box-shadow: inset 0 1px 0 0 #aec3e5;
+}*/
+
+input[type=submit] , input[type=reset] {
+    position: relative;
+    display: inline-block;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    cursor: default;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    margin-right: 16px;
+    height: 27px;
+    line-height: 27px;
+    min-width: 54px;
+    outline: 0;
+    padding: 0 8px;
 }
 
 .login input[type="text"], .login input[type="password"], .login form {
@@ -91,7 +109,7 @@ input[type=submit] {
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 }
 
-.login input[type="text"]:focus, .login input[type="password"]:focus, #search:focus {
+.login input[type="text"]:focus, .login input[type="password"]:focus, #search:focus, .formulaire input[type=text]:hover, .formulaire input[type=text]:focus {
     border: 1px solid #4D90FE;
     outline: none; /*Pour enlever la bordur automatique jaune de chrome*/
 }
@@ -107,7 +125,7 @@ input[type=submit] {
     background-color: #F3F3F3;
     border-right: 1px solid #DDD;
     /*barre de defilement apparait si le contenu depasse (? voir si ca sert)*/
-/*    overflow: auto;*/
+    /*    overflow: auto;*/
 }
 
 
@@ -115,23 +133,19 @@ input[type=submit] {
     background: white url('./img/search.png') 6px 6px no-repeat;
     font-size: 14px;
     height: 29px;
-/*    width: 97%;*/
-    width: 85%;
+/*    width: 100%;*/
     padding: 4px 0 4px 30px;
     margin: 5px 0 5px 5px;
-    border: 1px solid #D9D9D9;
-    border-top: 1px solid silver;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-
     color: #222;
 }
 
 .add {
     position: absolute;
     height: 19px;
-    width: 7%;
+    width: 23px;
     background: white url('./img/add.png') 5px 5px no-repeat;
     border-bottom: 1px solid #D9D9D9;
     border-right: 1px solid #D9D9D9;
@@ -140,6 +154,7 @@ input[type=submit] {
     margin: 5px 5px 5px 0;
 }
 
+
 .add:hover {
     background-position: 5px -19px;
 }
@@ -147,10 +162,9 @@ input[type=submit] {
 :-webkit-input-placeholder {
     color:    #999;
 }
-:-moz-placeholder {
+:-moz-placeholder, #search:-moz-placeholder {
     color:    #999;
 }
-
 
 /***Header de la page***/
 #page_header {
@@ -221,12 +235,12 @@ input[type=submit] {
     top: 38px;
     right: 2px;
     left: 4px;
-     /*barre de defilement apparait si le contenu depasse (? voir si ca sert)*/
+    /*barre de defilement apparait si le contenu depasse (? voir si ca sert)*/
     overflow: auto;
 }
 
 #side_individu ul {
-    
+
     background-color: white;
     font-family: "Lucida grande", Tahoma, Verdana, Arial, Sans-serif;
     font-size: 11px;
@@ -239,7 +253,7 @@ input[type=submit] {
 }
 
 #side_individu li:last-child {
-border-bottom: none;
+    border-bottom: none;
 }
 
 #side_individu a {
@@ -249,10 +263,10 @@ border-bottom: none;
 
 
 #side_individu li:hover {
-/*    position: relative;
-    left: 2px;*/
-/*    width: 101%;*/
-    
+    /*    position: relative;
+        left: 2px;*/
+    /*    width: 101%;*/
+
     background-color: white;
 }
 
@@ -264,7 +278,7 @@ border-bottom: none;
     background-image: -webkit-gradient(linear, left bottom, left top, from(#2D2D2D), to(#5e5e5e));
     background-image: -webkit-linear-gradient(bottom, #5e5e5e, #2D2D2D 5px);
     background-image: linear-gradient(bottom, #2D2D2D, #5e5e5e 5px);
-    
+
     -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
     -moz-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
     box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
@@ -300,3 +314,14 @@ border-bottom: none;
 #contenu {
     padding: 20px;
 }
+
+/***FIELDSET***/
+fieldset {
+ padding:0 20px 20px 20px;
+ margin-bottom:10px;
+ border:1px solid #DCDCDC;
+ }
+legend {
+ color: #F77F00;
+ font-size: 12px;
+ }

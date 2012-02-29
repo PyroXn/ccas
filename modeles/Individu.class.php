@@ -38,14 +38,14 @@ class Individu extends Doctrine_Record
         $this->hasColumn('numDossierPe', 'string', 20);
         $this->hasColumn('numAllocataireCaf', 'string', 20);
         $this->hasColumn('idLienFamille', 'integer', 5);               //cle etrangere
-        $this->hasColumn('idCaisseCaf', 'integer', 5);            //cle etrangere
+        $this->hasColumn('idCaisseCaf', 'integer', 5);            //cle etrangere ==> A FAIRE
         $this->hasColumn('idNiveauEtude', 'integer', 5);          //cle etrangere
         $this->hasColumn('idProfession', 'integer', 5);           //cle etrangere
-        $this->hasColumn('idCaisseMut', 'integer', 5);            //cle etrangere
-        $this->hasColumn('idCaisseSecu', 'integer', 5);           //cle etrangere
+        $this->hasColumn('idCaisseMut', 'integer', 5);            //cle etrangere ==> A FAIRE
+        $this->hasColumn('idCaisseSecu', 'integer', 5);           //cle etrangere == A FAIRE
         $this->hasColumn('idSitFam', 'integer', 5);               //cle etrangere
         $this->hasColumn('idNationalite', 'integer', 5);          //cle etrangere
-        $this->hasColumn('idLieuNaissance', 'integer', 20);       //cle etrangere
+        $this->hasColumn('idVilleNaissance', 'integer', 20);       //cle etrangere
         $this->hasColumn('idFoyer', 'integer', 8);       //cle etrangere
         
         
@@ -57,6 +57,42 @@ class Individu extends Doctrine_Record
     	$this->hasOne('foyer as foyer',
     		array(
     			'local' => 'idFoyer', 
+    			'foreign' => 'id'
+    		)
+    	);
+        $this->hasOne('lienfamille as lienfamille',
+    		array(
+    			'local' => 'idLienFamille', 
+    			'foreign' => 'id'
+    		)
+    	);
+        $this->hasOne('etude as etude',
+    		array(
+    			'local' => 'idNiveauEtude', 
+    			'foreign' => 'id'
+    		)
+    	);
+        $this->hasOne('profession as profession',
+    		array(
+    			'local' => 'idProfession', 
+    			'foreign' => 'id'
+    		)
+    	);
+        $this->hasOne('situationmatri as situationmatri',
+    		array(
+    			'local' => 'idSitFam', 
+    			'foreign' => 'id'
+    		)
+    	);
+        $this->hasOne('nationalite as nationalite',
+    		array(
+    			'local' => 'idNationalite', 
+    			'foreign' => 'id'
+    		)
+    	);
+        $this->hasOne('ville as ville',
+    		array(
+    			'local' => 'idVilleNaissance', 
     			'foreign' => 'id'
     		)
     	);

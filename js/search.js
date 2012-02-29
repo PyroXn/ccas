@@ -74,11 +74,13 @@ $(function() {
             console.log(idFoyer);
             $.ajax({
                 type: "POST",
+                dataType:'json',
                 url: "./index.php?p=foyer",
                 data: 'idFoyer='+ idFoyer + "&idIndividu=" + idIndividu,
                 success: function(html)
                 {
-                    $("#list_individu").html(html).show();	
+                    $("#list_individu").html(html.listeIndividu);
+                    $("#page_header_navigation").html(html.menu);
                 }
             });
         } else {
@@ -98,7 +100,7 @@ function search(searchbox) {
         cache: false,
         success: function(html)
         {
-            $("#list_individu").html(html).show();	
+            $("#list_individu").html(html);	
         }
     });
 }

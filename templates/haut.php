@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="./templates/navigationbar.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/ccas.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/tipsy.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./templates/form.css" media="screen" />
     </head>
     <body>
         <div id="navigationbar">
@@ -33,7 +34,7 @@
             <div id="navigationright">
                 <ul id="connexionlist">
                     <li class="navigationligne">
-                        <a class="lien_navigation" href="#" title="Connexion">
+                        <a class="lien_navigation" href="index.php" title="Accueil">
                             <span class="border_top"></span>
                             <?php
                             include_once('./lib/config.php');
@@ -53,11 +54,16 @@
                         </a>
                         <div class="menu_option">
                             <ul class="liste_menu_option">
+                                <?php
+                                if(isAuthorized("0100")) {
+                                    echo '<li><a clas="" href="#">Configuration</a></li>';
+                                }
+                                if(isAuthorized("1000")) { // On autorise à partir de l'user level 2 soit 0100
+                                    echo '<li><a class="" href="index.php?p=admin" >Administration</a></li>';
+                                }
+                                ?>
                                 <li>
-                                    <a class="" href="#" >Coucou c'est moi</a>
-                                </li>
-                                <li>
-                                    <a class="" href="#" >Coucou c'est moi2</a>
+                                    <a class="" href="index.php?p=deconnexion" >Deconnexion</a>
                                 </li>
                             </ul>
                         </div>
