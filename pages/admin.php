@@ -100,7 +100,7 @@ function manageUser() {
                                 </tr>';
         }
         $contenu .= '</table>
-            <input type="submit" name="submitpermission" class="modif" value="Enregistrer" />
+            <input type="submit" name="submitpermission" id="submitpermission" class="modif" value="Enregistrer" />
             <input type="reset" name="reset" class="classique" value="Annuler" />
             </form></fieldset>
             <div id="useredit"></div>
@@ -124,7 +124,7 @@ function manageUser() {
             $userUpdate->level = $chaine;
             $userUpdate->save();
         }
-        header("Location: index.php?p=manageuser");
+        //header("Location: index.php?p=manageuser");
     } elseif (isset($_POST['submituser'])) { // Ajout user
         $user = new User();
         $user->login = $_POST['login'];
