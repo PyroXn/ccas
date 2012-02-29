@@ -238,4 +238,5 @@
 		}
 	};
     $('.add').tipsy();
+    $('.delete').tipsy();
 })(jQuery);
