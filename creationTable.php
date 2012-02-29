@@ -190,7 +190,16 @@ try {
 }
 
 try {
-	$table = Doctrine_Core::getTable('Aide'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('AideExterne'); // On récupère l'objet de la table.
+	$connexion->export->createTable($table->getTableName(), 
+		                           $table->getColumns()); // Puis, on la crée.
+        echo 'La table a bien été créée';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+	echo $e->getMessage(); // On l'affiche.
+}
+
+try {
+	$table = Doctrine_Core::getTable('AideInterne'); // On récupère l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
 		                           $table->getColumns()); // Puis, on la crée.
         echo 'La table a bien été créée';
@@ -218,6 +227,33 @@ try {
 
 try {
 	$table = Doctrine_Core::getTable('Depense'); // On récupère l'objet de la table.
+	$connexion->export->createTable($table->getTableName(), 
+		                           $table->getColumns()); // Puis, on la crée.
+        echo 'La table a bien été créée';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+	echo $e->getMessage(); // On l'affiche.
+}
+
+try {
+	$table = Doctrine_Core::getTable('Credit'); // On récupère l'objet de la table.
+	$connexion->export->createTable($table->getTableName(), 
+		                           $table->getColumns()); // Puis, on la crée.
+        echo 'La table a bien été créée';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+	echo $e->getMessage(); // On l'affiche.
+}
+
+try {
+	$table = Doctrine_Core::getTable('Organisme'); // On récupère l'objet de la table.
+	$connexion->export->createTable($table->getTableName(), 
+		                           $table->getColumns()); // Puis, on la crée.
+        echo 'La table a bien été créée';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+	echo $e->getMessage(); // On l'affiche.
+}
+
+try {
+	$table = Doctrine_Core::getTable('LibelleOrganisme'); // On récupère l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
 		                           $table->getColumns()); // Puis, on la crée.
         echo 'La table a bien été créée';
