@@ -72,12 +72,12 @@ $(function() {
                     
                     //NON GENERIQUE
                     //reload la liste gauche et simuler le click sur le nouveau individu
+                    //un vrai reload semble obligatoire
                     $('#search').trigger('keyup');
-                    
-                    var selector = '.label[id_individu="'+data+'"]';
+                    var selector = '.label[id_foyer="'+data+'"]';
                     console.log(selector);
+//                    $(selector).trigger("click");
                     $(selector).trigger("click");
-//                    $('.label[id_individu=16]').trigger("click");
                 }
             });
         }
