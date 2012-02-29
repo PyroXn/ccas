@@ -133,8 +133,7 @@ input[type=submit] , input[type=reset] {
     background: white url('./img/search.png') 6px 6px no-repeat;
     font-size: 14px;
     height: 29px;
-    /*    width: 97%;*/
-    width: 85%;
+/*    width: 90%;*/
     padding: 4px 0 4px 30px;
     margin: 5px 0 5px 5px;
     box-sizing: border-box;
@@ -146,7 +145,7 @@ input[type=submit] , input[type=reset] {
 .add {
     position: absolute;
     height: 19px;
-    width: 7%;
+    width: 23px;
     background: white url('./img/add.png') 5px 5px no-repeat;
     border-bottom: 1px solid #D9D9D9;
     border-right: 1px solid #D9D9D9;
@@ -162,10 +161,9 @@ input[type=submit] , input[type=reset] {
 :-webkit-input-placeholder {
     color:    #999;
 }
-:-moz-placeholder {
+:-moz-placeholder, #search:-moz-placeholder {
     color:    #999;
 }
-
 
 /***Header de la page***/
 #page_header {
