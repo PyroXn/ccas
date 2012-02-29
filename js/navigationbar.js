@@ -19,4 +19,16 @@ $(function() {
          $(this).attr("name","passive");
       }
   });    
+  $('.edituser').click(function() {
+      var user = $(this).attr('name');
+      $.ajax({
+                url: './index.php?p=edituser',
+                type:'POST',
+                data: "user="+user,
+                //Succès de la requête
+                success: function(data) {
+                    $('#useredit').html(data);
+                }
+  });
+  });
 });

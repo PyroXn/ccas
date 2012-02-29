@@ -60,7 +60,7 @@ function manageUser() {
                             <input class="contour_field" type="text" title="Login" placeholder="Login" name="login">
                         </div>
                         <div class="input_text">
-                            <input class="contour_field" type="text" title="Password" placeholder="Password" name="pwd">
+                            <input class="contour_field" type="password" title="Password" placeholder="Password" name="pwd">
                         </div>
                         <div class="input_text">
                             <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcomplet">
@@ -77,6 +77,7 @@ function manageUser() {
                         <tr>
                             <td width="15%"></td>
                             <td width="5%"></td>
+                            <td width="5%"></td>
                             <td width="20%">Utiliser le logiciel</td>
                             <td width="20%">Acc&eacute;der aux documents vierges</td>
                             <td width="20%">Configuration</td>
@@ -90,7 +91,8 @@ function manageUser() {
 
             $contenu .= '<tr>
                                     <td width="15%">' . $user->nomcomplet . '</td>
-                                    <td width="5%"><a href="index.php?p=manageuser&id='.$user->id.'" class="delete" original-title="D&eacute;sactiver '.$user->login.'"><img src="./templates/img/delete.png"></img></a></td>
+                                    <td width="5%"><a href="index.php?p=manageuser&idDelete='.$user->id.'" class="delete" original-title="D&eacute;sactiver '.$user->login.'"><img src="./templates/img/delete.png"></img></a></td>
+                                    <td width="5%"><a href="#" class="edituser" original-title="Modifier le compte" name="'.$user->id.'"><img src="./templates/img/edit.png"></img></a></td>
                                     <td width="20%"><input type="checkbox" name="use' . $user->id . '" ' . $check0 . ' value="1"></td>
                                     <td width="20%"><input type="checkbox" name="access' . $user->id . '" ' . $check1 . ' value="1"></td>
                                     <td width="20%"><input type="checkbox" name="config' . $user->id . '" ' . $check2 . ' value="1"></td>
@@ -101,11 +103,12 @@ function manageUser() {
             <input type="submit" name="submitpermission" class="modif" value="Enregistrer" />
             <input type="reset" name="reset" class="classique" value="Annuler" />
             </form></fieldset>
+            <div id="useredit"></div>
             <div>
                 </div>
                 ';
         display($title, $contenu);
-    } elseif (isset($_POST['submitpermission'])) {
+    } elseif (isset($_POST['submitpermission'])) { // Modification permission
         include_once('./lib/config.php');
         $users = Doctrine_Core::getTable('user')->findAll();
         $chaine = array();
@@ -122,20 +125,51 @@ function manageUser() {
             $userUpdate->save();
         }
         header("Location: index.php?p=manageuser");
-    } elseif (isset($_POST['submituser'])) {
+    } elseif (isset($_POST['submituser'])) { // Ajout user
         $user = new User();
         $user->login = $_POST['login'];
         $user->password = md5($_POST['pwd']);
         $user->nomcomplet = $_POST['nomcomplet'];
         $user->save();
         header("Location: index.php?p=manageuser");
-    } elseif(isset($_GET['id'])) {
+    } elseif(isset($_GET['idDelete'])) { // Supression user
         include_once('./lib/config.php');
-        $user = Doctrine_Core::getTable('user')->find($_GET['id']);
+        $user = Doctrine_Core::getTable('user')->find($_GET['idDelete']);
         $user->actif = 1;
         $user->save();
         header("Location: index.php?p=manageuser");
+    } elseif(isset($_POST['submitedit'])) {
+        include_once('./lib/config.php');
+        $user = Doctrine_Core::getTable('user')->find($_POST['id']);
+        $user->login = $_POST['login'];
+        $user->nomcomplet = $_POST['nomcomplet'];
+        if($_POST['pwd'] != null) { $user->password = md5($_POST['pwd']); }
+        $user->save();
+        header("Location: index.php?p=manageuser");
     }
+}
+
+function editUser() {
+    $user = Doctrine_Core::getTable('user')->find($_POST['user']);
+    $contenu = '<fieldset><legend>Modifier un utilisateur</legend>
+                    <form method="POST" action="index.php?p=manageuser">
+                        <div class="input_text">
+                            <input type="hidden" name="idedit" value="'.$user->id.'">
+                            <input class="contour_field" type="text" title="Login" placeholder="Login" name="login" value="'.$user->login.'">
+                        </div>
+                        <div class="input_text">
+                            <input class="contour_field" type="password" title="Password" placeholder="Nouveau password" name="pwdedit">
+                        </div>
+                        <div class="input_text">
+                            <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcompletedit" value="'.$user->nomcomplet.'">
+                        </div>
+                        <div class="sauvegarder_annuler">
+                            <input type="submit" class="modif" name="submitedit" id="submitedit" value="Enregistrer"/>
+                            <input type="reset" class="classique" name="reset" value="Annuler"/>
+                        </div>
+                    </form>
+                    </fieldset>';
+    echo $contenu;
 }
 
 ?>

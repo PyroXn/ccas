@@ -2,7 +2,7 @@
 
 include_once('./lib/config.php');
 session_start();
-
+if(!isset($_SESSION['userId'])) { login(); exit(); }
 switch (@$_GET['p']) {
     case 'login':
         login();
@@ -19,9 +19,6 @@ switch (@$_GET['p']) {
     case 'scroll':
         scroll();
         break;
-    case 'deconnexion':
-        deconnexion();
-        break;
     case 'form':
         include_once('./pages/form.php');
         form();
@@ -37,8 +34,12 @@ switch (@$_GET['p']) {
     case 'deconnexion':
         deconnexion();
         break;
+    case 'edituser':
+        include_once('./pages/admin.php');
+        editUser();
+        break;
     default:
-        login();
+        home();
         break;
 }
 
