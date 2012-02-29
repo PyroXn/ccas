@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="./templates/navigationbar.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/ccas.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/tipsy.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./templates/form.css" media="screen" />
     </head>
     <body>
         <div id="navigationbar">
