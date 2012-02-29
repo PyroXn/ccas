@@ -56,22 +56,22 @@ function manageUser() {
                     <div id="contenu">
                     <fieldset><legend>Ajouter un utilisateur</legend>
                     <div id="newUser" class="bouton ajout" value="add">+</div>
-                    <div class="formulaire" action="creation_utilisateur">
+        <div class="formulaire" action="creation_utilisateur">
             <h2>Utilisateur</h2>
             <div class="colonne_droite">
                 <div class="input_text">
-                            <input class="contour_field" type="text" title="Login" placeholder="Login" name="login">
-                        </div>
-                        <div class="input_text">
-                            <input class="contour_field" type="password" title="Password" placeholder="Password" name="pwd">
-                        </div>
-                        <div class="input_text">
-                            <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcomplet">
-                        </div>
-                        <div class="sauvegarder_annuler">
-                            <input type="submit" class="modif" name="submituser" value="Enregistrer"/>
-                            <input type="reset" class="classique" name="reset" value="Annuler"/>
-                        </div>
+                    <input class="contour_field" type="text" title="Login" placeholder="Login" name="login">
+                </div>
+                <div class="input_text">
+                    <input class="contour_field" type="password" title="Password" placeholder="Password" name="pwd">
+                </div>
+                <div class="input_text">
+                    <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcomplet">
+                </div>
+                <div class="sauvegarder_annuler">
+                    <div class="bouton modif" value="save">Enregistrer</div>
+                    <div class="bouton classique" value="cancel">Annuler</div>
+                </div>
             </div>
         </div>
                     <!--<form method="POST" id="formadd">

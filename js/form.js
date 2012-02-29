@@ -37,7 +37,8 @@ $(function() {
             $('.en_execution').toggleClass('en_execution');
             $('.en_attente').toggleClass('en_attente');
             $('#ecran_gris').toggle();
-            $('.formulaire').toggle();
+//            $('.formulaire').toggle();
+            $(this).parent().parent().parent().toggle();
             effacer();
         } else if(value=='save') {
             //commun a tous les form
