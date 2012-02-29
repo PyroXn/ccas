@@ -55,7 +55,7 @@ function manageUser() {
                 <div id="contenu_wrapper">
                     <div id="contenu">
                     <fieldset><legend>Ajouter un utilisateur</legend>
-                    <form method="POST">
+                    <form method="POST" id="formadd">
                         <div class="input_text">
                             <input class="contour_field" type="text" title="Login" placeholder="Login" name="login">
                         </div>
@@ -138,38 +138,38 @@ function manageUser() {
         $user->actif = 1;
         $user->save();
         header("Location: index.php?p=manageuser");
-    } elseif(isset($_POST['submitedit'])) {
-        include_once('./lib/config.php');
-        $user = Doctrine_Core::getTable('user')->find($_POST['id']);
-        $user->login = $_POST['login'];
-        $user->nomcomplet = $_POST['nomcomplet'];
-        if($_POST['pwd'] != null) { $user->password = md5($_POST['pwd']); }
-        $user->save();
-        header("Location: index.php?p=manageuser");
     }
 }
 
 function editUser() {
-    $user = Doctrine_Core::getTable('user')->find($_POST['user']);
-    $contenu = '<fieldset><legend>Modifier un utilisateur</legend>
-                    <form method="POST" action="index.php?p=manageuser">
-                        <div class="input_text">
-                            <input type="hidden" name="idedit" value="'.$user->id.'">
-                            <input class="contour_field" type="text" title="Login" placeholder="Login" name="login" value="'.$user->login.'">
-                        </div>
-                        <div class="input_text">
-                            <input class="contour_field" type="password" title="Password" placeholder="Nouveau password" name="pwdedit">
-                        </div>
-                        <div class="input_text">
-                            <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcompletedit" value="'.$user->nomcomplet.'">
-                        </div>
-                        <div class="sauvegarder_annuler">
-                            <input type="submit" class="modif" name="submitedit" id="submitedit" value="Enregistrer"/>
-                            <input type="reset" class="classique" name="reset" value="Annuler"/>
-                        </div>
-                    </form>
-                    </fieldset>';
-    echo $contenu;
+    if(isset($_POST['user'])) {
+        $user = Doctrine_Core::getTable('user')->find($_POST['user']);
+        $contenu = '<fieldset><legend>Modifier un utilisateur</legend>
+                        <form method="POST" action="index.php?p=manageuser">
+                            <div class="input_text">
+                                <input type="hidden" name="idedit" value="'.$user->id.'" id="idedit">
+                                <input class="contour_field" type="text" title="Login" placeholder="Login" name="login" id="loginedit"value="'.$user->login.'">
+                            </div>
+                            <div class="input_text">
+                                <input class="contour_field" type="password" title="Password" placeholder="Nouveau password" name="pwdedit" id="pwdedit">
+                            </div>
+                            <div class="input_text">
+                                <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcompletedit" value="'.$user->nomcomplet.'" id="nomcompletedit">
+                            </div>
+                            <div class="sauvegarder_annuler">
+                                <input type="button" class="modif" name="submitedit" id="submitedit" value="Enregistrer"/>
+                                <input type="reset" class="classique" name="reset" value="Annuler"/>
+                            </div>
+                        </form>
+                        </fieldset>';
+        echo $contenu;
+    } elseif(isset($_POST['idedit'])) {
+        $user = Doctrine_Core::getTable('user')->find($_POST['idedit']);
+        $user->login = $_POST['loginedit'];
+        $user->nomcomplet = $_POST['nomcompletedit'];
+        if($_POST['pwdedit'] != null) { $user->password = md5($_POST['pwd']); }
+        $user->save();
+    }
 }
 
 ?>

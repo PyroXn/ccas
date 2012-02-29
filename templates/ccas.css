@@ -60,7 +60,7 @@ ul {
     box-shadow: inset 0 1px 0 0 #aec3e5;
 }*/
 
-input[type=submit] , input[type=reset] {
+input[type=submit] , input[type=reset], input[type=button] {
     position: relative;
     display: inline-block;
     -webkit-border-radius: 2px;
@@ -325,3 +325,5 @@ legend {
  color: #F77F00;
  font-size: 12px;
  }
+ 
+
