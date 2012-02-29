@@ -1,17 +1,6 @@
 $(function() {
     $('#newfoyer').click(function() {
-        var x = $(this).offset();
-        var h = $(this).outerHeight();
-        $('#ecran_gris').toggle();
-        $('.formulaire').css({
-            "display":"block"
-        });
-        $('.formulaire').offset({
-            top:x.top+h,
-            left:x.left
-        });
-        
-
+        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_foyer"]'))
     });
     
     $('.select').live("click", function() {
@@ -81,5 +70,16 @@ $(function() {
     
     function effacer() {
         $('.input_text').children().val('');
+    }
+    
+    function creationForm(x, h, form) {
+        $('#ecran_gris').toggle();
+        $(form).css({
+            "display":"block"
+        });
+        $(form).offset({
+            top:x.top+h,
+            left:x.left
+        });
     }
 });
