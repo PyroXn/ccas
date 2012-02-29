@@ -55,4 +55,18 @@ $(function() {
             }
         });
     });
+  $('#submitedit').live("click", function() {
+      var id = $('#idedit').val();
+      var login = $('#loginedit').val();
+      var pwd = $('#pwdedit').val();
+      var nomcomplet = $('#nomcompletedit').val();
+      $.ajax({
+          url: './index.php?p=edituser',
+          type:'POST',
+          data: "idedit="+id+"&loginedit="+login+"&pwdedit="+pwd+"&nomcompletedit="+nomcomplet,
+          success: function(data) {
+              $(location).attr('href','index.php?p=manageuser');
+          }
+      });
+  });
 });
