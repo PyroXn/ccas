@@ -168,7 +168,7 @@ function login() {
     } else {
         include_once('./lib/config.php');
         $user = Doctrine_Core::getTable('user')->findOneByLoginAndPassword($_POST['log'], md5($_POST['pwd']));
-        if ($user != null) {
+        if ($user != null && $user->actif == 0) {
             $_SESSION['userId'] = $user->id;
             $_SESSION['level'] = $user->level;
             header('Location: index.php?p=home');

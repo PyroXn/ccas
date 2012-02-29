@@ -315,3 +315,14 @@ input[type=submit] , input[type=reset] {
 #contenu {
     padding: 20px;
 }
+
+/***FIELDSET***/
+fieldset {
+ padding:0 20px 20px 20px;
+ margin-bottom:10px;
+ border:1px solid #DCDCDC;
+ }
+legend {
+ color: #F77F00;
+ font-size: 12px;
+ }
