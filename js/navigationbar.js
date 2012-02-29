@@ -65,22 +65,23 @@ $(function() {
           type:'POST',
           data: "idedit="+id+"&loginedit="+login+"&pwdedit="+pwd+"&nomcompletedit="+nomcomplet,
           success: function(data) {
-              message("Le compte utilisateur de "+nomcomplet+" a bien &eacute;t&eacute; modifi&eacute;");
+              message("Le compte utilisateur de "+nomcomplet+" a bien &eacute;t&eacute; modifi&eacute.");
               //$(location).attr('href','index.php?p=manageuser');
           }
       });
   });
-  
+
   $('#ok').live("click", function() {
       $('#ecran_gris').toggle();
         $('.messageJS').css ({
             "display":"none"
         });
+        return true;
   });
 });
 
 function message(message) {
-  var valider ='<div id="ok" class="bouton modif" value="save">Ok</div>';
+  var valider ='<div id="ok" class="bouton modif">Ok</div>';
         $('#ecran_gris').toggle();
         $('.messageJS').css ({
             "display":"block"
