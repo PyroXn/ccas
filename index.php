@@ -37,10 +37,6 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         homeAdmin();
         break;
-    case 'manageuser':
-        include_once('./pages/admin.php');
-        echo manageUser();
-        break;
     case 'deconnexion':
         deconnexion();
         break;
@@ -232,7 +228,7 @@ function generationHeaderNavigation($mode) {
             break;
         case 'admin' :
             $retour = '
-                <div id="adminaccueil" href="index.php?p=admin" class="page_header_link active">
+                <div id="accueilAdmin" href="#" class="page_header_link active">
                     <span class="label">Administration - Accueil</span>
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">

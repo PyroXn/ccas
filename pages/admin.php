@@ -30,7 +30,7 @@ function homeAdmin() {
     display($title, $contenu);
 }
 
-function manageUser() {
+function manadgeUser() {
         include_once('./lib/config.php');
         $users = Doctrine_Core::getTable('user')->findByActif(0);
         $title = 'Accueil';

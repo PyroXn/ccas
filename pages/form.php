@@ -10,8 +10,10 @@ function form() {
              echo json_encode($retour);
              break;
          case 'creation_utilisateur':
+             include_once('./pages/contenu.php');
              createUser($_POST['login'], $_POST['pwd'], $_POST['nomcomplet']);
-             $retour = array('tableau' =>manageUser());
+             $page = manageUser();
+             $retour = array('tableau' =>$page);
              echo json_encode($retour);
              break;
     }
