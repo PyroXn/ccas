@@ -232,7 +232,7 @@ function generationHeaderNavigation($mode) {
             break;
         case 'admin' :
             $retour = '
-                <div id="accueilAdmin" href="index.php?p=admin" class="page_header_link active">
+                <div id="adminaccueil" href="index.php?p=admin" class="page_header_link active">
                     <span class="label">Administration - Accueil</span>
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
