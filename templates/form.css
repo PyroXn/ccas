@@ -64,6 +64,30 @@
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 }
 
+.ajout {
+    background-color: #D14836;
+    background-image: -webkit-linear-gradient(top,#DD4B39,#D14836);
+    background-image: -moz-linear-gradient(top,#DD4B39,#D14836);
+    background-image: -ms-linear-gradient(top,#DD4B39,#D14836);
+    background-image: -o-linear-gradient(top,#DD4B39,#D14836);
+    background-image: linear-gradient(top,#DD4B39,#D14836);
+    border: 1px solid transparent;
+    color: white;
+}
+
+.ajout:hover {
+    background-color: #C53727;
+    background-image: -webkit-linear-gradient(top,#DD4B39,#C53727);
+    background-image: -moz-linear-gradient(top,#DD4B39,#C53727);
+    background-image: -ms-linear-gradient(top,#DD4B39,#C53727);
+    background-image: -o-linear-gradient(top,#DD4B39,#C53727);
+    background-image: linear-gradient(top,#DD4B39,#C53727);
+    border: 1px solid #B0281A;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+
 /***FORMULAIRE***/
 #ecran_gris {
     background-color: #DDD;

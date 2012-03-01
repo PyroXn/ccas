@@ -58,12 +58,12 @@
                                 if(isAuthorized("0100")) {
                                     echo '<li><a clas="" href="#">Configuration</a></li>';
                                 }
-                                if(isAuthorized("1000")) { // On autorise à partir de l'user level 2 soit 0100
+                                if(isAuthorized("1000")) { 
                                     echo '<li><a class="" href="index.php?p=admin" >Administration</a></li>';
                                 }
                                 ?>
                                 <li>
-                                    <a class="" href="index.php?p=deconnexion" >Deconnexion</a>
+                                    <a class="deconnexion" href="index.php?p=deconnexion" >Deconnexion</a>
                                 </li>
                             </ul>
                         </div>

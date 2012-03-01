@@ -345,3 +345,7 @@ legend {
     -o-box-shadow: 0 1px 5px #ccc;
     -webkit-box-shadow: 0 1px 5px #ccc;
 }
+
+.deconnexion {
+    border-top: 1px solid #E5E5E5;
+}

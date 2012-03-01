@@ -3,6 +3,10 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_foyer"]'))
     });
     
+    $('#newUser').click(function() {
+        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_utilisateur"]'))
+    });
+    
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
         var attr = '.'+$(this).attr('role');
@@ -33,7 +37,8 @@ $(function() {
             $('.en_execution').toggleClass('en_execution');
             $('.en_attente').toggleClass('en_attente');
             $('#ecran_gris').toggle();
-            $('.formulaire').toggle();
+//            $('.formulaire').toggle();
+            $(this).parent().parent().parent().toggle();
             effacer();
         } else if(value=='save') {
             //commun a tous les form

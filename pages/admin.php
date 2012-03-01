@@ -55,7 +55,26 @@ function manageUser() {
                 <div id="contenu_wrapper">
                     <div id="contenu">
                     <fieldset><legend>Ajouter un utilisateur</legend>
-                    <form method="POST" id="formadd">
+                    <div id="newUser" class="bouton ajout" value="add">+</div>
+        <div class="formulaire" action="creation_utilisateur">
+            <h2>Utilisateur</h2>
+            <div class="colonne_droite">
+                <div class="input_text">
+                    <input class="contour_field" type="text" title="Login" placeholder="Login" name="login">
+                </div>
+                <div class="input_text">
+                    <input class="contour_field" type="password" title="Password" placeholder="Password" name="pwd">
+                </div>
+                <div class="input_text">
+                    <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcomplet">
+                </div>
+                <div class="sauvegarder_annuler">
+                    <div class="bouton modif" value="save">Enregistrer</div>
+                    <div class="bouton classique" value="cancel">Annuler</div>
+                </div>
+            </div>
+        </div>
+                    <!--<form method="POST" id="formadd">
                         <div class="input_text">
                             <input class="contour_field" type="text" title="Login" placeholder="Login" name="login">
                         </div>
@@ -69,7 +88,7 @@ function manageUser() {
                             <input type="submit" class="modif" name="submituser" value="Enregistrer"/>
                             <input type="reset" class="classique" name="reset" value="Annuler"/>
                         </div>
-                    </form>
+                    </form>-->
                     </fieldset>
                     <fieldset><legend>G&eacute;rer les permissions</legend>
                     <form method="POST" id="formaccess">
@@ -90,7 +109,7 @@ function manageUser() {
             $check3 = $user->level[0] == 1 ? "checked = checked" : "";
 
             $contenu .= '<tr>
-                                    <td width="15%">' . $user->nomcomplet . '</td>
+                                    <td style="text-align: left;" width="15%">' . $user->nomcomplet . '</td>
                                     <td width="5%"><a href="index.php?p=manageuser&idDelete='.$user->id.'" class="delete" original-title="D&eacute;sactiver '.$user->login.'"><img src="./templates/img/delete.png"></img></a></td>
                                     <td width="5%"><a href="#" class="edituser" original-title="Modifier le compte" name="'.$user->id.'"><img src="./templates/img/edit.png"></img></a></td>
                                     <td width="20%"><input type="checkbox" name="use' . $user->id . '" ' . $check0 . ' value="1"></td>
@@ -100,7 +119,7 @@ function manageUser() {
                                 </tr>';
         }
         $contenu .= '</table>
-            <input type="submit" name="submitpermission" class="modif" value="Enregistrer" />
+            <input type="submit" name="submitpermission" id="submitpermission" class="modif" value="Enregistrer" />
             <input type="reset" name="reset" class="classique" value="Annuler" />
             </form></fieldset>
             <div id="useredit"></div>
@@ -124,7 +143,7 @@ function manageUser() {
             $userUpdate->level = $chaine;
             $userUpdate->save();
         }
-        header("Location: index.php?p=manageuser");
+        //header("Location: index.php?p=manageuser");
     } elseif (isset($_POST['submituser'])) { // Ajout user
         $user = new User();
         $user->login = $_POST['login'];
