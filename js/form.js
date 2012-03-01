@@ -72,6 +72,7 @@ $(function() {
         $('.input_text').children().val('');
     }
     
+    //permet l'affichage des formulaires flottant entouré de gris
     function creationForm(x, h, form) {
         $('#ecran_gris').toggle();
         $(form).css({
