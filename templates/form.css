@@ -134,12 +134,12 @@
     margin-top: 8px;
 }
 
-.formulaire input[type=text] {
+.formulaire input[type=text], .formulaire input[type=password] {
     padding: 4px 6px;
     width: 300px;
 }
 
-.formulaire input[type=text]:hover, .formulaire input[type=text]:focus {
+.formulaire input[type=text]:hover, .formulaire input[type=text]:focus, .formulaire input[type=password]:hover, .formulaire input[type=password]:focus {
     outline: none;
 }
 
