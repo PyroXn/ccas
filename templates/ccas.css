@@ -185,7 +185,7 @@ input[type=submit] , input[type=reset], input[type=button] {
 
 
 
-#page_header a {
+#page_header div {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     color: #F77F00;

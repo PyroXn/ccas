@@ -93,9 +93,20 @@ $(function() {
                 {
                     $("#list_individu").html(html.listeIndividu);
                     $("#page_header_navigation").html(html.menu);
+                    $('#contenu').html(html.contenu);
                 }
             });
         } else {
+            $.ajax({
+                type: "POST",
+                dataType:'json',
+                url: "./index.php?p=accueil",
+                success: function(html)
+                {
+                    $("#page_header_navigation").html(html.menu);
+                    $("#contenu").html(html.contenu);
+                }
+            });
             var searchbox = $("#search").val();
             search(searchbox);
         }
