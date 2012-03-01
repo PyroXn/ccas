@@ -88,18 +88,49 @@ $(function() {
                 type: "POST",
                 dataType:'json',
                 url: "./index.php?p=foyer",
-                data: 'idFoyer='+ idFoyer + "&idIndividu=" + idIndividu,
+                data: 'idFoyer='+ idFoyer + '&idIndividu=' + idIndividu,
                 success: function(html)
                 {
                     $("#list_individu").html(html.listeIndividu);
                     $("#page_header_navigation").html(html.menu);
+                    $('#contenu').html(html.contenu);
                 }
             });
         } else {
+            $.ajax({
+                type: "POST",
+                dataType:'json',
+                url: "./index.php?p=accueil",
+                success: function(html)
+                {
+                    $("#page_header_navigation").html(html.menu);
+                    $("#contenu").html(html.contenu);
+                }
+            });
             var searchbox = $("#search").val();
             search(searchbox);
         }
     });  
+    
+    $('#page_header_navigation > div').live("click", function() {
+        console.log($(this));
+        $('.active').toggleClass('active');
+        $(this).toggleClass('active');
+        var idMenu = $(this).attr("id");
+        var idIndividu = $('#list_individu').children('.current').children().children().attr('id_individu');
+        console.log(idIndividu);
+        $.ajax({
+            type: "POST",
+            url: "./index.php?p=contenu",
+            data: 'idMenu=' + idMenu + '&idIndividu='+ idIndividu,
+            success: function(html)
+            {
+                $("#contenu").html(html);
+            }
+        });
+    });  
+    
+    
 });
 
 function search(searchbox) {
