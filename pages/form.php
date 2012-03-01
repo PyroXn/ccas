@@ -11,6 +11,7 @@ function form() {
              break;
          case 'creation_utilisateur':
              createUser($_POST['login'], $_POST['pwd'], $_POST['nomcomplet']);
+             manageUser();
              break;
     }
 }
@@ -34,7 +35,7 @@ function createUser($login,$password,$nomcomplet) {
     include_once('./lib/config.php');
     $user = new User();
     $user->login = $login;
-    $user->password = $password;
+    $user->password = md5($password);
     $user->nomcomplet = $nomcomplet;
     $user->save();
     

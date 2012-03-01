@@ -1,4 +1,4 @@
-        
+
         <div id="messageJS" class="messageJS"></div>
         <div class="formulaire" action="creation_foyer">
             <h2>Foyer</h2>
@@ -37,5 +37,6 @@
         <script type="text/javascript" src="./js/search.js"></script>
         <script type="text/javascript" src="./js/jquery.tipsy.js"></script>
         <script type="text/javascript" src="./js/form.js"></script>
+        <script type="text/javascript" src="./js/admin.js"></script>
     </body>
 </html>

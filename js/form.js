@@ -3,7 +3,7 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_foyer"]'))
     });
     
-    $('#newUser').click(function() {
+    $('#newUser').live("click", function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_utilisateur"]'))
     });
     
@@ -30,15 +30,16 @@ $(function() {
         $('.en_execution').toggleClass('en_execution');   
     });
     
-    $('.bouton').click(function() {
+    $('.bouton').live("click", function() {
         var value = $(this).attr('value');
+        var formActuel = $(this).parent().parent().parent();
         if(value=='cancel') {
             $('.en_execution').toggle();
             $('.en_execution').toggleClass('en_execution');
             $('.en_attente').toggleClass('en_attente');
             $('#ecran_gris').toggle();
 //            $('.formulaire').toggle();
-            $(this).parent().parent().parent().toggle();
+            formActuel.toggle();
             effacer();
         } else if(value=='save') {
             //commun a tous les form
@@ -67,16 +68,18 @@ $(function() {
                 //Succès de la requête
                 success: function(data) {
                     $('#ecran_gris').toggle();
-                    $(this).parent().parent().parent().toggle();
+                    formActuel.toggle();
                     effacer();
                     
                     //CAS NON GENERIQUE
                     $("#list_individu").html(data.listeIndividu);
                     $("#page_header_navigation").html(data.menu);
+                    $("#contenu").html(data);
                 }
             });
         }
     });
+    
     
     function effacer() {
         $('.input_text').children().val('');

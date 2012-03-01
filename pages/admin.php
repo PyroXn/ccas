@@ -7,10 +7,10 @@ function homeAdmin() {
         <div id="menu_gauche"></div>
                 <div id="page_header">
                     <div id="page_header_navigation">
-                        <a href="index.php?p=admin" class="page_header_link active">
+                        <a id="accueilAdmin" href="index.php?p=admin" class="page_header_link active">
                             <span class="label">Administration - Accueil</span>
                         </a>
-                        <a href="index.php?p=manageuser" class="page_header_link">
+                        <a id="manageuser" href="#" class="page_header_link">
                             <span class="label">G&eacute;rer les utilisateurs</span>
                         </a>
                     </div>
@@ -36,24 +36,10 @@ function homeAdmin() {
 }
 
 function manageUser() {
-    if (!isset($_POST['submitpermission']) && !isset($_POST['submituser']) && !isset($_GET['id'])) {
         include_once('./lib/config.php');
         $users = Doctrine_Core::getTable('user')->findByActif(0);
         $title = 'Accueil';
         $contenu = '
-        <div id="menu_gauche"></div>
-                <div id="page_header">
-                    <div id="page_header_navigation">
-                        <a href="index.php?p=admin" class="page_header_link">
-                            <span class="label">Administration - Accueil</span>
-                        </a>
-                        <a href="index.php?p=manageuser" class="page_header_link active">
-                            <span class="label">G&eacute;rer les utilisateurs</span>
-                        </a>
-                    </div>
-                </div>
-                <div id="contenu_wrapper">
-                    <div id="contenu">
                     <fieldset><legend>Ajouter un utilisateur</legend>
                     <div id="newUser" class="bouton ajout" value="add">+</div>
         <div class="formulaire" action="creation_utilisateur">
@@ -76,8 +62,7 @@ function manageUser() {
         </div>
                     </fieldset>
                     <fieldset><legend>G&eacute;rer les permissions</legend>
-                    <form method="POST" id="formaccess">
-                    <table border="0">
+                    <table id="manageuser" border="0">
                         <tr>
                             <td width="15%"></td>
                             <td width="5%"></td>
@@ -106,36 +91,36 @@ function manageUser() {
         $contenu .= '</table>
             <input type="submit" name="submitpermission" id="submitpermission" class="modif" value="Enregistrer" />
             <input type="reset" name="reset" class="classique" value="Annuler" />
-            </form></fieldset>
+            </fieldset>
             <div id="useredit"></div>
             <div>
                 </div>
                 ';
-        display($title, $contenu);
-    } elseif (isset($_POST['submitpermission'])) { // Modification permission
-        include_once('./lib/config.php');
-        $users = Doctrine_Core::getTable('user')->findAll();
-        $chaine = array();
-        foreach ($users as $user) {
-            $check0 = (isset($_POST['use' . $user->id])) ? $_POST['use' . $user->id] : "0";
-            $check1 = (isset($_POST['access' . $user->id])) ? $_POST['access' . $user->id] : "0";
-            $check2 = (isset($_POST['config' . $user->id])) ? $_POST['config' . $user->id] : "0";
-            $check3 = (isset($_POST['admin' . $user->id])) ? $_POST['admin' . $user->id] : "0";
-            $chaine = $check3 . $check2 . $check1 . $check0;
-
-            // On met à jour
-            $userUpdate = Doctrine_Core::getTable('user')->find($user->id);
-            $userUpdate->level = $chaine;
-            $userUpdate->save();
-        }
-        //header("Location: index.php?p=manageuser");
-    } elseif(isset($_GET['idDelete'])) { // Supression user
-        include_once('./lib/config.php');
-        $user = Doctrine_Core::getTable('user')->find($_GET['idDelete']);
-        $user->actif = 1;
-        $user->save();
-        header("Location: index.php?p=manageuser");
-    }
+        echo $contenu;
+//    } elseif (isset($_POST['submitpermission'])) { // Modification permission
+//        include_once('./lib/config.php');
+//        $users = Doctrine_Core::getTable('user')->findAll();
+//        $chaine = array();
+//        foreach ($users as $user) {
+//            $check0 = (isset($_POST['use' . $user->id])) ? $_POST['use' . $user->id] : "0";
+//            $check1 = (isset($_POST['access' . $user->id])) ? $_POST['access' . $user->id] : "0";
+//            $check2 = (isset($_POST['config' . $user->id])) ? $_POST['config' . $user->id] : "0";
+//            $check3 = (isset($_POST['admin' . $user->id])) ? $_POST['admin' . $user->id] : "0";
+//            $chaine = $check3 . $check2 . $check1 . $check0;
+//
+//            // On met à jour
+//            $userUpdate = Doctrine_Core::getTable('user')->find($user->id);
+//            $userUpdate->level = $chaine;
+//            $userUpdate->save();
+//        }
+//        //header("Location: index.php?p=manageuser");
+//    } elseif(isset($_GET['idDelete'])) { // Supression user
+//        include_once('./lib/config.php');
+//        $user = Doctrine_Core::getTable('user')->find($_GET['idDelete']);
+//        $user->actif = 1;
+//        $user->save();
+//        header("Location: index.php?p=manageuser");
+//    }
 }
 
 function editUser() {
