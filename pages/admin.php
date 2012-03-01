@@ -7,12 +7,7 @@ function homeAdmin() {
         <div id="menu_gauche"></div>
                 <div id="page_header">
                     <div id="page_header_navigation">
-                        <a id="accueilAdmin" href="index.php?p=admin" class="page_header_link active">
-                            <span class="label">Administration - Accueil</span>
-                        </a>
-                        <a id="manageuser" href="#" class="page_header_link">
-                            <span class="label">G&eacute;rer les utilisateurs</span>
-                        </a>
+                        '.generationHeaderNavigation('admin').'
                     </div>
                 </div>
                 <div id="contenu_wrapper">
