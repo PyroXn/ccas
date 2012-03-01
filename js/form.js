@@ -7,6 +7,7 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_utilisateur"]'))
     });
     
+    
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
         var attr = '.'+$(this).attr('role');

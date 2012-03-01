@@ -68,10 +68,8 @@ function home() {
             $contenu .= '<li class="impair individu" id="' . $i . '">';
         }
         $contenu .= '
-            <a href="#">
-                <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
-            </a>
-        </li>';
+                           <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                 </li>';
         $i++;
     }
     $contenu .= '
@@ -146,10 +144,8 @@ function search() {
             $retour .= '<li class="impair individu" id="' . $i . '">';
         }
         $retour .= '
-                    <a href="#">
-                        <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
-                    </a>
-                </li>';
+                         <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                 </li>';
         $i++;
     }
     echo $retour;
@@ -159,7 +155,7 @@ function foyer() {
     include_once('./pages/contenu.php');
     $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
     $menu = generationHeaderNavigation('foyer');
-    $contenu = foyerContenu();
+    $contenu = foyerContenu($_POST['idFoyer']);
     $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu, 'contenu' => $contenu);
     echo json_encode($retour);
 }
@@ -184,9 +180,7 @@ function creationListeByFoyer($idFoyer, $idIndividu) {
             }
         }
         $retour .= '
-                    <a href="#">
                         <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . ' </span>
-                    </a>
                 </li>';
         $i++;
     }
@@ -312,10 +306,8 @@ function scroll() {
             $retour .= '<li class="impair individu" id="' . $i . '">';
         }
         $retour .= '
-                            <a href="#">
-                                <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
-                            </a>
-                        </li>';
+                    <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+            </li>';
         $i++;
     }
     echo $retour;

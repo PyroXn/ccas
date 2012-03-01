@@ -80,8 +80,8 @@ $(function() {
         
         if (!test.is(this)) {
             $(this).addClass('current');
-            var idFoyer = $(this).children().children().attr('id_foyer');
-            var idIndividu = $(this).children().children().attr('id_individu');
+            var idFoyer = $(this).children().attr('id_foyer');
+            var idIndividu = $(this).children().attr('id_individu');
             console.log(idIndividu);
             console.log(idFoyer);
             $.ajax({
@@ -91,6 +91,7 @@ $(function() {
                 data: 'idFoyer='+ idFoyer + '&idIndividu=' + idIndividu,
                 success: function(html)
                 {
+                    console.log(html);
                     $("#list_individu").html(html.listeIndividu);
                     $("#page_header_navigation").html(html.menu);
                     $('#contenu').html(html.contenu);
@@ -118,11 +119,12 @@ $(function() {
         $(this).toggleClass('active');
         var idMenu = $(this).attr("id");
         var idIndividu = $('#list_individu').children('.current').children().children().attr('id_individu');
+        var idFoyer = $('#list_individu').children('.current').children().children().attr('id_foyer');
         console.log(idIndividu);
         $.ajax({
             type: "POST",
             url: "./index.php?p=contenu",
-            data: 'idMenu=' + idMenu + '&idIndividu='+ idIndividu,
+            data: 'idMenu=' + idMenu + '&idIndividu='+ idIndividu + '&idFoyer='+idFoyer,
             success: function(html)
             {
                 $("#contenu").html(html);

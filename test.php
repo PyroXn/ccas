@@ -41,12 +41,21 @@ include_once('./lib/config.php');
 //echo md5($mdp);
 
 
-$user = Doctrine_Core::getTable('user')->findOneByLoginAndPassword('Florian', md5('lorian'));
-if ($user != null) {
-    echo '<div> '.$user->login.' ' . $user->id . ' ' . $user->password . '</div>';
-} else {
-    echo "opif";
-}
+//$user = Doctrine_Core::getTable('user')->findOneByLoginAndPassword('Florian', md5('lorian'));
+//if ($user != null) {
+//    echo '<div> '.$user->login.' ' . $user->id . ' ' . $user->password . '</div>';
+//} else {
+//    echo "opif";
+//}
+
+     $users = Doctrine_Query::create()
+                ->from('individu')
+                ->where('idFoyer= ?', 1)
+                ->orderBy('datenaissance DESC')
+                ->execute();
+    foreach($users as $user) {
+        echo $user->prenom;
+    }
     
 
 ?>
