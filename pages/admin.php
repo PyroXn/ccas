@@ -60,13 +60,13 @@ function manageUser() {
             <h2>Utilisateur</h2>
             <div class="colonne_droite">
                 <div class="input_text">
-                    <input class="contour_field" type="text" title="Login" placeholder="Login" name="login">
+                    <input class="contour_field" type="text" title="Login" placeholder="Login" name="login" id="newlogin">
                 </div>
                 <div class="input_text">
-                    <input class="contour_field" type="password" title="Password" placeholder="Password" name="pwd">
+                    <input class="contour_field" type="password" title="Password" placeholder="Password" name="pwd" id="newpwd">
                 </div>
                 <div class="input_text">
-                    <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcomplet">
+                    <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcomplet" id="newnomcomplet">
                 </div>
                 <div class="sauvegarder_annuler">
                     <div class="bouton modif" value="save">Enregistrer</div>
@@ -74,21 +74,6 @@ function manageUser() {
                 </div>
             </div>
         </div>
-                    <!--<form method="POST" id="formadd">
-                        <div class="input_text">
-                            <input class="contour_field" type="text" title="Login" placeholder="Login" name="login">
-                        </div>
-                        <div class="input_text">
-                            <input class="contour_field" type="password" title="Password" placeholder="Password" name="pwd">
-                        </div>
-                        <div class="input_text">
-                            <input class="contour_field" type="text" title="Nom complet" placeholder="Nom complet" name="nomcomplet">
-                        </div>
-                        <div class="sauvegarder_annuler">
-                            <input type="submit" class="modif" name="submituser" value="Enregistrer"/>
-                            <input type="reset" class="classique" name="reset" value="Annuler"/>
-                        </div>
-                    </form>-->
                     </fieldset>
                     <fieldset><legend>G&eacute;rer les permissions</legend>
                     <form method="POST" id="formaccess">
@@ -144,13 +129,6 @@ function manageUser() {
             $userUpdate->save();
         }
         //header("Location: index.php?p=manageuser");
-    } elseif (isset($_POST['submituser'])) { // Ajout user
-        $user = new User();
-        $user->login = $_POST['login'];
-        $user->password = md5($_POST['pwd']);
-        $user->nomcomplet = $_POST['nomcomplet'];
-        $user->save();
-        header("Location: index.php?p=manageuser");
     } elseif(isset($_GET['idDelete'])) { // Supression user
         include_once('./lib/config.php');
         $user = Doctrine_Core::getTable('user')->find($_GET['idDelete']);

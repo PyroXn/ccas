@@ -53,6 +53,11 @@ $(function() {
                     datastring += '&nom=' + $('#form_2').val();
                     datastring += '&prenom=' + $('#form_3').val();
                     break;
+                case 'creation_utilisateur':
+                    datastring += '&login='+$('#newlogin').val();
+                    datastring += '&pwd='+$('#newpwd').val();
+                    datastring += '&nomcomplet='+$('#newnomcomplet').val();
+                    break;
             }
             $.ajax({
                 type: 'post',
@@ -62,7 +67,7 @@ $(function() {
                 //Succès de la requête
                 success: function(data) {
                     $('#ecran_gris').toggle();
-                    $('.formulaire').toggle();
+                    $(this).parent().parent().parent().toggle();
                     effacer();
                     
                     //CAS NON GENERIQUE

@@ -9,6 +9,9 @@ function form() {
              $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu);
              echo json_encode($retour);
              break;
+         case 'creation_utilisateur':
+             createUser($_POST['login'], $_POST['pwd'], $_POST['nomcomplet']);
+             break;
     }
 }
 
@@ -27,4 +30,13 @@ function creationFoyer($civilite, $nom, $prenom) {
     return creationListeByFoyer($foyer->id, $individu->id);
 }
 
+function createUser($login,$password,$nomcomplet) {
+    include_once('./lib/config.php');
+    $user = new User();
+    $user->login = $login;
+    $user->password = $password;
+    $user->nomcomplet = $nomcomplet;
+    $user->save();
+    
+}
 ?>
