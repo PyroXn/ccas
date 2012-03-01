@@ -29,6 +29,10 @@ switch (@$_GET['p']) {
         include_once('./pages/form.php');
         form();
         break;
+    case 'contenu':
+        include_once('./pages/contenu.php');
+        contenu();
+        break;
     case 'admin':
         include_once('./pages/admin.php');
         homeAdmin();
@@ -44,6 +48,7 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         editUser();
         break;
+    
     default:
         home();
         break;
@@ -155,9 +160,10 @@ function search() {
 }
 
 function foyer() {
+    include_once('./pages/contenu.php');
     $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
     $menu = generationHeaderNavigation('foyer');
-    $contenu = 'test';
+    $contenu = foyerContenu();
     $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu, 'contenu' => $contenu);
     echo json_encode($retour);
 }
@@ -202,25 +208,25 @@ function generationHeaderNavigation($mode) {
     switch ($mode) {
         case 'accueil' :
             $retour = '
-                <div class="page_header_link active">
+                <div id="accueil" class="page_header_link active">
                     <span class="label">Accueil</span>
                 </div>';
             break;
         case 'foyer' :
             $retour = '
-                <div class="page_header_link active">
+                <div id="foyer" class="page_header_link active">
                     <span class="label">Foyer</span>
                 </div>
-                <div href="#" class="page_header_link">
+                <div id="generalites" class="page_header_link">
                     <span class="label">G&#233;n&#233;ralit&#233;s</span>
                 </div>
-                <div href="#" class="page_header_link">
+                <div id="budget" class="page_header_link">
                     <span class="label">Budget</span>
                 </div>
-                <div href="#" class="page_header_link">
+                <div id="aides" class="page_header_link">
                     <span class="label">Aides</span>
                 </div>
-                <div href="#" class="page_header_link">
+                <div id="historique" class="page_header_link">
                     <span class="label">Historique</span>
                 </div>';
             break;

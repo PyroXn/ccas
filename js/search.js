@@ -88,7 +88,7 @@ $(function() {
                 type: "POST",
                 dataType:'json',
                 url: "./index.php?p=foyer",
-                data: 'idFoyer='+ idFoyer + "&idIndividu=" + idIndividu,
+                data: 'idFoyer='+ idFoyer + '&idIndividu=' + idIndividu,
                 success: function(html)
                 {
                     $("#list_individu").html(html.listeIndividu);
@@ -111,6 +111,26 @@ $(function() {
             search(searchbox);
         }
     });  
+    
+    $('#page_header_navigation > div').live("click", function() {
+        console.log($(this));
+        $('.active').toggleClass('active');
+        $(this).toggleClass('active');
+        var idMenu = $(this).attr("id");
+        var idIndividu = $('#list_individu').children('.current').children().children().attr('id_individu');
+        console.log(idIndividu);
+        $.ajax({
+            type: "POST",
+            url: "./index.php?p=contenu",
+            data: 'idMenu=' + idMenu + '&idIndividu='+ idIndividu,
+            success: function(html)
+            {
+                $("#contenu").html(html);
+            }
+        });
+    });  
+    
+    
 });
 
 function search(searchbox) {
