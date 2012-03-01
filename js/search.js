@@ -1,4 +1,16 @@
 $(function() {
+    calculTailleInputSearch();
+    
+    $(window).resize(function(){
+        calculTailleInputSearch();
+    })
+    
+    $('#search').css({
+        "width" : $('#menu_gauche').outerWidth() - $('.add').outerWidth(true) 
+        - parseInt($('#search').css("margin-left"))
+    });
+    
+
     $("#search").keyup(function() 
     {
         var searchbox = $(this).val();
@@ -95,12 +107,19 @@ function search(searchbox) {
     $.ajax({
         type: "POST",
         url: "./index.php?p=search",
-//        url: "./search.php",
+        //        url: "./search.php",
         data: dataString,
         cache: false,
         success: function(html)
         {
             $("#list_individu").html(html);	
         }
+    });
+}
+
+function calculTailleInputSearch() {
+    $('#search').css({
+        "width" : $('#menu_gauche').outerWidth() - $('.add').outerWidth(true) 
+        - parseInt($('#search').css("margin-left"))
     });
 }
