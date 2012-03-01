@@ -70,11 +70,11 @@ $(function() {
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
                     effacer();
-                    
+                    $("#contenu").html(data.tableau);
                     //CAS NON GENERIQUE
                     $("#list_individu").html(data.listeIndividu);
                     $("#page_header_navigation").html(data.menu);
-                    $("#contenu").html(data);
+                    
                 }
             });
         }

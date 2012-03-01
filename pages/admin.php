@@ -96,7 +96,7 @@ function manageUser() {
             <div>
                 </div>
                 ';
-        echo $contenu;
+        return $contenu;
 //    } elseif (isset($_POST['submitpermission'])) { // Modification permission
 //        include_once('./lib/config.php');
 //        $users = Doctrine_Core::getTable('user')->findAll();

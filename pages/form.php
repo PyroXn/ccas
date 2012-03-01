@@ -11,7 +11,8 @@ function form() {
              break;
          case 'creation_utilisateur':
              createUser($_POST['login'], $_POST['pwd'], $_POST['nomcomplet']);
-             manageUser();
+             $retour = array('tableau' =>manageUser());
+             echo json_encode($retour);
              break;
     }
 }
