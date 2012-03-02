@@ -32,6 +32,8 @@ function contenu() {
 
 // Mettre chef de famille à 0 de base
 function foyerContenu($idFoyer) {
+    $contenu = '';
+    $contenu .= '<h2>Foyer</h2>';
     $foyer = Doctrine_Core::getTable('foyer')->find($idFoyer);
 
     function sortFoyer($a, $b) {
@@ -48,10 +50,30 @@ function foyerContenu($idFoyer) {
     $individus = $foyer->individu;
     $individus = $individus->getData(); // convert from Doctrine_Collection to array
     usort($individus, 'sortFoyer');
-    $contenu = '';
+    
+    $contenu .= '
+        <h3>Membres du foyers</h3>
+        <ul class="list_individu">';
     foreach ($individus as $individu) {
-        $contenu .= '<div>' . $individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = ' . $individu->chefDeFamille . ' date de naissance = ' . $individu->dateNaissance . '</div>';
+        $contenu .= '
+            <li>
+                <div>
+                    <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>
+                    <spam class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
+                    <span class="chef_famille"> Chef de famille ';
+                        if ($individu->chefDeFamille) {
+                            $contenu .= '<span class="checkbox checkbox_active"></span>';
+                        } else {
+                            $contenu .= '<span class="checkbox"></span>';
+                        }
+                $contenu .= '
+                    </span>
+                </div>
+                
+            </li>';
     }
+    $contenu .= '
+        </ul><div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>';
  
     return $contenu;
 }

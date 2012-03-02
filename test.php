@@ -40,8 +40,6 @@ include_once('./lib/config.php');
 $foyer = Doctrine_Core::getTable('foyer')->find(1);
 
 function sortFoyer($a, $b) {
-    echo ' a = ' . $a->nom;
-    echo ' b = ' . $b->nom;
     if ($a->chefDeFamille == 1) {
         return -1;
     }
