@@ -4,12 +4,6 @@ $(function() {
     $(window).resize(function(){
         calculTailleInputSearch();
     })
-    
-    $('#search').css({
-        "width" : $('#menu_gauche').outerWidth() - $('.add').outerWidth(true) 
-        - parseInt($('#search').css("margin-left"))
-    });
-    
 
     $("#search").keyup(function() 
     {
@@ -118,8 +112,8 @@ $(function() {
         $('.active').toggleClass('active');
         $(this).toggleClass('active');
         var idMenu = $(this).attr("id");
-        var idIndividu = $('#list_individu').children('.current').children().children().attr('id_individu');
-        var idFoyer = $('#list_individu').children('.current').children().children().attr('id_foyer');
+        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
+        var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
         console.log(idIndividu);
         $.ajax({
             type: "POST",
