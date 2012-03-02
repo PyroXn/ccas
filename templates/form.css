@@ -237,3 +237,8 @@
 .checkbox_active {
     background: white url('./img/check-sprite.gif') 2px center no-repeat;
 }
+
+#updateIndividu {
+    display: none;
+    float: right;
+}

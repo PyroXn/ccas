@@ -27,6 +27,19 @@ $(function() {
         $(attr).toggleClass('en_execution');
     });
     
+    $('.checkbox').live("click", function(){
+        if(!$(this).hasClass('checkbox_active')) {
+            $('.checkbox_active').toggleClass('checkbox_active');
+            $(this).toggleClass('checkbox_active');
+            $('#updateIndividu').css({
+                "display":"block"
+            });
+            $('#updateIndividu').css({
+                "margin-right":"0"
+            });
+        }
+    });
+    
     $('.en_execution > li').live("click", function() {
         console.log($(this).children().text());
         $('.en_execution').toggle();
@@ -43,7 +56,7 @@ $(function() {
             $('.en_execution').toggleClass('en_execution');
             $('.en_attente').toggleClass('en_attente');
             $('#ecran_gris').toggle();
-//            $('.formulaire').toggle();
+            //            $('.formulaire').toggle();
             formActuel.toggle();
             effacer();
         } else if(value=='save') {
@@ -99,17 +112,17 @@ $(function() {
                             $('#contenu').html(data.newIndividu);
                             break;
                     }
-                    //FONCTIONNE PAS 
-//                    if(!($.isEmptyObject(data.listeIndividu) && $.isEmptyObject(data.menu))) {
-//                        $("#list_individu").html(data.listeIndividu);
-//                        $("#page_header_navigation").html(data.menu);
-//                    } else if(!$.isEmptyObject(data.tableau)) {
-//                        $("#contenu").html(data.tableau);
-//                    } else if(!$.isEmptyObject(data.newIndividu)) {
-//                        $("#list_individu").html(data.listeIndividu);
-//                        /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
-//                        $('#contenu').html(data.newIndividu);
-//                    }     
+                //FONCTIONNE PAS 
+                //                    if(!($.isEmptyObject(data.listeIndividu) && $.isEmptyObject(data.menu))) {
+                //                        $("#list_individu").html(data.listeIndividu);
+                //                        $("#page_header_navigation").html(data.menu);
+                //                    } else if(!$.isEmptyObject(data.tableau)) {
+                //                        $("#contenu").html(data.tableau);
+                //                    } else if(!$.isEmptyObject(data.newIndividu)) {
+                //                        $("#list_individu").html(data.listeIndividu);
+                //                        /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
+                //                        $('#contenu').html(data.newIndividu);
+                //                    }     
                 }
             });
         }

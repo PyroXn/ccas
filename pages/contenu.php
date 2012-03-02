@@ -60,6 +60,7 @@ function foyerContenu($idFoyer) {
     $contenu .= '
         </ul>
         <div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>
+        <div id="updateIndividu" class="bouton modif" value="updateMembreFoyer">Enregistrer</div>
          <div class="formulaire" action="creation_individu">
             <h2>Individu</h2>
             <div class="colonne_droite">
@@ -85,7 +86,7 @@ function foyerContenu($idFoyer) {
 
 function generateLigneMembreFoyer($individu) {
     $retour = '
-        <li class="membre_foyer">
+        <li class="membre_foyer" id_foyer='.$individu->idFoyer.' id_individu='.$individu->id.'>
             <div>
                 <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>
                 <spam class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
