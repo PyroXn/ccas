@@ -28,6 +28,7 @@ function creationFoyer($civilite, $nom, $prenom) {
     $individu->civilite = $civilite;
     $individu->nom = $nom;
     $individu->prenom = $prenom;
+    $individu->chefDeFamille = true;
     $individu->idFoyer = $foyer->id;
     $individu->save();
     

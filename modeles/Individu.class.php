@@ -14,7 +14,7 @@ class Individu extends Doctrine_Record
         $this->hasColumn('prenom', 'string', 50);
         $this->hasColumn('nomMarital', 'string', 50);
         $this->hasColumn('nomUsage', 'string', 50);
-        $this->hasColumn('chefDeFamille', 'boolean', 1);
+        $this->hasColumn('chefDeFamille', 'boolean', 1, array('default' => '0'));
         $this->hasColumn('dateNaissance', 'integer', 50);
         $this->hasColumn('sexe', 'string', 1);
         $this->hasColumn('telephone', 'string', 50);
