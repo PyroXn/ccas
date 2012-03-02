@@ -37,32 +37,40 @@ include_once('./lib/config.php');
 //    echo "opif";
 //}
 
-$foyer = Doctrine_Core::getTable('foyer')->find(1);
+//$foyer = Doctrine_Core::getTable('foyer')->find(1);
+//
+//function sortFoyer($a, $b) {
+//    if ($a->chefDeFamille == 1) {
+//        return -1;
+//    }
+//    if ($b->chefDeFamille == 1) {
+//        return 1;
+//    }    
+//    return ($a->dateNaissance < $b->dateNaissance) ? -1 : 1;
+//    return 0;
+//}
+//
+//$individus = $foyer->individu;
+//
+//$individus = $individus->getData(); // convert from Doctrine_Collection to array
+//
+//echo '<h1>Pas triée</h1>';
+//foreach($foyer->individu as $individu) {
+//        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
+//}
+//
+//usort($individus, "sortFoyer");
+//echo '<h1>Triée</h1>';
+//foreach($individus as $individu) {
+//        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
+//}
 
-function sortFoyer($a, $b) {
-    if ($a->chefDeFamille == 1) {
-        return -1;
-    }
-    if ($b->chefDeFamille == 1) {
-        return 1;
-    }    
-    return ($a->dateNaissance < $b->dateNaissance) ? -1 : 1;
-    return 0;
-}
-
-$individus = $foyer->individu;
-
-$individus = $individus->getData(); // convert from Doctrine_Collection to array
-
-echo '<h1>Pas triée</h1>';
-foreach($foyer->individu as $individu) {
-        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
-}
-
-usort($individus, "sortFoyer");
-echo '<h1>Triée</h1>';
-foreach($individus as $individu) {
-        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
-}
-
+$individu = new Individu();
+    $individu->civilite = 'Monsieur';
+    $individu->nom = 'Opif';
+    $individu->prenom = 'prenom';
+    
+    $individu->save();
+    
+    echo $individu->dateNaissance;
 ?>

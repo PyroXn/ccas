@@ -16,6 +16,15 @@ function form() {
              $retour = array('tableau' =>$page);
              echo json_encode($retour);
              break;
+        case 'creation_individu':
+            include_once('./pages/contenu.php');
+            include_once('./index.php');
+            
+            $newIndividu = createIndividu($_POST['idFoyer'], $_POST['civilite'], $_POST['nom'], $_POST['prenom']);
+            $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividuCourant']);
+            $retour = array('listeIndividu' => $listeIndividu, 'newIndividu' => $newIndividu);
+            echo json_encode($retour);
+            break;
     }
 }
 
@@ -43,5 +52,16 @@ function createUser($login,$password,$nomcomplet) {
     $user->nomcomplet = $nomcomplet;
     $user->save();
     
+}
+
+function createIndividu($idFoyer, $civilite, $nom, $prenom) {
+    include_once('./lib/config.php');
+    $individu = new Individu();
+    $individu->civilite = $civilite;
+    $individu->nom = $nom;
+    $individu->prenom = $prenom;
+    $individu->idFoyer = $idFoyer;
+    $individu->save();
+    return FoyerContenu($idFoyer);
 }
 ?>

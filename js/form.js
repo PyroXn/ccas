@@ -7,6 +7,10 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_utilisateur"]'))
     });
     
+    $('#newIndividu').live("click", function() {
+        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
+    });
+    
     
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
@@ -60,6 +64,14 @@ $(function() {
                     datastring += '&pwd='+$('#newpwd').val();
                     datastring += '&nomcomplet='+$('#newnomcomplet').val();
                     break;
+                case 'creation_individu':
+                    datastring += '&idFoyer=' + $('#list_individu').children('.current').children().attr('id_foyer');
+                    datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
+                    datastring += '&civilite=' + $('#form_1').text();
+                    datastring += '&nom=' + $('#form_2').val();
+                    datastring += '&prenom=' + $('#form_3').val();
+                    break;
+                        
             }
             $.ajax({
                 type: 'post',
@@ -72,13 +84,32 @@ $(function() {
                     formActuel.toggle();
                     effacer();
                     
-                    //CAS NON GENERIQUE
-                    if(!$.isEmptyObject(data.listeIndividu)) {
-                        $("#list_individu").html(data.listeIndividu);
-                        $("#page_header_navigation").html(data.menu);
-                    } else if(!$.isEmptyObject(data.tableau)) {
-                        $("#contenu").html(data.tableau);
-                    }         
+                    switch(table){
+                        //unique pour la creation de foyer
+                        case 'creation_foyer':
+                            $("#list_individu").html(data.listeIndividu);
+                            $("#page_header_navigation").html(data.menu);
+                            break;
+                        case 'creation_utilisateur':
+                            $("#contenu").html(data.tableau);
+                            break;
+                        case 'creation_individu':
+                            $("#list_individu").html(data.listeIndividu);
+                            /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
+                            $('#contenu').html(data.newIndividu);
+                            break;
+                    }
+                    //FONCTIONNE PAS 
+//                    if(!($.isEmptyObject(data.listeIndividu) && $.isEmptyObject(data.menu))) {
+//                        $("#list_individu").html(data.listeIndividu);
+//                        $("#page_header_navigation").html(data.menu);
+//                    } else if(!$.isEmptyObject(data.tableau)) {
+//                        $("#contenu").html(data.tableau);
+//                    } else if(!$.isEmptyObject(data.newIndividu)) {
+//                        $("#list_individu").html(data.listeIndividu);
+//                        /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
+//                        $('#contenu').html(data.newIndividu);
+//                    }     
                 }
             });
         }

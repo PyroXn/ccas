@@ -53,29 +53,53 @@ function foyerContenu($idFoyer) {
     
     $contenu .= '
         <h3>Membres du foyers</h3>
-        <ul class="list_individu">';
+        <ul id="membre_foyer_list">';
     foreach ($individus as $individu) {
-        $contenu .= '
-            <li>
-                <div>
-                    <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>
-                    <spam class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
-                    <span class="chef_famille"> Chef de famille ';
-                        if ($individu->chefDeFamille) {
-                            $contenu .= '<span class="checkbox checkbox_active"></span>';
-                        } else {
-                            $contenu .= '<span class="checkbox"></span>';
-                        }
-                $contenu .= '
-                    </span>
-                </div>
-                
-            </li>';
+        $contenu .= generateLigneMembreFoyer($individu);
     }
     $contenu .= '
-        </ul><div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>';
+        </ul>
+        <div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>
+         <div class="formulaire" action="creation_individu">
+            <h2>Individu</h2>
+            <div class="colonne_droite">
+                <div class="select classique" role="select_civilite">
+                    <div id="form_1" class="option">Madame</div>
+                    <div class="fleche_bas"> </div>
+                </div>
+                <div class="input_text">
+                    <input id="form_2" class="contour_field" type="text" title="Nom" placeholder="Nom">
+                </div>
+                <div class="input_text">
+                    <input id="form_3" class="contour_field" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
+                </div>
+                <div class="sauvegarder_annuler">
+                    <div class="bouton modif" value="save">Enregistrer</div>
+                    <div class="bouton classique" value="cancel">Annuler</div>
+                </div>
+            </div>
+        </div>';
  
     return $contenu;
+}
+
+function generateLigneMembreFoyer($individu) {
+    $retour = '
+        <li class="membre_foyer">
+            <div>
+                <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>
+                <spam class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
+                <span class="chef_famille"> Chef de famille ';
+                    if ($individu->chefDeFamille) {
+                        $retour .= '<span class="checkbox checkbox_active"></span>';
+                    } else {
+                        $retour .= '<span class="checkbox"></span>';
+                    }
+    $retour .= '</span>
+            </div>
+        </li>';
+    
+    return $retour;
 }
 
 function accueilAdmin() {
