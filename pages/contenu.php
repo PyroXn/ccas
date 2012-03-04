@@ -30,7 +30,6 @@ function contenu() {
     }
 }
 
-// Mettre chef de famille à 0 de base
 function foyerContenu($idFoyer) {
     $contenu = '';
     $contenu .= '<h2>Foyer</h2>';

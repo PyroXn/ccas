@@ -4,9 +4,12 @@ function form() {
     $table = $_POST['table'];
     switch ($table) {
          case 'creation_foyer':
-             $listeIndividu = creationFoyer($_POST['civilite'], $_POST['nom'], $_POST['prenom']);
+             include_once('./pages/contenu.php');
+             $tab = creationFoyer($_POST['civilite'], $_POST['nom'], $_POST['prenom']);
+             $listeIndividu = creationListeByFoyer($tab['idFoyer'], $tab['idIndividu']);
              $menu = generationHeaderNavigation('foyer');
-             $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu);
+             $contenu = foyerContenu($tab['idFoyer']);
+             $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu, 'contenu' => $contenu);
              echo json_encode($retour);
              break;
          case 'creation_utilisateur':
@@ -40,8 +43,8 @@ function creationFoyer($civilite, $nom, $prenom) {
     $individu->chefDeFamille = true;
     $individu->idFoyer = $foyer->id;
     $individu->save();
-    
-    return creationListeByFoyer($foyer->id, $individu->id);
+    return array('idFoyer' => $foyer->id, 'idIndividu' => $individu->id);
+//    return creationListeByFoyer($foyer->id, $individu->id);
 }
 
 function createUser($login,$password,$nomcomplet) {

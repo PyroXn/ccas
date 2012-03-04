@@ -100,8 +100,10 @@ $(function() {
                     switch(table){
                         //unique pour la creation de foyer
                         case 'creation_foyer':
+                            console.log('YOP : ' + data);
                             $("#list_individu").html(data.listeIndividu);
                             $("#page_header_navigation").html(data.menu);
+                            $('#contenu').html(data.contenu);
                             break;
                         case 'creation_utilisateur':
                             $("#contenu").html(data.tableau);
