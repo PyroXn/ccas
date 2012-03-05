@@ -399,3 +399,12 @@ legend {
 .deconnexion {
     border-top: 1px solid #E5E5E5;
 }
+
+/*** BUDGET ***/
+.first_colonne {
+    width: 20%;
+}
+
+.autre_colonne {
+    margin-left: 10%;
+}

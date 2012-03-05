@@ -153,6 +153,7 @@ function search() {
 
 function foyer() {
     include_once('./pages/contenu.php');
+    $_SESSION['idIndividu'] = $_POST['idIndividu'];
     $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
     $menu = generationHeaderNavigation('foyer');
     $contenu = foyerContenu($_POST['idFoyer']);

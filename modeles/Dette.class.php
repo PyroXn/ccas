@@ -15,7 +15,7 @@ class Dette extends Doctrine_Record {
         $this->hasColumn('noteAutreDette', 'string', 255);
         $this->hasColumn('idPrestaElec', 'integer', 5);
         $this->hasColumn('idPrestaGaz', 'integer', 5);
-        $this->hasColumn('idIndidivu', 'integer', 5);
+        $this->hasColumn('idIndividu', 'integer', 5);
         $this->hasColumn('dateCreation', 'integer', 20);
     }
     public function setUp() {

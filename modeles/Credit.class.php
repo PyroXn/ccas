@@ -11,7 +11,7 @@ class Credit extends Doctrine_Record {
         $this->hasColumn('mensualite', 'float');
         $this->hasColumn('dureeMois', 'integer', 5); 
         $this->hasColumn('totalRestant', 'float');
-        $this->hasColumn('idInstruct', 'integer', 5);
+        $this->hasColumn('idIndividu', 'integer', 5);
         $this->hasColumn('dateAjout', 'integer', 20);
     }
 

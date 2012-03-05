@@ -10,7 +10,7 @@ function contenu() {
             echo 'generalites';
             break;
         case 'budget':
-            echo 'budget';
+            echo budget();
             break;
         case 'aides':
             echo 'aides';
@@ -181,6 +181,91 @@ function manageUser() {
                 </div>
                 ';
     return $contenu;
+}
+
+function budget() {
+    include_once('./lib/config.php');
+    $user = Doctrine_Core::getTable('individu')->find($_SESSION['idIndividu']);
+    $revenu = Doctrine_Core::getTable('revenu')->findOneByIdIndividu($_SESSION['idIndividu']);
+    $depense = Doctrine_Core::getTable('depense')->findOneByIdIndividu($_SESSION['idIndividu']);
+    $dette = Doctrine_Core::getTable('dette')->findOneByIdIndividu($_SESSION['idIndividu']);
+    $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($_SESSION['idIndividu']);
+    $contenu = '<h2>Budget</h2>';
+    $contenu .= '<h3>Ressources de '.$user->civilite.' '.$user->nom.' '.$user->prenom.'</h3>';
+    $contenu .= '<ul id="membre_foyer_list">
+                                <li class="membre_foyer">
+                                    <span class="first_colonne">Salaire : '.$revenu->salaire.'</span>
+                                    <span class="autre_colonne">All. Chômage : '.$revenu->chomage.'</span>
+                                    <span class="autre_colonne">All. familiales : '.$revenu->revenuAlloc.'</span>
+                                    <span class="autre_colonne">ASS : '.$revenu->ass.'</span>
+                               </li>
+                               <li class="membre_foyer">
+                                    <span class="first_colonne">AAH : '.$revenu->aah.'</span>
+                                    <span class="autre_colonne">RSA Socle : '.$revenu->rsaSocle.'</span>
+                                    <span class="autre_colonne">RSA Activité : '.$revenu->rsaActivite.'</span>
+                                    <span class="autre_colonne">Retraite compl  : '.$revenu->retraitComp.'</span>
+                               </li>
+                               <li class="membre_foyer">
+                                    <span class="first_colonne">P. alimentaire : '.$revenu->pensionAlim.'</span>
+                                    <span class="autre_colonne">P. de retraite : '.$revenu->pensionRetraite.'</span>
+                                    <span class="autre_colonne">Autres revenus  : '.$revenu->autreRevenu.'</span>
+                                    <span class="autre_colonne">Nature autres revenus  : </span>
+                               </li>
+                            </ul>
+                            <h3>Dépenses</h3>
+                            <ul id="membre_foyer_list">
+                                <li class="membre_foyer">
+                                    <span class="first_colonne">Impôts revenu : '.$depense->impotRevenu.'</span>
+                                    <span class="autre_colonne">Impôts locaux : '.$depense->impotLocaux.'</span>
+                                    <span class="autre_colonne">P. alimentaire : '.$depense->pensionAlim.'</span>
+                                    <span class="autre_colonne">Mutuelle : '.$depense->mutuelle.'</span>
+                               </li>
+                               <li class="membre_foyer">
+                                    <span class="first_colonne">Electricité : '.$depense->electricite.'</span>
+                                    <span class="autre_colonne">Gaz : '.$depense->gaz.'</span>
+                                    <span class="autre_colonne">Eau : '.$depense->eau.'</span>
+                                    <span class="autre_colonne">Chauffage : '.$depense->chauffage.'</span>
+                               </li>
+                               <li class="membre_foyer">
+                                    <span class="first_colonne">Téléphonie : '.$depense->telephonie.'</span>
+                                    <span class="autre_colonne">Internet : '.$depense->internet.'</span>
+                                    <span class="autre_colonne">Télévision : '.$depense->television.'</span>
+                               </li>
+                               <li class="membre_foyer">
+                                    <span class="first_colonne">Autres Dépenses : '.$depense->autreDepense.'</span>
+                                    <span class="autre_colonne">Détail : </span>
+                               </li>
+                            </ul>
+                            <h3>Dettes</h3>
+                                <ul id="membre_foyer_list">
+                                <li class="membre_foyer">
+                                    <span class="first_colonne">Arriéré locatif : '.$dette->arriereLocatif.'</span>
+                                    <span class="autre_colonne">Frais huissier : '.$dette->fraisHuissier.'</span>
+                                    <span class="autre_colonne">Autres dettes : '.$dette->autreDette.'</span>
+                                    <span class="autre_colonne">Nature autres dettes :</span>
+                               </li>
+                               <li class="membre_foyer">
+                                    <span class="first_colonne">Arriéré électricité : '.$dette->arriereElectricite.'</span>
+                                    <span class="autre_colonne">Prestataire : '.$dette->idPrestaElec.'</span>
+                               </li>
+                              <li class="membre_foyer">
+                                    <span class="first_colonne">Arriéré gaz : '.$dette->arriereElectricite.'</span>
+                                    <span class="autre_colonne">Prestataire : '.$dette->idPrestaElec.'</span>
+                               </li>
+                               </ul>
+                            <h3>Crédits</h3>
+                            <ul id="membre_foyer_list">';
+                            foreach($credits as $credit) {
+                                $contenu .= '<li class="membre_foyer">
+                                                            <span class="first_colonne">Organisme : '.$credit->organisme.'</span>
+                                                            <span class="autre_colonne">Mensualité : '.$credit->mensualite.'</span>
+                                                            <span class="autre_colonne">Durée : '.$credit->dureeMois.'</span>
+                                                            <span class="autre_colonne">Montant total restant : '.$credit->totalRestant.'</span>
+                                                      </li>';
+                            }
+
+                               $contenu .= '</ul>';
+    return utf8_encode($contenu);
 }
 
 ?>

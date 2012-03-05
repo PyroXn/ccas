@@ -28,8 +28,8 @@ include_once('./lib/config.php');
 //    foreach($foyer->individu as $individu) {
 //        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong></div>';
 //    }
-//$mdp = 'florian';
-//echo md5($mdp);
+$mdp = 'florian';
+echo md5($mdp);
 //$user = Doctrine_Core::getTable('user')->findOneByLoginAndPassword('Florian', md5('lorian'));
 //if ($user != null) {
 //    echo '<div> '.$user->login.' ' . $user->id . ' ' . $user->password . '</div>';
@@ -65,12 +65,12 @@ include_once('./lib/config.php');
 //        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
 //}
 
-$individu = new Individu();
-    $individu->civilite = 'Monsieur';
-    $individu->nom = 'Opif';
-    $individu->prenom = 'prenom';
-    
-    $individu->save();
-    
-    echo $individu->dateNaissance;
+//$individu = new Individu();
+//    $individu->civilite = 'Monsieur';
+//    $individu->nom = 'Opif';
+//    $individu->prenom = 'prenom';
+//    
+//    $individu->save();
+//    
+//    echo $individu->dateNaissance;
 ?>

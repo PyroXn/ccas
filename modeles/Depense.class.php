@@ -11,7 +11,7 @@ class Depense extends Doctrine_Record {
         $this->hasColumn('impotLocaux', 'float'); 
         $this->hasColumn('pensionAlim', 'float');
         $this->hasColumn('mutuelle', 'float');
-        $this->hasColumn('eletricite', 'float');
+        $this->hasColumn('electricite', 'float');
         $this->hasColumn('gaz', 'float');
         $this->hasColumn('eau', 'float');
         $this->hasColumn('chauffage', 'float');
@@ -22,7 +22,7 @@ class Depense extends Doctrine_Record {
         $this->hasColumn('credit', 'float');
         $this->hasColumn('autreDepense', 'float');
         $this->hasColumn('loyer', 'float');
-        $this->hasColumn('idIndidivu', 'integer', 5);
+        $this->hasColumn('idIndividu', 'integer', 5);
         $this->hasColumn('dateCreation', 'integer', 20);
     }
     public function setUp() {
