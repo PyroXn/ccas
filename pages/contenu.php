@@ -236,6 +236,14 @@ function budget() {
                                     <span class="autre_colonne">Détail : </span>
                                </li>
                             </ul>
+                            <h3>Dépenses habitation</h3>
+                            <ul id="membre_foyer_list">
+                                <li class="membre_foyer">
+                                    <span class="first_colonne">Loyer : '.$depense->loyer.'</span>
+                                    <span class="autre_colonne">AL ou APL : '.$revenu->aideLogement.'</span>
+                                    <span class="autre_colonne">Résiduel : '.($depense->loyer - $revenu->aideLogement).'</span>
+                                </li>
+                            </ul>
                             <h3>Dettes</h3>
                                 <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
