@@ -53,7 +53,6 @@ function createUser($login,$password,$nomcomplet) {
     $user->login = $login;
     $user->password = md5($password);
     $user->nomcomplet = $nomcomplet;
-    $user->actif = 0;
     $user->save();
     
 }
