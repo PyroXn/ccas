@@ -1,5 +1,22 @@
 <?php
 
+function updateMembreFoyer() {
+    include_once('./lib/config.php');
+    include_once('./pages/contenu.php');
+    $individu = Doctrine_Core::getTable('individu')->findOneByIdFoyerAndChefDeFamille(1, 1);
+    $individu->chefDeFamille = 0;
+    $individu->save();
+    
+    $individuNewChefFamille = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
+    $individuNewChefFamille->chefDeFamille = 1;
+    $individuNewChefFamille->save();
+    
+    echo foyerContenu($_POST['idFoyer']);
+}
+
+
+
+
 function generalite() {
     include_once('./lib/config.php');
     $liens = Doctrine_Core::getTable('lienfamille')->findAll();

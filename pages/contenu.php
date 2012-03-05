@@ -88,7 +88,7 @@ function generateLigneMembreFoyer($individu) {
         <li class="membre_foyer" id_foyer='.$individu->idFoyer.' id_individu='.$individu->id.'>
             <div>
                 <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>
-                <spam class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
+                <span class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
                 <span class="chef_famille"> Chef de famille ';
                     if ($individu->chefDeFamille) {
                         $retour .= '<span class="checkbox checkbox_active"></span>';
