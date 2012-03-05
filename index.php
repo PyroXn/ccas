@@ -44,7 +44,10 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         editUser();
         break;
-    
+    case 'individu':
+        include_once('./pages/individu.php');
+        updateMembreFoyer();
+        break;
     default:
         home();
         break;

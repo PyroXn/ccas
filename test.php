@@ -73,4 +73,11 @@ echo md5($mdp);
 //    $individu->save();
 //    
 //    echo $individu->dateNaissance;
+
+
+$individu = Doctrine_Core::getTable('individu')->findOneByIdFoyerAndChefDeFamille(1, 0);
+$individu->chefDeFamille = true;
+$individu->save();
+echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
+
 ?>

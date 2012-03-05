@@ -100,7 +100,6 @@ $(function() {
                     switch(table){
                         //unique pour la creation de foyer
                         case 'creation_foyer':
-                            console.log('YOP : ' + data);
                             $("#list_individu").html(data.listeIndividu);
                             $("#page_header_navigation").html(data.menu);
                             $('#contenu').html(data.contenu);
@@ -127,6 +126,25 @@ $(function() {
                 //                    }     
                 }
             });
+        } else if (value == 'updateMembreFoyer') {
+            $membreFoyer = $('.checkbox_active').parent().parent().parent();
+            console.log($membreFoyer);
+            $idFoyer = $membreFoyer.attr('id_foyer');
+            $idIndividu = $membreFoyer.attr('id_individu');
+            datastring = 'idFoyer=' + $idFoyer;
+            datastring += '&idIndividu=' + $idIndividu;
+            console.log('datastring' + datastring);
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=individu',
+                //Succès de la requête
+                success: function(contenu) {
+                    console.log(contenu);
+                    $('#contenu').html(contenu);
+                }
+            });
+            
         }
     });
     
