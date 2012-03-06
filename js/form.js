@@ -32,10 +32,10 @@ $(function() {
         if(!$(this).hasClass('checkbox_active')) {
             $('.checkbox_active').toggleClass('checkbox_active');
             $(this).toggleClass('checkbox_active');
-            $('#updateIndividu').css({
+            $('.update').css({
                 "display":"block"
             });
-            $('#updateIndividu').css({
+            $('.update').css({
                 "margin-right":"0"
             });
         }
@@ -165,4 +165,12 @@ $(function() {
             left:x.left
         });
     }
+    
+    $('.edit').live("click", function() {
+        $(this).parent().next().children().find('input').removeAttr("disabled");
+        $('.update').css({
+                 "margin-right":"0"
+            });
+            $('.update').slideToggle();
+    });
 });

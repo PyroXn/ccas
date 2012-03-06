@@ -238,6 +238,7 @@
     background: white url('./img/check-sprite.gif') 2px center no-repeat;
 }
 
+
 .delete {
     background: transparent url('./img/delete.png') no-repeat;
     display: inline-block;
@@ -249,7 +250,8 @@
 
 
 
-#updateIndividu {
+
+.update {
     display: none;
     float: right;
 }

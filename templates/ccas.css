@@ -402,10 +402,26 @@ legend {
 }
 
 /*** BUDGET ***/
-.first_colonne {
-    width: 20%;
+.colonne {
+    display: inline-block;
+    width: 24%;
 }
 
-.autre_colonne {
-    margin-left: 10%;
+.attribut {
+    display: inline-block;
+    width: 40%;
+    font-weight: bold;
+    text-align: right;
+}
+
+.timemaj {
+    float: right;
+}
+
+.edit {
+    background: url('./img/edit.png') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
 }
