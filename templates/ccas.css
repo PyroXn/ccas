@@ -423,4 +423,5 @@ legend {
     height: 16px;
     display: inline-block;
     cursor: pointer;
+    vertical-align: middle;
 }

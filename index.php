@@ -48,6 +48,10 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateMembreFoyer();
         break;
+    case 'updateressource':
+        include_once('./pages/individu.php');
+        updateRessource();
+        break;
     default:
         home();
         break;

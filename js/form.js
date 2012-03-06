@@ -145,6 +145,26 @@ $(function() {
                 }
             });
             
+        } else if(value == 'updateRessource') {
+            var loc = $(this);
+            var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
+            datastring = 'idIndividu='+idIndividu+'&salaire='+$('#salaire').val();
+            datastring += '&chomage='+$('#chomage').val()+'&revenuAlloc='+$('#revenuAlloc').val();
+            datastring += '&ass='+$('#ass').val()+'&aah='+$('#aah').val();
+            datastring += '&rsaSocle='+$('#rsaSocle').val()+'&rsaActivite='+$('#rsaActivite').val();
+            datastring += '&retraitComp='+$('#retraitComp').val()+'&pensionAlim='+$('#pensionAlim').val();
+            datastring += '&pensionRetraite='+$('#pensionRetraite').val()+'&autreRevenu='+$('#autreRevenu').val();
+            datastring += '&natureAutre='+$('#natureRevenu').val();
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updateressource',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+        }
+    });
         }
     });
     

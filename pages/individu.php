@@ -15,7 +15,24 @@ function updateMembreFoyer() {
 }
 
 
-
+function updateRessource() {
+    include_once('./lib/config.php');
+    $individu = Doctrine_Core::getTable('revenu')->getLastFicheRessource($_POST['idIndividu']);
+    $individu->salaire = $_POST['salaire'];
+    $individu->chomage = $_POST['chomage'];
+    $individu->revenuAlloc = $_POST['revenuAlloc'];
+    $individu->ass = $_POST['ass'];
+    $individu->aah = $_POST['aah'];
+    $individu->rsaSocle = $_POST['rsaSocle'];
+    $individu->rsaActivite = $_POST['rsaActivite'];
+    $individu->retraitComp = $_POST['retraitComp'];
+    $individu->pensionAlim = $_POST['pensionAlim'];
+    $individu->pensionRetraite = $_POST['pensionRetraite'];
+    $individu->autreRevenu = $_POST['autreRevenu'];
+    $individu->natureAutre = $_POST['natureAutre'];
+    $individu->dateCreation = time();
+    $individu->save();
+}
 
 function generalite() {
     include_once('./lib/config.php');
