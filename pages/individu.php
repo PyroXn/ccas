@@ -1,6 +1,6 @@
 <?php
 
-function updateMembreFoyer() {
+function updateChefDeFamille() {
     include_once('./lib/config.php');
     include_once('./pages/contenu.php');
     $individu = Doctrine_Core::getTable('individu')->findOneByIdFoyerAndChefDeFamille(1, 1);
@@ -14,6 +14,17 @@ function updateMembreFoyer() {
     echo foyerContenu($_POST['idFoyer']);
 }
 
+function deleteIndividu() {
+    include_once('./lib/config.php');
+    include_once('./pages/contenu.php');
+    include_once('./index.php');
+    $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
+    $individu->delete();
+    $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividuCourant']);
+    $contenu = foyerContenu($_POST['idFoyer']);
+    $retour = array('listeIndividu' => $listeIndividu, 'contenu' => $contenu);
+    echo json_encode($retour);
+}
 
 function updateRessource() {
     include_once('./lib/config.php');

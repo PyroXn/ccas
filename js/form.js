@@ -11,7 +11,6 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
     });
     
-    
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
         var attr = '.'+$(this).attr('role');
@@ -137,7 +136,7 @@ $(function() {
             $.ajax({
                 type: 'post',
                 data: datastring,
-                url: './index.php?p=individu',
+                url: './index.php?p=updateChefDeFamille',
                 //Succès de la requête
                 success: function(contenu) {
                     console.log(contenu);
@@ -188,8 +187,28 @@ $(function() {
     $('.edit').live("click", function() {
         $(this).parent().next().children().find('input').removeAttr("disabled");
         $('.update').css({
-                 "margin-right":"0"
-            });
-            $('.update').slideToggle();
+            "margin-right":"0"
+        });
+        $('.update').slideToggle();
+    });
+    
+    $('.delete').live("click", function() {
+        $idFoyer = $(this).parent().parent().attr('id_foyer');
+        $idIndividu = $(this).parent().parent().attr('id_individu');
+        datastring = 'idFoyer=' + $idFoyer;
+        datastring += '&idIndividu=' + $idIndividu;
+        datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
+        console.log(datastring);
+        $.ajax({
+            type: 'post',
+            dataType:'json',
+            data: datastring,
+            url: './index.php?p=deleteIndividu',
+            //Succès de la requête
+            success: function(data) {
+                $("#list_individu").html(data.listeIndividu);
+                $('#contenu').html(data.contenu);
+            }
+        });
     });
 });
