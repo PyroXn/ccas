@@ -50,6 +50,8 @@ $(function() {
     $('.bouton').live("click", function() {
         var value = $(this).attr('value');
         var formActuel = $(this).parent().parent().parent();
+        var loc = $(this);
+        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
         if(value=='cancel') {
             $('.en_execution').toggle();
             $('.en_execution').toggleClass('en_execution');
@@ -145,8 +147,6 @@ $(function() {
             });
             
         } else if(value == 'updateRessource') {
-            var loc = $(this);
-            var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
             datastring = 'idIndividu='+idIndividu+'&salaire='+$('#salaire').val();
             datastring += '&chomage='+$('#chomage').val()+'&revenuAlloc='+$('#revenuAlloc').val();
             datastring += '&ass='+$('#ass').val()+'&aah='+$('#aah').val();
@@ -162,10 +162,29 @@ $(function() {
                 //Succès de la requête
                 success: function(data) {
                     loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        } else if(value == 'updateDepense') {
+            datastring = 'idIndividu='+idIndividu+'&impotRevenu='+$('#impotRevenu').val();
+            datastring += '&impotLocaux='+$('#impotLocaux').val()+'&pensionAlim='+$('#pensionAlim').val();
+            datastring += '&mutuelle='+$('#mutuelle').val()+'&electricite='+$('#electricite').val();
+            datastring += '&gaz='+$('#gaz').val()+'&eau='+$('#eau').val();
+            datastring += '&chauffage='+$('#chauffage').val()+'&telephonie='+$('#telephonie').val();
+            datastring += '&internet='+$('#internet').val()+'&television='+$('#television').val();
+            datastring += '&autreDepense='+$('#autreDepense').val()+'&natureDepense='+$('#natureDepense').val();
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatedepense',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
         }
     });
-        }
-    });
+    
     
     
     function effacer() {

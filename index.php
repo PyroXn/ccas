@@ -56,6 +56,10 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateRessource();
         break;
+    case 'updatedepense':
+        include_once('./pages/individu.php');
+        updateDepense();
+        break;
     default:
         home();
         break;

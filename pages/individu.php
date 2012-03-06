@@ -45,6 +45,26 @@ function updateRessource() {
     $individu->save();
 }
 
+function updateDepense() {
+    include_once('./lib/config.php');
+    $individu = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
+    $individu->impotRevenu = $_POST['impotRevenu'];
+    $individu->impotLocaux = $_POST['impotLocaux'];
+    $individu->pensionAlim = $_POST['pensionAlim'];
+    $individu->mutuelle = $_POST['mutuelle'];
+    $individu->electricite = $_POST['electricite'];
+    $individu->gaz = $_POST['gaz'];
+    $individu->eau = $_POST['eau'];
+    $individu->chauffage = $_POST['chauffage'];
+    $individu->telephonie = $_POST['telephonie'];
+    $individu->internet = $_POST['internet'];
+    $individu->television = $_POST['television'];
+    $individu->autreDepense = $_POST['autreDepense'];
+    $individu->natureDepense = $_POST['natureDepense'];
+    $individu->dateCreation = time();
+    $individu->save();
+}
+
 function generalite() {
     include_once('./lib/config.php');
     $liens = Doctrine_Core::getTable('lienfamille')->findAll();

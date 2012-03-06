@@ -21,6 +21,7 @@ class Depense extends Doctrine_Record {
         $this->hasColumn('assurance', 'float');
         $this->hasColumn('credit', 'float');
         $this->hasColumn('autreDepense', 'float');
+        $this->hasColumn('natureDepense', 'string', 150);
         $this->hasColumn('loyer', 'float');
         $this->hasColumn('idIndividu', 'integer', 5);
         $this->hasColumn('dateCreation', 'integer', 20);
