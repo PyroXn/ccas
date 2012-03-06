@@ -408,5 +408,19 @@ legend {
 
 .attribut {
     display: inline-block;
-    width: 35%;
+    width: 40%;
+    font-weight: bold;
+    text-align: right;
+}
+
+.timemaj {
+    float: right;
+}
+
+.edit {
+    background: url('./img/edit.png') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
 }

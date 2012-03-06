@@ -59,7 +59,7 @@ function foyerContenu($idFoyer) {
     $contenu .= '
         </ul>
         <div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>
-        <div id="updateIndividu" class="bouton modif" value="updateMembreFoyer">Enregistrer</div>
+        <div class="bouton modif update" value="updateMembreFoyer">Enregistrer</div>
          <div class="formulaire" action="creation_individu">
             <h2>Individu</h2>
             <div class="colonne_droite">
@@ -191,56 +191,56 @@ function budget() {
     $dette = Doctrine_Core::getTable('dette')->findOneByIdIndividu($_POST['idIndividu']);
     $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($_POST['idIndividu']);
     $contenu = '<h2>Budget</h2>';
-    $contenu .= '<h3>Ressources de '.$user->civilite.' '.$user->nom.' '.$user->prenom.'</h3>';
+    $contenu .= '<div><h3>Ressources  <span class="edit"></span> <span class="timemaj">'.date('d/m/Y', $revenu->dateCreation).'</span></h3>';
     $contenu .= '<ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                     <div class="colonne">
                                         <span class="attribut">Salaire : </span>
-                                        <span>'.$revenu->salaire.'</span>
+                                        <span><input class="input_dyn" type="text" name="salaire" value="'.$revenu->salaire.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">All. Chômage : </span>
-                                        <span>'.$revenu->chomage.'</span>
+                                        <span><input class="input_dyn" type="text" name="chomage" value="'.$revenu->chomage.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">All. familiales : </span>
-                                        <span>'.$revenu->revenuAlloc.'</span>
+                                        <span><input type="text" name="revenuAlloc" value="'.$revenu->revenuAlloc.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">ASS : </span>
-                                        <span>'.$revenu->ass.'</span>
+                                        <span><input type="text" name="ass" value="'.$revenu->ass.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="membre_foyer">
                                     <div class="colonne">
                                         <span class="attribut">AAH : </span>
-                                        <span>'.$revenu->aah.'</span>
+                                        <span><input type="text" name="aah" value="'.$revenu->aah.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">RSA Socle : </span>
-                                        <span>'.$revenu->rsaSocle.'</span>
+                                        <span><input type="text" name="rsaSocle" value="'.$revenu->rsaSocle.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">RSA Activité : </span>
-                                        <span>'.$revenu->rsaActivite.'</span>
+                                        <span><input type="text" name="rsaActivite" value="'.$revenu->rsaActivite.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Retraite compl  : </span>
-                                        <span>'.$revenu->retraitComp.'</span>
+                                        <span><input type="text" name="retraitComp" value="'.$revenu->retraitComp.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="membre_foyer">
                                     <div class="colonne">
                                         <span class="attribut">P. alimentaire : </span>
-                                        <span>'.$revenu->pensionAlim.'</span>
+                                        <span><input type="text" name="pensionAlim" value="'.$revenu->pensionAlim.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">P. de retraite : </span>
-                                        <span>'.$revenu->pensionRetraite.'</span>
+                                        <span><input type="text" name="pensionRetraite" value="'.$revenu->pensionRetraite.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Autres revenus  : </span>
-                                        <span>'.$revenu->autreRevenu.'</span>
+                                        <span><input type="text" name="autreRevenu" value="'.$revenu->autreRevenu.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Nature : </span>
@@ -248,69 +248,75 @@ function budget() {
                                     </div>
                                </li>
                             </ul>
-                            <h3>Dépenses</h3>
+                            
+                            <div class="bouton modif update" value="updateRessource">Enregistrer</div>
+                            </div>
+                            <div>
+                            <h3>Dépenses <span class="timemaj">'.date('d/m/Y', $depense->dateCreation).'</span></h3>
                             <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">
                                     <span class="attribut">Impôts revenu : </span>
-                                    <span>'.$depense->impotRevenu.'</span>
+                                    <span><input type="text" name="impotRevenu" value="'.$depense->impotRevenu.'" disabled/></span>
                                  </div>
                                     <div class="colonne">
                                         <span class="attribut">Impôts locaux : </span>
-                                        <span>'.$depense->impotLocaux.'</span>
+                                        <span><input type="text" name="impotLocaux" value="'.$depense->impotLocaux.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                     <span class="attribut">P. alimentaire :</span>
-                                    <span>'.$depense->pensionAlim.'</span>
+                                    <span><input type="text" name="pensionAlim" value="'.$depense->pensionAlim.'" disabled/></span>
                                      </div>
                                      <div class="colonne">
                                     <span class="attribut">Mutuelle : </span>
-                                    <span>'.$depense->mutuelle.'</span>
+                                    <span><input type="text" name="mutuelle" value="'.$depense->mutuelle.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Electricité : </span>
-                                    <span>'.$depense->electricite.'</span>
+                                    <span><input type="text" name="electricite" value="'.$depense->electricite.'" disabled/></span>
                                  </div>
                                  <div class="colonne">
                                     <span class="attribut">Gaz : </span>
-                                    <span>'.$depense->gaz.'</span>
+                                    <span><input type="text" name="gaz" value="'.$depense->gaz.'" disabled/></span>
                                  </div>
                                  <div class="colonne">
                                     <span class="attribut">Eau : </span>
-                                    <span>'.$depense->eau.'</span>
+                                    <span><input type="text" name="eau" value="'.$depense->eau.'" disabled/></span>
                                  </div>
                                  <div class="colonne">
                                     <span class="attribut">Chauffage :</span>
-                                    <span>'.$depense->chauffage.'</span>
+                                    <span><input type="text" name="chauffage" value="'.$depense->chauffage.'" disabled/></span>
                                 </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Téléphonie : </span>
-                                    <span>'.$depense->telephonie.'</span>
+                                    <span><input type="text" name="telephonie" value="'.$depense->telephonie.'" disabled/></span>
                                </div>
                                <div class="colonne">
                                     <span class="attribut">Internet : </span>
-                                    <span>'.$depense->internet.'</span>
+                                    <span><input type="text" name="internet" value="'.$depense->internet.'" disabled/></span>
                               </div>
                               <div class="colonne">
                                     <span class="attribut">Télévision : </span>
-                                    <span>'.$depense->television.'</span>
+                                    <span><input type="text" name="television" value="'.$depense->television.'" disabled/></span>
                                </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Autres Dépenses : </span>
-                                    <span>'.$depense->autreDepense.'</span>
+                                    <span><input type="text" name="autreDepense" value="'.$depense->autreDepense.'" disabled/></span>
                                </div>
                                <div class="colonne">
                                     <span class="attribut">Détail : </span>
-                                    <span>0.00</span>
+                                    <span><input type="text" name="salaire" value="" disabled/></span>
                                </div>
                                </li>
                             </ul>
+                            </div>
+                            <div>
                             <h3>Dépenses habitation</h3>
                             <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
@@ -328,7 +334,7 @@ function budget() {
                                 </div>
                                 </li>
                             </ul>
-                            <h3>Dettes</h3>
+                            <h3>Dettes <span class="timemaj">'.date('d/m/Y', $dette->dateCreation).'</span></h3>
                                 <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">
@@ -369,6 +375,8 @@ function budget() {
                                </div>
                                </li>
                                </ul>
+                               </div>
+                               <div>
                             <h3>Crédits</h3>
                             <ul id="membre_foyer_list">';
                             foreach($credits as $credit) {
@@ -392,7 +400,7 @@ function budget() {
                                                       </li>';
                             }
 
-                               $contenu .= '</ul>';
+                               $contenu .= '</ul></div>';
     return utf8_encode($contenu);
 }
 

@@ -238,7 +238,7 @@
     background: white url('./img/check-sprite.gif') 2px center no-repeat;
 }
 
-#updateIndividu {
+.update {
     display: none;
     float: right;
 }
