@@ -401,10 +401,12 @@ legend {
 }
 
 /*** BUDGET ***/
-.first_colonne {
-    width: 20%;
+.colonne {
+    display: inline-block;
+    width: 24%;
 }
 
-.autre_colonne {
-    margin-left: 10%;
+.attribut {
+    display: inline-block;
+    width: 35%;
 }
