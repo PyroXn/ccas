@@ -355,9 +355,10 @@ input[type=submit] , input[type=reset], input[type=button] {
     background: #FCFCE2;
 }
 
-.chef_famille {
+.droite {
     float: right;
     font-size: 12px;
+    margin: 4px;
 }
 
 .date_naissance {

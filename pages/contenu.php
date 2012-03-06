@@ -73,6 +73,9 @@ function foyerContenu($idFoyer) {
                 <div class="input_text">
                     <input id="form_3" class="contour_field" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
                 </div>
+                <div class="input_text">
+                    <input id="form_4" class="contour_field date" type="text" title="Date de naissance" placeholder="Date de naissance">
+                </div>
                 <div class="sauvegarder_annuler">
                     <div class="bouton modif" value="save">Enregistrer</div>
                     <div class="bouton classique" value="cancel">Annuler</div>
@@ -89,13 +92,15 @@ function generateLigneMembreFoyer($individu) {
             <div>
                 <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>
                 <span class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
-                <span class="chef_famille"> Chef de famille ';
+                <span class="delete droite"></span>
+                <span class="droite"> Chef de famille ';
                     if ($individu->chefDeFamille) {
                         $retour .= '<span class="checkbox checkbox_active"></span>';
                     } else {
                         $retour .= '<span class="checkbox"></span>';
                     }
     $retour .= '</span>
+                
             </div>
         </li>';
     

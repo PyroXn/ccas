@@ -11,6 +11,7 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
     });
     
+    $('.date').glDatePicker();
     
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
