@@ -12,18 +12,18 @@ class Foyer extends Doctrine_Record {
 //        $this->hasColumn('nom', 'string', 100);
 //        $this->hasColumn('prenom', 'string', 100);
 
-        $this->hasColumn('numRue', 'integer', 10);
+        $this->hasColumn('numRue', 'integer', 10, array('default' => '0'));
         $this->hasColumn('idRue', 'integer', 10);
         $this->hasColumn('idSecteur', 'integer', 10);
         $this->hasColumn('idVille', 'integer', 10);
         $this->hasColumn('idBailleur', 'integer', 10);
-        $this->hasColumn('dateInscription', 'integer', 20); // timestamp
+        $this->hasColumn('dateInscription', 'integer', 20, array('default' => '0')); // timestamp
         $this->hasColumn('typeLogement', 'integer', 5);
         $this->hasColumn('typeAppartenance', 'integer', 5);
-        $this->hasColumn('logDateArrive', 'integer', 20); // timestamp
-        $this->hasColumn('logSurface', 'float');
+        $this->hasColumn('logDateArrive', 'integer', 20, array('default' => '0')); // timestamp
+        $this->hasColumn('logSurface', 'float', array('default' => '0'));
         $this->hasColumn('idInstruct', 'integer', 5);
-        $this->hasColumn('notes', 'string', 255);
+        $this->hasColumn('notes', 'string', 255, array('default' => ''));
     }
 
     public function setUp() {

@@ -7,16 +7,16 @@ class Dette extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('arriereLocatif', 'float');
-        $this->hasColumn('fraisHuissier', 'float'); 
-        $this->hasColumn('arriereElectricite', 'float');
-        $this->hasColumn('arriereGaz', 'float');
-        $this->hasColumn('autreDette', 'float');
-        $this->hasColumn('noteAutreDette', 'string', 255);
+        $this->hasColumn('arriereLocatif', 'float', array('default' => '0'));
+        $this->hasColumn('fraisHuissier', 'float', array('default' => '0')); 
+        $this->hasColumn('arriereElectricite', 'float', array('default' => '0'));
+        $this->hasColumn('arriereGaz', 'float', array('default' => '0'));
+        $this->hasColumn('autreDette', 'float', array('default' => '0'));
+        $this->hasColumn('noteAutreDette', 'string', 255, array('default' => ''));
         $this->hasColumn('idPrestaElec', 'integer', 5);
         $this->hasColumn('idPrestaGaz', 'integer', 5);
         $this->hasColumn('idIndividu', 'integer', 5);
-        $this->hasColumn('dateCreation', 'integer', 20);
+        $this->hasColumn('dateCreation', 'integer', 20, array('default' => '0'));
     }
     public function setUp() {
         $this->hasOne('individu as individu', array(
