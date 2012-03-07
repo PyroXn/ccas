@@ -6,7 +6,7 @@ class Profession extends Doctrine_Record {
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('profession', 'string', 100, array('default' => ''));
+        $this->hasColumn('profession', 'string', 100, array('default' => ' '));
     }
 }
 ?>
