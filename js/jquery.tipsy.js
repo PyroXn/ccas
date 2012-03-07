@@ -238,5 +238,5 @@
 		}
 	};
     $('.add').tipsy();
-    $('.delete').tipsy();
+    $('.archive').tipsy();
 })(jQuery);

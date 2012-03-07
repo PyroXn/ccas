@@ -256,6 +256,28 @@ $(function() {
                     $('#contenu').html(data);
                 }
             });
+        } else if($(this).parent().attr('role') == "depense") {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archivedepense',
+                //Succès de la requête
+                success: function(data) {
+                    $('#contenu').html(data);
+                }
+            });
+        } else if($(this).parent().attr('role') == "dette") {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archivedette',
+                //Succès de la requête
+                success: function(data) {
+                    $('#contenu').html(data);
+                }
+            });
         }
     });
     

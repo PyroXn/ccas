@@ -72,6 +72,14 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         archiveRessource();
         break;
+    case 'archivedepense':
+        include_once('./pages/individu.php');
+        archiveDepense();
+        break;
+    case 'archivedette':
+        include_once('./pages/individu.php');
+        archiveDette();
+        break;
     default:
         home();
         break;

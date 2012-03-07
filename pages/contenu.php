@@ -291,7 +291,7 @@ function budget() {
                             <div class="bouton modif update" value="updateRessource">Enregistrer</div>
                             </div>
                             <div>
-                            <h3 role="depense">Dépenses <span class="edit"></span> <span class="timemaj">'.date('d/m/Y', $depense->dateCreation).'</span></h3>
+                            <h3 role="depense">Dépenses <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.date('d/m/Y', $depense->dateCreation).'</span></h3>
                             <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">
@@ -379,7 +379,7 @@ function budget() {
                             </div>
                             
                             <div>
-                            <h3 role="dettes">Dettes <span class="edit"></span><span class="timemaj">'.date('d/m/Y', $dette->dateCreation).'</span></h3>
+                            <h3 role="dette">Dettes <span class="edit"></span><span class="archive" original-title="Archiver les dettes"></span><span class="timemaj">'.date('d/m/Y', $dette->dateCreation).'</span></h3>
                                 <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">

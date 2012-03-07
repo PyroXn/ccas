@@ -94,10 +94,24 @@ function updateDepenseHabitation() {
 function archiveRessource() {
     include_once('./lib/config.php');
     include_once('./pages/contenu.php');
-    $ressource = new Revenu();
-    $ressource->idIndividu = $_POST['idIndividu'];
-    $ressource->dateCreation = time();
-    $ressource->save();
+    include_once('./pages/form.php');
+    createRevenu($_POST['idIndividu']);
+    echo budget();
+}
+
+function archiveDepense() {
+    include_once('./lib/config.php');
+    include_once('./pages/contenu.php');
+    include_once('./pages/form.php');
+    createDepense($_POST['idIndividu']);
+    echo budget();
+}
+
+function archiveDette() {
+    include_once('./lib/config.php');
+    include_once('./pages/contenu.php');
+    include_once('./pages/form.php');
+    createDette($_POST['idIndividu']);
     echo budget();
 }
 
