@@ -14,11 +14,11 @@ class Depense extends Doctrine_Record {
         $this->hasColumn('electricite', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('gaz', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('eau', 'float', null, array('type' => 'float', 'default' => 0));
-        $this->hasColumn('chauffage', null, array('type' => 'float', 'default' => 0));
-        $this->hasColumn('telephonie', null, array('type' => 'float', 'default' => 0));
-        $this->hasColumn('internet', null, array('type' => 'float', 'default' => 0));
-        $this->hasColumn('television', null, array('type' => 'float', 'default' => 0));
-        $this->hasColumn('assurance', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('chauffage', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('telephonie', 'float',null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('internet', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('television', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('assurance', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('credit', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('autreDepense', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('natureDepense', 'string', 150, array('default' => ''));
