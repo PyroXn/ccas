@@ -43,6 +43,23 @@ function creationFoyer($civilite, $nom, $prenom) {
     $individu->chefDeFamille = true;
     $individu->idFoyer = $foyer->id;
     $individu->save();
+    
+    $revenu = new Revenu();
+    $revenu->idIndividu = $individu->id;
+    $revenu->dateCreation = time();
+    $revenu->save();
+    
+    
+    $depense = new Depense();
+    $depense->idIndividu = $individu->id;
+    $depense->dateCreation = time();
+    $depense->save();
+    
+    $dette = new Dette();
+    $dette->idIndividu = $individu->id;
+    $dette->dateCreation = time();
+    $dette->save();
+//    
     return array('idFoyer' => $foyer->id, 'idIndividu' => $individu->id);
 //    return creationListeByFoyer($foyer->id, $individu->id);
 }
@@ -65,6 +82,18 @@ function createIndividu($idFoyer, $civilite, $nom, $prenom) {
     $individu->prenom = $prenom;
     $individu->idFoyer = $idFoyer;
     $individu->save();
+    $ressource = new ressource();
+    $ressource->idIndividu = $individu->id;
+    $ressource->dateCreation = time();
+    $ressource->save();
+    $depense = new depense();
+    $depense->idIndividu = $individu->id;
+    $depense->dateCreation = time();
+    $depense->save();
+    $dette = new dette();
+    $dette->idIndividu = $individu->id;
+    $dette->dateCreation = time();
+    $dette->save();
     return FoyerContenu($idFoyer);
 }
 ?>
