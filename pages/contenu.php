@@ -61,7 +61,7 @@ function foyerContenu($idFoyer) {
         </ul>
         <div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>
         <div class="bouton modif update" value="updateMembreFoyer">Enregistrer</div>
-         <div class="formulaire" action="creation_individu">
+        <div class="formulaire" action="creation_individu">
             <h2>Individu</h2>
             <div class="colonne_droite">
                 <div class="select classique" role="select_civilite">
@@ -98,7 +98,25 @@ function foyerContenu($idFoyer) {
             $i++;
         }
         $contenu .= '</ul>';
+        $contenu .= generateInfoFoyer($foyer);
     return $contenu;
+}
+
+function generateInfoFoyer($foyer) {
+    $retour = '';
+    $retour .= '
+        <div><h3>Foyer</h3>
+            <ul id="membre_foyer_list">
+                <li class="membre_foyer">
+                    <div class="colonne">
+                        <span class="attribut"> test</span>
+                        <span><input class="input_dyn" type="text" id="salaire" value="'.$foyer->numRue.'" disabled/></span>
+                    </div>
+                </li>
+            </ul>
+            <div class="bouton modif update" value="updateDepense">Enregistrer</div>
+        </div>';
+    return $retour;
 }
 
 function generateLigneMembreFoyer($individu) {
