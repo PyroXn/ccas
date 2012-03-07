@@ -7,11 +7,11 @@ class Dette extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('arriereLocatif', 'float', array('default' => '0'));
-        $this->hasColumn('fraisHuissier', 'float', array('default' => '0')); 
-        $this->hasColumn('arriereElectricite', 'float', array('default' => '0'));
-        $this->hasColumn('arriereGaz', 'float', array('default' => '0'));
-        $this->hasColumn('autreDette', 'float', array('default' => '0'));
+        $this->hasColumn('arriereLocatif', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('fraisHuissier', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('arriereElectricite', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('arriereGaz', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('autreDette', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('noteAutreDette', 'string', 255, array('default' => ''));
         $this->hasColumn('idPrestaElec', 'integer', 5);
         $this->hasColumn('idPrestaGaz', 'integer', 5);

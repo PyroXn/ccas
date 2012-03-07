@@ -7,24 +7,24 @@ class Depense extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('impotRevenu', 'float', array('default' => '0'));
-        $this->hasColumn('impotLocaux', 'float', array('default' => '0')); 
-        $this->hasColumn('pensionAlim', 'float', array('default' => '0'));
-        $this->hasColumn('mutuelle', 'float', array('default' => '0'));
-        $this->hasColumn('electricite', 'float', array('default' => '0'));
-        $this->hasColumn('gaz', 'float', array('default' => '0'));
-        $this->hasColumn('eau', 'float', array('default' => '0'));
-        $this->hasColumn('chauffage', 'float', array('default' => '0'));
-        $this->hasColumn('telephonie', 'float', array('default' => '0'));
-        $this->hasColumn('internet', 'float', array('default' => '0'));
-        $this->hasColumn('television', 'float', array('default' => '0'));
-        $this->hasColumn('assurance', 'float', array('default' => '0'));
-        $this->hasColumn('credit', 'float', array('default' => '0'));
-        $this->hasColumn('autreDepense', 'float', array('default' => '0'));
+        $this->hasColumn('impotRevenu', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('impotLocaux', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('pensionAlim', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('mutuelle', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('electricite', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('gaz', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('eau', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('chauffage', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('telephonie', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('internet', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('television', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('assurance', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('credit', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('autreDepense', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('natureDepense', 'string', 150, array('default' => ''));
-        $this->hasColumn('loyer', 'float', array('default' => '0'));
+        $this->hasColumn('loyer', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('idIndividu', 'integer', 5);
-        $this->hasColumn('dateCreation', 'integer', 20, array('default' => '0'));
+        $this->hasColumn('dateCreation', 'integer', 20, null, array('type' => 'float', 'default' => 0));
     }
     public function setUp() {
         $this->hasOne('individu as individu', array(
