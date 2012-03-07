@@ -12,14 +12,14 @@ class Individu extends Doctrine_Record
         $this->hasColumn('civilite', 'string', 50);
         $this->hasColumn('nom', 'string', 50);
         $this->hasColumn('prenom', 'string', 50);
-        $this->hasColumn('nomMarital', 'string', 50,array('default' => ''));
-        $this->hasColumn('nomUsage', 'string', 50,array('default' => ''));
+        $this->hasColumn('nomMarital', 'string', 50,array('default' => ' '));
+        $this->hasColumn('nomUsage', 'string', 50,array('default' => ' '));
         $this->hasColumn('chefDeFamille', 'boolean', 1, array('default' => '0'));
         $this->hasColumn('dateNaissance', 'integer', 50,array('default' => '0'));
-        $this->hasColumn('sexe', 'string', 1,array('default' => ''));
-        $this->hasColumn('telephone', 'string', 50, array('default' => ''));
-        $this->hasColumn('portable', 'string', 50,array('default' => ''));
-        $this->hasColumn('email', 'string', 50,array('default' => ''));
+        $this->hasColumn('sexe', 'string', 1,array('default' => ' '));
+        $this->hasColumn('telephone', 'string', 50, array('default' => ' '));
+        $this->hasColumn('portable', 'string', 50,array('default' => ' '));
+        $this->hasColumn('email', 'string', 50,array('default' => ' '));
         $this->hasColumn('assure', 'boolean', 1,array('default' => '0'));
         $this->hasColumn('numSecu', 'integer', 20,array('default' => '0'));
         $this->hasColumn('clefSecu', 'integer', 10,array('default' => '0'));
@@ -35,8 +35,8 @@ class Individu extends Doctrine_Record
         $this->hasColumn('dateInscriptionPe', 'integer', 50,array('default' => '0'));
         $this->hasColumn('dateDebutDroitPe', 'integer', 50,array('default' => '0'));
         $this->hasColumn('dateFinDroitPe', 'integer', 50, array('default' => '0'));
-        $this->hasColumn('numDossierPe', 'string', 20, array('default' => ''));
-        $this->hasColumn('numAllocataireCaf', 'string', 20, array('default' => ''));
+        $this->hasColumn('numDossierPe', 'string', 20, array('default' => ' '));
+        $this->hasColumn('numAllocataireCaf', 'string', 20, array('default' => ' '));
         $this->hasColumn('idLienFamille', 'integer', 5);               //cle etrangere
         $this->hasColumn('idCaisseCaf', 'integer', 5);            //cle etrangere ==> A FAIRE
         $this->hasColumn('idNiveauEtude', 'integer', 5);          //cle etrangere
