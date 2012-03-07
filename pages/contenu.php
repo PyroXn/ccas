@@ -56,6 +56,7 @@ function foyerContenu($idFoyer) {
     foreach ($individus as $individu) {
         $contenu .= generateLigneMembreFoyer($individu);
     }
+    $lienFamilles = Doctrine_Core::getTable('lienFamille')->findAll();
     $contenu .= '
         </ul>
         <div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>
@@ -76,13 +77,27 @@ function foyerContenu($idFoyer) {
                 <div class="input_text">
                     <input id="form_4" class="contour_field date" type="text" title="Date de naissance" placeholder="Date de naissance">
                 </div>
+                <div class="select classique" role="select_lien_famille">
+                    <div id="form_5" class="option">'. $lienFamilles[0]->lien .'</div>
+                    <div class="fleche_bas"></div>
+                </div>
                 <div class="sauvegarder_annuler">
                     <div class="bouton modif" value="save">Enregistrer</div>
                     <div class="bouton classique" value="cancel">Annuler</div>
                 </div>
             </div>
-        </div>';
- 
+        </div>
+        <ul class="select_lien_famille">';
+    
+        
+        $i = 0;
+        foreach ($lienFamilles as $lienFamille) {
+            $contenu .= '<li value="'.$i.'">
+                <div>'.$lienFamille->lien.'</div>
+            </li>';
+            $i++;
+        }
+        $contenu .= '</ul>';
     return $contenu;
 }
 
@@ -92,6 +107,7 @@ function generateLigneMembreFoyer($individu) {
             <div>
                 <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>
                 <span class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
+                <span class="date_naissance">'. $individu->lienfamille->lien .'</span>
                 <span class="delete droite"></span>
                 <span class="droite"> Chef de famille ';
                     if ($individu->chefDeFamille) {
