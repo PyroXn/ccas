@@ -65,6 +65,21 @@ function updateDepense() {
     $individu->save();
 }
 
+function updateDette() {
+    include_once('./lib/config.php');
+    $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
+    $dette->arriereLocatif = $_POST['arriereLocatif'];
+    $dette->fraisHuissier = $_POST['fraisHuissier'];
+    $dette->autreDette = $_POST['autreDette'];
+    $dette->natureDette = $_POST['natureDette'];
+    $dette->arriereElectricite = $_POST['arriereElec'];
+    $dette->prestaElec = $_POST['prestaElec'];
+    $dette->arriereGaz = $_POST['arriereGaz'];
+    $dette->prestaGaz = $_POST['prestaGaz'];
+    $dette->dateCreation = time();
+    $dette->save();
+}
+
 function updateDepenseHabitation() {
     include_once('./lib/config.php');
     $ressource = Doctrine_Core::getTable('revenu')->getLastFicheRessource($_POST['idIndividu']);
@@ -74,6 +89,16 @@ function updateDepenseHabitation() {
     $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
     $depense->loyer = $_POST['loyer'];
     $depense->save();
+}
+
+function archiveRessource() {
+    include_once('./lib/config.php');
+    include_once('./pages/contenu.php');
+    $ressource = new Revenu();
+    $ressource->idIndividu = $_POST['idIndividu'];
+    $ressource->dateCreation = time();
+    $ressource->save();
+//    echo budget();
 }
 
 function generalite() {

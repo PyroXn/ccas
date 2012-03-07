@@ -212,7 +212,7 @@ function budget() {
     $dette = Doctrine_Core::getTable('dette')->findOneByIdIndividu($_POST['idIndividu']);
     $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($_POST['idIndividu']);
     $contenu = '<h2>Budget</h2>';
-    $contenu .= '<div><h3>Ressources  <span class="edit"></span> <span class="timemaj">'.date('d/m/Y', $revenu->dateCreation).'</span></h3>';
+    $contenu .= '<div><h3 role="ressource"><span>Ressources</span>  <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.date('d/m/Y', $revenu->dateCreation).'</span></h3>';
     $contenu .= '<ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                     <div class="colonne">
@@ -273,7 +273,7 @@ function budget() {
                             <div class="bouton modif update" value="updateRessource">Enregistrer</div>
                             </div>
                             <div>
-                            <h3>Dépenses <span class="edit"></span> <span class="timemaj">'.date('d/m/Y', $depense->dateCreation).'</span></h3>
+                            <h3 role="depense">Dépenses <span class="edit"></span> <span class="timemaj">'.date('d/m/Y', $depense->dateCreation).'</span></h3>
                             <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">
@@ -361,51 +361,48 @@ function budget() {
                             </div>
                             
                             <div>
-                            <h3>Dettes <span class="timemaj">'.date('d/m/Y', $dette->dateCreation).'</span></h3>
+                            <h3 role="dettes">Dettes <span class="edit"></span><span class="timemaj">'.date('d/m/Y', $dette->dateCreation).'</span></h3>
                                 <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">
                                     <span class="attribut">Arriéré locatif : </span>
-                                    <span>'.$dette->arriereLocatif.'</span>
+                                    <span><input type="text" id="arriereLocatif" value="'.$dette->arriereLocatif.'" disabled/></span>
                                 </div>
                                 <div class="colonne">
                                     <span class="attribut">Frais huissier : </span>
-                                    <span>'.$dette->fraisHuissier.'</span>
+                                    <span><input type="text" id="fraisHuissier" value="'.$dette->fraisHuissier.'" disabled/></span>
                                 </div>
                                 <div class="colonne">
                                     <span class="attribut">Autres dettes : </span>
-                                    <span>'.$dette->autreDette.'</span>
+                                    <span><input type="text" id="autreDette" value="'.$dette->autreDette.'" disabled/></span>
                                 </div>
                                 <div class="colonne">
                                     <span class="attribut">Nature  :</span>
-                                    <span></span>
+                                    <span><input type="text" id="natureDette" value="'.$dette->natureDette.'" disabled/></span>
                                </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Arriéré électricité : </span>
-                                    <span>'.$dette->arriereElectricite.'</span>
+                                    <span><input type="text" id="arriereElec" value="'.$dette->arriereElectricite.'" disabled/></span>
                                </div>
                                <div class="colonne">
                                     <span class="attribut">Prestataire : </span>
-                                    <span>
-                                        <div class="select classique" role="select_presta_elec">
-                                         <div id="form_1" class="option">Madame</div>
-                                        <div class="fleche_bas"> </div>
-                                </div>'.$dette->idPrestaElec.'</span>
+                                    <span><input type="text" id="prestaElec" value="'.$dette->prestaElec.'" disabled/></span>
                                </div>
                                </li>
                               <li class="membre_foyer">
                               <div class="colonne">
                                     <span class="attribut">Arriéré gaz : </span>
-                                    <span>'.$dette->arriereElectricite.'</span>
+                                    <span><input type="text" id="arriereGaz" value="'.$dette->arriereGaz.'" disabled/></span>
                               </div>
                               <div class="colonne">
                                     <span class="attribut">Prestataire : </span>
-                                    <span>'.$dette->idPrestaElec.'</span>
+                                    <span><input type="text" id="prestaGaz" value="'.$dette->prestaGaz.'" disabled/></span>
                                </div>
                                </li>
                                </ul>
+                               <div class="bouton modif update" value="updateDette">Enregistrer</div>
                                </div>
                                
                                <div>

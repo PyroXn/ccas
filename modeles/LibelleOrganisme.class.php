@@ -7,7 +7,7 @@ class LibelleOrganisme extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('libelle', 'string',50);
+        $this->hasColumn('libelle', 'string',50,array('default' => ''));
     }
 
 }

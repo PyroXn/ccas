@@ -64,6 +64,14 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateDepenseHabitation();
         break;
+    case 'updatedette':
+        include_once('./pages/individu.php');
+        updateDette();
+        break;
+    case 'archiveressource':
+        include_once('./pages/individu.php');
+        archiveRessource();
+        break;
     default:
         home();
         break;

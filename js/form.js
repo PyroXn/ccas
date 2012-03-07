@@ -193,7 +193,24 @@ $(function() {
                 url: './index.php?p=updatedepensehabitation',
                 //Succès de la requête
                 success: function(data) {
-                    console.log(loc.parent());
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateDette') {
+            datastring = 'idIndividu='+idIndividu+'&arriereLocatif='+$('#arriereLocatif').val();
+            datastring += '&fraisHuissier='+$('#fraisHuissier').val()+'&autreDette='+$('#autreDette').val();
+            datastring += '&natureDette='+$('#natureDette').val()+'&arriereElec='+$('#arriereElec').val();
+            datastring += '&prestaElec='+$('#prestaElec').val()+'&arriereGaz='+$('#arriereGaz').val();
+            datastring += '&prestaGaz='+$('#prestaGaz').val();
+            console.log('update Dette :'+datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatedette',
+                //Succès de la requête
+                success: function(data) {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -224,6 +241,22 @@ $(function() {
             "margin-right":"0"
         });
         $('.update').slideToggle();
+    });
+    
+    $('.archive').live("click", function() {
+        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
+        if($(this).parent().attr('role') == "ressource") {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archiveressource',
+                //Succès de la requête
+                success: function(data) {
+                    $('#contenu').html(data);
+                }
+            });
+        }
     });
     
     $('.delete').live("click", function() {

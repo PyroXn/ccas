@@ -7,7 +7,7 @@ class LienFamille extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('lien', 'string', 100);
+        $this->hasColumn('lien', 'string', 100, array('default' => ''));
     }
 
 }

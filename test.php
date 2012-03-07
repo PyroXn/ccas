@@ -79,6 +79,6 @@ include_once('./lib/config.php');
 //$individu->chefDeFamille = true;
 //$individu->save();
 //echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
-$individu = Doctrine_Core::getTable('depense')->getLastFicheDepense(1);
-echo '<div>'.$individu->electricite . ', prenom: <strong>' . $individu->gaz . '</strong></div>';
+$individu = Doctrine_Core::getTable('dette')->getLastFicheDette(1);
+echo '<div>'.$individu->arriereLocatif . ', prenom: <strong>' . $individu->fraisHuissier . '</strong></div>';
 ?>
