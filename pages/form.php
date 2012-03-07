@@ -44,24 +44,35 @@ function creationFoyer($civilite, $nom, $prenom) {
     $individu->idFoyer = $foyer->id;
     $individu->save();
     
-    $revenu = new Revenu();
-    $revenu->idIndividu = $individu->id;
-    $revenu->dateCreation = time();
-    $revenu->save();
-    
-    
-    $depense = new Depense();
-    $depense->idIndividu = $individu->id;
-    $depense->dateCreation = time();
-    $depense->save();
-    
-    $dette = new Dette();
-    $dette->idIndividu = $individu->id;
-    $dette->dateCreation = time();
-    $dette->save();
-//    
+   
+    createRevenu($individu->id);
+    createDepense($individu->id);
+    createDette($individu->id);
+ 
     return array('idFoyer' => $foyer->id, 'idIndividu' => $individu->id);
 //    return creationListeByFoyer($foyer->id, $individu->id);
+}
+
+function createRevenu($idIndividu) {
+    $revenu = new Revenu();
+    $revenu->idIndividu = $idIndividu;
+    $revenu->dateCreation = time();
+    $revenu->save();
+} 
+
+function createDepense($idIndividu) {
+    $depense = new Depense();
+    $depense->idIndividu = $idIndividu;
+    $depense->dateCreation = time();
+    $depense->save();
+}
+
+function createDette($idIndividu) {
+     
+    $dette = new Dette();
+    $dette->idIndividu = $idIndividu;
+    $dette->dateCreation = time();
+    $dette->save();
 }
 
 function createUser($login,$password,$nomcomplet) {
@@ -82,18 +93,9 @@ function createIndividu($idFoyer, $civilite, $nom, $prenom) {
     $individu->prenom = $prenom;
     $individu->idFoyer = $idFoyer;
     $individu->save();
-    $ressource = new ressource();
-    $ressource->idIndividu = $individu->id;
-    $ressource->dateCreation = time();
-    $ressource->save();
-    $depense = new depense();
-    $depense->idIndividu = $individu->id;
-    $depense->dateCreation = time();
-    $depense->save();
-    $dette = new dette();
-    $dette->idIndividu = $individu->id;
-    $dette->dateCreation = time();
-    $dette->save();
+    createRevenu($individu->id);
+    createDepense($individu->id);
+    createDette($individu->id);
     return FoyerContenu($idFoyer);
 }
 ?>
