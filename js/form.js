@@ -183,6 +183,21 @@ $(function() {
                 }
             });
         }
+        else if(value == 'updateDepenseHabitation') {
+            datastring = 'idIndividu='+idIndividu+'&loyer='+$('#loyer').val();
+            datastring += '&apl='+$('#apl').val();
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatedepensehabitation',
+                //Succès de la requête
+                success: function(data) {
+                    console.log(loc.parent());
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
     });
     
     

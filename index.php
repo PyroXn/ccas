@@ -60,6 +60,10 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateDepense();
         break;
+    case 'updatedepensehabitation':
+        include_once('./pages/individu.php');
+        updateDepenseHabitation();
+        break;
     default:
         home();
         break;

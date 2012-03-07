@@ -65,6 +65,17 @@ function updateDepense() {
     $individu->save();
 }
 
+function updateDepenseHabitation() {
+    include_once('./lib/config.php');
+    $ressource = Doctrine_Core::getTable('revenu')->getLastFicheRessource($_POST['idIndividu']);
+    $ressource->aideLogement = $_POST['apl'];
+    $ressource->save();
+    
+    $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
+    $depense->loyer = $_POST['loyer'];
+    $depense->save();
+}
+
 function generalite() {
     include_once('./lib/config.php');
     $liens = Doctrine_Core::getTable('lienfamille')->findAll();

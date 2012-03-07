@@ -320,27 +320,31 @@ function budget() {
                                </div>
                                </li>
                             </ul>
-                            
                             <div class="bouton modif update" value="updateDepense">Enregistrer</div>
                             </div>
+                            
                             <div>
-                            <h3>Dépenses habitation</h3>
-                            <ul id="membre_foyer_list">
-                                <li class="membre_foyer">
-                                <div class="colonne">
-                                    <span class="attribut">Loyer : </span>
-                                    <span>'.$depense->loyer.'</span>
-                                </div>
-                                <div class="colonne">
-                                    <span class="attribut">AL ou APL : </span>
-                                    <span>'.$revenu->aideLogement.'</span>
-                               </div>
-                               <div class="colonne">
-                                    <span class="attribut">Résiduel : </span>
-                                    <span>'.($depense->loyer - $revenu->aideLogement).'</span>
-                                </div>
-                                </li>
-                            </ul>
+                                <h3>Dépenses habitation <span class="edit"></span></h3>
+                                <ul id="membre_foyer_list">
+                                    <li class="membre_foyer">
+                                    <div class="colonne">
+                                        <span class="attribut">Loyer : </span>
+                                        <span><input type="text" id="loyer" value="'.$depense->loyer.'" disabled/></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">AL ou APL : </span>
+                                        <span><input type="text" id="apl" value="'.$revenu->aideLogement.'" disabled/></span>
+                                   </div>
+                                   <div class="colonne">
+                                        <span class="attribut">Résiduel : </span>
+                                        <span>'.($depense->loyer - $revenu->aideLogement).'</span>
+                                    </div>
+                                    </li>
+                                </ul>
+                                <div class="bouton modif update" value="updateDepenseHabitation">Enregistrer</div>
+                            </div>
+                            
+                            <div>
                             <h3>Dettes <span class="timemaj">'.date('d/m/Y', $dette->dateCreation).'</span></h3>
                                 <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
@@ -368,7 +372,11 @@ function budget() {
                                </div>
                                <div class="colonne">
                                     <span class="attribut">Prestataire : </span>
-                                    <span>'.$dette->idPrestaElec.'</span>
+                                    <span>
+                                        <div class="select classique" role="select_presta_elec">
+                                         <div id="form_1" class="option">Madame</div>
+                                        <div class="fleche_bas"> </div>
+                                </div>'.$dette->idPrestaElec.'</span>
                                </div>
                                </li>
                               <li class="membre_foyer">
@@ -383,6 +391,7 @@ function budget() {
                                </li>
                                </ul>
                                </div>
+                               
                                <div>
                             <h3>Crédits</h3>
                             <ul id="membre_foyer_list">';
