@@ -98,7 +98,7 @@ function archiveRessource() {
     $ressource->idIndividu = $_POST['idIndividu'];
     $ressource->dateCreation = time();
     $ressource->save();
-//    echo budget();
+    echo budget();
 }
 
 function generalite() {
