@@ -21,9 +21,9 @@ class Foyer extends Doctrine_Record {
         $this->hasColumn('typeLogement', 'integer', 5);
         $this->hasColumn('typeAppartenance', 'integer', 5);
         $this->hasColumn('logDateArrive', 'integer', 20, array('default' => '0')); // timestamp
-        $this->hasColumn('logSurface', 'float', array('default' => '0'));
+        $this->hasColumn('logSurface', 'float', array('default' => 0));
         $this->hasColumn('idInstruct', 'integer', 5);
-        $this->hasColumn('notes', 'string', 255, array('default' => ''));
+        $this->hasColumn('notes', 'string', 255, array('default' => ' '));
     }
 
     public function setUp() {

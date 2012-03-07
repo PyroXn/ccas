@@ -7,7 +7,7 @@ class Bailleur extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('nomBailleur', 'string', 100, array('default' => ''));
+        $this->hasColumn('nomBailleur', 'string', 100, array('default' => ' '));
         $this->hasColumn('adresse', 'string', 255, array('default' => ''));
         $this->hasColumn('idVille', 'integer', 10);
         $this->hasColumn('telephone', 'string', 30, array('default' => ''));
