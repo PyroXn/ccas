@@ -225,9 +225,9 @@ function manageUser() {
 function budget() {
     include_once('./lib/config.php');
     $user = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $revenu = Doctrine_Core::getTable('revenu')->findOneByIdIndividu($_POST['idIndividu']);
-    $depense = Doctrine_Core::getTable('depense')->findOneByIdIndividu($_POST['idIndividu']);
-    $dette = Doctrine_Core::getTable('dette')->findOneByIdIndividu($_POST['idIndividu']);
+    $revenu = Doctrine_Core::getTable('revenu')->getLastFicheRessource($_POST['idIndividu']);
+    $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
+    $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
     $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($_POST['idIndividu']);
     $contenu = '<h2>Budget</h2>';
     $contenu .= '<div><h3 role="ressource"><span>Ressources</span>  <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.date('d/m/Y', $revenu->dateCreation).'</span></h3>';

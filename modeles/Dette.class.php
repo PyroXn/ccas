@@ -13,8 +13,8 @@ class Dette extends Doctrine_Record {
         $this->hasColumn('arriereGaz', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('autreDette', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('natureDette', 'string', 255, array('default' => ' '));
-        $this->hasColumn('idPrestaElec', 'integer', 5);
-        $this->hasColumn('idPrestaGaz', 'integer', 5);
+        $this->hasColumn('prestaElec', 'string', 50);
+        $this->hasColumn('prestaGaz', 'string', 50);
         $this->hasColumn('idIndividu', 'integer', 5);
         $this->hasColumn('dateCreation', 'integer', 20, array('default' => '0'));
     }
