@@ -423,8 +423,20 @@ legend {
     text-align: right;
 }
 
-.input_dyn {
-    width: 30%;
+.input_num {
+    width: 20%;
+}
+
+.input_char {
+    width: 47%;
+}
+
+.input_numsecu {
+    width: 35%;
+}
+
+.input_cle {
+    width: 10%;
 }
 
 .timemaj {

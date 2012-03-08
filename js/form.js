@@ -34,7 +34,7 @@ $(function() {
         $(attr).toggleClass('en_execution');
     });
     
-    $('.checkbox').live("click", function(){
+    $('.checkboxChefFamille').live("click", function(){
         if(!$(this).hasClass('checkbox_active')) {
             $('.checkbox_active').toggleClass('checkbox_active');
             $(this).toggleClass('checkbox_active');
@@ -45,6 +45,10 @@ $(function() {
                 "margin-right":"0"
             });
         }
+    });
+    
+    $('.checkbox').live("click", function(){
+        $(this).toggleClass('checkbox_active');
     });
     
     $('.en_execution > li').live("click", function() {
