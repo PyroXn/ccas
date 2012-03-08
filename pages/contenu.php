@@ -7,7 +7,7 @@ function contenu() {
             echo foyerContenu($_POST['idFoyer']);
             break;
         case 'generalites':
-            echo 'generalites';
+            echo generalite();
             break;
         case 'budget':
             echo budget();
@@ -224,7 +224,6 @@ function manageUser() {
 
 function budget() {
     include_once('./lib/config.php');
-    $user = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $revenu = Doctrine_Core::getTable('revenu')->getLastFicheRessource($_POST['idIndividu']);
     $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
     $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
@@ -472,6 +471,291 @@ function budget() {
                                         
                                    </div>
                                    </div>';
+    return utf8_encode($contenu);
+}
+
+function generalite() {
+    include_once('./lib/config.php');
+    $user = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
+    $situations = Doctrine_Core::getTable('situationmatri')->findAll();
+    $nationalite = Doctrine_Core::getTable('nationalite')->findAll();
+    $villes = Doctrine_Core::getTable('ville')->findAll();
+    $liens = Doctrine_Core::getTable('lienfamille')->findAll();
+    $etudes = Doctrine_Core::getTable('etude')->findAll();
+    $professions = Doctrine_Core::getTable('profession')->findAll();
+    $organismes = Doctrine_Core::getTable('organisme')->findAll();
+    
+    $contenu = '<h2>Généralités</h2>';
+    $contenu .= '<h3><span>Informations personnelles</span>  <span class="edit"></span></h3>';
+    $contenu .= '<ul id="membre_foyer_list">
+                                <li class="membre_foyer">
+                                    <div class="colonne">
+                                        <span class="attribut">Nom :</span>
+                                        <span><input type="text" id="nom" value="'.$user->nom.'" disabled/></span>
+                                   </div>
+                                   <div class="colonne">
+                                        <span class="attribut">Prenom :</span>
+                                        <span><input type="text" id="prenom" value="'.$user->prenom.'" disabled/></span>
+                                   </div>
+                                   <div class="colonne">
+                                        <span class="attribut">Situation Familiale :</span>
+                                        <div class="select classique" role="select_situation">
+                                            <div id="situation" class="option">Marié(e)</div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                   </div>
+                                   <div class="colonne">
+                                        <span class="attribut">Nationalité :</span>
+                                        <div class="select classique" role="select_natio">
+                                            <div id="nationalite" class="option">Française</div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                   </div>
+                               </li>
+                               <li class="membre_foyer">
+                                   <div class="colonne">
+                                        <span class="attribut">Date de naissance :</span>
+                                        <span><input type="text" id="datenaissance" value="'.date('d/m/Y', $user->dateNaissance).'" disabled/></span>
+                                   </div>
+                                   <div class="colonne">
+                                        <span class="attribut">Lieu de naissance :</span>
+                                        <div class="select classique" role="select_ville">
+                                            <div id="lieu" class="option">YUTZ</div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                   </div>
+                                   <div class="colonne">
+                                        <span class="attribut">Sexe :</span>
+                                        <div class="select classique" role="select_sexe">
+                                            <div id="sexe" class="option">Homme</div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                   </div>
+                                   <div class="colonne">
+                                        <span class="attribut">Statut :</span>
+                                        <div class="select classique" role="select_statut">
+                                            <div id="statut" class="option">Chef lui même</div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                   </div>
+                                </li>
+                                
+                            </ul>';
+    
+// CONTACT
+    $contenu .= '<h3><span>Télèphone / Email</span>  <span class="edit"></span></h3>';
+    $contenu .= '<ul id="membre_foyer_list">
+                                <li class="membre_foyer">
+                                    <div class="colonne">
+                                        <span class="attribut">Télèphone :</span>
+                                        <span><input type="text" id="telephone" value="'.$user->telephone.'" disabled/></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">Portable :</span>
+                                        <span><input type="text" id="portable" value="'.$user->portable.'" disabled/></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">Email :</span>
+                                        <span><input type="text" id="email" value="'.$user->email.'" disabled/></span>
+                                    </div>
+                                </li>
+                            </ul>';
+// SITUATION PROFESSIONNELLE
+    $contenu .= '<h3><span>Situation professionnelle</span>  <span class="edit"></span></h3>';
+    $contenu .= '<ul id="membre_foyer_list">
+                                <li class="membre_foyer">
+                                    <div class="colonne">
+                                        <span class="attribut">Niveau étude :</span>
+                                        <div class="select classique" role="select_etude">
+                                            <div id="etude" class="option">BAC Général</div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">Profession :</span>
+                                        <div class="select classique" role="select_profession">
+                                            <div id="profession" class="option">Secrétaire</div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">Employeur :</span>
+                                        <span><input type="text" id="employeur" value="'.$user->employeur.'" disabled/></span>
+                                    </div> 
+                                </li>
+                                <li class="membre_foyer">
+                                    <div class="colonne">
+                                        <span class="attribut">Inscription P.E :</span>
+                                        <span><input type="text" id="dateinscriptionpe" value="'.$user->dateInscriptionPe.'" disabled/></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">N° dossier P.E :</span>
+                                        <span><input type="text" id="numdossierpe" value="'.$user->numDossierPe.'" disabled/></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">Début droits P.E :</span>
+                                        <span><input type="text" id="datedebutdroitpe" value="'.$user->dateDebutDroitPe.'" disabled/></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">Fin droits P.E :</span>
+                                        <span><input type="text" id="datefindroitpe" value="'.$user->dateFinDroitPe.'" disabled/></span>
+                                    </div> 
+                                </li>
+                            </ul>';   
+// COUVERTURE SOCIALE
+    $contenu .= '<h3><span>Couverture sociale</span></h3>';
+    $contenu .= '<ul id="membre_foyer_list">
+                                <li class="membre_foyer">
+                                    <div class="colonne">
+                                        <span class="attribut">Assuré <span class="checkbox"></span></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">N° :</span>
+                                        <span><input type="text" id="numsecu" value="'.$user->numSecu.'" size="13" disabled/></span>
+                                        <span><input type="text" id="clefsecu" value="'.$user->clefSecu.'" size="2" disabled/></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">Régime :</span>
+                                        <div class="select classique" role="select_regime">
+                                            <div id="regime" class="option">Local</div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                   </div>
+                               </li>
+                               <li class="membre_foyer">
+                                    <div class="colonne">
+                                        <span class="attribut">Caisse :</span>
+                                        <div class="select classique" role="select_couv">
+                                            <div id="couv" class="option"></div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                   </div>
+                                   <div class="colonne">
+                                        <span class="attribut">CMU <span class="checkbox"></span></span>
+                                   </div>
+                                   <div class="colonne">
+                                        <span class="attribut">Date début droit :</span>
+                                        <span><input type="text" id="datedebitcouvsecu" value="'.$user->dateDebutCouvSecu.'" disabled/></span>
+                                   </div>
+                                   <div class="colonne">
+                                        <span class="attribut">Date fin de droits :</span>
+                                        <span><input type="text" id="datefincouvsecu" value="'.$user->dateFinCouvSecu.'" disabled/></span>
+                                   </div>
+                               </li>
+                                        
+                             </ul>';
+// MUTUELLE
+$contenu .= '<h3><span>Mutuelle</span></h3>';
+    $contenu .= '<ul id="membre_foyer_list">
+                                <li class="membre_foyer">
+                                    <div class="colonne">
+                                        <span class="attribut">Caisse :</span>
+                                        <div class="select classique" role="select_mut">
+                                            <div id="mut" class="option"></div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                        <span class="attribut">CMUC <span class="checkbox"></span></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">N° adhérent :</span>
+                                        <span><input type="text" id="numadherentmut" value="'.$user->numAdherentMut.'" disabled/></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">Date début :</span>
+                                        <span><input type="text" id="datedebutcouvmut" value="'.$user->dateDebutCouvMut.'" disabled/></span>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">Date fin :</span>
+                                        <span><input type="text" id="datefincouvmut" value="'.$user->dateFinCouvMut.'" disabled/></span>
+                                    </div>
+                                </li>
+                             </ul>';
+// CAF
+$contenu .= '<h3><span>CAF</span></h3>';
+    $contenu .= '<ul id="membre_foyer_list">
+                                <li class="membre_foyer">
+                                    <div class="colonne">
+                                        <span class="attribut">Caisse :</span>
+                                        <div class="select classique" role="select_caf">
+                                            <div id="caf" class="option"></div>
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                    </div>
+                                    <div class="colonne">
+                                        <span class="attribut">N° allocataire :</span>
+                                        <span><input type="text" id="numallocatairecaf" value="'.$user->numAllocataireCaf.'" disabled/></span>
+                                    </div>
+                                </li>
+                             </ul>';                                   
+// COMBO BOX
+//    $contenu .= ' <ul class="select_couv">';
+//    foreach($organismes as $organisme) {
+//        if($organisme->idLibelleOrganisme->libelle == 'Caisse SECU') {
+//        $contenu .= '<li value="'.$organisme->id.'">
+//                                    <div>'.utf8_decode($organisme->appelation).'</div>
+//                               </li>';
+//        }
+//    }
+//    $contenu .= '</ul>';
+    $contenu .= ' <ul class="select_regime">';
+     $contenu .= '<li value="Local">
+                                    <div>Local</div>
+                            </li>
+                            <li value="Général">
+                                <div>Général</div>
+                            </li>
+                            </ul>';
+    $contenu .= '</ul>';
+    $contenu .= ' <ul class="select_profession">';
+    foreach($professions as $profession) {
+        $contenu .= '<li value="'.$profession->id.'">
+                                    <div>'.utf8_decode($profession->profession).'</div>
+                               </li>';
+    }
+    $contenu .= '</ul>';
+   $contenu .= ' <ul class="select_etude">';
+    foreach($etudes as $etude) {
+        $contenu .= '<li value="'.$etude->id.'">
+                                    <div>'.utf8_decode($etude->etude).'</div>
+                               </li>';
+    }
+    $contenu .= '</ul>';
+    $contenu .= ' <ul class="select_statut">';
+    foreach($liens as $lien) {
+        $contenu .= '<li value="'.$lien->id.'">
+                                    <div>'.utf8_decode($lien->lien).'</div>
+                               </li>';
+    }
+    $contenu .= '</ul>';
+    $contenu .= ' <ul class="select_ville">';
+    foreach($villes as $ville) {
+        $contenu .= '<li value="'.$ville->id.'">
+                                    <div>'.utf8_decode($ville->libelle).'</div>
+                               </li>';
+    }
+    $contenu .= '</ul>';
+    $contenu .= ' <ul class="select_natio">';
+    foreach($nationalite as $nat) {
+        $contenu .= '<li value="'.$nat->id.'">
+                                    <div>'.utf8_decode($nat->nationalite).'</div>
+                               </li>';
+    }
+    $contenu .= '</ul>';
+    $contenu .= ' <ul class="select_situation">';
+    foreach($situations as $sit) {
+        $contenu .= '<li value="'.$sit->id.'">
+                                    <div>'.utf8_decode($sit->situation).'</div>
+                               </li>';
+    }
+    $contenu .= '</ul>';
+    $contenu .= ' <ul class="select_sexe">
+                                <li value="Homme">
+                                    <div>Homme</div>
+                                </li>
+                                <li value="Femme">
+                                    <div>Femme</div>
+                                </li>
+                            </ul>';
     return utf8_encode($contenu);
 }
 

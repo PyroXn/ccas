@@ -180,7 +180,7 @@
     top: 12px;
 }
 
-.select_civilite, .select_lien_famille {
+.select_civilite, .select_lien_famille, .select_sexe, .select_situation, .select_natio, .select_ville, .select_statut, .select_etude, .select_profession, .select_regime, .select_couv, .select_mut, .select_caf {
     display: none;
     z-index: 1002;
     position: absolute;
