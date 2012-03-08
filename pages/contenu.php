@@ -427,7 +427,7 @@ function budget() {
                             <h3>Crédits</h3>
                             <ul id="membre_foyer_list">';
                             foreach($credits as $credit) {
-                                $contenu .= '<li class="membre_foyer">
+                                $contenu .= '<li name="'.$credit->id.'" class="membre_foyer">
                                                             <div class="colonne">
                                                                 <span class="attribut">Organisme : </span>
                                                                 <span>'.$credit->organisme.'</span>
@@ -443,11 +443,35 @@ function budget() {
                                                             <div class="colonne">
                                                                 <span class="attribut">Montant restant : </span>
                                                                 <span>'.$credit->totalRestant.'</span>
+                                                                <span class="timemaj">'.date('d/m/Y', $credit->dateAjout).'</span>
                                                             </div>
+                                                            <span class="delete_credit"></span>
                                                       </li>';
                             }
 
-                               $contenu .= '</ul></div>';
+                               $contenu .= '</ul>
+                                   <div class="bouton modif" id="createCredit">Ajouter un crédit</div></div>
+                                   <div class="formulaire" action="creation_credit">
+                                   <div class="colonne_droite">
+                                         <div class="input_text">
+                                            <input id="organisme" class="contour_field" type="text" title="Organisme" placeholder="Organisme">
+                                        </div>
+                                        <div class="input_text">
+                                            <input id="mensualite" class="contour_field" type="text" title="Mensualite" placeholder="Mensualite">
+                                        </div>
+                                        <div class="input_text">
+                                            <input id="duree" class="contour_field" type="text" title="Durée" placeholder="Durée">
+                                        </div>
+                                        <div class="input_text">
+                                            <input id="total" class="contour_field" type="text" title="Total Restant" placeholder="Total Restant">
+                                        </div>
+                                        <div class="sauvegarder_annuler">
+                                            <div class="bouton modif" value="save">Enregistrer</div>
+                                            <div class="bouton classique" value="cancel">Annuler</div>
+                                        </div>
+                                        
+                                   </div>
+                                   </div>';
     return utf8_encode($contenu);
 }
 

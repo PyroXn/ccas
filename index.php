@@ -83,6 +83,10 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         archiveDette();
         break;
+    case 'deletecredit':
+        include_once('./pages/individu.php');
+        deleteCredit();
+        break;
     default:
         home();
         break;

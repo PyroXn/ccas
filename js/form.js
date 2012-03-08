@@ -11,6 +11,14 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
     });
     
+    $('#createCredit').live("click", function() {        
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_credit"]').width()/2;
+        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_credit"]').height();
+        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_credit"]'));
+    });
+
+    
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
         var attr = '.'+$(this).attr('role');
@@ -85,6 +93,11 @@ $(function() {
                     datastring += '&nom=' + $('#form_2').val();
                     datastring += '&prenom=' + $('#form_3').val();
                     break;
+                case 'creation_credit':
+                    datastring += '&idIndividu='+idIndividu+'&organisme='+$('#organisme').val();
+                    datastring += '&mensualite='+$('#mensualite').val()+'&duree='+$('#duree').val();
+                    datastring += '&total='+$('#total').val();
+                    break;
                         
             }
             $.ajax({
@@ -112,6 +125,9 @@ $(function() {
                             $("#list_individu").html(data.listeIndividu);
                             /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
                             $('#contenu').html(data.newIndividu);
+                            break;
+                        case 'creation_credit':
+                            $("#contenu").html(data.budget);
                             break;
                     }
                 //FONCTIONNE PAS 
@@ -282,10 +298,10 @@ $(function() {
     });
     
     $('.delete').live("click", function() {
-        $idFoyer = $(this).parent().parent().attr('id_foyer');
-        $idIndividu = $(this).parent().parent().attr('id_individu');
-        datastring = 'idFoyer=' + $idFoyer;
-        datastring += '&idIndividu=' + $idIndividu;
+        var idFoyer = $(this).parent().parent().attr('id_foyer');
+        var idIndividu = $(this).parent().parent().attr('id_individu');
+        datastring = 'idFoyer=' + idFoyer;
+        datastring += '&idIndividu=' + idIndividu;
         datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
         console.log(datastring);
         $.ajax({
@@ -297,6 +313,20 @@ $(function() {
             success: function(data) {
                 $("#list_individu").html(data.listeIndividu);
                 $('#contenu').html(data.contenu);
+            }
+        });
+    });
+    
+    $('.delete_credit').live("click", function() {
+        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
+        var id = $(this).parent().attr('name');
+        datastring = 'id='+id+'&idIndividu='+idIndividu;
+        $.ajax({
+            type: 'post',
+            data: datastring,
+            url: './index.php?p=deletecredit',
+            success: function(data) {
+                $("#contenu").html(data);
             }
         });
     });

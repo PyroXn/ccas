@@ -416,6 +416,9 @@ legend {
 
 .timemaj {
     float: right;
+    font-style: italic; 
+    font-size: 12px;
+    color: #3A505B;
 }
 
 .edit {
@@ -435,4 +438,13 @@ legend {
     cursor: pointer;
     margin-left: 4px;
     vertical-align: middle;
+}
+
+.delete_credit {
+    background: transparent url('./img/delete.png') no-repeat;
+    float: right;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
 }

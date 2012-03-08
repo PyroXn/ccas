@@ -79,8 +79,21 @@ include_once('./lib/config.php');
 //$individu->chefDeFamille = true;
 //$individu->save();
 //echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
+
 //$individu = Doctrine_Core::getTable('dette')->getLastFicheDette(1);
 //echo '<div>'.$individu->arriereLocatif . ', prenom: <strong>' . $individu->fraisHuissier . '</strong></div>';
+
+
+
+//$credit = new Credit();
+//    $credit->organisme = 'de';
+//    $credit->mensualite = 10;
+//    $credit->dureeMois = 10;
+//    $credit->totalRestant = 10;
+//    $credit->idIndividu = 1;
+//    $credit->dateAjout = time();
+//    $credit->save();
+
 
 
 $searchword = 'rue';
