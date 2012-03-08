@@ -28,6 +28,14 @@ function form() {
             $retour = array('listeIndividu' => $listeIndividu, 'newIndividu' => $newIndividu);
             echo json_encode($retour);
             break;
+        case 'creation_credit':
+            include_once('./pages/contenu.php');
+            createCredit($_POST['idIndividu'], $_POST['organisme'], $_POST['mensualite'], $_POST['duree'], $_POST['total']);
+            $budget = budget();
+            $retour = array('budget' => $budget);
+            echo json_encode($retour);
+            break;
+            
     }
 }
 
@@ -97,5 +105,17 @@ function createIndividu($idFoyer, $civilite, $nom, $prenom) {
     createDepense($individu->id);
     createDette($individu->id);
     return FoyerContenu($idFoyer);
+}
+
+function createCredit($idIndividu, $organisme, $mensualite, $duree, $total) {
+    include_once('./lib/config.php');
+    $credit = new Credit();
+    $credit->organisme = $organisme;
+    $credit->mensualite = $mensualite;
+    $credit->dureeMois = $duree;
+    $credit->totalRestant = $total;
+    $credit->idIndividu = $idIndividu;
+    $credit->dateAjout = time();
+    $credit->save();
 }
 ?>

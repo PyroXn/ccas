@@ -115,6 +115,14 @@ function archiveDette() {
     echo budget();
 }
 
+function deleteCredit() {
+    include_once('./lib/config.php');
+    include_once('./pages/contenu.php');
+    $credit = Doctrine_Core::getTable('credit')->find($_POST['id']);
+    $credit->delete();
+    echo budget();   
+}
+
 function generalite() {
     include_once('./lib/config.php');
     $liens = Doctrine_Core::getTable('lienfamille')->findAll();
