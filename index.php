@@ -19,6 +19,9 @@ switch (@$_GET['p']) {
     case 'search':
         search();
         break;
+    case 'autoComplete':
+        autoComplete();
+        break;
     case 'foyer':
         foyer();
         break;
@@ -349,6 +352,51 @@ function scroll() {
             </li>';
         $i++;
     }
+    echo $retour;
+}
+
+function autoComplete() {
+    $searchword = $_POST['searchword'];
+    $table = $_POST['table'];
+    $champ = $_POST['champ'];
+
+    $retour = '';
+    $table = Doctrine_Core::getTable($table);
+    $likeNb = Doctrine_Query::create()
+        ->from($table)
+        ->where($champ + ' LIKE ?', array($searchword . '%'))
+        ->orderBy($champ + ' ASC');
+    $nb = $likeNb->count();
+    
+    $like = Doctrine_Query::create()
+        ->from($table)
+        ->where($champ + ' LIKE ?', array($searchword . '%'))
+        ->orderBy($champ + ' ASC')
+        ->limit(5);
+    
+//    if ($nb != 0) {
+//        $retour .= '<div class="nb_individu">' . $nb . '</div>';
+//    } else {
+//        $retour .= '<div class="nb_individu">Aucun r&#233;sultat</div>';
+//    }
+
+    $retour = '<ul>';
+    
+    foreach ($like->execute() as $tmp) {
+        $retour .= '<li>'.$tmp->$champ.'</li>';
+    }
+    $retour .= '</ul>';
+//    foreach ($table->searchLikeByLimitOffset($q, 100, 0)->execute() as $individu) {
+//        if ($i % 2 == 0) {
+//            $retour .= '<li class="pair individu" id="' . $i . '">';
+//        } else {
+//            $retour .= '<li class="impair individu" id="' . $i . '">';
+//        }
+//        $retour .= '
+//                         <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+//                 </li>';
+//        $i++;
+//    }
     echo $retour;
 }
 

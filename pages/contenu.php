@@ -105,7 +105,7 @@ function foyerContenu($idFoyer) {
 function generateInfoFoyer($foyer) {
     $retour = '';
     $retour .= '
-        <div><h3>Foyer</h3>
+        <div><h3>Foyer<span class="edit"></span></h3>
             <ul id="membre_foyer_list">
                 <li class="membre_foyer">
                     <div class="colonne">

@@ -126,8 +126,28 @@ $(function() {
         });
     });  
     
+    $('.autoComplete').live("keyup", function()  {
+        var searchbox = $(this).val();
+        var table = $(this).attr('table');
+        autoComplete(searchbox, table);
+    });
     
 });
+
+function autoComplete(searchbox, table) {
+    var dataString = 'searchword='+ searchbox;
+    dataString += '&table=' + table
+    $.ajax({
+        type: "POST",
+        url: "./index.php?p=autoComplete",
+        data: dataString,
+        cache: false,
+        success: function(html)
+        {
+            
+        }
+    });
+}
 
 function search(searchbox) {
     var dataString = 'searchword='+ searchbox;

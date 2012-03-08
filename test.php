@@ -79,6 +79,34 @@ include_once('./lib/config.php');
 //$individu->chefDeFamille = true;
 //$individu->save();
 //echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
-$individu = Doctrine_Core::getTable('dette')->getLastFicheDette(1);
-echo '<div>'.$individu->arriereLocatif . ', prenom: <strong>' . $individu->fraisHuissier . '</strong></div>';
+//$individu = Doctrine_Core::getTable('dette')->getLastFicheDette(1);
+//echo '<div>'.$individu->arriereLocatif . ', prenom: <strong>' . $individu->fraisHuissier . '</strong></div>';
+
+
+$searchword = 'rue';
+    $table = 'rue';
+    $champ = 'rue';
+
+    $retour = '';
+//    $t = Doctrine_Core::getTable($table);
+//    $likeNb = Doctrine_Query::create()
+//        ->from($table)
+//        ->where($champ + ' LIKE ?', array($searchword . '%'))
+//        ->orderBy($champ + ' ASC');
+//    $nb = $likeNb->count();
+    
+    $like = Doctrine_Query::create()
+        ->from($table)
+        ->where($champ .' LIKE ?', $searchword.'%')
+        ->orderBy($champ .' ASC')
+        ->limit(5);
+    
+
+    $retour = '<ul>';
+    
+    foreach ($like->execute() as $tmp) {
+        $retour .= '<li>'.$tmp->$champ.'</li>';
+    }
+    $retour .= '</ul>';
+    echo $retour;
 ?>
