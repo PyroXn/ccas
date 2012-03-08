@@ -129,14 +129,16 @@ $(function() {
     $('.autoComplete').live("keyup", function()  {
         var searchbox = $(this).val();
         var table = $(this).attr('table');
-        autoComplete(searchbox, table);
+        var champ = $(this).attr('champ');
+        autoComplete(searchbox, table, champ, $(this));
     });
     
 });
 
-function autoComplete(searchbox, table) {
+function autoComplete(searchbox, table, champ, elmt) {
     var dataString = 'searchword='+ searchbox;
     dataString += '&table=' + table
+    dataString += '&champ=' + champ
     $.ajax({
         type: "POST",
         url: "./index.php?p=autoComplete",
@@ -144,7 +146,7 @@ function autoComplete(searchbox, table) {
         cache: false,
         success: function(html)
         {
-            
+            $('.liste_sugestion').html(html);
         }
     });
 }

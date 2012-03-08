@@ -16,6 +16,15 @@ ul {
     list-style: none outside none;
 }
 
+.clearboth {
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    width: 100%;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -409,9 +418,13 @@ legend {
 
 .attribut {
     display: inline-block;
-    width: 40%;
+    width: 50%;
     font-weight: bold;
     text-align: right;
+}
+
+.input_dyn {
+    width: 30%;
 }
 
 .timemaj {
@@ -431,6 +444,8 @@ legend {
 }
 
 .archive {
+    position: relative;
+    bottom: 2px;
     background: url('./img/archive.png') transparent no-repeat;
     width: 16px;
     height: 16px;

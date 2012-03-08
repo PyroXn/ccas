@@ -110,7 +110,7 @@ function generateInfoFoyer($foyer) {
                 <li class="membre_foyer">
                     <div class="colonne">
                         <span class="attribut"> test</span>
-                        <span><input class="input_dyn" type="text" id="salaire" value="'.$foyer->numRue.'" disabled/></span>
+                        <span><input class="input_dyn autoComplete" type="text" id="salaire" table="rue" champ="rue"/><div class="liste_sugestion"></div></span>
                     </div>
                 </li>
             </ul>
@@ -242,118 +242,120 @@ function budget() {
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">All. familiales : </span>
-                                        <span><input type="text" id="revenuAlloc" value="'.$revenu->revenuAlloc.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="revenuAlloc" value="'.$revenu->revenuAlloc.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">ASS : </span>
-                                        <span><input type="text" id="ass" value="'.$revenu->ass.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="ass" value="'.$revenu->ass.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="membre_foyer">
                                     <div class="colonne">
                                         <span class="attribut">AAH : </span>
-                                        <span><input type="text" id="aah" value="'.$revenu->aah.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="aah" value="'.$revenu->aah.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">RSA Socle : </span>
-                                        <span><input type="text" id="rsaSocle" value="'.$revenu->rsaSocle.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="rsaSocle" value="'.$revenu->rsaSocle.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">RSA Activité : </span>
-                                        <span><input type="text" id="rsaActivite" value="'.$revenu->rsaActivite.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="rsaActivite" value="'.$revenu->rsaActivite.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Retraite compl  : </span>
-                                        <span><input type="text" id="retraitComp" value="'.$revenu->retraitComp.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="retraitComp" value="'.$revenu->retraitComp.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="membre_foyer">
                                     <div class="colonne">
                                         <span class="attribut">P. alimentaire : </span>
-                                        <span><input type="text" id="pensionAlim" value="'.$revenu->pensionAlim.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="pensionAlim" value="'.$revenu->pensionAlim.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">P. de retraite : </span>
-                                        <span><input type="text" id="pensionRetraite" value="'.$revenu->pensionRetraite.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="pensionRetraite" value="'.$revenu->pensionRetraite.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Autres revenus  : </span>
-                                        <span><input type="text" id="autreRevenu" value="'.$revenu->autreRevenu.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="autreRevenu" value="'.$revenu->autreRevenu.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Nature : </span>
-                                        <span><input type="text" id="natureRevenu" value="'.$revenu->natureAutre.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="natureRevenu" value="'.$revenu->natureAutre.'" disabled/></span>
                                     </div>
                                </li>
                             </ul>
-                            
                             <div class="bouton modif update" value="updateRessource">Enregistrer</div>
+                            <div class="clearboth"></div>
                             </div>
+                            
                             <div>
                             <h3 role="depense">Dépenses <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.date('d/m/Y', $depense->dateCreation).'</span></h3>
                             <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">
                                     <span class="attribut">Impôts revenu : </span>
-                                    <span><input type="text" id="impotRevenu" value="'.$depense->impotRevenu.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="impotRevenu" value="'.$depense->impotRevenu.'" disabled/></span>
                                  </div>
                                     <div class="colonne">
                                         <span class="attribut">Impôts locaux : </span>
-                                        <span><input type="text" id="impotLocaux" value="'.$depense->impotLocaux.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="impotLocaux" value="'.$depense->impotLocaux.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                     <span class="attribut">P. alimentaire :</span>
-                                    <span><input type="text" id="pensionAlim" value="'.$depense->pensionAlim.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="pensionAlim" value="'.$depense->pensionAlim.'" disabled/></span>
                                      </div>
                                      <div class="colonne">
                                     <span class="attribut">Mutuelle : </span>
-                                    <span><input type="text" id="mutuelle" value="'.$depense->mutuelle.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="mutuelle" value="'.$depense->mutuelle.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Electricité : </span>
-                                    <span><input type="text" id="electricite" value="'.$depense->electricite.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="electricite" value="'.$depense->electricite.'" disabled/></span>
                                  </div>
                                  <div class="colonne">
                                     <span class="attribut">Gaz : </span>
-                                    <span><input type="text" id="gaz" value="'.$depense->gaz.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="gaz" value="'.$depense->gaz.'" disabled/></span>
                                  </div>
                                  <div class="colonne">
                                     <span class="attribut">Eau : </span>
-                                    <span><input type="text" id="eau" value="'.$depense->eau.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="eau" value="'.$depense->eau.'" disabled/></span>
                                  </div>
                                  <div class="colonne">
                                     <span class="attribut">Chauffage :</span>
-                                    <span><input type="text" id="chauffage" value="'.$depense->chauffage.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="chauffage" value="'.$depense->chauffage.'" disabled/></span>
                                 </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Téléphonie : </span>
-                                    <span><input type="text" id="telephonie" value="'.$depense->telephonie.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="telephonie" value="'.$depense->telephonie.'" disabled/></span>
                                </div>
                                <div class="colonne">
                                     <span class="attribut">Internet : </span>
-                                    <span><input type="text" id="internet" value="'.$depense->internet.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="internet" value="'.$depense->internet.'" disabled/></span>
                               </div>
                               <div class="colonne">
                                     <span class="attribut">Télévision : </span>
-                                    <span><input type="text" id="television" value="'.$depense->television.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="television" value="'.$depense->television.'" disabled/></span>
                                </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Autres Dépenses : </span>
-                                    <span><input type="text" id="autreDepense" value="'.$depense->autreDepense.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="autreDepense" value="'.$depense->autreDepense.'" disabled/></span>
                                </div>
                                <div class="colonne">
                                     <span class="attribut">Détail : </span>
-                                    <span><input type="text" id="natureDepense" value="'.$depense->natureDepense.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="natureDepense" value="'.$depense->natureDepense.'" disabled/></span>
                                </div>
                                </li>
                             </ul>
                             <div class="bouton modif update" value="updateDepense">Enregistrer</div>
+                            <div class="clearboth"></div>
                             </div>
                             
                             <div>
@@ -362,11 +364,11 @@ function budget() {
                                     <li class="membre_foyer">
                                     <div class="colonne">
                                         <span class="attribut">Loyer : </span>
-                                        <span><input type="text" id="loyer" value="'.$depense->loyer.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="loyer" value="'.$depense->loyer.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">AL ou APL : </span>
-                                        <span><input type="text" id="apl" value="'.$revenu->aideLogement.'" disabled/></span>
+                                        <span><input class="input_dyn" type="text" id="apl" value="'.$revenu->aideLogement.'" disabled/></span>
                                    </div>
                                    <div class="colonne">
                                         <span class="attribut">Résiduel : </span>
@@ -375,6 +377,7 @@ function budget() {
                                     </li>
                                 </ul>
                                 <div class="bouton modif update" value="updateDepenseHabitation">Enregistrer</div>
+                                <div class="clearboth"></div>
                             </div>
                             
                             <div>
@@ -383,43 +386,44 @@ function budget() {
                                 <li class="membre_foyer">
                                 <div class="colonne">
                                     <span class="attribut">Arriéré locatif : </span>
-                                    <span><input type="text" id="arriereLocatif" value="'.$dette->arriereLocatif.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="arriereLocatif" value="'.$dette->arriereLocatif.'" disabled/></span>
                                 </div>
                                 <div class="colonne">
                                     <span class="attribut">Frais huissier : </span>
-                                    <span><input type="text" id="fraisHuissier" value="'.$dette->fraisHuissier.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="fraisHuissier" value="'.$dette->fraisHuissier.'" disabled/></span>
                                 </div>
                                 <div class="colonne">
                                     <span class="attribut">Autres dettes : </span>
-                                    <span><input type="text" id="autreDette" value="'.$dette->autreDette.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="autreDette" value="'.$dette->autreDette.'" disabled/></span>
                                 </div>
                                 <div class="colonne">
                                     <span class="attribut">Nature  :</span>
-                                    <span><input type="text" id="natureDette" value="'.$dette->natureDette.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="natureDette" value="'.$dette->natureDette.'" disabled/></span>
                                </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Arriéré électricité : </span>
-                                    <span><input type="text" id="arriereElec" value="'.$dette->arriereElectricite.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="arriereElec" value="'.$dette->arriereElectricite.'" disabled/></span>
                                </div>
                                <div class="colonne">
                                     <span class="attribut">Prestataire : </span>
-                                    <span><input type="text" id="prestaElec" value="'.$dette->prestaElec.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="prestaElec" value="'.$dette->prestaElec.'" disabled/></span>
                                </div>
                                </li>
                               <li class="membre_foyer">
                               <div class="colonne">
                                     <span class="attribut">Arriéré gaz : </span>
-                                    <span><input type="text" id="arriereGaz" value="'.$dette->arriereGaz.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="arriereGaz" value="'.$dette->arriereGaz.'" disabled/></span>
                               </div>
                               <div class="colonne">
                                     <span class="attribut">Prestataire : </span>
-                                    <span><input type="text" id="prestaGaz" value="'.$dette->prestaGaz.'" disabled/></span>
+                                    <span><input class="input_dyn" type="text" id="prestaGaz" value="'.$dette->prestaGaz.'" disabled/></span>
                                </div>
                                </li>
                                </ul>
                                <div class="bouton modif update" value="updateDette">Enregistrer</div>
+                               <div class="clearboth"></div>
                                </div>
                                
                                <div>

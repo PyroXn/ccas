@@ -253,10 +253,11 @@ $(function() {
     
     $('.edit').live("click", function() {
         $(this).parent().next().children().find('input').removeAttr("disabled");
-        $('.update').css({
+        var update = $(this).parent().parent().children('.update');
+        $(update).css({
             "margin-right":"0"
         });
-        $('.update').slideToggle();
+        $(update.after()).slideToggle();
     });
     
     $('.archive').live("click", function() {
