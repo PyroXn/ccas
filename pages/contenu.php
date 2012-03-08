@@ -234,55 +234,55 @@ function budget() {
                                 <li class="membre_foyer">
                                     <div class="colonne">
                                         <span class="attribut">Salaire : </span>
-                                        <span><input class="input_num" type="text" id="salaire" value="'.$revenu->salaire.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="salaire" value="'.$revenu->salaire.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">All. Chômage : </span>
-                                        <span><input class="input_num" type="text" id="chomage" value="'.$revenu->chomage.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="chomage" value="'.$revenu->chomage.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">All. familiales : </span>
-                                        <span><input class="input_num" type="text" id="revenuAlloc" value="'.$revenu->revenuAlloc.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="revenuAlloc" value="'.$revenu->revenuAlloc.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">ASS : </span>
-                                        <span><input class="input_num" type="text" id="ass" value="'.$revenu->ass.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="ass" value="'.$revenu->ass.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="membre_foyer">
                                     <div class="colonne">
                                         <span class="attribut">AAH : </span>
-                                        <span><input class="input_num" type="text" id="aah" value="'.$revenu->aah.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="aah" value="'.$revenu->aah.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">RSA Socle : </span>
-                                        <span><input class="input_num" type="text" id="rsaSocle" value="'.$revenu->rsaSocle.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="rsaSocle" value="'.$revenu->rsaSocle.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">RSA Activité : </span>
-                                        <span><input class="input_num" type="text" id="rsaActivite" value="'.$revenu->rsaActivite.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="rsaActivite" value="'.$revenu->rsaActivite.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Retraite compl  : </span>
-                                        <span><input class="input_num" type="text" id="retraitComp" value="'.$revenu->retraitComp.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="retraitComp" value="'.$revenu->retraitComp.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="membre_foyer">
                                     <div class="colonne">
                                         <span class="attribut">P. alimentaire : </span>
-                                        <span><input class="input_num" type="text" id="pensionAlim" value="'.$revenu->pensionAlim.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$revenu->pensionAlim.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">P. de retraite : </span>
-                                        <span><input class="input_num" type="text" id="pensionRetraite" value="'.$revenu->pensionRetraite.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="pensionRetraite" value="'.$revenu->pensionRetraite.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Autres revenus  : </span>
-                                        <span><input class="input_num" type="text" id="autreRevenu" value="'.$revenu->autreRevenu.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="autreRevenu" value="'.$revenu->autreRevenu.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Nature : </span>
-                                        <span><input class="input_char" type="text" id="natureRevenu" value="'.$revenu->natureAutre.'" disabled/></span>
+                                        <span><input class="contour_field input_char" type="text" id="natureRevenu" value="'.$revenu->natureAutre.'" disabled/></span>
                                     </div>
                                </li>
                             </ul>
@@ -296,61 +296,61 @@ function budget() {
                                 <li class="membre_foyer">
                                 <div class="colonne">
                                     <span class="attribut">Impôts revenu : </span>
-                                    <span><input class="input_num" type="text" id="impotRevenu" value="'.$depense->impotRevenu.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="impotRevenu" value="'.$depense->impotRevenu.'" disabled/></span>
                                  </div>
                                     <div class="colonne">
                                         <span class="attribut">Impôts locaux : </span>
-                                        <span><input class="input_num" type="text" id="impotLocaux" value="'.$depense->impotLocaux.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="impotLocaux" value="'.$depense->impotLocaux.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                     <span class="attribut">P. alimentaire :</span>
-                                    <span><input class="input_num" type="text" id="pensionAlim" value="'.$depense->pensionAlim.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$depense->pensionAlim.'" disabled/></span>
                                      </div>
                                      <div class="colonne">
                                     <span class="attribut">Mutuelle : </span>
-                                    <span><input class="input_num" type="text" id="mutuelle" value="'.$depense->mutuelle.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="mutuelle" value="'.$depense->mutuelle.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Electricité : </span>
-                                    <span><input class="input_num" type="text" id="electricite" value="'.$depense->electricite.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="electricite" value="'.$depense->electricite.'" disabled/></span>
                                  </div>
                                  <div class="colonne">
                                     <span class="attribut">Gaz : </span>
-                                    <span><input class="input_num" type="text" id="gaz" value="'.$depense->gaz.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="gaz" value="'.$depense->gaz.'" disabled/></span>
                                  </div>
                                  <div class="colonne">
                                     <span class="attribut">Eau : </span>
-                                    <span><input class="input_num" type="text" id="eau" value="'.$depense->eau.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="eau" value="'.$depense->eau.'" disabled/></span>
                                  </div>
                                  <div class="colonne">
                                     <span class="attribut">Chauffage :</span>
-                                    <span><input class="input_num" type="text" id="chauffage" value="'.$depense->chauffage.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="chauffage" value="'.$depense->chauffage.'" disabled/></span>
                                 </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Téléphonie : </span>
-                                    <span><input class="input_num" type="text" id="telephonie" value="'.$depense->telephonie.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="telephonie" value="'.$depense->telephonie.'" disabled/></span>
                                </div>
                                <div class="colonne">
                                     <span class="attribut">Internet : </span>
-                                    <span><input class="input_num" type="text" id="internet" value="'.$depense->internet.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="internet" value="'.$depense->internet.'" disabled/></span>
                               </div>
                               <div class="colonne">
                                     <span class="attribut">Télévision : </span>
-                                    <span><input class="input_num" type="text" id="television" value="'.$depense->television.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="television" value="'.$depense->television.'" disabled/></span>
                                </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Autres Dépenses : </span>
-                                    <span><input class="input_num" type="text" id="autreDepense" value="'.$depense->autreDepense.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="autreDepense" value="'.$depense->autreDepense.'" disabled/></span>
                                </div>
                                <div class="colonne">
                                     <span class="attribut">Détail : </span>
-                                    <span><input class="input_char" type="text" id="natureDepense" value="'.$depense->natureDepense.'" disabled/></span>
+                                    <span><input class="contour_field input_char" type="text" id="natureDepense" value="'.$depense->natureDepense.'" disabled/></span>
                                </div>
                                </li>
                             </ul>
@@ -364,11 +364,11 @@ function budget() {
                                     <li class="membre_foyer">
                                     <div class="colonne">
                                         <span class="attribut">Loyer : </span>
-                                        <span><input class="input_num" type="text" id="loyer" value="'.$depense->loyer.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="loyer" value="'.$depense->loyer.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">AL ou APL : </span>
-                                        <span><input class="input_num" type="text" id="apl" value="'.$revenu->aideLogement.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="apl" value="'.$revenu->aideLogement.'" disabled/></span>
                                    </div>
                                    <div class="colonne">
                                         <span class="attribut">Résiduel : </span>
@@ -386,39 +386,39 @@ function budget() {
                                 <li class="membre_foyer">
                                 <div class="colonne">
                                     <span class="attribut">Arriéré locatif : </span>
-                                    <span><input class="input_num" type="text" id="arriereLocatif" value="'.$dette->arriereLocatif.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="arriereLocatif" value="'.$dette->arriereLocatif.'" disabled/></span>
                                 </div>
                                 <div class="colonne">
                                     <span class="attribut">Frais huissier : </span>
-                                    <span><input class="input_num" type="text" id="fraisHuissier" value="'.$dette->fraisHuissier.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="fraisHuissier" value="'.$dette->fraisHuissier.'" disabled/></span>
                                 </div>
                                 <div class="colonne">
                                     <span class="attribut">Autres dettes : </span>
-                                    <span><input class="input_num" type="text" id="autreDette" value="'.$dette->autreDette.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="autreDette" value="'.$dette->autreDette.'" disabled/></span>
                                 </div>
                                 <div class="colonne">
                                     <span class="attribut">Nature  :</span>
-                                    <span><input class="input_char" type="text" id="natureDette" value="'.$dette->natureDette.'" disabled/></span>
+                                    <span><input class="contour_field input_char" type="text" id="natureDette" value="'.$dette->natureDette.'" disabled/></span>
                                </div>
                                </li>
                                <li class="membre_foyer">
                                <div class="colonne">
                                     <span class="attribut">Arriéré électricité : </span>
-                                    <span><input class="input_num" type="text" id="arriereElec" value="'.$dette->arriereElectricite.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="arriereElec" value="'.$dette->arriereElectricite.'" disabled/></span>
                                </div>
                                <div class="colonne">
                                     <span class="attribut">Prestataire : </span>
-                                    <span><input class="input_char" type="text" id="prestaElec" value="'.$dette->prestaElec.'" disabled/></span>
+                                    <span><input class="contour_field input_char" type="text" id="prestaElec" value="'.$dette->prestaElec.'" disabled/></span>
                                </div>
                                </li>
                               <li class="membre_foyer">
                               <div class="colonne">
                                     <span class="attribut">Arriéré gaz : </span>
-                                    <span><input class="input_num" type="text" id="arriereGaz" value="'.$dette->arriereGaz.'" disabled/></span>
+                                    <span><input class="contour_field input_num" type="text" id="arriereGaz" value="'.$dette->arriereGaz.'" disabled/></span>
                               </div>
                               <div class="colonne">
                                     <span class="attribut">Prestataire : </span>
-                                    <span><input class="input_char" type="text" id="prestaGaz" value="'.$dette->prestaGaz.'" disabled/></span>
+                                    <span><input class="contour_field input_char" type="text" id="prestaGaz" value="'.$dette->prestaGaz.'" disabled/></span>
                                </div>
                                </li>
                                </ul>
@@ -497,11 +497,11 @@ function generalite() {
                 <li class="membre_foyer">
                     <div class="colonne">
                         <span class="attribut">Nom :</span>
-                        <span><input class="input_char" type="text" id="nom" value="'.$user->nom.'" disabled/></span>
+                        <span><input class="contour_field input_char" type="text" id="nom" value="'.$user->nom.'" disabled/></span>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Prenom :</span>
-                        <span><input class="input_char" type="text" id="prenom" value="'.$user->prenom.'" disabled/></span>
+                        <span><input class="contour_field input_char" type="text" id="prenom" value="'.$user->prenom.'" disabled/></span>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Situation Familiale :</span>
@@ -521,7 +521,7 @@ function generalite() {
                     <div class="colonne">
                         <span class="attribut">Date de naissance :</span>
                         <span>
-                            <input class="input_char" type="text" id="datenaissance" value="'.date('d/m/Y', $user->dateNaissance).'" disabled/>
+                            <input class="contour_field input_char" type="text" id="datenaissance" value="'.date('d/m/Y', $user->dateNaissance).'" disabled/>
                         </span>
                     </div>
                     <div class="colonne">
@@ -559,15 +559,15 @@ function generalite() {
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Télèphone :</span>
-                    <span><input class="input_char" type="text" id="telephone" value="'.$user->telephone.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="telephone" value="'.$user->telephone.'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Portable :</span>
-                    <span><input class="input_char" type="text" id="portable" value="'.$user->portable.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="portable" value="'.$user->portable.'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Email :</span>
-                    <span><input class="input_char" type="text" id="email" value="'.$user->email.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="email" value="'.$user->email.'" disabled/></span>
                 </div>
             </li>
         </ul>
@@ -597,25 +597,25 @@ function generalite() {
                 </div>
                 <div class="colonne">
                     <span class="attribut">Employeur :</span>
-                    <span><input class="input_char" type="text" id="employeur" value="'.$user->employeur.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="employeur" value="'.$user->employeur.'" disabled/></span>
                 </div> 
             </li>
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Inscription P.E :</span>
-                    <span><input class="input_char" type="text" id="dateinscriptionpe" value="'.$user->dateInscriptionPe.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="dateinscriptionpe" value="'.$user->dateInscriptionPe.'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">N° dossier P.E :</span>
-                    <span><input class="input_char" type="text" id="numdossierpe" value="'.$user->numDossierPe.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="numdossierpe" value="'.$user->numDossierPe.'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Début droits P.E :</span>
-                    <span><input class="input_char" type="text" id="datedebutdroitpe" value="'.$user->dateDebutDroitPe.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebutdroitpe" value="'.$user->dateDebutDroitPe.'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Fin droits P.E :</span>
-                    <span><input class="input_char" type="text" id="datefindroitpe" value="'.$user->dateFinDroitPe.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefindroitpe" value="'.$user->dateFinDroitPe.'" disabled/></span>
                 </div> 
             </li>
         </ul>
@@ -635,8 +635,8 @@ function generalite() {
                 </div>
                 <div class="colonne">
                     <span class="attribut">N° :</span>
-                    <span><input maxlength="13" class="input_numsecu" type="text" id="numsecu" value="'.$user->numSecu.'" size="13" disabled/></span>
-                    <span><input maxlength="2" class="input_cle" type="text" id="clefsecu" value="'.$user->clefSecu.'" size="2" disabled/></span>
+                    <span><input maxlength="13" class="contour_field input_numsecu" type="text" id="numsecu" value="'.$user->numSecu.'" size="13" disabled/></span>
+                    <span><input maxlength="2" class="contour_field input_cle" type="text" id="clefsecu" value="'.$user->clefSecu.'" size="2" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Régime :</span>
@@ -660,11 +660,11 @@ function generalite() {
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début droit :</span>
-                    <span><input class="input_char" type="text" id="datedebitcouvsecu" value="'.$user->dateDebutCouvSecu.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebitcouvsecu" value="'.$user->dateDebutCouvSecu.'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date fin de droits :</span>
-                    <span><input class="input_char" type="text" id="datefincouvsecu" value="'.$user->dateFinCouvSecu.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefincouvsecu" value="'.$user->dateFinCouvSecu.'" disabled/></span>
                 </div>
             </li>
         </ul>
@@ -689,15 +689,15 @@ $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">N° adhérent :</span>
-                    <span><input class="input_char" type="text" id="numadherentmut" value="'.$user->numAdherentMut.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="numadherentmut" value="'.$user->numAdherentMut.'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début :</span>
-                    <span><input class="input_char" type="text" id="datedebutcouvmut" value="'.$user->dateDebutCouvMut.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebutcouvmut" value="'.$user->dateDebutCouvMut.'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date fin :</span>
-                    <span><input class="input_char" type="text" id="datefincouvmut" value="'.$user->dateFinCouvMut.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefincouvmut" value="'.$user->dateFinCouvMut.'" disabled/></span>
                 </div>
             </li>
         </ul>
@@ -720,7 +720,7 @@ $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">N° allocataire :</span>
-                    <span><input class="input_char" type="text" id="numallocatairecaf" value="'.$user->numAllocataireCaf.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="numallocatairecaf" value="'.$user->numAllocataireCaf.'" disabled/></span>
                 </div>
             </li>
         </ul>

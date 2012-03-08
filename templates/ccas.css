@@ -121,7 +121,8 @@ input[type=submit] , input[type=reset], input[type=button] {
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 }
 
-.login input[type="text"]:focus, .login input[type="password"]:focus, #search:focus, .formulaire input[type=text]:hover, .formulaire input[type=text]:focus {
+.login input[type="text"]:focus, .login input[type="password"]:focus, #search:focus, .formulaire input[type=text]:hover, .formulaire input[type=text]:focus,
+.colonne input[type=text]:hover, .colonne input[type=text]:focus {
     border: 1px solid #4D90FE;
     outline: none; /*Pour enlever la bordur automatique jaune de chrome*/
 }
@@ -425,18 +426,22 @@ legend {
 
 .input_num {
     width: 20%;
+    padding: 2px 3px;
 }
 
 .input_char {
-    width: 47%;
+    width: 45%;
+    padding: 2px 3px;
 }
 
 .input_numsecu {
-    width: 35%;
+    width: 32%;
+    padding: 2px 3px;
 }
 
 .input_cle {
-    width: 10%;
+    width: 8%;
+    padding: 2px 3px;
 }
 
 .timemaj {
