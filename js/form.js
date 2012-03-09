@@ -235,6 +235,20 @@ $(function() {
                 }
             });
         }
+        else if(value == 'updateContact') {
+            datastring = 'idIndividu='+idIndividu+'&telephone='+$('#telephone').val();
+            datastring += '&portable='+$('#portable').val()+'&email='+$('#email').val();
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatecontact',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
     });
     
     

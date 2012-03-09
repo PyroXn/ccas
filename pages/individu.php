@@ -123,6 +123,15 @@ function deleteCredit() {
     echo budget();   
 }
 
+function updateContact() {
+    include_once('./lib/config.php');
+    $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
+    $individu->telephone = $_POST['telephone'];
+    $individu->portable = $_POST['portable'];
+    $individu->email = $_POST['email'];
+    $individu->save();
+}
+
 //function generalite() {
 //    include_once('./lib/config.php');
 //    $liens = Doctrine_Core::getTable('lienfamille')->findAll();

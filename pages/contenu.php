@@ -506,14 +506,14 @@ function generalite() {
                     <div class="colonne">
                         <span class="attribut">Situation Familiale :</span>
                         <div class="select classique" role="select_situation">
-                            <div id="situation" class="option">Marié(e)</div>
+                            <div id="situation" class="option" value=" ">-----</div>
                             <div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Nationalité :</span>
                         <div class="select classique" role="select_natio">
-                        <div id="nationalite" class="option">Française</div>
+                        <div id="nationalite" class="option" value=" ">-----</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </li>
@@ -534,14 +534,14 @@ function generalite() {
                     <div class="colonne">
                         <span class="attribut">Sexe :</span>
                         <div class="select classique" role="select_sexe">
-                            <div id="sexe" class="option">Homme</div>
+                            <div id="sexe" class="option" value=" ">-----</div>
                             <div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statut">
-                            <div id="statut" class="option">Chef lui même</div>
+                            <div id="statut" class="option" value=" ">-----</div>
                             <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -584,14 +584,14 @@ function generalite() {
                 <div class="colonne">
                     <span class="attribut">Niveau étude :</span>
                     <div class="select classique" role="select_etude">
-                        <div id="etude" class="option">BAC Général</div>
+                        <div id="etude" class="option" value=" ">-----</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Profession :</span>
                     <div class="select classique" role="select_profession">
-                        <div id="profession" class="option">Secrétaire</div>
+                        <div id="profession" class="option" value=" ">-----</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -630,9 +630,14 @@ function generalite() {
         <ul id="membre_foyer_list">
             <li class="membre_foyer">
                 <div class="colonne">
-                    <span class="attribut">Assuré :</span>
-                    <span class="checkbox"></span>
-                </div>
+                    <span class="attribut">Assuré : </span>';
+    if($user->assure == 1) {
+        $contenu .= '<span class="checkbox checkbox_active" value="1"></span>';
+    } else {
+        $contenu .= '<span class="checkbox" value="0"></span>';
+    }
+                    
+    $contenu .= '</div>
                 <div class="colonne">
                     <span class="attribut">N° :</span>
                     <span><input maxlength="13" class="contour_field input_numsecu" type="text" id="numsecu" value="'.$user->numSecu.'" size="13" disabled/></span>
@@ -641,7 +646,7 @@ function generalite() {
                 <div class="colonne">
                     <span class="attribut">Régime :</span>
                     <div class="select classique" role="select_regime">
-                        <div id="regime" class="option">Local</div>
+                        <div id="regime" class="option" value=" ">-----</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -650,13 +655,18 @@ function generalite() {
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
                     <div class="select classique" role="select_couv">
-                        <div id="couv" class="option"></div>
+                        <div id="couv" class="option" value=" ">-----</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">CMU :</span>
-                    <span class="checkbox"></span>
+                    <span class="attribut">CMU : </span>';
+    if($user->cmu == 1) {
+        $contenu .= '<span class="checkbox checkbox_active" value="1"></span>';
+    } else {
+        $contenu .= '<span class="checkbox" value="0"></span>';
+    }
+    $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début droit :</span>
@@ -681,11 +691,16 @@ $contenu .= '
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
                     <div class="select classique" role="select_mut">
-                        <div id="mut" class="option"></div>
+                        <div id="mut" class="option" value=" ">-----</div>
                         <div class="fleche_bas"> </div>
                     </div>
-                    <span class="attribut">CMUC :</span>
-                    <span class="checkbox"></span>
+                    <span class="attribut">CMUC : </span>';
+if($user->CMUC == 1) {
+    $contenu .= '<span class="checkbox checkbox_active" value="1"></span>';
+} else {
+    $contenu .= '<span class="checkbox" value="0"></span>';
+}
+$contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">N° adhérent :</span>
@@ -714,7 +729,7 @@ $contenu .= '
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
                     <div class="select classique" role="select_caf">
-                        <div id="caf" class="option"></div>
+                        <div id="caf" class="option" value=" ">-----</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -729,7 +744,27 @@ $contenu .= '
     </div>';
 
 // COMBO BOX
-    $contenu .= ' <ul class="select_couv">';
+$contenu .= '<ul class="select_caf">';
+    foreach($organismes as $organisme) {
+        if($organisme->libelleorganisme->libelle == 'Caisse CAF') {
+            $contenu .= '
+                    <li value="'.$organisme->id.'">
+                        <div>'.utf8_decode($organisme->appelation).'</div>
+                    </li>';
+        }
+    }
+    $contenu .= '</ul>';
+$contenu .= '<ul class="select_mut">';
+    foreach($organismes as $organisme) {
+        if($organisme->libelleorganisme->libelle == 'Mutuelle') {
+            $contenu .= '
+                    <li value="'.$organisme->id.'">
+                        <div>'.utf8_decode($organisme->appelation).'</div>
+                    </li>';
+        }
+    }
+    $contenu .= '</ul>';
+    $contenu .= '<ul class="select_couv">';
     foreach($organismes as $organisme) {
         if($organisme->libelleorganisme->libelle == 'Caisse SECU') {
             $contenu .= '

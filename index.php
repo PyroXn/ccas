@@ -87,6 +87,10 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         deleteCredit();
         break;
+    case 'updatecontact':
+        include_once('./pages/individu.php');
+        updateContact();
+        break;
     default:
         home();
         break;
