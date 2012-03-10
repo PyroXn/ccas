@@ -110,7 +110,11 @@ function generateInfoFoyer($foyer) {
                 <li class="membre_foyer">
                     <div class="colonne">
                         <span class="attribut"> test</span>
-                        <span><input class="input_num autoComplete" type="text" id="salaire" table="rue" champ="rue"/><div class="liste_sugestion"></div></span>
+                        <span>
+                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="lol" champ="rue"/>
+                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="rue" champ="rue"/>
+                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="rue" champ="lol"/>
+                        </span>
                     </div>
                 </li>
             </ul>

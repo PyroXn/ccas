@@ -1,5 +1,6 @@
 
         <div id="messageJS" class="messageJS"></div>
+        <div id="suggestion"></div>
         <div class="formulaire" action="creation_foyer">
             <h2>Foyer</h2>
             <div class="colonne_droite">

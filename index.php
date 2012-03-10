@@ -383,10 +383,10 @@ function autoComplete() {
         ->limit(5);
     
 
-    $retour = '<ul>';
+    $retour = '<ul class="liste_suggestion" table="'.$table.'" champ="'.$table.'">';
     
     foreach ($like->execute() as $tmp) {
-        $retour .= '<li>'.$tmp->$champ.'</li>';
+        $retour .= '<li valeur="'.$tmp->id.'">'.$tmp->$champ.'</li>';
     }
     $retour .= '</ul>';
     echo $retour;
