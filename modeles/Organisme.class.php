@@ -24,6 +24,7 @@ class Organisme extends Doctrine_Record {
             'foreign' => 'id'
                 )
         );
+    }
 }
 
 ?>
