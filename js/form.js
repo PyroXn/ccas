@@ -11,6 +11,13 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
     });
     
+    $('#createCredit').live("click", function() {        
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_credit"]').width()/2;
+        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_credit"]').height();
+        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_credit"]'));
+    });
+
     
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
@@ -27,17 +34,21 @@ $(function() {
         $(attr).toggleClass('en_execution');
     });
     
-    $('.checkbox').live("click", function(){
+    $('.checkboxChefFamille').live("click", function(){
         if(!$(this).hasClass('checkbox_active')) {
             $('.checkbox_active').toggleClass('checkbox_active');
             $(this).toggleClass('checkbox_active');
-            $('#updateIndividu').css({
+            $('.update').css({
                 "display":"block"
             });
-            $('#updateIndividu').css({
+            $('.update').css({
                 "margin-right":"0"
             });
         }
+    });
+    
+    $('.checkbox').live("click", function(){
+        $(this).toggleClass('checkbox_active');
     });
     
     $('.en_execution > li').live("click", function() {
@@ -51,6 +62,8 @@ $(function() {
     $('.bouton').live("click", function() {
         var value = $(this).attr('value');
         var formActuel = $(this).parent().parent().parent();
+        var loc = $(this);
+        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
         if(value=='cancel') {
             $('.en_execution').toggle();
             $('.en_execution').toggleClass('en_execution');
@@ -84,6 +97,11 @@ $(function() {
                     datastring += '&nom=' + $('#form_2').val();
                     datastring += '&prenom=' + $('#form_3').val();
                     break;
+                case 'creation_credit':
+                    datastring += '&idIndividu='+idIndividu+'&organisme='+$('#organisme').val();
+                    datastring += '&mensualite='+$('#mensualite').val()+'&duree='+$('#duree').val();
+                    datastring += '&total='+$('#total').val();
+                    break;
                         
             }
             $.ajax({
@@ -112,6 +130,9 @@ $(function() {
                             /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
                             $('#contenu').html(data.newIndividu);
                             break;
+                        case 'creation_credit':
+                            $("#contenu").html(data.budget);
+                            break;
                     }
                 //FONCTIONNE PAS 
                 //                    if(!($.isEmptyObject(data.listeIndividu) && $.isEmptyObject(data.menu))) {
@@ -137,7 +158,7 @@ $(function() {
             $.ajax({
                 type: 'post',
                 data: datastring,
-                url: './index.php?p=individu',
+                url: './index.php?p=updateChefDeFamille',
                 //Succès de la requête
                 success: function(contenu) {
                     console.log(contenu);
@@ -145,8 +166,91 @@ $(function() {
                 }
             });
             
+        } else if(value == 'updateRessource') {
+            datastring = 'idIndividu='+idIndividu+'&salaire='+$('#salaire').val();
+            datastring += '&chomage='+$('#chomage').val()+'&revenuAlloc='+$('#revenuAlloc').val();
+            datastring += '&ass='+$('#ass').val()+'&aah='+$('#aah').val();
+            datastring += '&rsaSocle='+$('#rsaSocle').val()+'&rsaActivite='+$('#rsaActivite').val();
+            datastring += '&retraitComp='+$('#retraitComp').val()+'&pensionAlim='+$('#pensionAlim').val();
+            datastring += '&pensionRetraite='+$('#pensionRetraite').val()+'&autreRevenu='+$('#autreRevenu').val();
+            datastring += '&natureAutre='+$('#natureRevenu').val();
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updateressource',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        } else if(value == 'updateDepense') {
+            datastring = 'idIndividu='+idIndividu+'&impotRevenu='+$('#impotRevenu').val();
+            datastring += '&impotLocaux='+$('#impotLocaux').val()+'&pensionAlim='+$('#pensionAlim').val();
+            datastring += '&mutuelle='+$('#mutuelle').val()+'&electricite='+$('#electricite').val();
+            datastring += '&gaz='+$('#gaz').val()+'&eau='+$('#eau').val();
+            datastring += '&chauffage='+$('#chauffage').val()+'&telephonie='+$('#telephonie').val();
+            datastring += '&internet='+$('#internet').val()+'&television='+$('#television').val();
+            datastring += '&autreDepense='+$('#autreDepense').val()+'&natureDepense='+$('#natureDepense').val();
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatedepense',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateDepenseHabitation') {
+            datastring = 'idIndividu='+idIndividu+'&loyer='+$('#loyer').val();
+            datastring += '&apl='+$('#apl').val();
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatedepensehabitation',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateDette') {
+            datastring = 'idIndividu='+idIndividu+'&arriereLocatif='+$('#arriereLocatif').val();
+            datastring += '&fraisHuissier='+$('#fraisHuissier').val()+'&autreDette='+$('#autreDette').val();
+            datastring += '&natureDette='+$('#natureDette').val()+'&arriereElec='+$('#arriereElec').val();
+            datastring += '&prestaElec='+$('#prestaElec').val()+'&arriereGaz='+$('#arriereGaz').val();
+            datastring += '&prestaGaz='+$('#prestaGaz').val();
+            console.log('update Dette :'+datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatedette',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateContact') {
+            datastring = 'idIndividu='+idIndividu+'&telephone='+$('#telephone').val();
+            datastring += '&portable='+$('#portable').val()+'&email='+$('#email').val();
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatecontact',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
         }
     });
+    
     
     
     function effacer() {
@@ -164,4 +268,85 @@ $(function() {
             left:x.left
         });
     }
+    
+    $('.edit').live("click", function() {
+        $(this).parent().next().children().find('input').removeAttr("disabled");
+        var update = $(this).parent().parent().children('.update');
+        $(update).css({
+            "margin-right":"0"
+        });
+        $(update.after()).slideToggle();
+    });
+    
+    $('.archive').live("click", function() {
+        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
+        if($(this).parent().attr('role') == "ressource") {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archiveressource',
+                //Succès de la requête
+                success: function(data) {
+                    $('#contenu').html(data);
+                }
+            });
+        } else if($(this).parent().attr('role') == "depense") {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archivedepense',
+                //Succès de la requête
+                success: function(data) {
+                    $('#contenu').html(data);
+                }
+            });
+        } else if($(this).parent().attr('role') == "dette") {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archivedette',
+                //Succès de la requête
+                success: function(data) {
+                    $('#contenu').html(data);
+                }
+            });
+        }
+    });
+    
+    $('.delete').live("click", function() {
+        var idFoyer = $(this).parent().parent().attr('id_foyer');
+        var idIndividu = $(this).parent().parent().attr('id_individu');
+        datastring = 'idFoyer=' + idFoyer;
+        datastring += '&idIndividu=' + idIndividu;
+        datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
+        console.log(datastring);
+        $.ajax({
+            type: 'post',
+            dataType:'json',
+            data: datastring,
+            url: './index.php?p=deleteIndividu',
+            //Succès de la requête
+            success: function(data) {
+                $("#list_individu").html(data.listeIndividu);
+                $('#contenu').html(data.contenu);
+            }
+        });
+    });
+    
+    $('.delete_credit').live("click", function() {
+        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
+        var id = $(this).parent().attr('name');
+        datastring = 'id='+id+'&idIndividu='+idIndividu;
+        $.ajax({
+            type: 'post',
+            data: datastring,
+            url: './index.php?p=deletecredit',
+            success: function(data) {
+                $("#contenu").html(data);
+            }
+        });
+    });
 });

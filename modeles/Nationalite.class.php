@@ -6,7 +6,7 @@ class Nationalite extends Doctrine_Record {
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('nationalite', 'string', 90);
+        $this->hasColumn('nationalite', 'string', 90, array('default' => ' '));
     }
 }
 ?>

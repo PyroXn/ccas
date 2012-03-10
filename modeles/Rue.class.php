@@ -6,7 +6,7 @@ class Rue extends Doctrine_Record {
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('rue', 'string', 255);
+        $this->hasColumn('rue', 'string', 255,array('default' => ' '));
     }
 }
 ?>

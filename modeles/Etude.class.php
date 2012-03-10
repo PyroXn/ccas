@@ -6,7 +6,7 @@ class Etude extends Doctrine_Record {
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('etude', 'string', 90);
+        $this->hasColumn('etude', 'string', 90, array('default' => ' '));
     }
 }
 ?>

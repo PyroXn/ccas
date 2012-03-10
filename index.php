@@ -19,6 +19,9 @@ switch (@$_GET['p']) {
     case 'search':
         search();
         break;
+    case 'autoComplete':
+        autoComplete();
+        break;
     case 'foyer':
         foyer();
         break;
@@ -44,9 +47,49 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         editUser();
         break;
-    case 'individu':
+    case 'updateChefDeFamille':
         include_once('./pages/individu.php');
-        updateMembreFoyer();
+        updateChefDeFamille();
+        break;
+    case 'deleteIndividu':
+        include_once('./pages/individu.php');
+        deleteIndividu();
+        break;
+    case 'updateressource':
+        include_once('./pages/individu.php');
+        updateRessource();
+        break;
+    case 'updatedepense':
+        include_once('./pages/individu.php');
+        updateDepense();
+        break;
+    case 'updatedepensehabitation':
+        include_once('./pages/individu.php');
+        updateDepenseHabitation();
+        break;
+    case 'updatedette':
+        include_once('./pages/individu.php');
+        updateDette();
+        break;
+    case 'archiveressource':
+        include_once('./pages/individu.php');
+        archiveRessource();
+        break;
+    case 'archivedepense':
+        include_once('./pages/individu.php');
+        archiveDepense();
+        break;
+    case 'archivedette':
+        include_once('./pages/individu.php');
+        archiveDette();
+        break;
+    case 'deletecredit':
+        include_once('./pages/individu.php');
+        deleteCredit();
+        break;
+    case 'updatecontact':
+        include_once('./pages/individu.php');
+        updateContact();
         break;
     default:
         home();
@@ -156,6 +199,7 @@ function search() {
 
 function foyer() {
     include_once('./pages/contenu.php');
+    $_SESSION['idIndividu'] = $_POST['idIndividu'];
     $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
     $menu = generationHeaderNavigation('foyer');
     $contenu = foyerContenu($_POST['idFoyer']);
@@ -238,6 +282,9 @@ function generationHeaderNavigation($mode) {
 
 function accueilContenu() {
     $retour = '
+        <div class="input_text">
+                    <input id="form_4" class="contour_field date" type="text" title="Date de naissance" placeholder="Date de naissance">
+                </div>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget libero vel massa sagittis adipiscing sed vitae enim. Praesent non eros nec nunc vestibulum pharetra in in nisl. Nulla et luctus ante. Donec et consequat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque laoreet facilisis egestas. Sed a ullamcorper risus.
             In convallis turpis pharetra ante commodo convallis. In sit amet neque vitae libero luctus mollis. Morbi hendrerit, felis eu cursus ornare, arcu mi sodales mauris, non tincidunt justo odio a lacus. Maecenas vel sodales nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae velit ac est laoreet sollicitudin. Nullam suscipit porttitor pellentesque. Ut vehicula ligula at leo rhoncus tristique. Praesent scelerisque, orci at consectetur pretium, libero nisl mattis sapien, nec elementum tortor sem sed enim. Vestibulum vitae vulputate felis. Aliquam laoreet quam mollis velit gravida interdum lacinia orci sodales. Vivamus non placerat magna. Duis leo nunc, tincidunt vel pharetra sit amet, mollis id nunc. Etiam semper fermentum mauris nec sodales. Morbi tincidunt, nisi vitae pellentesque fringilla, ipsum turpis porta massa, at tincidunt mi tellus congue massa.
@@ -313,6 +360,35 @@ function scroll() {
             </li>';
         $i++;
     }
+    echo $retour;
+}
+
+function autoComplete() {
+    $searchword = $_POST['searchword'];
+    $table = $_POST['table'];
+    $champ = $_POST['champ'];
+
+    $retour = '';
+    $t = Doctrine_Core::getTable($table);
+    $likeNb = Doctrine_Query::create()
+        ->from($table)
+        ->where($champ + ' LIKE ?', array($searchword . '%'))
+        ->orderBy($champ + ' ASC');
+    $nb = $likeNb->count();
+    
+    $like = Doctrine_Query::create()
+        ->from($table)
+        ->where($champ .' LIKE ?', $searchword.'%')
+        ->orderBy($champ .' ASC')
+        ->limit(5);
+    
+
+    $retour = '<ul>';
+    
+    foreach ($like->execute() as $tmp) {
+        $retour .= '<li>'.$tmp->$champ.'</li>';
+    }
+    $retour .= '</ul>';
     echo $retour;
 }
 

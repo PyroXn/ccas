@@ -126,8 +126,30 @@ $(function() {
         });
     });  
     
+    $('.autoComplete').live("keyup", function()  {
+        var searchbox = $(this).val();
+        var table = $(this).attr('table');
+        var champ = $(this).attr('champ');
+        autoComplete(searchbox, table, champ, $(this));
+    });
     
 });
+
+function autoComplete(searchbox, table, champ, elmt) {
+    var dataString = 'searchword='+ searchbox;
+    dataString += '&table=' + table
+    dataString += '&champ=' + champ
+    $.ajax({
+        type: "POST",
+        url: "./index.php?p=autoComplete",
+        data: dataString,
+        cache: false,
+        success: function(html)
+        {
+            $('.liste_sugestion').html(html);
+        }
+    });
+}
 
 function search(searchbox) {
     var dataString = 'searchword='+ searchbox;

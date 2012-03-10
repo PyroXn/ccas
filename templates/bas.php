@@ -3,10 +3,6 @@
         <div class="formulaire" action="creation_foyer">
             <h2>Foyer</h2>
             <div class="colonne_droite">
-<!--                <select name="civilite" placeholder="Civilite">
-                    <option value="1">Madame</option>
-                    <option value="2">Monsieur</option>
-                </select>-->
                 <div class="select classique" role="select_civilite">
                     <div id="form_1" class="option">Madame</div>
                     <div class="fleche_bas"> </div>

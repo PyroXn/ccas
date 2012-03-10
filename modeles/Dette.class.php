@@ -7,16 +7,16 @@ class Dette extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('arriereLocatif', 'float');
-        $this->hasColumn('fraisHuissier', 'float'); 
-        $this->hasColumn('arriereElectricite', 'float');
-        $this->hasColumn('arriereGaz', 'float');
-        $this->hasColumn('autreDette', 'float');
-        $this->hasColumn('noteAutreDette', 'string', 255);
-        $this->hasColumn('idPrestaElec', 'integer', 5);
-        $this->hasColumn('idPrestaGaz', 'integer', 5);
-        $this->hasColumn('idIndidivu', 'integer', 5);
-        $this->hasColumn('dateCreation', 'integer', 20);
+        $this->hasColumn('arriereLocatif', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('fraisHuissier', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('arriereElectricite', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('arriereGaz', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('autreDette', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('natureDette', 'string', 255, array('default' => ' '));
+        $this->hasColumn('prestaElec', 'string', 50);
+        $this->hasColumn('prestaGaz', 'string', 50);
+        $this->hasColumn('idIndividu', 'integer', 5);
+        $this->hasColumn('dateCreation', 'integer', 20, array('default' => '0'));
     }
     public function setUp() {
         $this->hasOne('individu as individu', array(

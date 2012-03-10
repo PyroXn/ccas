@@ -16,6 +16,15 @@ ul {
     list-style: none outside none;
 }
 
+.clearboth {
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    width: 100%;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -112,7 +121,8 @@ input[type=submit] , input[type=reset], input[type=button] {
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 }
 
-.login input[type="text"]:focus, .login input[type="password"]:focus, #search:focus, .formulaire input[type=text]:hover, .formulaire input[type=text]:focus {
+.login input[type="text"]:focus, .login input[type="password"]:focus, #search:focus, .formulaire input[type=text]:hover, .formulaire input[type=text]:focus,
+.colonne input[type=text]:hover, .colonne input[type=text]:focus {
     border: 1px solid #4D90FE;
     outline: none; /*Pour enlever la bordur automatique jaune de chrome*/
 }
@@ -355,9 +365,10 @@ input[type=submit] , input[type=reset], input[type=button] {
     background: #FCFCE2;
 }
 
-.chef_famille {
+.droite {
     float: right;
     font-size: 12px;
+    margin: 4px;
 }
 
 .date_naissance {
@@ -398,4 +409,74 @@ legend {
 
 .deconnexion {
     border-top: 1px solid #E5E5E5;
+}
+
+/*** BUDGET ***/
+.colonne {
+    display: inline-block;
+    width: 24%;
+}
+
+.attribut {
+    display: inline-block;
+    width: 50%;
+    font-weight: bold;
+    text-align: right;
+}
+
+.input_num {
+    width: 20%;
+    padding: 2px 3px;
+}
+
+.input_char {
+    width: 45%;
+    padding: 2px 3px;
+}
+
+.input_numsecu {
+    width: 32%;
+    padding: 2px 3px;
+}
+
+.input_cle {
+    width: 8%;
+    padding: 2px 3px;
+}
+
+.timemaj {
+    float: right;
+    font-style: italic; 
+    font-size: 12px;
+    color: #3A505B;
+}
+
+.edit {
+    background: url('./img/edit.png') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.archive {
+    position: relative;
+    bottom: 2px;
+    background: url('./img/archive.png') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.delete_credit {
+    background: transparent url('./img/delete.png') no-repeat;
+    float: right;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
 }

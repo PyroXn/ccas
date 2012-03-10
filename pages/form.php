@@ -28,6 +28,14 @@ function form() {
             $retour = array('listeIndividu' => $listeIndividu, 'newIndividu' => $newIndividu);
             echo json_encode($retour);
             break;
+        case 'creation_credit':
+            include_once('./pages/contenu.php');
+            createCredit($_POST['idIndividu'], $_POST['organisme'], $_POST['mensualite'], $_POST['duree'], $_POST['total']);
+            $budget = budget();
+            $retour = array('budget' => $budget);
+            echo json_encode($retour);
+            break;
+            
     }
 }
 
@@ -43,8 +51,36 @@ function creationFoyer($civilite, $nom, $prenom) {
     $individu->chefDeFamille = true;
     $individu->idFoyer = $foyer->id;
     $individu->save();
+    
+   
+    createRevenu($individu->id);
+    createDepense($individu->id);
+    createDette($individu->id);
+ 
     return array('idFoyer' => $foyer->id, 'idIndividu' => $individu->id);
 //    return creationListeByFoyer($foyer->id, $individu->id);
+}
+
+function createRevenu($idIndividu) {
+    $revenu = new Revenu();
+    $revenu->idIndividu = $idIndividu;
+    $revenu->dateCreation = time();
+    $revenu->save();
+} 
+
+function createDepense($idIndividu) {
+    $depense = new Depense();
+    $depense->idIndividu = $idIndividu;
+    $depense->dateCreation = time();
+    $depense->save();
+}
+
+function createDette($idIndividu) {
+     
+    $dette = new Dette();
+    $dette->idIndividu = $idIndividu;
+    $dette->dateCreation = time();
+    $dette->save();
 }
 
 function createUser($login,$password,$nomcomplet) {
@@ -65,6 +101,21 @@ function createIndividu($idFoyer, $civilite, $nom, $prenom) {
     $individu->prenom = $prenom;
     $individu->idFoyer = $idFoyer;
     $individu->save();
+    createRevenu($individu->id);
+    createDepense($individu->id);
+    createDette($individu->id);
     return FoyerContenu($idFoyer);
+}
+
+function createCredit($idIndividu, $organisme, $mensualite, $duree, $total) {
+    include_once('./lib/config.php');
+    $credit = new Credit();
+    $credit->organisme = $organisme;
+    $credit->mensualite = $mensualite;
+    $credit->dureeMois = $duree;
+    $credit->totalRestant = $total;
+    $credit->idIndividu = $idIndividu;
+    $credit->dateAjout = time();
+    $credit->save();
 }
 ?>

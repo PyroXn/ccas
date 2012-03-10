@@ -7,21 +7,21 @@ class Revenu extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('salaire', 'float');
-        $this->hasColumn('chomage', 'float'); 
-        $this->hasColumn('revenuAlloc', 'float');
-        $this->hasColumn('ass', 'float');
-        $this->hasColumn('aah', 'float');
-        $this->hasColumn('rsaSocle', 'float');
-        $this->hasColumn('rsaActivite', 'float');
-        $this->hasColumn('pensionAlim', 'float');
-        $this->hasColumn('pensionRetraite', 'float');
-        $this->hasColumn('retraitComp', 'float');
-        $this->hasColumn('autreRevenu', 'float');
-        $this->hasColumn('natureAutre', 'string', 150); // Nature autre revenu
-        $this->hasColumn('idIndividu', 'integer', 10);
-        $this->hasColumn('aideLogement', 'float');
-        $this->hasColumn('dateCreation', 'integer', 20);
+        $this->hasColumn('salaire', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('chomage', 'float', null, array('type' => 'float', 'default' => 0)); 
+        $this->hasColumn('revenuAlloc', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('ass', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('aah', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('rsaSocle', 'float',null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('rsaActivite', 'float',null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('pensionAlim', 'float',null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('pensionRetraite', 'float',null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('retraitComp', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('autreRevenu', 'float',null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('natureAutre', 'string', 150,array('default' => '')); // Nature autre revenu
+        $this->hasColumn('idIndividu', 'integer', 10,array('default' => '0'));
+        $this->hasColumn('aideLogement', 'float',null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('dateCreation', 'integer', 20,array('default' => '0'));
     }
     
     public function setUp() {
