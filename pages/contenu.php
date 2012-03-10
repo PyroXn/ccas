@@ -636,9 +636,9 @@ function generalite() {
                 <div class="colonne">
                     <span class="attribut">Assuré : </span>';
     if($user->assure == 1) {
-        $contenu .= '<span class="checkbox checkbox_active" value="1"></span>';
+        $contenu .= '<span id="assure" class="checkbox checkbox_active" value="1"></span>';
     } else {
-        $contenu .= '<span class="checkbox" value="0"></span>';
+        $contenu .= '<span id="assure" class="checkbox" value="0"></span>';
     }
                     
     $contenu .= '</div>
@@ -649,36 +649,36 @@ function generalite() {
                 </div>
                 <div class="colonne">
                     <span class="attribut">Régime :</span>
-                    <div class="select classique" role="select_regime">
-                        <div id="regime" class="option" value=" ">-----</div>
-                        <div class="fleche_bas"> </div>
+                    <div class="select classique" role="select_regime">';
+$contenu .= $user->regime == ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.utf8_decode($user->regime).'</div>';                   
+$contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
             </li>
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_couv">
-                        <div id="couv" class="option" value=" ">-----</div>
-                        <div class="fleche_bas"> </div>
+                    <div class="select classique" role="select_couv">';
+$contenu .= $user->idCaisseSecu == null ? '<div id="caisseCouv" class="option" value=" ">-----</div>' : '<div id="caisseCouv" class="option" value="'.$user->idCaisseSecu.'">'.$user->secu->appelation.'</div>';                   
+$contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
                     <span class="attribut">CMU : </span>';
     if($user->cmu == 1) {
-        $contenu .= '<span class="checkbox checkbox_active" value="1"></span>';
+        $contenu .= '<span id="cmu" class="checkbox checkbox_active" value="1"></span>';
     } else {
-        $contenu .= '<span class="checkbox" value="0"></span>';
+        $contenu .= '<span id="cmu" class="checkbox" value="0"></span>';
     }
     $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début droit :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebitcouvsecu" value="'.$user->dateDebutCouvSecu.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebutcouvsecu" value="'.date('d/m/Y', $user->dateDebutCouvSecu).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date fin de droits :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefincouvsecu" value="'.$user->dateFinCouvSecu.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefincouvsecu" value="'.date('d/m/Y', $user->dateFinCouvSecu).'" disabled/></span>
                 </div>
             </li>
         </ul>
@@ -694,15 +694,15 @@ $contenu .= '
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_mut">
-                        <div id="mut" class="option" value=" ">-----</div>
-                        <div class="fleche_bas"> </div>
+                    <div class="select classique" role="select_mut">';
+$contenu .= $user->idCaisseMut == null ? '<div id="mutuelle" class="option" value="">-----</div>' : '<div id="mutuelle" class="option" value="'.$user->idCaisseMut.'">'.$user->mutuelle->appelation.'</div>';                   
+$contenu .= '<div class="fleche_bas"> </div>
                     </div>
                     <span class="attribut">CMUC : </span>';
 if($user->CMUC == 1) {
-    $contenu .= '<span class="checkbox checkbox_active" value="1"></span>';
+    $contenu .= '<span id="cmuc" class="checkbox checkbox_active"></span>';
 } else {
-    $contenu .= '<span class="checkbox" value="0"></span>';
+    $contenu .= '<span id="cmuc" class="checkbox"></span>';
 }
 $contenu .= '
                 </div>
@@ -712,11 +712,11 @@ $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebutcouvmut" value="'.$user->dateDebutCouvMut.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebutcouvmut" value="'.date('d/m/Y',$user->dateDebutCouvMut).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date fin :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefincouvmut" value="'.$user->dateFinCouvMut.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefincouvmut" value="'.date('d/m/Y', $user->dateFinCouvMut).'" disabled/></span>
                 </div>
             </li>
         </ul>
@@ -732,9 +732,9 @@ $contenu .= '
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_caf">
-                        <div id="caf" class="option" value=" ">-----</div>
-                        <div class="fleche_bas"> </div>
+                    <div class="select classique" role="select_caf">';
+$contenu .= $user->idCaisseCaf == null ? '<div id="caf" class="option" value="">-----</div>' : '<div id="caf" class="option" value="'.$user->idCaisseCaf.'">'.$user->caf->appelation.'</div>';                   
+$contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
@@ -743,7 +743,7 @@ $contenu .= '
                 </div>
             </li>
         </ul>
-        <div class="bouton modif update" value="updateMutuelle">Enregistrer</div>
+        <div class="bouton modif update" value="updateCaf">Enregistrer</div>
         <div class="clearboth"></div>
     </div>';
 
@@ -752,8 +752,8 @@ $contenu .= '<ul class="select_caf">';
     foreach($organismes as $organisme) {
         if($organisme->libelleorganisme->libelle == 'Caisse CAF') {
             $contenu .= '
-                    <li value="'.$organisme->id.'">
-                        <div>'.utf8_decode($organisme->appelation).'</div>
+                    <li>
+                        <div value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
                     </li>';
         }
     }
@@ -762,8 +762,8 @@ $contenu .= '<ul class="select_mut">';
     foreach($organismes as $organisme) {
         if($organisme->libelleorganisme->libelle == 'Mutuelle') {
             $contenu .= '
-                    <li value="'.$organisme->id.'">
-                        <div>'.utf8_decode($organisme->appelation).'</div>
+                    <li>
+                        <div value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
                     </li>';
         }
     }
@@ -772,8 +772,8 @@ $contenu .= '<ul class="select_mut">';
     foreach($organismes as $organisme) {
         if($organisme->libelleorganisme->libelle == 'Caisse SECU') {
             $contenu .= '
-                    <li value="'.$organisme->id.'">
-                        <div>'.utf8_decode($organisme->appelation).'</div>
+                    <li>
+                        <div  value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
                     </li>';
         }
     }
@@ -781,11 +781,11 @@ $contenu .= '<ul class="select_mut">';
     
     
     $contenu .= ' <ul class="select_regime">';
-     $contenu .= '<li value="Local">
-                                    <div>Local</div>
+     $contenu .= '<li>
+                                    <div value="Local">Local</div>
                             </li>
-                            <li value="Général">
-                                <div>Général</div>
+                            <li>
+                                <div value="Général">Général</div>
                             </li>
                             </ul>';
     $contenu .= '</ul>';

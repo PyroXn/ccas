@@ -23,9 +23,15 @@ class Organisme extends Doctrine_Record {
             'local' => 'idLibelleOrganisme',
             'foreign' => 'id'
                 )
+        
+        );
+        $this->hasMany('individu as individu', array(
+            'local' => 'id',
+            'foreign' => 'idCaisseMut'
+                )
+        
         );
     }
-
 }
 
 ?>
