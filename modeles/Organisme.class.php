@@ -7,7 +7,7 @@ class Organisme extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('idTypeOrganisme', 'integer', 5);
+        $this->hasColumn('idLibelleOrganisme', 'integer', 5);
         $this->hasColumn('appelation', 'string', 50);
         $this->hasColumn('adresse', 'string', 200);
         $this->hasColumn('cp', 'string', 10);
@@ -18,6 +18,14 @@ class Organisme extends Doctrine_Record {
         $this->hasColumn('note', 'string', 200);
     }
 
+    public function setUp() {
+        $this->hasMany(
+                'libelleorganisme as libelleorganisme', array(
+            'local' => 'id',
+            'foreign' => 'idLibelleOrganisme'
+                )
+        );
+    }
 }
 
 ?>

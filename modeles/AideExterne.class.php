@@ -14,9 +14,9 @@ class AideExterne extends Doctrine_Record {
         $this->hasColumn('aideUrgente', 'integer', 1);
         $this->hasColumn('idAideDemandee', 'integer', 5);
         $this->hasColumn('idInstruct', 'integer', 5);
-        $this->hasColumn('idEtat', 'integer', 5);
+        $this->hasColumn('Etat', 'string', 20);
         $this->hasColumn('proposition', 'string', 250);
-        $this->hasColumn('idAvis', 'integer', 5);
+        $this->hasColumn('avis', 'string', 20);
         $this->hasColumn('idDecideur', 'integer', 5);
         $this->hasColumn('dateDecision', 'integer', 20);
         $this->hasColumn('montant', 'float');
@@ -25,6 +25,9 @@ class AideExterne extends Doctrine_Record {
         $this->hasColumn('vigilance', 'string',50);
         $this->hasColumn('idAideAccordee', 'integer', 5);
         $this->hasColumn('commentaire', 'string',250);
+        $this->hasColumn('rapport', 'string',250);
+        $this->hasColumn('dateRevision', 'integer', 20);
+
     }
 
 }
