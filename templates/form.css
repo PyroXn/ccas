@@ -229,6 +229,7 @@
 
 .checkbox, .checkboxChefFamille {
     position: relative;
+    left: 5px;
     top: 2px;
     background: white;
     border: 1px solid #1C5180;

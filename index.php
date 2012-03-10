@@ -91,6 +91,18 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateContact();
         break;
+    case 'updatecaf':
+        include_once('./pages/individu.php');
+        updateCaf();
+        break;
+    case 'updatemutuelle':
+        include_once('./pages/individu.php');
+        updateMutuelle();
+        break;
+    case 'updatecouverture':
+        include_once('./pages/individu.php');
+        updateCouvertureSociale();
+        break;
     default:
         home();
         break;
