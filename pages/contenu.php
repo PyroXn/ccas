@@ -51,7 +51,7 @@ function foyerContenu($idFoyer) {
     usort($individus, 'sortFoyer');
     
     $contenu .= '
-        <h3>Membres du foyers</h3>
+        <h3>Membres du foyer</h3>
         <ul id="membre_foyer_list">';
     foreach ($individus as $individu) {
         $contenu .= generateLigneMembreFoyer($individu);
@@ -103,6 +103,7 @@ function foyerContenu($idFoyer) {
 }
 
 function generateInfoFoyer($foyer) {
+    $secteurs = Doctrine_Core::getTable('secteur')->findAll();
     $retour = '';
     $retour .= '
         <div><h3>Foyer<span class="edit"></span></h3>
@@ -117,9 +118,33 @@ function generateInfoFoyer($foyer) {
                         </span>
                     </div>
                 </li>
+                <li class="membre_foyer">
+                    <div class="colonne">
+                        <span class="attribut">N</span>
+                        <span><input type="text" class="contour_field input_num" id="numrue" value="'.$foyer->numRue.'" disabled/></span>
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Rue</span>
+                        <span><input type="text" class="contour_field input_char" id="rue" disabled/></span>
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Secteur</span>
+                        <div class="select classique" role="select_secteur">';
+    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
+    $retour .= '<div class="fleche_bas"> </div>
+                        </div>
+                    </div>
+               </li>
             </ul>
             <div class="bouton modif update" value="updateDepense">Enregistrer</div>
         </div>';
+    $retour .= '<ul class="select_secteur">';
+    foreach($secteurs as $secteur) {
+        $retour .= '<li>
+                                <div value="'.$secteur->id.'">'.$secteur->secteur.'</div>
+                           </li>';
+    }
+    $retour .= '</ul>';
     return $retour;
 }
 
