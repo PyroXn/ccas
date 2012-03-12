@@ -95,12 +95,12 @@ include_once('./lib/config.php');
 //    $credit->save();
 
 
-
-$searchword = 'rue';
-    $table = 'rue';
-    $champ = 'rue';
-
-    $retour = '';
+//
+//$searchword = 'rue';
+//    $table = 'rue';
+//    $champ = 'rue';
+//
+//    $retour = '';
 //    $t = Doctrine_Core::getTable($table);
 //    $likeNb = Doctrine_Query::create()
 //        ->from($table)
@@ -108,18 +108,21 @@ $searchword = 'rue';
 //        ->orderBy($champ + ' ASC');
 //    $nb = $likeNb->count();
     
-    $like = Doctrine_Query::create()
-        ->from($table)
-        ->where($champ .' LIKE ?', $searchword.'%')
-        ->orderBy($champ .' ASC')
-        ->limit(5);
-    
+//    $like = Doctrine_Query::create()
+//        ->from($table)
+//        ->where($champ .' LIKE ?', $searchword.'%')
+//        ->orderBy($champ .' ASC')
+//        ->limit(5);
+//    
+//
+//    $retour = '<ul>';
+//    
+//    foreach ($like->execute() as $tmp) {
+//        $retour .= '<li>'.$tmp->$champ.'</li>';
+//    }
+//    $retour .= '</ul>';
+//    echo $retour;
 
-    $retour = '<ul>';
-    
-    foreach ($like->execute() as $tmp) {
-        $retour .= '<li>'.$tmp->$champ.'</li>';
-    }
-    $retour .= '</ul>';
-    echo $retour;
+$foyer = Doctrine_Core::getTable('foyer')->find(1);
+echo $foyer->secteur->secteur;
 ?>

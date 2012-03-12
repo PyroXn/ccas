@@ -8,5 +8,7 @@ class Secteur extends Doctrine_Record {
             'autoincrement' => true));
         $this->hasColumn('secteur', 'string', 255,array('default' => ' '));
     }
+    
+
 }
 ?>

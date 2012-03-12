@@ -130,13 +130,17 @@ function generateInfoFoyer($foyer) {
                     <div class="colonne">
                         <span class="attribut">Secteur</span>
                         <div class="select classique" role="select_secteur">';
-    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
+    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->foyer->secteur.'</div>';
     $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
+                    <div class="colonne">
+                        <span class="attribut">Ville</span>
+                        <span><input type="text" id="ville" class="contour_field input_char" value="'.$foyer->ville->libelle.'" disabled/></span>
+                    </div>
                </li>
             </ul>
-            <div class="bouton modif update" value="updateDepense">Enregistrer</div>
+            <div class="bouton modif update" value="updateFoyer">Enregistrer</div>
         </div>';
     $retour .= '<ul class="select_secteur">';
     foreach($secteurs as $secteur) {

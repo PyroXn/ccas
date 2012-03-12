@@ -36,32 +36,32 @@ class Foyer extends Doctrine_Record {
 
         $this->hasOne(
                 'rue as rue', array(
-            'local' => 'id',
-            'foreign' => 'idRue'
+            'local' => 'idRue',
+            'foreign' => 'id'
                 )
         );
         $this->hasOne(
                 'secteur as secteur', array(
-            'local' => 'id',
-            'foreign' => 'idSecteur'
+            'local' => 'idSecteur',
+            'foreign' => 'id'
                 )
         );
         $this->hasOne(
                 'ville as ville', array(
-            'local' => 'id',
-            'foreign' => 'idVille'
+            'local' => 'idVille',
+            'foreign' => 'id'
                 )
         );
         $this->hasOne(
                 'bailleur as bailleur', array(
-            'local' => 'id',
-            'foreign' => 'idBailleur'
+            'local' => 'idBailleur',
+            'foreign' => 'id'
                 )
         );
         $this->hasOne(
                 'instruct as instruct', array(
-            'local' => 'id',
-            'foreign' => 'idInstruct'
+            'local' => 'idInstruct',
+            'foreign' => 'id'
                 )
         );
     }
