@@ -92,8 +92,8 @@ function foyerContenu($idFoyer) {
         
         $i = 0;
         foreach ($lienFamilles as $lienFamille) {
-            $contenu .= '<li value="'.$i.'">
-                <div>'.$lienFamille->lien.'</div>
+            $contenu .= '<li>
+                <div value="'.$lienFamille->id.'">'.$lienFamille->lien.'</div>
             </li>';
             $i++;
         }

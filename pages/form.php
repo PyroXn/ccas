@@ -23,7 +23,7 @@ function form() {
             include_once('./pages/contenu.php');
             include_once('./index.php');
             
-            $newIndividu = createIndividu($_POST['idFoyer'], $_POST['civilite'], $_POST['nom'], $_POST['prenom']);
+            $newIndividu = createIndividu($_POST['idFoyer'], $_POST['civilite'], $_POST['nom'], $_POST['prenom'], $_POST['naissance'], $_POST['idlienfamille']);
             $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividuCourant']);
             $retour = array('listeIndividu' => $listeIndividu, 'newIndividu' => $newIndividu);
             echo json_encode($retour);
@@ -93,13 +93,16 @@ function createUser($login,$password,$nomcomplet) {
     
 }
 
-function createIndividu($idFoyer, $civilite, $nom, $prenom) {
+function createIndividu($idFoyer, $civilite, $nom, $prenom, $dateNaissance, $idLienFamille) {
     include_once('./lib/config.php');
+    $date = explode('/', $dateNaissance);
     $individu = new Individu();
     $individu->civilite = $civilite;
     $individu->nom = $nom;
     $individu->prenom = $prenom;
     $individu->idFoyer = $idFoyer;
+    $individu->dateNaissance = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
+    $individu->idLienFamille = $idLienFamille;
     $individu->save();
     createRevenu($individu->id);
     createDepense($individu->id);

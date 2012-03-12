@@ -97,6 +97,8 @@ $(function() {
                     datastring += '&civilite=' + $('#form_1').text();
                     datastring += '&nom=' + $('#form_2').val();
                     datastring += '&prenom=' + $('#form_3').val();
+                    datastring += '&naissance='+$('#form_4').val();
+                    datastring += '&idlienfamille='+$('#form_5').attr('value');
                     break;
                 case 'creation_credit':
                     datastring += '&idIndividu='+idIndividu+'&organisme='+$('#organisme').val();
