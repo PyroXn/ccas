@@ -11,6 +11,13 @@ class Type extends Doctrine_Record {
         
     }
 
+    public function setUp() {
+        $this->hasMany('aideexterne as aideexterne', array(
+            'local' => 'id',
+            'foreign' => 'idAideDemandee'
+                )
+        );
+    }
 }
 
 ?>
