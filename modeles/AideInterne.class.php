@@ -14,9 +14,9 @@ class AideInterne extends Doctrine_Record {
         $this->hasColumn('aideUrgente', 'integer', 1, array('default' => '0'));
         $this->hasColumn('idAideDemandee', 'integer', 5);
         $this->hasColumn('idInstruct', 'integer', 5);
-        $this->hasColumn('idEtat', 'integer', 5);
+        $this->hasColumn('etat', 'string', 20);
         $this->hasColumn('proposition', 'string', 250, array('default' => ' '));
-        $this->hasColumn('idAvis', 'integer', 5);
+        $this->hasColumn('avis', 'string', 20);
         $this->hasColumn('idDecideur', 'integer', 5);
         $this->hasColumn('dateDecision', 'integer', 20, array('default' => '0'));
         $this->hasColumn('montant', 'float', null, array('type' => 'float', 'default' => 0));

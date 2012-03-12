@@ -13,7 +13,8 @@ function contenu() {
             echo budget();
             break;
         case 'aides':
-            echo 'aides';
+            include_once './pages/aide.php';
+            echo aide();
             break;
         case 'historique':
             echo 'historique';
