@@ -23,7 +23,7 @@ class Individu extends Doctrine_Record
         $this->hasColumn('assure', 'boolean', 1,array('default' => '0'));
         $this->hasColumn('numSecu', 'integer', 20,array('default' => '0'));
         $this->hasColumn('clefSecu', 'integer', 10,array('default' => '0'));
-        $this->hasColumn('regime', 'integer', 5,array('default' => '0'));
+        $this->hasColumn('regime', 'string', 50,array('default' => ' '));
         $this->hasColumn('cmu', 'boolean', 1,array('default' => '0'));
         $this->hasColumn('dateDebutCouvSecu', 'integer', 50,array('default' => '0'));
         $this->hasColumn('dateFinCouvSecu', 'integer', 50,array('default' => '0'));
@@ -100,6 +100,24 @@ class Individu extends Doctrine_Record
     		array(
     			'local' => 'id', 
     			'foreign' => 'idIndividu'
+    		)
+    	);
+        $this->hasOne('organisme as mutuelle',
+    		array(
+    			'local' => 'idCaisseMut', 
+    			'foreign' => 'id'
+    		)
+    	);
+        $this->hasOne('organisme as caf',
+    		array(
+    			'local' => 'idCaisseCaf', 
+    			'foreign' => 'id'
+    		)
+    	);
+        $this->hasOne('organisme as secu',
+    		array(
+    			'local' => 'idCaisseSecu', 
+    			'foreign' => 'id'
     		)
     	);
     }

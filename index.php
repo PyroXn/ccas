@@ -91,6 +91,18 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateContact();
         break;
+    case 'updatecaf':
+        include_once('./pages/individu.php');
+        updateCaf();
+        break;
+    case 'updatemutuelle':
+        include_once('./pages/individu.php');
+        updateMutuelle();
+        break;
+    case 'updatecouverture':
+        include_once('./pages/individu.php');
+        updateCouvertureSociale();
+        break;
     default:
         home();
         break;
@@ -383,10 +395,10 @@ function autoComplete() {
         ->limit(5);
     
 
-    $retour = '<ul>';
+    $retour = '<ul class="liste_suggestion" table="'.$table.'" champ="'.$table.'">';
     
     foreach ($like->execute() as $tmp) {
-        $retour .= '<li>'.$tmp->$champ.'</li>';
+        $retour .= '<li valeur="'.$tmp->id.'">'.$tmp->$champ.'</li>';
     }
     $retour .= '</ul>';
     echo $retour;

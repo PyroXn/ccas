@@ -52,7 +52,7 @@ function foyerContenu($idFoyer) {
     usort($individus, 'sortFoyer');
     
     $contenu .= '
-        <h3>Membres du foyers</h3>
+        <h3>Membres du foyer</h3>
         <ul id="membre_foyer_list">';
     foreach ($individus as $individu) {
         $contenu .= generateLigneMembreFoyer($individu);
@@ -93,8 +93,8 @@ function foyerContenu($idFoyer) {
         
         $i = 0;
         foreach ($lienFamilles as $lienFamille) {
-            $contenu .= '<li value="'.$i.'">
-                <div>'.$lienFamille->lien.'</div>
+            $contenu .= '<li>
+                <div value="'.$lienFamille->id.'">'.$lienFamille->lien.'</div>
             </li>';
             $i++;
         }
@@ -104,6 +104,7 @@ function foyerContenu($idFoyer) {
 }
 
 function generateInfoFoyer($foyer) {
+    $secteurs = Doctrine_Core::getTable('secteur')->findAll();
     $retour = '';
     $retour .= '
         <div><h3>Foyer<span class="edit"></span></h3>
@@ -111,12 +112,40 @@ function generateInfoFoyer($foyer) {
                 <li class="membre_foyer">
                     <div class="colonne">
                         <span class="attribut"> test</span>
-                        <span><input class="input_num autoComplete" type="text" id="salaire" table="rue" champ="rue"/><div class="liste_sugestion"></div></span>
+                        <span>
+                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="lol" champ="rue"/>
+                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="rue" champ="rue"/>
+                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="rue" champ="lol"/>
+                        </span>
                     </div>
                 </li>
+                <li class="membre_foyer">
+                    <div class="colonne">
+                        <span class="attribut">N</span>
+                        <span><input type="text" class="contour_field input_num" id="numrue" value="'.$foyer->numRue.'" disabled/></span>
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Rue</span>
+                        <span><input type="text" class="contour_field input_char" id="rue" disabled/></span>
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Secteur</span>
+                        <div class="select classique" role="select_secteur">';
+    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
+    $retour .= '<div class="fleche_bas"> </div>
+                        </div>
+                    </div>
+               </li>
             </ul>
             <div class="bouton modif update" value="updateDepense">Enregistrer</div>
         </div>';
+    $retour .= '<ul class="select_secteur">';
+    foreach($secteurs as $secteur) {
+        $retour .= '<li>
+                                <div value="'.$secteur->id.'">'.$secteur->secteur.'</div>
+                           </li>';
+    }
+    $retour .= '</ul>';
     return $retour;
 }
 
@@ -230,7 +259,7 @@ function budget() {
     $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
     $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($_POST['idIndividu']);
     $contenu = '<h2>Budget</h2>';
-    $contenu .= '<div><h3 role="ressource"><span>Ressources</span>  <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.date('d/m/Y', $revenu->dateCreation).'</span></h3>';
+    $contenu .= '<div><h3 role="ressource"><span>Ressources</span>  <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.getDatebyTimestamp($revenu->dateCreation).'</span></h3>';
     $contenu .= '<ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                     <div class="colonne">
@@ -292,7 +321,7 @@ function budget() {
                             </div>
                             
                             <div>
-                            <h3 role="depense">Dépenses <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.date('d/m/Y', $depense->dateCreation).'</span></h3>
+                            <h3 role="depense">Dépenses <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.getDatebyTimestamp($depense->dateCreation).'</span></h3>
                             <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">
@@ -382,7 +411,7 @@ function budget() {
                             </div>
                             
                             <div>
-                            <h3 role="dette">Dettes <span class="edit"></span><span class="archive" original-title="Archiver les dettes"></span><span class="timemaj">'.date('d/m/Y', $dette->dateCreation).'</span></h3>
+                            <h3 role="dette">Dettes <span class="edit"></span><span class="archive" original-title="Archiver les dettes"></span><span class="timemaj">'.getDatebyTimestamp($dette->dateCreation).'</span></h3>
                                 <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">
@@ -447,7 +476,7 @@ function budget() {
                                                             <div class="colonne">
                                                                 <span class="attribut">Montant restant : </span>
                                                                 <span>'.$credit->totalRestant.'</span>
-                                                                <span class="timemaj">'.date('d/m/Y', $credit->dateAjout).'</span>
+                                                                <span class="timemaj">'.getDatebyTimestamp($credit->dateAjout).'</span>
                                                             </div>
                                                             <span class="delete_credit"></span>
                                                       </li>';
@@ -522,7 +551,7 @@ function generalite() {
                     <div class="colonne">
                         <span class="attribut">Date de naissance :</span>
                         <span>
-                            <input class="contour_field input_char" type="text" id="datenaissance" value="'.date('d/m/Y', $user->dateNaissance).'" disabled/>
+                            <input class="contour_field input_char" type="text" id="datenaissance" value="'.getDatebyTimestamp($user->dateNaissance).'" disabled/>
                         </span>
                     </div>
                     <div class="colonne">
@@ -604,7 +633,7 @@ function generalite() {
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Inscription P.E :</span>
-                    <span><input class="contour_field input_char" type="text" id="dateinscriptionpe" value="'.$user->dateInscriptionPe.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="dateinscriptionpe" value="'.getDatebyTimestamp($user->dateInscriptionPe).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">N° dossier P.E :</span>
@@ -612,11 +641,11 @@ function generalite() {
                 </div>
                 <div class="colonne">
                     <span class="attribut">Début droits P.E :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebutdroitpe" value="'.$user->dateDebutDroitPe.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebutdroitpe" value="'.getDatebyTimestamp($user->dateDebutDroitPe).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Fin droits P.E :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefindroitpe" value="'.$user->dateFinDroitPe.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefindroitpe" value="'.getDatebyTimestamp($user->dateFinDroitPe).'" disabled/></span>
                 </div> 
             </li>
         </ul>
@@ -633,9 +662,9 @@ function generalite() {
                 <div class="colonne">
                     <span class="attribut">Assuré : </span>';
     if($user->assure == 1) {
-        $contenu .= '<span class="checkbox checkbox_active" value="1"></span>';
+        $contenu .= '<span id="assure" class="checkbox checkbox_active" value="1"></span>';
     } else {
-        $contenu .= '<span class="checkbox" value="0"></span>';
+        $contenu .= '<span id="assure" class="checkbox" value="0"></span>';
     }
                     
     $contenu .= '</div>
@@ -646,36 +675,36 @@ function generalite() {
                 </div>
                 <div class="colonne">
                     <span class="attribut">Régime :</span>
-                    <div class="select classique" role="select_regime">
-                        <div id="regime" class="option" value=" ">-----</div>
-                        <div class="fleche_bas"> </div>
+                    <div class="select classique" role="select_regime">';
+$contenu .= $user->regime == ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.utf8_decode($user->regime).'</div>';                   
+$contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
             </li>
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_couv">
-                        <div id="couv" class="option" value=" ">-----</div>
-                        <div class="fleche_bas"> </div>
+                    <div class="select classique" role="select_couv">';
+$contenu .= $user->idCaisseSecu == null ? '<div id="caisseCouv" class="option" value=" ">-----</div>' : '<div id="caisseCouv" class="option" value="'.$user->idCaisseSecu.'">'.$user->secu->appelation.'</div>';                   
+$contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
                     <span class="attribut">CMU : </span>';
     if($user->cmu == 1) {
-        $contenu .= '<span class="checkbox checkbox_active" value="1"></span>';
+        $contenu .= '<span id="cmu" class="checkbox checkbox_active" value="1"></span>';
     } else {
-        $contenu .= '<span class="checkbox" value="0"></span>';
+        $contenu .= '<span id="cmu" class="checkbox" value="0"></span>';
     }
     $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début droit :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebitcouvsecu" value="'.$user->dateDebutCouvSecu.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebutcouvsecu" value="'.getDatebyTimestamp($user->dateDebutCouvSecu).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date fin de droits :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefincouvsecu" value="'.$user->dateFinCouvSecu.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefincouvsecu" value="'.getDatebyTimestamp($user->dateFinCouvSecu).'" disabled/></span>
                 </div>
             </li>
         </ul>
@@ -691,15 +720,15 @@ $contenu .= '
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_mut">
-                        <div id="mut" class="option" value=" ">-----</div>
-                        <div class="fleche_bas"> </div>
+                    <div class="select classique" role="select_mut">';
+$contenu .= $user->idCaisseMut == null ? '<div id="mutuelle" class="option" value="">-----</div>' : '<div id="mutuelle" class="option" value="'.$user->idCaisseMut.'">'.$user->mutuelle->appelation.'</div>';                   
+$contenu .= '<div class="fleche_bas"> </div>
                     </div>
                     <span class="attribut">CMUC : </span>';
 if($user->CMUC == 1) {
-    $contenu .= '<span class="checkbox checkbox_active" value="1"></span>';
+    $contenu .= '<span id="cmuc" class="checkbox checkbox_active"></span>';
 } else {
-    $contenu .= '<span class="checkbox" value="0"></span>';
+    $contenu .= '<span id="cmuc" class="checkbox"></span>';
 }
 $contenu .= '
                 </div>
@@ -709,11 +738,11 @@ $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebutcouvmut" value="'.$user->dateDebutCouvMut.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebutcouvmut" value="'.getDatebyTimestamp($user->dateDebutCouvMut).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date fin :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefincouvmut" value="'.$user->dateFinCouvMut.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefincouvmut" value="'.getDatebyTimestamp($user->dateFinCouvMut).'" disabled/></span>
                 </div>
             </li>
         </ul>
@@ -729,9 +758,9 @@ $contenu .= '
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_caf">
-                        <div id="caf" class="option" value=" ">-----</div>
-                        <div class="fleche_bas"> </div>
+                    <div class="select classique" role="select_caf">';
+$contenu .= $user->idCaisseCaf == null ? '<div id="caf" class="option" value="">-----</div>' : '<div id="caf" class="option" value="'.$user->idCaisseCaf.'">'.$user->caf->appelation.'</div>';                   
+$contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
@@ -740,7 +769,7 @@ $contenu .= '
                 </div>
             </li>
         </ul>
-        <div class="bouton modif update" value="updateMutuelle">Enregistrer</div>
+        <div class="bouton modif update" value="updateCaf">Enregistrer</div>
         <div class="clearboth"></div>
     </div>';
 
@@ -749,8 +778,8 @@ $contenu .= '<ul class="select_caf">';
     foreach($organismes as $organisme) {
         if($organisme->libelleorganisme->libelle == 'Caisse CAF') {
             $contenu .= '
-                    <li value="'.$organisme->id.'">
-                        <div>'.utf8_decode($organisme->appelation).'</div>
+                    <li>
+                        <div value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
                     </li>';
         }
     }
@@ -759,8 +788,8 @@ $contenu .= '<ul class="select_mut">';
     foreach($organismes as $organisme) {
         if($organisme->libelleorganisme->libelle == 'Mutuelle') {
             $contenu .= '
-                    <li value="'.$organisme->id.'">
-                        <div>'.utf8_decode($organisme->appelation).'</div>
+                    <li>
+                        <div value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
                     </li>';
         }
     }
@@ -769,8 +798,8 @@ $contenu .= '<ul class="select_mut">';
     foreach($organismes as $organisme) {
         if($organisme->libelleorganisme->libelle == 'Caisse SECU') {
             $contenu .= '
-                    <li value="'.$organisme->id.'">
-                        <div>'.utf8_decode($organisme->appelation).'</div>
+                    <li>
+                        <div  value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
                     </li>';
         }
     }
@@ -778,11 +807,11 @@ $contenu .= '<ul class="select_mut">';
     
     
     $contenu .= ' <ul class="select_regime">';
-     $contenu .= '<li value="Local">
-                                    <div>Local</div>
+     $contenu .= '<li>
+                                    <div value="Local">Local</div>
                             </li>
-                            <li value="Général">
-                                <div>Général</div>
+                            <li>
+                                <div value="Général">Général</div>
                             </li>
                             </ul>';
     $contenu .= '</ul>';

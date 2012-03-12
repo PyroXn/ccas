@@ -52,9 +52,10 @@ $(function() {
     });
     
     $('.en_execution > li').live("click", function() {
-        console.log($(this).children().text());
+        console.log($(this).children().attr('value'));
         $('.en_execution').toggle();
         $('.en_attente').text($(this).children().text());
+        $('.en_attente').attr('value', $(this).children().attr('value'));
         $('.en_attente').toggleClass('en_attente');
         $('.en_execution').toggleClass('en_execution');   
     });
@@ -96,6 +97,8 @@ $(function() {
                     datastring += '&civilite=' + $('#form_1').text();
                     datastring += '&nom=' + $('#form_2').val();
                     datastring += '&prenom=' + $('#form_3').val();
+                    datastring += '&naissance='+$('#form_4').val();
+                    datastring += '&idlienfamille='+$('#form_5').attr('value');
                     break;
                 case 'creation_credit':
                     datastring += '&idIndividu='+idIndividu+'&organisme='+$('#organisme').val();
@@ -243,6 +246,61 @@ $(function() {
                 dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatecontact',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateCaf') {
+            datastring = 'idIndividu='+idIndividu+'&caf='+$('#caf').attr('value');
+            datastring += '&numallocatairecaf='+$('#numallocatairecaf').val();
+            alert(datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatecaf',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateMutuelle') {
+            var cmuc = 0;
+            if($('#cmuc').hasClass('checkbox_active')) { cmuc = 1; }
+            datastring = 'idIndividu='+idIndividu+'&mut='+$('#mutuelle').attr('value');
+            datastring += '&cmuc='+cmuc+'&numadherentmut='+$('#numadherentmut').val();
+            datastring += '&datedebutcouvmut='+$('#datedebutcouvmut').val()+'&datefincouvmut='+$('#datefincouvmut').val();
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatemutuelle',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateCouvertureSocial') {
+            var assure = 0;
+            var cmu = 0;
+            if($('#assure').hasClass('checkbox_active')) { assure = 1; }
+            if($('#cmu').hasClass('checkbox_active')) { cmu = 1; }
+            datastring = 'idIndividu='+idIndividu+'&assure='+assure;
+            datastring += '&caisseCouv='+$('#caisseCouv').attr('value')+'&cmu='+cmu;
+            datastring += '&numsecu='+$('#numsecu').val()+'&clefsecu='+$('#clefsecu').val();
+            datastring += '&regime='+$('#regime').attr('value')+'&datedebutcouvsecu='+$('#datedebutcouvsecu').val();
+            datastring += '&datefincouvsecu='+$('#datefincouvsecu').val();
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatecouverture',
                 //Succès de la requête
                 success: function(data) {
                     loc.parent().find('input').attr("disabled","disabled");
