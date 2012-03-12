@@ -9,6 +9,5 @@ class Secteur extends Doctrine_Record {
         $this->hasColumn('secteur', 'string', 255,array('default' => ' '));
     }
     
-
 }
 ?>

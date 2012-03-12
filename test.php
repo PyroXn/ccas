@@ -122,7 +122,6 @@ include_once('./lib/config.php');
 //    }
 //    $retour .= '</ul>';
 //    echo $retour;
-
-$foyer = Doctrine_Core::getTable('foyer')->find(1);
-echo $foyer->secteur->secteur;
+include_once('./pages/contenu.php');
+echo situationFinanciere(1);
 ?>

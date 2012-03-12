@@ -142,27 +142,43 @@ function updateCaf() {
 
 function updateMutuelle() {
     include_once('./lib/config.php');
-    $date1 = explode('/', $_POST['datedebutcouvmut']);
-    $date2 = explode('/', $_POST['datefincouvmut']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $individu->idCaisseMut = $_POST['mut'];
     $individu->CMUC = $_POST['cmuc'];
     $individu->numAdherentMut = $_POST['numadherentmut'];
-    $individu->dateDebutCouvMut = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    $individu->dateFinCouvMut = mktime(0, 0, 0, $date2[1], $date2[0], $date2[2]);
+    if($_POST['datedebutcouvmut'] != 0) {
+        $date1 = explode('/', $_POST['datedebutcouvmut']);
+        $individu->dateDebutCouvMut = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
+    } else {
+        $individu->dateDebutCouvMut = 0;
+    }
+    if($_POST['datefincouvmut'] != 0) {
+        $date2 = explode('/', $_POST['datefincouvmut']);
+        $individu->dateFinCouvMut = mktime(0, 0, 0, $date2[1], $date2[0], $date2[2]);
+    } else {
+        $individu->dateFinCouvMut = 0;
+    }
     $individu->save();  
 }
 
 function updateCouvertureSociale() {
     include_once('./lib/config.php');
-    $date1 = explode('/', $_POST['datedebutcouvsecu']);
-    $date2 = explode('/', $_POST['datefincouvsecu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $individu->assure = $_POST['assure'];
     $individu->cmu = $_POST['cmu'];
     $individu->idCaisseSecu = $_POST['caisseCouv'];
-    $individu->dateDebutCouvSecu = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    $individu->dateFinCouvSecu = mktime(0, 0, 0, $date2[1], $date2[0], $date2[2]);
+    if($_POST['datedebutcouvsecu'] != 0) {
+        $date1 = explode('/', $_POST['datedebutcouvsecu']);
+        $individu->dateDebutCouvSecu = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
+    } else {
+        $individu->dateDebutCouvSecu = 0;
+    }
+    if($_POST['datefincouvsecu'] != 0) {
+        $date2 = explode('/', $_POST['datefincouvsecu']);
+        $individu->dateFinCouvSecu = mktime(0, 0, 0, $date2[1], $date2[0], $date2[2]);
+    } else {
+        $individu->dateFinCouvSecu = 0;
+    }
     $individu->numSecu = $_POST['numsecu'];
     $individu->clefSecu = $_POST['clefsecu'];
     $individu->regime = $_POST['regime'];

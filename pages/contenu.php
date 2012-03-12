@@ -121,17 +121,17 @@ function generateInfoFoyer($foyer) {
                 </li>
                 <li class="membre_foyer">
                     <div class="colonne">
-                        <span class="attribut">N</span>
+                        <span class="attribut">N&deg;</span>
                         <span><input type="text" class="contour_field input_num" id="numrue" value="'.$foyer->numRue.'" disabled/></span>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Rue</span>
-                        <span><input type="text" class="contour_field input_char" id="rue" disabled/></span>
+                        <span><input type="text" class="contour_field input_char" id="rue" value="'.$foyer->rue->rue.'" disabled/></span>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Secteur</span>
                         <div class="select classique" role="select_secteur">';
-    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->foyer->secteur.'</div>';
+    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
     $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -140,8 +140,23 @@ function generateInfoFoyer($foyer) {
                         <span><input type="text" id="ville" class="contour_field input_char" value="'.$foyer->ville->libelle.'" disabled/></span>
                     </div>
                </li>
-            </ul>
-            <div class="bouton modif update" value="updateFoyer">Enregistrer</div>
+               <li class="membre_foyer">
+                    <div class="colonne">
+                        <span class="attribut">Type Logement :</span>
+                        <span></span>
+                   </div>
+                   <div class="colonne">
+                        <span class="attribut">Statut(proprietaire..) :</span>
+                        <span></span>
+                   </div>
+                   <div class="colonne">
+                        <span class="attribut">Surface :</span>
+                        <span></span>
+                  </div>
+               </li>
+            </ul>';
+        $retour .= situationFinanciere($foyer->id);
+$retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</div>
         </div>';
     $retour .= '<ul class="select_secteur">';
     foreach($secteurs as $secteur) {
@@ -151,6 +166,60 @@ function generateInfoFoyer($foyer) {
     }
     $retour .= '</ul>';
     return $retour;
+}
+
+function situationFinanciere($idFoyer) {
+    include_once('./lib/config.php');
+    $individus = Doctrine_Core::getTable('individu')->findByIdFoyer($idFoyer);
+    
+    $totalRessource = 0;
+    $totalDepense = 0;
+    $totalDette = 0;
+    $totalCredit = 0;
+    
+    foreach($individus as $individu) {
+        $revenu = Doctrine_Core::getTable('revenu')->getLastFicheRessource($individu->id);
+        $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($individu->id);
+        $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($individu->id);
+        $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($individu->id);
+        $arrayRevenu = array($revenu->salaire, $revenu->chomage, $revenu->revenuAlloc, $revenu->ass, $revenu->aah, $revenu->rsaSocle,
+                                        $revenu->rsaActivite, $revenu->pensionAlim, $revenu->pensionRetraite, $revenu->retraitComp, $revenu->autreRevenu, $revenu->aideLogement);
+        $arrayDepense = array($depense->impotRevenu, $depense->impotLocaux, $depense->pensionAlim, $depense->mutuelle, $depense->electricite, $depense->gaz,
+                                        $depense->eau, $depense->chauffage, $depense->telephonie, $depense->internet, $depense->television, $depense->assurance, $depense->credit,
+                                        $depense->autreDepense, $depense->loyer);
+        $arrayDette = array($dette->arriereLocatif, $dette->fraisHuissier, $dette->arriereElectricite, $dette->arriereGaz, $dette->autreDette);
+        foreach($credits as $credit) {
+            $totalCredit = $totalCredit + $credit->mensualite;
+        }
+        $totalRessource =  $totalRessource + array_sum($arrayRevenu);
+        $totalDepense = $totalDepense + array_sum($arrayDepense);
+        $totalDette = $totalDette + array_sum($arrayDette);
+        
+    }
+    $contenu = '<div><h3>Situation financière de la famille</h3>';
+    $contenu .= '
+        <ul id="membre_foyer_list">
+                <li class="membre_foyer">
+                    <div class="colonne">
+                        <span class="attribut">Total ressources :</span>
+                        <span>'.$totalRessource.'</span>
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Total dépenses :</span>
+                        <span>'.$totalDepense.'</span>
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Total dettes :</span>
+                        <span>'.$totalRessource.'</span>
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Total credits :</span>
+                        <span>'.$totalCredit.'</span>
+                    </div>
+                </li>
+        </ul>
+        </div>';
+    return utf8_encode($contenu);
 }
 
 function generateLigneMembreFoyer($individu) {

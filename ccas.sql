@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Lun 12 Mars 2012 à 16:18
+-- Généré le : Lun 12 Mars 2012 à 18:45
 -- Version du serveur: 5.1.58
 -- Version de PHP: 5.3.6-13ubuntu3.6
 
@@ -138,7 +138,14 @@ CREATE TABLE IF NOT EXISTS `credit` (
   `idindividu` bigint(20) DEFAULT '0',
   `dateajout` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `credit`
+--
+
+INSERT INTO `credit` (`id`, `organisme`, `mensualite`, `dureemois`, `totalrestant`, `idindividu`, `dateajout`) VALUES
+(1, 'Sofinco', 10.00, 15, 12.00, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -179,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `depense` (
   `idindividu` bigint(20) DEFAULT NULL,
   `datecreation` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `depense`
@@ -187,7 +194,10 @@ CREATE TABLE IF NOT EXISTS `depense` (
 
 INSERT INTO `depense` (`id`, `impotrevenu`, `impotlocaux`, `pensionalim`, `mutuelle`, `electricite`, `gaz`, `eau`, `chauffage`, `telephonie`, `internet`, `television`, `assurance`, `credit`, `autredepense`, `naturedepense`, `loyer`, `idindividu`, `datecreation`) VALUES
 (1, 6.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 10.00, 1, 1331136605),
-(2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' test', 0.00, 1, 1331283009);
+(2, 0.00, 0.00, 1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 1.00, ' test', 540.00, 1, 1331566099),
+(3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 4, 1331569012),
+(4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 2, 1331569613),
+(5, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 3, 1331569619);
 
 -- --------------------------------------------------------
 
@@ -208,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `dette` (
   `idindividu` bigint(20) DEFAULT NULL,
   `datecreation` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `dette`
@@ -216,7 +226,10 @@ CREATE TABLE IF NOT EXISTS `dette` (
 
 INSERT INTO `dette` (`id`, `arrierelocatif`, `fraishuissier`, `arriereelectricite`, `arrieregaz`, `autredette`, `naturedette`, `prestaelec`, `prestagaz`, `idindividu`, `datecreation`) VALUES
 (1, 35.00, 0.00, 0.00, 0.00, 0.00, ' ', 'EDF', 'GDF', 1, 1331136828),
-(2, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 1, 1331138364);
+(2, 1.00, 0.00, 0.00, 0.00, 0.00, ' ', '', '', 1, 1331566110),
+(3, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 4, 1331569014),
+(4, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 2, 1331569614),
+(5, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 3, 1331569620);
 
 -- --------------------------------------------------------
 
@@ -283,14 +296,14 @@ CREATE TABLE IF NOT EXISTS `foyer` (
   `idinstruct` bigint(20) DEFAULT NULL,
   `notes` varchar(255) DEFAULT ' ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `foyer`
 --
 
 INSERT INTO `foyer` (`id`, `numrue`, `idrue`, `idsecteur`, `idville`, `idbailleur`, `dateinscription`, `typelogement`, `typeappartenance`, `logdatearrive`, `logsurface`, `idinstruct`, `notes`) VALUES
-(1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1, 23, 5, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -340,16 +353,16 @@ CREATE TABLE IF NOT EXISTS `individu` (
   `idvillenaissance` bigint(20) DEFAULT NULL,
   `idfoyer` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `individu`
 --
 
 INSERT INTO `individu` (`id`, `civilite`, `nom`, `prenom`, `nommarital`, `nomusage`, `chefdefamille`, `datenaissance`, `sexe`, `telephone`, `portable`, `email`, `assure`, `numsecu`, `clefsecu`, `regime`, `cmu`, `datedebutcouvsecu`, `datefincouvsecu`, `numadherentmut`, `datedebutcouvmut`, `datefincouvmut`, `cmuc`, `employeur`, `dateinscriptionpe`, `datedebutdroitpe`, `datefindroitpe`, `numdossierpe`, `numallocatairecaf`, `idlienfamille`, `idcaissecaf`, `idniveauetude`, `idprofession`, `idcaissemut`, `idcaissesecu`, `idsitfam`, `idnationalite`, `idvillenaissance`, `idfoyer`) VALUES
-(1, 'Madame', 'Osef', 'Lapraline', NULL, NULL, 0, NULL, NULL, '0383828113', '0679809964', 'florian.janson@mydevhouse.com', 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(1, 'Madame', 'Osef', 'Lapraline', NULL, NULL, 0, NULL, NULL, '0383828113', '0679809964', 'florian.janson@mydevhouse.com', 0, 0, 0, 'Local', 1, 0, 943916400, '00000001', 0, 0, 1, NULL, NULL, NULL, NULL, NULL, '', NULL, 1, NULL, NULL, 12, 2, NULL, NULL, NULL, 1),
 (2, 'Monsieur', 'Pupu', 'Coco', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(3, 'Monsieur', 'Perlin', 'Pinpin', NULL, NULL, 0, NULL, NULL, 'test', 'test', 'test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(3, 'Monsieur', 'Perlin', 'Pinpin', NULL, NULL, 0, NULL, NULL, 'test', 'test', 'test', 0, 0, 0, '', 0, 943916400, 943916400, '', 943916400, 943916400, 1, NULL, NULL, NULL, NULL, NULL, '0001', NULL, 1, NULL, NULL, 12, 2, NULL, NULL, NULL, 1),
 (4, 'Monsieur', 'test', 'test', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2);
 
 -- --------------------------------------------------------
@@ -580,7 +593,7 @@ CREATE TABLE IF NOT EXISTS `revenu` (
   `aidelogement` float(18,2) DEFAULT '0.00',
   `datecreation` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `revenu`
@@ -589,7 +602,10 @@ CREATE TABLE IF NOT EXISTS `revenu` (
 INSERT INTO `revenu` (`id`, `salaire`, `chomage`, `revenualloc`, `ass`, `aah`, `rsasocle`, `rsaactivite`, `pensionalim`, `pensionretraite`, `retraitcomp`, `autrerevenu`, `natureautre`, `idindividu`, `aidelogement`, `datecreation`) VALUES
 (2, 96.00, 0.00, 0.00, 0.00, 18.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 1, 0.00, 1331136849),
 (3, 10006.00, 0.00, 0.00, 0.00, 18.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 1, 0.00, 1331137203),
-(4, 380.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 1, 0.00, 1331282971);
+(4, 1.78, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00, 0.00, 0.00, '', 1, 0.00, 1331571992),
+(5, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 4, 0.00, 1331569011),
+(6, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 2, 0.00, 1331569612),
+(7, 0.00, 0.00, 0.00, 0.00, 520.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 3, 0.00, 1331569618);
 
 -- --------------------------------------------------------
 

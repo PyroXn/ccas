@@ -43,6 +43,7 @@ function form() {
 function creationFoyer($civilite, $nom, $prenom) {
     include_once('./lib/config.php');
     $foyer = new Foyer();
+    $foyer->dateInscription = time();
     $foyer->save();
     $individu = new Individu();
     $individu->civilite = $civilite;

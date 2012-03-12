@@ -11,14 +11,6 @@ class Ville extends Doctrine_Record {
         $this->hasColumn('libelle', 'string', 255, array('default' => ' '));
     }
     
-    public function setUp() {
-        $this->hasMany(
-                'ville as ville', array(
-            'local' => 'id',
-            'foreign' => 'idVille'
-                )
-        );
-    }
 
 }
 
