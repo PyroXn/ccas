@@ -233,7 +233,7 @@ function budget() {
     $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
     $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($_POST['idIndividu']);
     $contenu = '<h2>Budget</h2>';
-    $contenu .= '<div><h3 role="ressource"><span>Ressources</span>  <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.date('d/m/Y', $revenu->dateCreation).'</span></h3>';
+    $contenu .= '<div><h3 role="ressource"><span>Ressources</span>  <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.getDatebyTimestamp($revenu->dateCreation).'</span></h3>';
     $contenu .= '<ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                     <div class="colonne">
@@ -295,7 +295,7 @@ function budget() {
                             </div>
                             
                             <div>
-                            <h3 role="depense">Dépenses <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.date('d/m/Y', $depense->dateCreation).'</span></h3>
+                            <h3 role="depense">Dépenses <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.getDatebyTimestamp($depense->dateCreation).'</span></h3>
                             <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">
@@ -385,7 +385,7 @@ function budget() {
                             </div>
                             
                             <div>
-                            <h3 role="dette">Dettes <span class="edit"></span><span class="archive" original-title="Archiver les dettes"></span><span class="timemaj">'.date('d/m/Y', $dette->dateCreation).'</span></h3>
+                            <h3 role="dette">Dettes <span class="edit"></span><span class="archive" original-title="Archiver les dettes"></span><span class="timemaj">'.getDatebyTimestamp($dette->dateCreation).'</span></h3>
                                 <ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                 <div class="colonne">
@@ -450,7 +450,7 @@ function budget() {
                                                             <div class="colonne">
                                                                 <span class="attribut">Montant restant : </span>
                                                                 <span>'.$credit->totalRestant.'</span>
-                                                                <span class="timemaj">'.date('d/m/Y', $credit->dateAjout).'</span>
+                                                                <span class="timemaj">'.getDatebyTimestamp($credit->dateAjout).'</span>
                                                             </div>
                                                             <span class="delete_credit"></span>
                                                       </li>';
@@ -525,7 +525,7 @@ function generalite() {
                     <div class="colonne">
                         <span class="attribut">Date de naissance :</span>
                         <span>
-                            <input class="contour_field input_char" type="text" id="datenaissance" value="'.date('d/m/Y', $user->dateNaissance).'" disabled/>
+                            <input class="contour_field input_char" type="text" id="datenaissance" value="'.getDatebyTimestamp($user->dateNaissance).'" disabled/>
                         </span>
                     </div>
                     <div class="colonne">
@@ -607,7 +607,7 @@ function generalite() {
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Inscription P.E :</span>
-                    <span><input class="contour_field input_char" type="text" id="dateinscriptionpe" value="'.$user->dateInscriptionPe.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="dateinscriptionpe" value="'.getDatebyTimestamp($user->dateInscriptionPe).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">N° dossier P.E :</span>
@@ -615,11 +615,11 @@ function generalite() {
                 </div>
                 <div class="colonne">
                     <span class="attribut">Début droits P.E :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebutdroitpe" value="'.$user->dateDebutDroitPe.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebutdroitpe" value="'.getDatebyTimestamp($user->dateDebutDroitPe).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Fin droits P.E :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefindroitpe" value="'.$user->dateFinDroitPe.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefindroitpe" value="'.getDatebyTimestamp($user->dateFinDroitPe).'" disabled/></span>
                 </div> 
             </li>
         </ul>
@@ -674,11 +674,11 @@ $contenu .= '<div class="fleche_bas"> </div>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début droit :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebutcouvsecu" value="'.date('d/m/Y', $user->dateDebutCouvSecu).'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebutcouvsecu" value="'.getDatebyTimestamp($user->dateDebutCouvSecu).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date fin de droits :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefincouvsecu" value="'.date('d/m/Y', $user->dateFinCouvSecu).'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefincouvsecu" value="'.getDatebyTimestamp($user->dateFinCouvSecu).'" disabled/></span>
                 </div>
             </li>
         </ul>
@@ -712,11 +712,11 @@ $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebutcouvmut" value="'.date('d/m/Y',$user->dateDebutCouvMut).'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datedebutcouvmut" value="'.getDatebyTimestamp($user->dateDebutCouvMut).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date fin :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefincouvmut" value="'.date('d/m/Y', $user->dateFinCouvMut).'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="datefincouvmut" value="'.getDatebyTimestamp($user->dateFinCouvMut).'" disabled/></span>
                 </div>
             </li>
         </ul>
