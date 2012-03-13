@@ -10,7 +10,6 @@ $(function() {
         var searchbox = $(this).val();
         search(searchbox);
     });
-     
     
     $("#side_individu").scroll(function(){ // On surveille l'évènement scroll
         /* la fonction offset permet de récupérer la valeur X et Y d'un élément
@@ -125,8 +124,7 @@ $(function() {
             }
         });
     });  
-    
-
+ 
     $('.autoComplete').live("keyup", function(evenement)  {
         var codeTouche = evenement.which || evenement.keyCode;
         var searchbox = $(this).val();
@@ -187,11 +185,21 @@ $(function() {
             $('#suggestion').css("display", "none");
         }
     });
-    
+        
+    $('.autoComplete').live("click", function() {
+        $(this).attr('autocomplete', 'off');
+    });
+        
     $('.autoComplete').live("blur", function()  {
         $('#suggestion').css("display", "none");
     });
     
+    $('.select').live("click", function() {
+        //        $('.en_execution').css("display", "none");
+        $('.en_execution').hover(function() {
+            alert("quit");
+        });
+    });
     $('.liste_suggestion > li').live("click", function() {
         var focus = $(this);
         var parent = $(this).parent();

@@ -111,6 +111,10 @@ switch (@$_GET['p']) {
         include_once('./pages/contenu.php');
         updateFoyer();
         break;
+    case 'updateinfoperso':
+        include_once('./pages/individu.php');
+        updateInfoPerso();
+        break;
     default:
         home();
         break;

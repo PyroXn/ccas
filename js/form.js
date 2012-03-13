@@ -51,6 +51,9 @@ $(function() {
         $(this).toggleClass('checkbox_active');
     });
     
+    $('.select').live("click", function() {
+        console.log($(this).focus());
+    });
     $('.en_execution > li').live("click", function() {
         console.log($(this).children().attr('value'));
         $('.en_execution').toggle();
@@ -321,9 +324,10 @@ $(function() {
         }
         else if(value == 'updateFoyer') {
             var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
-            datastring = 'idFoyer='+idFoyer+'&numrue='+$('#numrue').attr('value');
-            datastring += '&rue='+$('#rue').attr('value')+'&secteur='+$('#secteur').attr('value');
-            datastring += '&ville='+$('#ville').attr('value');
+            datastring = 'idFoyer='+idFoyer+'&numrue='+$('#numrue').val();
+            datastring += '&rue='+$('#rue').attr('valeur')+'&secteur='+$('#secteur').attr('value');
+            datastring += '&ville='+$('#ville').attr('valeur');
+            console.log(datastring);
             $.ajax({
                 type: 'post',
                 dataType:'json',
@@ -331,6 +335,26 @@ $(function() {
                 url: './index.php?p=updateFoyer',
                 //Succès de la requête
                 success: function(data) {
+                    alert("success");
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateInfoPerso') {
+            datastring = 'idIndividu='+idIndividu+'&nom='+$('#nom').val();
+            datastring += '&prenom='+$('#prenom').val()+'&situation='+$('#situation').attr('value');
+            datastring += '&nationalite='+$('#nationalite').attr('value')+'&datenaissance='+$('#datenaissance').val();
+            datastring += '&lieu='+$('#lieu').attr('valeur')+'&sexe='+$('#sexe').attr('value');
+            datastring += '&statut='+$('#statut').attr('value');
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updateinfoperso',
+                //Succès de la requête
+                success: function(data) {
+                    alert("success");
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });

@@ -212,6 +212,25 @@ function updateSituationProfessionnelle() {
     }
     $individu->save();
 }
+
+function updateInfoPerso() {
+    include_once('./lib/config.php');
+    $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
+    $individu->nom = $_POST['nom'];
+    $individu->prenom = $_POST['prenom'];
+    $individu->idSitFam = $_POST['situation'];
+    $individu->idNationalite = $_POST['nationalite'];
+    if($_POST['datenaissance'] != 0) {
+        $date = explode('/', $_POST['datenaissance']);
+        $individu->dateNaissance = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
+    } else {
+        $individu->dateNaissance = 0;
+    }
+    $individu->idVilleNaissance = $_POST['lieu'];
+    $individu->sexe = $_POST['sexe'];
+    $individu->idLienFamille = $_POST['statut'];
+    $individu->save();
+}
 //function generalite() {
 //    include_once('./lib/config.php');
 //    $liens = Doctrine_Core::getTable('lienfamille')->findAll();
