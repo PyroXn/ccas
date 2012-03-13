@@ -126,50 +126,78 @@ $(function() {
         });
     });  
     
-    $('.autoComplete').live("focus", function() {
-         $(this).live("keyup", function(evenement){
-                var codeTouche = evenement.which || evenement.keyCode;
-                switch(codeTouche) {
-                    case 13:
-                        // Touche entrée
-                        alert("Touche entrée");
-                        break;
-                   case 40:
-                       //fleche bas
-                       alert("Fleche bas");
-                       break;
-                  case 38:
-                      //fleche haut
-                      alert("Felche haut");
-                      break;
-                }
-            });
-    });
-    $('.autoComplete').live("keyup", function()  {
+    $('.autoComplete').live("keyup", function(evenement)  {
+        var codeTouche = evenement.which || evenement.keyCode;
         var searchbox = $(this).val();
         if (searchbox.length > 2) {
-            var table = $(this).attr('table');
-            var champ = $(this).attr('champ');
+            switch(codeTouche) {
+                case 13:
+                    var selection = $('.selection');
+                    
+                    console.log(selection);
+                    if(selection.length != 0) {
+                        var parent = selection.parent();
+                        var table = parent.attr('table');
+                        var champ = parent.attr('champ');
+                        selectionList(selection, table, champ);
+                    }
+                    //Touche entrée
+                    console.log("Touche entrée");
+                    break;
+                case 40:
+                    var selection = $('.selection');
+                    console.log(selection);
+                    if(selection.length != 0) {
+                        console.log('after ' + $(selection).next());
+                        $(selection).toggleClass('selection');
+                        $(selection).next().toggleClass('selection');
+                    } else {
+                        $('.liste_suggestion > li:first').toggleClass('selection');
+                    }
+                    //fleche bas
+                    console.log("Fleche bas");
+                    break;
+                case 38:
+                    var selection = $('.selection');
+                    console.log(selection);
+                    if(selection.length != 0) {
+                        console.log('before ' + $(selection).prev());
+                        $(selection).toggleClass('selection');
+                        $(selection).prev().toggleClass('selection');
+                    } else {
+                        $('.liste_suggestion > li:last').toggleClass('selection');
+                    }
+                    //fleche haut
+                    console.log("Fleche haut");
+                    break;
+                default:
+                    var table = $(this).attr('table');
+                    var champ = $(this).attr('champ');
 
-            //positionnement de la liste de suggestion
-            var x = $(this).offset();
-            var h = $(this).outerHeight();            
-            $('#suggestion').css("top", x.top+h);
-            $('#suggestion').css("left", x.left);
-            $('#suggestion').css("display", "block");
-            autoComplete(searchbox, table, champ, $(this));
+                    //positionnement de la liste de suggestion
+                    var x = $(this).offset();
+                    var h = $(this).outerHeight();            
+                    $('#suggestion').css("top", x.top+h);
+                    $('#suggestion').css("left", x.left);
+                    $('#suggestion').css("display", "block");
+                    autoComplete(searchbox, table, champ, $(this));
+            }
         } else {
             $('#suggestion').css("display", "none");
         }
     });
     
     $('.liste_suggestion > li').live("click", function() {
+        var focus = $(this);
         var parent = $(this).parent();
         var table = parent.attr('table');
         var champ = parent.attr('champ');
-        $('.autoComplete[table="' + table + '"][champ="' + champ + '"]').val($(this).text());
-        $('.autoComplete[table="' + table + '"][champ="' + champ + '"]').attr("valeur", $(this).attr("valeur"));
-        $('#suggestion').css("display", "none"); 
+        selectionList(focus, table, champ);
+    });
+    
+    //le hover permet de chopper l'evenment à l'entrer et à la sortie, le toggleClass prend donc tous son sens!
+    $('.liste_suggestion > li').live('hover', function() {
+        $(this).toggleClass('selection');
     });
     
 });
@@ -186,8 +214,18 @@ function autoComplete(searchbox, table, champ, elmt) {
         success: function(html)
         {
             $('#suggestion').html(html);
+            $('.liste_suggestion > li:first').focus();
         }
     });
+}
+
+/*
+ * fonction qui fait les operations lors de la selection dans un autocomplete
+ */
+function selectionList(focus, table, champ) {
+    $('.autoComplete[table="' + table + '"][champ="' + champ + '"]').val(focus.text());
+    $('.autoComplete[table="' + table + '"][champ="' + champ + '"]').attr("valeur", focus.attr("valeur"));
+    $('#suggestion').css("display", "none"); 
 }
 
 function search(searchbox) {
