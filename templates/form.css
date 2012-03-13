@@ -224,7 +224,7 @@
 
 .select_civilite li:hover, .select_lien_famille li:hover, .select_sexe li:hover, .select_situation li:hover, .select_natio li:hover,
 .select_ville li:hover, .select_statut li:hover, .select_etude li:hover, .select_profession li:hover, .select_regime li:hover,
-.select_couv li:hover, .select_mut li:hover, .select_caf li:hover, .liste_suggestion li:hover, .select_secteur li:hover {
+.select_couv li:hover, .select_mut li:hover, .select_caf li:hover, .liste_suggestion .selection, .select_secteur li:hover {
     background-color: #EEE;
     border-color: #EEE;
     border-style: dotted;
