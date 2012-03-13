@@ -138,8 +138,24 @@ $(function() {
             $('#suggestion').css("top", x.top+h);
             $('#suggestion').css("left", x.left);
             $('#suggestion').css("display", "block");
-            
             autoComplete(searchbox, table, champ, $(this));
+            $(this).live("keydown", function(evenement){
+                var codeTouche = evenement.which || evenement.keyCode;
+                switch(codeTouche) {
+                    case 13:
+                        // Touche entrée
+                        alert("Touche entrée");
+                        break;
+                   case 40:
+                       //fleche bas
+                       alert("Fleche bas");
+                       break;
+                  case 38:
+                      //fleche haut
+                      alert("Felche haut");
+                      break;
+                }
+            });
         } else {
             $('#suggestion').css("display", "none");
         }
