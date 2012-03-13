@@ -319,6 +319,22 @@ $(function() {
                 }
             });
         }
+        else if(value == 'updateFoyer') {
+            var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
+            datastring = 'idFoyer='+idFoyer+'&numrue='+$('#numrue').attr('value');
+            datastring += '&rue='+$('#rue').attr('value')+'&secteur='+$('#secteur').attr('value');
+            datastring += '&ville='+$('#ville').attr('value');
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updateFoyer',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
     });
     
     

@@ -111,22 +111,22 @@ function generateInfoFoyer($foyer) {
             <ul id="membre_foyer_list">
                 <li class="membre_foyer">
                     <div class="colonne">
-                        <span class="attribut">N&deg;</span>
+                        <span class="attribut">N&deg; :</span>
                         <span><input type="text" class="contour_field input_num" id="numrue" value="'.$foyer->numRue.'" disabled/></span>
                     </div>
                     <div class="colonne">
-                        <span class="attribut">Rue</span>
+                        <span class="attribut">Rue :</span>
                         <span><input type="text" class="contour_field input_char autoComplete" id="rue" table="rue" champ="rue" value="'.$foyer->rue->rue.'" disabled/></span>
                     </div>
                     <div class="colonne">
-                        <span class="attribut">Secteur</span>
+                        <span class="attribut">Secteur :</span>
                         <div class="select classique" role="select_secteur">';
     $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
     $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
-                        <span class="attribut">Ville</span>
+                        <span class="attribut">Ville :</span>
                         <span><input type="text" id="ville" class="contour_field input_char autoComplete" table="ville" champ="libelle" value="'.$foyer->ville->libelle.'" disabled/></span>
                     </div>
                </li>
@@ -145,9 +145,11 @@ function generateInfoFoyer($foyer) {
                   </div>
                </li>
             </ul>';
-        $retour .= situationFinanciere($foyer->id);
+       
 $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</div>
+            <div class="clearboth"></div>
         </div>';
+ $retour .= situationFinanciere($foyer->id);
     $retour .= '<ul class="select_secteur">';
     foreach($secteurs as $secteur) {
         $retour .= '<li>
@@ -156,6 +158,26 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
     }
     $retour .= '</ul>';
     return $retour;
+}
+
+function updateFoyer() {
+    include_once('./lib/config.php');
+    $ville = Doctrine_Core::getTable('ville')->findOneByLibelle($_POST['ville']);
+    if($ville!=null) {
+        $ville = new Ville();
+        $ville->libelle = $_POST['ville'];
+    }
+    $rue = Doctrine_Core::getTable('rue')->findOneByRue($_POST['rue']);
+    if($rue!=null) {
+        $rue = new Rue();
+        $rue->rue = $_POST['rue'];
+    }
+    $foyer = Doctrine_Core::getTable('foyer')->find($_POST['idFoyer']);
+    $foyer->numRue = $_POST['numrue'];
+    $foyer->idRue = $rue->id;
+    $foyer->idSecteur = $_POST['secteur'];
+    $foyer->idVille = $ville->id;
+    $individu->save();
 }
 
 function situationFinanciere($idFoyer) {
