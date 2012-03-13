@@ -7,6 +7,7 @@ class SituationMatri extends Doctrine_Record {
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
         $this->hasColumn('situation', 'string', 100,array('default' => ' '));
+        $this->option('orderBy', 'situation ASC');
     }
 }
 ?>

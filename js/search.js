@@ -126,20 +126,8 @@ $(function() {
         });
     });  
     
-    $('.autoComplete').live("keyup", function()  {
-        var searchbox = $(this).val();
-        if (searchbox.length > 2) {
-            var table = $(this).attr('table');
-            var champ = $(this).attr('champ');
-
-            //positionnement de la liste de suggestion
-            var x = $(this).offset();
-            var h = $(this).outerHeight();            
-            $('#suggestion').css("top", x.top+h);
-            $('#suggestion').css("left", x.left);
-            $('#suggestion').css("display", "block");
-            autoComplete(searchbox, table, champ, $(this));
-            $(this).live("keydown", function(evenement){
+    $('.autoComplete').live("focus", function() {
+         $(this).live("keyup", function(evenement){
                 var codeTouche = evenement.which || evenement.keyCode;
                 switch(codeTouche) {
                     case 13:
@@ -156,6 +144,20 @@ $(function() {
                       break;
                 }
             });
+    });
+    $('.autoComplete').live("keyup", function()  {
+        var searchbox = $(this).val();
+        if (searchbox.length > 2) {
+            var table = $(this).attr('table');
+            var champ = $(this).attr('champ');
+
+            //positionnement de la liste de suggestion
+            var x = $(this).offset();
+            var h = $(this).outerHeight();            
+            $('#suggestion').css("top", x.top+h);
+            $('#suggestion').css("left", x.left);
+            $('#suggestion').css("display", "block");
+            autoComplete(searchbox, table, champ, $(this));
         } else {
             $('#suggestion').css("display", "none");
         }
