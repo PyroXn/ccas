@@ -111,22 +111,12 @@ function generateInfoFoyer($foyer) {
             <ul id="membre_foyer_list">
                 <li class="membre_foyer">
                     <div class="colonne">
-                        <span class="attribut"> test</span>
-                        <span>
-                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="lol" champ="rue"/>
-                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="rue" champ="rue"/>
-                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="rue" champ="lol"/>
-                        </span>
-                    </div>
-                </li>
-                <li class="membre_foyer">
-                    <div class="colonne">
                         <span class="attribut">N&deg;</span>
                         <span><input type="text" class="contour_field input_num" id="numrue" value="'.$foyer->numRue.'" disabled/></span>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Rue</span>
-                        <span><input type="text" class="contour_field input_char" id="rue" value="'.$foyer->rue->rue.'" disabled/></span>
+                        <span><input type="text" class="contour_field input_char autoComplete" id="rue" table="rue" champ="rue" value="'.$foyer->rue->rue.'" disabled/></span>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Secteur</span>
@@ -137,7 +127,7 @@ function generateInfoFoyer($foyer) {
                     </div>
                     <div class="colonne">
                         <span class="attribut">Ville</span>
-                        <span><input type="text" id="ville" class="contour_field input_char" value="'.$foyer->ville->libelle.'" disabled/></span>
+                        <span><input type="text" id="ville" class="contour_field input_char autoComplete" table="ville" champ="libelle" value="'.$foyer->ville->libelle.'" disabled/></span>
                     </div>
                </li>
                <li class="membre_foyer">

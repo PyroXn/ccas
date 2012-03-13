@@ -193,6 +193,9 @@ $(function() {
         var parent = $(this).parent();
         var table = parent.attr('table');
         var champ = parent.attr('champ');
+        console.log('parent ' + parent);
+        console.log('table ' + table);
+        console.log('champ ' + champ);
         selectionList(focus, table, champ);
     });
     
@@ -203,7 +206,7 @@ $(function() {
     
 });
 
-function autoComplete(searchbox, table, champ, elmt) {
+function autoComplete(searchbox, table, champ) {
     var dataString = 'searchword='+ searchbox;
     dataString += '&table=' + table
     dataString += '&champ=' + champ
@@ -224,6 +227,9 @@ function autoComplete(searchbox, table, champ, elmt) {
  * fonction qui fait les operations lors de la selection dans un autocomplete
  */
 function selectionList(focus, table, champ) {
+    console.log('focus ' + focus);
+    console.log('table ' + table);
+    console.log('champ ' + champ);
     $('.autoComplete[table="' + table + '"][champ="' + champ + '"]').val(focus.text());
     $('.autoComplete[table="' + table + '"][champ="' + champ + '"]').attr("valeur", focus.attr("valeur"));
     $('#suggestion').css("display", "none"); 
