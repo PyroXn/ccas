@@ -188,6 +188,10 @@ $(function() {
         }
     });
     
+    $('.autoComplete').live("blur", function()  {
+        $('#suggestion').css("display", "none");
+    });
+    
     $('.liste_suggestion > li').live("click", function() {
         var focus = $(this);
         var parent = $(this).parent();
