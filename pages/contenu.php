@@ -686,21 +686,23 @@ function generalite() {
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Niveau étude :</span>
-                    <div class="select classique" role="select_etude">
-                        <div id="etude" class="option" value=" ">-----</div>
+                    <div class="select classique" role="select_etude">';
+$contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.utf8_decode($user->etude->etude).'</div>';  
+$contenu .= '
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Profession :</span>
-                    <div class="select classique" role="select_profession">
-                        <div id="profession" class="option" value=" ">-----</div>
+                    <div class="select classique" role="select_profession">';
+$contenu .= $user->idNiveauEtude == null ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.utf8_decode($user->profession->profession).'</div>';  
+$contenu .= '
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Employeur :</span>
-                    <span><input class="contour_field input_char" type="text" id="employeur" value="'.$user->employeur.'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="employeur" value="'.utf8_decode($user->employeur).'" disabled/></span>
                 </div> 
             </li>
             <li class="membre_foyer">
@@ -890,43 +892,43 @@ $contenu .= '<ul class="select_mut">';
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_profession">';
     foreach($professions as $profession) {
-        $contenu .= '<li value="'.$profession->id.'">
-                                    <div>'.utf8_decode($profession->profession).'</div>
+        $contenu .= '<li>
+                                    <div value="'.$profession->id.'">'.utf8_decode($profession->profession).'</div>
                                </li>';
     }
     $contenu .= '</ul>';
    $contenu .= ' <ul class="select_etude">';
     foreach($etudes as $etude) {
-        $contenu .= '<li value="'.$etude->id.'">
-                                    <div>'.utf8_decode($etude->etude).'</div>
+        $contenu .= '<li>
+                                    <div value="'.$etude->id.'">'.utf8_decode($etude->etude).'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_statut">';
     foreach($liens as $lien) {
-        $contenu .= '<li value="'.$lien->id.'">
-                                    <div>'.utf8_decode($lien->lien).'</div>
+        $contenu .= '<li>
+                                    <div value="'.$lien->id.'">'.utf8_decode($lien->lien).'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_ville">';
     foreach($villes as $ville) {
-        $contenu .= '<li value="'.$ville->id.'">
-                                    <div>'.utf8_decode($ville->libelle).'</div>
+        $contenu .= '<li>
+                                    <div value="'.$ville->id.'">'.utf8_decode($ville->libelle).'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_natio">';
     foreach($nationalite as $nat) {
-        $contenu .= '<li value="'.$nat->id.'">
-                                    <div>'.utf8_decode($nat->nationalite).'</div>
+        $contenu .= '<li>
+                                    <div value="'.$nat->id.'">'.utf8_decode($nat->nationalite).'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_situation">';
     foreach($situations as $sit) {
-        $contenu .= '<li value="'.$sit->id.'">
-                                    <div>'.utf8_decode($sit->situation).'</div>
+        $contenu .= '<li>
+                                    <div value="'.$sit->id.'">'.utf8_decode($sit->situation).'</div>
                                </li>';
     }
     $contenu .= '</ul>';

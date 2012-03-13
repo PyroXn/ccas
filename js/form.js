@@ -226,7 +226,6 @@ $(function() {
             datastring += '&natureDette='+$('#natureDette').val()+'&arriereElec='+$('#arriereElec').val();
             datastring += '&prestaElec='+$('#prestaElec').val()+'&arriereGaz='+$('#arriereGaz').val();
             datastring += '&prestaGaz='+$('#prestaGaz').val();
-            console.log('update Dette :'+datastring);
             $.ajax({
                 type: 'post',
                 dataType:'json',
@@ -255,7 +254,6 @@ $(function() {
         else if(value == 'updateCaf') {
             datastring = 'idIndividu='+idIndividu+'&caf='+$('#caf').attr('value');
             datastring += '&numallocatairecaf='+$('#numallocatairecaf').val();
-            alert(datastring);
             $.ajax({
                 type: 'post',
                 dataType:'json',
@@ -273,7 +271,6 @@ $(function() {
             datastring = 'idIndividu='+idIndividu+'&mut='+$('#mutuelle').attr('value');
             datastring += '&cmuc='+cmuc+'&numadherentmut='+$('#numadherentmut').val();
             datastring += '&datedebutcouvmut='+$('#datedebutcouvmut').val()+'&datefincouvmut='+$('#datefincouvmut').val();
-            console.log(datastring);
             $.ajax({
                 type: 'post',
                 dataType:'json',
@@ -295,12 +292,27 @@ $(function() {
             datastring += '&numsecu='+$('#numsecu').val()+'&clefsecu='+$('#clefsecu').val();
             datastring += '&regime='+$('#regime').attr('value')+'&datedebutcouvsecu='+$('#datedebutcouvsecu').val();
             datastring += '&datefincouvsecu='+$('#datefincouvsecu').val();
-            console.log(datastring);
             $.ajax({
                 type: 'post',
                 dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatecouverture',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateSituationProfessionnelle') {
+            datastring = 'idIndividu='+idIndividu+'&etude='+$('#etude').attr('value');
+            datastring += '&profession='+$('#profession').attr('value')+'&employeur='+$('#employeur').val();
+            datastring += '&inscriptionpe='+$('#dateinscriptionpe').val()+'&numdossier='+$('#numdossierpe').val();
+            datastring += '&debutdroit='+$('#datedebutdroitpe').val()+'&findroit='+$('#datefindroitpe').val();
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatesituationprofessionnelle',
                 //Succès de la requête
                 success: function(data) {
                     loc.parent().find('input').attr("disabled","disabled");

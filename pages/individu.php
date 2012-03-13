@@ -184,6 +184,34 @@ function updateCouvertureSociale() {
     $individu->regime = $_POST['regime'];
     $individu->save();  
 }
+
+function updateSituationProfessionnelle() {
+    include_once('./lib/config.php');
+    $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
+    $individu->idNiveauEtude = $_POST['etude'];
+    $individu->idProfession = $_POST['profession'];
+    $individu->employeur = $_POST['employeur'];
+    if($_POST['inscriptionpe'] != 0) {
+        $date = explode('/', $_POST['inscriptionpe']);
+        $individu->dateInscriptionPe = mktime(0,0,0,$date[1], $date[0], $date[2]);
+    } else {
+        $individu->dateInscriptionPe = 0;
+    }
+    $individu->numDossierPe = $_POST['numdossier'];
+    if($_POST['debutdroit'] != 0) {
+        $date1 = explode('/', $_POST['debutdroit']);
+        $individu->dateDebutDroitPe = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
+    } else {
+        $individu->dateDebutDroitPe = 0;
+    }
+    if($_POST['findroit'] != 0) {
+        $date2 = explode('/', $_POST['findroit']);
+        $individu->dateFinDroitPe = mktime(0, 0, 0, $date2[1], $date2[0], $date2[2]);
+    } else {
+        $individu->dateFinDroitPe = 0;
+    }
+    $individu->save();
+}
 //function generalite() {
 //    include_once('./lib/config.php');
 //    $liens = Doctrine_Core::getTable('lienfamille')->findAll();

@@ -127,7 +127,7 @@ $(function() {
     });  
     
     $('.autoComplete').live("focus", function() {
-         $(this).live("keyup", function(evenement){
+         $(this).bind("keyup", function(evenement){
                 var codeTouche = evenement.which || evenement.keyCode;
                 switch(codeTouche) {
                     case 13:

@@ -103,6 +103,10 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateCouvertureSociale();
         break;
+    case 'updatesituationprofessionnelle':
+        include_once('./pages/individu.php');
+        updateSituationProfessionnelle();
+        break;
     default:
         home();
         break;
