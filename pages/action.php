@@ -3,7 +3,7 @@
 function action() {
     include_once('./lib/config.php');
     $actions = Doctrine_Core::getTable('action')->findByIdIndividu($_POST['idIndividu']);
-    $types = Doctrine_Core::getTable('type')->findByCategorie(4); // Type Action
+    $types = Doctrine_Core::getTable('type')->findByCategorie(2); // Type Action
     $instructs = Doctrine_Core::getTable('instruct')->findByInterne(1); // Instruct interne
     $contenu = '<h2>Budget</h2>';
     $contenu .= '<div><h3><span>Suivi des actions</span></h3>';

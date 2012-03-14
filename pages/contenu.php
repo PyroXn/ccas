@@ -119,17 +119,6 @@ function generateInfoFoyer($foyer) {
             <ul id="membre_foyer_list">
                 <li class="membre_foyer">
                     <div class="colonne">
-<<<<<<< HEAD
-                        <span class="attribut"> test</span>
-                        <span>
-                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="lol" champ="rue"/>
-                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="rue" champ="rue"/>
-                            <input class="contour_field input_num autoComplete" type="text" id="salaire" table="rue" champ="lol"/>
-                        </span>
-                    </div>
-                </li>
-                <li class="membre_foyer">
-                    <div class="colonne">
                         <span class="attribut">N&deg; :</span>
                         <span><input type="text" class="contour_field input_num" id="numrue" value="'.$foyer->numRue.'" disabled/></span>
                     </div>
@@ -225,7 +214,7 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
  $retour .= '</ul>';
  $retour .= '<ul class="select_typelogement">';
  foreach($types as $t) {
-     if($t->categorie == 2) {
+     if($t->categorie == 4) {
      $retour .= '<li>
                             <div value="'.$t->id.'">'.$t->libelle.'</div>
                         </li>';

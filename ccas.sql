@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mer 14 Mars 2012 à 15:56
+-- Généré le : Mer 14 Mars 2012 à 19:00
 -- Version du serveur: 5.1.61
 -- Version de PHP: 5.3.6-13ubuntu3.6
 
@@ -58,13 +58,13 @@ CREATE TABLE IF NOT EXISTS `aideexterne` (
   `idindividu` bigint(20) DEFAULT NULL,
   `datedemande` bigint(20) DEFAULT '0',
   `idorganisme` bigint(20) DEFAULT NULL,
-  `idnature` bigint(20) DEFAULT NULL,
+  `nature` varchar(20) DEFAULT NULL,
   `aideurgente` tinyint(4) DEFAULT '0',
   `idaidedemandee` bigint(20) DEFAULT NULL,
   `idinstruct` bigint(20) DEFAULT NULL,
-  `idetat` bigint(20) DEFAULT NULL,
+  `etat` varchar(20) DEFAULT NULL,
   `proposition` varchar(250) DEFAULT ' ',
-  `idavis` bigint(20) DEFAULT NULL,
+  `avis` varchar(20) DEFAULT NULL,
   `iddecideur` bigint(20) DEFAULT NULL,
   `datedecision` bigint(20) DEFAULT '0',
   `montant` float(18,2) DEFAULT '0.00',
@@ -88,14 +88,14 @@ CREATE TABLE IF NOT EXISTS `aideinterne` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `idindividu` bigint(20) DEFAULT NULL,
   `datedemande` bigint(20) DEFAULT '0',
-  `idorigine` bigint(20) DEFAULT NULL,
-  `idnature` bigint(20) DEFAULT NULL,
+  `idorganisme` bigint(20) DEFAULT NULL,
+  `nature` varchar(20) DEFAULT NULL,
   `aideurgente` tinyint(4) DEFAULT '0',
   `idaidedemandee` bigint(20) DEFAULT NULL,
   `idinstruct` bigint(20) DEFAULT NULL,
-  `idetat` bigint(20) DEFAULT NULL,
+  `etat` varchar(20) DEFAULT NULL,
   `proposition` varchar(250) DEFAULT ' ',
-  `idavis` bigint(20) DEFAULT NULL,
+  `avis` varchar(20) DEFAULT NULL,
   `iddecideur` bigint(20) DEFAULT NULL,
   `datedecision` bigint(20) DEFAULT '0',
   `montant` float(18,2) DEFAULT '0.00',
@@ -104,6 +104,8 @@ CREATE TABLE IF NOT EXISTS `aideinterne` (
   `vigilance` varchar(50) DEFAULT ' ',
   `idaideaccordee` bigint(20) DEFAULT NULL,
   `commentaire` varchar(250) DEFAULT ' ',
+  `rapport` varchar(250) DEFAULT NULL,
+  `daterevision` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -336,11 +338,11 @@ CREATE TABLE IF NOT EXISTS `foyer` (
 --
 
 INSERT INTO `foyer` (`id`, `numrue`, `idrue`, `idsecteur`, `idville`, `idbailleur`, `dateinscription`, `typelogement`, `typeappartenance`, `logdatearrive`, `logsurface`, `idinstruct`, `notes`) VALUES
-(1, 12, 69, 4, 218, 15, NULL, 2, 4, 978303600, 105.00, 1, 'Je note.'),
-(2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 0, NULL, NULL, NULL, NULL, 1331648671, NULL, NULL, 0, 0.00, NULL, ' '),
-(4, 0, NULL, NULL, NULL, NULL, 1331648779, NULL, NULL, 0, 0.00, NULL, ' '),
-(5, 0, NULL, NULL, NULL, NULL, 1331661060, NULL, NULL, 0, 0.00, NULL, ' ');
+(1, 12, 69, 4, 218, 15, 1334418102, 2, 4, 978303600, 105.00, 1, 'Je note.1331648671'),
+(2, NULL, NULL, NULL, NULL, NULL, 1331648671, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 0, NULL, NULL, NULL, NULL, 1302795702, NULL, NULL, 0, 0.00, NULL, ' '),
+(4, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, 0.00, NULL, ' '),
+(5, 0, NULL, NULL, NULL, NULL, 1321288902, NULL, NULL, 0, 0.00, NULL, ' ');
 
 -- --------------------------------------------------------
 
@@ -1023,12 +1025,12 @@ CREATE TABLE IF NOT EXISTS `type` (
 --
 
 INSERT INTO `type` (`id`, `categorie`, `libelle`) VALUES
-(1, 2, ' F1'),
-(2, 2, ' F2'),
+(1, 4, ' F1'),
+(2, 4, ' F2'),
 (3, 3, 'Locataire'),
 (4, 3, 'Propriétaire'),
-(5, 4, ' Visite à domicile'),
-(6, 4, ' Courrier');
+(5, 2, ' Visite à domicile'),
+(6, 2, ' Courrier');
 
 -- --------------------------------------------------------
 
@@ -1065,7 +1067,7 @@ CREATE TABLE IF NOT EXISTS `ville` (
   `cp` varchar(10) DEFAULT ' ',
   `libelle` varchar(255) DEFAULT ' ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=272 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=273 ;
 
 --
 -- Contenu de la table `ville`
@@ -1340,7 +1342,8 @@ INSERT INTO `ville` (`id`, `cp`, `libelle`) VALUES
 (268, '', 'ROUMANIE'),
 (269, '', 'SOMME'),
 (270, '', 'LE HAVRE'),
-(271, '66000', 'PERPIGNAN');
+(271, '66000', 'PERPIGNAN'),
+(272, '99999', 'tutu');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
