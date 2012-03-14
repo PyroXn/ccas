@@ -13,6 +13,7 @@ class Bailleur extends Doctrine_Record {
         $this->hasColumn('telephone', 'string', 30, array('default' => ' '));
         $this->hasColumn('fax', 'string', 30, array('default' => ' '));
         $this->hasColumn('email', 'string', 30, array('default' => ' '));
+        $this->option('orderBy', 'nomBailleur ASC');
     }
 
     public function setUp() {
