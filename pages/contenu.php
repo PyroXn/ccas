@@ -153,8 +153,14 @@ $retour .= '<div class="fleche_bas"> </div>
                   </div>
                   <div class="colonne">
                         <span class="attribut">Dâte d\'entrée :</span>
-                        <span><input class="contour_field input_char" type="text" id="surface" disabled/></span>
+                        <span><input class="contour_field input_date" type="text" id="surface" size="10" disabled/></span>
                   </div>
+               </li>
+               <li class="membre_foyer">
+                    <div class="colonne_large">
+                        <span class="attribut_for_large">Note :</span>
+                        <span><input class="contour_field input_char_for_large" type="text" id="surface" disabled/></span>
+                    </div>
                </li>
             </ul>';
        
