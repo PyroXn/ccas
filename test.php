@@ -6,23 +6,6 @@ include_once('./lib/config.php');
 //$mdp = 'florian';
 //echo md5($mdp);
 
-//$tableStatique = Doctrine_Core::getTable('ville')->findAll();
-//
-//$i = 0;
-//foreach ($tableStatique as $ligne) {
-//    $ligneData = $ligne->getData();
-//    if ($i == 0) {
-//        $keys = array_keys($ligneData);
-//            foreach ($keys as $key) {
-//            echo '<span>'.$key.' </span>';
-//        }
-//    }
-//    echo '<div>ligne numero : '.$i.'</div>' ;
-//    foreach ($ligneData as $attribut) {
-//        echo '<div>'.$attribut.'</div>';
-//    }
-//    $i++;
-//}
 
 echo generateEcranStatique('ville');
 
@@ -67,7 +50,9 @@ function generateEcranStatique($table) {
 //   $i++;
 //}
 
+
 //$individu = Doctrine_Core::getTable('ville')->find(1);
 $colonnes = Doctrine_Core::getTable('ville')->getColumnNames();
 print_r($colonnes);
+
 ?>
