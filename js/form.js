@@ -17,6 +17,13 @@ $(function() {
         newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_credit"]').height();
         creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_credit"]'));
     });
+    
+    $('#createAction').live("click", function() {        
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_action"]').width()/2;
+        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_action"]').height();
+        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_action"]'));
+    });
 
     
     $('.select').live("click", function() {
@@ -105,7 +112,12 @@ $(function() {
                     datastring += '&mensualite='+$('#mensualite').val()+'&duree='+$('#duree').val();
                     datastring += '&total='+$('#total').val();
                     break;
-                        
+                case 'creation_action':
+                    datastring += '&idIndividu='+idIndividu+'&date='+$('#date').val();
+                    datastring += '&typeaction='+$('#typeaction').attr('value')+'&motif='+$('#motif').val();
+                    datastring += '&suiteadonner='+$('#suiteadonner').val()+'&suitedonnee='+$('#suitedonnee').val();
+                    datastring += '&instruct='+$('#instruct').attr('value');
+                    break;
             }
             $.ajax({
                 type: 'post',
@@ -135,6 +147,9 @@ $(function() {
                             break;
                         case 'creation_credit':
                             $("#contenu").html(data.budget);
+                            break;
+                        case 'creation_action':
+                            $('#contenu').html(data.action);
                             break;
                     }
                 //FONCTIONNE PAS 

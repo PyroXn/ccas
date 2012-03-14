@@ -20,6 +20,10 @@ function contenu() {
             include_once './pages/tableStatique.php';
             echo generateEcranStatique('ville');
             break;
+        case 'actions':
+            include_once('./pages/action.php');
+            echo action();
+            break;
         case 'accueil':
             echo accueilContenu();
             break;
@@ -423,7 +427,7 @@ function budget() {
     $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
     $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($_POST['idIndividu']);
     $contenu = '<h2>Budget</h2>';
-    $contenu .= '<div><h3 role="ressource"><span>Ressources</span>  <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.getDatebyTimestamp($revenu->dateCreation).'</span></h3>';
+    $contenu .= '<div><h3><span>Ressources</span>  <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.getDatebyTimestamp($revenu->dateCreation).'</span></h3>';
     $contenu .= '<ul id="membre_foyer_list">
                                 <li class="membre_foyer">
                                     <div class="colonne">
@@ -542,9 +546,9 @@ function budget() {
                                     <span class="attribut">Autres Dépenses : </span>
                                     <span><input class="contour_field input_num" type="text" id="autreDepense" value="'.$depense->autreDepense.'" disabled/></span>
                                </div>
-                               <div class="colonne">
-                                    <span class="attribut">Détail : </span>
-                                    <span><input class="contour_field input_char" type="text" id="natureDepense" value="'.$depense->natureDepense.'" disabled/></span>
+                               <div class="colonne_large">
+                                    <span class="attribut_for_large">Détail : </span>
+                                    <span><input class="contour_field  input_char_for_large" type="text" id="natureDepense" value="'.$depense->natureDepense.'" disabled/></span>
                                </div>
                                </li>
                             </ul>
@@ -686,7 +690,7 @@ function generalite() {
     $contenu = '<h2>Généralités</h2>';
     $contenu .= '
     <div>
-        <h3><span>Informations personnelles</span><span class="edit"></span></h3>
+        <h3><span>Informations personnelles</span>  <span class="edit"></span></h3>
             <ul id="membre_foyer_list">
                 <li class="membre_foyer">
                     <div class="colonne">
@@ -745,7 +749,7 @@ $contenu .= '<div class="fleche_bas"> </div>
 // CONTACT
     $contenu .= '
     <div>
-        <h3><span>Télèphone / Email</span><span class="edit"></span></h3>
+        <h3><span>Télèphone / Email</span>  <span class="edit"></span></h3>
         <ul id="membre_foyer_list">
             <li class="membre_foyer">
                 <div class="colonne">
@@ -819,7 +823,7 @@ $contenu .= '
 // COUVERTURE SOCIALE
     $contenu .= '
     <div>
-        <h3><span>Couverture sociale</span><span class="edit"></span></h3>
+        <h3><span>Couverture sociale</span>  <span class="edit"></span></h3>
         <ul id="membre_foyer_list">
             <li class="membre_foyer">
                 <div class="colonne">
@@ -878,7 +882,7 @@ $contenu .= '<div class="fleche_bas"> </div>
 // MUTUELLE
 $contenu .= '
     <div>
-        <h3><span>Mutuelle</span><span class="edit"></span></h3>
+        <h3><span>Mutuelle</span>  <span class="edit"></span></h3>
         <ul id="membre_foyer_list">
             <li class="membre_foyer">
                 <div class="colonne">
@@ -916,7 +920,7 @@ $contenu .= '
 // CAF
 $contenu .= '
     <div>
-        <h3><span>CAF</span><span class="edit"></span></h3>
+        <h3><span>CAF</span>  <span class="edit"></span></h3>
         <ul id="membre_foyer_list">
             <li class="membre_foyer">
                 <div class="colonne">

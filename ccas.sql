@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mer 14 Mars 2012 à 14:09
+-- Généré le : Mer 14 Mars 2012 à 15:56
 -- Version du serveur: 5.1.61
 -- Version de PHP: 5.3.6-13ubuntu3.6
 
@@ -19,6 +19,33 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `ccas`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `action`
+--
+
+CREATE TABLE IF NOT EXISTS `action` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `date` bigint(20) DEFAULT '0',
+  `idaction` bigint(20) DEFAULT '0',
+  `motif` varchar(150) DEFAULT ' ',
+  `suiteadonner` varchar(150) DEFAULT ' ',
+  `suitedonnee` varchar(150) DEFAULT ' ',
+  `idinstruct` bigint(20) DEFAULT '0',
+  `idindividu` bigint(20) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `action`
+--
+
+INSERT INTO `action` (`id`, `date`, `idaction`, `motif`, `suiteadonner`, `suitedonnee`, `idinstruct`, `idindividu`) VALUES
+(1, 0, 5, ' Osef', 'Definir pénitence', 'Coup de fouet sur place publique', 1, 1),
+(2, 1331679600, 5, 'Ta race', 'TG', 'TG', 30, 1),
+(3, 946681200, 5, 'a', 'a', 'a', 28, 1);
 
 -- --------------------------------------------------------
 
@@ -989,7 +1016,7 @@ CREATE TABLE IF NOT EXISTS `type` (
   `categorie` bigint(20) DEFAULT '0',
   `libelle` varchar(50) DEFAULT ' ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `type`
@@ -999,7 +1026,9 @@ INSERT INTO `type` (`id`, `categorie`, `libelle`) VALUES
 (1, 2, ' F1'),
 (2, 2, ' F2'),
 (3, 3, 'Locataire'),
-(4, 3, 'Propriétaire');
+(4, 3, 'Propriétaire'),
+(5, 4, ' Visite à domicile'),
+(6, 4, ' Courrier');
 
 -- --------------------------------------------------------
 

@@ -260,4 +260,13 @@ try {
 } catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
 	echo $e->getMessage(); // On l'affiche.
 }
+
+try {
+	$table = Doctrine_Core::getTable('Action'); // On récupère l'objet de la table.
+	$connexion->export->createTable($table->getTableName(), 
+		                           $table->getColumns()); // Puis, on la crée.
+        echo 'La table a bien été créée';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+	echo $e->getMessage(); // On l'affiche.
+}
 ?>

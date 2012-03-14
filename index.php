@@ -287,6 +287,9 @@ function generationHeaderNavigation($mode) {
                 <div id="aides" class="page_header_link">
                     <span class="label">Aides</span>
                 </div>
+                 <div id="actions" class="page_header_link">
+                    <span class="label">Actions</span>
+                </div>
                 <div id="historique" class="page_header_link">
                     <span class="label">Historique</span>
                 </div>';
