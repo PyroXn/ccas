@@ -52,7 +52,11 @@ function generateEcranStatique($table) {
 
 
 //$individu = Doctrine_Core::getTable('ville')->find(1);
-$colonnes = Doctrine_Core::getTable('ville')->getColumnNames();
-print_r($colonnes);
+$table = Doctrine_Core::getTable('dette');
+foreach ($table->getColumnNames() as $columnName) {
+    echo $table->getTypeOfColumn($columnName).' ';
+//    echo $colonne->get;
+}
+//print_r($colonnes->type);
 
 ?>
