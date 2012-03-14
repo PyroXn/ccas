@@ -107,6 +107,8 @@ function foyerContenu($idFoyer) {
 function generateInfoFoyer($foyer) {
     $secteurs = Doctrine_Core::getTable('secteur')->findAll();
     $types =  Doctrine_Core::getTable('type')->findAll();
+    $bailleurs =  Doctrine_Core::getTable('bailleur')->findAll();
+    $instructs =  Doctrine_Core::getTable('instruct')->findAll();
     $retour = '';
     $retour .= '
         <div><h3>Foyer<span class="edit"></span></h3>
@@ -143,7 +145,7 @@ $retour .= '<div class="fleche_bas"> </div>
                    <div class="colonne">
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statutlogement">';
-$retour .= $foyer->typeAppartenance == null ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
+$retour .= $foyer->typeAppartenance == null ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.utf8_decode($foyer->statutlogement->libelle).'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                    </div>
@@ -153,13 +155,27 @@ $retour .= '<div class="fleche_bas"> </div>
                   </div>
                   <div class="colonne">
                         <span class="attribut">Dâte d\'entrée :</span>
-                        <span><input class="contour_field input_date" type="text" id="surface" size="10" disabled/></span>
+                        <span><input class="contour_field input_date" type="text" id="dateentree" size="10" value="'.getDatebyTimestamp($foyer->logDateArrive).'" disabled/></span>
                   </div>
                </li>
                <li class="membre_foyer">
+                    <div class="colonne">
+                        <span class="attribut">Bailleur :</span>
+                        <div class="select classique" role="select_bailleur">';
+$retour .= $foyer->idBailleur == null ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.utf8_decode($foyer->bailleur->nomBailleur).'</div>';
+$retour .= '<div class="fleche_bas"> </div>
+                    </div>
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Instructeur :</span>
+                        <div class="select classique" role="select_instruct">';
+$retour .= $foyer->idInstruct == null ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.utf8_decode($foyer->instruct->nom).'</div>';
+$retour .= '<div class="fleche_bas"> </div>
+                    </div>
+                    </div>
                     <div class="colonne_large">
                         <span class="attribut_for_large">Note :</span>
-                        <span><input class="contour_field input_char_for_large" type="text" id="surface" disabled/></span>
+                        <span><input class="contour_field input_char_for_large" type="text" id="note" value="'.$foyer->notes.'" disabled/></span>
                     </div>
                </li>
             </ul>';
@@ -169,11 +185,25 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
         </div>';
  $retour .= situationFinanciere($foyer->id);
  // COMBO BOX
+ $retour .= '<ul class="select_instruct">';
+    foreach($instructs as $instruct) {
+        $retour .= '<li>
+                                <div value="'.$instruct->id.'">'.utf8_decode($instruct->nom).'</div>
+                           </li>';
+    }
+    $retour .= '</ul>';
+ $retour .= '<ul class="select_bailleur">';
+    foreach($bailleurs as $bailleur) {
+        $retour .= '<li>
+                                <div value="'.$bailleur->id.'">'.utf8_decode($bailleur->nomBailleur).'</div>
+                           </li>';
+    }
+    $retour .= '</ul>';
  $retour .= '<ul class="select_statutlogement">';
  foreach($types as $t) {
      if($t->categorie == 3) {
      $retour .= '<li>
-                            <div value="'.$t->id.'">'.$t->libelle.'</div>
+                            <div value="'.$t->id.'">'.utf8_decode($t->libelle).'</div>
                         </li>';
      }
  }
@@ -190,7 +220,7 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
     $retour .= '<ul class="select_secteur">';
     foreach($secteurs as $secteur) {
         $retour .= '<li>
-                                <div value="'.$secteur->id.'">'.$secteur->secteur.'</div>
+                                <div value="'.$secteur->id.'">'.utf8_decode($secteur->secteur).'</div>
                            </li>';
     }
     $retour .= '</ul>';
@@ -214,6 +244,18 @@ function updateFoyer() {
     $foyer->idRue = $_POST['rue'];
     $foyer->idSecteur = $_POST['secteur'];
     $foyer->idVille = $_POST['ville'];
+    $foyer->idBailleur = $_POST['bailleur'];
+    $foyer->typeLogement = $_POST['type'];
+    $foyer->typeAppartenance = $_POST['statut'];
+    $foyer->logSurface = $_POST['surface'];
+    $foyer->idInstruct = $_POST['instruct'];
+    $foyer->notes = $_POST['notes'];
+    if($_POST['dateentree'] != 0) {
+        $date = explode('/', $_POST['dateentree']);
+        $foyer->logDateArrive = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
+    } else {
+        $foyer->logDateArrive = 0;
+    }
     $foyer->save();
 }
 
@@ -673,7 +715,7 @@ $contenu .= '<div class="fleche_bas"> </div>
                     <div class="colonne">
                         <span class="attribut">Date de naissance :</span>
                         <span>
-                            <input class="contour_field input_char" type="text" id="datenaissance" value="'.getDatebyTimestamp($user->dateNaissance).'" disabled/>
+                            <input class="contour_field input_date" type="text" size="10" id="datenaissance" value="'.getDatebyTimestamp($user->dateNaissance).'" disabled/>
                         </span>
                     </div>
                     <div class="colonne">
@@ -754,7 +796,7 @@ $contenu .= '
             <li class="membre_foyer">
                 <div class="colonne">
                     <span class="attribut">Inscription P.E :</span>
-                    <span><input class="contour_field input_char" type="text" id="dateinscriptionpe" value="'.getDatebyTimestamp($user->dateInscriptionPe).'" disabled/></span>
+                    <span><input class="contour_field input_date" size="10" type="text" id="dateinscriptionpe" value="'.getDatebyTimestamp($user->dateInscriptionPe).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">N° dossier P.E :</span>
@@ -762,11 +804,11 @@ $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">Début droits P.E :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebutdroitpe" value="'.getDatebyTimestamp($user->dateDebutDroitPe).'" disabled/></span>
+                    <span><input class="contour_field input_date" size="10" type="text" id="datedebutdroitpe" value="'.getDatebyTimestamp($user->dateDebutDroitPe).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Fin droits P.E :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefindroitpe" value="'.getDatebyTimestamp($user->dateFinDroitPe).'" disabled/></span>
+                    <span><input class="contour_field input_date" size="10" type="text" id="datefindroitpe" value="'.getDatebyTimestamp($user->dateFinDroitPe).'" disabled/></span>
                 </div> 
             </li>
         </ul>
@@ -821,11 +863,11 @@ $contenu .= '<div class="fleche_bas"> </div>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début droit :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebutcouvsecu" value="'.getDatebyTimestamp($user->dateDebutCouvSecu).'" disabled/></span>
+                    <span><input class="contour_field input_date" size="10" type="text" id="datedebutcouvsecu" value="'.getDatebyTimestamp($user->dateDebutCouvSecu).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date fin de droits :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefincouvsecu" value="'.getDatebyTimestamp($user->dateFinCouvSecu).'" disabled/></span>
+                    <span><input class="contour_field input_date" size="10" type="text" id="datefincouvsecu" value="'.getDatebyTimestamp($user->dateFinCouvSecu).'" disabled/></span>
                 </div>
             </li>
         </ul>
@@ -859,11 +901,11 @@ $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date début :</span>
-                    <span><input class="contour_field input_char" type="text" id="datedebutcouvmut" value="'.getDatebyTimestamp($user->dateDebutCouvMut).'" disabled/></span>
+                    <span><input class="contour_field input_date" size="10" type="text" id="datedebutcouvmut" value="'.getDatebyTimestamp($user->dateDebutCouvMut).'" disabled/></span>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Date fin :</span>
-                    <span><input class="contour_field input_char" type="text" id="datefincouvmut" value="'.getDatebyTimestamp($user->dateFinCouvMut).'" disabled/></span>
+                    <span><input class="contour_field input_date" size="10" type="text" id="datefincouvmut" value="'.getDatebyTimestamp($user->dateFinCouvMut).'" disabled/></span>
                 </div>
             </li>
         </ul>

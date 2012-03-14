@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mer 14 Mars 2012 à 11:51
+-- Généré le : Mer 14 Mars 2012 à 14:09
 -- Version du serveur: 5.1.61
 -- Version de PHP: 5.3.6-13ubuntu3.6
 
@@ -309,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `foyer` (
 --
 
 INSERT INTO `foyer` (`id`, `numrue`, `idrue`, `idsecteur`, `idville`, `idbailleur`, `dateinscription`, `typelogement`, `typeappartenance`, `logdatearrive`, `logsurface`, `idinstruct`, `notes`) VALUES
-(1, 12, 69, 4, 218, NULL, NULL, 1, 3, NULL, NULL, NULL, NULL),
+(1, 12, 69, 4, 218, 15, NULL, 2, 4, 978303600, 105.00, 1, 'Je note.'),
 (2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 0, NULL, NULL, NULL, NULL, 1331648671, NULL, NULL, 0, 0.00, NULL, ' '),
 (4, 0, NULL, NULL, NULL, NULL, 1331648779, NULL, NULL, 0, 0.00, NULL, ' '),
@@ -388,7 +388,52 @@ CREATE TABLE IF NOT EXISTS `instruct` (
   `telephone` varchar(15) DEFAULT ' ',
   `interne` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+
+--
+-- Contenu de la table `instruct`
+--
+
+INSERT INTO `instruct` (`id`, `nom`, `adresse`, `telephone`, `interne`) VALUES
+(1, 'HERMANN Catherine', '', '', 0),
+(2, 'PIERRE PICCININNO Carine', '', '', 0),
+(3, 'BAUDIN Isabelle', '', '', 0),
+(4, 'PIGNON Valérie', 'CMS', '', 0),
+(5, 'GENTILHOMME', '', '', 0),
+(6, 'HOUAR Rachida', 'Mission Locale', '', 0),
+(7, 'GERNE Laurence', 'CMS', '', 0),
+(8, 'GEHAY', 'CPAM', '', 0),
+(9, 'SIEJA Nadine', '', '', 0),
+(10, 'TOSCANO Angèle', '', '', 0),
+(11, 'BOHÊME Céline', '', '', 0),
+(12, 'SCHEIDT Karine', '', '', 0),
+(13, 'TRIBOUT Mélanie', '', '', 0),
+(14, 'BOUCHER Anne Valérie', '', '', 0),
+(15, 'DIESLER Catherine', 'CMS, Esplanade de la Liberté - HAYANGE', '0387350160', 0),
+(16, 'Mme DOUILLET', '', '', 0),
+(17, 'CMS Thionville', '', '', 0),
+(18, 'ILHE Julie', '', '', 0),
+(19, 'SCHEED Sophie', '', '', 0),
+(20, 'BARTHELEMY Noémie', 'UDAF', '', 0),
+(21, 'Armée du Salut', '', '', 0),
+(22, 'HOUPERT PETIT Catherine', '', '', 0),
+(23, 'MACALUSO Lidia', '', '', 0),
+(24, 'Chantal VILLEMIN', '', '', 0),
+(25, 'AUBURTIN Chantal', '', '', 0),
+(26, 'FRANK Laurence', '', '', 0),
+(27, 'PIERRE-PICCININNO Carine', '', '', 1),
+(28, 'PIMENTEL Véronique', '', '', 1),
+(29, 'BOHEME Céline', '', '', 1),
+(30, 'IGEL Sabine', '', '', 1),
+(31, 'LAVARONE Lorella', '', '', 1),
+(32, 'SCHEED Sophie', '', '', 1),
+(33, 'MARCONATO Jeanne', '', '', 1),
+(34, 'TRIBOUT Mélanie', '', '', 1),
+(35, 'BOUCHER Anne Valérie', '', '', 1),
+(37, 'UWERA Helga', '', '', 1),
+(38, 'Stagiaire', '', '', 1),
+(39, 'LISPI Benoit', '', '', 1),
+(40, 'Stagiaire CESF', '', '', 1);
 
 -- --------------------------------------------------------
 

@@ -323,7 +323,10 @@ $(function() {
             var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
             datastring = 'idFoyer='+idFoyer+'&numrue='+$('#numrue').val();
             datastring += '&rue='+$('#rue').attr('valeur')+'&secteur='+$('#secteur').attr('value');
-            datastring += '&ville='+$('#ville').attr('valeur');
+            datastring += '&ville='+$('#ville').attr('valeur')+'&type='+$('#typelogement').attr('value');
+            datastring += '&statut='+$('#statutlogement').attr('value')+'&surface='+$('#surface').val();
+            datastring += '&dateentree='+$('#dateentree').val()+'&bailleur='+$('#bailleur').attr('value');
+            datastring += '&instruct='+$('#instruct').attr('value')+'&notes='+$('#note').val();
             console.log(datastring);
             $.ajax({
                 type: 'post',
