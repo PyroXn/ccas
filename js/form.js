@@ -332,7 +332,6 @@ $(function() {
                 url: './index.php?p=updateFoyer',
                 //Succès de la requête
                 success: function(data) {
-                    alert("success");
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -351,7 +350,6 @@ $(function() {
                 url: './index.php?p=updateinfoperso',
                 //Succès de la requête
                 success: function(data) {
-                    alert("success");
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });

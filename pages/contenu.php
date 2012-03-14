@@ -105,6 +105,7 @@ function foyerContenu($idFoyer) {
 
 function generateInfoFoyer($foyer) {
     $secteurs = Doctrine_Core::getTable('secteur')->findAll();
+    $types =  Doctrine_Core::getTable('type')->findAll();
     $retour = '';
     $retour .= '
         <div><h3>Foyer<span class="edit"></span></h3>
@@ -121,7 +122,7 @@ function generateInfoFoyer($foyer) {
                     <div class="colonne">
                         <span class="attribut">Secteur :</span>
                         <div class="select classique" role="select_secteur">';
-    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
+    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.utf8_decode($foyer->secteur->secteur).'</div>';
     $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -132,16 +133,26 @@ function generateInfoFoyer($foyer) {
                </li>
                <li class="membre_foyer">
                     <div class="colonne">
-                        <span class="attribut">Type Logement :</span>
-                        <span></span>
-                   </div>
+                        <span class="attribut">Type :</span>
+                        <div class="select classique" role="select_typelogement">';
+$retour .= $foyer->typeLogement == null ? '<div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
+$retour .= '<div class="fleche_bas"> </div>
+                </div>
+                </div>
                    <div class="colonne">
-                        <span class="attribut">Statut(proprietaire..) :</span>
-                        <span></span>
+                        <span class="attribut">Statut :</span>
+                        <div class="select classique" role="select_statutlogement">';
+$retour .= $foyer->typeAppartenance == null ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
+$retour .= '<div class="fleche_bas"> </div>
+                    </div>
                    </div>
                    <div class="colonne">
                         <span class="attribut">Surface :</span>
-                        <span></span>
+                        <span><input class="contour_field input_num" type="text" id="surface" value="'.$foyer->logSurface.'" disabled/></span>
+                  </div>
+                  <div class="colonne">
+                        <span class="attribut">Dâte d\'entrée :</span>
+                        <span><input class="contour_field input_char" type="text" id="surface" disabled/></span>
                   </div>
                </li>
             </ul>';
@@ -150,14 +161,33 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
             <div class="clearboth"></div>
         </div>';
  $retour .= situationFinanciere($foyer->id);
-    $retour .= '<ul id="test" class="select_secteur">';
+ // COMBO BOX
+ $retour .= '<ul class="select_statutlogement">';
+ foreach($types as $t) {
+     if($t->categorie == 3) {
+     $retour .= '<li>
+                            <div value="'.$t->id.'">'.$t->libelle.'</div>
+                        </li>';
+     }
+ }
+ $retour .= '</ul>';
+ $retour .= '<ul class="select_typelogement">';
+ foreach($types as $t) {
+     if($t->categorie == 2) {
+     $retour .= '<li>
+                            <div value="'.$t->id.'">'.$t->libelle.'</div>
+                        </li>';
+     }
+ }
+ $retour .= '</ul>';
+    $retour .= '<ul class="select_secteur">';
     foreach($secteurs as $secteur) {
         $retour .= '<li>
                                 <div value="'.$secteur->id.'">'.$secteur->secteur.'</div>
                            </li>';
     }
     $retour .= '</ul>';
-    return $retour;
+    return utf8_encode($retour);
 }
 
 function updateFoyer() {
@@ -231,7 +261,7 @@ function situationFinanciere($idFoyer) {
                 </li>
         </ul>
         </div>';
-    return utf8_encode($contenu);
+    return $contenu;
 }
 
 function generateLigneMembreFoyer($individu) {

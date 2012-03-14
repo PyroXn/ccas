@@ -123,5 +123,18 @@ include_once('./lib/config.php');
 //    $retour .= '</ul>';
 //    echo $retour;
 include_once('./pages/contenu.php');
-echo situationFinanciere(1);
+$tableStatique = Doctrine_Core::getTable('ville')->findAll();
+$i = 0;
+
+foreach ($tableStatique as $ligne) {
+    $u = 0;
+    $test = $ligne->getData(); // test = ARRAY
+    $array = array_keys($test);
+    echo 'ligne numero : '.$i ;
+    foreach ($test as $l) {
+        echo '<div>Cle :'.$array[$u].' | valeur : '.$l.'</div>';
+        $u++;
+    }
+    $i++;
+}
 ?>
