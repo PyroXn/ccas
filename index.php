@@ -115,6 +115,10 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateInfoPerso();
         break;
+    case 'saveTableStatique':
+        include_once('./pages/tableStatique.php');
+        updateTableStatique();
+        break;
     default:
         home();
         break;

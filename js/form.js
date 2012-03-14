@@ -18,6 +18,20 @@ $(function() {
         creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_credit"]'));
     });
 
+    $('#newTableGenerique').live("click", function() {
+        $('.formulaire[action="edit_ligne"]').attr('table', $(this).attr('table'));
+        $('.formulaire[action="edit_ligne"]').removeAttr('idLigne');
+        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="edit_ligne"]'))
+    });
+    
+    $('.edit_ligne').live("click", function() {
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - $('.formulaire[action="edit_ligne"]').width()/2;
+        newPosition.top = $(window).height()/2 - $('.formulaire[action="edit_ligne"]').height();
+        $('.formulaire[action="edit_ligne"]').attr('table', $(this).attr('table'));
+        $('.formulaire[action="edit_ligne"]').attr('idLigne', $(this).attr('idLigne'));
+        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="edit_ligne"]'));
+    });
     
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
@@ -73,6 +87,32 @@ $(function() {
             //            $('.formulaire').toggle();
             formActuel.toggle();
             effacer();
+        } else if(value=='saveTableStatique') {
+            var form = $('.formulaire[action="edit_ligne"]');
+            var table = form.attr('table');
+            var idLigne = form.attr('idLigne');
+            
+            var datastring = 'table=' + table;
+            if (idLigne != undefined) {
+                datastring += '&idLigne='+idLigne;
+            }
+            $(form+'[columnName]').each(function(){
+                datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
+            });
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=saveTableStatique',
+                //Succès de la requête
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    effacer();
+                    $("#contenu").html(data);
+                    
+                }
+            });
         } else if(value=='save') {
             //commun a tous les form
             var table = $('.formulaire').attr('action');
@@ -267,7 +307,9 @@ $(function() {
         }
         else if(value == 'updateMutuelle') {
             var cmuc = 0;
-            if($('#cmuc').hasClass('checkbox_active')) { cmuc = 1; }
+            if($('#cmuc').hasClass('checkbox_active')) {
+                cmuc = 1;
+            }
             datastring = 'idIndividu='+idIndividu+'&mut='+$('#mutuelle').attr('value');
             datastring += '&cmuc='+cmuc+'&numadherentmut='+$('#numadherentmut').val();
             datastring += '&datedebutcouvmut='+$('#datedebutcouvmut').val()+'&datefincouvmut='+$('#datefincouvmut').val();
@@ -285,8 +327,12 @@ $(function() {
         else if(value == 'updateCouvertureSocial') {
             var assure = 0;
             var cmu = 0;
-            if($('#assure').hasClass('checkbox_active')) { assure = 1; }
-            if($('#cmu').hasClass('checkbox_active')) { cmu = 1; }
+            if($('#assure').hasClass('checkbox_active')) {
+                assure = 1;
+            }
+            if($('#cmu').hasClass('checkbox_active')) {
+                cmu = 1;
+            }
             datastring = 'idIndividu='+idIndividu+'&assure='+assure;
             datastring += '&caisseCouv='+$('#caisseCouv').attr('value')+'&cmu='+cmu;
             datastring += '&numsecu='+$('#numsecu').val()+'&clefsecu='+$('#clefsecu').val();
