@@ -51,7 +51,7 @@ function generateColonneByType($table, $columnName, $attribut=null, $disabled=fa
             $retour .= '
             <div class="colonne">
                 <span class="attribut">'.$columnName.' : </span>
-                <span><input class="contour_field input_char" type="text" value="'.$attribut.'"'.$disabled.'/></span>
+                <span><input class="contour_field input_char" type="text" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
             </div>';
             break;
         case 'float' :
@@ -59,7 +59,7 @@ function generateColonneByType($table, $columnName, $attribut=null, $disabled=fa
             $retour .= '
             <div class="colonne">
                 <span class="attribut">'.$columnName.' :</span>
-                <span><input type="text" class="contour_field input_num" value="'.$attribut.'"'.$disabled.'/></span>
+                <span><input type="text" class="contour_field input_num" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
             </div>';
             break;
         case 'boolean' :

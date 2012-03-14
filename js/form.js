@@ -32,12 +32,20 @@ $(function() {
     });
     
     $('.edit_ligne').live("click", function() {
+        var form = $('.formulaire[action="edit_ligne"]');
         var newPosition = new Object();
-        newPosition.left = $(window).width()/2 - $('.formulaire[action="edit_ligne"]').width()/2;
-        newPosition.top = $(window).height()/2 - $('.formulaire[action="edit_ligne"]').height();
-        $('.formulaire[action="edit_ligne"]').attr('table', $(this).attr('table'));
-        $('.formulaire[action="edit_ligne"]').attr('idLigne', $(this).attr('idLigne'));
-        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="edit_ligne"]'));
+        tmp = $(this).parent();
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        form.attr('table', $(this).attr('table'));
+        form.attr('idLigne', $(this).attr('idLigne'));
+        //marche pas si jamais checkbox
+//        $(form+'[columnName]').each(function(){
+//            console.log(tmp);
+//            console.log(tmp.find('.input').attr('columnName'));
+//            $(this).children().val(tmp.attr('columnName').val());
+//        });
+        creationForm(newPosition, $(this).outerHeight(), form);
     });
     
     $('.select').live("click", function() {
