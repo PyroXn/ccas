@@ -32,7 +32,7 @@ function generateEcranStatique($table) {
                 $retour .= generateColonneByType($tableStatique, array_search($attribut, $ligneData), $attribut, true);
             }
         }
-        $retour .= '<span class="delete droite"></span><span class="edit_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span></li>';
+        $retour .= '<span class="delete_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span><span class="edit_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span></li>';
     }
     $retour .= '</ul>';
     $retour .= generateFormulaireByTable($tableStatique, $columnNames);
@@ -140,6 +140,13 @@ function updateTableStatique() {
         $object->save();
     }
     echo generateEcranStatique($table);
+}
+
+function deleteTableStatique() {
+    include_once('./lib/config.php');
+    $ligne = Doctrine_Core::getTable($_POST['table'])->find($_POST['idLigne']);
+    $ligne->delete();
+    echo generateEcranStatique($_POST['table']);
 }
 
 ?>

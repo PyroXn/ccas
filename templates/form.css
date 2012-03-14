@@ -253,7 +253,7 @@
 }
 
 
-.delete {
+.delete, .delete_ligne {
     background: transparent url('./img/delete.png') no-repeat;
     display: inline-block;
     width: 16px;

@@ -123,6 +123,10 @@ switch (@$_GET['p']) {
         include_once('./pages/tableStatique.php');
         updateTableStatique();
         break;
+    case 'deleteTableStatique':
+        include_once('./pages/tableStatique.php');
+        deleteTableStatique();
+        break;
     default:
         home();
         break;

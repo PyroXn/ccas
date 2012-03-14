@@ -518,4 +518,17 @@ $(function() {
             }
         });
     });
+    
+    $('.delete_ligne').live("click", function() {
+        var datastring = 'table='+$(this).attr('table')+'&idLigne='+$(this).attr('idLigne');
+        console.log(datastring);
+        $.ajax({
+            type: 'post',
+            data: datastring,
+            url: './index.php?p=deleteTableStatique',
+            success: function(data) {
+                $("#contenu").html(data);
+            }
+        });
+    });
 });
