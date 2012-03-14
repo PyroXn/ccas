@@ -43,6 +43,10 @@ switch (@$_GET['p']) {
     case 'deconnexion':
         deconnexion();
         break;
+    case 'detailaideinterne':
+        include_once('./pages/aide.php');
+        echo detailAideInterne();
+        break;
     case 'edituser':
         include_once('./pages/admin.php');
         editUser();
@@ -290,6 +294,9 @@ function generationHeaderNavigation($mode) {
                 </div>
                 <div id="aides" class="page_header_link">
                     <span class="label">Aides</span>
+                </div>
+                 <div id="actions" class="page_header_link">
+                    <span class="label">Actions</span>
                 </div>
                 <div id="historique" class="page_header_link">
                     <span class="label">Historique</span>

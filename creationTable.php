@@ -50,10 +50,10 @@ include 'lib/config.php';
 
 // Si elle existe, supprimez la base existante.
 // Attention, cela vide totalement la base de données !
-Doctrine_Core::dropDatabases();
+//Doctrine_Core::dropDatabases();
 
 // Création de la base (uniquement si elle n'EXISTE PAS)
-Doctrine_Core::createDatabases();
+//Doctrine_Core::createDatabases();
 try {
 	$table = Doctrine_Core::getTable('Bailleur'); // On récupère l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
@@ -254,6 +254,15 @@ try {
 
 try {
 	$table = Doctrine_Core::getTable('LibelleOrganisme'); // On récupère l'objet de la table.
+	$connexion->export->createTable($table->getTableName(), 
+		                           $table->getColumns()); // Puis, on la crée.
+        echo 'La table a bien été créée';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+	echo $e->getMessage(); // On l'affiche.
+}
+
+try {
+	$table = Doctrine_Core::getTable('Action'); // On récupère l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
 		                           $table->getColumns()); // Puis, on la crée.
         echo 'La table a bien été créée';

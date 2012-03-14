@@ -123,7 +123,22 @@ $(function() {
                 $("#contenu").html(html);
             }
         });
-    });  
+    });
+    
+    $('#page_aide_interne > li > div > div > img').live("click", function() {
+        var idAide = $(this).parent().parent().parent().attr('name');
+        console.log(idAide);
+        $.ajax({
+            type: "POST",
+            url: "./index.php?p=detailaideinterne",
+            data: 'idAide='+ idAide,
+            success: function(html)
+            {
+                $("#contenu").html(html);
+            }
+        });
+    });
+     
  
     $('.autoComplete').live("keyup", function(evenement)  {
         var codeTouche = evenement.which || evenement.keyCode;

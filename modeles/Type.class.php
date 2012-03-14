@@ -17,6 +17,11 @@ class Type extends Doctrine_Record {
             'foreign' => 'idAideDemandee'
                 )
         );
+        $this->hasMany('aideinterne as aideinterne', array(
+            'local' => 'id',
+            'foreign' => 'idAideDemandee'
+                )
+        );
     }
 }
 
