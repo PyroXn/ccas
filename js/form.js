@@ -17,6 +17,13 @@ $(function() {
         newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_credit"]').height();
         creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_credit"]'));
     });
+    
+    $('#createAction').live("click", function() {        
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_action"]').width()/2;
+        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_action"]').height();
+        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_action"]'));
+    });
 
     
     $('.select').live("click", function() {
@@ -105,7 +112,12 @@ $(function() {
                     datastring += '&mensualite='+$('#mensualite').val()+'&duree='+$('#duree').val();
                     datastring += '&total='+$('#total').val();
                     break;
-                        
+                case 'creation_action':
+                    datastring += '&idIndividu='+idIndividu+'&date='+$('#date').val();
+                    datastring += '&typeaction='+$('#typeaction').attr('value')+'&motif='+$('#motif').val();
+                    datastring += '&suiteadonner='+$('#suiteadonner').val()+'&suitedonnee='+$('#suitedonnee').val();
+                    datastring += '&instruct='+$('#instruct').attr('value');
+                    break;
             }
             $.ajax({
                 type: 'post',
@@ -135,6 +147,9 @@ $(function() {
                             break;
                         case 'creation_credit':
                             $("#contenu").html(data.budget);
+                            break;
+                        case 'creation_action':
+                            $('#contenu').html(data.action);
                             break;
                     }
                 //FONCTIONNE PAS 
@@ -226,7 +241,6 @@ $(function() {
             datastring += '&natureDette='+$('#natureDette').val()+'&arriereElec='+$('#arriereElec').val();
             datastring += '&prestaElec='+$('#prestaElec').val()+'&arriereGaz='+$('#arriereGaz').val();
             datastring += '&prestaGaz='+$('#prestaGaz').val();
-            console.log('update Dette :'+datastring);
             $.ajax({
                 type: 'post',
                 dataType:'json',
@@ -255,7 +269,6 @@ $(function() {
         else if(value == 'updateCaf') {
             datastring = 'idIndividu='+idIndividu+'&caf='+$('#caf').attr('value');
             datastring += '&numallocatairecaf='+$('#numallocatairecaf').val();
-            alert(datastring);
             $.ajax({
                 type: 'post',
                 dataType:'json',
@@ -273,7 +286,6 @@ $(function() {
             datastring = 'idIndividu='+idIndividu+'&mut='+$('#mutuelle').attr('value');
             datastring += '&cmuc='+cmuc+'&numadherentmut='+$('#numadherentmut').val();
             datastring += '&datedebutcouvmut='+$('#datedebutcouvmut').val()+'&datefincouvmut='+$('#datefincouvmut').val();
-            console.log(datastring);
             $.ajax({
                 type: 'post',
                 dataType:'json',
@@ -295,12 +307,65 @@ $(function() {
             datastring += '&numsecu='+$('#numsecu').val()+'&clefsecu='+$('#clefsecu').val();
             datastring += '&regime='+$('#regime').attr('value')+'&datedebutcouvsecu='+$('#datedebutcouvsecu').val();
             datastring += '&datefincouvsecu='+$('#datefincouvsecu').val();
-            console.log(datastring);
             $.ajax({
                 type: 'post',
                 dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatecouverture',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateSituationProfessionnelle') {
+            datastring = 'idIndividu='+idIndividu+'&etude='+$('#etude').attr('value');
+            datastring += '&profession='+$('#profession').attr('value')+'&employeur='+$('#employeur').val();
+            datastring += '&inscriptionpe='+$('#dateinscriptionpe').val()+'&numdossier='+$('#numdossierpe').val();
+            datastring += '&debutdroit='+$('#datedebutdroitpe').val()+'&findroit='+$('#datefindroitpe').val();
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatesituationprofessionnelle',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateFoyer') {
+            var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
+            datastring = 'idFoyer='+idFoyer+'&numrue='+$('#numrue').val();
+            datastring += '&rue='+$('#rue').attr('valeur')+'&secteur='+$('#secteur').attr('value');
+            datastring += '&ville='+$('#ville').attr('valeur')+'&type='+$('#typelogement').attr('value');
+            datastring += '&statut='+$('#statutlogement').attr('value')+'&surface='+$('#surface').val();
+            datastring += '&dateentree='+$('#dateentree').val()+'&bailleur='+$('#bailleur').attr('value');
+            datastring += '&instruct='+$('#instruct').attr('value')+'&notes='+$('#note').val();
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updateFoyer',
+                //Succès de la requête
+                success: function(data) {
+                    loc.parent().find('input').attr("disabled","disabled");
+                }
+            });
+        }
+        else if(value == 'updateInfoPerso') {
+            datastring = 'idIndividu='+idIndividu+'&nom='+$('#nom').val();
+            datastring += '&prenom='+$('#prenom').val()+'&situation='+$('#situation').attr('value');
+            datastring += '&nationalite='+$('#nationalite').attr('value')+'&datenaissance='+$('#datenaissance').val();
+            datastring += '&lieu='+$('#lieu').attr('valeur')+'&sexe='+$('#sexe').attr('value');
+            datastring += '&statut='+$('#statut').attr('value');
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updateinfoperso',
                 //Succès de la requête
                 success: function(data) {
                     loc.parent().find('input').attr("disabled","disabled");

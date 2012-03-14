@@ -2,127 +2,61 @@
 
 include_once('./lib/config.php');
 
-//    $individu = Doctrine_Core::getTable('individu')->find(1);
-//    echo $individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>';
-//    $individu = Doctrine_Core::getTable('individu')->findOneByPrenom('Pierre');
-//    echo $individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>';
-//    $requete = Doctrine_Core::getTable('individu')->findAll();
-//
-//    $requete = Doctrine_Core::getTable('individu')->findByPrenom('%P%');
-//foreach($requete as $individu)
-//{
-//    echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong></div>';
-//}
-//    $famille = Doctrine_Core::getTable('individu');
-//    foreach($famille->likeNom('pier')->execute() as $individu)
-//    {
-//        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong></div>';
-//    }
-// $requete = Doctrine_Core::getTable('foyer')->findAll();
-//foreach($requete as $foyer)
-//{
-//    echo '<div>'.$foyer->id;
-//}
-//    $foyer = Doctrine_Core::getTable('foyer')->find(1);
-//    echo $foyer->numRue ;
-//    foreach($foyer->individu as $individu) {
-//        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong></div>';
-//    }
+
 //$mdp = 'florian';
 //echo md5($mdp);
-//$user = Doctrine_Core::getTable('user')->findOneByLoginAndPassword('Florian', md5('lorian'));
-//if ($user != null) {
-//    echo '<div> '.$user->login.' ' . $user->id . ' ' . $user->password . '</div>';
-//} else {
-//    echo "opif";
-//}
-
-//$foyer = Doctrine_Core::getTable('foyer')->find(1);
-//
-//function sortFoyer($a, $b) {
-//    if ($a->chefDeFamille == 1) {
-//        return -1;
-//    }
-//    if ($b->chefDeFamille == 1) {
-//        return 1;
-//    }    
-//    return ($a->dateNaissance < $b->dateNaissance) ? -1 : 1;
-//    return 0;
-//}
-//
-//$individus = $foyer->individu;
-//
-//$individus = $individus->getData(); // convert from Doctrine_Collection to array
-//
-//echo '<h1>Pas triée</h1>';
-//foreach($foyer->individu as $individu) {
-//        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
-//}
-//
-//usort($individus, "sortFoyer");
-//echo '<h1>Triée</h1>';
-//foreach($individus as $individu) {
-//        echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
-//}
-
-//$individu = new Individu();
-//    $individu->civilite = 'Monsieur';
-//    $individu->nom = 'Opif';
-//    $individu->prenom = 'prenom';
-//    
-//    $individu->save();
-//    
-//    echo $individu->dateNaissance;
 
 
-//$individu = Doctrine_Core::getTable('individu')->findOneByIdFoyerAndChefDeFamille(1, 0);
-//$individu->chefDeFamille = true;
-//$individu->save();
-//echo '<div>'.$individu->nom . ', prenom: <strong>' . $individu->prenom . '</strong>, chef de famille = '.$individu->chefDeFamille.' date de naissance = '.$individu->dateNaissance.'</div>';
+echo generateEcranStatique('ville');
 
-//$individu = Doctrine_Core::getTable('dette')->getLastFicheDette(1);
-//echo '<div>'.$individu->arriereLocatif . ', prenom: <strong>' . $individu->fraisHuissier . '</strong></div>';
-
-
-
-//$credit = new Credit();
-//    $credit->organisme = 'de';
-//    $credit->mensualite = 10;
-//    $credit->dureeMois = 10;
-//    $credit->totalRestant = 10;
-//    $credit->idIndividu = 1;
-//    $credit->dateAjout = time();
-//    $credit->save();
-
-
-//
-//$searchword = 'rue';
-//    $table = 'rue';
-//    $champ = 'rue';
-//
-//    $retour = '';
-//    $t = Doctrine_Core::getTable($table);
-//    $likeNb = Doctrine_Query::create()
-//        ->from($table)
-//        ->where($champ + ' LIKE ?', array($searchword . '%'))
-//        ->orderBy($champ + ' ASC');
-//    $nb = $likeNb->count();
+function generateEcranStatique($table) {
+    $tableStatique = Doctrine_Core::getTable($table)->findAll();
+    $retour = '<h3>'.$table.'</h3>
+        <div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>
+        <div class="bouton modif update" value="updateMembreFoyer">Enregistrer</div>
+        <ul id="membre_foyer_list">';
     
-//    $like = Doctrine_Query::create()
-//        ->from($table)
-//        ->where($champ .' LIKE ?', $searchword.'%')
-//        ->orderBy($champ .' ASC')
-//        ->limit(5);
-//    
-//
-//    $retour = '<ul>';
-//    
-//    foreach ($like->execute() as $tmp) {
-//        $retour .= '<li>'.$tmp->$champ.'</li>';
-//    }
-//    $retour .= '</ul>';
-//    echo $retour;
+    $i = 0;
+    foreach ($tableStatique as $ligne) {
+        $ligneData = $ligne->getData();
+        $retour .= '<li>';
+        foreach ($ligneData as $attribut) {
+            if (array_search($attribut, $ligneData) != 'id') {
+                $retour .= '
+                    <div class="colonne">
+                        <span class="attribut">'.array_search($attribut, $ligneData).' : </span>
+                        <span><input class="contour_field input_num" type="text" value="'.$attribut.'"/></span>
+                    </div>';
+            }
+        }
+        $retour .= '</li>';
+    }
+    $retour .= '</ul>';
+    return $retour;
+}
 
-$foyer = Doctrine_Core::getTable('foyer')->find(1);
-echo $foyer->secteur->secteur;
+
+//$tableStatique = Doctrine_Core::getTable('ville')->findAll();
+//$i = 0;
+//foreach ($tableStatique as $ligne) {
+//   $u = 0;
+//   $test = $ligne->getData();
+//   $array = array_keys($test);
+//   echo 'ligne numero : '.$i ;
+//   foreach ($test as $l) {
+//       echo '<div>Cle :'.$array[$u].' | valeur : '.$l.'</div>';
+//       $u++;
+//   }
+//   $i++;
+//}
+
+
+//$individu = Doctrine_Core::getTable('ville')->find(1);
+$table = Doctrine_Core::getTable('dette');
+foreach ($table->getColumnNames() as $columnName) {
+    echo $table->getTypeOfColumn($columnName).' ';
+//    echo $colonne->get;
+}
+//print_r($colonnes->type);
+
 ?>

@@ -7,8 +7,9 @@ class Secteur extends Doctrine_Record {
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
         $this->hasColumn('secteur', 'string', 255,array('default' => ' '));
+        
+        $this->option('orderBy', 'secteur ASC');
     }
     
-
 }
 ?>

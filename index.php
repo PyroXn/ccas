@@ -107,6 +107,18 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateCouvertureSociale();
         break;
+    case 'updatesituationprofessionnelle':
+        include_once('./pages/individu.php');
+        updateSituationProfessionnelle();
+        break;
+    case 'updateFoyer':
+        include_once('./pages/contenu.php');
+        updateFoyer();
+        break;
+    case 'updateinfoperso':
+        include_once('./pages/individu.php');
+        updateInfoPerso();
+        break;
     default:
         home();
         break;
@@ -279,6 +291,9 @@ function generationHeaderNavigation($mode) {
                 <div id="aides" class="page_header_link">
                     <span class="label">Aides</span>
                 </div>
+                 <div id="actions" class="page_header_link">
+                    <span class="label">Actions</span>
+                </div>
                 <div id="historique" class="page_header_link">
                     <span class="label">Historique</span>
                 </div>';
@@ -399,7 +414,7 @@ function autoComplete() {
         ->limit(5);
     
 
-    $retour = '<ul class="liste_suggestion" table="'.$table.'" champ="'.$table.'">';
+    $retour = '<ul class="liste_suggestion" table="'.$table.'" champ="'.$champ.'">';
     
     foreach ($like->execute() as $tmp) {
         $retour .= '<li valeur="'.$tmp->id.'">'.$tmp->$champ.'</li>';

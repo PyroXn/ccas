@@ -64,6 +64,19 @@ class Foyer extends Doctrine_Record {
             'foreign' => 'id'
                 )
         );
+        $this->hasOne(
+                'type as typelogement', array(
+            'local' => 'typeLogement',
+            'foreign' => 'id'
+                )
+        );
+        
+        $this->hasOne(
+                'type as statutlogement', array(
+            'local' => 'typeAppartenance',
+            'foreign' => 'id'
+                )
+        );
     }
 
 }

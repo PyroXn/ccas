@@ -442,6 +442,23 @@ legend {
     width: 48%;
 }
 
+.colonne_large {
+    display: inline-block;
+    width: 48%;
+}
+
+.attribut_for_large {
+    display: inline-block;
+    width: 25%;
+    font-weight: bold;
+    text-align: right;
+}
+
+.input_char_for_large {
+    width: 73%;
+    padding: 2px 3px;
+}
+
 .attribut {
     display: inline-block;
     width: 50%;
@@ -456,6 +473,12 @@ legend {
 
 .input_char {
     width: 45%;
+    padding: 2px 3px;
+}
+
+.input_date {
+    text-align: center;
+
     padding: 2px 3px;
 }
 

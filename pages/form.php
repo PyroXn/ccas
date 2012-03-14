@@ -35,6 +35,13 @@ function form() {
             $retour = array('budget' => $budget);
             echo json_encode($retour);
             break;
+        case 'creation_action':
+            include_once('./pages/action.php');
+            createAction($_POST['date'], $_POST['typeaction'], $_POST['motif'], $_POST['suiteadonner'], $_POST['suitedonnee'], $_POST['instruct'], $_POST['idIndividu']);
+            $action = action();
+            $retour = array('action' => $action);
+            echo json_encode($retour);
+            break;
             
     }
 }
@@ -43,6 +50,7 @@ function form() {
 function creationFoyer($civilite, $nom, $prenom) {
     include_once('./lib/config.php');
     $foyer = new Foyer();
+    $foyer->dateInscription = time();
     $foyer->save();
     $individu = new Individu();
     $individu->civilite = $civilite;
