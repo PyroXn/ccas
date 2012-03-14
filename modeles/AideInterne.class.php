@@ -9,8 +9,8 @@ class AideInterne extends Doctrine_Record {
             'autoincrement' => true));
         $this->hasColumn('idIndividu', 'integer', 20);
         $this->hasColumn('dateDemande', 'integer', 20, array('default' => '0'));
-        $this->hasColumn('idOrigine', 'integer', 5);
-        $this->hasColumn('idNature', 'integer', 5);
+        $this->hasColumn('idOrganisme', 'integer', 5);
+        $this->hasColumn('nature', 'string', 20);
         $this->hasColumn('aideUrgente', 'integer', 1, array('default' => '0'));
         $this->hasColumn('idAideDemandee', 'integer', 5);
         $this->hasColumn('idInstruct', 'integer', 5);
@@ -25,8 +25,42 @@ class AideInterne extends Doctrine_Record {
         $this->hasColumn('vigilance', 'string',50, array('default' => ' '));
         $this->hasColumn('idAideAccordee', 'integer', 5);
         $this->hasColumn('commentaire', 'string',250, array('default' => ' '));
+        $this->hasColumn('rapport', 'string',250);
+        $this->hasColumn('dateRevision', 'integer', 20);
     }
 
+    public function setUp() {
+        $this->hasOne('type as typeAideDemandee', array(
+            'local' => 'idAideDemandee',
+            'foreign' => 'id'
+                )
+        );
+        $this->hasOne('type as typeAideAccordee', array(
+            'local' => 'idAideAccordee',
+            'foreign' => 'id'
+                )
+        );
+        $this->hasOne('individu as individu', array(
+            'local' => 'idIndividu',
+            'foreign' => 'id'
+                )
+        );
+        $this->hasOne('organisme as organisme', array(
+            'local' => 'idOrganisme',
+            'foreign' => 'id'
+                )
+        );
+        $this->hasOne('instruct as instruct', array(
+            'local' => 'idInstruct',
+            'foreign' => 'id'
+                )
+        );
+        $this->hasOne('decideur as decideur', array(
+            'local' => 'idDecideur',
+            'foreign' => 'id'
+                )
+        );
+    }
 }
 
 ?>

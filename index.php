@@ -43,6 +43,10 @@ switch (@$_GET['p']) {
     case 'deconnexion':
         deconnexion();
         break;
+    case 'detailaideinterne':
+        include_once('./pages/aide.php');
+        echo detailAideInterne();
+        break;
     case 'edituser':
         include_once('./pages/admin.php');
         editUser();

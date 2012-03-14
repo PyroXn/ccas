@@ -417,6 +417,31 @@ legend {
     width: 24%;
 }
 
+.colonne5 {
+    display: inline-block;
+    width: 5%;
+}
+
+.colonne10 {
+    display: inline-block;
+    width: 10%;
+}
+
+.colonne15 {
+    display: inline-block;
+    width: 15%;
+}
+
+.colonne20 {
+    display: inline-block;
+    width: 20%;
+}
+
+.colonne50 {
+    display: inline-block;
+    width: 48%;
+}
+
 .attribut {
     display: inline-block;
     width: 50%;

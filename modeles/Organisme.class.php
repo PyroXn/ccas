@@ -31,6 +31,12 @@ class Organisme extends Doctrine_Record {
                 )
         
         );
+        $this->hasMany('aideinterne as aideinterne', array(
+            'local' => 'id',
+            'foreign' => 'idOrganisme'
+                )
+        
+        );
     }
 }
 

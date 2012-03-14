@@ -122,7 +122,7 @@ function generateInfoFoyer($foyer) {
                 <li class="membre_foyer">
                     <div class="colonne">
                         <span class="attribut">N</span>
-                        <span><input type="text" class="contour_field input_num" id="numrue" value="'.$foyer->numRue.'" disabled/></span>
+                        <span><input type="text" class="contour_field input_num" id="numrue" value="'.@$foyer->numRue.'" disabled/></span>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Rue</span>
@@ -131,13 +131,13 @@ function generateInfoFoyer($foyer) {
                     <div class="colonne">
                         <span class="attribut">Secteur</span>
                         <div class="select classique" role="select_secteur">';
-    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->foyer->secteur.'</div>';
+    $retour .= @$foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="">'.$foyer->secteur->secteur.'</div>';
     $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Ville</span>
-                        <span><input type="text" id="ville" class="contour_field input_char" value="'.$foyer->ville->libelle.'" disabled/></span>
+                        <span><input type="text" id="ville" class="contour_field input_char" value="'.@$foyer->ville->libelle.'" disabled/></span>
                     </div>
                </li>
             </ul>
