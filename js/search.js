@@ -3,7 +3,7 @@ $(function() {
     
     $(window).resize(function(){
         calculTailleInputSearch();
-    })
+    });
 
     $("#search").keyup(function() 
     {
@@ -194,12 +194,6 @@ $(function() {
         $('#suggestion').css("display", "none");
     });
     
-    $('.select').live("click", function() {
-        //        $('.en_execution').css("display", "none");
-        $('.en_execution').hover(function() {
-            alert("quit");
-        });
-    });
     $('.liste_suggestion > li').live("click", function() {
         var focus = $(this);
         var parent = $(this).parent();

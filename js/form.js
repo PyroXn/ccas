@@ -51,9 +51,6 @@ $(function() {
         $(this).toggleClass('checkbox_active');
     });
     
-    $('.select').live("click", function() {
-        console.log($(this).focus());
-    });
     $('.en_execution > li').live("click", function() {
         console.log($(this).children().attr('value'));
         $('.en_execution').toggle();
