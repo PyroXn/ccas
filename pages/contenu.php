@@ -17,7 +17,8 @@ function contenu() {
             echo aide();
             break;
         case 'historique':
-            echo 'historique';
+            include_once './pages/tableStatique.php';
+            echo generateEcranStatique('ville');
             break;
         case 'accueil':
             echo accueilContenu();
