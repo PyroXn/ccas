@@ -48,6 +48,7 @@ $(function() {
                 type: 'post',
                 //                data: 'last='+nb_individu_total,
                 data: "last=" + nb_individu_total+ "&searchword=" + searchbox,
+                cache: false,
                 //Succès de la requête
                 success: function(data) {
  
@@ -82,6 +83,7 @@ $(function() {
                 dataType:'json',
                 url: "./index.php?p=foyer",
                 data: 'idFoyer='+ idFoyer + '&idIndividu=' + idIndividu,
+                cache: false,
                 success: function(html)
                 {
                     console.log(html);
@@ -95,6 +97,7 @@ $(function() {
                 type: "POST",
                 dataType:'json',
                 url: "./index.php?p=accueil",
+                cache: false,
                 success: function(html)
                 {
                     $("#page_header_navigation").html(html.menu);
@@ -118,6 +121,7 @@ $(function() {
             type: "POST",
             url: "./index.php?p=contenu",
             data: 'idMenu=' + idMenu + '&idIndividu='+ idIndividu + '&idFoyer='+idFoyer,
+            cache: false,
             success: function(html)
             {
                 $("#contenu").html(html);
@@ -132,6 +136,7 @@ $(function() {
             type: "POST",
             url: "./index.php?p=detailaideinterne",
             data: 'idAide='+ idAide,
+            cache: false,
             success: function(html)
             {
                 $("#contenu").html(html);

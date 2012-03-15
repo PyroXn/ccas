@@ -20,8 +20,8 @@ function form() {
              echo json_encode($retour);
              break;
         case 'creation_individu':
-            include_once('./pages/contenu.php');
-            include_once('./index.php');
+//            include_once('./pages/contenu.php');
+//            include_once('./index.php');
             
             $newIndividu = createIndividu($_POST['idFoyer'], $_POST['civilite'], $_POST['nom'], $_POST['prenom'], $_POST['naissance'], $_POST['idlienfamille']);
             $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividuCourant']);
@@ -103,13 +103,20 @@ function createUser($login,$password,$nomcomplet) {
 
 function createIndividu($idFoyer, $civilite, $nom, $prenom, $dateNaissance, $idLienFamille) {
     include_once('./lib/config.php');
-    $date = explode('/', $dateNaissance);
+    include_once('./pages/contenu.php');
+    
     $individu = new Individu();
     $individu->civilite = $civilite;
     $individu->nom = $nom;
     $individu->prenom = $prenom;
     $individu->idFoyer = $idFoyer;
-    $individu->dateNaissance = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
+    if ($dateNaissance != 0) {
+        $date = explode('/', $dateNaissance);
+        $individu->dateNaissance = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
+    } else {
+        $individu->dateNaissance = 0;
+    }
+    
     $individu->idLienFamille = $idLienFamille;
     $individu->save();
     createRevenu($individu->id);

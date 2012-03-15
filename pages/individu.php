@@ -218,7 +218,7 @@ function updateInfoPerso() {
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $individu->nom = $_POST['nom'];
     $individu->prenom = $_POST['prenom'];
-    $individu->idSitFam = $_POST['situation'];
+    $individu->idSitMatri = $_POST['situation'];
     $individu->idNationalite = $_POST['nationalite'];
     if($_POST['datenaissance'] != 0) {
         $date = explode('/', $_POST['datenaissance']);

@@ -8,6 +8,7 @@ $(function() {
     });
     
     $('#newIndividu').live("click", function() {
+        console.log('Creation Form');
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
     });
     
@@ -94,6 +95,7 @@ $(function() {
         var formActuel = $(this).parent().parent().parent();
         var loc = $(this);
         var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
+        console.log("FONCTION DE PORC");
         if(value=='cancel') {
             $('.en_execution').toggle();
             $('.en_execution').toggleClass('en_execution');
@@ -119,6 +121,7 @@ $(function() {
                 type: 'post',
                 data: datastring,
                 url: './index.php?p=saveTableStatique',
+                cache: false,
                 //Succès de la requête
                 success: function(data) {
                     $('#ecran_gris').toggle();
@@ -128,7 +131,7 @@ $(function() {
                     
                 }
             });
-        }  else if(value=='edit_action') {
+        } else if(value=='edit_action') {
             var idAction = $(this).attr('idAction');
             datastring = 'idAction='+idAction+'&idIndividu='+idIndividu+'&date='+$('#date_edit').val()+'&motif='+$('#motif_edit').val();
             datastring += '&suiteadonner='+$('#suiteadonner_edit').val()+'&suitedonnee='+$('#suitedonnee_edit').val();
@@ -136,6 +139,7 @@ $(function() {
                 type: 'post',
                 data: datastring,
                 url: './index.php?p=updateaction',
+                cache: false,
                 //Succès de la requête
                 success: function(data) {
                     $('#ecran_gris').toggle();
@@ -150,7 +154,7 @@ $(function() {
             var table = $('.formulaire').attr('action');
             var datastring = 'table=' + table
             
-            
+            console.log('TABLE : ' + table);
             switch(table){
                 //unique pour la creation de foyer
                 case 'creation_foyer':
@@ -171,6 +175,7 @@ $(function() {
                     datastring += '&prenom=' + $('#form_3').val();
                     datastring += '&naissance='+$('#form_4').val();
                     datastring += '&idlienfamille='+$('#form_5').attr('value');
+                    console.log('DATSTRING : ' + datastring);
                     break;
                 case 'creation_credit':
                     datastring += '&idIndividu='+idIndividu+'&organisme='+$('#organisme').val();
@@ -190,8 +195,10 @@ $(function() {
                 dataType:'json',
                 data: datastring,
                 url: './index.php?p=form',
+                cache: false,
                 //Succès de la requête
                 success: function(data) {
+                    console.log("SUCCESS FONCTION PORC");
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
                     effacer();
@@ -232,17 +239,18 @@ $(function() {
                 }
             });
         } else if (value == 'updateMembreFoyer') {
-            $membreFoyer = $('.checkbox_active').parent().parent().parent();
-            console.log($membreFoyer);
-            $idFoyer = $membreFoyer.attr('id_foyer');
-            $idIndividu = $membreFoyer.attr('id_individu');
-            datastring = 'idFoyer=' + $idFoyer;
-            datastring += '&idIndividu=' + $idIndividu;
+            var membreFoyer = $('.checkbox_active').parent().parent().parent();
+            console.log(membreFoyer);
+            var idFoyer = membreFoyer.attr('id_foyer');
+            var idIndividu = membreFoyer.attr('id_individu');
+            datastring = 'idFoyer=' + idFoyer;
+            datastring += '&idIndividu=' + idIndividu;
             console.log('datastring' + datastring);
             $.ajax({
                 type: 'post',
                 data: datastring,
                 url: './index.php?p=updateChefDeFamille',
+                cache: false,
                 //Succès de la requête
                 success: function(contenu) {
                     console.log(contenu);
@@ -260,11 +268,11 @@ $(function() {
             datastring += '&natureAutre='+$('#natureRevenu').val();
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updateressource',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -278,11 +286,11 @@ $(function() {
             datastring += '&autreDepense='+$('#autreDepense').val()+'&natureDepense='+$('#natureDepense').val();
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatedepense',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -292,11 +300,11 @@ $(function() {
             datastring += '&apl='+$('#apl').val();
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatedepensehabitation',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -309,11 +317,11 @@ $(function() {
             datastring += '&prestaGaz='+$('#prestaGaz').val();
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatedette',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -323,11 +331,11 @@ $(function() {
             datastring += '&portable='+$('#portable').val()+'&email='+$('#email').val();
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatecontact',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -337,11 +345,11 @@ $(function() {
             datastring += '&numallocatairecaf='+$('#numallocatairecaf').val();
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatecaf',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -356,11 +364,11 @@ $(function() {
             datastring += '&datedebutcouvmut='+$('#datedebutcouvmut').val()+'&datefincouvmut='+$('#datefincouvmut').val();
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatemutuelle',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -381,11 +389,11 @@ $(function() {
             datastring += '&datefincouvsecu='+$('#datefincouvsecu').val();
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatecouverture',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -397,11 +405,11 @@ $(function() {
             datastring += '&debutdroit='+$('#datedebutdroitpe').val()+'&findroit='+$('#datefindroitpe').val();
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updatesituationprofessionnelle',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -417,11 +425,11 @@ $(function() {
             console.log(datastring);
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updateFoyer',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -432,14 +440,15 @@ $(function() {
             datastring += '&nationalite='+$('#nationalite').attr('value')+'&datenaissance='+$('#datenaissance').val();
             datastring += '&lieu='+$('#lieu').attr('valeur')+'&sexe='+$('#sexe').attr('value');
             datastring += '&statut='+$('#statut').attr('value');
-            console.log(datastring);
+            console.log("UPDATE INFO PERSO : " + datastring);
             $.ajax({
                 type: 'post',
-                dataType:'json',
                 data: datastring,
                 url: './index.php?p=updateinfoperso',
+                cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
+                    console.log('SUCCESS INFO PERSO');
                     loc.parent().find('input').attr("disabled","disabled");
                 }
             });
@@ -474,15 +483,20 @@ $(function() {
     });
     
     $('.archive').live("click", function() {
+        console.log('ARCHIVE');
+        var datastring;
         var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
         if($(this).parent().attr('role') == "ressource") {
             datastring = 'idIndividu='+idIndividu;
+            console.log('ARCHIVE ressource ' + datastring);
             $.ajax({
                 type: 'post',
                 data: datastring,
                 url: './index.php?p=archiveressource',
+                cache: false,
                 //Succès de la requête
                 success: function(data) {
+                    console.log("SUCCESS : " + data);
                     $('#contenu').html(data);
                 }
             });
@@ -492,6 +506,7 @@ $(function() {
                 type: 'post',
                 data: datastring,
                 url: './index.php?p=archivedepense',
+                cache: false,
                 //Succès de la requête
                 success: function(data) {
                     $('#contenu').html(data);
@@ -503,6 +518,7 @@ $(function() {
                 type: 'post',
                 data: datastring,
                 url: './index.php?p=archivedette',
+                cache: false,
                 //Succès de la requête
                 success: function(data) {
                     $('#contenu').html(data);
@@ -514,7 +530,7 @@ $(function() {
     $('.delete').live("click", function() {
         var idFoyer = $(this).parent().parent().attr('id_foyer');
         var idIndividu = $(this).parent().parent().attr('id_individu');
-        datastring = 'idFoyer=' + idFoyer;
+        var datastring = 'idFoyer=' + idFoyer;
         datastring += '&idIndividu=' + idIndividu;
         datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
         console.log(datastring);
@@ -523,6 +539,7 @@ $(function() {
             dataType:'json',
             data: datastring,
             url: './index.php?p=deleteIndividu',
+            cache: false,
             //Succès de la requête
             success: function(data) {
                 $("#list_individu").html(data.listeIndividu);
@@ -539,6 +556,7 @@ $(function() {
             type: 'post',
             data: datastring,
             url: './index.php?p=deletecredit',
+            cache: false,
             success: function(data) {
                 $("#contenu").html(data);
             }
@@ -552,6 +570,7 @@ $(function() {
             type: 'post',
             data: datastring,
             url: './index.php?p=deleteTableStatique',
+            cache: false,
             success: function(data) {
                 $("#contenu").html(data);
             }
@@ -563,7 +582,7 @@ $(function() {
         var idAction = $(this).attr('idAction');
         var newPosition = new Object();
         console.log('id :'+idAction);
-        datastring = 'id='+idAction;
+        var datastring = 'id='+idAction;
                         newPosition.left = $(window).width()/2 - form.width()/2;
                 newPosition.top = $(window).height()/2 - form.height();
                 creationForm(newPosition, $(this).outerHeight(), form);
@@ -572,6 +591,7 @@ $(function() {
             dataType: 'json',
             data: datastring,
             url: './index.php?p=getaction',
+            cache: false,
             success: function(data) {
                 $('#instruct_edit').parent().next().children(':first').attr('idAction', idAction);
                 $('#date_edit').val(data.date);
