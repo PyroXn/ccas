@@ -128,6 +128,23 @@ $(function() {
                     
                 }
             });
+        }  else if(value=='edit_action') {
+            var idAction = $(this).attr('idAction');
+            datastring = 'idAction='+idAction+'&idIndividu='+idIndividu+'&date='+$('#date_edit').val()+'&motif='+$('#motif_edit').val();
+            datastring += '&suiteadonner='+$('#suiteadonner_edit').val()+'&suitedonnee='+$('#suitedonnee_edit').val();
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=updateaction',
+                //Succès de la requête
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    effacer();
+                    $("#contenu").html(data);
+                    
+                }
+            });
         } else if(value=='save') {
             //commun a tous les form
             var table = $('.formulaire').attr('action');
@@ -165,6 +182,7 @@ $(function() {
                     datastring += '&typeaction='+$('#typeaction').attr('value')+'&motif='+$('#motif').val();
                     datastring += '&suiteadonner='+$('#suiteadonner').val()+'&suitedonnee='+$('#suitedonnee').val();
                     datastring += '&instruct='+$('#instruct').attr('value');
+                    console.log(datastring);
                     break;
             }
             $.ajax({
@@ -538,5 +556,32 @@ $(function() {
                 $("#contenu").html(data);
             }
         });
+    });
+    
+     $('.edit_action').live("click", function() {
+        var form = $('.formulaire[action="edit_action"]');
+        var idAction = $(this).attr('idAction');
+        var newPosition = new Object();
+        console.log('id :'+idAction);
+        datastring = 'id='+idAction;
+                        newPosition.left = $(window).width()/2 - form.width()/2;
+                newPosition.top = $(window).height()/2 - form.height();
+                creationForm(newPosition, $(this).outerHeight(), form);
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            data: datastring,
+            url: './index.php?p=getaction',
+            success: function(data) {
+                $('#instruct_edit').parent().next().children(':first').attr('idAction', idAction);
+                $('#date_edit').val(data.date);
+                $('#typeaction_edit').val(data.action);
+                $('#motif_edit').val(data.motif);
+                $('#suiteadonner_edit').val(data.suiteadonner);
+                $('#suitedonnee_edit').val(data.suitedonnee);
+                $('#instruct_edit').val(data.instruct);
+            }
+        });
+        
     });
 });

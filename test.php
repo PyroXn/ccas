@@ -1,17 +1,23 @@
 <?php
 
 include_once('./lib/config.php');
-$foyers = Doctrine_Core::getTable('foyer')->findAll();
-$arrayCreation = array();
-$result = array();
-foreach($foyers as $foyer) {
-    $arrayCreation[] = $foyer->dateInscription;
+$actions = Doctrine_Core::getTable('action')->findByIdIndividu(1);
+foreach($actions as $action) {
+    echo $action->id;
 }
-//print_r($arrayCreation);
-$result = getAnneeAndMois($arrayCreation);
-print_r($result['year']);
-echo '<br />';
-print_r($result['month']);
+//$foyers = Doctrine_Core::getTable('foyer')->findAll();
+//$arrayCreation = array();
+//$result = array();
+//foreach($foyers as $foyer) {
+//    $arrayCreation[] = $foyer->dateInscription;
+//}
+////print_r($arrayCreation);
+//$result = getAnneeAndMois($arrayCreation);
+//print_r($result['year']);
+//echo '<br />';
+//print_r($result['month']);
+//echo '<br />';
+//print_r($result['total']);
 
 //$mdp = 'florian';
 //echo md5($mdp);

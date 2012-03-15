@@ -651,7 +651,7 @@ function budget() {
                             }
 
                                $contenu .= '</ul>
-                                   <div class="bouton modif" id="createCredit">Ajouter un crédit</div></div>
+                                   <div class="bouton ajout" id="createCredit">Ajouter un crédit</div></div>
                                    <div class="formulaire" action="creation_credit">
                                    <div class="colonne_droite">
                                          <div class="input_text">
@@ -704,7 +704,7 @@ function generalite() {
                     <div class="colonne">
                         <span class="attribut">Situation Familiale :</span>
                         <div class="select classique" role="select_situation">';
-$contenu .= $user->idSitFam == null ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitFam.'">'.utf8_decode($user->situationmatri->situation).'</div>';  
+$contenu .= $user->idSitMatri == null ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.utf8_decode($user->situationmatri->situation).'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>

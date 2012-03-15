@@ -499,7 +499,7 @@ legend {
     color: #3A505B;
 }
 
-.edit, .edit_ligne {
+.edit, .edit_ligne, .edit_action {
     background: url('./img/edit.png') transparent no-repeat;
     width: 16px;
     height: 16px;

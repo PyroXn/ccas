@@ -42,22 +42,36 @@ function getDatebyTimestamp($timestamp) {
 }
 
 function getAnneeAndMois($arrayTimestamp) {
+    $now = explode('/', date('d/m/Y', time()));
     $arrayYear = array();
     $arrayMonth= array();
-    for($i=0; $i < count($arrayTimestamp); $i++) {
+    $nb = array();
+    for($i=0; $i < count($arrayTimestamp); $i++) { // On parcourt tout les foyers
         $date = explode('/', date('d/n/Y', $arrayTimestamp[$i]));
         if(!in_array($date[2], $arrayYear)) { // année
             $arrayYear[] = $date[2];
+            $nb[$date[2]] = 1;
             sort($arrayYear);
+        } else {
+            $nb[$date[2]] += 1;
+        }
+        if($now[2] == $date[2]) {
+            if(!in_array($date[1], $arrayMonth)) {
+                $arrayMonth[] = $date[1];
+                $nb[$date[1]] = 1;
+                sort($arrayMonth);
+            } else {
+                $nb[$date[1]] += 1;
+            }
         }
         //$pos = array_search($date[2], $arrayYear);
-        if(!isset($arrayMonth[$date[2]])) {
-            $arrayMonth[$date[2]][] = $date[1];
-        }
-        if(!in_array($date[1], $arrayMonth[$date[2]])) {
-            $arrayMonth[$date[2]][] = $date[1];
-            sort($arrayMonth[$date[2]]);
-        }
+//        if(!isset($arrayMonth[$date[2]])) {
+//            $arrayMonth[$date[2]][] = $date[1];
+//        }
+//        if(!in_array($date[1], $arrayMonth[$date[2]])) {
+//            $arrayMonth[$date[2]][] = $date[1];
+//            sort($arrayMonth[$date[2]]);
+//        }
     }
     // FONCTIONNE
 //    $array = array();
@@ -90,7 +104,7 @@ function getAnneeAndMois($arrayTimestamp) {
 //        } 
 //    }
 //    return array('year' =>$arrayYear, 'month' => $arrayMonth);
-    return array('year' => $arrayYear, 'month' => $arrayMonth);
+    return array('year' => $arrayYear, 'month' => $arrayMonth, 'total' => $nb);
 }
 
 ?>

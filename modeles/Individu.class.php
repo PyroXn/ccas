@@ -43,7 +43,7 @@ class Individu extends Doctrine_Record
         $this->hasColumn('idProfession', 'integer', 5);           //cle etrangere
         $this->hasColumn('idCaisseMut', 'integer', 5);            //cle etrangere ==> A FAIRE
         $this->hasColumn('idCaisseSecu', 'integer', 5);           //cle etrangere == A FAIRE
-        $this->hasColumn('idSitFam', 'integer', 5);               //cle etrangere
+        $this->hasColumn('idSitMatri', 'integer', 5);               //cle etrangere
         $this->hasColumn('idNationalite', 'integer', 5);          //cle etrangere
         $this->hasColumn('idVilleNaissance', 'integer', 20);       //cle etrangere
         $this->hasColumn('idFoyer', 'integer', 8);       //cle etrangere
@@ -80,7 +80,7 @@ class Individu extends Doctrine_Record
     	);
         $this->hasOne('situationmatri as situationmatri',
     		array(
-    			'local' => 'idSitFam', 
+    			'local' => 'idSitMatri', 
     			'foreign' => 'id'
     		)
     	);

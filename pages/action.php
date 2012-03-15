@@ -15,6 +15,7 @@ function action() {
                                     <td>Suite à donner</td>
                                     <td>Suite donnee</td>
                                     <td>Instructeur</td>
+                                    <td></td>
                                 </tr>';
     foreach($actions as $action) {
         $contenu .= '<tr>
@@ -24,18 +25,19 @@ function action() {
                                     <td>'.utf8_decode($action->suiteADonner).'</td>
                                     <td>'.utf8_decode($action->suitedonnee).'</td>
                                     <td>'.utf8_decode($action->instruct->nom).'</td>
+                                    <td><span class="edit_action" idAction="'.$action->id.'"></span></td>
                                 </tr>';
     }
                                 
     $contenu .= '</table>
-                            <div class="bouton modif" id="createAction">Ajouter une action</div>
+                            <div class="bouton ajout" id="createAction">Ajouter une action</div>
                             <div class="formulaire" action="creation_action">
                                    <div class="colonne_droite">
                                          <div class="input_text">
                                             <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
                                         </div>
                                         <div class="select classique" role="select_motifaction">
-                                            <div id="typeaction" class="option">--------</div>
+                                            <div id="typeaction" class="option">Type d\'action</div>
                                             <div class="fleche_bas"> </div>
                                         </div>
                                         <div class="input_text">
@@ -48,11 +50,38 @@ function action() {
                                             <input id="suitedonnee" class="contour_field" type="text" title="Suite donnée" placeholder="Suite donnée">
                                         </div>
                                         <div class="select classique" role="select_instruct">
-                                            <div id="instruct" class="option">--------</div>
+                                            <div id="instruct" class="option">Instructeur</div>
                                             <div class="fleche_bas"> </div>
                                         </div>
                                         <div class="sauvegarder_annuler">
                                             <div class="bouton modif" value="save">Enregistrer</div>
+                                            <div class="bouton classique" value="cancel">Annuler</div>
+                                        </div>
+                                        
+                                   </div>
+                           </div>
+                           <div class="formulaire" action="edit_action">
+                                   <div class="colonne_droite">
+                                         <div class="input_text">
+                                            <input id="date_edit" class="contour_field" type="text" title="Date">
+                                        </div>
+                                        <div class="input_text">
+                                            <input id="typeaction_edit" class="contour_field" type="text" title="Type action" disabled/>
+                                        </div>
+                                        <div class="input_text">
+                                            <input id="motif_edit" class="contour_field" type="text" title="Motif">
+                                        </div>
+                                        <div class="input_text">
+                                            <input id="suiteadonner_edit" class="contour_field" type="text" title="Suite à donner">
+                                        </div>
+                                        <div class="input_text">
+                                            <input id="suitedonnee_edit" class="contour_field" type="text" title="Suite donnée">
+                                        </div>
+                                        <div class="input_text">
+                                            <input id="instruct_edit" class="contour_field" type="text" title="Instructeur" disabled/>
+                                        </div>
+                                        <div class="sauvegarder_annuler">
+                                            <div class="bouton modif" value="edit_action">Enregistrer</div>
                                             <div class="bouton classique" value="cancel">Annuler</div>
                                         </div>
                                         
@@ -93,5 +122,33 @@ function createAction($date, $typeaction, $motif, $suiteadonner, $suitedonnee, $
     $action->idInstruct = $idInstruct;
     $action->idIndividu = $idIndividu;
     $action->save();
+}
+
+function getAction() {
+    include_once('./lib/config.php');
+    $action = Doctrine_Core::getTable('action')->find($_POST['id']);
+    if($action->date != 0) {
+        $date = date('d/m/Y', $action->date);
+    } else {
+        $date = 0;
+    }
+    $retour = array('date' => $date, 'action' => $action->typeaction->libelle, 'motif' => $action->motif, 'suiteadonner' => $action->suiteADonner, 'suitedonnee' => $action->suitedonnee, 'instruct' => $action->instruct->nom);
+    echo json_encode($retour);
+}
+
+function updateAction() {
+    include_once('./lib/config.php');
+    $action = Doctrine_Core::getTable('action')->find($_POST['idAction']);
+    $action->motif = $_POST['motif'];
+    $action->suiteADonner = $_POST['suiteadonner'];
+    $action->suitedonnee = $_POST['suitedonnee'];
+    if($_POST['date'] != 0) {
+        $date1 = explode('/', $_POST['date']);
+        $action->date = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
+    } else {
+        $action->date = 0;
+    }
+    $action->save();
+    echo action();
 }
 ?>
