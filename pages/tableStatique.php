@@ -44,7 +44,7 @@ function generateEcranStatique($table) {
     $retour .= '</ul>';
     $retour .= generateFormulaireByTable($tableStatique, $columnNames);
     $retour .= '</div>';
-    echo $retour;
+    return $retour;
 }
 
 function generateContenuTableStatique($table, $tableStatique, $search) {

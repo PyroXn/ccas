@@ -121,7 +121,7 @@ switch (@$_GET['p']) {
         break;
     case 'generateEcranStatique':
         include_once('./pages/tableStatique.php');
-        generateEcranStatique($_POST['table']);
+        echo generateEcranStatique($_POST['table']);
         break;
     case 'saveTableStatique':
         include_once('./pages/tableStatique.php');
