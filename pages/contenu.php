@@ -18,7 +18,7 @@ function contenu() {
             break;
         case 'historique':
             include_once './pages/tableStatique.php';
-            echo generateEcranStatique('ville');
+            echo comboTableStatique();
             break;
         case 'actions':
             include_once('./pages/action.php');

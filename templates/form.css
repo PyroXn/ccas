@@ -185,7 +185,7 @@
 
 .select_civilite, .select_lien_famille, .select_sexe, .select_situation, .select_natio, .select_ville, .select_statut,
 .select_etude, .select_profession, .select_regime, .select_couv, .select_mut, .select_caf, #suggestion, .select_secteur, .select_typelogement,
-.select_statutlogement, .select_bailleur, .select_instruct, .select_motifaction {
+.select_statutlogement, .select_bailleur, .select_instruct, .select_motifaction, .select_table_statique {
     display: none;
     z-index: 1002;
     position: absolute;
@@ -213,7 +213,8 @@
 
 .select_civilite li, .select_lien_famille li, .select_sexe li, .select_situation li, .select_natio li, .select_ville li,
 .select_statut li, .select_etude li, .select_profession li, .select_regime li, .select_couv li, .select_mut li, .select_caf li,
-.liste_suggestion li, .select_secteur li, .select_typelogement li, .select_statutlogement li, .select_bailleur li, .select_instruct li, .select_motifaction li {
+.liste_suggestion li, .select_secteur li, .select_typelogement li, .select_statutlogement li, .select_bailleur li, .select_instruct li,
+.select_motifaction li, .select_table_statique li {
     position: relative;
     color: #333;
     cursor: pointer;
@@ -226,7 +227,7 @@
 .select_civilite li:hover, .select_lien_famille li:hover, .select_sexe li:hover, .select_situation li:hover, .select_natio li:hover,
 .select_ville li:hover, .select_statut li:hover, .select_etude li:hover, .select_profession li:hover, .select_regime li:hover,
 .select_couv li:hover, .select_mut li:hover, .select_caf li:hover, .liste_suggestion .selection, .select_secteur li:hover, .select_typelogement li:hover,
-.select_statutlogement li:hover, .select_bailleur li:hover, .select_instruct li:hover, .select_motifaction li:hover {
+.select_statutlogement li:hover, .select_bailleur li:hover, .select_instruct li:hover, .select_motifaction li:hover, .select_table_statique li:hover {
     background-color: #EEE;
     border-color: #EEE;
     border-style: dotted;

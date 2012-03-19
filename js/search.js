@@ -251,8 +251,6 @@ $(function() {
             }
         });
     });
-    
-    
 });
 
 function autoComplete(searchbox, table, champ) {

@@ -1,12 +1,30 @@
 <?php
 
+function comboTableStatique() {
+    $retour = '
+        <div class="select classique" role="select_table_statique">
+            <div id="choixTableStatique" class="option">ville</div>
+            <div class="fleche_bas"> </div>
+        </div>
+        <ul class="select_table_statique">
+            <li value="0">
+                <div>ville</div>
+            </li>
+            <li value="1">
+                <div>rue</div>
+            </li>
+        </ul>';
+    $retour .= generateEcranStatique('ville');
+    return $retour;
+}
+
 function generateEcranStatique($table) {
     $tableStatique = Doctrine_Core::getTable($table);
 
     $columnNames = $tableStatique->getColumnNames();
 //    echo $table->getTypeOfColumn($columnName);
 
-    $retour = '';
+    $retour = '<div id="tableStatique">';
     $retour .= '<h3>Recherche</h3>
         <ul class="list_classique">
             <li id="ligneRechercheTableStaique" class="ligne_list_classique" table="'.$table.'">';
@@ -25,7 +43,8 @@ function generateEcranStatique($table) {
     $retour .= generateContenuTableStatique($table, $tableStatique, $tableStatique->findAll());
     $retour .= '</ul>';
     $retour .= generateFormulaireByTable($tableStatique, $columnNames);
-    return $retour;
+    $retour .= '</div>';
+    echo $retour;
 }
 
 function generateContenuTableStatique($table, $tableStatique, $search) {

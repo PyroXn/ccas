@@ -42,8 +42,8 @@ $(function() {
         form.attr('idLigne', $(this).attr('idLigne'));
         //marche pas si jamais checkbox
         $(form).find('[columnName]').each(function(){
-//            console.log($(this).attr('columnName')); // balance la valeur de l'attribut
-//            var test = tmp.find('[columnName="'+$(this).attr('columnName')+'"]'); //le input
+            //            console.log($(this).attr('columnName')); // balance la valeur de l'attribut
+            //            var test = tmp.find('[columnName="'+$(this).attr('columnName')+'"]'); //le input
 
             // pour chaque columnname du formulaire on cherche si il existe une columnname avec une valeur similaire dans notre edit_ligne
             // si c'est le cas on lui met la valeur'
@@ -90,7 +90,22 @@ $(function() {
         $('.en_attente').text($(this).children().text());
         $('.en_attente').attr('value', $(this).children().attr('value'));
         $('.en_attente').toggleClass('en_attente');
-        $('.en_execution').toggleClass('en_execution');   
+        $('.en_execution').toggleClass('en_execution');
+        if ($(this).parent().hasClass("select_table_statique")) {
+            var datastring = 'table=' + $('#choixTableStatique').text();
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=generateEcranStatique',
+                cache: false,
+                //Succès de la requête
+                success: function(data) {
+                    $("#tableStatique").html(data);
+                }
+            });
+        }
+            
     });
     
     $('.bouton').live("click", function() {
@@ -131,7 +146,7 @@ $(function() {
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
                     effacer();
-                    $("#contenu").html(data);
+                    $("#tableStatique").html(data);
                     
                 }
             });
@@ -576,20 +591,20 @@ $(function() {
             url: './index.php?p=deleteTableStatique',
             cache: false,
             success: function(data) {
-                $("#contenu").html(data);
+                $("#tableStatique").html(data);
             }
         });
     });
     
-     $('.edit_action').live("click", function() {
+    $('.edit_action').live("click", function() {
         var form = $('.formulaire[action="edit_action"]');
         var idAction = $(this).attr('idAction');
         var newPosition = new Object();
         console.log('id :'+idAction);
         var datastring = 'id='+idAction;
-                        newPosition.left = $(window).width()/2 - form.width()/2;
-                newPosition.top = $(window).height()/2 - form.height();
-                creationForm(newPosition, $(this).outerHeight(), form);
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        creationForm(newPosition, $(this).outerHeight(), form);
         $.ajax({
             type: 'post',
             dataType: 'json',
