@@ -2,19 +2,27 @@
 
 include_once('./lib/config.php');
 
-$req = 'libelle LIKE ? and cp LIKE ? ';
-$array = array();
+$tableStatique = Doctrine_Core::getTable('bailleur');
 
-$array[] = "%te%";
-$array[] = "%%";
-
-$test = '999999';
-$test2 = 'test';
-$villes = Doctrine_Core::getTable('ville')->findByDql($req, $array);
-
-foreach($villes as $ville) {
-    echo $ville->id.'</br>';
+$columnNames = $tableStatique->getColumnNames();
+foreach ($columnNames as $columnName) {
+    $type = $tableStatique->getTypeOfColumn($columnName);
+    echo $columnName .' '. $type .'</br>';
 }
+
+//$req = 'libelle LIKE ? and cp LIKE ? ';
+//$array = array();
+//
+//$array[] = "%te%";
+//$array[] = "%%";
+//
+//$test = '999999';
+//$test2 = 'test';
+//$villes = Doctrine_Core::getTable('ville')->findByDql($req, $array);
+//
+//foreach($villes as $ville) {
+//    echo $ville->id.'</br>';
+//}
 
 //$actions = Doctrine_Core::getTable('action')->findByIdIndividu(1);
 //foreach($actions as $action) {

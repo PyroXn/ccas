@@ -1,20 +1,51 @@
 <?php
 
+//TODO marche pas avec bailleur et instruct
 function comboTableStatique() {
     $retour = '
         <div class="select classique" role="select_table_statique">
-            <div id="choixTableStatique" class="option">ville</div>
+            <div id="choixTableStatique" class="option">etude</div>
             <div class="fleche_bas"> </div>
         </div>
         <ul class="select_table_statique">
-            <li value="0">
-                <div>ville</div>
+            <li>
+                <div>bailleur</div>
             </li>
-            <li value="1">
+            <li>
+                <div>decideur</div>
+            </li>
+            <li>
+                <div>etude</div>
+            </li>
+            <li>
+                <div>instruct</div>
+            </li>
+            <li>
+                <div>libelleorganisme</div>
+            </li>
+            <li>
+                <div>lienfamille</div>
+            </li>
+            <li>
+                <div>nationalite</div>
+            </li>
+            <li>
+                <div>profession</div>
+            </li>
+            <li>
                 <div>rue</div>
             </li>
+            <li>
+                <div>secteur</div>
+            </li>
+            <li>
+                <div>situationmatri</div>
+            </li>
+            <li>
+                <div>ville</div>
+            </li>            
         </ul>';
-    $retour .= generateEcranStatique('ville');
+    $retour .= generateEcranStatique('etude');
     return $retour;
 }
 
