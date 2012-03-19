@@ -41,11 +41,14 @@ $(function() {
         form.attr('table', $(this).attr('table'));
         form.attr('idLigne', $(this).attr('idLigne'));
         //marche pas si jamais checkbox
-//        $(form+'[columnName]').each(function(){
-//            console.log(tmp);
-//            console.log(tmp.find('.input').attr('columnName'));
-//            $(this).children().val(tmp.attr('columnName').val());
-//        });
+        $(form).find('[columnName]').each(function(){
+//            console.log($(this).attr('columnName')); // balance la valeur de l'attribut
+//            var test = tmp.find('[columnName="'+$(this).attr('columnName')+'"]'); //le input
+
+            // pour chaque columnname du formulaire on cherche si il existe une columnname avec une valeur similaire dans notre edit_ligne
+            // si c'est le cas on lui met la valeur'
+            $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).val());
+        });
         creationForm(newPosition, $(this).outerHeight(), form);
     });
     
@@ -113,7 +116,8 @@ $(function() {
             if (idLigne != undefined) {
                 datastring += '&idLigne='+idLigne;
             }
-            $(form+'[columnName]').each(function(){
+            $(form).find('[columnName]').each(function(){
+                console.log($(this));
                 datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
             });
             console.log(datastring);
