@@ -292,6 +292,12 @@ function generationHeaderNavigation($mode) {
             $retour = '
                 <div id="accueil" class="page_header_link active">
                     <span class="label">Accueil</span>
+                </div>
+                 <div id="document" class="page_header_link">
+                    <span class="label">Documents</span>
+                </div>
+                <div id="statistique" class="page_header_link">
+                    <span class="label">Statistiques</span>
                 </div>';
             break;
         case 'foyer' :

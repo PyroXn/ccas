@@ -33,6 +33,10 @@ function contenu() {
         case 'manageuser' :
             echo manageUser();
             break;
+        case 'document':
+            include_once('./pages/document.php');
+            echo getDocument();
+            break;
     }
 }
 

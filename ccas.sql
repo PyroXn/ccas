@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mer 14 Mars 2012 à 19:00
+-- Généré le : Lun 19 Mars 2012 à 10:27
 -- Version du serveur: 5.1.61
 -- Version de PHP: 5.3.6-13ubuntu3.6
 
@@ -36,16 +36,19 @@ CREATE TABLE IF NOT EXISTS `action` (
   `idinstruct` bigint(20) DEFAULT '0',
   `idindividu` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `action`
 --
 
 INSERT INTO `action` (`id`, `date`, `idaction`, `motif`, `suiteadonner`, `suitedonnee`, `idinstruct`, `idindividu`) VALUES
-(1, 0, 5, ' Osef', 'Definir pénitence', 'Coup de fouet sur place publique', 1, 1),
-(2, 1331679600, 5, 'Ta race', 'TG', 'TG', 30, 1),
-(3, 946681200, 5, 'a', 'a', 'a', 28, 1);
+(1, 626396400, 5, 'Je', 'peux', 'updatew', 28, 1),
+(2, 978303600, 5, 'a', 'de', ' ', 27, 1),
+(3, 978303600, 0, '5', '2', '1', 0, 1),
+(4, 989013600, 5, 's', 's', 's', 27, 1),
+(5, 978303600, 5, 'f', 'd', 's', 28, 1),
+(6, 0, 0, '', '', '', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -167,14 +170,14 @@ CREATE TABLE IF NOT EXISTS `credit` (
   `idindividu` bigint(20) DEFAULT '0',
   `dateajout` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `credit`
 --
 
 INSERT INTO `credit` (`id`, `organisme`, `mensualite`, `dureemois`, `totalrestant`, `idindividu`, `dateajout`) VALUES
-(2, 'Test', 20.00, 20, 20.00, 1, 1331634954);
+(3, '', 0.00, 0, 0.00, 3, 1331841273);
 
 -- --------------------------------------------------------
 
@@ -215,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `depense` (
   `idindividu` bigint(20) DEFAULT NULL,
   `datecreation` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Contenu de la table `depense`
@@ -226,10 +229,20 @@ INSERT INTO `depense` (`id`, `impotrevenu`, `impotlocaux`, `pensionalim`, `mutue
 (2, 0.00, 0.00, 1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 1.00, ' test', 540.00, 1, 1331566099),
 (3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 4, 1331569012),
 (4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 2, 1331569613),
-(5, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 3, 1331569619),
+(5, 1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 3, 1331841584),
 (6, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 5, 1331648671),
 (7, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 6, 1331648780),
-(8, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 7, 1331661060);
+(8, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 7, 1331661060),
+(9, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 8, 1331804450),
+(10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 9, 1331828190),
+(11, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 10, 1331841283),
+(12, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 11, 1331842533),
+(13, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 12, 1331842562),
+(14, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 13, 1331842628),
+(15, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 14, 1331842749),
+(16, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 3, 1331888470),
+(17, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 1, 1332148026),
+(18, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 4, 1332148581);
 
 -- --------------------------------------------------------
 
@@ -250,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `dette` (
   `idindividu` bigint(20) DEFAULT NULL,
   `datecreation` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Contenu de la table `dette`
@@ -264,7 +277,15 @@ INSERT INTO `dette` (`id`, `arrierelocatif`, `fraishuissier`, `arriereelectricit
 (5, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 3, 1331569620),
 (6, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 5, 1331648671),
 (7, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 6, 1331648780),
-(8, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 7, 1331661060);
+(8, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 7, 1331661060),
+(9, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 8, 1331804450),
+(10, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 9, 1331828191),
+(11, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 10, 1331841283),
+(12, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 11, 1331842533),
+(13, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 12, 1331842562),
+(14, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 13, 1331842628),
+(15, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 14, 1331842749),
+(16, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 4, 1332148581);
 
 -- --------------------------------------------------------
 
@@ -331,18 +352,20 @@ CREATE TABLE IF NOT EXISTS `foyer` (
   `idinstruct` bigint(20) DEFAULT NULL,
   `notes` varchar(255) DEFAULT ' ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `foyer`
 --
 
 INSERT INTO `foyer` (`id`, `numrue`, `idrue`, `idsecteur`, `idville`, `idbailleur`, `dateinscription`, `typelogement`, `typeappartenance`, `logdatearrive`, `logsurface`, `idinstruct`, `notes`) VALUES
-(1, 12, 69, 4, 218, 15, 1334418102, 2, 4, 978303600, 105.00, 1, 'Je note.1331648671'),
-(2, NULL, NULL, NULL, NULL, NULL, 1331648671, NULL, NULL, NULL, NULL, NULL, NULL),
+(1, 50, 69, 4, 218, 15, 1334418102, 2, 4, 978303600, 105.00, 1, 'Je note.'),
+(2, NULL, 0, 0, 0, 0, 1331648671, 0, 0, NULL, NULL, 0, NULL),
 (3, 0, NULL, NULL, NULL, NULL, 1302795702, NULL, NULL, 0, 0.00, NULL, ' '),
-(4, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, 0.00, NULL, ' '),
-(5, 0, NULL, NULL, NULL, NULL, 1321288902, NULL, NULL, 0, 0.00, NULL, ' ');
+(4, 0, NULL, NULL, NULL, NULL, 1350293968, NULL, NULL, 0, 0.00, NULL, ' '),
+(5, 0, NULL, NULL, NULL, NULL, 1321288902, NULL, NULL, 0, 0.00, NULL, ' '),
+(6, 0, NULL, NULL, NULL, NULL, 1331804450, NULL, NULL, 0, 0.00, NULL, ' '),
+(7, 0, NULL, NULL, NULL, NULL, 1332148581, NULL, NULL, 0, 0.00, NULL, ' ');
 
 -- --------------------------------------------------------
 
@@ -386,23 +409,22 @@ CREATE TABLE IF NOT EXISTS `individu` (
   `idprofession` bigint(20) DEFAULT NULL,
   `idcaissemut` bigint(20) DEFAULT NULL,
   `idcaissesecu` bigint(20) DEFAULT NULL,
-  `idsitfam` bigint(20) DEFAULT NULL,
+  `idsitmatri` bigint(20) DEFAULT NULL,
   `idnationalite` bigint(20) DEFAULT NULL,
   `idvillenaissance` bigint(20) DEFAULT NULL,
   `idfoyer` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `individu`
 --
 
-INSERT INTO `individu` (`id`, `civilite`, `nom`, `prenom`, `nommarital`, `nomusage`, `chefdefamille`, `datenaissance`, `sexe`, `telephone`, `portable`, `email`, `assure`, `numsecu`, `clefsecu`, `regime`, `cmu`, `datedebutcouvsecu`, `datefincouvsecu`, `numadherentmut`, `datedebutcouvmut`, `datefincouvmut`, `cmuc`, `employeur`, `dateinscriptionpe`, `datedebutdroitpe`, `datefindroitpe`, `numdossierpe`, `numallocatairecaf`, `idlienfamille`, `idcaissecaf`, `idniveauetude`, `idprofession`, `idcaissemut`, `idcaissesecu`, `idsitfam`, `idnationalite`, `idvillenaissance`, `idfoyer`) VALUES
-(1, 'Madame', 'Osef', 'Lapraline', NULL, NULL, 0, 626396400, 'Homme', '0383828113', '0679809964', 'florian.janson@mydevhouse.com', 0, 0, 0, 'Local', 1, 0, 943916400, '00000001', 0, 0, 1, 'Moi même', 1304719200, 1312754400, 1344376800, '5425365254', '', 18, 1, 9, 7, 12, 2, 4, 1, 168, 1),
-(2, 'Monsieur', 'Pupu', 'Coco', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(3, 'Monsieur', 'Perlin', 'Pinpin', NULL, NULL, 0, 0, 'Femme', 'test', 'test', 'test', 0, 0, 0, 'Général', 0, 943916400, 943916400, '', 943916400, 943916400, 1, NULL, NULL, NULL, NULL, NULL, '0001', 37, 1, NULL, NULL, 12, 2, 8, 4, 0, 1),
-(4, 'Monsieur', 'test', 'test', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2),
-(7, 'Madame', 'w', 'w', ' ', ' ', 1, 0, ' ', ' ', ' ', ' ', 0, 0, 0, ' ', 0, 0, 0, '', 0, 0, 0, '', 0, 0, 0, ' ', ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5);
+INSERT INTO `individu` (`id`, `civilite`, `nom`, `prenom`, `nommarital`, `nomusage`, `chefdefamille`, `datenaissance`, `sexe`, `telephone`, `portable`, `email`, `assure`, `numsecu`, `clefsecu`, `regime`, `cmu`, `datedebutcouvsecu`, `datefincouvsecu`, `numadherentmut`, `datedebutcouvmut`, `datefincouvmut`, `cmuc`, `employeur`, `dateinscriptionpe`, `datedebutdroitpe`, `datefindroitpe`, `numdossierpe`, `numallocatairecaf`, `idlienfamille`, `idcaissecaf`, `idniveauetude`, `idprofession`, `idcaissemut`, `idcaissesecu`, `idsitmatri`, `idnationalite`, `idvillenaissance`, `idfoyer`) VALUES
+(1, 'Madame', 'Osef', 'Lapraline', NULL, NULL, 0, 626396400, 'Homme', '03838281132', '0679809964', 'florian.janson@mydevhouse.com', 0, 0, 0, 'Local', 1, 0, 943916400, '00000001', 0, 0, 1, 'Moi même', 1304719200, 1312754400, 1344376800, '5425365254', '', 18, 1, 17, 7, 12, 2, 4, 1, 168, 1),
+(2, 'Monsieur', 'Pupu', 'Coco', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 1002664800, 990741600, '', NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, 1),
+(3, 'Monsieur', 'Perlin', 'Pinpina', NULL, NULL, 0, 1002664800, 'Femme', 'test', 'test', 'test', 0, 0, 0, 'Général', 0, 943916400, 943916400, '', 943916400, 943916400, 0, '', 0, 0, 0, '', '0001', 37, 1, 17, 22, 12, 2, 8, 4, 0, 1),
+(4, 'Madame', 'Rita', 'Mizuko', ' ', ' ', 1, 0, ' ', ' ', ' ', ' ', 0, 0, 0, ' ', 0, 0, 0, '', 0, 0, 0, '', 0, 0, 0, ' ', ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 7);
 
 -- --------------------------------------------------------
 
@@ -677,7 +699,7 @@ CREATE TABLE IF NOT EXISTS `revenu` (
   `aidelogement` float(18,2) DEFAULT '0.00',
   `datecreation` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Contenu de la table `revenu`
@@ -686,13 +708,21 @@ CREATE TABLE IF NOT EXISTS `revenu` (
 INSERT INTO `revenu` (`id`, `salaire`, `chomage`, `revenualloc`, `ass`, `aah`, `rsasocle`, `rsaactivite`, `pensionalim`, `pensionretraite`, `retraitcomp`, `autrerevenu`, `natureautre`, `idindividu`, `aidelogement`, `datecreation`) VALUES
 (2, 96.00, 0.00, 0.00, 0.00, 18.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 1, 0.00, 1331136849),
 (3, 10006.00, 0.00, 0.00, 0.00, 18.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 1, 0.00, 1331137203),
-(4, 1.78, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00, 0.00, 0.00, '', 1, 0.00, 1331571992),
+(4, 5.78, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00, 0.00, 0.00, '', 1, 0.00, 1331828424),
 (5, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 4, 0.00, 1331569011),
 (6, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 2, 0.00, 1331569612),
-(7, 0.00, 0.00, 0.00, 0.00, 520.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 3, 0.00, 1331569618),
+(7, 10.00, 0.00, 0.00, 0.00, 520.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 3, 0.00, 1331841141),
 (8, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 5, 0.00, 1331648671),
 (9, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 6, 0.00, 1331648779),
-(10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 7, 0.00, 1331661060);
+(10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 7, 0.00, 1331661060),
+(11, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 8, 0.00, 1331804450),
+(12, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 9, 0.00, 1331828190),
+(13, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 10, 0.00, 1331841283),
+(14, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 11, 0.00, 1331842533),
+(15, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 12, 0.00, 1331842562),
+(16, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 13, 0.00, 1331842628),
+(17, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 14, 0.00, 1331842749),
+(18, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 4, 0.00, 1332148581);
 
 -- --------------------------------------------------------
 
@@ -1047,14 +1077,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `level` varchar(5) DEFAULT ' ',
   `actif` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `user`
 --
 
 INSERT INTO `user` (`id`, `login`, `password`, `nomcomplet`, `idinstruct`, `level`, `actif`) VALUES
-(1, 'Florian', '56910c52ed70539e3ce0391edeb6d339', 'Janson Florian', 0, '1111', 0);
+(1, 'Florian', '56910c52ed70539e3ce0391edeb6d339', 'Janson Florian', 0, '1111', 0),
+(2, 'w', 'f1290186a5d0b1ceab27f4e77c0c5d68', 'www', NULL, ' 0000', 0);
 
 -- --------------------------------------------------------
 
@@ -1067,7 +1098,7 @@ CREATE TABLE IF NOT EXISTS `ville` (
   `cp` varchar(10) DEFAULT ' ',
   `libelle` varchar(255) DEFAULT ' ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=273 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=276 ;
 
 --
 -- Contenu de la table `ville`
@@ -1343,7 +1374,10 @@ INSERT INTO `ville` (`id`, `cp`, `libelle`) VALUES
 (269, '', 'SOMME'),
 (270, '', 'LE HAVRE'),
 (271, '66000', 'PERPIGNAN'),
-(272, '99999', 'tutu');
+(272, '99999', 'tutu'),
+(273, '', ''),
+(274, '', ''),
+(275, '999999', 'TEST');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
