@@ -1,10 +1,25 @@
 <?php
 
 include_once('./lib/config.php');
-$actions = Doctrine_Core::getTable('action')->findByIdIndividu(1);
-foreach($actions as $action) {
-    echo $action->id;
+
+$req = 'libelle LIKE ? and cp LIKE ? ';
+$array = array();
+
+$array[] = "%te%";
+$array[] = "%%";
+
+$test = '999999';
+$test2 = 'test';
+$villes = Doctrine_Core::getTable('ville')->findByDql($req, $array);
+
+foreach($villes as $ville) {
+    echo $ville->id.'</br>';
 }
+
+//$actions = Doctrine_Core::getTable('action')->findByIdIndividu(1);
+//foreach($actions as $action) {
+//    echo $action->id;
+//}
 //$foyers = Doctrine_Core::getTable('foyer')->findAll();
 //$arrayCreation = array();
 //$result = array();
@@ -30,7 +45,7 @@ foreach($actions as $action) {
 //    $retour = '<h3>'.$table.'</h3>
 //        <div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>
 //        <div class="bouton modif update" value="updateMembreFoyer">Enregistrer</div>
-//        <ul id="membre_foyer_list">';
+//        <ul>';
 //    
 //    $i = 0;
 //    foreach ($tableStatique as $ligne) {

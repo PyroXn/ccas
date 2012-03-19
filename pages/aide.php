@@ -8,7 +8,7 @@ function aide() {
         $contenu = '<h3>Aides Internes :</h3>
                     <center>
                     <ul id="page_aide_interne">
-                        <li class="membre_foyer">
+                        <li class="ligne_list_classique">
                             <div class="colonne10">
                                 <span><h3>Date demande</h3></span>
                             </div>
@@ -36,7 +36,7 @@ function aide() {
                         </li>';
 
         foreach($aidesInternes as $aideInterne) {
-            $contenu .= '<li name="'.$aideInterne->id.'" class="membre_foyer">
+            $contenu .= '<li name="'.$aideInterne->id.'" class="ligne_list_classique">
                             <div>
 
                                 <div class="colonne10">
@@ -77,8 +77,8 @@ function detailAideInterne() {
     
     $contenu = "<h3>Fiche d'aide :</h3>";
     
-    $contenu .= '<ul id="membre_foyer_list">
-                     <li class="membre_foyer">
+    $contenu .= '<ul class="list_classique">
+                     <li class="ligne_list_classique">
                          <div class="colonne50">
                               <span class="attribut">aide demandée : </span>
                               <span><input class="contour_field input_char" type="text" id="aideDemandee" value="'.$aideInterne->typeAideDemandee->libelle.'" disabled/></span>
@@ -92,7 +92,7 @@ function detailAideInterne() {
                              <span><input class="contour_field input_char" type="text" id="organisme" value="'.$aideInterne->organisme->appelation.'" disabled/></span>
                          </div>
                      </li>
-                     <li class="membre_foyer">
+                     <li class="ligne_list_classique">
                          <div class="colonne">
                               <span class="attribut">demandeur : </span>
                               <span><input class="contour_field input_char" type="text" id="demandeur" value="'.$aideInterne->individu->nom.' '.$aideInterne->individu->prenom.'" disabled/></span>
@@ -106,7 +106,7 @@ function detailAideInterne() {
                              <span><input class="contour_field input_char" type="text" id="instructeur" value="'.$aideInterne->instruct->nom.'" disabled/></span>
                          </div>
                      </li>
-                     <li class="membre_foyer">
+                     <li class="ligne_list_classique">
                          <div class="colonne">
                              <span class="attribut">nature : </span>
                              <span><input class="contour_field input_char" type="text" id="nature" value="'.utf8_decode($aideInterne->nature).'" disabled/></span>
@@ -129,8 +129,8 @@ function detailAideInterne() {
                      </li></ul>';
 
         $contenu .= '<h3>Décision :</h3>
-                     <ul id="membre_foyer_list">
-                     <li class="membre_foyer">
+                     <ul class="list_classique">
+                     <li class="ligne_list_classique">
                          <div class="colonne50">
                               <span class="attribut">aide accordée : </span>
                               <span><input class="contour_field input_char" type="text" id="aideAcordee" value="'.$aideInterne->typeAideAccordee->libelle.'" disabled/></span>
@@ -144,7 +144,7 @@ function detailAideInterne() {
                              <span><input class="contour_field input_char" type="text" id="decideur" value="'.$aideInterne->instruct->nom.'" disabled/></span>
                          </div>
                      </li>
-                     <li class="membre_foyer">
+                     <li class="ligne_list_classique">
                          <div class="colonne">
                              <span class="attribut">avis : </span>
                              <span><input class="contour_field input_char" type="text" id="avis" value="'.utf8_decode($aideInterne->avis).'" disabled/></span>
@@ -156,7 +156,7 @@ function detailAideInterne() {
                              <span><input class="contour_field input_char" type="text" id="vigilance" value="'.$aideInterne->vigilance.'" disabled/></span>
                          </div>
                      </li>
-                     <li class="membre_foyer">
+                     <li class="ligne_list_classique">
                          <div class="colonne">
                              <span class="attribut">montant : </span>
                              <span><input class="contour_field input_num" type="text" id="montant" value="'.$aideInterne->montant.'" disabled/></span>
@@ -174,8 +174,8 @@ function detailAideInterne() {
                      </li>
                  </ul>
                  <h3>Rapport :</h3>
-                     <ul id="membre_foyer_list">
-                         <li class="membre_foyer">
+                     <ul class="list_classique">
+                         <li class="ligne_list_classique">
                             <span><textarea class="contour_field input_char" style="width:99%" type="text" id="rapport" >'.$aideInterne->rapport.'</textarea></span>
                          </li>
                      </ul>';
