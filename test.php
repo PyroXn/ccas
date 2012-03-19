@@ -2,13 +2,41 @@
 
 include_once('./lib/config.php');
 
-$tableStatique = Doctrine_Core::getTable('bailleur');
+$table = 'bailleur';
+$tableStatique = Doctrine_Core::getTable($table);
+$fla = $tableStatique->find(1);
+$test = $fla->getData();
+$arrayKey = array_keys($test);
+echo $tableStatique->getTypeOfColumn(strtolower($arrayKey[1]));
+//$columnNames = $tableStatique->getColumnNames();
+//foreach ($columnNames as $columnName) {
+//    $type = $tableStatique->getTypeOfColumn($columnName);
+//    echo $columnName .' '. $type .'</br>';
+//}
 
-$columnNames = $tableStatique->getColumnNames();
-foreach ($columnNames as $columnName) {
-    $type = $tableStatique->getTypeOfColumn($columnName);
-    echo $columnName .' '. $type .'</br>';
-}
+//include_once('./pages/tableStatique.php');
+//
+//$retour = '';
+//    $i = 0;
+//    foreach ($search as $ligne) {
+//        $ligneData = $ligne->getData();
+//        $arrayKey = array_keys($ligneData);
+//        $u = 0;
+//        $retour .= '<li class="ligne_list_classique">';
+//        foreach ($ligneData as $attribut) {
+//            
+//            $type = $tableStatique->getTypeOfColumn($arrayKey[$u]);
+//            $retour.= 'NUMERO: '.$u.' '.$arrayKey[$u].' : '.$attribut.' type= '.$type.' ';
+//            if ($arrayKey[$u] != 'id') {
+//                $retour.= ' != id ';
+//                $retour .= generateColonneByType($tableStatique, $arrayKey[$u], false, $attribut, true);
+//            }
+//            $u++;
+//        }
+//        $retour .= '<span class="delete_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span><span class="edit_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span></li>';
+//        $i++;
+//    }
+//    echo $retour;
 
 //$req = 'libelle LIKE ? and cp LIKE ? ';
 //$array = array();

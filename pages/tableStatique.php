@@ -83,13 +83,17 @@ function generateContenuTableStatique($table, $tableStatique, $search) {
     $i = 0;
     foreach ($search as $ligne) {
         $ligneData = $ligne->getData();
+        $arrayKey = array_keys($ligneData);
+        $u = 0;
         $retour .= '<li class="ligne_list_classique">';
         foreach ($ligneData as $attribut) {
-            if (array_search($attribut, $ligneData) != 'id') {
-                $retour .= generateColonneByType($tableStatique, array_search($attribut, $ligneData), false, $attribut, true);
+            if ($arrayKey[$u] != 'id') {
+                $retour .= generateColonneByType($tableStatique, $arrayKey[$u], false, $attribut, true);
             }
+            $u++;
         }
         $retour .= '<span class="delete_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span><span class="edit_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span></li>';
+        $i++;
     }
     return $retour;
 }
@@ -98,6 +102,7 @@ function generateContenuTableStatique($table, $tableStatique, $search) {
  * AJOUTER EGALEMENT LA GESTION DES COMBOBOX SUR LES COLONNEs AYANT LEUR NOM COMMENCANT PAR ID (a voir si utile)
  */
 function generateColonneByType($table, $columnName, $recherche=false, $attribut=null, $disabled=false) {
+    $columnName = strtolower($columnName);
     $retour = '';
     $disabled = $disabled ? 'disabled' : '';
     $recherche = $recherche ? 'rechercheTableStatique' : '';
