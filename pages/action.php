@@ -7,16 +7,21 @@ function action() {
     $instructs = Doctrine_Core::getTable('instruct')->findByInterne(1); // Instruct interne
     $contenu = '<h2>Budget</h2>';
     $contenu .= '<div><h3><span>Suivi des actions</span></h3>';
-    $contenu .= '<table border="0">
-                                <tr>
-                                    <td>Date</td>
-                                    <td>Actions</td>
-                                    <td>Motif</td>
-                                    <td>Suite à donner</td>
-                                    <td>Suite donnee</td>
-                                    <td>Instructeur</td>
-                                    <td></td>
-                                </tr>';
+    $contenu .= '
+        <div class="bubble tree-browser-wrapper">
+            <table class="tree-browser" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr class="header">
+                      <th>Date</th>
+                      <th>Actions</th>
+                      <th>Motif</th>
+                      <th>Suite à donner</th>
+                      <th>Suite donnee</th>
+                      <th>Instructeur</th>
+                      <th></th>
+                    </tr>
+                </thead>
+                <tbody>';
     foreach($actions as $action) {
         $contenu .= '<tr>
                                     <td>'.getDatebyTimestamp($action->date).'</td>
@@ -29,64 +34,64 @@ function action() {
                                 </tr>';
     }
                                 
-    $contenu .= '</table>
-                            <div class="bouton ajout" id="createAction">Ajouter une action</div>
-                            <div class="formulaire" action="creation_action">
-                                   <div class="colonne_droite">
-                                         <div class="input_text">
-                                            <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
-                                        </div>
-                                        <div class="select classique" role="select_motifaction">
-                                            <div id="typeaction" class="option">Type d\'action</div>
-                                            <div class="fleche_bas"> </div>
-                                        </div>
-                                        <div class="input_text">
-                                            <input id="motif" class="contour_field" type="text" title="Motif" placeholder="Motif">
-                                        </div>
-                                        <div class="input_text">
-                                            <input id="suiteadonner" class="contour_field" type="text" title="Suite à donner" placeholder="Suite à donner">
-                                        </div>
-                                        <div class="input_text">
-                                            <input id="suitedonnee" class="contour_field" type="text" title="Suite donnée" placeholder="Suite donnée">
-                                        </div>
-                                        <div class="select classique" role="select_instruct">
-                                            <div id="instruct" class="option">Instructeur</div>
-                                            <div class="fleche_bas"> </div>
-                                        </div>
-                                        <div class="sauvegarder_annuler">
-                                            <div class="bouton modif" value="save">Enregistrer</div>
-                                            <div class="bouton classique" value="cancel">Annuler</div>
-                                        </div>
-                                        
-                                   </div>
-                           </div>
-                           <div class="formulaire" action="edit_action">
-                                   <div class="colonne_droite">
-                                         <div class="input_text">
-                                            <input id="date_edit" class="contour_field" type="text" title="Date">
-                                        </div>
-                                        <div class="input_text">
-                                            <input id="typeaction_edit" class="contour_field" type="text" title="Type action" disabled/>
-                                        </div>
-                                        <div class="input_text">
-                                            <input id="motif_edit" class="contour_field" type="text" title="Motif">
-                                        </div>
-                                        <div class="input_text">
-                                            <input id="suiteadonner_edit" class="contour_field" type="text" title="Suite à donner">
-                                        </div>
-                                        <div class="input_text">
-                                            <input id="suitedonnee_edit" class="contour_field" type="text" title="Suite donnée">
-                                        </div>
-                                        <div class="input_text">
-                                            <input id="instruct_edit" class="contour_field" type="text" title="Instructeur" disabled/>
-                                        </div>
-                                        <div class="sauvegarder_annuler">
-                                            <div class="bouton modif" value="edit_action">Enregistrer</div>
-                                            <div class="bouton classique" value="cancel">Annuler</div>
-                                        </div>
-                                        
-                                   </div>
-                           </div>';
+    $contenu .= '</tbody></table></div>';    
+    $contenu .= '<div class="bouton ajout" id="createAction">Ajouter une action</div>
+    <div class="formulaire" action="creation_action">
+           <div class="colonne_droite">
+                 <div class="input_text">
+                    <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                </div>
+                <div class="select classique" role="select_motifaction">
+                    <div id="typeaction" class="option">Type d\'action</div>
+                    <div class="fleche_bas"> </div>
+                </div>
+                <div class="input_text">
+                    <input id="motif" class="contour_field" type="text" title="Motif" placeholder="Motif">
+                </div>
+                <div class="input_text">
+                    <input id="suiteadonner" class="contour_field" type="text" title="Suite à donner" placeholder="Suite à donner">
+                </div>
+                <div class="input_text">
+                    <input id="suitedonnee" class="contour_field" type="text" title="Suite donnée" placeholder="Suite donnée">
+                </div>
+                <div class="select classique" role="select_instruct">
+                    <div id="instruct" class="option">Instructeur</div>
+                    <div class="fleche_bas"> </div>
+                </div>
+                <div class="sauvegarder_annuler">
+                    <div class="bouton modif" value="save">Enregistrer</div>
+                    <div class="bouton classique" value="cancel">Annuler</div>
+                </div>
+
+           </div>
+   </div>
+   <div class="formulaire" action="edit_action">
+           <div class="colonne_droite">
+                 <div class="input_text">
+                    <input id="date_edit" class="contour_field" type="text" title="Date">
+                </div>
+                <div class="input_text">
+                    <input id="typeaction_edit" class="contour_field" type="text" title="Type action" disabled/>
+                </div>
+                <div class="input_text">
+                    <input id="motif_edit" class="contour_field" type="text" title="Motif">
+                </div>
+                <div class="input_text">
+                    <input id="suiteadonner_edit" class="contour_field" type="text" title="Suite à donner">
+                </div>
+                <div class="input_text">
+                    <input id="suitedonnee_edit" class="contour_field" type="text" title="Suite donnée">
+                </div>
+                <div class="input_text">
+                    <input id="instruct_edit" class="contour_field" type="text" title="Instructeur" disabled/>
+                </div>
+                <div class="sauvegarder_annuler">
+                    <div class="bouton modif" value="edit_action">Enregistrer</div>
+                    <div class="bouton classique" value="cancel">Annuler</div>
+                </div>
+
+           </div>
+   </div>';
     // COMBO BOX
       $contenu .= '<ul class="select_instruct">';
     foreach($instructs as $instruct) {

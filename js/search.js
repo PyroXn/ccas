@@ -230,6 +230,27 @@ $(function() {
         $(this).toggleClass('selection');
     });
     
+    $('.rechercheTableStatique').live("keyup", function() {
+        var datastring = 'table=' + $('#ligneRechercheTableStaique').attr('table');
+        $('#ligneRechercheTableStaique').find('[columnName]').each(function(){
+            
+            console.log($(this).attr('columnName') + ' : ' + $(this).val());
+            datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
+        });
+        
+        console.log(datastring);
+        $.ajax({
+            type: 'post',
+            data: datastring,
+            url: './index.php?p=searchTableStatique',
+            cache: false,
+            //Succès de la requête
+            success: function(tableStatique) {
+//                console.log(tableStatique);
+                $("#contenu_table_statique").html(tableStatique);
+            }
+        });
+    });
 });
 
 function autoComplete(searchbox, table, champ) {

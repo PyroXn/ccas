@@ -119,6 +119,10 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateInfoPerso();
         break;
+    case 'generateEcranStatique':
+        include_once('./pages/tableStatique.php');
+        echo generateEcranStatique($_POST['table']);
+        break;
     case 'saveTableStatique':
         include_once('./pages/tableStatique.php');
         updateTableStatique();
@@ -126,6 +130,10 @@ switch (@$_GET['p']) {
     case 'deleteTableStatique':
         include_once('./pages/tableStatique.php');
         deleteTableStatique();
+        break;
+    case 'searchTableStatique':
+        include_once('./pages/tableStatique.php');
+        searchTableStatique();
         break;
     case 'getaction':
         include_once('./pages/action.php');

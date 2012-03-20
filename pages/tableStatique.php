@@ -1,18 +1,67 @@
 <?php
 
+//TODO marche pas avec bailleur et instruct
+function comboTableStatique() {
+    $retour = '
+        <div class="select classique" role="select_table_statique">
+            <div id="choixTableStatique" class="option">etude</div>
+            <div class="fleche_bas"> </div>
+        </div>
+        <ul class="select_table_statique">
+            <li>
+                <div>bailleur</div>
+            </li>
+            <li>
+                <div>decideur</div>
+            </li>
+            <li>
+                <div>etude</div>
+            </li>
+            <li>
+                <div>instruct</div>
+            </li>
+            <li>
+                <div>libelleorganisme</div>
+            </li>
+            <li>
+                <div>lienfamille</div>
+            </li>
+            <li>
+                <div>nationalite</div>
+            </li>
+            <li>
+                <div>profession</div>
+            </li>
+            <li>
+                <div>rue</div>
+            </li>
+            <li>
+                <div>secteur</div>
+            </li>
+            <li>
+                <div>situationmatri</div>
+            </li>
+            <li>
+                <div>ville</div>
+            </li>            
+        </ul>';
+    $retour .= generateEcranStatique('etude');
+    return $retour;
+}
+
 function generateEcranStatique($table) {
     $tableStatique = Doctrine_Core::getTable($table);
 
     $columnNames = $tableStatique->getColumnNames();
 //    echo $table->getTypeOfColumn($columnName);
 
-    $retour = '';
+    $retour = '<div id="tableStatique">';
     $retour .= '<h3>Recherche</h3>
-        <ul id="membre_foyer_list">
-            <li class="membre_foyer">';
+        <ul class="list_classique">
+            <li id="ligneRechercheTableStaique" class="ligne_list_classique" table="'.$table.'">';
             foreach ($columnNames as $columnName) {
                 if ($columnName != 'id') {
-                    $retour .= generateColonneByType($tableStatique, $columnName);
+                    $retour .= generateColonneByType($tableStatique, $columnName, true);
                 }
             }
         $retour .= '</li></ul>';
@@ -21,37 +70,49 @@ function generateEcranStatique($table) {
     $retour .= '
         <div id="newTableGenerique" class="bouton ajout" value="add" table="'.$table.'">Ajout '.$table.'</div>
         <h3>'.$table.'</h3>
-        <ul id="membre_foyer_list">';
-    
-    $i = 0;
-    foreach ($tableStatique->findAll() as $ligne) {
-        $ligneData = $ligne->getData();
-        $retour .= '<li class="membre_foyer">';
-        foreach ($ligneData as $attribut) {
-            if (array_search($attribut, $ligneData) != 'id') {
-                $retour .= generateColonneByType($tableStatique, array_search($attribut, $ligneData), $attribut, true);
-            }
-        }
-        $retour .= '<span class="delete_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span><span class="edit_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span></li>';
-    }
+        <ul id="contenu_table_statique" class="list_classique">';
+    $retour .= generateContenuTableStatique($table, $tableStatique, $tableStatique->findAll());
     $retour .= '</ul>';
     $retour .= generateFormulaireByTable($tableStatique, $columnNames);
+    $retour .= '</div>';
+    return $retour;
+}
+
+function generateContenuTableStatique($table, $tableStatique, $search) {
+    $retour = '';
+    $i = 0;
+    foreach ($search as $ligne) {
+        $ligneData = $ligne->getData();
+        $arrayKey = array_keys($ligneData);
+        $u = 0;
+        $retour .= '<li class="ligne_list_classique">';
+        foreach ($ligneData as $attribut) {
+            if ($arrayKey[$u] != 'id') {
+                $retour .= generateColonneByType($tableStatique, $arrayKey[$u], false, $attribut, true);
+            }
+            $u++;
+        }
+        $retour .= '<span class="delete_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span><span class="edit_ligne droite" table="'.$table.'" idLigne="'.$ligne->id.'"></span></li>';
+        $i++;
+    }
     return $retour;
 }
 
 /*
  * AJOUTER EGALEMENT LA GESTION DES COMBOBOX SUR LES COLONNEs AYANT LEUR NOM COMMENCANT PAR ID (a voir si utile)
  */
-function generateColonneByType($table, $columnName, $attribut=null, $disabled=false) {
+function generateColonneByType($table, $columnName, $recherche=false, $attribut=null, $disabled=false) {
+    $columnName = strtolower($columnName);
     $retour = '';
     $disabled = $disabled ? 'disabled' : '';
+    $recherche = $recherche ? 'rechercheTableStatique' : '';
     $type = $table->getTypeOfColumn($columnName);
     switch ($type) {
         case 'string':
             $retour .= '
             <div class="colonne">
                 <span class="attribut">'.$columnName.' : </span>
-                <span><input class="contour_field input_char" type="text" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
+                <span><input class="contour_field input_char '.$recherche.'" type="text" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
             </div>';
             break;
         case 'float' :
@@ -149,4 +210,26 @@ function deleteTableStatique() {
     echo generateEcranStatique($_POST['table']);
 }
 
+
+/*
+ * La recherche n'inclus pour el moment seulement les champs text, float et int (pas les combo et pas les checkbox)
+ */
+function searchTableStatique() {
+    include_once('./lib/config.php');
+    $table = $_POST['table'];
+    $tableStatique = Doctrine_Core::getTable($table);
+    $columnNames = $tableStatique->getColumnNames();
+    $req = '';
+    $param = array();
+    $premierPassage = true;
+    foreach ($columnNames as $columnName) {
+        if ($columnName != 'id') {
+            $req .= $premierPassage ? $columnName.' like ? ' : 'and '.$columnName.' like ? ';
+            $param[] = $_POST[$columnName].'%';
+            $premierPassage = false;
+        }
+    }
+    $search = $tableStatique->findByDql($req, $param);
+    echo generateContenuTableStatique($table, $tableStatique, $search);
+}
 ?>

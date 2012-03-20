@@ -185,7 +185,7 @@
 
 .select_civilite, .select_lien_famille, .select_sexe, .select_situation, .select_natio, .select_ville, .select_statut,
 .select_etude, .select_profession, .select_regime, .select_couv, .select_mut, .select_caf, #suggestion, .select_secteur, .select_typelogement,
-.select_statutlogement, .select_bailleur, .select_instruct, .select_motifaction {
+.select_statutlogement, .select_bailleur, .select_instruct, .select_motifaction, .select_table_statique {
     display: none;
     z-index: 1002;
     position: absolute;
@@ -213,7 +213,8 @@
 
 .select_civilite li, .select_lien_famille li, .select_sexe li, .select_situation li, .select_natio li, .select_ville li,
 .select_statut li, .select_etude li, .select_profession li, .select_regime li, .select_couv li, .select_mut li, .select_caf li,
-.liste_suggestion li, .select_secteur li, .select_typelogement li, .select_statutlogement li, .select_bailleur li, .select_instruct li, .select_motifaction li {
+.liste_suggestion li, .select_secteur li, .select_typelogement li, .select_statutlogement li, .select_bailleur li, .select_instruct li,
+.select_motifaction li, .select_table_statique li {
     position: relative;
     color: #333;
     cursor: pointer;
@@ -226,7 +227,7 @@
 .select_civilite li:hover, .select_lien_famille li:hover, .select_sexe li:hover, .select_situation li:hover, .select_natio li:hover,
 .select_ville li:hover, .select_statut li:hover, .select_etude li:hover, .select_profession li:hover, .select_regime li:hover,
 .select_couv li:hover, .select_mut li:hover, .select_caf li:hover, .liste_suggestion .selection, .select_secteur li:hover, .select_typelogement li:hover,
-.select_statutlogement li:hover, .select_bailleur li:hover, .select_instruct li:hover, .select_motifaction li:hover {
+.select_statutlogement li:hover, .select_bailleur li:hover, .select_instruct li:hover, .select_motifaction li:hover, .select_table_statique li:hover {
     background-color: #EEE;
     border-color: #EEE;
     border-style: dotted;
@@ -262,9 +263,6 @@
     cursor: pointer;
 }
 
-
-
-
 .update {
     display: none;
     float: right;
@@ -274,22 +272,56 @@
     z-index: 999;
 }
 
-/*.liste_suggestion {
-    margin: 10px 0px 0px 0px;
-    background-color: #212427;
-    -moz-border-radius: 7px;
-    -webkit-border-radius: 7px;
-    border: 2px solid #000;	
-    color: #fff;
+/****TABLE****/
+.tree-browser-wrapper {
+    margin-bottom: 30px;
 }
 
-.liste_suggestion li {
-
-    margin: 0px 0px 3px 0px;
+.bubble {
     padding: 3px;
-    cursor: pointer;
+    background: #E6F1F6;
+    border: 1px solid #C5D5DD;
+    border-top: none;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 
-.liste_suggestion li:hover {
-    background-color: #659CD8;
-}*/
+.tree-browser {
+    width: 100%;
+    margin: 0;
+    border-radius: 3px;
+    border: 1px solid #CACACA;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 13px;
+}
+
+.tree-browser th {
+    text-align: left;
+    font-weight: bold;
+    padding: 6px 3px;
+    color: #555;
+    text-shadow: 0 1px 0 white;
+    border-bottom: 1px solid #D8D8D8;
+    background: #FAFAFA;
+    background: -moz-linear-gradient(#FAFAFA,#EAEAEA);
+    background: -webkit-linear-gradient(#FAFAFA,#EAEAEA);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa',endColorstr='#eaeaea')";
+}
+
+.tree-browser td.icon {
+    width: 17px;
+    padding-right: 2px;
+    padding-left: 10px;
+}
+
+.tree-browser td {
+    background: #F8F8F8;
+    border-bottom: 1px solid #EEE;
+    padding: 7px 3px;
+    color: #484848;
+    vertical-align: middle;
+}
