@@ -8,8 +8,8 @@ function action() {
     $contenu = '<h2>Budget</h2>';
     $contenu .= '<div><h3><span>Suivi des actions</span></h3>';
     $contenu .= '
-        <div class="bubble tree-browser-wrapper">
-            <table class="tree-browser" cellpadding="0" cellspacing="0">
+        <div class="bubble tableau_classique_wrapper">
+            <table class="tableau_classique" cellpadding="0" cellspacing="0">
                 <thead>
                     <tr class="header">
                       <th>Date</th>
@@ -22,16 +22,19 @@ function action() {
                     </tr>
                 </thead>
                 <tbody>';
+    $i = 1;
     foreach($actions as $action) {
-        $contenu .= '<tr>
-                                    <td>'.getDatebyTimestamp($action->date).'</td>
-                                    <td>'.utf8_decode($action->typeaction->libelle).'</td>
-                                    <td>'.$action->motif.'</td>
-                                    <td>'.utf8_decode($action->suiteADonner).'</td>
-                                    <td>'.utf8_decode($action->suitedonnee).'</td>
-                                    <td>'.utf8_decode($action->instruct->nom).'</td>
-                                    <td><span class="edit_action" idAction="'.$action->id.'"></span></td>
-                                </tr>';
+        $i%2 ? $contenu .= '<tr>' : $contenu .= '<tr class="alt">';
+        
+        $contenu .= '<td>'.getDatebyTimestamp($action->date).'</td>
+            <td>'.utf8_decode($action->typeaction->libelle).'</td>
+            <td>'.$action->motif.'</td>
+            <td>'.utf8_decode($action->suiteADonner).'</td>
+            <td>'.utf8_decode($action->suitedonnee).'</td>
+            <td>'.utf8_decode($action->instruct->nom).'</td>
+            <td><span class="edit_action" idAction="'.$action->id.'"></span></td>
+        </tr>';
+        $i++;
     }
                                 
     $contenu .= '</tbody></table></div>';    
