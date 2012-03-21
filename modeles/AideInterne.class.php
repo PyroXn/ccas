@@ -60,6 +60,12 @@ class AideInterne extends Doctrine_Record {
             'foreign' => 'id'
                 )
         );
+        $this->hasMany('bonAideInterne as bonAideInterne',
+    		array(
+    			'local' => 'id', 
+    			'foreign' => 'idAideInterne'
+    		)
+    	);
     }
 }
 
