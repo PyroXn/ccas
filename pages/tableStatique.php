@@ -45,7 +45,7 @@ function comboTableStatique() {
                 <div>ville</div>
             </li>            
         </ul>';
-    $retour .= generateEcranStatique('etude');
+    $retour .= generateEcranStatiqueEnTab('etude');
     return $retour;
 }
 
@@ -176,6 +176,104 @@ function generateFormulaireByTable($table, $columnNames) {
     return $retour;
 }
 
+
+
+
+function generateEcranStatiqueEnTab($table) {
+    $tableStatique = Doctrine_Core::getTable($table);
+
+    $columnNames = $tableStatique->getColumnNames();
+//    echo $table->getTypeOfColumn($columnName);
+
+    $retour = '<div id="tableStatique">';
+    $retour .= '<h3>Recherche</h3>
+        <ul class="list_classique">
+            <li id="ligneRechercheTableStaique" class="ligne_list_classique" table="'.$table.'">';
+            foreach ($columnNames as $columnName) {
+                if ($columnName != 'id') {
+                    $retour .= generateColonneByType($tableStatique, $columnName, true);
+                }
+            }
+        $retour .= '</li></ul>';
+            
+    
+    $retour .= '
+        <div id="newTableGenerique" class="bouton ajout" value="add" table="'.$table.'">Ajout '.$table.'</div>
+        <h3>'.$table.'</h3>';
+    $retour .= '
+        <div class="bubble tableau_classique_wrapper">
+            <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr class="header">';
+                        foreach ($columnNames as $columnName) {
+                            if ($columnName != 'id') {
+                                $retour .= '<th>'.$columnName.'</th>';
+                            }
+                        }
+            $retour .= '<th></th>
+                        <th></th>
+                    </tr>
+                </thead><tbody id="contenu_table_statique">';
+    $retour .= generateContenuTableStatiqueEnTab($table, $tableStatique, $tableStatique->findAll());
+    $retour .= '</tbody></table></div>';
+    $retour .= generateFormulaireByTable($tableStatique, $columnNames);
+    $retour .= '</div>';
+    return $retour;
+}
+
+function generateContenuTableStatiqueEnTab($table, $tableStatique, $search) {
+    $retour = '';
+    $i = 0;
+    foreach ($search as $ligne) {
+        $ligneData = $ligne->getData();
+        $arrayKey = array_keys($ligneData);
+        $u = 0;
+        $i%2 ? $retour .= '<tr>' : $retour .= '<tr class="alt">';
+        foreach ($ligneData as $attribut) {
+            if ($arrayKey[$u] != 'id') {
+                $retour .= generateColonneByTypeEntab($tableStatique, $arrayKey[$u], false, $attribut, true);
+            }
+            $u++;
+        }
+        $retour .= '<td class="icon"><span class="edit_ligne" table="'.$table.'" idLigne="'.$ligne->id.'"></span></td>
+                    <td class="icon"><span class="delete_ligne" table="'.$table.'" idLigne="'.$ligne->id.'"></span></td>
+                </tr>';
+        $i++;
+    }
+    return $retour;
+}
+
+/*
+ * AJOUTER EGALEMENT LA GESTION DES COMBOBOX SUR LES COLONNEs AYANT LEUR NOM COMMENCANT PAR ID (a voir si utile)
+ */
+function generateColonneByTypeEnTab($table, $columnName, $recherche=false, $attribut=null, $disabled=false) {
+    $columnName = strtolower($columnName);
+    $retour = '';
+    $disabled = $disabled ? 'disabled' : '';
+    $recherche = $recherche ? 'rechercheTableStatique' : '';
+    $type = $table->getTypeOfColumn($columnName);
+    switch ($type) {
+        case 'string':
+            $retour .= '<td class="'.$recherche.'" columnName='.$columnName.'>'.$attribut.'</td>';
+            break;
+        case 'float' :
+        case 'integer' :
+            $retour .= '<td columnName='.$columnName.'>'.$attribut.'</td>';
+            break;
+        case 'boolean' :
+            $retour .= '<td>';
+            if($attribut != null && $attribut == 1) {
+                $retour .= '<span class="checkbox checkbox_active" value="1"'.$disabled.'></span></div>';
+            } else {
+                $retour .= '<span class="checkbox" value="0"'.$disabled.'></span></td>';
+            };
+            break;
+    }
+    return $retour;
+}
+
+
+
 function updateTableStatique() {
     include_once('./lib/config.php');
     $table = $_POST['table'];
@@ -200,14 +298,14 @@ function updateTableStatique() {
         }
         $object->save();
     }
-    echo generateEcranStatique($table);
+//    echo generateEcranStatiqueEnTab($table);
 }
 
 function deleteTableStatique() {
     include_once('./lib/config.php');
     $ligne = Doctrine_Core::getTable($_POST['table'])->find($_POST['idLigne']);
     $ligne->delete();
-    echo generateEcranStatique($_POST['table']);
+//    echo generateEcranStatiqueEnTab($_POST['table']);
 }
 
 
@@ -230,6 +328,6 @@ function searchTableStatique() {
         }
     }
     $search = $tableStatique->findByDql($req, $param);
-    echo generateContenuTableStatique($table, $tableStatique, $search);
+    echo generateContenuTableStatiqueEntab($table, $tableStatique, $search);
 }
 ?>

@@ -35,7 +35,13 @@ $(function() {
     $('.edit_ligne').live("click", function() {
         var form = $('.formulaire[action="edit_ligne"]');
         var newPosition = new Object();
-        tmp = $(this).parent();
+        var tmp = $(this).parent();
+        var tab = false;
+        if ($(tmp).hasClass('icon')) {
+            tmp = $(tmp).parent();
+            tab = true;
+        }
+        console.log(tmp);
         newPosition.left = $(window).width()/2 - form.width()/2;
         newPosition.top = $(window).height()/2 - form.height();
         form.attr('table', $(this).attr('table'));
@@ -47,7 +53,11 @@ $(function() {
 
             // pour chaque columnname du formulaire on cherche si il existe une columnname avec une valeur similaire dans notre edit_ligne
             // si c'est le cas on lui met la valeur'
-            $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).val());
+            if (tab) {
+                $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).text());
+            } else {
+                $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).val());
+            }
         });
         creationForm(newPosition, $(this).outerHeight(), form);
     });
@@ -142,11 +152,11 @@ $(function() {
                 url: './index.php?p=saveTableStatique',
                 cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
                     effacer();
-                    $("#tableStatique").html(data);
+                    searchTableStatique();
                     
                 }
             });
@@ -244,17 +254,6 @@ $(function() {
                             $('#contenu').html(data.action);
                             break;
                     }
-                //FONCTIONNE PAS 
-                //                    if(!($.isEmptyObject(data.listeIndividu) && $.isEmptyObject(data.menu))) {
-                //                        $("#list_individu").html(data.listeIndividu);
-                //                        $("#page_header_navigation").html(data.menu);
-                //                    } else if(!$.isEmptyObject(data.tableau)) {
-                //                        $("#contenu").html(data.tableau);
-                //                    } else if(!$.isEmptyObject(data.newIndividu)) {
-                //                        $("#list_individu").html(data.listeIndividu);
-                //                        /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
-                //                        $('#contenu').html(data.newIndividu);
-                //                    }     
                 }
             });
         } else if (value == 'updateMembreFoyer') {
@@ -590,8 +589,8 @@ $(function() {
             data: datastring,
             url: './index.php?p=deleteTableStatique',
             cache: false,
-            success: function(data) {
-                $("#tableStatique").html(data);
+            success: function() {
+                searchTableStatique();
             }
         });
     });
@@ -623,4 +622,30 @@ $(function() {
         });
         
     });
+    
+    $('.rechercheTableStatique').live("keyup", function() {
+        searchTableStatique();
+    });
 });
+
+function searchTableStatique() {
+    var datastring = 'table=' + $('#ligneRechercheTableStaique').attr('table');
+    $('#ligneRechercheTableStaique').find('[columnName]').each(function(){
+            
+        console.log($(this).attr('columnName') + ' : ' + $(this).val());
+        datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
+    });
+        
+    console.log(datastring);
+    $.ajax({
+        type: 'post',
+        data: datastring,
+        url: './index.php?p=searchTableStatique',
+        cache: false,
+        //Succès de la requête
+        success: function(tableStatique) {
+            //                console.log(tableStatique);
+            $("#contenu_table_statique").html(tableStatique);
+        }
+    });
+}
