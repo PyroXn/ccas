@@ -82,6 +82,19 @@ function getDocument() {
         
     }
     $contenu .= '</table>';
+    $contenu .= '<div id="newDocument" class="bouton ajout">Ajouter un document</div>
+                            <div class="formulaire" action="new_document">
+                                   <div class="colonne_droite">
+                                         <div class="input_text">
+                                            <input id="document" class="contour_field" type="file">
+                                        </div>
+                                        <div class="sauvegarder_annuler">
+                                            <div class="bouton modif" value="save">Enregistrer</div>
+                                            <div class="bouton classique" value="cancel">Annuler</div>
+                                        </div>
+                                        
+                                   </div>
+                                   </div>';
     echo $contenu;
     }
 }

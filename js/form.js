@@ -32,6 +32,13 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="edit_ligne"]'))
     });
     
+        $('#newDocument').live("click", function() {        
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - $('.formulaire[action="new_document"]').width()/2;
+        newPosition.top = $(window).height()/2 - $('.formulaire[action="new_document"]').height();
+        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="new_document"]'));
+    });
+    
     $('.edit_ligne').live("click", function() {
         var form = $('.formulaire[action="edit_ligne"]');
         var newPosition = new Object();

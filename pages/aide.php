@@ -1,72 +1,47 @@
 <?php
 function aide() {
+    $contenu = aideInterne();
+    
+    return $contenu;
+}
+function aideInterne() {
     
         //AFFICHAGE DES LISTES D'AIDES
         
             // AIDES INTERNES //
         $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
-        $contenu = '<h3>Aides Internes :</h3>
-                    <center>
-                    <ul id="page_aide_interne">
-                        <li class="ligne_list_classique">
-                            <div class="colonne10">
-                                <span><h3>Date demande</h3></span>
-                            </div>
-                            <div class="colonne">
-                                <span><h3>Aide demandée</h3></span>
-                            </div>
-                            <div class="colonne10">
-                                <span><h3>Etat</h3></span>
-                            </div>
-                            <div class="colonne10">
-                                <span><h3>Nature</h3></span>
-                            </div>
-                            <div class="colonne10">
-                                <span><h3>Avis</h3></span>
-                            </div>
-                            <div class="colonne10">
-                                <span><h3>Montant</h3></span>
-                            </div>
-                            <div class="colonne10">
-                                <span><h3>Date décision</h3></span>
-                            </div>
-                            <div class="colonne5">
-                                <span><h3>Détails</h3></span>
-                            </div>
-                        </li>';
-
+        $contenu = '
+            <h3>Aides Internes :</h3>
+                <div class="bubble tableau_classique_wrapper">
+                    <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr class="header">
+                                <th>Date demande</th>
+                                <th>Aide demandée</th>
+                                <th>Etat</th>
+                                <th>Nature</th>
+                                <th>Avis</th>
+                                <th>Montant</th>
+                                <th>Date décision</th>
+                                <th>Détails</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
+        $i = 1;
         foreach($aidesInternes as $aideInterne) {
-            $contenu .= '<li name="'.$aideInterne->id.'" class="ligne_list_classique">
-                            <div>
-
-                                <div class="colonne10">
-                                    <span>'.getDatebyTimestamp($aideInterne->dateDemande).'</span>
-                                </div>
-                                <div class="colonne">
-                                    <span> '.$aideInterne->typeAideDemandee->libelle.'</span>
-                                </div>
-                                <div class="colonne10">
-                                    <span allign="center"> '.utf8_decode($aideInterne->etat).'</span>
-                                </div>
-                                <div class="colonne10">
-                                    <span> '.utf8_decode($aideInterne->nature).'</span>
-                                </div>
-                                <div class="colonne10">
-                                    <span> '.utf8_decode($aideInterne->avis).'</span>
-                                </div>
-                                <div class="colonne10">
-                                    <span> '.$aideInterne->montant.' &euro;</span>
-                                </div>
-                                <div class="colonne10">
-                                    <span> '.getDatebyTimestamp($aideInterne->dateDecision).'</span>
-                                </div>
-                                <div class="colonne5">
-                                    <img src="./templates/img/edit.png"></img>
-                                </div>
-                            </div>
-                        </li>';
+            $i % 2 ? $contenu .= '<tr>' : $contenu .= '<tr class="alt">';
+            $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
+                                    <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
+                                    <td> '.utf8_decode($aideInterne->etat).'</td>
+                                    <td> '.utf8_decode($aideInterne->nature).'</td>
+                                    <td> '.utf8_decode($aideInterne->avis).'</td>
+                                    <td> '.$aideInterne->montant.' &euro;</td>
+                                    <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
+                                    <td><img src="./templates/img/edit.png"></img></td>
+                        </tr>';
+            $i++;
         }
-        $contenu .= '</ul></center>';
+        $contenu .= '</tbody></table>';
    
         return utf8_encode($contenu);
     
