@@ -144,6 +144,10 @@
     outline: none;
 }
 
+.formulaire .select {
+    margin-bottom: 5px;
+}
+
 .contour_field {
     border: 1px solid #D9D9D9;
     border-top: 1px solid silver;
@@ -156,8 +160,8 @@
 .select {    
     position: relative;
     display: inline-block;
-    padding: 0 18px 0 6px;
-    margin-bottom: 5px;
+    padding: 1px 18px 0 6px;
+
 }
 
 .option {
@@ -165,7 +169,7 @@
     cursor: default;
     font-size: 11px;
     font-weight: bold;
-    line-height: 27px;
+    line-height: 23px;
     list-style: none;
     text-align: center;
 
@@ -180,7 +184,7 @@
     width: 0;
     position: absolute;
     right: 5px;
-    top: 12px;
+    top: 11px;
 }
 
 .select_civilite, .select_lien_famille, .select_sexe, .select_situation, .select_natio, .select_ville, .select_statut,
