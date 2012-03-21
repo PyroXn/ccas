@@ -129,8 +129,8 @@ $(function() {
         });
     });
     
-    $('#page_aide_interne > li > div > div > img').live("click", function() {
-        var idAide = $(this).parent().parent().parent().attr('name');
+    $('.edit_aide_interne').live("click", function() {
+        var idAide = $(this).parent().parent().attr('name');
         console.log(idAide);
         $.ajax({
             type: "POST",
@@ -228,28 +228,6 @@ $(function() {
     //le hover permet de chopper l'evenment à l'entrer et à la sortie, le toggleClass prend donc tous son sens!
     $('.liste_suggestion > li').live('hover', function() {
         $(this).toggleClass('selection');
-    });
-    
-    $('.rechercheTableStatique').live("keyup", function() {
-        var datastring = 'table=' + $('#ligneRechercheTableStaique').attr('table');
-        $('#ligneRechercheTableStaique').find('[columnName]').each(function(){
-            
-            console.log($(this).attr('columnName') + ' : ' + $(this).val());
-            datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
-        });
-        
-        console.log(datastring);
-        $.ajax({
-            type: 'post',
-            data: datastring,
-            url: './index.php?p=searchTableStatique',
-            cache: false,
-            //Succès de la requête
-            success: function(tableStatique) {
-//                console.log(tableStatique);
-                $("#contenu_table_statique").html(tableStatique);
-            }
-        });
     });
 });
 

@@ -466,6 +466,14 @@ legend {
     text-align: right;
 }
 
+.formulaire .attribut {
+    display: inline;
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+    padding-left: 3px;
+}
+
 .input_num {
     width: 20%;
     padding: 4px 6px;
@@ -498,7 +506,7 @@ legend {
     color: #3A505B;
 }
 
-.edit, .edit_ligne, .edit_action {
+.edit, .edit_ligne, .edit_action, .edit_aide_interne {
     background: url('./img/edit.png') transparent no-repeat;
     width: 16px;
     height: 16px;

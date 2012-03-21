@@ -32,32 +32,65 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="edit_ligne"]'))
     });
     
-        $('#newDocument').live("click", function() {        
+    $('#newDocument').live("click", function() {        
         var newPosition = new Object();
         newPosition.left = $(window).width()/2 - $('.formulaire[action="new_document"]').width()/2;
         newPosition.top = $(window).height()/2 - $('.formulaire[action="new_document"]').height();
         creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="new_document"]'));
     });
     
+     $('#createAideInterne').live("click", function() {        
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_aide_interne"]').width()/2;
+        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_aide_interne"]').height();
+        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_aide_interne"]'));
+    });
+    
     $('.edit_ligne').live("click", function() {
         var form = $('.formulaire[action="edit_ligne"]');
         var newPosition = new Object();
-        tmp = $(this).parent();
+        var tmp = $(this).parent();
+        var tab = false;
+        if ($(tmp).hasClass('icon')) {
+            tmp = $(tmp).parent();
+            tab = true;
+        }
+        console.log(tmp);
         newPosition.left = $(window).width()/2 - form.width()/2;
         newPosition.top = $(window).height()/2 - form.height();
         form.attr('table', $(this).attr('table'));
         form.attr('idLigne', $(this).attr('idLigne'));
-        //marche pas si jamais checkbox
         $(form).find('[columnName]').each(function(){
             //            console.log($(this).attr('columnName')); // balance la valeur de l'attribut
             //            var test = tmp.find('[columnName="'+$(this).attr('columnName')+'"]'); //le input
 
             // pour chaque columnname du formulaire on cherche si il existe une columnname avec une valeur similaire dans notre edit_ligne
             // si c'est le cas on lui met la valeur'
-            $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).val());
+            if ($(this).children().hasClass('checkbox')) {   //gestion checkbox
+                var value = $(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).attr('value');
+                $(this).children().each(function(){
+                    if ($(this).hasClass('checkbox')) {
+                        $(this).attr('value', value);
+                        value == '1' ? $(this).addClass('checkbox_active') : $(this).removeClass('checkbox_active');
+                    }
+                });
+            } else if (tab) {
+                
+                $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).text());
+            } else {
+                $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).val());
+            }
         });
         creationForm(newPosition, $(this).outerHeight(), form);
     });
+    
+    /*if ($(this).children().hasClass('checkbox')) {
+                    if ($(this).children().hasClass('checkbox_active')) {
+                        datastring += '&'+$(this).attr('columnName')+'=1';
+                    } else {
+                        datastring += '&'+$(this).attr('columnName')+'=0';
+                    }
+                } else {*/
     
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
@@ -88,7 +121,9 @@ $(function() {
     });
     
     $('.checkbox').live("click", function(){
-        $(this).toggleClass('checkbox_active');
+        if (!$(this).attr('disabled')) {
+            $(this).toggleClass('checkbox_active');
+        }
     });
     
     $('.en_execution > li').live("click", function() {
@@ -140,7 +175,16 @@ $(function() {
             }
             $(form).find('[columnName]').each(function(){
                 console.log($(this));
-                datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
+                console.log($(this).children());
+                if ($(this).children().hasClass('checkbox')) {
+                    if ($(this).children().hasClass('checkbox_active')) {
+                        datastring += '&'+$(this).attr('columnName')+'=1';
+                    } else {
+                        datastring += '&'+$(this).attr('columnName')+'=0';
+                    }
+                } else {
+                    datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
+                }
             });
             console.log(datastring);
             $.ajax({
@@ -149,12 +193,11 @@ $(function() {
                 url: './index.php?p=saveTableStatique',
                 cache: false,
                 //Succès de la requête
-                success: function(data) {
+                success: function() {
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
                     effacer();
-                    $("#tableStatique").html(data);
-                    
+                    searchTableStatique();
                 }
             });
         } else if(value=='edit_action') {
@@ -251,17 +294,6 @@ $(function() {
                             $('#contenu').html(data.action);
                             break;
                     }
-                //FONCTIONNE PAS 
-                //                    if(!($.isEmptyObject(data.listeIndividu) && $.isEmptyObject(data.menu))) {
-                //                        $("#list_individu").html(data.listeIndividu);
-                //                        $("#page_header_navigation").html(data.menu);
-                //                    } else if(!$.isEmptyObject(data.tableau)) {
-                //                        $("#contenu").html(data.tableau);
-                //                    } else if(!$.isEmptyObject(data.newIndividu)) {
-                //                        $("#list_individu").html(data.listeIndividu);
-                //                        /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
-                //                        $('#contenu').html(data.newIndividu);
-                //                    }     
                 }
             });
         } else if (value == 'updateMembreFoyer') {
@@ -597,8 +629,8 @@ $(function() {
             data: datastring,
             url: './index.php?p=deleteTableStatique',
             cache: false,
-            success: function(data) {
-                $("#tableStatique").html(data);
+            success: function() {
+                searchTableStatique();
             }
         });
     });
@@ -630,4 +662,30 @@ $(function() {
         });
         
     });
+    
+    $('.rechercheTableStatique').live("keyup", function() {
+        searchTableStatique();
+    });
 });
+
+function searchTableStatique() {
+    var datastring = 'table=' + $('#ligneRechercheTableStaique').attr('table');
+    $('#ligneRechercheTableStaique').find('[columnName]').each(function(){
+            
+        console.log($(this).attr('columnName') + ' : ' + $(this).val());
+        datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
+    });
+        
+    console.log(datastring);
+    $.ajax({
+        type: 'post',
+        data: datastring,
+        url: './index.php?p=searchTableStatique',
+        cache: false,
+        //Succès de la requête
+        success: function(tableStatique) {
+            //                console.log(tableStatique);
+            $("#contenu_table_statique").html(tableStatique);
+        }
+    });
+}
