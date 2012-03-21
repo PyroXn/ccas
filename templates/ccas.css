@@ -466,6 +466,14 @@ legend {
     text-align: right;
 }
 
+.formulaire .attribut {
+    display: inline;
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+    padding-left: 3px;
+}
+
 .input_num {
     width: 20%;
     padding: 4px 6px;

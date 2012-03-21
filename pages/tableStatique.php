@@ -45,7 +45,7 @@ function comboTableStatique() {
                 <div>ville</div>
             </li>            
         </ul>';
-    $retour .= generateEcranStatiqueEnTab('etude');
+    $retour .= generateEcranStatiqueEnTab('instruct');
     return $retour;
 }
 
@@ -128,9 +128,9 @@ function generateColonneByType($table, $columnName, $recherche=false, $attribut=
                 <div class="colonne">
                     <span class="attribut">'.$columnName.' : </span>';
             if($attribut != null && $attribut == 1) {
-                $retour .= '<span class="checkbox checkbox_active" value="1"'.$disabled.'></span></div>';
+                $retour .= '<span class="checkbox checkbox_active" value="1" columnName='.$columnName.' '.$disabled.'></span></div>';
             } else {
-                $retour .= '<span class="checkbox" value="0"'.$disabled.'></span></div>';
+                $retour .= '<span class="checkbox" value="0" columnName='.$columnName.' '.$disabled.'></span></div>';
             };
             break;
     }
@@ -158,8 +158,8 @@ function generateFormulaireByTable($table, $columnNames) {
                 case 'boolean' :
                     $retour .='
                     <div columnName='.$columnName.'>
-                        <span class="attribut">'.$columnName.' : </span>
                         <span class="checkbox" value="0"></span>
+                        <span class="attribut">'.$columnName.'</span>
                     </div>';
                     break;
             };
@@ -263,9 +263,9 @@ function generateColonneByTypeEnTab($table, $columnName, $recherche=false, $attr
         case 'boolean' :
             $retour .= '<td>';
             if($attribut != null && $attribut == 1) {
-                $retour .= '<span class="checkbox checkbox_active" value="1"'.$disabled.'></span></div>';
+                $retour .= '<span class="checkbox checkbox_active" value="1" columnName='.$columnName.' '.$disabled.'></span></div>';
             } else {
-                $retour .= '<span class="checkbox" value="0"'.$disabled.'></span></td>';
+                $retour .= '<span class="checkbox" value="0" columnName='.$columnName.' '.$disabled.'></span></td>';
             };
             break;
     }

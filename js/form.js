@@ -32,7 +32,7 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="edit_ligne"]'))
     });
     
-        $('#newDocument').live("click", function() {        
+    $('#newDocument').live("click", function() {        
         var newPosition = new Object();
         newPosition.left = $(window).width()/2 - $('.formulaire[action="new_document"]').width()/2;
         newPosition.top = $(window).height()/2 - $('.formulaire[action="new_document"]').height();
@@ -53,14 +53,22 @@ $(function() {
         newPosition.top = $(window).height()/2 - form.height();
         form.attr('table', $(this).attr('table'));
         form.attr('idLigne', $(this).attr('idLigne'));
-        //marche pas si jamais checkbox
         $(form).find('[columnName]').each(function(){
             //            console.log($(this).attr('columnName')); // balance la valeur de l'attribut
             //            var test = tmp.find('[columnName="'+$(this).attr('columnName')+'"]'); //le input
 
             // pour chaque columnname du formulaire on cherche si il existe une columnname avec une valeur similaire dans notre edit_ligne
             // si c'est le cas on lui met la valeur'
-            if (tab) {
+            if ($(this).children().hasClass('checkbox')) {   //gestion checkbox
+                var value = $(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).attr('value');
+                $(this).children().each(function(){
+                    if ($(this).hasClass('checkbox')) {
+                        $(this).attr('value', value);
+                        value == '1' ? $(this).addClass('checkbox_active') : $(this).removeClass('checkbox_active');
+                    }
+                });
+            } else if (tab) {
+                
                 $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).text());
             } else {
                 $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).val());
@@ -68,6 +76,14 @@ $(function() {
         });
         creationForm(newPosition, $(this).outerHeight(), form);
     });
+    
+    /*if ($(this).children().hasClass('checkbox')) {
+                    if ($(this).children().hasClass('checkbox_active')) {
+                        datastring += '&'+$(this).attr('columnName')+'=1';
+                    } else {
+                        datastring += '&'+$(this).attr('columnName')+'=0';
+                    }
+                } else {*/
     
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
@@ -98,7 +114,9 @@ $(function() {
     });
     
     $('.checkbox').live("click", function(){
-        $(this).toggleClass('checkbox_active');
+        if (!$(this).attr('disabled')) {
+            $(this).toggleClass('checkbox_active');
+        }
     });
     
     $('.en_execution > li').live("click", function() {
@@ -150,7 +168,16 @@ $(function() {
             }
             $(form).find('[columnName]').each(function(){
                 console.log($(this));
-                datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
+                console.log($(this).children());
+                if ($(this).children().hasClass('checkbox')) {
+                    if ($(this).children().hasClass('checkbox_active')) {
+                        datastring += '&'+$(this).attr('columnName')+'=1';
+                    } else {
+                        datastring += '&'+$(this).attr('columnName')+'=0';
+                    }
+                } else {
+                    datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
+                }
             });
             console.log(datastring);
             $.ajax({
@@ -164,7 +191,6 @@ $(function() {
                     formActuel.toggle();
                     effacer();
                     searchTableStatique();
-                    
                 }
             });
         } else if(value=='edit_action') {
