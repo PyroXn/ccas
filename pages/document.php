@@ -30,6 +30,8 @@ function getDocument() {
                     <td>Word</td>
                     <td>Excel</td>
                     <td>Texte</td>
+                    <td>PDF</td>
+                    <td>Autres</td>
                 </tr>';
     foreach($arrayExtension as $tab) {
        
@@ -39,15 +41,61 @@ function getDocument() {
              $contenu .= '<tr>';
              $extension = pathinfo($t, PATHINFO_EXTENSION);
              if($extension == 'xls') {
-                 $contenu .= '<td></td><td>'.$t.'</td><td></td>';
+                 $contenu .= '
+                     <td></td>
+                     <td>'.$t.'</td>
+                     <td></td>
+                     <td></td>
+                     <td></td>';
              } else if($extension == 'doc' || $extension == 'docx') {
-                 $contenu .= '<td>'.$t.'</td><td></td><td></td>';
+                 $contenu .= '
+                     <td>'.$t.'</td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>';
+             } else if($extension == 'txt') {
+                 $contenu .= '
+                     <td></td>
+                     <td></td>
+                     <td>'.$t.'</td>
+                     <td></td>
+                     <td></td>';
+             } else if($extension == 'pdf') {
+                 $contenu .= '
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td>'.$t.'</td>
+                     <td></td>';
+             } else {
+                 $contenu .= '
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td>'.$t.'</td>';
              }
-             $contenu .= '</tr></table>';
-             echo $contenu;
+             $contenu .= '</tr>';
+             
         }
         
     }
+    $contenu .= '</table>';
+    $contenu .= '<div id="newDocument" class="bouton ajout">Ajouter un document</div>
+                            <div class="formulaire" action="new_document">
+                                   <div class="colonne_droite">
+                                         <div class="input_text">
+                                            <input id="document" class="contour_field" type="file">
+                                        </div>
+                                        <div class="sauvegarder_annuler">
+                                            <div class="bouton modif" value="save">Enregistrer</div>
+                                            <div class="bouton classique" value="cancel">Annuler</div>
+                                        </div>
+                                        
+                                   </div>
+                                   </div>';
+    echo $contenu;
     }
 }
 ?>

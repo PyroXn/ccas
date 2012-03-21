@@ -5,7 +5,7 @@ function action() {
     $actions = Doctrine_Core::getTable('action')->findByIdIndividu($_POST['idIndividu']);
     $types = Doctrine_Core::getTable('type')->findByCategorie(2); // Type Action
     $instructs = Doctrine_Core::getTable('instruct')->findByInterne(1); // Instruct interne
-    $contenu = '<h2>Budget</h2>';
+    $contenu = '<h2>Actions</h2>';
     $contenu .= '<div><h3><span>Suivi des actions</span></h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
@@ -24,7 +24,7 @@ function action() {
                 <tbody>';
     $i = 1;
     foreach($actions as $action) {
-        $i%2 ? $contenu .= '<tr>' : $contenu .= '<tr class="alt">';
+        $i % 2 ? $contenu .= '<tr>' : $contenu .= '<tr class="alt">';
         
         $contenu .= '<td>'.getDatebyTimestamp($action->date).'</td>
             <td>'.utf8_decode($action->typeaction->libelle).'</td>
