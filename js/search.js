@@ -129,8 +129,8 @@ $(function() {
         });
     });
     
-    $('#page_aide_interne > li > div > div > img').live("click", function() {
-        var idAide = $(this).parent().parent().parent().attr('name');
+    $('.edit_aide_interne').live("click", function() {
+        var idAide = $(this).parent().parent().attr('name');
         console.log(idAide);
         $.ajax({
             type: "POST",
