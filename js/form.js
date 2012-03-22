@@ -84,14 +84,6 @@ $(function() {
         creationForm(newPosition, $(this).outerHeight(), form);
     });
     
-    /*if ($(this).children().hasClass('checkbox')) {
-                    if ($(this).children().hasClass('checkbox_active')) {
-                        datastring += '&'+$(this).attr('columnName')+'=1';
-                    } else {
-                        datastring += '&'+$(this).attr('columnName')+'=0';
-                    }
-                } else {*/
-    
     $('.select').live("click", function() {
         //permet de generaliser sur tous les select
         var attr = '.'+$(this).attr('role');
@@ -123,6 +115,10 @@ $(function() {
     $('.checkbox').live("click", function(){
         if (!$(this).attr('disabled')) {
             $(this).toggleClass('checkbox_active');
+            console.log($(this).parent().parent());
+            if ($(this).parent().parent().is('#ligneRechercheTableStatique')) {
+                searchTableStatique();
+            }
         }
     });
     
@@ -710,11 +706,15 @@ $(function() {
 });
 
 function searchTableStatique() {
-    var datastring = 'table=' + $('#ligneRechercheTableStaique').attr('table');
-    $('#ligneRechercheTableStaique').find('[columnName]').each(function(){
-            
-        console.log($(this).attr('columnName') + ' : ' + $(this).val());
-        datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
+    var datastring = 'table=' + $('#ligneRechercheTableStatique').attr('table');
+    $('#ligneRechercheTableStatique').find('[columnName]').each(function(){
+        if ($(this).hasClass('checkbox_active')) {
+            console.log($(this));
+            datastring += '&' + $(this).attr('columnName') + '=1';
+        } else {
+            console.log($(this).attr('columnName') + ' : ' + $(this).val());
+            datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
+        }
     });
         
     console.log(datastring);

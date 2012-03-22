@@ -133,26 +133,26 @@ function detailAideInterne() {
     $aideInterne = Doctrine_Core::getTable('aideinterne')->findOneById($_POST['idAide']);
     $typesaides = Doctrine_Core::getTable('type')->findByCategorie(1);
     
-    $contenu = "<h3>Fiche d'aide :</h3>";
+    $contenu = "<h3>Fiche d'aide interne :</h3>";
     
     $contenu .= '<ul class="list_classique">
                      <li class="ligne_list_classique">
                          <div class="colonne50">
-                              <span class="attribut">aide demandée : </span>
+                              <span class="attribut">Aide demandée : </span>
                               <span><input class="contour_field input_char" type="text" id="aideDemandee" value="'.utf8_decode($aideInterne->typeAideDemandee->libelle).'" disabled/></span>
                          </div>
                          <div class="colonne">
-                             <span class="attribut">date demande : </span>
+                             <span class="attribut">Date demande : </span>
                              <span><input class="contour_field input_num" type="text" id="dateDemande" value="'.getDatebyTimestamp($aideInterne->dateDemande).'" disabled/></span>
                          </div>
                          <div class="colonne">
-                             <span class="attribut">organisme : </span>
+                             <span class="attribut">Organisme : </span>
                              <span><input class="contour_field input_char" type="text" id="organisme" value="'.utf8_decode($aideInterne->organisme->appelation).'" disabled/></span>
                          </div>
                      </li>
                      <li class="ligne_list_classique">
                          <div class="colonne">
-                              <span class="attribut">demandeur : </span>
+                              <span class="attribut">Demandeur : </span>
                               <span><input class="contour_field input_char" type="text" id="demandeur" value="'.utf8_decode($aideInterne->individu->nom).' '.utf8_decode($aideInterne->individu->prenom).'" disabled/></span>
                          </div>
                          <div class="colonne">
@@ -160,20 +160,20 @@ function detailAideInterne() {
                          <div class="colonne">
                          </div>
                          <div class="colonne">
-                             <span class="attribut">instructeur : </span>
+                             <span class="attribut">Instructeur : </span>
                              <span><input class="contour_field input_char" type="text" id="instructeur" value="'.utf8_decode($aideInterne->instruct->nom).'" disabled/></span>
                          </div>
                      </li>
                      <li class="ligne_list_classique">
                          <div class="colonne">
-                             <span class="attribut">nature : </span>
+                             <span class="attribut">Nature : </span>
                              <span><input class="contour_field input_char" type="text" id="nature" value="'.utf8_decode($aideInterne->natureAide->libelle).'" disabled/></span>
-                             <span class="attribut">état : </span>
+                             <span class="attribut">État : </span>
                              <span><input class="contour_field input_char" type="text" id="etat" value="'.utf8_decode($aideInterne->etat).'" disabled/></span>
                            
                          </div>
                          <div class="colonne">
-                         <span class="attribut">aide urgente : </span>';
+                         <span class="attribut">Aide urgente : </span>';
                              if($aideInterne->aideUrgente == 1) {
                                 $contenu .= '<span id="aideUrgente" class="checkbox checkbox_active" value="1"></span>';
                              } else {
@@ -181,7 +181,7 @@ function detailAideInterne() {
                              }
             $contenu .= '</div>
                          <div class="colonne50">
-                             <span class="attribut">proposition : </span>
+                             <span class="attribut">Proposition : </span>
                              <span><textarea class="contour_field input_char" type="text" id="proposition">'.utf8_decode($aideInterne->proposition).'</textarea></span>
                          </div>
                      </li></ul>';
@@ -194,7 +194,7 @@ function detailAideInterne() {
                      <ul class="list_classique">
                      <li class="ligne_list_classique">
                          <div class="colonne50">
-                              <span class="attribut">aide accordée : </span>
+                              <span class="attribut">Aide accordée : </span>
                               <div class="select classique" role="select_typeaide_interne">';
         $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option">Type d\'aide</div>' : '<div id="aideaccorde" class="option" value="'. $aideInterne->idAideAccordee .'">'.utf8_decode($aideInterne->typeAideAccordee->libelle).'</div>';  
         $contenu .= '
@@ -202,17 +202,17 @@ function detailAideInterne() {
                             </div>
                          </div>
                          <div class="colonne">
-                             <span class="attribut">date décision : </span>
+                             <span class="attribut">Date décision : </span>
                              <span><input class="contour_field input_num" type="text" id="dateDecision" value="'.getDatebyTimestamp($aideInterne->dateDecision).'"></span>
                          </div>
                          <div class="colonne">
-                             <span class="attribut">décideur : </span>
+                             <span class="attribut">Décideur : </span>
                              <span><input class="contour_field input_char" type="text" id="decideur" value="'.utf8_decode($aideInterne->instruct->nom).'" disabled/></span>
                          </div>
                      </li>
                      <li class="ligne_list_classique">
                          <div class="colonne">
-                             <span class="attribut">avis : </span>
+                             <span class="attribut">Avis : </span>
                              <div class="select classique" role="select_avis">';
         $contenu .= $aideInterne->avis == null ? '<div id="avis" class="option">-----</div>' : '<div id="avis" class="option" value="'. utf8_decode($aideInterne->avis).'">'.utf8_decode($aideInterne->avis).'</div>';  
         $contenu .= '                  
@@ -220,7 +220,7 @@ function detailAideInterne() {
                         </div>
                          </div>
                          <div class="colonne">
-                             <span class="attribut">vigilance : </span>';
+                             <span class="attribut">Vigilance : </span>';
          if($aideInterne->vigilance == 1) {
             $contenu .= '<span id="vigilance" class="checkbox checkbox_active" value="1"></span>';
          } else {
@@ -229,11 +229,11 @@ function detailAideInterne() {
     $contenu .= '
                          </div>
                         <div class="colonne_large">
-                             <span class="attribut">commentaire : </span>
+                             <span class="attribut">Commentaire : </span>
                              <span><textarea class="contour_field input_char" type="text" id="commentaire">'.utf8_decode($aideInterne->commentaire).'</textarea></span>
                          </div>
                      </li>
-                 </ul>'; 
+                 </ul>';
     $contenu .= '
             <div class="bubble tableau_classique_wrapper">
                 <table class="tableau_classique" cellpadding="0" cellspacing="0">
@@ -268,7 +268,7 @@ function detailAideInterne() {
                      </tr>';
     }
     $contenu .= '</tbody></table></div>
-                    <h3>Rapport :</h3>
+                 <h3>Rapport :</h3>
                      <ul class="list_classique">
                          <li class="ligne_list_classique">
                             <span><textarea class="contour_field input_char" style="width:99%" type="text" id="rapport" >'.utf8_decode($aideInterne->rapport).'</textarea></span>
@@ -362,24 +362,130 @@ function aideExterne() {
                     </thead>
                     <tbody>';
     $i = 1;
-    foreach($aidesExternes as $aideExterne) {
-        $i % 2 ? $contenu .= '<tr name="'.$aideExterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideExterne->id.'">';
-        $contenu .= '<td>'.getDatebyTimestamp($aideExterne->dateDemande).'</td>
-                                <td> '.$aideExterne->typeAideDemandee->libelle.'</td>
-                                <td> '.utf8_decode($aideExterne->etat).'</td>
-                                <td> '.utf8_decode($aideExterne->natureAide->libelle).'</td>
-                                <td> '.utf8_decode($aideExterne->organisme->appelation).'</td>                                    
-                                <td> '.utf8_decode($aideExterne->avis).'</td>
-                                <td> '.$aideExterne->montantPercu.' &euro;</td>
-                                <td> '.getDatebyTimestamp($aideExterne->dateDecision).'</td>
-                                <td><span class="edit_aide_externe"></span></td>
-                    </tr>';
-        $i++;
+    if (sizeof($aidesExternes) != null) {
+        foreach($aidesExternes as $aideExterne) {
+            $i % 2 ? $contenu .= '<tr name="'.$aideExterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideExterne->id.'">';
+            $contenu .= '<td>'.getDatebyTimestamp($aideExterne->dateDemande).'</td>
+                                    <td> '.$aideExterne->typeAideDemandee->libelle.'</td>
+                                    <td> '.utf8_decode($aideExterne->etat).'</td>
+                                    <td> '.utf8_decode($aideExterne->natureAide->libelle).'</td>
+                                    <td> '.utf8_decode($aideExterne->organisme->appelation).'</td>                                    
+                                    <td> '.utf8_decode($aideExterne->avis).'</td>
+                                    <td> '.$aideExterne->montantPercu.' &euro;</td>
+                                    <td> '.getDatebyTimestamp($aideExterne->dateDecision).'</td>
+                                    <td><span class="edit_aide_externe"></span></td>
+                        </tr>';
+            $i++;
+        }
+    } else {
+        $contenu .= '<tr>
+                         <td colspan=9 align=center>< Aucune aide externe n\'a été attribuée à cet individu > </td>
+                     </tr>';
     }
+
     $contenu .= '</tbody></table>';
 
     return utf8_encode($contenu);
 }
 
+function detailAideExterne() {
+    $aideExterne = Doctrine_Core::getTable('aideexterne')->findOneById($_POST['idAide']);
+    
+    $contenu = "<h3>Fiche d'aide externe:</h3>";
+    
+    $contenu .= '<ul class="list_classique">
+                     <li class="ligne_list_classique">
+                         <div class="colonne50">
+                              <span class="attribut">Aide demandée : </span>
+                              <span><input class="contour_field input_char" type="text" id="aideDemandee" value="'.utf8_decode($aideExterne->typeAideDemandee->libelle).'" disabled/></span>
+                         </div>
+                         <div class="colonne">
+                             <span class="attribut">Date demande : </span>
+                             <span><input class="contour_field input_num" type="text" id="dateDemande" value="'.getDatebyTimestamp($aideExterne->dateDemande).'" disabled/></span>
+                         </div>
+                         <div class="colonne">
+                             <span class="attribut">Organisme : </span>
+                             <span><input class="contour_field input_char" type="text" id="organisme" value="'.utf8_decode($aideExterne->organisme->appelation).'" disabled/></span>
+                         </div>
+                     </li>
+                     <li class="ligne_list_classique">
+                         <div class="colonne">
+                              <span class="attribut">Demandeur : </span>
+                              <span><input class="contour_field input_char" type="text" id="demandeur" value="'.utf8_decode($aideExterne->individu->nom).' '.utf8_decode($aideExterne->individu->prenom).'" disabled/></span>
+                         </div>
+                         <div class="colonne">
+                            <span class="attribut">Aide urgente : </span>';
+                             if($aideExterne->aideUrgente == 1) {
+                                $contenu .= '<span id="aideUrgente" class="checkbox checkbox_active" value="1"></span>';
+                             } else {
+                                $contenu .= '<span id="aideUrgente" class="checkbox" value="0"></span>';
+                             }
+            $contenu .= '</div>
+                         <div class="colonne">
+                         </div>
+                         <div class="colonne">
+                             <span class="attribut">Instructeur : </span>
+                             <span><input class="contour_field input_char" type="text" id="instructeur" value="'.utf8_decode($aideExterne->instruct->nom).'" disabled/></span>
+                         </div>
+                     </li>
+                     <li class="ligne_list_classique">
+                         <div class="colonne">
+                             <span class="attribut">Nature : </span>
+                             <span><input class="contour_field input_char" type="text" id="nature" value="'.utf8_decode($aideExterne->natureAide->libelle).'" disabled/></span>
+  
+                         </div>
+                         <div class="colonne">
+                         </div>
+                         <div class="colonne">
+                         </div>                         
+                         <div class="colonne">
+                                 <span class="attribut">État : </span>
+                             <span><input class="contour_field input_char" type="text" id="etat" value="'.utf8_decode($aideExterne->etat).'" disabled/></span>
+                         </div>
+                     </li>
+                     <li class="ligne_list_classique">
+                         <div class="colonne">
+                             <span class="attribut">Montant demandé : </span>
+                             <span><input class="contour_field input_char" type="text" id="etat" value="'.$aideExterne->montantDemande.'" disabled/></span>
+                         </div>
+                         <div class="colonne">
+                         </div>
+                         <div class="colonne">
+                         </div>
+                         <div class="colonne">
+                             <span class="attribut">Distributeur : </span>
+                             <span><input class="contour_field input_char" type="text" id="etat" value="'.$aideExterne->distrib->appelation.'" disabled/></span>
+                         </div>
+                         </li></ul>';
+            
+    $contenu .= '<h3>Décision :</h3>
+                     <ul class="list_classique">
+                         <li class="ligne_list_classique">
+                             <div class="colonne">
+                                  <span class="attribut">Montant perçu : </span>
+                                  <span><input class="contour_field input_char" type="text" id="aideAcordee" value="'.$aideExterne->montantPercu.'" disabled/></span>
+                             </div>
+                             <div class="colonne">
+                             </div>
+                             <div class="colonne">
+                                 <span class="attribut">Date décision : </span>
+                                 <span><input class="contour_field input_num" type="text" id="dateDecision" value="'.getDatebyTimestamp($aideExterne->dateDecision).'" disabled/></span>
+                             </div>
+                             <div class="colonne">
+                                 <span class="attribut">Avis : </span>
+                                 <span><input class="contour_field input_char" type="text" id="decideur" value="'.utf8_decode($aideExterne->avis).'" disabled/></span>
+                             </div>
+                         </li>
+                         <li class="ligne_list_classique">
+                             <div class="colonne_large">
+                                 <span class="attribut">Commentaire : </span>
+                                 <span><textarea class="contour_field input_char" type="text" id="proposition">'.utf8_decode($aideExterne->commentaire).'</textarea></span>
+                             </div>
+                         </li>
+                     </ul>';
+                    
+        
+    return utf8_encode($contenu);
+}
 
 ?>
