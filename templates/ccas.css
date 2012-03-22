@@ -540,3 +540,9 @@ legend {
     height: 16px;
     cursor: pointer;
 }
+
+/**** AIDES INTERNES ****/
+
+#decision {
+    display: none;
+}

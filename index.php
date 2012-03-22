@@ -1,6 +1,7 @@
 <?php
 
 include_once('./lib/config.php');
+ini_set('session.gc_maxlifetime', 3600); 
 session_start();
 if (!isset($_SESSION['userId'])) {
     login();
@@ -146,6 +147,10 @@ switch (@$_GET['p']) {
     case 'updateaction':
         include_once('./pages/action.php');
         updateAction();
+        break;
+    case 'updatedecisioninterne':
+        include_once('./pages/aide.php');
+        updateDecisionInterne();
         break;
     default:
         home();

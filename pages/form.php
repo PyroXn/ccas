@@ -44,7 +44,7 @@ function form() {
             break;
         case 'creation_aide_interne':
             include_once('./pages/aide.php');
-            createAideInterne($_POST['typeaide'], $_POST['date'], $_POST['instruct'], $_POST['nature'], $_POST['proposition'], $_POST['etat'], $_POST['idIndividu']);
+            createAideInterne($_POST['typeaide'], $_POST['date'], $_POST['instruct'], $_POST['nature'], $_POST['proposition'], $_POST['etat'], $_POST['idIndividu'], $_POST['orga'], $_POST['urgence']);
             $aide = aide();
             $retour = array('aide' => $aide);
             echo json_encode($retour);
