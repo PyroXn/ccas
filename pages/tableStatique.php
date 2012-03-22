@@ -45,7 +45,7 @@ function comboTableStatique() {
                 <div>ville</div>
             </li>            
         </ul>';
-    $retour .= generateEcranStatiqueEnTab('instruct');
+    $retour .= generateEcranStatiqueEnTab('bailleur');
     return $retour;
 }
 
@@ -117,11 +117,21 @@ function generateColonneByType($table, $columnName, $recherche=false, $attribut=
             break;
         case 'float' :
         case 'integer' :
-            $retour .= '
-            <div class="colonne">
-                <span class="attribut">'.$columnName.' :</span>
-                <span><input type="text" class="contour_field input_num" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
-            </div>';
+            if (preg_match('#id[a-zA-Z]+#', $columnName)) {
+                $columnName = substr($columnName, 2);
+                $retour .= '
+                <div class="colonne">
+                    <span class="attribut">'.$columnName.' :</span>
+                    <span><input type="text" class="contour_field input_char autoComplete" id="'.$columnName.'" table="'.$columnName.'" champ="libelle" value="'.$attribut.'"'.$disabled.'/></span>
+                </div>';        
+            } else {
+                $retour .= '
+                <div class="colonne">
+                    <span class="attribut">'.$columnName.' :</span>
+                    <span><input type="text" class="contour_field input_num" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
+                </div>';
+            }
+            
             break;
         case 'boolean' :
             $retour .='
@@ -150,10 +160,19 @@ function generateFormulaireByTable($table, $columnNames) {
                 case 'float' :
                 case 'string' :
                 case 'integer' :
-                    $retour .= '
-                    <div class="input_text" columnName='.$columnName.'>
-                        <input class="contour_field" type="text" title="'.$columnName.'" placeholder="'.$columnName.'">
-                    </div>';
+                    if (preg_match('#id[a-zA-Z]+#', $columnName)) {
+                        $columnName = substr($columnName, 2);
+                        $retour .= '
+                        <div class="select classique" columnName='.$columnName.'>
+                            <div class="option">------</div>
+                            <div class="fleche_bas"></div>
+                        </div>';
+                    } else {
+                        $retour .= '
+                        <div class="input_text" columnName='.$columnName.'>
+                            <input class="contour_field" type="text" title="'.$columnName.'" placeholder="'.$columnName.'">
+                        </div>';
+                    }
                     break;
                 case 'boolean' :
                     $retour .='
@@ -207,6 +226,9 @@ function generateEcranStatiqueEnTab($table) {
                     <tr class="header">';
                         foreach ($columnNames as $columnName) {
                             if ($columnName != 'id') {
+                                if (preg_match('#id[a-zA-Z]+#', $columnName)) {
+                                    $columnName = substr($columnName, 2);
+                                }
                                 $retour .= '<th>'.$columnName.'</th>';
                             }
                         }
@@ -258,7 +280,16 @@ function generateColonneByTypeEnTab($table, $columnName, $recherche=false, $attr
             break;
         case 'float' :
         case 'integer' :
-            $retour .= '<td columnName='.$columnName.'>'.$attribut.'</td>';
+                if (preg_match('#id[a-zA-Z]+#', $columnName)) {
+                    $columnName = substr($columnName, 2);
+                    if ($attribut != 0) {
+                        $retour .= '<td columnName='.$columnName.'>'.$attribut.'</td>';
+                    } else {
+                        $retour .= '<td columnName='.$columnName.'></td>';
+                    }
+                } else {
+                    $retour .= '<td columnName='.$columnName.'>'.$attribut.'</td>';
+                }
             break;
         case 'boolean' :
             $retour .= '<td>';
