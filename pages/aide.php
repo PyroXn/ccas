@@ -1,7 +1,7 @@
 <?php
 function aide() {
     $contenu = aideInterne();
-    $contenu .= aideExterne();
+//    $contenu .= aideExterne();
     
     return $contenu;
 }
@@ -66,7 +66,7 @@ function aideInterne() {
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
-                <span class="checkbox" id="urgence"></span>
+                <span class="checkbox" id="urgence"></span> Aide urgente ?
             </div>
             <div class="input_text">
                 <input id="proposition" class="contour_field" type="text" title="Proposition" placeholder="Proposition">
