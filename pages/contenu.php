@@ -628,33 +628,40 @@ function budget() {
                                <div class="clearboth"></div>
                                </div>
                                
-                               <div>
-                            <h3>Crédits</h3>
-                            <ul class="list_classique">';
-                            foreach($credits as $credit) {
-                                $contenu .= '<li name="'.$credit->id.'" class="ligne_list_classique">
-                                                            <div class="colonne">
-                                                                <span class="attribut">Organisme : </span>
-                                                                <span>'.$credit->organisme.'</span>
-                                                            </div>
-                                                            <div class="colonne">
-                                                                <span class="attribut">Mensualité : </span>
-                                                                <span>'.$credit->mensualite.'</span>
-                                                            </div>
-                                                            <div class="colonne">
-                                                                <span class="attribut">Durée : </span>
-                                                                <span>'.$credit->dureeMois.'</span>
-                                                            </div>
-                                                            <div class="colonne">
-                                                                <span class="attribut">Montant restant : </span>
-                                                                <span>'.$credit->totalRestant.'</span>
-                                                                <span class="timemaj">'.getDatebyTimestamp($credit->dateAjout).'</span>
-                                                            </div>
-                                                            <span class="delete_credit"></span>
-                                                      </li>';
-                            }
+                               <div>';
+                       $contenu .= '<div class="colonne_large">
+                                        <h3>Crédits :</h3>
+                                            <div class="bubble tableau_classique_wrapper">
+                                                <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                                                    <thead>
+                                                        <tr class="header">
+                                                            <th>Organisme</th>
+                                                            <th>Mensualité</th>
+                                                            <th>Durée</th>
+                                                            <th>Montant restant</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>';
+                                    $i = 1;
+                                    if (sizeof($credits) != null) {
+                                        foreach($credits as $credit) {
+                                            $i % 2 ? $contenu .= '<tr name="'.$credit->id.'">' : $contenu .= '<tr class="alt" name="'.$credit->id.'">';
+                                            $contenu .= '<td>'.$credit->organisme.'</td>
+                                                                    <td> '.$credit->mensualite.'</td>
+                                                                    <td> '.$credit->dureeMois.'</td>
+                                                                    <td> '.$credit->totalRestant.'</td>
+                                                                    <td><span class="delete_credit"></span></td>
+                                                        </tr>';
+                                            $i++;
+                                        }
+                                    } else {
+                                        $contenu .= '<tr>
+                                                         <td colspan=9 align=center>< Aucun crédit n\'est enregistré pour cet individu > </td>
+                                                     </tr>';
+                                    }
 
-                               $contenu .= '</ul>
+                               $contenu .= '</tbody></table></div>
                                    <div class="bouton ajout" id="createCredit">Ajouter un crédit</div></div>
                                    <div class="formulaire" action="creation_credit">
                                    <div class="colonne_droite">
