@@ -42,6 +42,13 @@ function form() {
             $retour = array('action' => $action);
             echo json_encode($retour);
             break;
+        case 'creation_aide_interne':
+            include_once('./pages/aide.php');
+            createAideInterne($_POST['typeaide'], $_POST['date'], $_POST['instruct'], $_POST['nature'], $_POST['proposition'], $_POST['etat'], $_POST['idIndividu']);
+            $aide = aide();
+            $retour = array('aide' => $aide);
+            echo json_encode($retour);
+            break;
             
     }
 }
