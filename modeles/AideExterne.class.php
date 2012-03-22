@@ -26,8 +26,18 @@ class AideExterne extends Doctrine_Record {
     }
 
     public function setUp() {
-        $this->hasOne('type as type', array(
+        $this->hasOne('type as typeAideDemandee', array(
             'local' => 'idAideDemandee',
+            'foreign' => 'id'
+                )
+        );
+        $this->hasOne('type as natureAide', array(
+            'local' => 'nature',
+            'foreign' => 'id'
+                )
+        );
+        $this->hasOne('organisme as organisme', array(
+            'local' => 'idOrganisme',
             'foreign' => 'id'
                 )
         );

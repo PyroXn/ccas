@@ -437,6 +437,11 @@ legend {
     width: 20%;
 }
 
+.colonne40 {
+    display: inline-block;
+    width: 39%;
+}
+
 .colonne50 {
     display: inline-block;
     width: 48%;
