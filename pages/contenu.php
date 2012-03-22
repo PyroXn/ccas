@@ -133,7 +133,7 @@ function generateInfoFoyer($foyer) {
                     <div class="colonne">
                         <span class="attribut">Secteur :</span>
                         <div class="select classique" role="select_secteur">';
-    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.utf8_decode($foyer->secteur->secteur).'</div>';
+    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
     $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -153,7 +153,7 @@ $retour .= '<div class="fleche_bas"> </div>
                    <div class="colonne">
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statutlogement">';
-$retour .= $foyer->typeAppartenance == null ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.utf8_decode($foyer->statutlogement->libelle).'</div>';
+$retour .= $foyer->typeAppartenance == null ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                    </div>
@@ -170,14 +170,14 @@ $retour .= '<div class="fleche_bas"> </div>
                     <div class="colonne">
                         <span class="attribut">Bailleur :</span>
                         <div class="select classique" role="select_bailleur">';
-$retour .= $foyer->idBailleur == null ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.utf8_decode($foyer->bailleur->nomBailleur).'</div>';
+$retour .= $foyer->idBailleur == null ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Instructeur :</span>
                         <div class="select classique" role="select_instruct">';
-$retour .= $foyer->idInstruct == null ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.utf8_decode($foyer->instruct->nom).'</div>';
+$retour .= $foyer->idInstruct == null ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                     </div>
@@ -196,14 +196,14 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
  $retour .= '<ul class="select_instruct">';
     foreach($instructs as $instruct) {
         $retour .= '<li>
-                                <div value="'.$instruct->id.'">'.utf8_decode($instruct->nom).'</div>
+                                <div value="'.$instruct->id.'">'.$instruct->nom.'</div>
                            </li>';
     }
     $retour .= '</ul>';
  $retour .= '<ul class="select_bailleur">';
     foreach($bailleurs as $bailleur) {
         $retour .= '<li>
-                                <div value="'.$bailleur->id.'">'.utf8_decode($bailleur->nomBailleur).'</div>
+                                <div value="'.$bailleur->id.'">'.$bailleur->nomBailleur.'</div>
                            </li>';
     }
     $retour .= '</ul>';
@@ -211,7 +211,7 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
  foreach($types as $t) {
      if($t->categorie == 3) {
      $retour .= '<li>
-                            <div value="'.$t->id.'">'.utf8_decode($t->libelle).'</div>
+                            <div value="'.$t->id.'">'.$t->libelle.'</div>
                         </li>';
      }
  }
@@ -228,11 +228,11 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
     $retour .= '<ul class="select_secteur">';
     foreach($secteurs as $secteur) {
         $retour .= '<li>
-                                <div value="'.$secteur->id.'">'.utf8_decode($secteur->secteur).'</div>
+                                <div value="'.$secteur->id.'">'.$secteur->secteur.'</div>
                            </li>';
     }
     $retour .= '</ul>';
-    return utf8_encode($retour);
+    return $retour;
 }
 
 function updateFoyer() {
@@ -684,7 +684,7 @@ function budget() {
                                         
                                    </div>
                                    </div>';
-    return utf8_encode($contenu);
+    return $contenu;
 }
 
 function generalite() {
@@ -698,7 +698,7 @@ function generalite() {
     $professions = Doctrine_Core::getTable('profession')->findAll();
     $organismes = Doctrine_Core::getTable('organisme')->findAll();
     
-    $contenu = '<h2>Généralités</h2>';
+    $contenu = '<h2>G&eacute;néralités</h2>';
     $contenu .= '
     <div>
         <h3><span>Informations personnelles</span>  <span class="edit"></span></h3>
@@ -715,14 +715,14 @@ function generalite() {
                     <div class="colonne">
                         <span class="attribut">Situation Familiale :</span>
                         <div class="select classique" role="select_situation">';
-$contenu .= $user->idSitMatri == null ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.utf8_decode($user->situationmatri->situation).'</div>';  
+$contenu .= $user->idSitMatri == null ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.$user->situationmatri->situation.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Nationalité :</span>
                         <div class="select classique" role="select_natio">';
-$contenu .= $user->idNationalite == null ? '<div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.utf8_decode($user->nationalite->nationalite).'</div>';  
+$contenu .= $user->idNationalite == null ? '<div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.$user->nationalite->nationalite.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </li>
@@ -790,7 +790,7 @@ $contenu .= '<div class="fleche_bas"> </div>
                 <div class="colonne">
                     <span class="attribut">Niveau étude :</span>
                     <div class="select classique" role="select_etude">';
-$contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.utf8_decode($user->etude->etude).'</div>';  
+$contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
 $contenu .= '
                         <div class="fleche_bas"> </div>
                     </div>
@@ -798,14 +798,14 @@ $contenu .= '
                 <div class="colonne">
                     <span class="attribut">Profession :</span>
                     <div class="select classique" role="select_profession">';
-$contenu .= $user->idNiveauEtude == null ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.utf8_decode($user->profession->profession).'</div>';  
+$contenu .= $user->idNiveauEtude == null ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.$user->profession->profession.'</div>';  
 $contenu .= '
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Employeur :</span>
-                    <span><input class="contour_field input_char" type="text" id="employeur" value="'.utf8_decode($user->employeur).'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="employeur" value="'.$user->employeur.'" disabled/></span>
                 </div> 
             </li>
             <li class="ligne_list_classique">
@@ -854,7 +854,7 @@ $contenu .= '
                 <div class="colonne">
                     <span class="attribut">Régime :</span>
                     <div class="select classique" role="select_regime">';
-$contenu .= $user->regime == ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.utf8_decode($user->regime).'</div>';                   
+$contenu .= $user->regime == ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.$user->regime.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -957,7 +957,7 @@ $contenu .= '<ul class="select_caf">';
         if($organisme->libelleorganisme->libelle == 'Caisse CAF') {
             $contenu .= '
                     <li>
-                        <div value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
+                        <div value="'.$organisme->id.'">'.$organisme->appelation.'</div>
                     </li>';
         }
     }
@@ -967,7 +967,7 @@ $contenu .= '<ul class="select_mut">';
         if($organisme->libelleorganisme->libelle == 'Mutuelle') {
             $contenu .= '
                     <li>
-                        <div value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
+                        <div value="'.$organisme->id.'">'.$organisme->appelation.'</div>
                     </li>';
         }
     }
@@ -977,7 +977,7 @@ $contenu .= '<ul class="select_mut">';
         if($organisme->libelleorganisme->libelle == 'Caisse SECU') {
             $contenu .= '
                     <li>
-                        <div  value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
+                        <div  value="'.$organisme->id.'">'.$organisme->appelation.'</div>
                     </li>';
         }
     }
@@ -996,42 +996,42 @@ $contenu .= '<ul class="select_mut">';
     $contenu .= ' <ul class="select_profession">';
     foreach($professions as $profession) {
         $contenu .= '<li>
-                                    <div value="'.$profession->id.'">'.utf8_decode($profession->profession).'</div>
+                                    <div value="'.$profession->id.'">'.$profession->profession.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
    $contenu .= ' <ul class="select_etude">';
     foreach($etudes as $etude) {
         $contenu .= '<li>
-                                    <div value="'.$etude->id.'">'.utf8_decode($etude->etude).'</div>
+                                    <div value="'.$etude->id.'">'.$etude->etude.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_statut">';
     foreach($liens as $lien) {
         $contenu .= '<li>
-                                    <div value="'.$lien->id.'">'.utf8_decode($lien->lien).'</div>
+                                    <div value="'.$lien->id.'">'.$lien->lien.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_ville">';
     foreach($villes as $ville) {
         $contenu .= '<li>
-                                    <div value="'.$ville->id.'">'.utf8_decode($ville->libelle).'</div>
+                                    <div value="'.$ville->id.'">'.$ville->libelle.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_natio">';
     foreach($nationalite as $nat) {
         $contenu .= '<li>
-                                    <div value="'.$nat->id.'">'.utf8_decode($nat->nationalite).'</div>
+                                    <div value="'.$nat->id.'">'.$nat->nationalite.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_situation">';
     foreach($situations as $sit) {
         $contenu .= '<li>
-                                    <div value="'.$sit->id.'">'.utf8_decode($sit->situation).'</div>
+                                    <div value="'.$sit->id.'">'.$sit->situation.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
@@ -1043,7 +1043,7 @@ $contenu .= '<ul class="select_mut">';
                                     <div value="Femme">Femme</div>
                                 </li>
                             </ul>';
-    return utf8_encode($contenu);
+    return $contenu;
 }
 
 ?>

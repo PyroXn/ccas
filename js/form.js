@@ -222,7 +222,7 @@ $(function() {
               datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&aide='+$('#aideaccorde').attr('value');
               datastring += '&date='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
               datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
-              datastring += '&rapport='+$('#rapport').val();
+              datastring += '&rapport='+$('#rapport').val()+'&decideur='+$('#decideur').attr('value');
               console.log(datastring);
               $.ajax({
                   type: 'post',
@@ -287,6 +287,13 @@ $(function() {
                    datastring += '&etat='+$('#etat').attr('value')+'&orga='+$('#orga').attr('value')+'&urgence='+urgence;
                    console.log(datastring);
                    break;
+              case 'addBonInterne':
+                  var idAide = $('.formulaire').attr('idAide');
+                  datastring += '&idAide='+idAide+'&dateprevue='+$('#dateprevue').val();
+                  datastring += '&dateeffective='+$('#dateeffective').val()+'&montant='+$('#montant').val();
+                  datastring += '&commentaire='+$('#commentaireBon').val()+'&instruct='+$('#idinstruct').attr('value');
+                  console.log(datastring);
+                  break;
             }
             $.ajax({
                 type: 'post',
@@ -324,6 +331,9 @@ $(function() {
                             break;
                        case 'creation_aide_interne':
                            $('#contenu').html(data.aide);
+                           break;
+                      case 'addBonInterne':
+                           $('#contenu').html(data.detail);
                            break;
                     }
                 }
@@ -702,6 +712,15 @@ $(function() {
     $('#updateDecision').live("click", function() {
         $('#decision').toggle();
         $(this).toggle();
+    });
+    
+    $('.addElem').live("click", function() {
+        var action = $(this).attr('role');
+        var form = $('.formulaire[action="'+action+'"]');
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        creationForm(newPosition, $(this).outerHeight(), form);
     });
 });
 

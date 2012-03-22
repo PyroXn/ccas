@@ -2,12 +2,18 @@
 
 include_once('./lib/config.php');
 
-$table = 'bailleur';
-$tableStatique = Doctrine_Core::getTable($table);
-$fla = $tableStatique->find(1);
-$test = $fla->getData();
-$arrayKey = array_keys($test);
-echo $tableStatique->getTypeOfColumn(strtolower($arrayKey[1]));
+    require('./lib/fpdf.php');
+    $pdf = new FPDF();
+    $pdf->AddPage();
+    $pdf->SetFont('times','B',12);
+    $pdf->Cell(500,10,'CENTRE COMMUNAL D\'ACTION SOCIALE DE HAYANGE', 0, 0);
+    $pdf->Output();
+//$table = 'bailleur';
+//$tableStatique = Doctrine_Core::getTable($table);
+//$fla = $tableStatique->find(1);
+//$test = $fla->getData();
+//$arrayKey = array_keys($test);
+//echo $tableStatique->getTypeOfColumn(strtolower($arrayKey[1]));
 //$columnNames = $tableStatique->getColumnNames();
 //foreach ($columnNames as $columnName) {
 //    $type = $tableStatique->getTypeOfColumn($columnName);

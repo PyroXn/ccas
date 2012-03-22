@@ -546,3 +546,12 @@ legend {
 #decision {
     display: none;
 }
+
+.addElem {
+/*    position: absolute;*/
+    height: 16px;
+    width: 16px;
+    background: white url('./img/ajouter.png') no-repeat;
+    cursor: pointer;
+    float: right;
+}

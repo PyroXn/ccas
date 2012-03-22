@@ -190,7 +190,7 @@
 .select_civilite, .select_lien_famille, .select_sexe, .select_situation, .select_natio, .select_ville, .select_statut,
 .select_etude, .select_profession, .select_regime, .select_couv, .select_mut, .select_caf, #suggestion, .select_secteur, .select_typelogement,
 .select_statutlogement, .select_bailleur, .select_instruct, .select_motifaction, .select_table_statique, .select_typeaide_interne, .select_nature, .select_etat,
-.select_orga, .select_avis {
+.select_orga, .select_avis, .select_decideur {
     display: none;
     z-index: 1002;
     position: absolute;
@@ -219,7 +219,7 @@
 .select_civilite li, .select_lien_famille li, .select_sexe li, .select_situation li, .select_natio li, .select_ville li,
 .select_statut li, .select_etude li, .select_profession li, .select_regime li, .select_couv li, .select_mut li, .select_caf li,
 .liste_suggestion li, .select_secteur li, .select_typelogement li, .select_statutlogement li, .select_bailleur li, .select_instruct li,
-.select_motifaction li, .select_table_statique li, .select_typeaide_interne li, .select_nature li, .select_etat li, .select_orga li, .select_avis li {
+.select_motifaction li, .select_table_statique li, .select_typeaide_interne li, .select_nature li, .select_etat li, .select_orga li, .select_avis li, .select_decideur li {
     position: relative;
     color: #333;
     cursor: pointer;
@@ -233,7 +233,7 @@
 .select_ville li:hover, .select_statut li:hover, .select_etude li:hover, .select_profession li:hover, .select_regime li:hover,
 .select_couv li:hover, .select_mut li:hover, .select_caf li:hover, .liste_suggestion .selection, .select_secteur li:hover, .select_typelogement li:hover,
 .select_statutlogement li:hover, .select_bailleur li:hover, .select_instruct li:hover, .select_motifaction li:hover, .select_table_statique li:hover, .select_typeaide_interne li:hover,
-.select_nature li:hover, .select_etat li:hover, .select_orga li:hover, .select_avis li:hover {
+.select_nature li:hover, .select_etat li:hover, .select_orga li:hover, .select_avis li:hover, .select_decideur li:hover {
     background-color: #EEE;
     border-color: #EEE;
     border-style: dotted;

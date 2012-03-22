@@ -36,9 +36,9 @@ function aideInterne() {
         $i % 2 ? $contenu .= '<tr name="'.$aideInterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideInterne->id.'">';
         $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
                                 <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
-                                <td> '.utf8_decode($aideInterne->etat).'</td>
-                                <td> '.utf8_decode($aideInterne->natureAide->libelle).'</td>
-                                <td> '.utf8_decode($aideInterne->avis).'</td>
+                                <td> '.$aideInterne->etat.'</td>
+                                <td> '.$aideInterne->natureAide->libelle.'</td>
+                                <td> '.$aideInterne->avis.'</td>
                                 <td> MONTANT TOTAL</td>
                                 <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
                                 <td><span class="edit_aide_interne"></span></td>
@@ -67,7 +67,8 @@ function aideInterne() {
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
-                <span class="checkbox" id="urgence"></span> Aide urgente ?
+                <span class="checkbox" id="urgence"></span> 
+                <span class="attribut">Aide urgente</span>
             </div>
             <div class="select classique" role="select_orga">
                 <div id="orga" class="option">Organisme</div>
@@ -91,7 +92,7 @@ function aideInterne() {
     $contenu .= '<ul class="select_orga">';
 foreach($organismes as $organisme) {
     $contenu .= '<li>
-                                <div value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
+                                <div value="'.$organisme->id.'">'.$organisme->appelation.'</div>
                             </li>';
     }
     $contenu .= '</ul>';
@@ -107,31 +108,32 @@ foreach($organismes as $organisme) {
     $contenu .= '<ul class="select_typeaide_interne">';
 foreach($typesaides as $type) {
     $contenu .= '<li>
-                                <div value="'.$type->id.'">'.utf8_decode($type->libelle).'</div>
+                                <div value="'.$type->id.'">'.$type->libelle.'</div>
                             </li>';
     }
     $contenu .= '</ul>';
     $contenu .= '<ul class="select_instruct">';
     foreach($instructs as $instruct) {
         $contenu .= '<li>
-                                <div value="'.$instruct->id.'">'.utf8_decode($instruct->nom).'</div>
+                                <div value="'.$instruct->id.'">'.$instruct->nom.'</div>
                            </li>';
     }
     $contenu .= '</ul>';
     $contenu .= '<ul class="select_nature">';
 foreach($natures as $nature) {
     $contenu .= '<li>
-                                <div value="'.$nature->id.'">'.utf8_decode($nature->libelle).'</div>
+                                <div value="'.$nature->id.'">'.$nature->libelle.'</div>
                             </li>';
     }
     $contenu .= '</ul>';
-    return utf8_encode($contenu);
+    return $contenu;
 
 }
 
 function detailAideInterne() {
     $aideInterne = Doctrine_Core::getTable('aideinterne')->findOneById($_POST['idAide']);
     $typesaides = Doctrine_Core::getTable('type')->findByCategorie(1);
+    $decideurs = Doctrine_Core::getTable('decideur')->findAll();
     
     $contenu = "<h3>Fiche d'aide interne :</h3>";
     
@@ -139,7 +141,7 @@ function detailAideInterne() {
                      <li class="ligne_list_classique">
                          <div class="colonne50">
                               <span class="attribut">Aide demandée : </span>
-                              <span><input class="contour_field input_char" type="text" id="aideDemandee" value="'.utf8_decode($aideInterne->typeAideDemandee->libelle).'" disabled/></span>
+                              <span><input class="contour_field input_char" type="text" id="aideDemandee" value="'.$aideInterne->typeAideDemandee->libelle.'" disabled/></span>
                          </div>
                          <div class="colonne">
                              <span class="attribut">Date demande : </span>
@@ -147,13 +149,13 @@ function detailAideInterne() {
                          </div>
                          <div class="colonne">
                              <span class="attribut">Organisme : </span>
-                             <span><input class="contour_field input_char" type="text" id="organisme" value="'.utf8_decode($aideInterne->organisme->appelation).'" disabled/></span>
+                             <span><input class="contour_field input_char" type="text" id="organisme" value="'.$aideInterne->organisme->appelation.'" disabled/></span>
                          </div>
                      </li>
                      <li class="ligne_list_classique">
                          <div class="colonne">
                               <span class="attribut">Demandeur : </span>
-                              <span><input class="contour_field input_char" type="text" id="demandeur" value="'.utf8_decode($aideInterne->individu->nom).' '.utf8_decode($aideInterne->individu->prenom).'" disabled/></span>
+                              <span><input class="contour_field input_char" type="text" id="demandeur" value="'.$aideInterne->individu->nom.' '.$aideInterne->individu->prenom.'" disabled/></span>
                          </div>
                          <div class="colonne">
                          </div>
@@ -161,15 +163,15 @@ function detailAideInterne() {
                          </div>
                          <div class="colonne">
                              <span class="attribut">Instructeur : </span>
-                             <span><input class="contour_field input_char" type="text" id="instructeur" value="'.utf8_decode($aideInterne->instruct->nom).'" disabled/></span>
+                             <span><input class="contour_field input_char" type="text" id="instructeur" value="'.$aideInterne->instruct->nom.'" disabled/></span>
                          </div>
                      </li>
                      <li class="ligne_list_classique">
                          <div class="colonne">
                              <span class="attribut">Nature : </span>
-                             <span><input class="contour_field input_char" type="text" id="nature" value="'.utf8_decode($aideInterne->natureAide->libelle).'" disabled/></span>
+                             <span><input class="contour_field input_char" type="text" id="nature" value="'.$aideInterne->natureAide->libelle.'" disabled/></span>
                              <span class="attribut">État : </span>
-                             <span><input class="contour_field input_char" type="text" id="etat" value="'.utf8_decode($aideInterne->etat).'" disabled/></span>
+                             <span><input class="contour_field input_char" type="text" id="etat" value="'.$aideInterne->etat.'" disabled/></span>
                            
                          </div>
                          <div class="colonne">
@@ -182,7 +184,7 @@ function detailAideInterne() {
             $contenu .= '</div>
                          <div class="colonne50">
                              <span class="attribut">Proposition : </span>
-                             <span><textarea class="contour_field input_char" type="text" id="proposition">'.utf8_decode($aideInterne->proposition).'</textarea></span>
+                             <span><textarea class="contour_field input_char" type="text" id="proposition">'.$aideInterne->proposition.'</textarea></span>
                          </div>
                      </li></ul>';
         if($aideInterne->avis == null) {
@@ -196,7 +198,7 @@ function detailAideInterne() {
                          <div class="colonne50">
                               <span class="attribut">Aide accordée : </span>
                               <div class="select classique" role="select_typeaide_interne">';
-        $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option">Type d\'aide</div>' : '<div id="aideaccorde" class="option" value="'. $aideInterne->idAideAccordee .'">'.utf8_decode($aideInterne->typeAideAccordee->libelle).'</div>';  
+        $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option">Type d\'aide</div>' : '<div id="aideaccorde" class="option" value="'. $aideInterne->idAideAccordee .'">'.$aideInterne->typeAideAccordee->libelle.'</div>';  
         $contenu .= '
                                 <div class="fleche_bas"> </div>
                             </div>
@@ -207,14 +209,18 @@ function detailAideInterne() {
                          </div>
                          <div class="colonne">
                              <span class="attribut">Décideur : </span>
-                             <span><input class="contour_field input_char" type="text" id="decideur" value="'.utf8_decode($aideInterne->instruct->nom).'" disabled/></span>
+                             <div class="select classique" role="select_decideur">';
+        $contenu .= $aideInterne->idDecideur == null ? '<div id="decideur" class="option">Decideur</div>' : '<div id="decideur" class="option" value="'. $aideInterne->idDecideur .'">'.$aideInterne->decideur->decideur.'</div>';  
+        $contenu .= '
+                                <div class="fleche_bas"> </div>
+                            </div>
                          </div>
                      </li>
                      <li class="ligne_list_classique">
                          <div class="colonne">
                              <span class="attribut">Avis : </span>
                              <div class="select classique" role="select_avis">';
-        $contenu .= $aideInterne->avis == null ? '<div id="avis" class="option">-----</div>' : '<div id="avis" class="option" value="'. utf8_decode($aideInterne->avis).'">'.utf8_decode($aideInterne->avis).'</div>';  
+        $contenu .= $aideInterne->avis == null ? '<div id="avis" class="option">-----</div>' : '<div id="avis" class="option" value="'. $aideInterne->avis.'">'.$aideInterne->avis.'</div>';  
         $contenu .= '                  
                             <div class="fleche_bas"> </div>
                         </div>
@@ -230,11 +236,12 @@ function detailAideInterne() {
                          </div>
                         <div class="colonne_large">
                              <span class="attribut">Commentaire : </span>
-                             <span><textarea class="contour_field input_char" type="text" id="commentaire">'.utf8_decode($aideInterne->commentaire).'</textarea></span>
+                             <span><textarea class="contour_field input_char" type="text" id="commentaire">'.$aideInterne->commentaire.'</textarea></span>
                          </div>
                      </li>
                  </ul>';
     $contenu .= '
+        <h3>Bon d\'aide <span class="addElem" role="addBonInterne"></span></h3>
             <div class="bubble tableau_classique_wrapper">
                 <table class="tableau_classique" cellpadding="0" cellspacing="0">
                     <thead>
@@ -244,6 +251,7 @@ function detailAideInterne() {
                             <th>Date remise effective</th>
                             <th>Remis par</th>
                             <th>Montant</th>
+                            <th>Commentaire</th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -256,9 +264,9 @@ function detailAideInterne() {
             $contenu .= '<td>'.$bonAide->aideInterne->typeAideDemandee->libelle.'</td>
                                     <td> '.getDatebyTimestamp($bonAide->dateRemisePrevue).'</td>
                                     <td> '.getDatebyTimestamp($bonAide->dateRemiseEffective).'</td>
-                                    <td> '.utf8_decode($bonAide->instruct->nom).'</td>                                
-                                    <td> '.utf8_decode($bonAide->montant).'</td>
-                                    <td><span class="edit_bon_aide"></span></td>
+                                    <td> '.$bonAide->instruct->nom.'</td>                                
+                                    <td> '.$bonAide->montant.'</td>
+                                    <td>'.$bonAide->commentaire.'</td>
                         </tr>';
             $i++;
         }
@@ -271,7 +279,7 @@ function detailAideInterne() {
                  <h3>Rapport :</h3>
                      <ul class="list_classique">
                          <li class="ligne_list_classique">
-                            <span><textarea class="contour_field input_char" style="width:99%" type="text" id="rapport" >'.utf8_decode($aideInterne->rapport).'</textarea></span>
+                            <span><textarea class="contour_field input_char" style="width:99%" type="text" id="rapport" >'.$aideInterne->rapport.'</textarea></span>
                          </li>
                      </ul>';
     $contenu .= '
@@ -283,6 +291,13 @@ function detailAideInterne() {
         $contenu .= '</div>';
     }
     // COMBO BOX
+    $contenu .= '<ul class="select_decideur">';
+    foreach($decideurs as $decideur) {
+    $contenu .= '<li>
+                                <div value="'.$decideur->id.'">'.$decideur->decideur.'</div>
+                            </li>';
+    }
+    $contenu .= '</ul>';
     $contenu .= '
         <ul class="select_avis">
             <li>
@@ -295,11 +310,34 @@ function detailAideInterne() {
     $contenu .= '<ul class="select_typeaide_interne">';
     foreach($typesaides as $type) {
     $contenu .= '<li>
-                                <div value="'.$type->id.'">'.utf8_decode($type->libelle).'</div>
+                                <div value="'.$type->id.'">'.$type->libelle.'</div>
                             </li>';
     }
     $contenu .= '</ul>';
-    return utf8_encode($contenu);
+    // FORMULAIRE
+    $contenu .= '<div class="formulaire" action="addBonInterne" idAide="'.$aideInterne->id.'">
+           <div class="colonne_droite">
+            <input type="hidden" id="idinstruct" value="'.$aideInterne->idInstruct.'">
+             <div class="input_text">
+                <input id="dateprevue" class="contour_field" type="text" title="Date" placeholder="Date de remise prévue">
+            </div>
+            <div class="input_text">
+                <input id="dateeffective" class="contour_field" type="text" title="Date" placeholder="Date de remise éffective">
+            </div>
+            <div class="input_text">
+                <input id="montant" class="contour_field input_num" type="text" title="Montant" placeholder="Montant">
+            </div>
+            <div class="input_text">
+                <input id="commentaireBon" class="contour_field" type="text" title="Commentaire" placeholder="Commentaire">
+            </div>
+            <div class="sauvegarder_annuler">
+                <div class="bouton modif" value="save">Enregistrer</div>
+                <div class="bouton classique" value="cancel">Annuler</div>
+            </div>
+
+           </div>
+   </div>';
+    return $contenu;
 }
 
 function createAideInterne($typeAide, $date, $instruct, $nature, $proposition, $etat, $idIndividu, $organisme, $urgence) {
@@ -335,10 +373,31 @@ function updateDecisionInterne() {
     $aide->vigilance = $_POST['vigilance'];
     $aide->commentaire = $_POST['commentaire'];
     $aide->rapport = $_POST['rapport'];
+    $aide->idDecideur = $_POST['decideur'];
     $aide->save();
     $retours = aide();
     $retour = array('aide' => $retours);
     echo json_encode($retour);  
+}
+
+function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $montant, $commentaire) {
+    include_once('./lib/config.php');
+    $bon = new BonAide();
+    $bon->idAideInterne = $idAide;
+    $bon->idInstruct = $idInstruct;
+    if($datePrevue != 0) {
+        $date1 = explode('/', $datePrevue);
+        $bon->dateRemisePrevue = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
+    } else {
+        $bon->dateRemisePrevue = 0;
+    }
+    if($dateEffective != 0) {
+        $date2 = explode('/', $dateEffective);
+        $bon->dateRemiseEffective = mktime(0, 0, 0, $date2[1], $date2[0], $date2[2]);
+    }
+    $bon->montant = $montant;
+    $bon->commentaire = $commentaire;
+    $bon->save();   
 }
 
 function aideExterne() {
@@ -367,10 +426,10 @@ function aideExterne() {
             $i % 2 ? $contenu .= '<tr name="'.$aideExterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideExterne->id.'">';
             $contenu .= '<td>'.getDatebyTimestamp($aideExterne->dateDemande).'</td>
                                     <td> '.$aideExterne->typeAideDemandee->libelle.'</td>
-                                    <td> '.utf8_decode($aideExterne->etat).'</td>
-                                    <td> '.utf8_decode($aideExterne->natureAide->libelle).'</td>
-                                    <td> '.utf8_decode($aideExterne->organisme->appelation).'</td>                                    
-                                    <td> '.utf8_decode($aideExterne->avis).'</td>
+                                    <td> '.$aideExterne->etat.'</td>
+                                    <td> '.$aideExterne->natureAide->libelle.'</td>
+                                    <td> '.$aideExterne->organisme->appelation.'</td>                                    
+                                    <td> '.$aideExterne->avis.'</td>
                                     <td> '.$aideExterne->montantPercu.' &euro;</td>
                                     <td> '.getDatebyTimestamp($aideExterne->dateDecision).'</td>
                                     <td><span class="edit_aide_externe"></span></td>
@@ -397,7 +456,7 @@ function detailAideExterne() {
                      <li class="ligne_list_classique">
                          <div class="colonne50">
                               <span class="attribut">Aide demandée : </span>
-                              <span><input class="contour_field input_char" type="text" id="aideDemandee" value="'.utf8_decode($aideExterne->typeAideDemandee->libelle).'" disabled/></span>
+                              <span><input class="contour_field input_char" type="text" id="aideDemandee" value="'.$aideExterne->typeAideDemandee->libelle.'" disabled/></span>
                          </div>
                          <div class="colonne">
                              <span class="attribut">Date demande : </span>
@@ -405,13 +464,13 @@ function detailAideExterne() {
                          </div>
                          <div class="colonne">
                              <span class="attribut">Organisme : </span>
-                             <span><input class="contour_field input_char" type="text" id="organisme" value="'.utf8_decode($aideExterne->organisme->appelation).'" disabled/></span>
+                             <span><input class="contour_field input_char" type="text" id="organisme" value="'.$aideExterne->organisme->appelation.'" disabled/></span>
                          </div>
                      </li>
                      <li class="ligne_list_classique">
                          <div class="colonne">
                               <span class="attribut">Demandeur : </span>
-                              <span><input class="contour_field input_char" type="text" id="demandeur" value="'.utf8_decode($aideExterne->individu->nom).' '.utf8_decode($aideExterne->individu->prenom).'" disabled/></span>
+                              <span><input class="contour_field input_char" type="text" id="demandeur" value="'.$aideExterne->individu->nom.' '.$aideExterne->individu->prenom.'" disabled/></span>
                          </div>
                          <div class="colonne">
                             <span class="attribut">Aide urgente : </span>';
@@ -425,13 +484,13 @@ function detailAideExterne() {
                          </div>
                          <div class="colonne">
                              <span class="attribut">Instructeur : </span>
-                             <span><input class="contour_field input_char" type="text" id="instructeur" value="'.utf8_decode($aideExterne->instruct->nom).'" disabled/></span>
+                             <span><input class="contour_field input_char" type="text" id="instructeur" value="'.$aideExterne->instruct->nom.'" disabled/></span>
                          </div>
                      </li>
                      <li class="ligne_list_classique">
                          <div class="colonne">
                              <span class="attribut">Nature : </span>
-                             <span><input class="contour_field input_char" type="text" id="nature" value="'.utf8_decode($aideExterne->natureAide->libelle).'" disabled/></span>
+                             <span><input class="contour_field input_char" type="text" id="nature" value="'.$aideExterne->natureAide->libelle.'" disabled/></span>
   
                          </div>
                          <div class="colonne">
@@ -440,7 +499,7 @@ function detailAideExterne() {
                          </div>                         
                          <div class="colonne">
                                  <span class="attribut">État : </span>
-                             <span><input class="contour_field input_char" type="text" id="etat" value="'.utf8_decode($aideExterne->etat).'" disabled/></span>
+                             <span><input class="contour_field input_char" type="text" id="etat" value="'.$aideExterne->etat.'" disabled/></span>
                          </div>
                      </li>
                      <li class="ligne_list_classique">
@@ -473,19 +532,27 @@ function detailAideExterne() {
                              </div>
                              <div class="colonne">
                                  <span class="attribut">Avis : </span>
-                                 <span><input class="contour_field input_char" type="text" id="decideur" value="'.utf8_decode($aideExterne->avis).'" disabled/></span>
+                                 <span><input class="contour_field input_char" type="text" id="decideur" value="'.$aideExterne->avis.'" disabled/></span>
                              </div>
                          </li>
                          <li class="ligne_list_classique">
                              <div class="colonne_large">
                                  <span class="attribut">Commentaire : </span>
-                                 <span><textarea class="contour_field input_char" type="text" id="proposition">'.utf8_decode($aideExterne->commentaire).'</textarea></span>
+                                 <span><textarea class="contour_field input_char" type="text" id="proposition">'.$aideExterne->commentaire.'</textarea></span>
                              </div>
                          </li>
                      </ul>';
                     
         
-    return utf8_encode($contenu);
+    return $contenu;
 }
 
+function generateBonAide() {
+    require('./lib/fpdf.php');
+    $pdf = new FPDF();
+    $pdf->AddPage();
+    $pdf->SetFont('Arial','B',16);
+    $pdf->Cell(40,10,'Hello World !');
+    $pdf->Output();
+}
 ?>

@@ -27,11 +27,11 @@ function action() {
         $i % 2 ? $contenu .= '<tr>' : $contenu .= '<tr class="alt">';
         
         $contenu .= '<td>'.getDatebyTimestamp($action->date).'</td>
-            <td>'.utf8_decode($action->typeaction->libelle).'</td>
+            <td>'.$action->typeaction->libelle.'</td>
             <td>'.$action->motif.'</td>
-            <td>'.utf8_decode($action->suiteADonner).'</td>
-            <td>'.utf8_decode($action->suitedonnee).'</td>
-            <td>'.utf8_decode($action->instruct->nom).'</td>
+            <td>'.$action->suiteADonner.'</td>
+            <td>'.$action->suitedonnee.'</td>
+            <td>'.$action->instruct->nom.'</td>
             <td><span class="edit_action" idAction="'.$action->id.'"></span></td>
         </tr>';
         $i++;
@@ -99,18 +99,18 @@ function action() {
       $contenu .= '<ul class="select_instruct">';
     foreach($instructs as $instruct) {
         $contenu .= '<li>
-                                    <div value="'.$instruct->id.'">'.utf8_decode($instruct->nom).'</div>
+                                    <div value="'.$instruct->id.'">'.$instruct->nom.'</div>
                                 </li>';
     }
     $contenu .= '</ul>';
    $contenu .= '<ul class="select_motifaction">';
     foreach($types as $type) {
         $contenu .= '<li>
-                                    <div value="'.$type->id.'">'.utf8_decode($type->libelle).'</div>
+                                    <div value="'.$type->id.'">'.$type->libelle.'</div>
                                 </li>';
     }
     $contenu .= '</ul>';
-    return utf8_encode($contenu);
+    return $contenu;
 
 }
 
