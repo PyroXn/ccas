@@ -1,14 +1,13 @@
 <?php
 
-class AideExterne extends Doctrine_Record {
+class BonAide extends Doctrine_Record {
 
     public function setTableDefinition() {
-        $this->setTableName('aideexterne');
+        $this->setTableName('bonaide');
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
         $this->hasColumn('idAideInterne', 'integer', 20);
-        $this->hasColumn('idInstruct', 'integer', 20);
         $this->hasColumn('idInstruct', 'integer', 20);
         $this->hasColumn('idTypeAide', 'integer', 20);
         $this->hasColumn('dateRemisePrevu', 'integer', 20);

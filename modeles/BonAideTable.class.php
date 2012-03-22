@@ -1,8 +1,8 @@
 <?php
 // On inclut le modèle «News ».
-require_once dirname(__FILE__).'/AideExterne.class.php';
+require_once dirname(__FILE__).'/BonAide.class.php';
 
-class AideExterneTable extends Doctrine_Table
+class BonAideTable extends Doctrine_Table
 {
     
 }
