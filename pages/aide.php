@@ -1,7 +1,7 @@
 <?php
 function aide() {
     $contenu = aideInterne();
-    $contenu .= aideExterne();
+//    $contenu .= aideExterne();
     
     return $contenu;
 }
@@ -66,7 +66,7 @@ function aideInterne() {
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
-                <span class="checkbox" id="urgence"></span>
+                <span class="checkbox" id="urgence"></span> Aide urgente ?
             </div>
             <div class="input_text">
                 <input id="proposition" class="contour_field" type="text" title="Proposition" placeholder="Proposition">
@@ -210,9 +210,44 @@ function detailAideInterne() {
                              <span class="attribut">total : </span>
                              <span><input class="contour_field input_num" type="text" id="montantTotal" value="'.$aideInterne->montantTotal.'" disabled/></span>
                          </div>
-                         <div class="colonne">
+                         <div class="colonne_large">';
+    
+    $contenu .= '
+            <div class="bubble tableau_classique_wrapper">
+                <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr class="header">
+                            <th>Type bon</th>
+                            <th>Date remise prévue</th>
+                            <th>Date remise effective</th>
+                            <th>Remis par</th>
+                            <th>Montant</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+    $i = 1;
+    $bonAides = $aideInterne->bonAide;
+
+    if (sizeof($bonAides) != null) {
+        foreach($bonAides as $bonAide) {
+            $i % 2 ? $contenu .= '<tr name="'.$bonAide->id.'">' : $contenu .= '<tr class="alt" name="'.$bonAide->id.'">';
+            $contenu .= '<td>'.$bonAide->aideInterne->typeAideDemandee->libelle.'</td>
+                                    <td> '.getDatebyTimestamp($bonAide->dateRemisePrevue).'</td>
+                                    <td> '.getDatebyTimestamp($bonAide->dateRemiseEffective).'</td>
+                                    <td> '.utf8_decode($bonAide->instruct->nom).'</td>                                
+                                    <td> '.utf8_decode($bonAide->montant).'</td>
+                                    <td><span class="edit_bon_aide"></span></td>
+                        </tr>';
+            $i++;
+        }
+    } else {
+        $contenu .= '<tr>
+                         <td colspan=5 align=center>< Aucun bon n\'a encore été délivré pour cette aide > </td>
+                     </tr>';
+    }
+    $contenu .= '</tbody></table></div>
                          </div>
-                         <div class="colonne50">
+                         <div class="colonne_large">
                              <span class="attribut">commentaire : </span>
                              <span><textarea class="contour_field input_char" type="text" id="commentaire">'.utf8_decode($aideInterne->commentaire).'</textarea></span>
                          </div>
@@ -245,5 +280,46 @@ function createAideInterne($typeAide, $date, $instruct, $nature, $proposition, $
     $aide->save();
     $retour = aide();
 }
+
+function aideExterne() {
+    $aidesExternes = Doctrine_Core::getTable('aideexterne')->findByIdIndividu($_POST['idIndividu']);
+    $contenu = '
+        <h3>Aides Externes :</h3>
+            <div class="bubble tableau_classique_wrapper">
+                <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr class="header">
+                            <th>Date demande</th>
+                            <th>Aide demandée</th>
+                            <th>Etat</th>
+                            <th>Nature</th>
+                            <th>Organisme</th>
+                            <th>Avis</th>
+                            <th>Montant</th>
+                            <th>Date décision</th>
+                            <th>Détails</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+    $i = 1;
+    foreach($aidesExternes as $aideExterne) {
+        $i % 2 ? $contenu .= '<tr name="'.$aideExterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideExterne->id.'">';
+        $contenu .= '<td>'.getDatebyTimestamp($aideExterne->dateDemande).'</td>
+                                <td> '.$aideExterne->typeAideDemandee->libelle.'</td>
+                                <td> '.utf8_decode($aideExterne->etat).'</td>
+                                <td> '.utf8_decode($aideExterne->natureAide->libelle).'</td>
+                                <td> '.utf8_decode($aideExterne->organisme->appelation).'</td>                                    
+                                <td> '.utf8_decode($aideExterne->avis).'</td>
+                                <td> '.$aideExterne->montantPercu.' &euro;</td>
+                                <td> '.getDatebyTimestamp($aideExterne->dateDecision).'</td>
+                                <td><span class="edit_aide_externe"></span></td>
+                    </tr>';
+        $i++;
+    }
+    $contenu .= '</tbody></table>';
+
+    return utf8_encode($contenu);
+}
+
 
 ?>
