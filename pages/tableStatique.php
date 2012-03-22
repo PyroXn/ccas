@@ -58,7 +58,7 @@ function generateEcranStatique($table) {
     $retour = '<div id="tableStatique">';
     $retour .= '<h3>Recherche</h3>
         <ul class="list_classique">
-            <li id="ligneRechercheTableStaique" class="ligne_list_classique" table="'.$table.'">';
+            <li id="ligneRechercheTableStatique" class="ligne_list_classique" table="'.$table.'">';
             foreach ($columnNames as $columnName) {
                 if ($columnName != 'id') {
                     $retour .= generateColonneByType($tableStatique, $columnName, true);
@@ -188,7 +188,7 @@ function generateEcranStatiqueEnTab($table) {
     $retour = '<div id="tableStatique">';
     $retour .= '<h3>Recherche</h3>
         <ul class="list_classique">
-            <li id="ligneRechercheTableStaique" class="ligne_list_classique" table="'.$table.'">';
+            <li id="ligneRechercheTableStatique" class="ligne_list_classique" table="'.$table.'">';
             foreach ($columnNames as $columnName) {
                 if ($columnName != 'id') {
                     $retour .= generateColonneByType($tableStatique, $columnName, true);
