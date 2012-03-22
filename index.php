@@ -47,6 +47,10 @@ switch (@$_GET['p']) {
         include_once('./pages/aide.php');
         echo detailAideInterne();
         break;
+    case 'detailaideexterne':
+        include_once('./pages/aide.php');
+        echo detailAideExterne();
+        break;
     case 'edituser':
         include_once('./pages/admin.php');
         editUser();

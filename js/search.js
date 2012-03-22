@@ -143,6 +143,20 @@ $(function() {
             }
         });
     });
+    $('.edit_aide_externe').live("click", function() {
+        var idAide = $(this).parent().parent().attr('name');
+        console.log(idAide);
+        $.ajax({
+            type: "POST",
+            url: "./index.php?p=detailaideexterne",
+            data: 'idAide='+ idAide,
+            cache: false,
+            success: function(html)
+            {
+                $("#contenu").html(html);
+            }
+        });
+    });
      
  
     $('.autoComplete').live("keyup", function(evenement)  {
