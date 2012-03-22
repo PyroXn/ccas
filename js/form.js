@@ -258,6 +258,13 @@ $(function() {
                     datastring += '&instruct='+$('#instruct').attr('value');
                     console.log(datastring);
                     break;
+               case 'creation_aide_interne':
+                   datastring += '&idIndividu='+idIndividu+'&typeaide='+$('#typeaideinterne').attr('value');
+                   datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
+                   datastring += '&nature='+$('#nature').attr('value')+'&proposition='+$('#proposition').val();
+                   datastring += '&etat='+$('#etat').attr('value');
+                   console.log(datastring);
+                   break;
             }
             $.ajax({
                 type: 'post',
@@ -293,6 +300,9 @@ $(function() {
                         case 'creation_action':
                             $('#contenu').html(data.action);
                             break;
+                       case 'creation_aide_interne':
+                           $('#contenu').html(data.aide);
+                           break;
                     }
                 }
             });

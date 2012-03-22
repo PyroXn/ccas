@@ -10,10 +10,10 @@ function aideInterne() {
     $natures = Doctrine_Core::getTable('type')->findByCategorie(5);
     $typesaides = Doctrine_Core::getTable('type')->findByCategorie(1);
     $instructs =  Doctrine_Core::getTable('instruct')->findAll();
-    // AIDES INTERNES //
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
+    $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $contenu = '
-        <div class="bouton ajout" id="createAideInterne">Ajouter une aide interne</div>
+        <div class="bouton ajout" id="createAideInterne">Ajouter une aide interne</div> -&nbsp;&nbsp;&nbsp;&nbsp;<div class="bouton ajout" id="">Ajouter une aide externe</div>
         <h3>Aides Internes :</h3>
             <div class="bubble tableau_classique_wrapper">
                 <table class="tableau_classique" cellpadding="0" cellspacing="0">
@@ -36,7 +36,7 @@ function aideInterne() {
         $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
                                 <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
                                 <td> '.utf8_decode($aideInterne->etat).'</td>
-                                <td> '.utf8_decode($aideInterne->nature).'</td>
+                                <td> '.utf8_decode($aideInterne->natureAide->libelle).'</td>
                                 <td> '.utf8_decode($aideInterne->avis).'</td>
                                 <td> '.$aideInterne->montant.' &euro;</td>
                                 <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
@@ -52,22 +52,28 @@ function aideInterne() {
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
-                    <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
             </div>
-            <div class="select classique" role="select_instruct">
+           <div class="select classique" role="select_instruct">
                 <div id="instruct" class="option">Instructeur</div>
                 <div class="fleche_bas"> </div>
+            </div>
+            <div class="input_text">
+                <input id="demandeur" class="contour_field" type="text" title="Demandeur" value="'.$individu->nom .' '.$individu->prenom.'" disabled />
             </div>
             <div class="select classique" role="select_nature">
                 <div id="nature" class="option">Nature</div>
                 <div class="fleche_bas"> </div>
             </div>
+            <div class="input_text">
+                <span class="checkbox" id="urgence"></span>
+            </div>
+            <div class="input_text">
+                <input id="proposition" class="contour_field" type="text" title="Proposition" placeholder="Proposition">
+            </div>
             <div class="select classique" role="select_etat">
                 <div id="etat" class="option">Etat</div>
                 <div class="fleche_bas"> </div>
-            </div>
-            <div class="input_text">
-                <span class="attribut">Aide urgente ?</span><span class="checkbox" id="urgence"></span>
             </div>
             <div class="sauvegarder_annuler">
                 <div class="bouton modif" value="save">Enregistrer</div>
@@ -148,7 +154,7 @@ function detailAideInterne() {
                      <li class="ligne_list_classique">
                          <div class="colonne">
                              <span class="attribut">nature : </span>
-                             <span><input class="contour_field input_char" type="text" id="nature" value="'.utf8_decode($aideInterne->nature).'" disabled/></span>
+                             <span><input class="contour_field input_char" type="text" id="nature" value="'.utf8_decode($aideInterne->natureAide->libelle).'" disabled/></span>
                              <span class="attribut">état : </span>
                              <span><input class="contour_field input_char" type="text" id="etat" value="'.utf8_decode($aideInterne->etat).'" disabled/></span>
                            
@@ -220,6 +226,24 @@ function detailAideInterne() {
                      </ul>';
         
     return utf8_encode($contenu);
+}
+
+function createAideInterne($typeAide, $date, $instruct, $nature, $proposition, $etat, $idIndividu) {
+    $aide = new AideInterne();
+    if($date != 0) {
+        $date1 = explode('/', $date);
+        $aide->dateDemande = mktime(0, 0, 0, $date[1], $date1[0], $date1[2]);
+    } else {
+        $aide->dateDemande = 0;
+    }
+    $aide->nature = $nature;
+    $aide->idAideDemandee = $typeAide;
+    $aide->idInstruct = $instruct;
+    $aide->etat = $etat;
+    $aide->proposition = $proposition;
+    $aide->idIndividu = $idIndividu;
+    $aide->save();
+    $retour = aide();
 }
 
 ?>

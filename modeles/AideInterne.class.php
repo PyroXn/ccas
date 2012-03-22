@@ -9,7 +9,7 @@ class AideInterne extends Doctrine_Record {
         $this->hasColumn('idIndividu', 'integer', 20);
         $this->hasColumn('dateDemande', 'integer', 20, array('default' => '0'));
         $this->hasColumn('idOrganisme', 'integer', 5);
-        $this->hasColumn('nature', 'string', 20);
+        $this->hasColumn('nature', 'integer', 1);
         $this->hasColumn('aideUrgente', 'integer', 1, array('default' => '0'));
         $this->hasColumn('idAideDemandee', 'integer', 5);
         $this->hasColumn('idInstruct', 'integer', 5);
@@ -26,6 +26,7 @@ class AideInterne extends Doctrine_Record {
         $this->hasColumn('commentaire', 'string',250, array('default' => ' '));
         $this->hasColumn('rapport', 'string',250);
         $this->hasColumn('dateRevision', 'integer', 20);
+        $this->option('orderBy', 'id DESC');
     }
 
     public function setUp() {
@@ -59,6 +60,13 @@ class AideInterne extends Doctrine_Record {
             'foreign' => 'id'
                 )
         );
+
+         $this->hasOne('type as natureAide', array(
+            'local' => 'nature',
+            'foreign' => 'id'
+                )
+        );
+
         $this->hasMany('bonAideInterne as bonAideInterne',
     		array(
     			'local' => 'id', 
