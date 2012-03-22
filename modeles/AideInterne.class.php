@@ -61,11 +61,19 @@ class AideInterne extends Doctrine_Record {
             'foreign' => 'id'
                 )
         );
+
          $this->hasOne('type as natureAide', array(
             'local' => 'nature',
             'foreign' => 'id'
                 )
         );
+
+        $this->hasMany('bonAideInterne as bonAideInterne',
+    		array(
+    			'local' => 'id', 
+    			'foreign' => 'idAideInterne'
+    		)
+    	);
     }
 }
 

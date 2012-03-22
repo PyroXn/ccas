@@ -1,6 +1,7 @@
 <?php
 function aide() {
     $contenu = aideInterne();
+    $contenu .= aideExterne();
     
     return $contenu;
 }
