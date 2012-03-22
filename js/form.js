@@ -218,7 +218,29 @@ $(function() {
                     
                 }
             });
-        } else if(value=='save') {
+        } else if(value == 'updateDecisionInterne') {
+              var vigilance = 0;
+              if($('#vigilance').hasClass('checkbox_active')) {
+                  vigilance = 1;
+              }
+              datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&aide='+$('#aideaccorde').attr('value');
+              datastring += '&date='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
+              datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
+              datastring += '&rapport='+$('#rapport').val();
+              console.log(datastring);
+              $.ajax({
+                  type: 'post',
+                  dataType:'json',
+                  data: datastring,
+                  url: './index.php?p=updatedecisioninterne',
+                  cache: false,
+                  success: function(aideinterne) {
+                      console.log(aideinterne);
+                      $('#contenu').html(aideinterne.aide);
+                  }
+              });
+        }
+            else if(value=='save') {
             //commun a tous les form
             var table = $('.formulaire').attr('action');
             var datastring = 'table=' + table
@@ -259,10 +281,14 @@ $(function() {
                     console.log(datastring);
                     break;
                case 'creation_aide_interne':
+                   var urgence = 0;
+                    if($('#urgence').hasClass('checkbox_active')) {
+                        urgence = 1;
+                    }
                    datastring += '&idIndividu='+idIndividu+'&typeaide='+$('#typeaideinterne').attr('value');
                    datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
                    datastring += '&nature='+$('#nature').attr('value')+'&proposition='+$('#proposition').val();
-                   datastring += '&etat='+$('#etat').attr('value');
+                   datastring += '&etat='+$('#etat').attr('value')+'&orga='+$('#orga').attr('value')+'&urgence='+urgence;
                    console.log(datastring);
                    break;
             }
@@ -675,6 +701,11 @@ $(function() {
     
     $('.rechercheTableStatique').live("keyup", function() {
         searchTableStatique();
+    });
+    
+    $('#updateDecision').live("click", function() {
+        $('#decision').toggle();
+        $(this).toggle();
     });
 });
 
