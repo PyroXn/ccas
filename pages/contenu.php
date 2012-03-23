@@ -39,7 +39,7 @@ function contenu() {
             include_once('./pages/config.php');
             echo accueilConfig();
             break;
-        case 'tableStatique':
+        case 'ecranTableStatique':
             include_once './pages/tableStatique.php';
             echo comboTableStatique();
             break;

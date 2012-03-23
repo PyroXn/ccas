@@ -356,7 +356,7 @@ function generationHeaderNavigation($mode) {
                 <div id="accueilConfig" href="#" class="page_header_link active">
                     <span class="label">Configuration - Accueil</span>
                 </div>
-                <div id="tableStatique" href="#" class="page_header_link">
+                <div id="ecranTableStatique" href="#" class="page_header_link">
                     <span class="label">Tables statique</span>
                 </div>';
             break;

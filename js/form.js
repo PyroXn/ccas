@@ -236,6 +236,21 @@ $(function() {
                 }
             });
         }
+        else if(value == 'cancelDecisionInterne') {
+            var idMenu = 'aides';
+            var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
+            console.log(idIndividu);
+            $.ajax({
+                type: "POST",
+                url: "./index.php?p=contenu",
+                data: 'idMenu=' + idMenu + '&idIndividu='+ idIndividu + '&idFoyer='+idFoyer,
+                cache: false,
+                success: function(html)
+                {
+                    $("#contenu").html(html);
+                }
+            });
+        }
         else if(value=='save') {
             //commun a tous les form
             var table = $('.formulaire').attr('action');

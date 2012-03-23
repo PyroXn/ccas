@@ -154,7 +154,7 @@
 }
 
 .input_text{
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .select {    
@@ -259,6 +259,10 @@
     background: white url('./img/check-sprite.gif') 2px center no-repeat;
 }
 
+.checkbox[disabled] {
+    cursor: default;
+    background-color: #EBEBE4;
+}
 
 .delete, .delete_ligne {
     background: transparent url('./img/delete.png') no-repeat;
@@ -342,4 +346,40 @@ table {
     width: 17px;
     padding-right: 2px;
     padding-left: 10px;
+}
+
+.affichage_classique {
+    font: normal 13px arial,sans-serif;
+    padding: 10px 0;
+    text-align: left;
+}
+
+.affichage_classique h2 {
+    color: #888;
+    font-size: 15px;
+    text-align: right;
+    font-weight: normal;
+    display: inline-block;
+    width: 200px;
+}
+
+.affichage_classique .aff {
+    padding-left: 15px;
+    display: inline-block;
+}
+
+.affichage_classique textarea {
+    vertical-align: top;
+    min-height: 30px;
+    width: 250px;
+    resize: vertical;
+}
+
+.affichage_classique .checkbox {
+    left: 0;
+}
+
+.colonne_classique {
+    display: inline-block;
+    vertical-align: top;
 }

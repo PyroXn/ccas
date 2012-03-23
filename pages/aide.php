@@ -59,26 +59,21 @@ function aideInterne() {
                 <div id="typeaideinterne" class="option">Type d\'aide</div>
                 <div class="fleche_bas"> </div>
             </div>
-            <div class="input_text">
-                <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
-            </div>
-           <div class="select classique" role="select_instruct">
+            <div class="clearboth"></div>
+            <div class="select classique" role="select_instruct">
                 <div id="instruct" class="option">Instructeur</div>
                 <div class="fleche_bas"> </div>
             </div>
-            <div class="input_text">
-                <input id="demandeur" class="contour_field" type="text" title="Demandeur" value="'.$individu->nom .' '.$individu->prenom.'" disabled />
-            </div>
-            <div class="select classique" role="select_nature">
-                <div id="nature" class="option">Nature</div>
+            <div class="clearboth"></div>
+            <div class="select classique" role="select_orga">
+                <div id="orga" class="option">Organisme</div>
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
-                <span class="checkbox" id="urgence"></span> 
-                <span class="attribut">Aide urgente</span>
+                <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
             </div>
-            <div class="select classique" role="select_orga">
-                <div id="orga" class="option">Organisme</div>
+            <div class="select classique" role="select_nature">
+                <div id="nature" class="option">Nature</div>
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
@@ -88,6 +83,11 @@ function aideInterne() {
                 <div id="etat" class="option">Etat</div>
                 <div class="fleche_bas"> </div>
             </div>
+            <div class="input_text">
+                <span class="checkbox" id="urgence"></span> 
+                <span class="attribut">Aide urgente</span>
+            </div>
+            
             <div class="sauvegarder_annuler">
                 <div class="bouton modif" value="save">Enregistrer</div>
                 <div class="bouton classique" value="cancel">Annuler</div>
@@ -142,111 +142,126 @@ function detailAideInterne() {
     $typesaides = Doctrine_Core::getTable('type')->findByCategorie(1);
     $decideurs = Doctrine_Core::getTable('decideur')->findAll();
     
-    $contenu = "<h3>Fiche d'aide interne :</h3>";
+    $testaffichage = '
+        <div class="colonne_classique">
+            <div class="affichage_classique">
+                <h2>Demandeur : </h2>
+                <div class="aff">'.$aideInterne->individu->nom.' '.$aideInterne->individu->prenom.'</div>
+            </div>
+            <div class="affichage_classique">
+                <h2>Instructeur : </h2>
+                <div class="aff">'.$aideInterne->instruct->nom.'</div>
+            </div>
+            <div class="affichage_classique">
+                <h2>Date demande : </h2>
+                <div class="aff">'.getDatebyTimestamp($aideInterne->dateDemande).'</div>
+            </div>
+        </div>
+        <div class="colonne_classique">
+            <div class="affichage_classique">
+                <h2>Aide demand&eacute;e : </h2>
+                <div class="aff">'.$aideInterne->typeAideDemandee->libelle.'</div>
+            </div>
+            <div class="affichage_classique">
+                <h2>Organisme : </h2>
+                <div class="aff">'.$aideInterne->organisme->appelation.'</div>
+            </div>
+            <div class="affichage_classique">
+                <h2>Nature : </h2>
+                <div class="aff">'.$aideInterne->natureAide->libelle.'</div>
+            </div>
+        </div>
+        <div class="colonne_classique">
+            <div class="affichage_classique">
+                <h2>Etat : </h2>
+                <div class="aff">'.$aideInterne->etat.'</div>
+            </div>
+            <div class="affichage_classique">
+                <h2>Aide urgente : </h2>
+                <div class="aff">';
+                if($aideInterne->aideUrgente == 1) {
+                    $testaffichage .= '<span id="aideUrgente" class="checkbox checkbox_active" value="1" disabled></span>';
+                } else {
+                    $testaffichage .= '<span id="aideUrgente" class="checkbox" value="0" disabled></span>';
+                }
+                $testaffichage .='</div>
+            </div>
+            <div class="affichage_classique">
+                <h2>Proposition : </h2>
+                <div class="aff">'.$aideInterne->proposition.'</div>
+            </div>
+        </div>
+                         ';
     
-    $contenu .= '<ul class="list_classique">
-                     <li class="ligne_list_classique">
-                         <div class="colonne50">
-                              <span class="attribut">Aide demand&eacute;e : </span>
-                              <span><input class="contour_field input_char" type="text" id="aideDemandee" value="'.$aideInterne->typeAideDemandee->libelle.'" disabled/></span>
-                         </div>
-                         <div class="colonne">
-                             <span class="attribut">Date demande : </span>
-                             <span><input class="contour_field input_num" type="text" id="dateDemande" value="'.getDatebyTimestamp($aideInterne->dateDemande).'" disabled/></span>
-                         </div>
-                         <div class="colonne">
-                             <span class="attribut">Organisme : </span>
-                             <span><input class="contour_field input_char" type="text" id="organisme" value="'.$aideInterne->organisme->appelation.'" disabled/></span>
-                         </div>
-                     </li>
-                     <li class="ligne_list_classique">
-                         <div class="colonne">
-                              <span class="attribut">Demandeur : </span>
-                              <span><input class="contour_field input_char" type="text" id="demandeur" value="'.$aideInterne->individu->nom.' '.$aideInterne->individu->prenom.'" disabled/></span>
-                         </div>
-                         <div class="colonne">
-                         </div>
-                         <div class="colonne">
-                         </div>
-                         <div class="colonne">
-                             <span class="attribut">Instructeur : </span>
-                             <span><input class="contour_field input_char" type="text" id="instructeur" value="'.$aideInterne->instruct->nom.'" disabled/></span>
-                         </div>
-                     </li>
-                     <li class="ligne_list_classique">
-                         <div class="colonne">
-                             <span class="attribut">Nature : </span>
-                             <span><input class="contour_field input_char" type="text" id="nature" value="'.$aideInterne->natureAide->libelle.'" disabled/></span>
-                             <span class="attribut">&eacute;tat : </span>
-                             <span><input class="contour_field input_char" type="text" id="etat" value="'.$aideInterne->etat.'" disabled/></span>
-                           
-                         </div>
-                         <div class="colonne">
-                         <span class="attribut">Aide urgente : </span>';
-                             if($aideInterne->aideUrgente == 1) {
-                                $contenu .= '<span id="aideUrgente" class="checkbox checkbox_active" value="1"></span>';
-                             } else {
-                                $contenu .= '<span id="aideUrgente" class="checkbox" value="0"></span>';
-                             }
-            $contenu .= '</div>
-                         <div class="colonne50">
-                             <span class="attribut">Proposition : </span>
-                             <span><textarea class="contour_field input_char" type="text" id="proposition">'.$aideInterne->proposition.'</textarea></span>
-                         </div>
-                     </li></ul>';
+    $contenu = "<h3>Fiche d'aide interne :</h3>";
+    $contenu .= '<ul class="list_classique"><li class="ligne_list_classique">'.$testaffichage.'</li></ul>';
+            
         if($aideInterne->avis == null) {
             $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une d&eacute;cision</div>';
             $contenu .= '<div id="decision">';
         }
-        $contenu .= '
-                <h3 id="idAide" value="'.$aideInterne->id.'">D&eacute;cision :</h3>
+        $contenu .= '<h3 id="idAide" value="'.$aideInterne->id.'">D&eacute;cision :</h3>
                      <ul class="list_classique">
-                     <li class="ligne_list_classique">
-                         <div class="colonne50">
-                              <span class="attribut">Aide accord&eacute;e : </span>
-                              <div class="select classique" role="select_typeaide_interne">';
-        $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option">Type d\'aide</div>' : '<div id="aideaccorde" class="option" value="'. $aideInterne->idAideAccordee .'">'.$aideInterne->typeAideAccordee->libelle.'</div>';  
-        $contenu .= '
-                                <div class="fleche_bas"> </div>
+                         <li class="ligne_list_classique">
+                            <div class="colonne_classique">
+                                <div class="affichage_classique">
+                                    <h2>Aide accord&eacute;e : </h2>
+                                    <div class="aff">
+                                        <div class="select classique" role="select_typeaide_interne">';
+            $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option">Type d\'aide</div>' : '<div id="aideaccorde" class="option" value="'. $aideInterne->idAideAccordee .'">'.$aideInterne->typeAideAccordee->libelle.'</div>';  
+            $contenu .= '
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="affichage_classique">
+                                    <h2>Avis : </h2>
+                                    <div class="aff">
+                                        <div class="select classique" role="select_avis">';
+            $contenu .= $aideInterne->avis == null ? '<div id="avis" class="option">-------</div>' : '<div id="avis" class="option" value="'. $aideInterne->avis.'">'.$aideInterne->avis.'</div>';  
+            $contenu .= '                  
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                         </div>
-                         <div class="colonne">
-                             <span class="attribut">Date d&eacute;cision : </span>
-                             <span><input class="contour_field input_num" type="text" id="dateDecision" value="'.getDatebyTimestamp($aideInterne->dateDecision).'"></span>
-                         </div>
-                         <div class="colonne">
-                             <span class="attribut">D&eacute;cideur : </span>
-                             <div class="select classique" role="select_decideur">';
+                            
+                            <div class="colonne_classique">
+                                <div class="affichage_classique">
+                                    <h2>Date d&eacute;cision : </h2>
+                                    <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" value="'.getDatebyTimestamp($aideInterne->dateDecision).'"></div>
+                                </div>
+                                <div class="affichage_classique">
+                                    <h2>Vigilance : </h2>
+                                    <div class="aff">';
+                                    if($aideInterne->vigilance == 1) {
+                                        $contenu .= '<span id="vigilance" class="checkbox checkbox_active" value="1"></span>';
+                                    } else {
+                                        $contenu .= '<span id="vigilance" class="checkbox" value="0"></span>';
+                                    }
+                                $contenu .= '
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="colonne_classique">
+                                <div class="affichage_classique">
+                                    <h2>D&eacute;cideur : </h2>
+                                    <div class="aff">
+                                        <div class="select classique" role="select_decideur">';
         $contenu .= $aideInterne->idDecideur == null ? '<div id="decideur" class="option">Decideur</div>' : '<div id="decideur" class="option" value="'. $aideInterne->idDecideur .'">'.$aideInterne->decideur->decideur.'</div>';  
         $contenu .= '
-                                <div class="fleche_bas"> </div>
-                            </div>
-                         </div>
-                     </li>
-                     <li class="ligne_list_classique">
-                         <div class="colonne">
-                             <span class="attribut">Avis : </span>
-                             <div class="select classique" role="select_avis">';
-        $contenu .= $aideInterne->avis == null ? '<div id="avis" class="option">-----</div>' : '<div id="avis" class="option" value="'. $aideInterne->avis.'">'.$aideInterne->avis.'</div>';  
-        $contenu .= '                  
-                            <div class="fleche_bas"> </div>
-                        </div>
-                         </div>
-                         <div class="colonne">
-                             <span class="attribut">Vigilance : </span>';
-         if($aideInterne->vigilance == 1) {
-            $contenu .= '<span id="vigilance" class="checkbox checkbox_active" value="1"></span>';
-         } else {
-            $contenu .= '<span id="vigilance" class="checkbox" value="0"></span>';
-         }
-    $contenu .= '
-                         </div>
-                        <div class="colonne_large">
-                             <span class="attribut">Commentaire : </span>
-                             <span><textarea class="contour_field input_char" type="text" id="commentaire">'.$aideInterne->commentaire.'</textarea></span>
-                         </div>
-                     </li>
-                 </ul>';
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="affichage_classique">
+                                    <h2>Commentaire : </h2>
+                                    <div class="aff"><textarea class="contour_field input_char" type="text" id="commentaire">'.$aideInterne->commentaire.'</textarea></div>
+                                </div>
+                            <div>
+                         </li>
+                     </ul>';
     $contenu .= '
         <h3>Bon d\'aide <span class="addElem" role="addBonInterne"></span></h3>
             <div class="bubble tableau_classique_wrapper">
@@ -279,20 +294,20 @@ function detailAideInterne() {
         }
     } else {
         $contenu .= '<tr>
-                         <td colspan=5 align=center>< Aucun bon n\'a encore &eacute;t&eacute; d&eacute;livr&eacute; pour cette aide > </td>
+                         <td colspan=6 align=center>< Aucun bon n\'a encore &eacute;t&eacute; d&eacute;livr&eacute; pour cette aide > </td>
                      </tr>';
     }
     $contenu .= '</tbody></table></div>
                  <h3>Rapport :</h3>
                      <ul class="list_classique">
                          <li class="ligne_list_classique">
-                            <span><textarea class="contour_field input_char" style="width:99%" type="text" id="rapport" >'.$aideInterne->rapport.'</textarea></span>
+                            <span><textarea class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="rapport" >'.$aideInterne->rapport.'</textarea></span>
                          </li>
                      </ul>';
     $contenu .= '
         <div class="sauvegarder_annuler">
             <div class="bouton modif" value="updateDecisionInterne">Enregistrer</div>
-            <div class="bouton classique" value="cancel">Annuler</div>
+            <div class="bouton classique" value="cancelDecisionInterne">Annuler</div>
         </div>';
     if($aideInterne->avis == null) {
         $contenu .= '</div>';
@@ -524,7 +539,6 @@ function detailAideExterne() {
                              <span><input class="contour_field input_char" type="text" id="etat" value="'.$aideExterne->distrib->appelation.'" disabled/></span>
                          </div>
                          </li></ul>';
-            
     $contenu .= '<h3>D&eacute;cision :</h3>
                      <ul class="list_classique">
                          <li class="ligne_list_classique">
