@@ -17,8 +17,6 @@ function contenu() {
             echo aide();
             break;
         case 'historique':
-            include_once './pages/tableStatique.php';
-            echo comboTableStatique();
             break;
         case 'actions':
             include_once('./pages/action.php');
@@ -36,6 +34,14 @@ function contenu() {
         case 'document':
             include_once('./pages/document.php');
             echo getDocument();
+            break;
+        case 'accueilConfig':
+            include_once('./pages/config.php');
+            echo accueilConfig();
+            break;
+        case 'tableStatique':
+            include_once './pages/tableStatique.php';
+            echo comboTableStatique();
             break;
     }
 }
