@@ -438,7 +438,7 @@ function aideExterne() {
         }
     } else {
         $contenu .= '<tr>
-                         <td colspan=9 align=center>< Aucune aide externe n\'a été attribuée à cet individu > </td>
+                         <td colspan=9 align=center>< Aucune aide externe n\'a été attribuée &agrave; cet individu > </td>
                      </tr>';
     }
 

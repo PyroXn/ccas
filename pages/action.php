@@ -15,7 +15,7 @@ function action() {
                       <th>Date</th>
                       <th>Actions</th>
                       <th>Motif</th>
-                      <th>Suite à donner</th>
+                      <th>Suite &agrave; donner</th>
                       <th>Suite donnee</th>
                       <th>Instructeur</th>
                       <th></th>
@@ -40,6 +40,7 @@ function action() {
     $contenu .= '</tbody></table></div>';    
     $contenu .= '<div class="bouton ajout" id="createAction">Ajouter une action</div>
     <div class="formulaire" action="creation_action">
+            <h2>Actions</h2>
            <div class="colonne_droite">
                  <div class="input_text">
                     <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
@@ -69,6 +70,7 @@ function action() {
            </div>
    </div>
    <div class="formulaire" action="edit_action">
+            <h2>Actions</h2>
            <div class="colonne_droite">
                  <div class="input_text">
                     <input id="date_edit" class="contour_field" type="text" title="Date">
