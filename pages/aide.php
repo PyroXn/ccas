@@ -21,13 +21,13 @@ function aideInterne() {
                     <thead>
                         <tr class="header">
                             <th>Date demande</th>
-                            <th>Aide demandée</th>
+                            <th>Aide demand&eacute;e</th>
                             <th>Etat</th>
                             <th>Nature</th>
                             <th>Avis</th>
                             <th>Montant</th>
-                            <th>Date décision</th>
-                            <th>Détails</th>
+                            <th>Date d&eacute;cision</th>
+                            <th>D&eacute;tails</th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -47,6 +47,7 @@ function aideInterne() {
     }
     $contenu .= '</tbody></table>';
     $contenu .= '<div class="formulaire" action="creation_aide_interne">
+        <h2>Aide interne</h2>
        <div class="colonne_droite">
              <div class="select classique" role="select_typeaide_interne">
                 <div id="typeaideinterne" class="option">Type d\'aide</div>
@@ -102,7 +103,7 @@ foreach($organismes as $organisme) {
                 <div value="En cours">En cours</div>
             </li>
             <li>
-                <div value="Terminé">Terminé</div>
+                <div value="Termin&eacute;">Termin&eacute;</div>
             </li>
         </ul>';
     $contenu .= '<ul class="select_typeaide_interne">';
@@ -140,7 +141,7 @@ function detailAideInterne() {
     $contenu .= '<ul class="list_classique">
                      <li class="ligne_list_classique">
                          <div class="colonne50">
-                              <span class="attribut">Aide demandée : </span>
+                              <span class="attribut">Aide demand&eacute;e : </span>
                               <span><input class="contour_field input_char" type="text" id="aideDemandee" value="'.$aideInterne->typeAideDemandee->libelle.'" disabled/></span>
                          </div>
                          <div class="colonne">
@@ -170,7 +171,7 @@ function detailAideInterne() {
                          <div class="colonne">
                              <span class="attribut">Nature : </span>
                              <span><input class="contour_field input_char" type="text" id="nature" value="'.$aideInterne->natureAide->libelle.'" disabled/></span>
-                             <span class="attribut">État : </span>
+                             <span class="attribut">&eacute;tat : </span>
                              <span><input class="contour_field input_char" type="text" id="etat" value="'.$aideInterne->etat.'" disabled/></span>
                            
                          </div>
@@ -188,15 +189,15 @@ function detailAideInterne() {
                          </div>
                      </li></ul>';
         if($aideInterne->avis == null) {
-            $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une décision</div>';
+            $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une d&eacute;cision</div>';
             $contenu .= '<div id="decision">';
         }
         $contenu .= '
-                <h3 id="idAide" value="'.$aideInterne->id.'">Décision :</h3>
+                <h3 id="idAide" value="'.$aideInterne->id.'">D&eacute;cision :</h3>
                      <ul class="list_classique">
                      <li class="ligne_list_classique">
                          <div class="colonne50">
-                              <span class="attribut">Aide accordée : </span>
+                              <span class="attribut">Aide accord&eacute;e : </span>
                               <div class="select classique" role="select_typeaide_interne">';
         $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option">Type d\'aide</div>' : '<div id="aideaccorde" class="option" value="'. $aideInterne->idAideAccordee .'">'.$aideInterne->typeAideAccordee->libelle.'</div>';  
         $contenu .= '
@@ -204,11 +205,11 @@ function detailAideInterne() {
                             </div>
                          </div>
                          <div class="colonne">
-                             <span class="attribut">Date décision : </span>
+                             <span class="attribut">Date d&eacute;cision : </span>
                              <span><input class="contour_field input_num" type="text" id="dateDecision" value="'.getDatebyTimestamp($aideInterne->dateDecision).'"></span>
                          </div>
                          <div class="colonne">
-                             <span class="attribut">Décideur : </span>
+                             <span class="attribut">D&eacute;cideur : </span>
                              <div class="select classique" role="select_decideur">';
         $contenu .= $aideInterne->idDecideur == null ? '<div id="decideur" class="option">Decideur</div>' : '<div id="decideur" class="option" value="'. $aideInterne->idDecideur .'">'.$aideInterne->decideur->decideur.'</div>';  
         $contenu .= '
@@ -247,7 +248,7 @@ function detailAideInterne() {
                     <thead>
                         <tr class="header">
                             <th>Type bon</th>
-                            <th>Date remise prévue</th>
+                            <th>Date remise pr&eacute;vue</th>
                             <th>Date remise effective</th>
                             <th>Remis par</th>
                             <th>Montant</th>
@@ -272,7 +273,7 @@ function detailAideInterne() {
         }
     } else {
         $contenu .= '<tr>
-                         <td colspan=5 align=center>< Aucun bon n\'a encore été délivré pour cette aide > </td>
+                         <td colspan=5 align=center>< Aucun bon n\'a encore &eacute;t&eacute; d&eacute;livr&eacute; pour cette aide > </td>
                      </tr>';
     }
     $contenu .= '</tbody></table></div>
@@ -301,10 +302,10 @@ function detailAideInterne() {
     $contenu .= '
         <ul class="select_avis">
             <li>
-                <div value="Accepté">Accepté</div>
+                <div value="Accept&eacute;">Accept&eacute;</div>
             </li>
             <li>
-                <div value="Refusé">Refusé</div>
+                <div value="Refus&eacute;">Refus&eacute;</div>
             </li>
         </ul>';
     $contenu .= '<ul class="select_typeaide_interne">';
@@ -316,13 +317,14 @@ function detailAideInterne() {
     $contenu .= '</ul>';
     // FORMULAIRE
     $contenu .= '<div class="formulaire" action="addBonInterne" idAide="'.$aideInterne->id.'">
+        <h2>Bon interne</h2>
            <div class="colonne_droite">
             <input type="hidden" id="idinstruct" value="'.$aideInterne->idInstruct.'">
              <div class="input_text">
-                <input id="dateprevue" class="contour_field" type="text" title="Date" placeholder="Date de remise prévue">
+                <input id="dateprevue" class="contour_field" type="text" title="Date" placeholder="Date de remise pr&eacute;vue">
             </div>
             <div class="input_text">
-                <input id="dateeffective" class="contour_field" type="text" title="Date" placeholder="Date de remise éffective">
+                <input id="dateeffective" class="contour_field" type="text" title="Date" placeholder="Date de remise &eacute;ffective">
             </div>
             <div class="input_text">
                 <input id="montant" class="contour_field input_num" type="text" title="Montant" placeholder="Montant">
@@ -409,14 +411,14 @@ function aideExterne() {
                     <thead>
                         <tr class="header">
                             <th>Date demande</th>
-                            <th>Aide demandée</th>
+                            <th>Aide demand&eacute;e</th>
                             <th>Etat</th>
                             <th>Nature</th>
                             <th>Organisme</th>
                             <th>Avis</th>
                             <th>Montant</th>
-                            <th>Date décision</th>
-                            <th>Détails</th>
+                            <th>Date d&eacute;cision</th>
+                            <th>D&eacute;tails</th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -438,7 +440,7 @@ function aideExterne() {
         }
     } else {
         $contenu .= '<tr>
-                         <td colspan=9 align=center>< Aucune aide externe n\'a été attribuée &agrave; cet individu > </td>
+                         <td colspan=9 align=center>< Aucune aide externe n\'a &eacute;t&eacute; attribu&eacute;e &agrave; cet individu > </td>
                      </tr>';
     }
 
@@ -455,7 +457,7 @@ function detailAideExterne() {
     $contenu .= '<ul class="list_classique">
                      <li class="ligne_list_classique">
                          <div class="colonne50">
-                              <span class="attribut">Aide demandée : </span>
+                              <span class="attribut">Aide demand&eacute;e : </span>
                               <span><input class="contour_field input_char" type="text" id="aideDemandee" value="'.$aideExterne->typeAideDemandee->libelle.'" disabled/></span>
                          </div>
                          <div class="colonne">
@@ -498,13 +500,13 @@ function detailAideExterne() {
                          <div class="colonne">
                          </div>                         
                          <div class="colonne">
-                                 <span class="attribut">État : </span>
+                                 <span class="attribut">&eacute;tat : </span>
                              <span><input class="contour_field input_char" type="text" id="etat" value="'.$aideExterne->etat.'" disabled/></span>
                          </div>
                      </li>
                      <li class="ligne_list_classique">
                          <div class="colonne">
-                             <span class="attribut">Montant demandé : </span>
+                             <span class="attribut">Montant demand&eacute; : </span>
                              <span><input class="contour_field input_char" type="text" id="etat" value="'.$aideExterne->montantDemande.'" disabled/></span>
                          </div>
                          <div class="colonne">
@@ -517,7 +519,7 @@ function detailAideExterne() {
                          </div>
                          </li></ul>';
             
-    $contenu .= '<h3>Décision :</h3>
+    $contenu .= '<h3>D&eacute;cision :</h3>
                      <ul class="list_classique">
                          <li class="ligne_list_classique">
                              <div class="colonne">
@@ -527,7 +529,7 @@ function detailAideExterne() {
                              <div class="colonne">
                              </div>
                              <div class="colonne">
-                                 <span class="attribut">Date décision : </span>
+                                 <span class="attribut">Date d&eacute;cision : </span>
                                  <span><input class="contour_field input_num" type="text" id="dateDecision" value="'.getDatebyTimestamp($aideExterne->dateDecision).'" disabled/></span>
                              </div>
                              <div class="colonne">

@@ -39,11 +39,8 @@ $(function() {
         creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="new_document"]'));
     });
     
-    $('#createAideInterne').live("click", function() {        
-        var newPosition = new Object();
-        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_aide_interne"]').width()/2;
-        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_aide_interne"]').height();
-        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_aide_interne"]'));
+    $('#createAideInterne').live("click", function() {
+        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_aide_interne"]'));
     });
     
     $('.edit_ligne').live("click", function() {
