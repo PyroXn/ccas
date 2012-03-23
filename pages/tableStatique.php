@@ -4,7 +4,7 @@
 function comboTableStatique() {
     $retour = '
         <div class="select classique" role="select_table_statique">
-            <div id="choixTableStatique" class="option">etude</div>
+            <div id="choixTableStatique" class="option">bailleur</div>
             <div class="fleche_bas"> </div>
         </div>
         <ul class="select_table_statique">

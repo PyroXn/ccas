@@ -55,9 +55,10 @@ $(function() {
             tmp = $(tmp).parent();
             tab = true;
         }
-        console.log(tmp);
+        console.log($(window).height());
+        console.log(form.height());
         newPosition.left = $(window).width()/2 - form.width()/2;
-        newPosition.top = $(window).height()/2 - form.height();
+        newPosition.top = $(window).height()/2 - form.height()/2;
         form.attr('table', $(this).attr('table'));
         form.attr('idLigne', $(this).attr('idLigne'));
         $(form).find('[columnName]').each(function(){
@@ -576,9 +577,11 @@ $(function() {
     
     //permet l'affichage des formulaires flottant entouré de gris
     function creationForm(x, h, form) {
+        console.log(form);
         $('#ecran_gris').toggle();
         $(form).css({
-            "display":"block"
+            "display":"block",
+            "position":"fixed"
         });
         $(form).offset({
             top:x.top+h,
