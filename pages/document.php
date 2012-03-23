@@ -25,14 +25,17 @@ function getDocument() {
 
         }
         $contenu = '
-            <table border="0">
-                <tr>
-                    <td>Word</td>
-                    <td>Excel</td>
-                    <td>Texte</td>
-                    <td>PDF</td>
-                    <td>Autres</td>
-                </tr>';
+            <table class="tableau_classique" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr class="header">
+                    <th>Word</th>
+                    <th>Excel</th>
+                    <th>Texte</th>
+                    <th>PDF</th>
+                    <th>Autres</th>
+                </tr>
+            </thead>
+            <tbody>';
     foreach($arrayExtension as $tab) {
        
 //        echo 'Fichier de type '.$tab;
@@ -81,7 +84,7 @@ function getDocument() {
         }
         
     }
-    $contenu .= '</table>';
+    $contenu .= '</tbody></table>';
     $contenu .= '<div id="newDocument" class="bouton ajout">Ajouter un document</div>
                             <div class="formulaire" action="new_document">
                                    <div class="colonne_droite">
