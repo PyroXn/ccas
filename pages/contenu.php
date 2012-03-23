@@ -132,7 +132,7 @@ function generateInfoFoyer($foyer) {
                     </div>
                     <div class="colonne">
                         <span class="attribut">Secteur :</span>
-                        <div class="select classique" role="select_secteur">';
+                        <div class="select classique" role="select_secteur" disabled>';
     $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
     $retour .= '<div class="fleche_bas"> </div>
                         </div>
@@ -145,14 +145,14 @@ function generateInfoFoyer($foyer) {
                <li class="ligne_list_classique">
                     <div class="colonne">
                         <span class="attribut">Type :</span>
-                        <div class="select classique" role="select_typelogement">';
+                        <div class="select classique" role="select_typelogement" disabled>';
 $retour .= $foyer->typeLogement == null ? '<div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                 </div>
                 </div>
                    <div class="colonne">
                         <span class="attribut">Statut :</span>
-                        <div class="select classique" role="select_statutlogement">';
+                        <div class="select classique" role="select_statutlogement" disabled>';
 $retour .= $foyer->typeAppartenance == null ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
@@ -169,14 +169,14 @@ $retour .= '<div class="fleche_bas"> </div>
                <li class="ligne_list_classique">
                     <div class="colonne">
                         <span class="attribut">Bailleur :</span>
-                        <div class="select classique" role="select_bailleur">';
+                        <div class="select classique" role="select_bailleur" disabled>';
 $retour .= $foyer->idBailleur == null ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Instructeur :</span>
-                        <div class="select classique" role="select_instruct">';
+                        <div class="select classique" role="select_instruct" disabled>';
 $retour .= $foyer->idInstruct == null ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
@@ -714,14 +714,14 @@ function generalite() {
                     </div>
                     <div class="colonne">
                         <span class="attribut">Situation Familiale :</span>
-                        <div class="select classique" role="select_situation">';
+                        <div class="select classique" role="select_situation" disabled>';
 $contenu .= $user->idSitMatri == null ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.$user->situationmatri->situation.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Nationalit&eacute; :</span>
-                        <div class="select classique" role="select_natio">';
+                        <div class="select classique" role="select_natio" disabled>';
 $contenu .= $user->idNationalite == null ? '<div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.$user->nationalite->nationalite.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
@@ -739,14 +739,14 @@ $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Sexe :</span>
-                        <div class="select classique" role="select_sexe">';
+                        <div class="select classique" role="select_sexe" disabled>';
 $contenu .= $user->sexe == ' ' ? '<div id="sexe" class="option" value=" ">-----</div>' : '<div id="sexe" class="option" value="'.$user->sexe.'">'.$user->sexe.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Statut :</span>
-                        <div class="select classique" role="select_statut">';
+                        <div class="select classique" role="select_statut" disabled>';
 $contenu .= $user->idLienFamille == null ? '<div id="statut" class="option" value=" ">-----</div>' : '<div id="statut" class="option" value="'.$user->idLienFamille.'">'.$user->lienfamille->lien.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
@@ -789,7 +789,7 @@ $contenu .= '<div class="fleche_bas"> </div>
             <li class="ligne_list_classique">
                 <div class="colonne">
                     <span class="attribut">Niveau &eacute;tude :</span>
-                    <div class="select classique" role="select_etude">';
+                    <div class="select classique" role="select_etude" disabled>';
 $contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
 $contenu .= '
                         <div class="fleche_bas"> </div>
@@ -797,7 +797,7 @@ $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">Profession :</span>
-                    <div class="select classique" role="select_profession">';
+                    <div class="select classique" role="select_profession" disabled>';
 $contenu .= $user->idNiveauEtude == null ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.$user->profession->profession.'</div>';  
 $contenu .= '
                         <div class="fleche_bas"> </div>
@@ -853,7 +853,7 @@ $contenu .= '
                 </div>
                 <div class="colonne">
                     <span class="attribut">R&eacute;gime :</span>
-                    <div class="select classique" role="select_regime">';
+                    <div class="select classique" role="select_regime" disabled>';
 $contenu .= $user->regime == ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.$user->regime.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
@@ -862,7 +862,7 @@ $contenu .= '<div class="fleche_bas"> </div>
             <li class="ligne_list_classique">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_couv">';
+                    <div class="select classique" role="select_couv" disabled>';
 $contenu .= $user->idCaisseSecu == null ? '<div id="caisseCouv" class="option" value=" ">-----</div>' : '<div id="caisseCouv" class="option" value="'.$user->idCaisseSecu.'">'.$user->secu->appelation.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
@@ -898,7 +898,7 @@ $contenu .= '
             <li class="ligne_list_classique">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_mut">';
+                    <div class="select classique" role="select_mut" disabled>';
 $contenu .= $user->idCaisseMut == null ? '<div id="mutuelle" class="option" value="">-----</div>' : '<div id="mutuelle" class="option" value="'.$user->idCaisseMut.'">'.$user->mutuelle->appelation.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
@@ -936,7 +936,7 @@ $contenu .= '
             <li class="ligne_list_classique">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_caf">';
+                    <div class="select classique" role="select_caf" disabled>';
 $contenu .= $user->idCaisseCaf == null ? '<div id="caf" class="option" value="">-----</div>' : '<div id="caf" class="option" value="'.$user->idCaisseCaf.'">'.$user->caf->appelation.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>

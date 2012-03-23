@@ -85,18 +85,20 @@ $(function() {
     });
     
     $('.select').live("click", function() {
-        //permet de generaliser sur tous les select
-        var attr = '.'+$(this).attr('role');
-        console.log(attr);
-        var x = $(this).offset();
-        var h = $(this).outerHeight();
-        $(attr).toggle();
-        $(attr).offset({
-            top:x.top+h,
-            left:x.left
-        });
-        $(this).children('.option').toggleClass('en_attente');
-        $(attr).toggleClass('en_execution');
+        if (!$(this).attr('disabled')) {
+            //permet de generaliser sur tous les select
+            var attr = '.'+$(this).attr('role');
+            console.log(attr);
+            var x = $(this).offset();
+            var h = $(this).outerHeight();
+            $(attr).toggle();
+            $(attr).offset({
+                top:x.top+h,
+                left:x.left
+            });
+            $(this).children('.option').toggleClass('en_attente');
+            $(attr).toggleClass('en_execution');
+        }
     });
     
     $('.checkboxChefFamille').live("click", function(){
@@ -575,6 +577,7 @@ $(function() {
     
     $('.edit').live("click", function() {
         $(this).parent().next().children().find('input').removeAttr("disabled");
+        $(this).parent().next().children().find('[class^=select]').removeAttr("disabled");
         var update = $(this).parent().parent().children('.update');
         $(update).css({
             "margin-right":"0"
