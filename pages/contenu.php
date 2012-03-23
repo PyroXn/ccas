@@ -162,7 +162,7 @@ $retour .= '<div class="fleche_bas"> </div>
                         <span><input class="contour_field input_num" type="text" id="surface" value="'.$foyer->logSurface.'" disabled/></span>
                   </div>
                   <div class="colonne">
-                        <span class="attribut">Dâte d\'entr&eacute;e :</span>
+                        <span class="attribut">Date d\'entr&eacute;e :</span>
                         <span><input class="contour_field input_date" type="text" id="dateentree" size="10" value="'.getDatebyTimestamp($foyer->logDateArrive).'" disabled/></span>
                   </div>
                </li>
