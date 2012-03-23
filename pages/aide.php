@@ -32,20 +32,26 @@ function aideInterne() {
                     </thead>
                     <tbody>';
     $i = 1;
-    foreach($aidesInternes as $aideInterne) {
-        $i % 2 ? $contenu .= '<tr name="'.$aideInterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideInterne->id.'">';
-        $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
-                                <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
-                                <td> '.$aideInterne->etat.'</td>
-                                <td> '.$aideInterne->natureAide->libelle.'</td>
-                                <td> '.$aideInterne->avis.'</td>
-                                <td> MONTANT TOTAL</td>
-                                <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
-                                <td><span class="edit_aide_interne"></span></td>
-                    </tr>';
-        $i++;
+    if (sizeof($aidesInternes) != null) {
+        foreach($aidesInternes as $aideInterne) {
+            $i % 2 ? $contenu .= '<tr name="'.$aideInterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideInterne->id.'">';
+            $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
+                                    <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
+                                    <td> '.$aideInterne->etat.'</td>
+                                    <td> '.$aideInterne->natureAide->libelle.'</td>
+                                    <td> '.$aideInterne->avis.'</td>
+                                    <td> MONTANT TOTAL</td>
+                                    <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
+                                    <td><span class="edit_aide_interne"></span></td>
+                        </tr>';
+            $i++;
+        }
+    } else {
+        $contenu .= '<tr>
+                         <td colspan=9 align=center>< Aucune aide interne n\'a &eacute;t&eacute; attribu&eacute;e &agrave; cet individu > </td>
+                     </tr>';
     }
-    $contenu .= '</tbody></table>';
+    $contenu .= '</tbody></table></div>';
     $contenu .= '<div class="formulaire" action="creation_aide_interne">
         <h2>Aide interne</h2>
        <div class="colonne_droite">
