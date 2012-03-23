@@ -576,8 +576,15 @@ $(function() {
     }
     
     $('.edit').live("click", function() {
-        $(this).parent().next().children().find('input').removeAttr("disabled");
-        $(this).parent().next().children().find('[class^=select]').removeAttr("disabled");
+        console.log($(this).parent().next().children().find('input').attr('disabled'));
+        var attr = $(this).parent().next().children().find('input').attr('disabled');
+        if (typeof attr !== 'undefined' && attr !== false) {
+            $(this).parent().next().children().find('input').removeAttr('disabled');
+            $(this).parent().next().children().find('[class^=select]').removeAttr('disabled');
+        } else {
+            $(this).parent().next().children().find('input').attr('disabled','');
+            $(this).parent().next().children().find('[class^=select]').attr('disabled','');
+        }
         var update = $(this).parent().parent().children('.update');
         $(update).css({
             "margin-right":"0"
