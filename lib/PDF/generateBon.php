@@ -1,7 +1,7 @@
 <?php
 
     ob_start();
-    include(dirname(__FILE__).'/page.php');
+    include(dirname(__FILE__).'/pageBon.php');
     $content = ob_get_clean();
 
     require_once(dirname(__FILE__).'/html2pdf/html2pdf.class.php');

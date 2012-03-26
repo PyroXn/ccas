@@ -1,4 +1,4 @@
-<link type="text/css" href="./lib/bonAide/style.css" rel="stylesheet" >
+<link type="text/css" href="./lib/PDF/styleBon.css" rel="stylesheet" >
 <page>
     <div id="nomCentre">
         <b>CENTRE COMMUNAL D'ACTION SOCIALE DE HAYANGE</b>

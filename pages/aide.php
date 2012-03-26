@@ -445,7 +445,7 @@ function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $monta
     if(!is_dir($chemin.'/'.$idAide)) {
         mkdir($chemin.'/'.$idAide);
     }
-    include_once('./lib/bonAide/index.php');
+    include_once('./lib/PDF/generateBon.php');
 }
 
 function aideExterne() {
