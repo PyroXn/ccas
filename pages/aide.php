@@ -34,13 +34,18 @@ function aideInterne() {
     $i = 1;
     if (sizeof($aidesInternes) != null) {
         foreach($aidesInternes as $aideInterne) {
+            $total = 0;
+            $bons = Doctrine_Core::getTable('bonaide')->findByIdAideInterne($aideInterne->id);
+            foreach($bons as $bon) {
+                $total += $bon->montant;
+            }
             $i % 2 ? $contenu .= '<tr name="'.$aideInterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideInterne->id.'">';
             $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
                                     <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
                                     <td> '.$aideInterne->etat.'</td>
                                     <td> '.$aideInterne->natureAide->libelle.'</td>
                                     <td> '.$aideInterne->avis.'</td>
-                                    <td> MONTANT TOTAL</td>
+                                    <td> '.$total.'&euro;</td>
                                     <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
                                     <td><span class="edit_aide_interne"></span></td>
                         </tr>';
