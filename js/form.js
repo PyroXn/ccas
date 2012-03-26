@@ -257,10 +257,9 @@ $(function() {
         }
         else if(value=='save') {
             //commun a tous les form
-            var table = $('.formulaire').attr('action');
-            var datastring = 'table=' + table
+            var table = formActuel.attr('action');
+            var datastring = 'table=' + table;
             
-            console.log('TABLE : ' + table);
             switch(table){
                 //unique pour la creation de foyer
                 case 'creation_foyer':
