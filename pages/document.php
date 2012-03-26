@@ -24,6 +24,7 @@ function getDocumentIndividu() {
                             <th>Nom document</th>
                             <th>Type fichier</th>
                             <th>Date dernière modification</th>
+                            <th>Télécharger</th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -32,10 +33,25 @@ function getDocumentIndividu() {
         foreach($fichier as $file) {
             $extension = pathinfo($dir_nom.'/'.$file, PATHINFO_EXTENSION);
 
-            $i % 2 ? $contenu .= '<tr name="'.$aideExterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideExterne->id.'">';
-            $contenu .= '<td>'.getDatebyTimestamp($aideExterne->dateDemande).'</td>
-                         <td> '.$aideExterne->typeAideDemandee->libelle.'</td>
-                         <td> '.utf8_decode($aideExterne->etat).'</td>
+            $i % 2 ? $contenu .= '<tr name="'.$file.'">' : $contenu .= '<tr class="alt" name="'.$file.'">';
+            $contenu .= '<td>'.$file.'</td>
+                         <td> ';
+            switch ($extension) {
+                case "doc":
+                case "docx":
+                    $contenu .= 'Microsft word';
+                    break;
+                case "xls":
+                case "xlsx":
+                    $contenu .= 'Microsft excel';
+                    break;
+                case "pdf":
+                    echo "pdf";
+                    break;
+            }
+         $contenu .=    '</td>
+                         <td> '.getDatebyTimestamp(filemtime($dir_nom.'/'.$file)).'</td>
+                         <td><span class="open_doc"></span></td>
                         </tr>';
             $i++;
         }

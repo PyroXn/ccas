@@ -43,6 +43,10 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_aide_interne"]'));
     });
     
+    $('#createAideExterne').live("click", function() {
+        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_aide_externe"]'));
+    });
+    
     $('.edit_ligne').live("click", function() {
         var form = $('.formulaire[action="edit_ligne"]');
         var newPosition = new Object();
@@ -302,6 +306,18 @@ $(function() {
                     datastring += '&etat='+$('#etat').attr('value')+'&orga='+$('#orga').attr('value')+'&urgence='+urgence;
                     console.log(datastring);
                     break;
+                case 'creation_aide_externe':
+                    var urgence = 0;
+                    if($('#urgence').hasClass('checkbox_active')) {
+                        urgence = 1;
+                    }
+                    datastring += '&idIndividu='+idIndividu+'&typeaideexterne='+$('#typeaideexterne').attr('value');
+                    datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
+                    datastring += '&natureexterne='+$('#natureexterne').attr('value')+'&distrib='+$('#distrib').attr('value');
+                    datastring += '&etat='+$('#etat').attr('value')+'&orgaext='+$('#orgaext').attr('value')+'&urgence='+urgence;
+                    datastring += '&montantDemande='+$('#montantdemande').attr('value');
+                    console.log(datastring);
+                    break;
                 case 'addBonInterne':
                     var idAide = $('.formulaire').attr('idAide');
                     datastring += '&idAide='+idAide+'&dateprevue='+$('#dateprevue').val();
@@ -345,6 +361,9 @@ $(function() {
                             $('#contenu').html(data.action);
                             break;
                         case 'creation_aide_interne':
+                            $('#contenu').html(data.aide);
+                            break;
+                        case 'creation_aide_externe':
                             $('#contenu').html(data.aide);
                             break;
                         case 'addBonInterne':
