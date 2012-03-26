@@ -293,7 +293,7 @@ function detailAideInterne() {
                                     <td> '.getDatebyTimestamp($bonAide->dateRemisePrevue).'</td>
                                     <td> '.getDatebyTimestamp($bonAide->dateRemiseEffective).'</td>
                                     <td> '.$bonAide->instruct->nom.'</td>                                
-                                    <td> '.$bonAide->montant.'</td>
+                                    <td> '.$bonAide->montant.'&euro;</td>
                                     <td>'.$bonAide->commentaire.'</td>
                                     <td><a href="./document/'.$bonAide->aideInterne->individu->id.'/'.$bonAide->aideInterne->id.'/'.$bonAide->id.'.pdf" target="_blank">V</a></td>
                         </tr>';
