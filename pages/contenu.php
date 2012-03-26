@@ -20,6 +20,10 @@ function contenu() {
             include_once './pages/tableStatique.php';
             echo comboTableStatique();
             break;
+        case 'documents':
+            include_once './pages/document.php';
+            echo getDocumentIndividu();
+            break;
         case 'actions':
             include_once('./pages/action.php');
             echo action();
