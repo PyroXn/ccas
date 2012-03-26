@@ -1,5 +1,56 @@
 <?php
 
+function getDocumentIndividu() {
+    
+    $dir_nom = './document/'.$_POST['idIndividu'];
+    $dir = opendir($dir_nom) or die('Erreur de listage : le répertoire n\'existe pas'); // on ouvre le contenu du dossier courant
+    $fichier= array(); // on déclare le tableau contenant le nom des fichiers
+    $arrayExtension = array();
+    while($element = readdir($dir)) {
+            if($element != '.' && $element != '..') {
+                    if (!is_dir($dir_nom.'/'.$element)) {$fichier[] = $element;}
+            }
+    }
+
+    closedir($dir);
+    
+    
+    $contenu = '
+        <h3>Documents :</h3>
+            <div class="bubble tableau_classique_wrapper">
+                <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr class="header">
+                            <th>Nom document</th>
+                            <th>Type fichier</th>
+                            <th>Date dernière modification</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+    if(!empty($fichier)) {
+        $i = 1;
+        foreach($fichier as $file) {
+            $extension = pathinfo($dir_nom.'/'.$file, PATHINFO_EXTENSION);
+
+            $i % 2 ? $contenu .= '<tr name="'.$aideExterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideExterne->id.'">';
+            $contenu .= '<td>'.getDatebyTimestamp($aideExterne->dateDemande).'</td>
+                         <td> '.$aideExterne->typeAideDemandee->libelle.'</td>
+                         <td> '.utf8_decode($aideExterne->etat).'</td>
+                        </tr>';
+            $i++;
+        }
+    } else {
+        $contenu .= '<tr>
+                         <td colspan=9 align=center>< Aucune document n\'a été attribué à cet individu > </td>
+                     </tr>';
+    }
+
+    $contenu .= '</tbody></table>';
+
+    return utf8_encode($contenu);
+}
+
+
 function getDocument() {
     $dir_nom = './document'; // dossier listé (pour lister le répertoir courant : $dir_nom = '.'  --> ('point')
     $dir = opendir($dir_nom) or die('Erreur de listage : le répertoire n\'existe pas'); // on ouvre le contenu du dossier courant
