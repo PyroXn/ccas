@@ -421,6 +421,18 @@ function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $monta
     $bon->montant = $montant;
     $bon->commentaire = $commentaire;
     $bon->save();   
+    // On génère le bon
+    $beneficaire = $bon->aideInterne->individu->civilite .' '. $bon->aideInterne->individu->nom .' '. $bon->aideInterne->individu->prenom;
+    $rue = $bon->aideInterne->individu->foyer->rue->rue;
+    $num = $bon->aideInterne->individu->foyer->numRue;
+    $idIndividu = $bon->aideInterne->individu->id;
+    
+    $chemin = './document/'.$idIndividu.'/'.$bon->aideInterne->id;
+    $numBon = $bon->id;
+    if(!opendir($chemin)) {
+        mkdir($chemin);
+    }
+    include_once('./lib/bonAide/index.php');
 }
 
 function aideExterne() {
