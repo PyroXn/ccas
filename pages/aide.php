@@ -34,13 +34,18 @@ function aideInterne() {
     $i = 1;
     if (sizeof($aidesInternes) != null) {
         foreach($aidesInternes as $aideInterne) {
+            $total = 0;
+            $bons = Doctrine_Core::getTable('bonaide')->findByIdAideInterne($aideInterne->id);
+            foreach($bons as $bon) {
+                $total += $bon->montant;
+            }
             $i % 2 ? $contenu .= '<tr name="'.$aideInterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideInterne->id.'">';
             $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
                                     <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
                                     <td> '.$aideInterne->etat.'</td>
                                     <td> '.$aideInterne->natureAide->libelle.'</td>
                                     <td> '.$aideInterne->avis.'</td>
-                                    <td> MONTANT TOTAL</td>
+                                    <td> '.$total.'&euro;</td>
                                     <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
                                     <td><span class="edit_aide_interne"></span></td>
                         </tr>';
@@ -274,6 +279,7 @@ function detailAideInterne() {
                             <th>Remis par</th>
                             <th>Montant</th>
                             <th>Commentaire</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -282,13 +288,15 @@ function detailAideInterne() {
 
     if (sizeof($bonAides) != null) {
         foreach($bonAides as $bonAide) {
+            $chemin = './document/'.$bonAide->aideInterne->individu->id.'/'.$bonAide->aideInterne->id;
             $i % 2 ? $contenu .= '<tr name="'.$bonAide->id.'">' : $contenu .= '<tr class="alt" name="'.$bonAide->id.'">';
             $contenu .= '<td>'.$bonAide->aideInterne->typeAideDemandee->libelle.'</td>
                                     <td> '.getDatebyTimestamp($bonAide->dateRemisePrevue).'</td>
                                     <td> '.getDatebyTimestamp($bonAide->dateRemiseEffective).'</td>
                                     <td> '.$bonAide->instruct->nom.'</td>                                
-                                    <td> '.$bonAide->montant.'</td>
+                                    <td> '.$bonAide->montant.'&euro;</td>
                                     <td>'.$bonAide->commentaire.'</td>
+                                    <td>'.pdfExist($chemin, $bonAide->id).'</td>
                         </tr>';
             $i++;
         }
@@ -441,6 +449,23 @@ function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $monta
     $bon->montant = $montant;
     $bon->commentaire = $commentaire;
     $bon->save();   
+    // On génère le bon
+    include_once('./lib/int2str.php');
+    $beneficaire = $bon->aideInterne->individu->civilite .' '. $bon->aideInterne->individu->nom .' '. $bon->aideInterne->individu->prenom;
+    $rue = $bon->aideInterne->individu->foyer->rue->rue;
+    $num = $bon->aideInterne->individu->foyer->numRue;
+    $idIndividu = $bon->aideInterne->individu->id;
+    $lettres = int2str($montant);
+    $chemin = './document/'.$idIndividu;
+    $idAide = $bon->aideInterne->id;
+    $numBon = $bon->id;
+    if(!is_dir($chemin)) {
+        mkdir($chemin);
+    }
+    if(!is_dir($chemin.'/'.$idAide)) {
+        mkdir($chemin.'/'.$idAide);
+    }
+    include_once('./lib/PDF/generateBon.php');
 }
 
 function aideExterne() {
@@ -684,12 +709,12 @@ function detailAideExterne() {
     return $contenu;
 }
 
-function generateBonAide() {
-    require('./lib/fpdf.php');
-    $pdf = new FPDF();
-    $pdf->AddPage();
-    $pdf->SetFont('Arial','B',16);
-    $pdf->Cell(40,10,'Hello World !');
-    $pdf->Output();
+// TODO : Prevoir creation du pdf si pdf existe pas
+function pdfExist($chemin, $idBon) {
+    if(is_dir($chemin)) {
+        if(file_exists($chemin.'/'.$idBon.'.pdf')) {
+            return '<a href="'.$chemin.'/'.$idBon.'.pdf" target="_blank">V</a>';
+        }
+    }
 }
 ?>

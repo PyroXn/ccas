@@ -9,6 +9,14 @@
         <link rel="stylesheet" type="text/css" href="./templates/tipsy.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/glDatePicker.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/form.css" media="screen" />
+        
+        
+<!--         Bootstrap CSS Toolkit styles 
+<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap.min.css" />
+ Bootstrap styles for responsive website layout, supporting different screen sizes 
+<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-responsive.min.css" />-->
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="./templates/css/jquery.fileupload-ui.css" />
     </head>
     <body>
         <div id="navigationbar">

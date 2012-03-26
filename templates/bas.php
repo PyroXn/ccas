@@ -37,6 +37,10 @@
         <script type="text/javascript" src="./js/jquery.tipsy.js"></script>
         <script type="text/javascript" src="./js/form.js"></script>
         <script type="text/javascript" src="./js/admin.js"></script>
+        <script>
+        
+        </script>
+        
                 <script type="text/javascript">
 		// Run capabilities test
 		enhance({
@@ -51,5 +55,18 @@
 			]	
 		});   
     </script>
+    
+    
+<script src="./js/jsUpload/jquery.ui.widget.js"></script>
+<script src="./js/jsUpload/tmpl.min.js"></script>
+<script src="./js/jsUpload/load-image.min.js"></script>
+<script src="./js/jsUpload/canvas-to-blob.min.js"></script>
+<script src="./js/jsUpload/bootstrap.min.js"></script>
+<script src="./js/jsUpload/bootstrap-image-gallery.min.js"></script>
+<script src="./js/jsUpload/jquery.iframe-transport.js"></script>
+<script src="./js/jsUpload/jquery.fileupload.js"></script>
+<script src="./js/jsUpload/jquery.fileupload-ip.js"></script>
+<script src="./js/jsUpload/jquery.fileupload-ui.js"></script>
+
     </body>
 </html>
