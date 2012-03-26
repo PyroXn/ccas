@@ -39,11 +39,8 @@ $(function() {
         creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="new_document"]'));
     });
     
-     $('#createAideInterne').live("click", function() {        
-        var newPosition = new Object();
-        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_aide_interne"]').width()/2;
-        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_aide_interne"]').height();
-        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_aide_interne"]'));
+    $('#createAideInterne').live("click", function() {
+        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_aide_interne"]'));
     });
     
     $('.edit_ligne').live("click", function() {
@@ -55,9 +52,10 @@ $(function() {
             tmp = $(tmp).parent();
             tab = true;
         }
-        console.log(tmp);
+        console.log($(window).height());
+        console.log(form.height());
         newPosition.left = $(window).width()/2 - form.width()/2;
-        newPosition.top = $(window).height()/2 - form.height();
+        newPosition.top = $(window).height()/2 - form.height()/2;
         form.attr('table', $(this).attr('table'));
         form.attr('idLigne', $(this).attr('idLigne'));
         $(form).find('[columnName]').each(function(){
@@ -85,18 +83,20 @@ $(function() {
     });
     
     $('.select').live("click", function() {
-        //permet de generaliser sur tous les select
-        var attr = '.'+$(this).attr('role');
-        console.log(attr);
-        var x = $(this).offset();
-        var h = $(this).outerHeight();
-        $(attr).toggle();
-        $(attr).offset({
-            top:x.top+h,
-            left:x.left
-        });
-        $(this).children('.option').toggleClass('en_attente');
-        $(attr).toggleClass('en_execution');
+        if (!$(this).attr('disabled')) {
+            //permet de generaliser sur tous les select
+            var attr = '.'+$(this).attr('role');
+            console.log(attr);
+            var x = $(this).offset();
+            var h = $(this).outerHeight();
+            $(attr).toggle();
+            $(attr).offset({
+                top:x.top+h,
+                left:x.left
+            });
+            $(this).children('.option').toggleClass('en_attente');
+            $(attr).toggleClass('en_execution');
+        }
     });
     
     $('.checkboxChefFamille').live("click", function(){
@@ -215,28 +215,43 @@ $(function() {
                 }
             });
         } else if(value == 'updateDecisionInterne') {
-              var vigilance = 0;
-              if($('#vigilance').hasClass('checkbox_active')) {
-                  vigilance = 1;
-              }
-              datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&aide='+$('#aideaccorde').attr('value');
-              datastring += '&date='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
-              datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
-              datastring += '&rapport='+$('#rapport').val();
-              console.log(datastring);
-              $.ajax({
-                  type: 'post',
-                  dataType:'json',
-                  data: datastring,
-                  url: './index.php?p=updatedecisioninterne',
-                  cache: false,
-                  success: function(aideinterne) {
-                      console.log(aideinterne);
-                      $('#contenu').html(aideinterne.aide);
-                  }
-              });
+            var vigilance = 0;
+            if($('#vigilance').hasClass('checkbox_active')) {
+                vigilance = 1;
+            }
+            datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&aide='+$('#aideaccorde').attr('value');
+            datastring += '&date='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
+            datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
+            datastring += '&rapport='+$('#rapport').val()+'&decideur='+$('#decideur').attr('value');
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatedecisioninterne',
+                cache: false,
+                success: function(aideinterne) {
+                    console.log(aideinterne);
+                    $('#contenu').html(aideinterne.aide);
+                }
+            });
         }
-            else if(value=='save') {
+        else if(value == 'cancelDecisionInterne') {
+            var idMenu = 'aides';
+            var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
+            console.log(idIndividu);
+            $.ajax({
+                type: "POST",
+                url: "./index.php?p=contenu",
+                data: 'idMenu=' + idMenu + '&idIndividu='+ idIndividu + '&idFoyer='+idFoyer,
+                cache: false,
+                success: function(html)
+                {
+                    $("#contenu").html(html);
+                }
+            });
+        }
+        else if(value=='save') {
             //commun a tous les form
             var table = $('.formulaire').attr('action');
             var datastring = 'table=' + table
@@ -276,17 +291,24 @@ $(function() {
                     datastring += '&instruct='+$('#instruct').attr('value');
                     console.log(datastring);
                     break;
-               case 'creation_aide_interne':
-                   var urgence = 0;
+                case 'creation_aide_interne':
+                    var urgence = 0;
                     if($('#urgence').hasClass('checkbox_active')) {
                         urgence = 1;
                     }
-                   datastring += '&idIndividu='+idIndividu+'&typeaide='+$('#typeaideinterne').attr('value');
-                   datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
-                   datastring += '&nature='+$('#nature').attr('value')+'&proposition='+$('#proposition').val();
-                   datastring += '&etat='+$('#etat').attr('value')+'&orga='+$('#orga').attr('value')+'&urgence='+urgence;
-                   console.log(datastring);
-                   break;
+                    datastring += '&idIndividu='+idIndividu+'&typeaide='+$('#typeaideinterne').attr('value');
+                    datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
+                    datastring += '&nature='+$('#nature').attr('value')+'&proposition='+$('#proposition').val();
+                    datastring += '&etat='+$('#etat').attr('value')+'&orga='+$('#orga').attr('value')+'&urgence='+urgence;
+                    console.log(datastring);
+                    break;
+                case 'addBonInterne':
+                    var idAide = $('.formulaire').attr('idAide');
+                    datastring += '&idAide='+idAide+'&dateprevue='+$('#dateprevue').val();
+                    datastring += '&dateeffective='+$('#dateeffective').val()+'&montant='+$('#montant').val();
+                    datastring += '&commentaire='+$('#commentaireBon').val()+'&instruct='+$('#idinstruct').attr('value');
+                    console.log(datastring);
+                    break;
             }
             $.ajax({
                 type: 'post',
@@ -322,9 +344,12 @@ $(function() {
                         case 'creation_action':
                             $('#contenu').html(data.action);
                             break;
-                       case 'creation_aide_interne':
-                           $('#contenu').html(data.aide);
-                           break;
+                        case 'creation_aide_interne':
+                            $('#contenu').html(data.aide);
+                            break;
+                        case 'addBonInterne':
+                            $('#contenu').html(data.detail);
+                            break;
                     }
                 }
             });
@@ -364,6 +389,7 @@ $(function() {
                 //Succès de la requête
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         } else if(value == 'updateDepense') {
@@ -382,6 +408,7 @@ $(function() {
                 //Succès de la requête
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         }
@@ -396,6 +423,7 @@ $(function() {
                 //Succès de la requête
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         }
@@ -413,6 +441,7 @@ $(function() {
                 //Succès de la requête
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         }
@@ -427,6 +456,7 @@ $(function() {
                 //Succès de la requête
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         }
@@ -441,6 +471,7 @@ $(function() {
                 //Succès de la requête
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         }
@@ -460,6 +491,7 @@ $(function() {
                 //Succès de la requête
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         }
@@ -485,6 +517,7 @@ $(function() {
                 //Succès de la requête
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         }
@@ -501,6 +534,7 @@ $(function() {
                 //Succès de la requête
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         }
@@ -521,6 +555,7 @@ $(function() {
                 //Succès de la requête
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         }
@@ -540,6 +575,7 @@ $(function() {
                 success: function() {
                     console.log('SUCCESS INFO PERSO');
                     loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
                 }
             });
         }
@@ -553,9 +589,11 @@ $(function() {
     
     //permet l'affichage des formulaires flottant entouré de gris
     function creationForm(x, h, form) {
+        console.log(form);
         $('#ecran_gris').toggle();
         $(form).css({
-            "display":"block"
+            "display":"block",
+            "position":"fixed"
         });
         $(form).offset({
             top:x.top+h,
@@ -564,12 +602,17 @@ $(function() {
     }
     
     $('.edit').live("click", function() {
-        $(this).parent().next().children().find('input').removeAttr("disabled");
+        console.log($(this).parent().next().children().find('input').attr('disabled'));
+        var attr = $(this).parent().next().children().find('input').attr('disabled');
+        if (typeof attr !== 'undefined' && attr !== false) {
+            $(this).parent().next().children().find('input').removeAttr('disabled');
+            $(this).parent().next().children().find('[class^=select]').removeAttr('disabled');
+        } else {
+            $(this).parent().next().children().find('input').attr('disabled','');
+            $(this).parent().next().children().find('[class^=select]').attr('disabled','');
+        }
         var update = $(this).parent().parent().children('.update');
-        $(update).css({
-            "margin-right":"0"
-        });
-        $(update.after()).slideToggle();
+        slideBouton(update);
     });
     
     $('.archive').live("click", function() {
@@ -703,6 +746,15 @@ $(function() {
         $('#decision').toggle();
         $(this).toggle();
     });
+    
+    $('.addElem').live("click", function() {
+        var action = $(this).attr('role');
+        var form = $('.formulaire[action="'+action+'"]');
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        creationForm(newPosition, $(this).outerHeight(), form);
+    });
 });
 
 function searchTableStatique() {
@@ -729,4 +781,11 @@ function searchTableStatique() {
             $("#contenu_table_statique").html(tableStatique);
         }
     });
+}
+
+function slideBouton(update) {
+    $(update).css({
+        "margin-right":"0"
+    });
+    $(update.after()).slideToggle();
 }

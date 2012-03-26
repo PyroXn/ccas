@@ -17,8 +17,6 @@ function contenu() {
             echo aide();
             break;
         case 'historique':
-            include_once './pages/tableStatique.php';
-            echo comboTableStatique();
             break;
         case 'documents':
             include_once './pages/document.php';
@@ -40,6 +38,14 @@ function contenu() {
         case 'document':
             include_once('./pages/document.php');
             echo getDocument();
+            break;
+        case 'accueilConfig':
+            include_once('./pages/config.php');
+            echo accueilConfig();
+            break;
+        case 'ecranTableStatique':
+            include_once './pages/tableStatique.php';
+            echo comboTableStatique();
             break;
     }
 }
@@ -136,8 +142,8 @@ function generateInfoFoyer($foyer) {
                     </div>
                     <div class="colonne">
                         <span class="attribut">Secteur :</span>
-                        <div class="select classique" role="select_secteur">';
-    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.utf8_decode($foyer->secteur->secteur).'</div>';
+                        <div class="select classique" role="select_secteur" disabled>';
+    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
     $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -149,15 +155,15 @@ function generateInfoFoyer($foyer) {
                <li class="ligne_list_classique">
                     <div class="colonne">
                         <span class="attribut">Type :</span>
-                        <div class="select classique" role="select_typelogement">';
+                        <div class="select classique" role="select_typelogement" disabled>';
 $retour .= $foyer->typeLogement == null ? '<div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                 </div>
                 </div>
                    <div class="colonne">
                         <span class="attribut">Statut :</span>
-                        <div class="select classique" role="select_statutlogement">';
-$retour .= $foyer->typeAppartenance == null ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.utf8_decode($foyer->statutlogement->libelle).'</div>';
+                        <div class="select classique" role="select_statutlogement" disabled>';
+$retour .= $foyer->typeAppartenance == null ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                    </div>
@@ -166,22 +172,22 @@ $retour .= '<div class="fleche_bas"> </div>
                         <span><input class="contour_field input_num" type="text" id="surface" value="'.$foyer->logSurface.'" disabled/></span>
                   </div>
                   <div class="colonne">
-                        <span class="attribut">Dâte d\'entrée :</span>
+                        <span class="attribut">Date d\'entr&eacute;e :</span>
                         <span><input class="contour_field input_date" type="text" id="dateentree" size="10" value="'.getDatebyTimestamp($foyer->logDateArrive).'" disabled/></span>
                   </div>
                </li>
                <li class="ligne_list_classique">
                     <div class="colonne">
                         <span class="attribut">Bailleur :</span>
-                        <div class="select classique" role="select_bailleur">';
-$retour .= $foyer->idBailleur == null ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.utf8_decode($foyer->bailleur->nomBailleur).'</div>';
+                        <div class="select classique" role="select_bailleur" disabled>';
+$retour .= $foyer->idBailleur == null ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Instructeur :</span>
-                        <div class="select classique" role="select_instruct">';
-$retour .= $foyer->idInstruct == null ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.utf8_decode($foyer->instruct->nom).'</div>';
+                        <div class="select classique" role="select_instruct" disabled>';
+$retour .= $foyer->idInstruct == null ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                     </div>
@@ -200,14 +206,14 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
  $retour .= '<ul class="select_instruct">';
     foreach($instructs as $instruct) {
         $retour .= '<li>
-                                <div value="'.$instruct->id.'">'.utf8_decode($instruct->nom).'</div>
+                                <div value="'.$instruct->id.'">'.$instruct->nom.'</div>
                            </li>';
     }
     $retour .= '</ul>';
  $retour .= '<ul class="select_bailleur">';
     foreach($bailleurs as $bailleur) {
         $retour .= '<li>
-                                <div value="'.$bailleur->id.'">'.utf8_decode($bailleur->nomBailleur).'</div>
+                                <div value="'.$bailleur->id.'">'.$bailleur->nomBailleur.'</div>
                            </li>';
     }
     $retour .= '</ul>';
@@ -215,7 +221,7 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
  foreach($types as $t) {
      if($t->categorie == 3) {
      $retour .= '<li>
-                            <div value="'.$t->id.'">'.utf8_decode($t->libelle).'</div>
+                            <div value="'.$t->id.'">'.$t->libelle.'</div>
                         </li>';
      }
  }
@@ -232,11 +238,11 @@ $retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</di
     $retour .= '<ul class="select_secteur">';
     foreach($secteurs as $secteur) {
         $retour .= '<li>
-                                <div value="'.$secteur->id.'">'.utf8_decode($secteur->secteur).'</div>
+                                <div value="'.$secteur->id.'">'.$secteur->secteur.'</div>
                            </li>';
     }
     $retour .= '</ul>';
-    return utf8_encode($retour);
+    return $retour;
 }
 
 function updateFoyer() {
@@ -299,7 +305,7 @@ function situationFinanciere($idFoyer) {
         $totalDette = $totalDette + array_sum($arrayDette);
         
     }
-    $contenu = '<div><h3>Situation financière de la famille</h3>';
+    $contenu = '<div><h3>Situation financi&agrave;re de la famille</h3>';
     $contenu .= '
         <ul class="list_classique">
                 <li class="ligne_list_classique">
@@ -308,7 +314,7 @@ function situationFinanciere($idFoyer) {
                         <span>'.$totalRessource.'</span>
                     </div>
                     <div class="colonne">
-                        <span class="attribut">Total dépenses :</span>
+                        <span class="attribut">Total d&eacute;penses :</span>
                         <span>'.$totalDepense.'</span>
                     </div>
                     <div class="colonne">
@@ -443,7 +449,7 @@ function budget() {
                                         <span><input class="contour_field input_num" type="text" id="salaire" value="'.$revenu->salaire.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
-                                        <span class="attribut">All. Chômage : </span>
+                                        <span class="attribut">All. Ch&ocirc;mage : </span>
                                         <span><input class="contour_field input_num" type="text" id="chomage" value="'.$revenu->chomage.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
@@ -465,7 +471,7 @@ function budget() {
                                         <span><input class="contour_field input_num" type="text" id="rsaSocle" value="'.$revenu->rsaSocle.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
-                                        <span class="attribut">RSA Activité : </span>
+                                        <span class="attribut">RSA Activit&eacute; : </span>
                                         <span><input class="contour_field input_num" type="text" id="rsaActivite" value="'.$revenu->rsaActivite.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
@@ -497,15 +503,15 @@ function budget() {
                             </div>
                             
                             <div>
-                            <h3 role="depense">Dépenses <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.getDatebyTimestamp($depense->dateCreation).'</span></h3>
+                            <h3 role="depense">D&eacute;penses <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.getDatebyTimestamp($depense->dateCreation).'</span></h3>
                             <ul class="list_classique">
                                 <li class="ligne_list_classique">
                                 <div class="colonne">
-                                    <span class="attribut">Impôts revenu : </span>
+                                    <span class="attribut">Imp&ocirc;ts revenu : </span>
                                     <span><input class="contour_field input_num" type="text" id="impotRevenu" value="'.$depense->impotRevenu.'" disabled/></span>
                                  </div>
                                     <div class="colonne">
-                                        <span class="attribut">Impôts locaux : </span>
+                                        <span class="attribut">Imp&ocirc;ts locaux : </span>
                                         <span><input class="contour_field input_num" type="text" id="impotLocaux" value="'.$depense->impotLocaux.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
@@ -519,7 +525,7 @@ function budget() {
                                </li>
                                <li class="ligne_list_classique">
                                <div class="colonne">
-                                    <span class="attribut">Electricité : </span>
+                                    <span class="attribut">Electricit&eacute; : </span>
                                     <span><input class="contour_field input_num" type="text" id="electricite" value="'.$depense->electricite.'" disabled/></span>
                                  </div>
                                  <div class="colonne">
@@ -537,7 +543,7 @@ function budget() {
                                </li>
                                <li class="ligne_list_classique">
                                <div class="colonne">
-                                    <span class="attribut">Téléphonie : </span>
+                                    <span class="attribut">T&eacute;l&eacute;phonie : </span>
                                     <span><input class="contour_field input_num" type="text" id="telephonie" value="'.$depense->telephonie.'" disabled/></span>
                                </div>
                                <div class="colonne">
@@ -545,17 +551,17 @@ function budget() {
                                     <span><input class="contour_field input_num" type="text" id="internet" value="'.$depense->internet.'" disabled/></span>
                               </div>
                               <div class="colonne">
-                                    <span class="attribut">Télévision : </span>
+                                    <span class="attribut">T&eacute;l&eacute;vision : </span>
                                     <span><input class="contour_field input_num" type="text" id="television" value="'.$depense->television.'" disabled/></span>
                                </div>
                                </li>
                                <li class="ligne_list_classique">
                                <div class="colonne">
-                                    <span class="attribut">Autres Dépenses : </span>
+                                    <span class="attribut">Autres D&eacute;penses : </span>
                                     <span><input class="contour_field input_num" type="text" id="autreDepense" value="'.$depense->autreDepense.'" disabled/></span>
                                </div>
                                <div class="colonne_large">
-                                    <span class="attribut_for_large">Détail : </span>
+                                    <span class="attribut_for_large">D&eacute;tail : </span>
                                     <span><input class="contour_field  input_char_for_large" type="text" id="natureDepense" value="'.$depense->natureDepense.'" disabled/></span>
                                </div>
                                </li>
@@ -565,7 +571,7 @@ function budget() {
                             </div>
                             
                             <div>
-                                <h3>Dépenses habitation <span class="edit"></span></h3>
+                                <h3>D&eacute;penses habitation <span class="edit"></span></h3>
                                 <ul class="list_classique">
                                     <li class="ligne_list_classique">
                                     <div class="colonne">
@@ -577,7 +583,7 @@ function budget() {
                                         <span><input class="contour_field input_num" type="text" id="apl" value="'.$revenu->aideLogement.'" disabled/></span>
                                    </div>
                                    <div class="colonne">
-                                        <span class="attribut">Résiduel : </span>
+                                        <span class="attribut">R&eacute;siduel : </span>
                                         <span>'.($depense->loyer - $revenu->aideLogement).'</span>
                                     </div>
                                     </li>
@@ -591,7 +597,7 @@ function budget() {
                                 <ul class="list_classique">
                                 <li class="ligne_list_classique">
                                 <div class="colonne">
-                                    <span class="attribut">Arriéré locatif : </span>
+                                    <span class="attribut">Arri&eacute;r&eacute; locatif : </span>
                                     <span><input class="contour_field input_num" type="text" id="arriereLocatif" value="'.$dette->arriereLocatif.'" disabled/></span>
                                 </div>
                                 <div class="colonne">
@@ -609,7 +615,7 @@ function budget() {
                                </li>
                                <li class="ligne_list_classique">
                                <div class="colonne">
-                                    <span class="attribut">Arriéré électricité : </span>
+                                    <span class="attribut">Arri&eacute;r&eacute; &eacute;lectricit&eacute; : </span>
                                     <span><input class="contour_field input_num" type="text" id="arriereElec" value="'.$dette->arriereElectricite.'" disabled/></span>
                                </div>
                                <div class="colonne">
@@ -619,7 +625,7 @@ function budget() {
                                </li>
                               <li class="ligne_list_classique">
                               <div class="colonne">
-                                    <span class="attribut">Arriéré gaz : </span>
+                                    <span class="attribut">Arri&eacute;r&eacute; gaz : </span>
                                     <span><input class="contour_field input_num" type="text" id="arriereGaz" value="'.$dette->arriereGaz.'" disabled/></span>
                               </div>
                               <div class="colonne">
@@ -634,14 +640,14 @@ function budget() {
                                
                                <div>';
                        $contenu .= '<div class="colonne_large">
-                                        <h3>Crédits :</h3>
+                                        <h3>Cr&eacute;dits :</h3>
                                             <div class="bubble tableau_classique_wrapper">
                                                 <table class="tableau_classique" cellpadding="0" cellspacing="0">
                                                     <thead>
                                                         <tr class="header">
                                                             <th>Organisme</th>
-                                                            <th>Mensualité</th>
-                                                            <th>Durée</th>
+                                                            <th>Mensualit&eacute;</th>
+                                                            <th>Dur&eacute;e</th>
                                                             <th>Montant restant</th>
                                                             <th>Actions</th>
                                                         </tr>
@@ -661,12 +667,12 @@ function budget() {
                                         }
                                     } else {
                                         $contenu .= '<tr>
-                                                         <td colspan=9 align=center>< Aucun crédit n\'est enregistré pour cet individu > </td>
+                                                         <td colspan=9 align=center>< Aucun cr&eacute;dit n\'est enregistr&eacute; pour cet individu > </td>
                                                      </tr>';
                                     }
 
                                $contenu .= '</tbody></table></div>
-                                   <div class="bouton ajout" id="createCredit">Ajouter un crédit</div></div>
+                                   <div class="bouton ajout" id="createCredit">Ajouter un cr&eacute;dit</div></div>
                                    <div class="formulaire" action="creation_credit">
                                    <div class="colonne_droite">
                                          <div class="input_text">
@@ -676,7 +682,7 @@ function budget() {
                                             <input id="mensualite" class="contour_field" type="text" title="Mensualite" placeholder="Mensualite">
                                         </div>
                                         <div class="input_text">
-                                            <input id="duree" class="contour_field" type="text" title="Durée" placeholder="Durée">
+                                            <input id="duree" class="contour_field" type="text" title="Dur&eacute;e" placeholder="Dur&eacute;e">
                                         </div>
                                         <div class="input_text">
                                             <input id="total" class="contour_field" type="text" title="Total Restant" placeholder="Total Restant">
@@ -688,7 +694,7 @@ function budget() {
                                         
                                    </div>
                                    </div>';
-    return utf8_encode($contenu);
+    return $contenu;
 }
 
 function generalite() {
@@ -702,7 +708,7 @@ function generalite() {
     $professions = Doctrine_Core::getTable('profession')->findAll();
     $organismes = Doctrine_Core::getTable('organisme')->findAll();
     
-    $contenu = '<h2>Généralités</h2>';
+    $contenu = '<h2>G&eacute;n&eacute;ralit&eacute;s</h2>';
     $contenu .= '
     <div>
         <h3><span>Informations personnelles</span>  <span class="edit"></span></h3>
@@ -718,15 +724,15 @@ function generalite() {
                     </div>
                     <div class="colonne">
                         <span class="attribut">Situation Familiale :</span>
-                        <div class="select classique" role="select_situation">';
-$contenu .= $user->idSitMatri == null ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.utf8_decode($user->situationmatri->situation).'</div>';  
+                        <div class="select classique" role="select_situation" disabled>';
+$contenu .= $user->idSitMatri == null ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.$user->situationmatri->situation.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
-                        <span class="attribut">Nationalité :</span>
-                        <div class="select classique" role="select_natio">';
-$contenu .= $user->idNationalite == null ? '<div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.utf8_decode($user->nationalite->nationalite).'</div>';  
+                        <span class="attribut">Nationalit&eacute; :</span>
+                        <div class="select classique" role="select_natio" disabled>';
+$contenu .= $user->idNationalite == null ? '<div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.$user->nationalite->nationalite.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </li>
@@ -743,14 +749,14 @@ $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Sexe :</span>
-                        <div class="select classique" role="select_sexe">';
+                        <div class="select classique" role="select_sexe" disabled>';
 $contenu .= $user->sexe == ' ' ? '<div id="sexe" class="option" value=" ">-----</div>' : '<div id="sexe" class="option" value="'.$user->sexe.'">'.$user->sexe.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Statut :</span>
-                        <div class="select classique" role="select_statut">';
+                        <div class="select classique" role="select_statut" disabled>';
 $contenu .= $user->idLienFamille == null ? '<div id="statut" class="option" value=" ">-----</div>' : '<div id="statut" class="option" value="'.$user->idLienFamille.'">'.$user->lienfamille->lien.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
@@ -764,11 +770,11 @@ $contenu .= '<div class="fleche_bas"> </div>
 // CONTACT
     $contenu .= '
     <div>
-        <h3><span>Télèphone / Email</span>  <span class="edit"></span></h3>
+        <h3><span>T&eacute;l&agrave;phone / Email</span>  <span class="edit"></span></h3>
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">
-                    <span class="attribut">Télèphone :</span>
+                    <span class="attribut">T&eacute;l&agrave;phone :</span>
                     <span><input class="contour_field input_char" type="text" id="telephone" value="'.$user->telephone.'" disabled/></span>
                 </div>
                 <div class="colonne">
@@ -792,24 +798,24 @@ $contenu .= '<div class="fleche_bas"> </div>
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">
-                    <span class="attribut">Niveau étude :</span>
-                    <div class="select classique" role="select_etude">';
-$contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.utf8_decode($user->etude->etude).'</div>';  
+                    <span class="attribut">Niveau &eacute;tude :</span>
+                    <div class="select classique" role="select_etude" disabled>';
+$contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
 $contenu .= '
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Profession :</span>
-                    <div class="select classique" role="select_profession">';
-$contenu .= $user->idNiveauEtude == null ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.utf8_decode($user->profession->profession).'</div>';  
+                    <div class="select classique" role="select_profession" disabled>';
+$contenu .= $user->idNiveauEtude == null ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.$user->profession->profession.'</div>';  
 $contenu .= '
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
                     <span class="attribut">Employeur :</span>
-                    <span><input class="contour_field input_char" type="text" id="employeur" value="'.utf8_decode($user->employeur).'" disabled/></span>
+                    <span><input class="contour_field input_char" type="text" id="employeur" value="'.$user->employeur.'" disabled/></span>
                 </div> 
             </li>
             <li class="ligne_list_classique">
@@ -818,11 +824,11 @@ $contenu .= '
                     <span><input class="contour_field input_date" size="10" type="text" id="dateinscriptionpe" value="'.getDatebyTimestamp($user->dateInscriptionPe).'" disabled/></span>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">N° dossier P.E :</span>
+                    <span class="attribut">N&deg; dossier P.E :</span>
                     <span><input class="contour_field input_char" type="text" id="numdossierpe" value="'.$user->numDossierPe.'" disabled/></span>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">Début droits P.E :</span>
+                    <span class="attribut">D&eacute;but droits P.E :</span>
                     <span><input class="contour_field input_date" size="10" type="text" id="datedebutdroitpe" value="'.getDatebyTimestamp($user->dateDebutDroitPe).'" disabled/></span>
                 </div>
                 <div class="colonne">
@@ -842,7 +848,7 @@ $contenu .= '
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">
-                    <span class="attribut">Assuré : </span>';
+                    <span class="attribut">Assur&eacute; : </span>';
     if($user->assure == 1) {
         $contenu .= '<span id="assure" class="checkbox checkbox_active" value="1"></span>';
     } else {
@@ -851,14 +857,14 @@ $contenu .= '
                     
     $contenu .= '</div>
                 <div class="colonne">
-                    <span class="attribut">N° :</span>
+                    <span class="attribut">N&deg; :</span>
                     <span><input maxlength="13" class="contour_field input_numsecu" type="text" id="numsecu" value="'.$user->numSecu.'" size="13" disabled/></span>
                     <span><input maxlength="2" class="contour_field input_cle" type="text" id="clefsecu" value="'.$user->clefSecu.'" size="2" disabled/></span>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">Régime :</span>
-                    <div class="select classique" role="select_regime">';
-$contenu .= $user->regime == ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.utf8_decode($user->regime).'</div>';                   
+                    <span class="attribut">R&eacute;gime :</span>
+                    <div class="select classique" role="select_regime" disabled>';
+$contenu .= $user->regime == ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.$user->regime.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -866,7 +872,7 @@ $contenu .= '<div class="fleche_bas"> </div>
             <li class="ligne_list_classique">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_couv">';
+                    <div class="select classique" role="select_couv" disabled>';
 $contenu .= $user->idCaisseSecu == null ? '<div id="caisseCouv" class="option" value=" ">-----</div>' : '<div id="caisseCouv" class="option" value="'.$user->idCaisseSecu.'">'.$user->secu->appelation.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
@@ -881,7 +887,7 @@ $contenu .= '<div class="fleche_bas"> </div>
     $contenu .= '
                 </div>
                 <div class="colonne">
-                    <span class="attribut">Date début droit :</span>
+                    <span class="attribut">Date d&eacute;but droit :</span>
                     <span><input class="contour_field input_date" size="10" type="text" id="datedebutcouvsecu" value="'.getDatebyTimestamp($user->dateDebutCouvSecu).'" disabled/></span>
                 </div>
                 <div class="colonne">
@@ -902,7 +908,7 @@ $contenu .= '
             <li class="ligne_list_classique">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_mut">';
+                    <div class="select classique" role="select_mut" disabled>';
 $contenu .= $user->idCaisseMut == null ? '<div id="mutuelle" class="option" value="">-----</div>' : '<div id="mutuelle" class="option" value="'.$user->idCaisseMut.'">'.$user->mutuelle->appelation.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
@@ -915,11 +921,11 @@ if($user->CMUC == 1) {
 $contenu .= '
                 </div>
                 <div class="colonne">
-                    <span class="attribut">N° adhérent :</span>
+                    <span class="attribut">N&deg; adh&eacute;rent :</span>
                     <span><input class="contour_field input_char" type="text" id="numadherentmut" value="'.$user->numAdherentMut.'" disabled/></span>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">Date début :</span>
+                    <span class="attribut">Date d&eacute;but :</span>
                     <span><input class="contour_field input_date" size="10" type="text" id="datedebutcouvmut" value="'.getDatebyTimestamp($user->dateDebutCouvMut).'" disabled/></span>
                 </div>
                 <div class="colonne">
@@ -940,13 +946,13 @@ $contenu .= '
             <li class="ligne_list_classique">
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
-                    <div class="select classique" role="select_caf">';
+                    <div class="select classique" role="select_caf" disabled>';
 $contenu .= $user->idCaisseCaf == null ? '<div id="caf" class="option" value="">-----</div>' : '<div id="caf" class="option" value="'.$user->idCaisseCaf.'">'.$user->caf->appelation.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">N° allocataire :</span>
+                    <span class="attribut">N&deg; allocataire :</span>
                     <span><input class="contour_field input_char" type="text" id="numallocatairecaf" value="'.$user->numAllocataireCaf.'" disabled/></span>
                 </div>
             </li>
@@ -961,7 +967,7 @@ $contenu .= '<ul class="select_caf">';
         if($organisme->libelleorganisme->libelle == 'Caisse CAF') {
             $contenu .= '
                     <li>
-                        <div value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
+                        <div value="'.$organisme->id.'">'.$organisme->appelation.'</div>
                     </li>';
         }
     }
@@ -971,7 +977,7 @@ $contenu .= '<ul class="select_mut">';
         if($organisme->libelleorganisme->libelle == 'Mutuelle') {
             $contenu .= '
                     <li>
-                        <div value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
+                        <div value="'.$organisme->id.'">'.$organisme->appelation.'</div>
                     </li>';
         }
     }
@@ -981,7 +987,7 @@ $contenu .= '<ul class="select_mut">';
         if($organisme->libelleorganisme->libelle == 'Caisse SECU') {
             $contenu .= '
                     <li>
-                        <div  value="'.$organisme->id.'">'.utf8_decode($organisme->appelation).'</div>
+                        <div  value="'.$organisme->id.'">'.$organisme->appelation.'</div>
                     </li>';
         }
     }
@@ -993,49 +999,49 @@ $contenu .= '<ul class="select_mut">';
                                     <div value="Local">Local</div>
                             </li>
                             <li>
-                                <div value="Général">Général</div>
+                                <div value="G&eacute;n&eacute;ral">G&eacute;n&eacute;ral</div>
                             </li>
                             </ul>';
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_profession">';
     foreach($professions as $profession) {
         $contenu .= '<li>
-                                    <div value="'.$profession->id.'">'.utf8_decode($profession->profession).'</div>
+                                    <div value="'.$profession->id.'">'.$profession->profession.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
    $contenu .= ' <ul class="select_etude">';
     foreach($etudes as $etude) {
         $contenu .= '<li>
-                                    <div value="'.$etude->id.'">'.utf8_decode($etude->etude).'</div>
+                                    <div value="'.$etude->id.'">'.$etude->etude.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_statut">';
     foreach($liens as $lien) {
         $contenu .= '<li>
-                                    <div value="'.$lien->id.'">'.utf8_decode($lien->lien).'</div>
+                                    <div value="'.$lien->id.'">'.$lien->lien.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_ville">';
     foreach($villes as $ville) {
         $contenu .= '<li>
-                                    <div value="'.$ville->id.'">'.utf8_decode($ville->libelle).'</div>
+                                    <div value="'.$ville->id.'">'.$ville->libelle.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_natio">';
     foreach($nationalite as $nat) {
         $contenu .= '<li>
-                                    <div value="'.$nat->id.'">'.utf8_decode($nat->nationalite).'</div>
+                                    <div value="'.$nat->id.'">'.$nat->nationalite.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
     $contenu .= ' <ul class="select_situation">';
     foreach($situations as $sit) {
         $contenu .= '<li>
-                                    <div value="'.$sit->id.'">'.utf8_decode($sit->situation).'</div>
+                                    <div value="'.$sit->id.'">'.$sit->situation.'</div>
                                </li>';
     }
     $contenu .= '</ul>';
@@ -1047,7 +1053,7 @@ $contenu .= '<ul class="select_mut">';
                                     <div value="Femme">Femme</div>
                                 </li>
                             </ul>';
-    return utf8_encode($contenu);
+    return $contenu;
 }
 
 ?>

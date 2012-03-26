@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Lun 19 Mars 2012 à 10:27
+-- Généré le : Ven 23 Mars 2012 à 10:26
 -- Version du serveur: 5.1.61
 -- Version de PHP: 5.3.6-13ubuntu3.6
 
@@ -65,18 +65,13 @@ CREATE TABLE IF NOT EXISTS `aideexterne` (
   `aideurgente` tinyint(4) DEFAULT '0',
   `idaidedemandee` bigint(20) DEFAULT NULL,
   `idinstruct` bigint(20) DEFAULT NULL,
+  `iddistrib` bigint(20) DEFAULT NULL,
   `etat` varchar(20) DEFAULT NULL,
-  `proposition` varchar(250) DEFAULT ' ',
   `avis` varchar(20) DEFAULT NULL,
-  `iddecideur` bigint(20) DEFAULT NULL,
   `datedecision` bigint(20) DEFAULT '0',
-  `montant` float(18,2) DEFAULT '0.00',
-  `quantite` bigint(20) DEFAULT '0',
-  `montanttotal` float(18,2) DEFAULT '0.00',
-  `vigilance` varchar(50) DEFAULT ' ',
-  `idaideaccordee` bigint(20) DEFAULT NULL,
+  `montantdemande` float(18,2) DEFAULT '0.00',
+  `montantpercu` float(18,2) DEFAULT '0.00',
   `commentaire` varchar(250) DEFAULT NULL,
-  `rapport` varchar(250) DEFAULT NULL,
   `daterevision` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -92,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `aideinterne` (
   `idindividu` bigint(20) DEFAULT NULL,
   `datedemande` bigint(20) DEFAULT '0',
   `idorganisme` bigint(20) DEFAULT NULL,
-  `nature` varchar(20) DEFAULT NULL,
+  `nature` int(2) DEFAULT NULL,
   `aideurgente` tinyint(4) DEFAULT '0',
   `idaidedemandee` bigint(20) DEFAULT NULL,
   `idinstruct` bigint(20) DEFAULT NULL,
@@ -101,16 +96,25 @@ CREATE TABLE IF NOT EXISTS `aideinterne` (
   `avis` varchar(20) DEFAULT NULL,
   `iddecideur` bigint(20) DEFAULT NULL,
   `datedecision` bigint(20) DEFAULT '0',
-  `montant` float(18,2) DEFAULT '0.00',
-  `quantite` bigint(20) DEFAULT '0',
-  `montanttotal` float(18,2) DEFAULT '0.00',
-  `vigilance` varchar(50) DEFAULT ' ',
+  `vigilance` int(2) DEFAULT '0',
   `idaideaccordee` bigint(20) DEFAULT NULL,
   `commentaire` varchar(250) DEFAULT ' ',
   `rapport` varchar(250) DEFAULT NULL,
-  `daterevision` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Contenu de la table `aideinterne`
+--
+
+INSERT INTO `aideinterne` (`id`, `idindividu`, `datedemande`, `idorganisme`, `nature`, `aideurgente`, `idaidedemandee`, `idinstruct`, `etat`, `proposition`, `avis`, `iddecideur`, `datedecision`, `vigilance`, `idaideaccordee`, `commentaire`, `rapport`) VALUES
+(1, 1, 0, 1, 10, 0, 7, 1, 'Accepté', 'Aucune', 'Accepté', 1, 0, 0, 7, ' Très bien', ''),
+(2, 1, 1341612000, NULL, 9, 0, 7, 3, 'En cours', 'Argent argent', 'Accepté', NULL, 0, 0, 8, ' ', ''),
+(3, 1, 1336168800, NULL, 10, 0, 8, 13, 'Terminé', 'Proposition', 'Refusé', 3, 1332457200, 1, 8, ' ', ''),
+(4, 3, 1332457200, 14, 10, 1, 7, 11, 'En cours', '50€ de bon d''achat pour vetement', 'Accepté', NULL, 1332457200, 1, 8, 'Personne en difficulté', 'Vigilance activé'),
+(5, 3, 0, 15, 10, 1, 7, 1, 'En cours', '', 'Accepté', 1, 0, 1, 7, ' ', ''),
+(6, 2, 955317600, 14, 10, 1, 7, 2, 'En cours', '', 'Accepté', 2, 0, 0, 7, ' ', ''),
+(7, 2, 978303600, 14, 9, 1, 7, 1, 'En cours', 'test', 'Accepté', 4, 0, 1, 8, ' ', '');
 
 -- --------------------------------------------------------
 
@@ -158,6 +162,31 @@ INSERT INTO `bailleur` (`id`, `nombailleur`, `adresse`, `idville`, `telephone`, 
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `bonaide`
+--
+
+CREATE TABLE IF NOT EXISTS `bonaide` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `idaideinterne` bigint(20) DEFAULT NULL,
+  `idinstruct` bigint(20) DEFAULT NULL,
+  `dateremiseprevue` bigint(20) DEFAULT NULL,
+  `dateremiseeffective` bigint(20) DEFAULT NULL,
+  `montant` float(18,2) DEFAULT '0.00',
+  `commentaire` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Contenu de la table `bonaide`
+--
+
+INSERT INTO `bonaide` (`id`, `idaideinterne`, `idinstruct`, `dateremiseprevue`, `dateremiseeffective`, `montant`, `commentaire`) VALUES
+(6, 5, 0, 1002664800, 1002664800, 30.00, 'test'),
+(7, 3, 13, 1332457200, 1332457200, 50.00, 'Premier bon');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `credit`
 --
 
@@ -189,7 +218,18 @@ CREATE TABLE IF NOT EXISTS `decideur` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `decideur` varchar(255) DEFAULT ' ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Contenu de la table `decideur`
+--
+
+INSERT INTO `decideur` (`id`, `decideur`) VALUES
+(1, 'Commission secours'),
+(2, 'Conseil d''administration'),
+(3, 'Directrice CCAS'),
+(4, 'Vice présidente CCAS'),
+(5, 'Président CCAS');
 
 -- --------------------------------------------------------
 
@@ -218,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `depense` (
   `idindividu` bigint(20) DEFAULT NULL,
   `datecreation` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Contenu de la table `depense`
@@ -242,7 +282,10 @@ INSERT INTO `depense` (`id`, `impotrevenu`, `impotlocaux`, `pensionalim`, `mutue
 (15, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 14, 1331842749),
 (16, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 3, 1331888470),
 (17, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 1, 1332148026),
-(18, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 4, 1332148581);
+(18, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 4, 1332148581),
+(19, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 5, 1332429502),
+(20, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 6, 1332429574),
+(21, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', 0.00, 7, 1332443649);
 
 -- --------------------------------------------------------
 
@@ -263,7 +306,7 @@ CREATE TABLE IF NOT EXISTS `dette` (
   `idindividu` bigint(20) DEFAULT NULL,
   `datecreation` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Contenu de la table `dette`
@@ -285,7 +328,10 @@ INSERT INTO `dette` (`id`, `arrierelocatif`, `fraishuissier`, `arriereelectricit
 (13, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 12, 1331842562),
 (14, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 13, 1331842628),
 (15, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 14, 1331842749),
-(16, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 4, 1332148581);
+(16, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 4, 1332148581),
+(17, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 5, 1332429502),
+(18, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 6, 1332429574),
+(19, 0.00, 0.00, 0.00, 0.00, 0.00, ' ', NULL, NULL, 7, 1332443649);
 
 -- --------------------------------------------------------
 
@@ -352,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `foyer` (
   `idinstruct` bigint(20) DEFAULT NULL,
   `notes` varchar(255) DEFAULT ' ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `foyer`
@@ -365,7 +411,10 @@ INSERT INTO `foyer` (`id`, `numrue`, `idrue`, `idsecteur`, `idville`, `idbailleu
 (4, 0, NULL, NULL, NULL, NULL, 1350293968, NULL, NULL, 0, 0.00, NULL, ' '),
 (5, 0, NULL, NULL, NULL, NULL, 1321288902, NULL, NULL, 0, 0.00, NULL, ' '),
 (6, 0, NULL, NULL, NULL, NULL, 1331804450, NULL, NULL, 0, 0.00, NULL, ' '),
-(7, 0, NULL, NULL, NULL, NULL, 1332148581, NULL, NULL, 0, 0.00, NULL, ' ');
+(7, 0, NULL, NULL, NULL, NULL, 1332148581, NULL, NULL, 0, 0.00, NULL, ' '),
+(8, 0, NULL, NULL, NULL, NULL, 1332429502, NULL, NULL, 0, 0.00, NULL, ' '),
+(9, 0, NULL, NULL, NULL, NULL, 1332429574, NULL, NULL, 0, 0.00, NULL, ' '),
+(10, 0, NULL, NULL, NULL, NULL, 1332443649, NULL, NULL, 0, 0.00, NULL, ' ');
 
 -- --------------------------------------------------------
 
@@ -414,7 +463,7 @@ CREATE TABLE IF NOT EXISTS `individu` (
   `idvillenaissance` bigint(20) DEFAULT NULL,
   `idfoyer` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `individu`
@@ -424,7 +473,8 @@ INSERT INTO `individu` (`id`, `civilite`, `nom`, `prenom`, `nommarital`, `nomusa
 (1, 'Madame', 'Osef', 'Lapraline', NULL, NULL, 0, 626396400, 'Homme', '03838281132', '0679809964', 'florian.janson@mydevhouse.com', 0, 0, 0, 'Local', 1, 0, 943916400, '00000001', 0, 0, 1, 'Moi même', 1304719200, 1312754400, 1344376800, '5425365254', '', 18, 1, 17, 7, 12, 2, 4, 1, 168, 1),
 (2, 'Monsieur', 'Pupu', 'Coco', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 1002664800, 990741600, '', NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, 1),
 (3, 'Monsieur', 'Perlin', 'Pinpina', NULL, NULL, 0, 1002664800, 'Femme', 'test', 'test', 'test', 0, 0, 0, 'Général', 0, 943916400, 943916400, '', 943916400, 943916400, 0, '', 0, 0, 0, '', '0001', 37, 1, 17, 22, 12, 2, 8, 4, 0, 1),
-(4, 'Madame', 'Rita', 'Mizuko', ' ', ' ', 1, 0, ' ', ' ', ' ', ' ', 0, 0, 0, ' ', 0, 0, 0, '', 0, 0, 0, '', 0, 0, 0, ' ', ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 7);
+(4, 'Madame', 'Rita', 'Mizuko', ' ', ' ', 1, 0, ' ', ' ', ' ', ' ', 0, 0, 0, ' ', 0, 0, 0, '', 0, 0, 0, '', 0, 0, 0, ' ', ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 7),
+(7, 'Monsieur', 'Jan', 'Bonéé', ' ', ' ', 1, 0, ' ', ' ', ' ', ' ', 0, 0, 0, ' ', 0, 0, 0, '', 0, 0, 0, '', 0, 0, 0, ' ', ' ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10);
 
 -- --------------------------------------------------------
 
@@ -437,7 +487,7 @@ CREATE TABLE IF NOT EXISTS `instruct` (
   `nom` varchar(255) DEFAULT ' ',
   `adresse` varchar(255) DEFAULT ' ',
   `telephone` varchar(15) DEFAULT ' ',
-  `interne` tinyint(1) DEFAULT '0',
+  `interne` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
 
@@ -446,45 +496,45 @@ CREATE TABLE IF NOT EXISTS `instruct` (
 --
 
 INSERT INTO `instruct` (`id`, `nom`, `adresse`, `telephone`, `interne`) VALUES
-(1, 'HERMANN Catherine', '', '', 1),
-(2, 'PIERRE PICCININNO Carine', '', '', 1),
-(3, 'BAUDIN Isabelle', '', '', 1),
-(4, 'PIGNON Valérie', 'CMS', '', 1),
-(5, 'GENTILHOMME', '', '', 1),
-(6, 'HOUAR Rachida', 'Mission Locale', '', 1),
-(7, 'GERNE Laurence', 'CMS', '', 1),
-(8, 'GEHAY', 'CPAM', '', 1),
-(9, 'SIEJA Nadine', '', '', 1),
-(10, 'TOSCANO Angèle', '', '', 1),
-(11, 'BOHÊME Céline', '', '', 1),
-(12, 'SCHEIDT Karine', '', '', 1),
-(13, 'TRIBOUT Mélanie', '', '', 1),
-(14, 'BOUCHER Anne Valérie', '', '', 1),
-(15, 'DIESLER Catherine', 'CMS, Esplanade de la Liberté - HAYANGE', '0387350160', 1),
-(16, 'Mme DOUILLET', '', '', 1),
-(17, 'CMS Thionville', '', '', 1),
-(18, 'ILHE Julie', '', '', 1),
-(19, 'SCHEED Sophie', '', '', 1),
-(20, 'BARTHELEMY Noémie', 'UDAF', '', 1),
-(21, 'Armée du Salut', '', '', 1),
-(22, 'HOUPERT PETIT Catherine', '', '', 1),
-(23, 'MACALUSO Lidia', '', '', 1),
-(24, 'Chantal VILLEMIN', '', '', 1),
-(25, 'AUBURTIN Chantal', '', '', 1),
-(26, 'FRANK Laurence', '', '', 1),
-(27, 'PIERRE-PICCININNO Carine', '', '', 0),
-(28, 'PIMENTEL Véronique', '', '', 0),
-(29, 'BOHEME Céline', '', '', 0),
-(30, 'IGEL Sabine', '', '', 0),
-(31, 'LAVARONE Lorella', '', '', 0),
-(32, 'SCHEED Sophie', '', '', 0),
-(33, 'MARCONATO Jeanne', '', '', 0),
-(34, 'TRIBOUT Mélanie', '', '', 0),
-(35, 'BOUCHER Anne Valérie', '', '', 0),
-(37, 'UWERA Helga', '', '', 0),
-(38, 'Stagiaire', '', '', 0),
-(39, 'LISPI Benoit', '', '', 0),
-(40, 'Stagiaire CESF', '', '', 0);
+(1, 'HERMANN Catherine', '', '', 0),
+(2, 'PIERRE PICCININNO Carine', '', '', 0),
+(3, 'BAUDIN Isabelle', '', '', 0),
+(4, 'PIGNON Valérie', 'CMS', '', 0),
+(5, 'GENTILHOMME', '', '', 0),
+(6, 'HOUAR Rachida', 'Mission Locale', '', 0),
+(7, 'GERNE Laurence', 'CMS', '', 0),
+(8, 'GEHAY', 'CPAM', '', 0),
+(9, 'SIEJA Nadine', '', '', 0),
+(10, 'TOSCANO Angèle', '', '', 0),
+(11, 'BOHÊME Céline', '', '', 0),
+(12, 'SCHEIDT Karine', '', '', 0),
+(13, 'TRIBOUT Mélanie', '', '', 0),
+(14, 'BOUCHER Anne Valérie', '', '', 0),
+(15, 'DIESLER Catherine', 'CMS, Esplanade de la Liberté - HAYANGE', '0387350160', 0),
+(16, 'Mme DOUILLET', '', '', 0),
+(17, 'CMS Thionville', '', '', 0),
+(18, 'ILHE Julie', '', '', 0),
+(19, 'SCHEED Sophie', '', '', 0),
+(20, 'BARTHELEMY Noémie', 'UDAF', '', 0),
+(21, 'Armée du Salut', '', '', 0),
+(22, 'HOUPERT PETIT Catherine', '', '', 0),
+(23, 'MACALUSO Lidia', '', '', 0),
+(24, 'Chantal VILLEMIN', '', '', 0),
+(25, 'AUBURTIN Chantal', '', '', 0),
+(26, 'FRANK Laurence', '', '', 0),
+(27, 'PIERRE-PICCININNO Carine', '', '', 1),
+(28, 'PIMENTEL Véronique', '', '', 1),
+(29, 'BOHEME Céline', '', '', 1),
+(30, 'IGEL Sabine', '', '', 1),
+(31, 'LAVARONE Lorella', '', '', 1),
+(32, 'SCHEED Sophie', '', '', 1),
+(33, 'MARCONATO Jeanne', '', '', 1),
+(34, 'TRIBOUT Mélanie', '', '', 1),
+(35, 'BOUCHER Anne Valérie', '', '', 1),
+(37, 'UWERA Helga', '', '', 1),
+(38, 'Stagiaire', '', '', 1),
+(39, 'LISPI Benoit', '', '', 1),
+(40, 'Stagiaire CESF', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -582,7 +632,7 @@ CREATE TABLE IF NOT EXISTS `nationalite` (
 --
 
 INSERT INTO `nationalite` (`id`, `nationalite`) VALUES
-(1, 'Française'),
+(1, 'Françaises'),
 (2, 'marocaine'),
 (3, 'algérienne'),
 (4, 'Arménienne'),
@@ -699,7 +749,7 @@ CREATE TABLE IF NOT EXISTS `revenu` (
   `aidelogement` float(18,2) DEFAULT '0.00',
   `datecreation` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Contenu de la table `revenu`
@@ -722,7 +772,10 @@ INSERT INTO `revenu` (`id`, `salaire`, `chomage`, `revenualloc`, `ass`, `aah`, `
 (15, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 12, 0.00, 1331842562),
 (16, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 13, 0.00, 1331842628),
 (17, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 14, 0.00, 1331842749),
-(18, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 4, 0.00, 1332148581);
+(18, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 4, 0.00, 1332148581),
+(19, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 5, 0.00, 1332429502),
+(20, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 6, 0.00, 1332429574),
+(21, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '', 7, 0.00, 1332443649);
 
 -- --------------------------------------------------------
 
@@ -1048,7 +1101,7 @@ CREATE TABLE IF NOT EXISTS `type` (
   `categorie` bigint(20) DEFAULT '0',
   `libelle` varchar(50) DEFAULT ' ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `type`
@@ -1060,7 +1113,11 @@ INSERT INTO `type` (`id`, `categorie`, `libelle`) VALUES
 (3, 3, 'Locataire'),
 (4, 3, 'Propriétaire'),
 (5, 2, ' Visite à domicile'),
-(6, 2, ' Courrier');
+(6, 2, ' Courrier'),
+(7, 1, 'Aide alimentaire'),
+(8, 1, 'Aide chauffage'),
+(9, 5, 'Renouvellement'),
+(10, 5, '1 ère demande');
 
 -- --------------------------------------------------------
 

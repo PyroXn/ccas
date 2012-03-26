@@ -37,6 +37,10 @@ switch (@$_GET['p']) {
         include_once('./pages/contenu.php');
         contenu();
         break;
+    case 'config':
+        include_once('./pages/config.php');
+        homeConfig();
+        break;
     case 'admin':
         include_once('./pages/admin.php');
         homeAdmin();
@@ -348,6 +352,15 @@ function generationHeaderNavigation($mode) {
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
                     <span class="label">G&eacute;rer les utilisateurs</span>
+                </div>';
+            break;
+        case 'config' :
+            $retour = '
+                <div id="accueilConfig" href="#" class="page_header_link active">
+                    <span class="label">Configuration - Accueil</span>
+                </div>
+                <div id="ecranTableStatique" href="#" class="page_header_link">
+                    <span class="label">Tables statique</span>
                 </div>';
             break;
     }
