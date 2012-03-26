@@ -334,7 +334,7 @@ function generateLigneMembreFoyer($individu) {
                 <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>
                 <span class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
                 <span class="date_naissance">'. $individu->lienfamille->lien .'</span>
-                <span class="delete droite"></span>
+                <span class="delete_individu droite"></span>
                 <span class="droite"> Chef de famille ';
                     if ($individu->chefDeFamille) {
                         $retour .= '<span class="checkboxChefFamille checkbox_active"></span>';
