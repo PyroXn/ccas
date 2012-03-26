@@ -424,18 +424,19 @@ function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $monta
     $bon->commentaire = $commentaire;
     $bon->save();   
     // On génère le bon
+    include_once('./lib/int2str.php');
     $beneficaire = $bon->aideInterne->individu->civilite .' '. $bon->aideInterne->individu->nom .' '. $bon->aideInterne->individu->prenom;
     $rue = $bon->aideInterne->individu->foyer->rue->rue;
     $num = $bon->aideInterne->individu->foyer->numRue;
     $idIndividu = $bon->aideInterne->individu->id;
-    
+    $lettres = int2str($montant);
     $chemin = './document/'.$idIndividu;
     $idAide = $bon->aideInterne->id;
     $numBon = $bon->id;
-    if(!opendir($chemin)) {
+    if(!is_dir($chemin)) {
         mkdir($chemin);
     }
-    if(!opendir($chemin.'/'.$idAide)) {
+    if(!is_dir($chemin.'/'.$idAide)) {
         mkdir($chemin.'/'.$idAide);
     }
     include_once('./lib/bonAide/index.php');

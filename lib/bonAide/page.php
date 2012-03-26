@@ -62,7 +62,7 @@
     <div class="underline" width="735"></div>
     <div class="underline" width="735"></div>
     <div class="espace"></div>
-    Pour un montant maximum de : <div class="underline" width="100"><?php echo $montant; ?></div> euros : Soit en toutes lettres : <div class="underline" width="238"></div>
+    Pour un montant maximum de : <div class="underline" width="100"><?php echo $montant; ?></div> euros : Soit en toutes lettres : <div class="underline" width="238"><?php echo $lettres; ?> euros</div>
     <div class="underline" width="735"></div>   
     <div class="espace"></div>
     Bénéficiaire : <div class="underline" width="655"><?php echo $beneficaire; ?></div>
