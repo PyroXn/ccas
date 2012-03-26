@@ -274,6 +274,7 @@ function detailAideInterne() {
                             <th>Remis par</th>
                             <th>Montant</th>
                             <th>Commentaire</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -289,6 +290,7 @@ function detailAideInterne() {
                                     <td> '.$bonAide->instruct->nom.'</td>                                
                                     <td> '.$bonAide->montant.'</td>
                                     <td>'.$bonAide->commentaire.'</td>
+                                    <td><a href="./document/'.$bonAide->aideInterne->individu->id.'/'.$bonAide->aideInterne->id.'/'.$bonAide->id.'.pdf" target="_blank">V</a></td>
                         </tr>';
             $i++;
         }
@@ -427,10 +429,14 @@ function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $monta
     $num = $bon->aideInterne->individu->foyer->numRue;
     $idIndividu = $bon->aideInterne->individu->id;
     
-    $chemin = './document/'.$idIndividu.'/'.$bon->aideInterne->id;
+    $chemin = './document/'.$idIndividu;
+    $idAide = $bon->aideInterne->id;
     $numBon = $bon->id;
     if(!opendir($chemin)) {
         mkdir($chemin);
+    }
+    if(!opendir($chemin.'/'.$idAide)) {
+        mkdir($chemin.'/'.$idAide);
     }
     include_once('./lib/bonAide/index.php');
 }
@@ -581,12 +587,4 @@ function detailAideExterne() {
     return $contenu;
 }
 
-function generateBonAide() {
-    require('./lib/fpdf.php');
-    $pdf = new FPDF();
-    $pdf->AddPage();
-    $pdf->SetFont('Arial','B',16);
-    $pdf->Cell(40,10,'Hello World !');
-    $pdf->Output();
-}
 ?>
