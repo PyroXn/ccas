@@ -340,6 +340,9 @@ function generationHeaderNavigation($mode) {
                 </div>
                 <div id="historique" class="page_header_link">
                     <span class="label">Historique</span>
+                </div>
+                <div id="documents" class="page_header_link">
+                    <span class="label">Documents</span>
                 </div>';
             break;
         case 'admin' :
