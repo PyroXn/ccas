@@ -773,6 +773,27 @@ $(function() {
         newPosition.top = $(window).height()/2 - form.height();
         creationForm(newPosition, $(this).outerHeight(), form);
     });
+    
+    $('.create_bon_interne').live("click", function() {
+        var loc = $(this);
+        var name = $(this).attr('name');
+        var datastring = "idBon=" + $(this).attr('idBon');
+        console.log(datastring);
+        $.ajax({
+            type: 'post',
+            data: datastring,
+            url: './index.php?p=createPDFBonInterne',
+            cache: false,
+            success: function() {
+                console.log("succes");
+                
+                loc.text('V');
+                loc.attr('href', name);
+                loc.attr('target','_blank');
+            }
+        });
+           
+    });
 });
 
 function searchTableStatique() {

@@ -715,12 +715,15 @@ function detailAideExterne() {
 
 function pdfExist($chemin, $idBon) {
     if(is_dir($chemin) && file_exists($chemin.'/'.$idBon.'.pdf')) {
-            return '<a href="'.$chemin.'/'.$idBon.'.pdf" target="_blank">V</a>';
+        return '<a name="'.$chemin.'/'.$idBon.'.pdf" href="'.$chemin.'/'.$idBon.'.pdf" target="_blank">V</a>';
     } else {
-        include_once('./lib/config.php');
-        $bon = Doctrine_Core::getTable('bonaide')->find($idBon);
-        creationPDFBonInterne($bon);
-        return '<a href="'.$chemin.'/'.$idBon.'.pdf" target="_blank">V</a>';
+        return '<a name="'.$chemin.'/'.$idBon.'.pdf" idBon="'.$idBon.'" class="create_bon_interne">C</a>';
     }
+}
+
+function createPDFBonInternetEtAffichage($idBon) {
+    include_once('./lib/config.php');
+    $bon = Doctrine_Core::getTable('bonaide')->find($idBon);
+    creationPDFBonInterne($bon);
 }
 ?>

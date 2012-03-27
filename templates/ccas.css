@@ -564,3 +564,7 @@ legend {
     cursor: pointer;
     float: right;
 }
+
+.create_bon_interne {
+    cursor: pointer;
+}
