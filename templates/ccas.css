@@ -134,7 +134,7 @@ input[type=submit] , input[type=reset], input[type=button] {
     top: 30px;
     bottom: 0;
     left: 0;
-    width: 20%;
+    width: 15%;
     background-color: #F3F3F3;
     border-right: 1px solid #DDD;
     /*barre de defilement apparait si le contenu depasse (? voir si ca sert)*/
@@ -181,9 +181,9 @@ input[type=submit] , input[type=reset], input[type=button] {
 
 /***Header de la page***/
 #page_header {
-    width: 80%;
+    width: 85%;
     position: absolute;
-    left: 20%;
+    left: 15%;
     right: 0;
     background: #F3F3F3;
     border-bottom: 1px solid #DDD;
@@ -309,9 +309,9 @@ input[type=submit] , input[type=reset], input[type=button] {
     position: absolute;
     top: 68px;
     bottom : 0;
-    left: 20%;
+    left: 15%;
     overflow: auto;
-    width: 80%;
+    width: 85%;
 }
 
 #contenu {
