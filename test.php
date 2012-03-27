@@ -1,13 +1,15 @@
 <?php
 
 include_once('./lib/config.php');
+$bon = Doctrine_Core::getTable('bonaide')->find(7);
+echo $bon->montant;
 
-    require('./lib/fpdf.php');
-    $pdf = new FPDF();
-    $pdf->AddPage();
-    $pdf->SetFont('times','B',12);
-    $pdf->Cell(500,10,'CENTRE COMMUNAL D\'ACTION SOCIALE DE HAYANGE', 0, 0);
-    $pdf->Output();
+//    require('./lib/fpdf.php');
+//    $pdf = new FPDF();
+//    $pdf->AddPage();
+//    $pdf->SetFont('times','B',12);
+//    $pdf->Cell(500,10,'CENTRE COMMUNAL D\'ACTION SOCIALE DE HAYANGE', 0, 0);
+//    $pdf->Output();
 //$table = 'bailleur';
 //$tableStatique = Doctrine_Core::getTable($table);
 //$fla = $tableStatique->find(1);
