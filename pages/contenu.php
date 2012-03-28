@@ -793,19 +793,11 @@ $contenu .= '<div class="fleche_bas"> </div>
     
 // SITUATION PROFESSIONNELLE
     $contenu .= '
-    <div>
+    <div class="colonne50">
         <h3><span>Situation professionnelle</span>  <span class="edit"></span></h3>
         <ul class="list_classique">
-            <li class="ligne_list_classique">
-                <div class="colonne">
-                    <span class="attribut">Niveau &eacute;tude :</span>
-                    <div class="select classique" role="select_etude" disabled>';
-$contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
-$contenu .= '
-                        <div class="fleche_bas"> </div>
-                    </div>
-                </div>
-                <div class="colonne">
+            <li class="ligne_list_classique">';
+$contenu .=      '<div class="colonne_large">
                     <span class="attribut">Profession :</span>
                     <div class="select classique" role="select_profession" disabled>';
 $contenu .= $user->idNiveauEtude == null ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.$user->profession->profession.'</div>';  
@@ -813,31 +805,91 @@ $contenu .= '
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
-                <div class="colonne">
+                <div class="colonne_large">
                     <span class="attribut">Employeur :</span>
                     <span><input class="contour_field input_char" type="text" id="employeur" value="'.$user->employeur.'" disabled/></span>
                 </div> 
             </li>
             <li class="ligne_list_classique">
-                <div class="colonne">
+                <div class="colonne_large">
                     <span class="attribut">Inscription P.E :</span>
                     <span><input class="contour_field input_date" size="10" type="text" id="dateinscriptionpe" value="'.getDatebyTimestamp($user->dateInscriptionPe).'" disabled/></span>
                 </div>
-                <div class="colonne">
+                <div class="colonne_large">
                     <span class="attribut">N&deg; dossier P.E :</span>
                     <span><input class="contour_field input_char" type="text" id="numdossierpe" value="'.$user->numDossierPe.'" disabled/></span>
                 </div>
-                <div class="colonne">
+            </li>    
+            <li class="ligne_list_classique">
+                <div class="colonne_large">
                     <span class="attribut">D&eacute;but droits P.E :</span>
                     <span><input class="contour_field input_date" size="10" type="text" id="datedebutdroitpe" value="'.getDatebyTimestamp($user->dateDebutDroitPe).'" disabled/></span>
                 </div>
-                <div class="colonne">
+                <div class="colonne_large">
                     <span class="attribut">Fin droits P.E :</span>
                     <span><input class="contour_field input_date" size="10" type="text" id="datefindroitpe" value="'.getDatebyTimestamp($user->dateFinDroitPe).'" disabled/></span>
                 </div> 
             </li>
         </ul>
         <div class="bouton modif update" value="updateSituationProfessionnelle">Enregistrer</div>
+        <div class="clearboth"></div>
+    </div>';
+
+// SITUATION SCOLAIRE
+    $contenu .= '
+    <div class="colonne50">
+        <h3><span>Situation scolaire</span>  <span class="edit"></span></h3>
+        <ul class="list_classique">
+            <li class="ligne_list_classique" >
+                <div class="colonne_large">
+                    <span class="attribut">actuellement scolaris&eacute; :</span>';
+                        if($user->scolarise == 1) {
+                            $contenu .= '<span id="checkboxScolarise" class="checkbox checkbox_active" value="1"></span>';
+                        } else {
+                            $contenu .= '<span id="checkboxScolarise" class="checkbox"></span>';
+                        }
+     $contenu .='</div>
+            </li>';
+            if($user->scolarise == 1) {
+                $contenu .= '<div class="scolarise">';
+            } else {
+                $contenu .= '<div class="scolarise" style="display:none">';
+            }
+    $contenu .='<li class="ligne_list_classique">
+                    <div class="colonne_large">
+                        <span class="attribut">&Eacute;tablissement :</span>
+                        <span><input class="contour_field input_char" type="text" id="etablissementscolaire" value="'.$user->etablissementScolaire.'" disabled/></span>
+                    </div>
+                </li>
+                <li class="ligne_list_classique">
+                    <div class="colonne_large">
+                        <span class="attribut">Classe :</span>
+                        <div class="select classique" role="select_etude" disabled>';
+    $contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
+    $contenu .= '
+                            <div class="fleche_bas"> </div>
+                        </div>
+                    </div>
+                </li>
+            </div>';
+            if($user->scolarise == 1) {
+                $contenu .= '<div class="nonscolarise" style="display:none">';
+            } else {
+                $contenu .= '<div class="nonscolarise">';
+            }
+    $contenu .='<li class="ligne_list_classique">
+                    <div class="colonne_large">
+                        <span class="attribut">Niveau &eacute;tude :</span>
+                        <div class="select classique" role="select_etude" disabled>';
+    $contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
+    $contenu .= '
+                            <div class="fleche_bas"> </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+        </ul>
+        <div class="bouton modif update" value="updateSituationScolaire">Enregistrer</div>
         <div class="clearboth"></div>
     </div>';
     

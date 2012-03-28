@@ -39,11 +39,11 @@ function getDocumentIndividu() {
             switch ($extension) {
                 case "doc":
                 case "docx":
-                    $contenu .= 'Microsft word';
+                    $contenu .= 'Microsoft word';
                     break;
                 case "xls":
                 case "xlsx":
-                    $contenu .= 'Microsft excel';
+                    $contenu .= 'Microsoft excel';
                     break;
                 case "pdf":
                     echo "pdf";
