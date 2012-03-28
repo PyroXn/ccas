@@ -9,10 +9,10 @@
                     <div class="fleche_bas"> </div>
                 </div>
                 <div class="input_text">
-                    <input id="form_2" class="contour_field" type="text" title="Nom" placeholder="Nom">
+                    <input id="form_2" class="contour_field requis" type="text" title="Nom" placeholder="Nom">
                 </div>
                 <div class="input_text">
-                    <input id="form_3" class="contour_field" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
+                    <input id="form_3" class="contour_field requis" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
                 </div>
                 <div class="sauvegarder_annuler">
                     <div class="bouton modif" value="save">Enregistrer</div>

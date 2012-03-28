@@ -89,10 +89,10 @@ function foyerContenu($idFoyer) {
                     <div class="fleche_bas"> </div>
                 </div>
                 <div class="input_text">
-                    <input id="form_2" class="contour_field" type="text" title="Nom" placeholder="Nom">
+                    <input id="form_2" class="contour_field requis" type="text" title="Nom" placeholder="Nom">
                 </div>
                 <div class="input_text">
-                    <input id="form_3" class="contour_field" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
+                    <input id="form_3" class="contour_field requis" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
                 </div>
                 <div class="input_text">
                     <input id="form_4" class="contour_field date" type="text" title="Date de naissance" placeholder="Date de naissance">
@@ -640,7 +640,7 @@ function budget() {
                                
                                <div>';
                        $contenu .= '<div class="colonne_large">
-                                        <h3>Cr&eacute;dits <span class="addElem"  id="createCredit"></span></h3>
+                                        <h3>Cr&eacute;dits <span class="addElem"  id="createCredit" role="creation_credit"></span></h3>
                                             <div class="bubble tableau_classique_wrapper">
                                                 <table class="tableau_classique" cellpadding="0" cellspacing="0">
                                                     <thead>
@@ -674,6 +674,7 @@ function budget() {
                                $contenu .= '</tbody></table></div>
                                    </div>
                                    <div class="formulaire" action="creation_credit">
+                                   <h2>Cr&eacute;dit</h2>
                                    <div class="colonne_droite">
                                          <div class="input_text">
                                             <input id="organisme" class="contour_field" type="text" title="Organisme" placeholder="Organisme">
