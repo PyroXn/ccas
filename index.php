@@ -160,6 +160,10 @@ switch (@$_GET['p']) {
         include_once('./pages/aide.php');
         updateDecisionInterne();
         break;
+    case 'createPDFBonInterne':
+        include_once('./pages/aide.php');
+        createPDFBonInternetEtAffichage($_POST['idBon']);
+        break;
     default:
         home();
         break;

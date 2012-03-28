@@ -448,14 +448,18 @@ function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $monta
     }
     $bon->montant = $montant;
     $bon->commentaire = $commentaire;
-    $bon->save();   
+    $bon->save();
+    creationPDFBonInterne($bon);
+}
+
+function creationPDFBonInterne($bon) {
     // On génère le bon
     include_once('./lib/int2str.php');
     $beneficaire = $bon->aideInterne->individu->civilite .' '. $bon->aideInterne->individu->nom .' '. $bon->aideInterne->individu->prenom;
     $rue = $bon->aideInterne->individu->foyer->rue->rue;
     $num = $bon->aideInterne->individu->foyer->numRue;
     $idIndividu = $bon->aideInterne->individu->id;
-    $lettres = int2str($montant);
+    $lettres = int2str($bon->montant);
     $chemin = './document/'.$idIndividu;
     $idAide = $bon->aideInterne->id;
     $numBon = $bon->id;
@@ -709,12 +713,17 @@ function detailAideExterne() {
     return $contenu;
 }
 
-// TODO : Prevoir creation du pdf si pdf existe pas
 function pdfExist($chemin, $idBon) {
-    if(is_dir($chemin)) {
-        if(file_exists($chemin.'/'.$idBon.'.pdf')) {
-            return '<a href="'.$chemin.'/'.$idBon.'.pdf" target="_blank">V</a>';
-        }
+    if(is_dir($chemin) && file_exists($chemin.'/'.$idBon.'.pdf')) {
+        return '<a name="'.$chemin.'/'.$idBon.'.pdf" href="'.$chemin.'/'.$idBon.'.pdf" target="_blank">V</a>';
+    } else {
+        return '<a name="'.$chemin.'/'.$idBon.'.pdf" idBon="'.$idBon.'" class="create_bon_interne">C</a>';
     }
+}
+
+function createPDFBonInternetEtAffichage($idBon) {
+    include_once('./lib/config.php');
+    $bon = Doctrine_Core::getTable('bonaide')->find($idBon);
+    creationPDFBonInterne($bon);
 }
 ?>

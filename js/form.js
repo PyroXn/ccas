@@ -268,10 +268,9 @@ $(function() {
         }
         else if(value=='save') {
             //commun a tous les form
-            var table = $('.formulaire').attr('action');
-            var datastring = 'table=' + table
+            var table = formActuel.attr('action');
+            var datastring = 'table=' + table;
             
-            console.log('TABLE : ' + table);
             switch(table){
                 //unique pour la creation de foyer
                 case 'creation_foyer':
@@ -803,6 +802,27 @@ $(function() {
         newPosition.left = $(window).width()/2 - form.width()/2;
         newPosition.top = $(window).height()/2 - form.height();
         creationForm(newPosition, $(this).outerHeight(), form);
+    });
+    
+    $('.create_bon_interne').live("click", function() {
+        var loc = $(this);
+        var name = $(this).attr('name');
+        var datastring = "idBon=" + $(this).attr('idBon');
+        console.log(datastring);
+        $.ajax({
+            type: 'post',
+            data: datastring,
+            url: './index.php?p=createPDFBonInterne',
+            cache: false,
+            success: function() {
+                console.log("succes");
+                
+                loc.text('V');
+                loc.attr('href', name);
+                loc.attr('target','_blank');
+            }
+        });
+           
     });
 });
 
