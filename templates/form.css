@@ -255,6 +255,19 @@
     width: 11px;
 }
 
+.checkbox, .checkboxScolarise {
+    position: relative;
+    left: 5px;
+    top: 2px;
+    background: white;
+    border: 1px solid #1C5180;
+    cursor: pointer;
+    display: -moz-inline-box;
+    display: inline-block;
+    height: 11px;
+    width: 11px;
+}
+
 .checkbox_active {
     background: white url('./img/check-sprite.gif') 2px center no-repeat;
 }

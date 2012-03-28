@@ -120,6 +120,10 @@ switch (@$_GET['p']) {
         include_once('./pages/individu.php');
         updateSituationProfessionnelle();
         break;
+    case 'updateSituationScolaire':
+        include_once('./pages/individu.php');
+        updateSituationScolaire();
+        break;
     case 'updateFoyer':
         include_once('./pages/contenu.php');
         updateFoyer();

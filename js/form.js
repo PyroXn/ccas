@@ -116,6 +116,17 @@ $(function() {
         }
     });
     
+    $('#checkboxScolarise').live("click", function(){
+            if ($(this).hasClass("checkbox_active")) {
+                $(".scolarise").hide();
+                $(".nonscolarise").fadeIn(500);
+            }
+            else {
+                $(".nonscolarise").hide();
+                $(".scolarise").fadeIn(500);
+            }
+    });
+    
     $('.checkbox').live("click", function(){
         if (!$(this).attr('disabled')) {
             $(this).toggleClass('checkbox_active');
@@ -541,7 +552,7 @@ $(function() {
             });
         }
         else if(value == 'updateSituationProfessionnelle') {
-            datastring = 'idIndividu='+idIndividu+'&etude='+$('#etude').attr('value');
+            datastring = 'idIndividu='+idIndividu;
             datastring += '&profession='+$('#profession').attr('value')+'&employeur='+$('#employeur').val();
             datastring += '&inscriptionpe='+$('#dateinscriptionpe').val()+'&numdossier='+$('#numdossierpe').val();
             datastring += '&debutdroit='+$('#datedebutdroitpe').val()+'&findroit='+$('#datefindroitpe').val();
@@ -549,6 +560,25 @@ $(function() {
                 type: 'post',
                 data: datastring,
                 url: './index.php?p=updatesituationprofessionnelle',
+                cache: false,
+                //Succès de la requête
+                success: function() {
+                    loc.parent().find('input').attr("disabled","disabled");
+                    slideBouton(loc);
+                }
+            });
+        }
+        else if(value == 'updateSituationScolaire') {
+            var scolarise = 0;
+            if($('#checkboxScolarise').hasClass('checkbox_active')) {
+                scolarise = 1;
+            }
+            datastring = 'idIndividu='+idIndividu+'&scolarise='+scolarise;
+            datastring += '&etablissementscolaire='+$('#etablissementscolaire').val()+'&etude='+$('#etude').val();
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=updateSituationScolaire',
                 cache: false,
                 //Succès de la requête
                 success: function() {

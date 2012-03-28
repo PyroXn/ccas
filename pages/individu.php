@@ -188,7 +188,6 @@ function updateCouvertureSociale() {
 function updateSituationProfessionnelle() {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $individu->idNiveauEtude = $_POST['etude'];
     $individu->idProfession = $_POST['profession'];
     $individu->employeur = $_POST['employeur'];
     if($_POST['inscriptionpe'] != 0) {
@@ -210,6 +209,15 @@ function updateSituationProfessionnelle() {
     } else {
         $individu->dateFinDroitPe = 0;
     }
+    $individu->save();
+}
+
+function updateSituationScolaire() {
+    include_once('./lib/config.php');
+    $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
+    $individu->scolarise = $_POST['scolarise'];
+    $individu->idNiveauEtude = $_POST['etude'];
+    $individu->etablissementScolaire = $_POST['etablissementscolaire'];
     $individu->save();
 }
 

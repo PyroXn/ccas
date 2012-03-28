@@ -365,6 +365,7 @@ input[type=submit] , input[type=reset], input[type=button] {
     background: #FCFCE2;
 }
 
+
 .droite {
     float: right;
     font-size: 12px;
@@ -443,8 +444,9 @@ legend {
 }
 
 .colonne50 {
+    
     display: inline-block;
-    width: 48%;
+    width: 49%;
 }
 
 .colonne_large {

@@ -47,8 +47,8 @@ class Individu extends Doctrine_Record
         $this->hasColumn('idNationalite', 'integer', 5);          //cle etrangere
         $this->hasColumn('idVilleNaissance', 'integer', 20);       //cle etrangere
         $this->hasColumn('idFoyer', 'integer', 8);       //cle etrangere
-        
-        
+        $this->hasColumn('scolarise', 'boolean', 1,array('default' => '0'));        
+        $this->hasColumn('etablissementScolaire', 'string', 50,array('default' => ' '));        
         
         $this->option('orderBy', 'nom ASC');
     }
