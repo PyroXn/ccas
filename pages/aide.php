@@ -726,4 +726,12 @@ function createPDFBonInternetEtAffichage($idBon) {
     $bon = Doctrine_Core::getTable('bonaide')->find($idBon);
     creationPDFBonInterne($bon);
 }
+
+function createPDFRapportSocial($idIndividu) {
+    include_once('./lib/config.php');
+    $individu = Doctrine_Core::getTable('individu')->find($idIndividu);
+    $famille = $individu->foyer->individu;
+    $nomComplet = $individu->civilite .' '. $individu->nom.' '. $individu->prenom;
+    include_once('./lib/PDF/generateRapport.php');   
+}
 ?>
