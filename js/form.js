@@ -731,7 +731,7 @@ $(function() {
     
     $('.delete_credit').live("click", function() {
         var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
-        var id = $(this).parent().attr('name');
+        var id = $(this).parent().parent().attr('name');
         datastring = 'id='+id+'&idIndividu='+idIndividu;
         $.ajax({
             type: 'post',

@@ -305,7 +305,7 @@ function situationFinanciere($idFoyer) {
         $totalDette = $totalDette + array_sum($arrayDette);
         
     }
-    $contenu = '<div><h3>Situation financi&agrave;re de la famille</h3>';
+    $contenu = '<div><h3>Situation financi&egrave;re de la famille</h3>';
     $contenu .= '
         <ul class="list_classique">
                 <li class="ligne_list_classique">
@@ -640,7 +640,7 @@ function budget() {
                                
                                <div>';
                        $contenu .= '<div class="colonne_large">
-                                        <h3>Cr&eacute;dits :</h3>
+                                        <h3>Cr&eacute;dits <span class="addElem"  id="createCredit"></span></h3>
                                             <div class="bubble tableau_classique_wrapper">
                                                 <table class="tableau_classique" cellpadding="0" cellspacing="0">
                                                     <thead>
@@ -672,7 +672,7 @@ function budget() {
                                     }
 
                                $contenu .= '</tbody></table></div>
-                                   <div class="bouton ajout" id="createCredit">Ajouter un cr&eacute;dit</div></div>
+                                   </div>
                                    <div class="formulaire" action="creation_credit">
                                    <div class="colonne_droite">
                                          <div class="input_text">
