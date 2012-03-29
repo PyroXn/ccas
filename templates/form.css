@@ -396,3 +396,7 @@ table {
     display: inline-block;
     vertical-align: top;
 }
+
+.a_completer {
+    border-color: red;
+}

@@ -12,11 +12,20 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
     });
     
-    $('#createCredit').live("click", function() {        
+    //    $('#createCredit').live("click", function() {        
+    //        var newPosition = new Object();
+    //        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_credit"]').width()/2;
+    //        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_credit"]').height();
+    //        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_credit"]'));
+    //    });
+    $('.addElem').live("click", function() {
+        console.log("addElem");
+        var action = $(this).attr('role');
+        var form = $('.formulaire[action="'+action+'"]');
         var newPosition = new Object();
-        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_credit"]').width()/2;
-        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_credit"]').height();
-        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_credit"]'));
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        creationForm(newPosition, $(this).outerHeight(), form);
     });
     
     $('#createAction').live("click", function() {        
@@ -117,14 +126,14 @@ $(function() {
     });
     
     $('#checkboxScolarise').live("click", function(){
-            if ($(this).hasClass("checkbox_active")) {
-                $(".scolarise").hide();
-                $(".nonscolarise").fadeIn(500);
-            }
-            else {
-                $(".nonscolarise").hide();
-                $(".scolarise").fadeIn(500);
-            }
+        if ($(this).hasClass("checkbox_active")) {
+            $(".scolarise").hide();
+            $(".nonscolarise").fadeIn(500);
+        }
+        else {
+            $(".nonscolarise").hide();
+            $(".scolarise").fadeIn(500);
+        }
     });
     
     $('.checkbox').live("click", function(){
@@ -172,7 +181,12 @@ $(function() {
             $('.en_execution').toggleClass('en_execution');
             $('.en_attente').toggleClass('en_attente');
             $('#ecran_gris').toggle();
-            //            $('.formulaire').toggle();
+            formActuel.find('.requis').each(function(){
+                if ($(this).val() == '') {
+                    traitement = false;
+                    $(this).toggleClass('a_completer');
+                }
+            });
             formActuel.toggle();
             effacer();
         } else if(value=='saveTableStatique') {
@@ -267,121 +281,136 @@ $(function() {
             });
         }
         else if(value=='save') {
-            //commun a tous les form
-            var table = formActuel.attr('action');
-            var datastring = 'table=' + table;
-            
-            switch(table){
-                //unique pour la creation de foyer
-                case 'creation_foyer':
-                    datastring += '&civilite=' + $('#form_1').text();
-                    datastring += '&nom=' + $('#form_2').val();
-                    datastring += '&prenom=' + $('#form_3').val();
-                    break;
-                case 'creation_utilisateur':
-                    datastring += '&login='+$('#newlogin').val();
-                    datastring += '&pwd='+$('#newpwd').val();
-                    datastring += '&nomcomplet='+$('#newnomcomplet').val();
-                    break;
-                case 'creation_individu':
-                    datastring += '&idFoyer=' + $('#list_individu').children('.current').children().attr('id_foyer');
-                    datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
-                    datastring += '&civilite=' + $('#form_1').text();
-                    datastring += '&nom=' + $('#form_2').val();
-                    datastring += '&prenom=' + $('#form_3').val();
-                    datastring += '&naissance='+$('#form_4').val();
-                    datastring += '&idlienfamille='+$('#form_5').attr('value');
-                    console.log('DATSTRING : ' + datastring);
-                    break;
-                case 'creation_credit':
-                    datastring += '&idIndividu='+idIndividu+'&organisme='+$('#organisme').val();
-                    datastring += '&mensualite='+$('#mensualite').val()+'&duree='+$('#duree').val();
-                    datastring += '&total='+$('#total').val();
-                    break;
-                case 'creation_action':
-                    datastring += '&idIndividu='+idIndividu+'&date='+$('#date').val();
-                    datastring += '&typeaction='+$('#typeaction').attr('value')+'&motif='+$('#motif').val();
-                    datastring += '&suiteadonner='+$('#suiteadonner').val()+'&suitedonnee='+$('#suitedonnee').val();
-                    datastring += '&instruct='+$('#instruct').attr('value');
-                    console.log(datastring);
-                    break;
-                case 'creation_aide_interne':
-                    var urgence = 0;
-                    if($('#urgence').hasClass('checkbox_active')) {
-                        urgence = 1;
-                    }
-                    datastring += '&idIndividu='+idIndividu+'&typeaide='+$('#typeaideinterne').attr('value');
-                    datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
-                    datastring += '&nature='+$('#nature').attr('value')+'&proposition='+$('#proposition').val();
-                    datastring += '&etat='+$('#etat').attr('value')+'&orga='+$('#orga').attr('value')+'&urgence='+urgence;
-                    console.log(datastring);
-                    break;
-                case 'creation_aide_externe':
-                    var urgence = 0;
-                    if($('#urgenceexterne').hasClass('checkbox_active')) {
-                        urgence = 1;
-                    }
-                    datastring += '&idIndividu='+idIndividu+'&typeaide='+$('#typeaideexterne').attr('value');
-                    datastring += '&date='+$('#dateaideexterne').val()+'&instruct='+$('#instructexterne').attr('value');
-                    datastring += '&nature='+$('#natureaideexterne').attr('value')+'&distrib='+$('#distrib').attr('value');
-                    datastring += '&etat='+$('#etatexterne').attr('value')+'&orga='+$('#orgaext').attr('value')+'&urgence='+urgence;
-                    datastring += '&montantDemande='+$('#montantdemande').val();
-                    console.log(datastring);
-                    break;
-                case 'addBonInterne':
-                    var idAide = $('.formulaire').attr('idAide');
-                    datastring += '&idAide='+idAide+'&dateprevue='+$('#dateprevue').val();
-                    datastring += '&dateeffective='+$('#dateeffective').val()+'&montant='+$('#montant').val();
-                    datastring += '&commentaire='+$('#commentaireBon').val()+'&instruct='+$('#idinstruct').attr('value');
-                    console.log(datastring);
-                    break;
-            }
-            $.ajax({
-                type: 'post',
-                dataType:'json',
-                data: datastring,
-                url: './index.php?p=form',
-                cache: false,
-                //Succès de la requête
-                success: function(data) {
-                    console.log("SUCCESS FONCTION PORC");
-                    $('#ecran_gris').toggle();
-                    formActuel.toggle();
-                    effacer();
-                    
-                    switch(table){
-                        //unique pour la creation de foyer
-                        case 'creation_foyer':
-                            $("#list_individu").html(data.listeIndividu);
-                            $("#page_header_navigation").html(data.menu);
-                            $('#contenu').html(data.contenu);
-                            break;
-                        case 'creation_utilisateur':
-                            $("#contenu").html(data.tableau);
-                            break;
-                        case 'creation_individu':
-                            $("#list_individu").html(data.listeIndividu);
-                            /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
-                            $('#contenu').html(data.newIndividu);
-                            break;
-                        case 'creation_credit':
-                            $("#contenu").html(data.budget);
-                            break;
-                        case 'creation_action':
-                            $('#contenu').html(data.action);
-                            break;
-                        case 'creation_aide_interne':
-                            $('#contenu').html(data.aide);
-                            break;
-                        case 'creation_aide_externe':
-                            $('#contenu').html(data.aide);
-                            break;
-                        case 'addBonInterne':
-                            $('#contenu').html(data.detail);
-                            break;
-                    }
+            var traitement = true;
+            formActuel.find('.requis').each(function(){
+                if ($(this).val() == '') {
+                    traitement = false;
+                    $(this).toggleClass('a_completer');
                 }
             });
+            if (traitement) {
+                //commun a tous les form
+                var table = formActuel.attr('action');
+                var datastring = 'table=' + table;
+
+                switch(table){
+                    //unique pour la creation de foyer
+                    case 'creation_foyer':
+                        datastring += '&civilite=' + $('#form_1').text();
+                        datastring += '&nom=' + $('#form_2').val();
+                        datastring += '&prenom=' + $('#form_3').val();
+                        break;
+                    case 'creation_utilisateur':
+                        datastring += '&login='+$('#newlogin').val();
+                        datastring += '&pwd='+$('#newpwd').val();
+                        datastring += '&nomcomplet='+$('#newnomcomplet').val();
+                        break;
+                    case 'creation_individu':
+                        datastring += '&idFoyer=' + $('#list_individu').children('.current').children().attr('id_foyer');
+                        datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
+                        datastring += '&civilite=' + $('#form_1').text();
+                        datastring += '&nom=' + $('#form_2').val();
+                        datastring += '&prenom=' + $('#form_3').val();
+                        datastring += '&naissance='+$('#form_4').val();
+                        datastring += '&idlienfamille='+$('#form_5').attr('value');
+                        console.log('DATSTRING : ' + datastring);
+                        break;
+                    case 'creation_credit':
+                        datastring += '&idIndividu='+idIndividu+'&organisme='+$('#organisme').val();
+                        datastring += '&mensualite='+$('#mensualite').val()+'&duree='+$('#duree').val();
+                        datastring += '&total='+$('#total').val();
+                        break;
+                    case 'creation_action':
+                        datastring += '&idIndividu='+idIndividu+'&date='+$('#date').val();
+                        datastring += '&typeaction='+$('#typeaction').attr('value')+'&motif='+$('#motif').val();
+                        datastring += '&suiteadonner='+$('#suiteadonner').val()+'&suitedonnee='+$('#suitedonnee').val();
+                        datastring += '&instruct='+$('#instruct').attr('value');
+                        console.log(datastring);
+                        break;
+                    case 'creation_aide_interne':
+                        var urgence = 0;
+                        if($('#urgence').hasClass('checkbox_active')) {
+                            urgence = 1;
+                        }
+                        datastring += '&idIndividu='+idIndividu+'&typeaide='+$('#typeaideinterne').attr('value');
+                        datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
+                        datastring += '&nature='+$('#nature').attr('value')+'&proposition='+$('#proposition').val();
+                        datastring += '&etat='+$('#etat').attr('value')+'&orga='+$('#orga').attr('value')+'&urgence='+urgence;
+                        console.log(datastring);
+                        break;
+                    case 'creation_aide_externe':
+                        var urgence = 0;
+                        if($('#urgence').hasClass('checkbox_active')) {
+                            urgence = 1;
+                        }
+                        datastring += '&idIndividu='+idIndividu+'&typeaideexterne='+$('#typeaideexterne').attr('value');
+                        datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
+                        datastring += '&natureexterne='+$('#natureexterne').attr('value')+'&distrib='+$('#distrib').attr('value');
+                        datastring += '&etat='+$('#etat').attr('value')+'&orgaext='+$('#orgaext').attr('value')+'&urgence='+urgence;
+                        datastring += '&montantDemande='+$('#montantdemande').attr('value');
+                        console.log(datastring);
+                        break;
+                    case 'addBonInterne':
+                        var idAide = $('.formulaire').attr('idAide');
+                        datastring += '&idAide='+idAide+'&dateprevue='+$('#dateprevue').val();
+                        datastring += '&dateeffective='+$('#dateeffective').val()+'&montant='+$('#montant').val();
+                        datastring += '&commentaire='+$('#commentaireBon').val()+'&instruct='+$('#idinstruct').attr('value');
+                        console.log(datastring);
+                        break;
+                }
+                $.ajax({
+                    type: 'post',
+                    dataType:'json',
+                    data: datastring,
+                    url: './index.php?p=form',
+                    cache: false,
+                    //Succès de la requête
+                    success: function(data) {
+                        console.log("SUCCESS FONCTION PORC");
+                        $('#ecran_gris').toggle();
+                        formActuel.toggle();
+                        formActuel.find('.requis').each(function(){
+                            if ($(this).val() == '') {
+                                traitement = false;
+                                $(this).toggleClass('a_completer');
+                            }
+                        });
+                        effacer();
+
+                        switch(table){
+                            //unique pour la creation de foyer
+                            case 'creation_foyer':
+                                $("#list_individu").html(data.listeIndividu);
+                                $("#page_header_navigation").html(data.menu);
+                                $('#contenu').html(data.contenu);
+                                break;
+                            case 'creation_utilisateur':
+                                $("#contenu").html(data.tableau);
+                                break;
+                            case 'creation_individu':
+                                $("#list_individu").html(data.listeIndividu);
+                                /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
+                                $('#contenu').html(data.newIndividu);
+                                break;
+                            case 'creation_credit':
+                                $("#contenu").html(data.budget);
+                                break;
+                            case 'creation_action':
+                                $('#contenu').html(data.action);
+                                break;
+                            case 'creation_aide_interne':
+                                $('#contenu').html(data.aide);
+                                break;
+                            case 'creation_aide_externe':
+                                $('#contenu').html(data.aide);
+                                break;
+                            case 'addBonInterne':
+                                $('#contenu').html(data.detail);
+                                break;
+                        }
+                    }
+                });
+            }
         } else if (value == 'updateMembreFoyer') {
             var membreFoyer = $('.checkbox_active').parent().parent().parent();
             console.log(membreFoyer);
@@ -637,6 +666,7 @@ $(function() {
     
     //permet l'affichage des formulaires flottant entouré de gris
     function creationForm(x, h, form) {
+        console.log("creationForm");
         console.log(form);
         $('#ecran_gris').toggle();
         $(form).css({
@@ -731,7 +761,7 @@ $(function() {
     
     $('.delete_credit').live("click", function() {
         var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
-        var id = $(this).parent().attr('name');
+        var id = $(this).parent().parent().attr('name');
         datastring = 'id='+id+'&idIndividu='+idIndividu;
         $.ajax({
             type: 'post',
@@ -793,15 +823,6 @@ $(function() {
     $('#updateDecision').live("click", function() {
         $('#decision').toggle();
         $(this).toggle();
-    });
-    
-    $('.addElem').live("click", function() {
-        var action = $(this).attr('role');
-        var form = $('.formulaire[action="'+action+'"]');
-        var newPosition = new Object();
-        newPosition.left = $(window).width()/2 - form.width()/2;
-        newPosition.top = $(window).height()/2 - form.height();
-        creationForm(newPosition, $(this).outerHeight(), form);
     });
     
     $('.create_bon_interne').live("click", function() {

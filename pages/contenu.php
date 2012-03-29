@@ -17,6 +17,8 @@ function contenu() {
             echo aide();
             break;
         case 'historique':
+            include_once './pages/historique.php';
+            echo affichageHistoriqueByIndividu();
             break;
         case 'documents':
             include_once './pages/document.php';
@@ -46,6 +48,10 @@ function contenu() {
         case 'ecranTableStatique':
             include_once './pages/tableStatique.php';
             echo comboTableStatique();
+            break;
+        case 'historiqueGlobal':
+            include_once './pages/historique.php';
+            echo affichageHistorique();
             break;
     }
 }
@@ -89,10 +95,10 @@ function foyerContenu($idFoyer) {
                     <div class="fleche_bas"> </div>
                 </div>
                 <div class="input_text">
-                    <input id="form_2" class="contour_field" type="text" title="Nom" placeholder="Nom">
+                    <input id="form_2" class="contour_field requis" type="text" title="Nom" placeholder="Nom">
                 </div>
                 <div class="input_text">
-                    <input id="form_3" class="contour_field" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
+                    <input id="form_3" class="contour_field requis" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
                 </div>
                 <div class="input_text">
                     <input id="form_4" class="contour_field date" type="text" title="Date de naissance" placeholder="Date de naissance">
@@ -275,6 +281,9 @@ function updateFoyer() {
         $foyer->logDateArrive = 0;
     }
     $foyer->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'foyer', $_SESSION['userId'], Doctrine_Core::getTable('individu')->findOneByIdFoyerAndChefDeFamille($_POST['idFoyer'], true));
 }
 
 function situationFinanciere($idFoyer) {
@@ -305,7 +314,7 @@ function situationFinanciere($idFoyer) {
         $totalDette = $totalDette + array_sum($arrayDette);
         
     }
-    $contenu = '<div><h3>Situation financi&agrave;re de la famille</h3>';
+    $contenu = '<div><h3>Situation financi&egrave;re de la famille</h3>';
     $contenu .= '
         <ul class="list_classique">
                 <li class="ligne_list_classique">
@@ -640,7 +649,7 @@ function budget() {
                                
                                <div>';
                        $contenu .= '<div class="colonne_large">
-                                        <h3>Cr&eacute;dits :</h3>
+                                        <h3>Cr&eacute;dits <span class="addElem"  id="createCredit" role="creation_credit"></span></h3>
                                             <div class="bubble tableau_classique_wrapper">
                                                 <table class="tableau_classique" cellpadding="0" cellspacing="0">
                                                     <thead>
@@ -672,8 +681,9 @@ function budget() {
                                     }
 
                                $contenu .= '</tbody></table></div>
-                                   <div class="bouton ajout" id="createCredit">Ajouter un cr&eacute;dit</div></div>
+                                   </div>
                                    <div class="formulaire" action="creation_credit">
+                                   <h2>Cr&eacute;dit</h2>
                                    <div class="colonne_droite">
                                          <div class="input_text">
                                             <input id="organisme" class="contour_field" type="text" title="Organisme" placeholder="Organisme">
@@ -770,7 +780,7 @@ $contenu .= '<div class="fleche_bas"> </div>
 // CONTACT
     $contenu .= '
     <div>
-        <h3><span>T&eacute;l&agrave;phone / Email</span>  <span class="edit"></span></h3>
+        <h3><span>T&eacute;l&egrave;phone / Email</span>  <span class="edit"></span></h3>
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">

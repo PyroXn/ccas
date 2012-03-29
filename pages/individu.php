@@ -11,6 +11,9 @@ function updateChefDeFamille() {
     $individuNewChefFamille->chefDeFamille = 1;
     $individuNewChefFamille->save();
     
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'individu', $_SESSION['userId'], $individu->id);
+    
     echo foyerContenu($_POST['idFoyer']);
 }
 
@@ -20,6 +23,10 @@ function deleteIndividu() {
     include_once('./index.php');
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $individu->delete();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Suppression, 'individu', $_SESSION['userId'], $_POST['idIndividu']);
+    
     $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividuCourant']);
     $contenu = foyerContenu($_POST['idFoyer']);
     $retour = array('listeIndividu' => $listeIndividu, 'contenu' => $contenu);
@@ -43,6 +50,9 @@ function updateRessource() {
     $individu->natureAutre = $_POST['natureAutre'];
     $individu->dateCreation = time();
     $individu->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'ressource', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateDepense() {
@@ -63,6 +73,9 @@ function updateDepense() {
     $individu->natureDepense = $_POST['natureDepense'];
     $individu->dateCreation = time();
     $individu->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'depense', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateDette() {
@@ -78,6 +91,9 @@ function updateDette() {
     $dette->prestaGaz = $_POST['prestaGaz'];
     $dette->dateCreation = time();
     $dette->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'dette', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateDepenseHabitation() {
@@ -89,6 +105,9 @@ function updateDepenseHabitation() {
     $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
     $depense->loyer = $_POST['loyer'];
     $depense->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'depense habitation', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function archiveRessource() {
@@ -120,6 +139,10 @@ function deleteCredit() {
     include_once('./pages/contenu.php');
     $credit = Doctrine_Core::getTable('credit')->find($_POST['id']);
     $credit->delete();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Suppression, 'credit', $_SESSION['userId'], $credit->idIndividu);
+    
     echo budget();   
 }
 
@@ -130,6 +153,9 @@ function updateContact() {
     $individu->portable = $_POST['portable'];
     $individu->email = $_POST['email'];
     $individu->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'télèphone / email', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateCaf() {
@@ -137,7 +163,10 @@ function updateCaf() {
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $individu->idCaisseCaf = $_POST['caf'];
     $individu->numAllocataireCaf = $_POST['numallocatairecaf'];
-    $individu->save();    
+    $individu->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'CAF', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateMutuelle() {
@@ -158,7 +187,10 @@ function updateMutuelle() {
     } else {
         $individu->dateFinCouvMut = 0;
     }
-    $individu->save();  
+    $individu->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'mutuelle', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateCouvertureSociale() {
@@ -182,7 +214,10 @@ function updateCouvertureSociale() {
     $individu->numSecu = $_POST['numsecu'];
     $individu->clefSecu = $_POST['clefsecu'];
     $individu->regime = $_POST['regime'];
-    $individu->save();  
+    $individu->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'couvertue sociale', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateSituationProfessionnelle() {
@@ -210,6 +245,9 @@ function updateSituationProfessionnelle() {
         $individu->dateFinDroitPe = 0;
     }
     $individu->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'situation professionnelle', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateSituationScolaire() {
@@ -219,6 +257,9 @@ function updateSituationScolaire() {
     $individu->idNiveauEtude = $_POST['etude'];
     $individu->etablissementScolaire = $_POST['etablissementscolaire'];
     $individu->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'situation scolaire', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateInfoPerso() {
@@ -238,5 +279,8 @@ function updateInfoPerso() {
     $individu->sexe = $_POST['sexe'];
     $individu->idLienFamille = $_POST['statut'];
     $individu->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'information personnelle', $_SESSION['userId'], $_POST['idIndividu']);
 }
 ?>

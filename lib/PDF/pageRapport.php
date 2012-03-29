@@ -1,10 +1,10 @@
-<link type="text/css" href="styleRapport.css" rel="stylesheet" >
+<link type="text/css" href="./lib/PDF/styleRapport.css" rel="stylesheet" >
 <page>
     <div id="titre">
         RAPPORT D'EVALUATION SOCIALE
     </div>
     <div id="date">
-        Date : 05/05/2012
+        Date : <?php echo date('d/m/Y'); ?>
     </div>
     <div id="espace"></div>
     <table>
@@ -13,28 +13,28 @@
         </tr>
         <tr>
             <td colspan="2" class="left">
-                Nom & Prénom du demandeur :
+                Nom & Prénom du demandeur : <?php echo $nomComplet; ?>
             </td>
         </tr>
         <tr>
             <td width="350" class="left">
-                Né le :
+                Né le : <?php echo getDatebyTimestamp($individu->dateNaissance); ?>
             </td>
             <td width="350" class="left">
-                A
-            </td>
-        </tr>
-        <tr>
-            <td width="350" class="left">
-                Adresse :
-            </td>
-            <td width="350" class="left">
-                Téléphone :
+                A <?php echo $individu->ville->libelle; ?>
             </td>
         </tr>
         <tr>
             <td width="350" class="left">
-                Situation Matrimoniale :
+                Adresse : <?php echo $individu->foyer->numRue . ' ' . $individu->foyer->rue->rue . ' ' . $individu->foyer->ville->libelle; ?>
+            </td>
+            <td width="350" class="left">
+                Téléphone : <?php echo $individu->telephone; ?>
+            </td>
+        </tr>
+        <tr>
+            <td width="350" class="left">
+                Situation Matrimoniale : <?php echo $individu->situationmatri->situation; ?>
             </td>
             <td width="350" class="left">
                 Nb d'enfants :
@@ -42,10 +42,10 @@
         </tr>
         <tr>
             <td width="350" class="left">
-                Situation professionnelle :
+                Situation professionnelle : <?php echo $individu->profession->profession; ?>
             </td>
             <td width="350" class="left">
-                N° CAF :
+                N° CAF : <?php echo $individu->numSecu; ?>
             </td>
         </tr>
     </table>
@@ -78,12 +78,18 @@
                 Profession - Employeur - Ecoles
             </td>
         </tr>
-        <tr>
-            <td height="200"></td>
-            <td height="200"></td>
-            <td height="200"></td>
-            <td height="200"></td>
-        </tr>
+        <?php
+        foreach ($famille as $fam) {
+            ?>
+            <tr>
+                <td><?php echo $fam->nom .' '. $fam->prenom; ?></td>
+                <td><?php echo $fam->lienfamille->lien; ?></td>
+                <td><?php echo getDatebyTimestamp($fam->dateNaissance); ?></td>
+                <td></td>
+            </tr>
+            <?php
+        }
+        ?>
     </table>
 
 </page>
