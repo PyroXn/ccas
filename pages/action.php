@@ -132,6 +132,9 @@ function createAction($date, $typeaction, $motif, $suiteadonner, $suitedonnee, $
     $action->idInstruct = $idInstruct;
     $action->idIndividu = $idIndividu;
     $action->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Creation, 'action', $_SESSION['userId'], $idIndividu);
 }
 
 function getAction() {
@@ -159,6 +162,10 @@ function updateAction() {
         $action->date = 0;
     }
     $action->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'action', $_SESSION['userId'], $action->idIndividu);
+    
     echo action();
 }
 ?>

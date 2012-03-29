@@ -17,6 +17,8 @@ function contenu() {
             echo aide();
             break;
         case 'historique':
+            include_once './pages/historique.php';
+            echo affichageHistoriqueByIndividu();
             break;
         case 'documents':
             include_once './pages/document.php';
@@ -275,6 +277,9 @@ function updateFoyer() {
         $foyer->logDateArrive = 0;
     }
     $foyer->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'foyer', $_SESSION['userId'], Doctrine_Core::getTable('individu')->findOneByIdFoyerAndChefDeFamille($_POST['idFoyer'], true));
 }
 
 function situationFinanciere($idFoyer) {
@@ -771,7 +776,7 @@ $contenu .= '<div class="fleche_bas"> </div>
 // CONTACT
     $contenu .= '
     <div>
-        <h3><span>T&eacute;l&agrave;phone / Email</span>  <span class="edit"></span></h3>
+        <h3><span>T&eacute;l&egrave;phone / Email</span>  <span class="edit"></span></h3>
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">

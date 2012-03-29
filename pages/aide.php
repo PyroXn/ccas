@@ -408,6 +408,9 @@ function createAideExterne($typeAide, $date, $instruct, $nature, $idDistrib, $et
     $aide->aideUrgente = $urgence;
     $aide->montantDemande = $montantDemande;
     $aide->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Creation, 'aide externe', $_SESSION['userId'], $idIndividu);
 }
 
 function updateDecisionInterne() {
@@ -426,6 +429,10 @@ function updateDecisionInterne() {
     $aide->rapport = $_POST['rapport'];
     $aide->idDecideur = $_POST['decideur'];
     $aide->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'aide interne', $_SESSION['userId'], $aide->idIndividu);
+    
     $retours = aide();
     $retour = array('aide' => $retours);
     echo json_encode($retour);  
@@ -449,6 +456,10 @@ function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $monta
     $bon->montant = $montant;
     $bon->commentaire = $commentaire;
     $bon->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Creation, 'bon interne', $_SESSION['userId'], $bon->aideInterne->individu->id);
+    
     creationPDFBonInterne($bon);
 }
 

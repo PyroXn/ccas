@@ -14,6 +14,14 @@ class User extends Doctrine_Record {
         $this->hasColumn('actif', 'integer',1, array('default' => '0'));
         $this->option('orderBy', 'nomcomplet ASC');
     }
+    
+    public function setUp() {
+        $this->hasMany('historique as historique', array(
+            'local' => 'id',
+            'foreign' => 'idUser'
+                )
+        );
+    }
 
 }
 ?>
