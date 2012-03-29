@@ -29,8 +29,19 @@ function affichageHistoriqueByIndividu() {
     $i = 1;
     foreach($historiques as $historique) {
         $i % 2 ? $contenu .= '<tr>' : $contenu .= '<tr class="alt">';
-        
-        $contenu .= '<td>'.Historique::getStaticValue($historique->typeAction).'</td>
+        if ($historique->typeAction == Historique::$Archiver) {
+            $q = Doctrine_Query::create()
+                ->from($historique->objet)
+                ->where('datecreation < ?', $historique->date)
+                ->andWhere('idIndividu = ?', $historique->idIndividu)
+                ->orderBy('datecreation DESC')
+                ->fetchOne();
+            
+            $contenu .= '<td><span>'.$q->id.' '.Historique::getStaticValue($historique->typeAction).'</span></td>';
+        } else {
+            $contenu .= '<td>'.Historique::getStaticValue($historique->typeAction).'</td>';
+        }
+        $contenu .= '
             <td>'.$historique->objet.'</td>
             <td>'.$historique->user->login.'</td>
             <td>'.getDatebyTimestamp($historique->date).'</td>
@@ -43,8 +54,36 @@ function affichageHistoriqueByIndividu() {
 }
 
 function affichageHistorique() {
+    $contenu = '';
+//    $contenu .= '<h3>Recherche</h3>
+//        <ul class="list_classique">
+//            <li id="ligneRechercheTableStatique" class="ligne_list_classique" table="historique">
+//                <div class="colonne">
+//                    <span class="attribut">Individu : </span>
+//                    <span><input class="contour_field input_char recherche" type="text" columnName="individu" value=""/></span>
+//                </div>
+//            </li>
+//            <li id="ligneRechercheTableStatique" class="ligne_list_classique" table="historique">
+//                <div class="colonne">
+//                    <span class="attribut">Individu : </span>
+//                    <span><input class="contour_field input_char recherche" type="text" columnName="individu" value=""/></span>
+//                </div>
+//            </li>
+//            <li id="ligneRechercheTableStatique" class="ligne_list_classique" table="historique">
+//                <div class="colonne">
+//                    <span class="attribut">Objet : </span>
+//                    <span><input class="contour_field input_char recherche" type="text" columnName="objet" value=""/></span>
+//                </div>
+//            </li>
+//            <li id="ligneRechercheTableStatique" class="ligne_list_classique" table="historique">
+//                <div class="colonne">
+//                    <span class="attribut">Utilisateur : </span>
+//                    <span><input class="contour_field input_char recherche" type="text" columnName="utilisateur" value=""/></span>
+//                </div>
+//            </li>
+//        </ul>';
     $historiques = Doctrine_Core::getTable('historique')->findAll();
-    $contenu = '<div><h3>Historique</h3>';
+    $contenu .= '<div><h3>Historique</h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
             <table class="tableau_classique" cellpadding="0" cellspacing="0">

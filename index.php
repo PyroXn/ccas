@@ -220,11 +220,11 @@ function login() {
             <form name="loginform" id="loginform" action="index.php?p=login" method="post">
                 <p>
                     <label for="user_login">Identifiant<br />
-                        <input type="text" name="log" id="user_login" class="input" value="" size="20" tabindex="10" /></label>
+                        <input type="text" name="log" id="user_login" class="input requis" value="" size="20" tabindex="10" /></label>
                 </p>
                 <p>
                     <label for="user_pass">Mot de passe<br />
-                        <input type="password" name="pwd" id="user_pass" class="input" value="" size="20" tabindex="20" /></label>
+                        <input type="password" name="pwd" id="user_pass" class="input requis" value="" size="20" tabindex="20" /></label>
                 </p>
                 <p class="submit">
                     <input type="submit" name="wp-submit" id="wp-submit" class="modif" value="Se connecter" tabindex="100" />

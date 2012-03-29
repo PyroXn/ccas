@@ -296,12 +296,12 @@ function situationFinanciere($idFoyer) {
     $totalCredit = 0;
     
     foreach($individus as $individu) {
-        $revenu = Doctrine_Core::getTable('revenu')->getLastFicheRessource($individu->id);
+        $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($individu->id);
         $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($individu->id);
         $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($individu->id);
         $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($individu->id);
-        $arrayRevenu = array($revenu->salaire, $revenu->chomage, $revenu->revenuAlloc, $revenu->ass, $revenu->aah, $revenu->rsaSocle,
-                                        $revenu->rsaActivite, $revenu->pensionAlim, $revenu->pensionRetraite, $revenu->retraitComp, $revenu->autreRevenu, $revenu->aideLogement);
+        $arrayRessource = array($ressource->salaire, $ressource->chomage, $ressource->revenuAlloc, $ressource->ass, $ressource->aah, $ressource->rsaSocle,
+                                        $ressource->rsaActivite, $ressource->pensionAlim, $ressource->pensionRetraite, $ressource->retraitComp, $ressource->autreRevenu, $ressource->aideLogement);
         $arrayDepense = array($depense->impotRevenu, $depense->impotLocaux, $depense->pensionAlim, $depense->mutuelle, $depense->electricite, $depense->gaz,
                                         $depense->eau, $depense->chauffage, $depense->telephonie, $depense->internet, $depense->television, $depense->assurance, $depense->credit,
                                         $depense->autreDepense, $depense->loyer);
@@ -309,7 +309,7 @@ function situationFinanciere($idFoyer) {
         foreach($credits as $credit) {
             $totalCredit = $totalCredit + $credit->mensualite;
         }
-        $totalRessource =  $totalRessource + array_sum($arrayRevenu);
+        $totalRessource =  $totalRessource + array_sum($arrayRessource);
         $totalDepense = $totalDepense + array_sum($arrayDepense);
         $totalDette = $totalDette + array_sum($arrayDette);
         
@@ -445,65 +445,65 @@ function manageUser() {
 
 function budget() {
     include_once('./lib/config.php');
-    $revenu = Doctrine_Core::getTable('revenu')->getLastFicheRessource($_POST['idIndividu']);
+    $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($_POST['idIndividu']);
     $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
     $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
     $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($_POST['idIndividu']);
     $contenu = '<h2>Budget</h2>';
-    $contenu .= '<div><h3 role="ressource"><span>Ressources</span>  <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.getDatebyTimestamp($revenu->dateCreation).'</span></h3>';
+    $contenu .= '<div><h3 role="ressource"><span>Ressources</span>  <span class="edit"></span><span class="archive"></span> <span class="timemaj">'.getDatebyTimestamp($ressource->dateCreation).'</span></h3>';
     $contenu .= '<ul class="list_classique">
                                 <li class="ligne_list_classique">
                                     <div class="colonne">
                                         <span class="attribut">Salaire : </span>
-                                        <span><input class="contour_field input_num" type="text" id="salaire" value="'.$revenu->salaire.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="salaire" value="'.$ressource->salaire.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">All. Ch&ocirc;mage : </span>
-                                        <span><input class="contour_field input_num" type="text" id="chomage" value="'.$revenu->chomage.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="chomage" value="'.$ressource->chomage.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">All. familiales : </span>
-                                        <span><input class="contour_field input_num" type="text" id="revenuAlloc" value="'.$revenu->revenuAlloc.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="revenuAlloc" value="'.$ressource->revenuAlloc.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">ASS : </span>
-                                        <span><input class="contour_field input_num" type="text" id="ass" value="'.$revenu->ass.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="ass" value="'.$ressource->ass.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="ligne_list_classique">
                                     <div class="colonne">
                                         <span class="attribut">AAH : </span>
-                                        <span><input class="contour_field input_num" type="text" id="aah" value="'.$revenu->aah.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="aah" value="'.$ressource->aah.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">RSA Socle : </span>
-                                        <span><input class="contour_field input_num" type="text" id="rsaSocle" value="'.$revenu->rsaSocle.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="rsaSocle" value="'.$ressource->rsaSocle.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">RSA Activit&eacute; : </span>
-                                        <span><input class="contour_field input_num" type="text" id="rsaActivite" value="'.$revenu->rsaActivite.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="rsaActivite" value="'.$ressource->rsaActivite.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Retraite compl  : </span>
-                                        <span><input class="contour_field input_num" type="text" id="retraitComp" value="'.$revenu->retraitComp.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="retraitComp" value="'.$ressource->retraitComp.'" disabled/></span>
                                     </div>
                                </li>
                                <li class="ligne_list_classique">
                                     <div class="colonne">
                                         <span class="attribut">P. alimentaire : </span>
-                                        <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$revenu->pensionAlim.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$ressource->pensionAlim.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">P. de retraite : </span>
-                                        <span><input class="contour_field input_num" type="text" id="pensionRetraite" value="'.$revenu->pensionRetraite.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="pensionRetraite" value="'.$ressource->pensionRetraite.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Autres revenus  : </span>
-                                        <span><input class="contour_field input_num" type="text" id="autreRevenu" value="'.$revenu->autreRevenu.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="autreRevenu" value="'.$ressource->autreRevenu.'" disabled/></span>
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">Nature : </span>
-                                        <span><input class="contour_field input_char" type="text" id="natureRevenu" value="'.$revenu->natureAutre.'" disabled/></span>
+                                        <span><input class="contour_field input_char" type="text" id="natureRevenu" value="'.$ressource->natureAutre.'" disabled/></span>
                                     </div>
                                </li>
                             </ul>
@@ -589,11 +589,11 @@ function budget() {
                                     </div>
                                     <div class="colonne">
                                         <span class="attribut">AL ou APL : </span>
-                                        <span><input class="contour_field input_num" type="text" id="apl" value="'.$revenu->aideLogement.'" disabled/></span>
+                                        <span><input class="contour_field input_num" type="text" id="apl" value="'.$ressource->aideLogement.'" disabled/></span>
                                    </div>
                                    <div class="colonne">
                                         <span class="attribut">R&eacute;siduel : </span>
-                                        <span>'.($depense->loyer - $revenu->aideLogement).'</span>
+                                        <span>'.($depense->loyer - $ressource->aideLogement).'</span>
                                     </div>
                                     </li>
                                 </ul>

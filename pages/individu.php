@@ -35,7 +35,7 @@ function deleteIndividu() {
 
 function updateRessource() {
     include_once('./lib/config.php');
-    $individu = Doctrine_Core::getTable('revenu')->getLastFicheRessource($_POST['idIndividu']);
+    $individu = Doctrine_Core::getTable('ressource')->getLastFicheRessource($_POST['idIndividu']);
     $individu->salaire = $_POST['salaire'];
     $individu->chomage = $_POST['chomage'];
     $individu->revenuAlloc = $_POST['revenuAlloc'];
@@ -98,7 +98,7 @@ function updateDette() {
 
 function updateDepenseHabitation() {
     include_once('./lib/config.php');
-    $ressource = Doctrine_Core::getTable('revenu')->getLastFicheRessource($_POST['idIndividu']);
+    $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($_POST['idIndividu']);
     $ressource->aideLogement = $_POST['apl'];
     $ressource->save();
     
@@ -114,7 +114,9 @@ function archiveRessource() {
     include_once('./lib/config.php');
     include_once('./pages/contenu.php');
     include_once('./pages/form.php');
-    createRevenu($_POST['idIndividu']);
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Archiver, 'ressource', $_SESSION['userId'], $_POST['idIndividu']);
+    createRessource($_POST['idIndividu']);
     echo budget();
 }
 
@@ -122,6 +124,8 @@ function archiveDepense() {
     include_once('./lib/config.php');
     include_once('./pages/contenu.php');
     include_once('./pages/form.php');
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Archiver, 'depense', $_SESSION['userId'], $_POST['idIndividu']);
     createDepense($_POST['idIndividu']);
     echo budget();
 }
@@ -130,6 +134,8 @@ function archiveDette() {
     include_once('./lib/config.php');
     include_once('./pages/contenu.php');
     include_once('./pages/form.php');
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Archiver, 'dette', $_SESSION['userId'], $_POST['idIndividu']);
     createDette($_POST['idIndividu']);
     echo budget();
 }

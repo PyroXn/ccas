@@ -96,7 +96,7 @@ class Individu extends Doctrine_Record
     			'foreign' => 'id'
     		)
     	);
-        $this->hasMany('revenu as revenu',
+        $this->hasMany('ressource as ressource',
     		array(
     			'local' => 'id', 
     			'foreign' => 'idIndividu'

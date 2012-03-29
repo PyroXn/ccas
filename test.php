@@ -1,8 +1,14 @@
 <?php
 
 include_once('./lib/config.php');
-$bon = Doctrine_Core::getTable('bonaide')->find(7);
-echo $bon->montant;
+$q = Doctrine_Query::create()
+                ->from('depense')
+                ->where('datecreation < ?', 1333007766)
+                ->orderBy('datecreation DESC')
+                ->fetchOne();
+        
+        echo $q->id;
+
 
 //    require('./lib/fpdf.php');
 //    $pdf = new FPDF();

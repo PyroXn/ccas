@@ -83,7 +83,7 @@ function creationFoyer($civilite, $nom, $prenom) {
     include_once('./pages/historique.php');
     createHistorique(Historique::$Creation, 'foyer', $_SESSION['userId'], $individu->id);
  
-    createRevenu($individu->id);
+    createRessource($individu->id);
     createDepense($individu->id);
     createDette($individu->id);
     
@@ -91,14 +91,14 @@ function creationFoyer($civilite, $nom, $prenom) {
 //    return creationListeByFoyer($foyer->id, $individu->id);
 }
 
-function createRevenu($idIndividu) {
-    $revenu = new Revenu();
-    $revenu->idIndividu = $idIndividu;
-    $revenu->dateCreation = time();
-    $revenu->save();
+function createRessource($idIndividu) {
+    $ressource = new Ressource();
+    $ressource->idIndividu = $idIndividu;
+    $ressource->dateCreation = time();
+    $ressource->save();
     
     include_once('./pages/historique.php');
-    createHistorique(Historique::$Creation, 'revenu', $_SESSION['userId'], $idIndividu);
+    createHistorique(Historique::$Creation, 'ressource', $_SESSION['userId'], $idIndividu);
 } 
 
 function createDepense($idIndividu) {
@@ -154,7 +154,7 @@ function createIndividu($idFoyer, $civilite, $nom, $prenom, $dateNaissance, $idL
     include_once('./pages/historique.php');
     createHistorique(Historique::$Creation, 'individu', $_SESSION['userId'], $individu->id);
     
-    createRevenu($individu->id);
+    createRessource($individu->id);
     createDepense($individu->id);
     createDette($individu->id);
     return FoyerContenu($idFoyer);

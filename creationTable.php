@@ -208,7 +208,7 @@ try {
 }
 
 try {
-	$table = Doctrine_Core::getTable('Revenu'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('ressource'); // On récupère l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
 		                           $table->getColumns()); // Puis, on la crée.
         echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
