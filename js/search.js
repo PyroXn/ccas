@@ -281,7 +281,9 @@ $(function() {
 function searchTableHistorique() {
     var datastring = 'table=historique';
     $('#ligneRechercheTableHistorique').find('[columnName]').each(function(){
-        datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
+        if($(this).val() != '') {
+            datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
+        }
     });
         
     console.log(datastring);

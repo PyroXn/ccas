@@ -152,16 +152,14 @@ function searchHistorique() {
     $param = array();
     $premierPassage = true;
     if (isset ($_POST['individu'])) {
-        $tableIndividu = Doctrine_Core::getTable('individu')->likeNom($_POST['individu']);
-        $tableIndividu->execute();
-        $req .= $premierPassage ? 'idIndividu IN ? ' : 'and idIndividu IN ? ';
-        $first = false;
+        $tableIndividu = Doctrine_Core::getTable('individu');
+        $req .= $premierPassage ? 'idIndividu IN ? ' : 'and idindividu IN ? ';
+        $first = true;
         $paramIdIndividu = '';
-        foreach($tableIndividu->execute() as $individu) {
-            $first ? $paramIdIndividu .= '('.$individu->id : ','.$individu->id;
-            
+        foreach($tableIndividu->likeNom($_POST['individu'])->execute() as $individu) {
+            $paramIdIndividu .= $first ? $individu->id : ','.$individu->id;
+            $first = false;
         }
-        $paramIdIndividu .= ')';
         $param[] = $paramIdIndividu;
         $premierPassage = false;
     }
@@ -174,10 +172,18 @@ function searchHistorique() {
         $param[] = $_POST['objet'].'%';
         $premierPassage = false;
     }
-//    if (isset ($_POST['individu'])) {
-//        $req .= $premierPassage ? $columnName.' like ? ' : 'and '.$columnName.' like ? ';
-//        $premierPassage = false;
-//    }
+    if (isset ($_POST['utilisateur'])) {
+        $tableUser = Doctrine_Core::getTable('user');
+        $req .= $premierPassage ? 'idUser IN ? ' : 'and idUser IN ? ';
+        $first = true;
+        $paramIdUser = '';
+        foreach($tableUser->likeLogin($_POST['utilisateur'])->execute() as $user) {
+            $paramIdUser .= $first ? $user->id : ','.$user->id;
+            $first = false;
+        }
+        $param[] = $paramIdUser;
+        $premierPassage = false;
+    }
     
 //    foreach ($columnNames as $columnName) {
 //        if ($columnName != 'id') {
@@ -186,7 +192,12 @@ function searchHistorique() {
 //            $premierPassage = false;
 //        }
 //    }
-    $search = $tableHistorique->findByDql($req, $param);
+    
+    if ($req == '') {
+        $search = $tableHistorique->findAll();
+    } else {
+        $search = $tableHistorique->findByDql($req, $param);
+    }
     echo generateContenuTableHistorique($search);
 }
 
