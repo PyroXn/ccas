@@ -43,20 +43,20 @@ function action() {
             <h2>Actions</h2>
            <div class="colonne_droite">
                  <div class="input_text">
-                    <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                    <input id="date" class="contour_field requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
                 </div>
                 <div class="select classique" role="select_motifaction">
                     <div id="typeaction" class="option">Type d\'action</div>
                     <div class="fleche_bas"> </div>
                 </div>
                 <div class="input_text">
-                    <input id="motif" class="contour_field" type="text" title="Motif" placeholder="Motif">
+                    <input id="motif" class="contour_field requis" type="text" title="Motif" placeholder="Motif">
                 </div>
                 <div class="input_text">
-                    <input id="suiteadonner" class="contour_field" type="text" title="Suite à donner" placeholder="Suite à donner">
+                    <input id="suiteadonner" class="contour_field" type="text" title="Suite à donner" placeholder="Suite &agrave; donner">
                 </div>
                 <div class="input_text">
-                    <input id="suitedonnee" class="contour_field" type="text" title="Suite donnée" placeholder="Suite donnée">
+                    <input id="suitedonnee" class="contour_field" type="text" title="Suite donnée" placeholder="Suite donn&eacute;e">
                 </div>
                 <div class="select classique" role="select_instruct">
                     <div id="instruct" class="option">Instructeur</div>
@@ -82,10 +82,10 @@ function action() {
                     <input id="motif_edit" class="contour_field" type="text" title="Motif">
                 </div>
                 <div class="input_text">
-                    <input id="suiteadonner_edit" class="contour_field" type="text" title="Suite à donner">
+                    <input id="suiteadonner_edit" class="contour_field" type="text" title="Suite &agrave; donner">
                 </div>
                 <div class="input_text">
-                    <input id="suitedonnee_edit" class="contour_field" type="text" title="Suite donnée">
+                    <input id="suitedonnee_edit" class="contour_field" type="text" title="Suite donn&eacute;e">
                 </div>
                 <div class="input_text">
                     <input id="instruct_edit" class="contour_field" type="text" title="Instructeur" disabled/>
