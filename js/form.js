@@ -318,14 +318,14 @@ $(function() {
                     break;
                 case 'creation_aide_externe':
                     var urgence = 0;
-                    if($('#urgence').hasClass('checkbox_active')) {
+                    if($('#urgenceexterne').hasClass('checkbox_active')) {
                         urgence = 1;
                     }
-                    datastring += '&idIndividu='+idIndividu+'&typeaideexterne='+$('#typeaideexterne').attr('value');
-                    datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
-                    datastring += '&natureexterne='+$('#natureexterne').attr('value')+'&distrib='+$('#distrib').attr('value');
-                    datastring += '&etat='+$('#etat').attr('value')+'&orgaext='+$('#orgaext').attr('value')+'&urgence='+urgence;
-                    datastring += '&montantDemande='+$('#montantdemande').attr('value');
+                    datastring += '&idIndividu='+idIndividu+'&typeaide='+$('#typeaideexterne').attr('value');
+                    datastring += '&date='+$('#dateaideexterne').val()+'&instruct='+$('#instructexterne').attr('value');
+                    datastring += '&nature='+$('#natureaideexterne').attr('value')+'&distrib='+$('#distrib').attr('value');
+                    datastring += '&etat='+$('#etatexterne').attr('value')+'&orga='+$('#orgaext').attr('value')+'&urgence='+urgence;
+                    datastring += '&montantDemande='+$('#montantdemande').val();
                     console.log(datastring);
                     break;
                 case 'addBonInterne':

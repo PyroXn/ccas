@@ -531,7 +531,7 @@ function aideExterne() {
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_instruct">
-                            <div id="instruct" class="option">Instructeur</div>
+                            <div id="instructexterne" class="option">Instructeur</div>
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="clearboth"></div>
@@ -540,11 +540,11 @@ function aideExterne() {
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="input_text">
-                            <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                            <input id="dateaideexterne" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_nature_externe">
-                            <div id="natureexterne" class="option">Nature</div>
+                            <div id="natureaideexterne" class="option">Nature</div>
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="clearboth"></div>
@@ -554,11 +554,11 @@ function aideExterne() {
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_etat">
-                            <div id="etat" class="option">Etat</div>
+                            <div id="etatexterne" class="option">Etat</div>
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="input_text">
-                            <span class="checkbox" id="urgence"></span> 
+                            <span class="checkbox" id="urgenceexterne"></span> 
                             <span class="attribut">Aide urgente</span>
                         </div>
                         <div class="input_text">
@@ -682,7 +682,10 @@ function detailAideExterne() {
                             </div>
                         </div>
                     </li></ul>';
-    
+        if($aideExterne->avis == null) {
+            $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une d&eacute;cision</div>';
+            $contenu .= '<div id="decision">';
+        }
         $contenu .= '<h3>D&eacute;cision :</h3>
                      <ul class="list_classique">
                         <li class="ligne_list_classique">
@@ -710,6 +713,9 @@ function detailAideExterne() {
                                 </div>
                             </div>
                         </li></ul>';
+    if($aideExterne->avis == null) {
+        $contenu .= '</div>';
+    }
     return $contenu;
 }
 
