@@ -75,7 +75,7 @@ function aideInterne() {
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
-                <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                <input id="date" class="contour_field requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
             </div>
             <div class="select classique" role="select_nature_interne">
                 <div id="nature" class="option">Nature</div>
@@ -551,7 +551,7 @@ function aideExterne() {
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="input_text">
-                            <input id="date" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                            <input id="date" class="contour_field requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_nature_externe">
