@@ -10,7 +10,10 @@ include_once('./lib/config.php');
 //        echo $q->id;
 
 $credits = Doctrine_Core::getTable('credit')->findByIdIndividu(6332);
-echo count($credits);
+
+if(!isset($credits->id)) {
+    echo "ok";
+}
 //    require('./lib/fpdf.php');
 //    $pdf = new FPDF();
 //    $pdf->AddPage();

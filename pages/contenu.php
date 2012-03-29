@@ -300,28 +300,26 @@ function situationFinanciere($idFoyer) {
         $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($individu->id);
         $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($individu->id);
         $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($individu->id);
-        if(count($ressource) != 0) {
+        if(isset($ressource->id)) {
             $arrayRessource = array($ressource->salaire, $ressource->chomage, $ressource->revenuAlloc, $ressource->ass, $ressource->aah, $ressource->rsaSocle,
                                             $ressource->rsaActivite, $ressource->pensionAlim, $ressource->pensionRetraite, $ressource->retraitComp, $ressource->autreRevenu, $ressource->aideLogement);
+            $totalRessource =  $totalRessource + array_sum($arrayRessource);
         }
-        if(count($depense) != 0) {
+        if(isset($depense->id)) {
             $arrayDepense = array($depense->impotRevenu, $depense->impotLocaux, $depense->pensionAlim, $depense->mutuelle, $depense->electricite, $depense->gaz,
                                             $depense->eau, $depense->chauffage, $depense->telephonie, $depense->internet, $depense->television, $depense->assurance, $depense->credit,
                                             $depense->autreDepense, $depense->loyer);
+            $totalDepense = $totalDepense + array_sum($arrayDepense);
         }
-        if(count($dette) != 0) {
+        if(isset($dette->id)) {
             $arrayDette = array($dette->arriereLocatif, $dette->fraisHuissier, $dette->arriereElectricite, $dette->arriereGaz, $dette->autreDette);
+            $totalDette = $totalDette + array_sum($arrayDette);
         }
-        if(count($credits) != 0) {
+        
             foreach($credits as $credit) {
                 $totalCredit = $totalCredit + $credit->mensualite;
             }
-        }
-            $totalRessource =  $totalRessource + array_sum($arrayRessource);
-            $totalDepense = $totalDepense + array_sum($arrayDepense);
-            $totalDette = $totalDette + array_sum($arrayDette);
-
-        }
+    }
         $contenu = '<div><h3>Situation financi&egrave;re de la famille</h3>';
         $contenu .= '
             <ul class="list_classique">
@@ -346,7 +344,6 @@ function situationFinanciere($idFoyer) {
             </ul>
             </div>';
         return $contenu;
-    }
 }
 
 function generateLigneMembreFoyer($individu) {
