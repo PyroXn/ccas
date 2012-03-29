@@ -53,33 +53,52 @@ function affichageHistoriqueByIndividu() {
 
 function affichageHistorique() {
     $contenu = '';
-//    $contenu .= '<h3>Recherche</h3>
-//        <ul class="list_classique">
-//            <li id="ligneRechercheTableStatique" class="ligne_list_classique" table="historique">
-//                <div class="colonne">
-//                    <span class="attribut">Individu : </span>
-//                    <span><input class="contour_field input_char recherche" type="text" columnName="individu" value=""/></span>
-//                </div>
-//            </li>
-//            <li id="ligneRechercheTableStatique" class="ligne_list_classique" table="historique">
-//                <div class="colonne">
-//                    <span class="attribut">Individu : </span>
-//                    <span><input class="contour_field input_char recherche" type="text" columnName="individu" value=""/></span>
-//                </div>
-//            </li>
-//            <li id="ligneRechercheTableStatique" class="ligne_list_classique" table="historique">
-//                <div class="colonne">
-//                    <span class="attribut">Objet : </span>
-//                    <span><input class="contour_field input_char recherche" type="text" columnName="objet" value=""/></span>
-//                </div>
-//            </li>
-//            <li id="ligneRechercheTableStatique" class="ligne_list_classique" table="historique">
-//                <div class="colonne">
-//                    <span class="attribut">Utilisateur : </span>
-//                    <span><input class="contour_field input_char recherche" type="text" columnName="utilisateur" value=""/></span>
-//                </div>
-//            </li>
-//        </ul>';
+    $contenu .= '<h3>Recherche</h3>
+        <ul class="list_classique">
+            <li id="ligneRechercheTableHistorique" class="ligne_list_classique">
+                <div class="colonne">
+                    <span class="attribut">Individu : </span>
+                    <span><input class="contour_field input_char rechercheHistorique" type="text" columnName="individu" value=""/></span>
+                </div>
+                <div class="colonne">
+                    <span class="attribut">Action : </span>
+                    <div class="select classique" role="select_historique_type_action">
+                        <div id="form_1" class="option">--------</div>
+                        <div class="fleche_bas"> </div>
+                    </div>
+                </div>
+                <div class="colonne">
+                    <span class="attribut">Objet : </span>
+                    <span><input class="contour_field input_char rechercheHistorique" type="text" columnName="objet" value=""/></span>
+                </div>
+                <div class="colonne">
+                    <span class="attribut">Utilisateur : </span>
+                    <span><input class="contour_field input_char rechercheHistorique" type="text" columnName="utilisateur" value=""/></span>
+                </div>
+                <div class="colonne">
+                    <span class="attribut">date inf&eacute;rieur &agrave; : </span>
+                    <span><input class="contour_field input_date rechercheHistorique" size="10" type="text" columnName="dateInf" value=""/></span>
+                </div>
+                <div class="colonne">
+                    <span class="attribut">date sup&eacute;rieur &agrave; : </span>
+                    <span><input class="contour_field input_date rechercheHistorique" size="10" type="text" columnName="dateSup" value=""/></span>
+                </div>
+            </li>
+        </ul>
+        <ul class="select_historique_type_action">
+            <li value='.Historique::$Creation.'>
+                <div>'.Historique::getStaticValue(Historique::$Creation).'</div>
+            </li>
+            <li value='.Historique::$Modification.'>
+                <div>'.Historique::getStaticValue(Historique::$Modification).'</div>
+            </li>
+            <li value='.Historique::$Suppression.'>
+                <div>'.Historique::getStaticValue(Historique::$Suppression).'</div>
+            </li>
+            <li value='.Historique::$Archiver.'>
+                <div>'.Historique::getStaticValue(Historique::$Archiver).'</div>
+            </li>
+        </ul>';
     $historiques = Doctrine_Core::getTable('historique')->findAll();
     $contenu .= '<div><h3>Historique</h3>';
     $contenu .= '
@@ -94,7 +113,13 @@ function affichageHistorique() {
                       <th>Date</th>
                     </tr>
                 </thead>
-                <tbody>';
+                <tbody id="contenu_table_historique">';     
+    $contenu .= generateContenuTableHistorique($historiques).'</tbody></table></div>';
+    return $contenu;
+}
+
+function generateContenuTableHistorique($historiques) {
+    $retour = '';
     foreach($historiques as $historique) {
         if ($historique->typeAction == Historique::$Archiver) {
             $q = Doctrine_Query::create()
@@ -103,12 +128,12 @@ function affichageHistorique() {
                 ->andWhere('idIndividu = ?', $historique->idIndividu)
                 ->orderBy('datecreation DESC')
                 ->fetchOne();
-            $contenu .= '<tr class="afficherArchivage isGlobal" idObjet='.$q->id.' table='.$historique->objet.'>';
+            $retour .= '<tr class="afficherArchivage isGlobal" idObjet='.$q->id.' table='.$historique->objet.'>';
         } else {
-            $contenu .= '<tr>';
+            $retour .= '<tr>';
         }
         
-        $contenu .= '
+        $retour .= '
             <td>'.$historique->individu->nom.' '.$historique->individu->prenom.'</td>
             <td>'.Historique::getStaticValue($historique->typeAction).'</td>
             <td>'.$historique->objet.'</td>
@@ -116,9 +141,53 @@ function affichageHistorique() {
             <td>'.getDatebyTimestamp($historique->date).'</td>
         </tr>';
     }
-                                
-    $contenu .= '</tbody></table></div>';
-    return $contenu;
+    return $retour;
+}
+
+function searchHistorique() {
+    include_once('./lib/config.php');
+    $table = $_POST['table'];
+    $tableHistorique = Doctrine_Core::getTable($table);
+    $req = '';
+    $param = array();
+    $premierPassage = true;
+    if (isset ($_POST['individu'])) {
+        $tableIndividu = Doctrine_Core::getTable('individu')->likeNom($_POST['individu']);
+        $tableIndividu->execute();
+        $req .= $premierPassage ? 'idIndividu IN ? ' : 'and idIndividu IN ? ';
+        $first = false;
+        $paramIdIndividu = '';
+        foreach($tableIndividu->execute() as $individu) {
+            $first ? $paramIdIndividu .= '('.$individu->id : ','.$individu->id;
+            
+        }
+        $paramIdIndividu .= ')';
+        $param[] = $paramIdIndividu;
+        $premierPassage = false;
+    }
+//    if (isset ($_POST['individu'])) {
+//        $req .= $premierPassage ? $columnName.' like ? ' : 'and '.$columnName.' like ? ';
+//        $premierPassage = false;
+//    }
+    if (isset ($_POST['objet'])) {
+        $req .= $premierPassage ? 'objet like ? ' : 'and objet like ? ';
+        $param[] = $_POST['objet'].'%';
+        $premierPassage = false;
+    }
+//    if (isset ($_POST['individu'])) {
+//        $req .= $premierPassage ? $columnName.' like ? ' : 'and '.$columnName.' like ? ';
+//        $premierPassage = false;
+//    }
+    
+//    foreach ($columnNames as $columnName) {
+//        if ($columnName != 'id') {
+//            $req .= $premierPassage ? $columnName.' like ? ' : 'and '.$columnName.' like ? ';
+//            $param[] = $_POST[$columnName].'%';
+//            $premierPassage = false;
+//        }
+//    }
+    $search = $tableHistorique->findByDql($req, $param);
+    echo generateContenuTableHistorique($search);
 }
 
 function affichageArchive() {

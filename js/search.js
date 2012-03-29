@@ -272,7 +272,31 @@ $(function() {
         }
         $(this).toggleClass('archiveVisible');
     });
+    
+    $('.rechercheHistorique').live("keyup", function() {
+        searchTableHistorique();
+    });
 });
+
+function searchTableHistorique() {
+    var datastring = 'table=historique';
+    $('#ligneRechercheTableHistorique').find('[columnName]').each(function(){
+        datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
+    });
+        
+    console.log(datastring);
+    $.ajax({
+        type: 'post',
+        data: datastring,
+        url: './index.php?p=searchTableHistorique',
+        cache: false,
+        //Succès de la requête
+        success: function(tableHistorique) {
+            //                console.log(tableStatique);
+            $("#contenu_table_historique").html(tableHistorique);
+        }
+    });
+}
 
 function autoComplete(searchbox, table, champ) {
     var dataString = 'searchword='+ searchbox;
