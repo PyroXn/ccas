@@ -300,19 +300,19 @@ function situationFinanciere($idFoyer) {
         $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($individu->id);
         $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($individu->id);
         $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($individu->id);
-        if(count($ressource) == 0) {
+        if(count($ressource) != 0) {
             $arrayRessource = array($ressource->salaire, $ressource->chomage, $ressource->revenuAlloc, $ressource->ass, $ressource->aah, $ressource->rsaSocle,
                                             $ressource->rsaActivite, $ressource->pensionAlim, $ressource->pensionRetraite, $ressource->retraitComp, $ressource->autreRevenu, $ressource->aideLogement);
         }
-        if(count($depense) == 0) {
+        if(count($depense) != 0) {
             $arrayDepense = array($depense->impotRevenu, $depense->impotLocaux, $depense->pensionAlim, $depense->mutuelle, $depense->electricite, $depense->gaz,
                                             $depense->eau, $depense->chauffage, $depense->telephonie, $depense->internet, $depense->television, $depense->assurance, $depense->credit,
                                             $depense->autreDepense, $depense->loyer);
         }
-        if(count($dette) == 0) {
+        if(count($dette) != 0) {
             $arrayDette = array($dette->arriereLocatif, $dette->fraisHuissier, $dette->arriereElectricite, $dette->arriereGaz, $dette->autreDette);
         }
-        if(count($credits) == 0) {
+        if(count($credits) != 0) {
             foreach($credits as $credit) {
                 $totalCredit = $totalCredit + $credit->mensualite;
             }
