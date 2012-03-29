@@ -329,7 +329,7 @@ function situationFinanciere($idFoyer) {
                         </div>
                         <div class="colonne">
                             <span class="attribut">Total dettes :</span>
-                            <span>'.$totalRessource.'</span>
+                            <span>'.$totalDette.'</span>
                         </div>
                         <div class="colonne">
                             <span class="attribut">Total credits :</span>
