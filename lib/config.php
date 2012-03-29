@@ -107,4 +107,21 @@ function getAnneeAndMois($arrayTimestamp) {
     return array('year' => $arrayYear, 'month' => $arrayMonth, 'total' => $nb);
 }
 
+function executeQueryFile($filesql) {
+                   mysql_connect("localhost", "root", "root");
+                   mysql_select_db("ccas");
+	$query = file_get_contents($filesql);
+	$array = explode(";\n", $query);
+	$b = true;
+	for ($i=0; $i < count($array) ; $i++) {
+		$str = $array[$i];
+		if ($str != '') {
+		     $str .= ';';
+		     $b &= mysql_query($str);	
+		}	
+	}
+	
+	return $b;
+}
+
 ?>

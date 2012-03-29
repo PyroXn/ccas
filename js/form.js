@@ -264,8 +264,38 @@ $(function() {
                     $('#contenu').html(aideinterne.aide);
                 }
             });
-        }
-        else if(value == 'cancelDecisionInterne') {
+        } else if(value == 'cancelDecisionInterne') {
+            var idMenu = 'aides';
+            var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
+            console.log(idIndividu);
+            $.ajax({
+                type: "POST",
+                url: "./index.php?p=contenu",
+                data: 'idMenu=' + idMenu + '&idIndividu='+ idIndividu + '&idFoyer='+idFoyer,
+                cache: false,
+                success: function(html)
+                {
+                    $("#contenu").html(html);
+                }
+            });
+        } else if(value == 'updateDecisionExterne') {
+            datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&montantPercu='+$('#montantPercu').val();
+            datastring += '&dateDecision='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
+            datastring += '&commentaire='+$('#commentaire').val();
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=updatedecisionexterne',
+                cache: false,
+                success: function(aideexterne) {
+                    console.log(aideexterne);
+                    $('#contenu').html(aideexterne.aide);
+                    alert("test");
+                }
+            });
+        } else if(value == 'cancelDecisionExterne') {
             var idMenu = 'aides';
             var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
             console.log(idIndividu);
