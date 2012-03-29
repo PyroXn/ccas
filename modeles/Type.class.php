@@ -8,6 +8,7 @@ class Type extends Doctrine_Record {
             'autoincrement' => true));
         $this->hasColumn('categorie', 'integer', 8,array('default' => '0'));
         $this->hasColumn('libelle', 'string', 50,array('default' => ' '));
+        $this->option('orderBy', 'libelle ASC');
         
     }
 

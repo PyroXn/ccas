@@ -370,13 +370,13 @@ $(function() {
                         break;
                     case 'creation_aide_externe':
                         var urgence = 0;
-                        if($('#urgence').hasClass('checkbox_active')) {
+                        if($('#urgenceexterne').hasClass('checkbox_active')) {
                             urgence = 1;
                         }
                         datastring += '&idIndividu='+idIndividu+'&typeaideexterne='+$('#typeaideexterne').attr('value');
-                        datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
-                        datastring += '&natureexterne='+$('#natureexterne').attr('value')+'&distrib='+$('#distrib').attr('value');
-                        datastring += '&etat='+$('#etat').attr('value')+'&orgaext='+$('#orgaext').attr('value')+'&urgence='+urgence;
+                        datastring += '&date='+$('#dateaideexterne').val()+'&instruct='+$('#instructexterne').attr('value');
+                        datastring += '&natureexterne='+$('#natureaideexterne').attr('value')+'&distrib='+$('#distrib').attr('value');
+                        datastring += '&etat='+$('#etatexterne').attr('value')+'&orgaext='+$('#orgaext').attr('value')+'&urgence='+urgence;
                         datastring += '&montantDemande='+$('#montantdemande').attr('value');
                         console.log(datastring);
                         break;
