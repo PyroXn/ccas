@@ -13,7 +13,8 @@ function graphNewUsager() {
     $retour = '<h3>Nombre de nouveaux usagers</h3>
         <div class="colonne">
             <ul>';
-    for($i=0; $i < count($result)-1; $i++) {
+
+    for($i=0; $i < count($result['year']); $i++) {
         $retour .= '<li>Annee : '.$result['year'][$i].' : '.$result['total'][$result['year'][$i]].'</li>';
     }
         $retour .= '
@@ -30,7 +31,7 @@ function graphNewUsager() {
             </div>
             <div class="colonne">
                 <table id="newusager" class="hide">
-                    <caption>Nombre de nouveaux usagers</caption>
+                    <caption>R&eacute;partition des nouveaux usagers en '.date('Y').'</caption>
                     <thead>
                         <tr>
                             <td></td>';

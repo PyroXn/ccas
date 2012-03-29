@@ -36,7 +36,11 @@ function action() {
         </tr>';
         $i++;
     }
-                                
+    if($i == 1) {
+        $contenu .=  '<tr>
+                         <td colspan="7" align="center">< Aucune action n\'a &eacute;t&eacute; &eacute;ffectu&eacute;e > </td>
+                     </tr>';
+    }
     $contenu .= '</tbody></table></div>';    
     $contenu .= '<div class="bouton ajout" id="createAction">Ajouter une action</div>
     <div class="formulaire" action="creation_action">

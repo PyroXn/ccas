@@ -1,15 +1,16 @@
 <?php
 
 include_once('./lib/config.php');
-$q = Doctrine_Query::create()
-                ->from('depense')
-                ->where('datecreation < ?', 1333007766)
-                ->orderBy('datecreation DESC')
-                ->fetchOne();
-        
-        echo $q->id;
+//$q = Doctrine_Query::create()
+//                ->from('depense')
+//                ->where('datecreation < ?', 1333007766)
+//                ->orderBy('datecreation DESC')
+//                ->fetchOne();
+//        
+//        echo $q->id;
 
-
+$credits = Doctrine_Core::getTable('credit')->findByIdIndividu(6332);
+echo count($credits);
 //    require('./lib/fpdf.php');
 //    $pdf = new FPDF();
 //    $pdf->AddPage();

@@ -387,15 +387,15 @@ function generationHeaderNavigation($mode) {
 }
 
 function accueilContenu() {
-//    include_once('./pages/graphique.php');
-//    $retour = '
-//    <script type="text/javascript">
-//            $("#newusager").visualize();
-//    </script>
-//        <h2>Tableau de bord</h2>';
-//    $retour .= graphNewUsager();
+    include_once('./pages/graphique.php');
+    $retour = '
+    <script type="text/javascript">
+            $("#newusager").visualize();
+    </script>
+        <h2>Tableau de bord</h2>';
+    $retour .= graphNewUsager();
         
-    return '$retour';
+    return $retour;
 }
 
 function accueil() {

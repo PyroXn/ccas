@@ -149,7 +149,7 @@ function generateInfoFoyer($foyer) {
                     <div class="colonne">
                         <span class="attribut">Secteur :</span>
                         <div class="select classique" role="select_secteur" disabled>';
-    $retour .= $foyer->idSecteur == null ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
+    $retour .= $foyer->idSecteur == null || ' ' ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
     $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -162,14 +162,14 @@ function generateInfoFoyer($foyer) {
                     <div class="colonne">
                         <span class="attribut">Type :</span>
                         <div class="select classique" role="select_typelogement" disabled>';
-$retour .= $foyer->typeLogement == null ? '<div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
+$retour .= $foyer->typeLogement == null || ' '  ? '<div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                 </div>
                 </div>
                    <div class="colonne">
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statutlogement" disabled>';
-$retour .= $foyer->typeAppartenance == null ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
+$retour .= $foyer->typeAppartenance == null || ' '  ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                    </div>
@@ -186,14 +186,14 @@ $retour .= '<div class="fleche_bas"> </div>
                     <div class="colonne">
                         <span class="attribut">Bailleur :</span>
                         <div class="select classique" role="select_bailleur" disabled>';
-$retour .= $foyer->idBailleur == null ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
+$retour .= $foyer->idBailleur == null || ' '  ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Instructeur :</span>
                         <div class="select classique" role="select_instruct" disabled>';
-$retour .= $foyer->idInstruct == null ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
+$retour .= $foyer->idInstruct == null || ' '  ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                     </div>
@@ -300,44 +300,46 @@ function situationFinanciere($idFoyer) {
         $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($individu->id);
         $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($individu->id);
         $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($individu->id);
-        $arrayRessource = array($ressource->salaire, $ressource->chomage, $ressource->revenuAlloc, $ressource->ass, $ressource->aah, $ressource->rsaSocle,
-                                        $ressource->rsaActivite, $ressource->pensionAlim, $ressource->pensionRetraite, $ressource->retraitComp, $ressource->autreRevenu, $ressource->aideLogement);
-        $arrayDepense = array($depense->impotRevenu, $depense->impotLocaux, $depense->pensionAlim, $depense->mutuelle, $depense->electricite, $depense->gaz,
-                                        $depense->eau, $depense->chauffage, $depense->telephonie, $depense->internet, $depense->television, $depense->assurance, $depense->credit,
-                                        $depense->autreDepense, $depense->loyer);
-        $arrayDette = array($dette->arriereLocatif, $dette->fraisHuissier, $dette->arriereElectricite, $dette->arriereGaz, $dette->autreDette);
-        foreach($credits as $credit) {
-            $totalCredit = $totalCredit + $credit->mensualite;
+        if(count($ressource) == 0 || count($depense) == 0 || count($dette) == 0) {
+            $arrayRessource = array($ressource->salaire, $ressource->chomage, $ressource->revenuAlloc, $ressource->ass, $ressource->aah, $ressource->rsaSocle,
+                                            $ressource->rsaActivite, $ressource->pensionAlim, $ressource->pensionRetraite, $ressource->retraitComp, $ressource->autreRevenu, $ressource->aideLogement);
+            $arrayDepense = array($depense->impotRevenu, $depense->impotLocaux, $depense->pensionAlim, $depense->mutuelle, $depense->electricite, $depense->gaz,
+                                            $depense->eau, $depense->chauffage, $depense->telephonie, $depense->internet, $depense->television, $depense->assurance, $depense->credit,
+                                            $depense->autreDepense, $depense->loyer);
+            $arrayDette = array($dette->arriereLocatif, $dette->fraisHuissier, $dette->arriereElectricite, $dette->arriereGaz, $dette->autreDette);
+            foreach($credits as $credit) {
+                $totalCredit = $totalCredit + $credit->mensualite;
+            }
+            $totalRessource =  $totalRessource + array_sum($arrayRessource);
+            $totalDepense = $totalDepense + array_sum($arrayDepense);
+            $totalDette = $totalDette + array_sum($arrayDette);
+
         }
-        $totalRessource =  $totalRessource + array_sum($arrayRessource);
-        $totalDepense = $totalDepense + array_sum($arrayDepense);
-        $totalDette = $totalDette + array_sum($arrayDette);
-        
+        $contenu = '<div><h3>Situation financi&egrave;re de la famille</h3>';
+        $contenu .= '
+            <ul class="list_classique">
+                    <li class="ligne_list_classique">
+                        <div class="colonne">
+                            <span class="attribut">Total ressources :</span>
+                            <span>'.$totalRessource.'</span>
+                        </div>
+                        <div class="colonne">
+                            <span class="attribut">Total d&eacute;penses :</span>
+                            <span>'.$totalDepense.'</span>
+                        </div>
+                        <div class="colonne">
+                            <span class="attribut">Total dettes :</span>
+                            <span>'.$totalRessource.'</span>
+                        </div>
+                        <div class="colonne">
+                            <span class="attribut">Total credits :</span>
+                            <span>'.$totalCredit.'</span>
+                        </div>
+                    </li>
+            </ul>
+            </div>';
+        return $contenu;
     }
-    $contenu = '<div><h3>Situation financi&egrave;re de la famille</h3>';
-    $contenu .= '
-        <ul class="list_classique">
-                <li class="ligne_list_classique">
-                    <div class="colonne">
-                        <span class="attribut">Total ressources :</span>
-                        <span>'.$totalRessource.'</span>
-                    </div>
-                    <div class="colonne">
-                        <span class="attribut">Total d&eacute;penses :</span>
-                        <span>'.$totalDepense.'</span>
-                    </div>
-                    <div class="colonne">
-                        <span class="attribut">Total dettes :</span>
-                        <span>'.$totalRessource.'</span>
-                    </div>
-                    <div class="colonne">
-                        <span class="attribut">Total credits :</span>
-                        <span>'.$totalCredit.'</span>
-                    </div>
-                </li>
-        </ul>
-        </div>';
-    return $contenu;
 }
 
 function generateLigneMembreFoyer($individu) {
@@ -735,14 +737,14 @@ function generalite() {
                     <div class="colonne">
                         <span class="attribut">Situation Familiale :</span>
                         <div class="select classique" role="select_situation" disabled>';
-$contenu .= $user->idSitMatri == null ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.$user->situationmatri->situation.'</div>';  
+$contenu .= $user->idSitMatri == null || ' ' ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.$user->situationmatri->situation.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Nationalit&eacute; :</span>
                         <div class="select classique" role="select_natio" disabled>';
-$contenu .= $user->idNationalite == null ? '<div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.$user->nationalite->nationalite.'</div>';  
+$contenu .= $user->idNationalite == null || ' ' ? '<div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.$user->nationalite->nationalite.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </li>
@@ -760,14 +762,14 @@ $contenu .= '<div class="fleche_bas"> </div>
                     <div class="colonne">
                         <span class="attribut">Sexe :</span>
                         <div class="select classique" role="select_sexe" disabled>';
-$contenu .= $user->sexe == ' ' ? '<div id="sexe" class="option" value=" ">-----</div>' : '<div id="sexe" class="option" value="'.$user->sexe.'">'.$user->sexe.'</div>';  
+$contenu .= $user->sexe == null || ' ' ? '<div id="sexe" class="option" value=" ">-----</div>' : '<div id="sexe" class="option" value="'.$user->sexe.'">'.$user->sexe.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statut" disabled>';
-$contenu .= $user->idLienFamille == null ? '<div id="statut" class="option" value=" ">-----</div>' : '<div id="statut" class="option" value="'.$user->idLienFamille.'">'.$user->lienfamille->lien.'</div>';  
+$contenu .= $user->idLienFamille == null || ' ' ? '<div id="statut" class="option" value=" ">-----</div>' : '<div id="statut" class="option" value="'.$user->idLienFamille.'">'.$user->lienfamille->lien.'</div>';  
 $contenu .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -810,7 +812,7 @@ $contenu .= '<div class="fleche_bas"> </div>
 $contenu .=      '<div class="colonne_large">
                     <span class="attribut">Profession :</span>
                     <div class="select classique" role="select_profession" disabled>';
-$contenu .= $user->idNiveauEtude == null ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.$user->profession->profession.'</div>';  
+$contenu .= $user->idNiveauEtude == null || ' ' ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.$user->profession->profession.'</div>';  
 $contenu .= '
                         <div class="fleche_bas"> </div>
                     </div>
@@ -875,7 +877,7 @@ $contenu .= '
                     <div class="colonne_large">
                         <span class="attribut">Classe :</span>
                         <div class="select classique" role="select_etude" disabled>';
-    $contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
+    $contenu .= $user->idNiveauEtude == null || ' ' ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
     $contenu .= '
                             <div class="fleche_bas"> </div>
                         </div>
@@ -891,7 +893,7 @@ $contenu .= '
                     <div class="colonne_large">
                         <span class="attribut">Niveau &eacute;tude :</span>
                         <div class="select classique" role="select_etude" disabled>';
-    $contenu .= $user->idNiveauEtude == null ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
+    $contenu .= $user->idNiveauEtude == null || ' ' ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
     $contenu .= '
                             <div class="fleche_bas"> </div>
                         </div>
@@ -926,7 +928,7 @@ $contenu .= '
                 <div class="colonne">
                     <span class="attribut">R&eacute;gime :</span>
                     <div class="select classique" role="select_regime" disabled>';
-$contenu .= $user->regime == ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.$user->regime.'</div>';                   
+$contenu .= $user->regime == null || ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.$user->regime.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -935,7 +937,7 @@ $contenu .= '<div class="fleche_bas"> </div>
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
                     <div class="select classique" role="select_couv" disabled>';
-$contenu .= $user->idCaisseSecu == null ? '<div id="caisseCouv" class="option" value=" ">-----</div>' : '<div id="caisseCouv" class="option" value="'.$user->idCaisseSecu.'">'.$user->secu->appelation.'</div>';                   
+$contenu .= $user->idCaisseSecu == null || ' ' ? '<div id="caisseCouv" class="option" value=" ">-----</div>' : '<div id="caisseCouv" class="option" value="'.$user->idCaisseSecu.'">'.$user->secu->appelation.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -971,7 +973,7 @@ $contenu .= '
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
                     <div class="select classique" role="select_mut" disabled>';
-$contenu .= $user->idCaisseMut == null ? '<div id="mutuelle" class="option" value="">-----</div>' : '<div id="mutuelle" class="option" value="'.$user->idCaisseMut.'">'.$user->mutuelle->appelation.'</div>';                   
+$contenu .= $user->idCaisseMut == null || ' ' ? '<div id="mutuelle" class="option" value="">-----</div>' : '<div id="mutuelle" class="option" value="'.$user->idCaisseMut.'">'.$user->mutuelle->appelation.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                     <span class="attribut">CMUC : </span>';
@@ -1009,7 +1011,7 @@ $contenu .= '
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
                     <div class="select classique" role="select_caf" disabled>';
-$contenu .= $user->idCaisseCaf == null ? '<div id="caf" class="option" value="">-----</div>' : '<div id="caf" class="option" value="'.$user->idCaisseCaf.'">'.$user->caf->appelation.'</div>';                   
+$contenu .= $user->idCaisseCaf == null || ' ' ? '<div id="caf" class="option" value="">-----</div>' : '<div id="caf" class="option" value="'.$user->idCaisseCaf.'">'.$user->caf->appelation.'</div>';                   
 $contenu .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>

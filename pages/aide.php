@@ -725,7 +725,7 @@ function detailAideExterne() {
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Montant per&ccedil;u : </h2>
-                                    <div class="aff"><input class="contour_field input_num" type="text" id="montantPercu" size="10" value="'.$aideExterne->montantPercu.'"></div>
+                                    <div class="aff"><input class="contour_field input_num" type="text" id="montantPercu"  value="'.$aideExterne->montantPercu.'"></div>
                                 </div>
 
                                 <div class="affichage_classique">
