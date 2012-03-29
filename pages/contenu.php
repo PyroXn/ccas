@@ -300,16 +300,23 @@ function situationFinanciere($idFoyer) {
         $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($individu->id);
         $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($individu->id);
         $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($individu->id);
-        if(count($ressource) == 0 || count($depense) == 0 || count($dette) == 0) {
+        if(count($ressource) == 0) {
             $arrayRessource = array($ressource->salaire, $ressource->chomage, $ressource->revenuAlloc, $ressource->ass, $ressource->aah, $ressource->rsaSocle,
                                             $ressource->rsaActivite, $ressource->pensionAlim, $ressource->pensionRetraite, $ressource->retraitComp, $ressource->autreRevenu, $ressource->aideLogement);
+        }
+        if(count($depense) == 0) {
             $arrayDepense = array($depense->impotRevenu, $depense->impotLocaux, $depense->pensionAlim, $depense->mutuelle, $depense->electricite, $depense->gaz,
                                             $depense->eau, $depense->chauffage, $depense->telephonie, $depense->internet, $depense->television, $depense->assurance, $depense->credit,
                                             $depense->autreDepense, $depense->loyer);
+        }
+        if(count($dette) == 0) {
             $arrayDette = array($dette->arriereLocatif, $dette->fraisHuissier, $dette->arriereElectricite, $dette->arriereGaz, $dette->autreDette);
+        }
+        if(count($credits) == 0) {
             foreach($credits as $credit) {
                 $totalCredit = $totalCredit + $credit->mensualite;
             }
+        }
             $totalRessource =  $totalRessource + array_sum($arrayRessource);
             $totalDepense = $totalDepense + array_sum($arrayDepense);
             $totalDette = $totalDette + array_sum($arrayDette);
@@ -321,19 +328,19 @@ function situationFinanciere($idFoyer) {
                     <li class="ligne_list_classique">
                         <div class="colonne">
                             <span class="attribut">Total ressources :</span>
-                            <span>'.$totalRessource.'</span>
+                            <span>'.$totalRessource.'&euro;</span>
                         </div>
                         <div class="colonne">
                             <span class="attribut">Total d&eacute;penses :</span>
-                            <span>'.$totalDepense.'</span>
+                            <span>'.$totalDepense.'&euro;</span>
                         </div>
                         <div class="colonne">
                             <span class="attribut">Total dettes :</span>
-                            <span>'.$totalDette.'</span>
+                            <span>'.$totalDette.'&euro;</span>
                         </div>
                         <div class="colonne">
                             <span class="attribut">Total credits :</span>
-                            <span>'.$totalCredit.'</span>
+                            <span>'.$totalCredit.'&euro;</span>
                         </div>
                     </li>
             </ul>
