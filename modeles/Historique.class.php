@@ -17,6 +17,7 @@ class Historique extends Doctrine_Record {
     public static $Creation = 1;
     public static $Modification = 2;
     public static $Suppression = 3;
+    public static $Archiver = 4;
 
     public static function getStaticValue($i) {
         switch ($i) {
@@ -28,6 +29,9 @@ class Historique extends Doctrine_Record {
                 break;
             case 3:
                 return 'Suppression';
+                break;
+            case 4:
+                return 'Archiver';
                 break;
         }
     }

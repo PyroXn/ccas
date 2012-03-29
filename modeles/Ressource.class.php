@@ -1,9 +1,9 @@
 <?php
 
-class Revenu extends Doctrine_Record {
+class Ressource extends Doctrine_Record {
 
     public function setTableDefinition() {
-        $this->setTableName('revenu');
+        $this->setTableName('ressource');
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
