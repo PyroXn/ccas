@@ -21,6 +21,7 @@ class AideExterne extends Doctrine_Record {
         $this->hasColumn('montantDemande', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('montantPercu', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('commentaire', 'string',250);
+        $this->option('orderBy', 'id DESC');
 
     }
 
