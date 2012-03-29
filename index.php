@@ -327,6 +327,9 @@ function generationHeaderNavigation($mode) {
                 </div>
                 <div id="statistique" class="page_header_link">
                     <span class="label">Statistiques</span>
+                </div>
+                <div id="historiqueGlobal" class="page_header_link">
+                    <span class="label">Historique</span>
                 </div>';
             break;
         case 'foyer' :

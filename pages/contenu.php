@@ -49,6 +49,10 @@ function contenu() {
             include_once './pages/tableStatique.php';
             echo comboTableStatique();
             break;
+        case 'historiqueGlobal':
+            include_once './pages/historique.php';
+            echo affichageHistorique();
+            break;
     }
 }
 

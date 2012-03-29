@@ -43,7 +43,7 @@ function comboTableStatique() {
             </li>
             <li>
                 <div>ville</div>
-            </li>            
+            </li> 
         </ul>';
     $retour .= generateEcranStatiqueEnTab('bailleur');
     return $retour;

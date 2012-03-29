@@ -38,6 +38,11 @@ class Historique extends Doctrine_Record {
             'foreign' => 'id'
                 )
         );
+        $this->hasOne('individu as individu', array(
+            'local' => 'idIndividu',
+            'foreign' => 'id'
+                )
+        );
     }
 
 }
