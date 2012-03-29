@@ -172,6 +172,10 @@ switch (@$_GET['p']) {
         include_once('./pages/historique.php');
         affichageArchive();
         break;
+    case 'searchTableHistorique':
+        include_once('./pages/historique.php');
+        searchHistorique();
+        break;
     default:
         home();
         break;
