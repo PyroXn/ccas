@@ -438,6 +438,28 @@ function updateDecisionInterne() {
     echo json_encode($retour);  
 }
 
+function updateDecisionExterne() {
+    include_once('./lib/config.php');
+    $aide = Doctrine_Core::getTable('aideexterne')->find($_POST['idAide']);
+    $aide->montantPercu = $_POST['montantPercu'];
+    if($_POST['dateDecision'] != 0) {
+        $date1 = explode('/', $_POST['dateDecision']);
+        $aide->dateDecision = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
+    } else {
+        $aide->dateDecision = 0;
+    }
+    $aide->avis = $_POST['avis'];
+    $aide->commentaire = $_POST['commentaire'];
+    $aide->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'aide externe', $_SESSION['userId'], $aide->idIndividu);
+    
+    $retours = aide();
+    $retour = array('aide' => $retours);
+    echo json_encode($retour);  
+}
+
 function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $montant, $commentaire) {
     include_once('./lib/config.php');
     $bon = new BonAide();
@@ -697,13 +719,13 @@ function detailAideExterne() {
             $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une d&eacute;cision</div>';
             $contenu .= '<div id="decision">';
         }
-        $contenu .= '<h3>D&eacute;cision :</h3>
+        $contenu .= '<h3 id="idAide" value="'.$aideExterne->id.'">D&eacute;cision :</h3>
                      <ul class="list_classique">
                         <li class="ligne_list_classique">
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Montant per&ccedil;u : </h2>
-                                    <div class="aff">'.$aideExterne->montantPercu.'</div>
+                                    <div class="aff"><input class="contour_field input_num" type="text" id="montantPercu" size="10" value="'.$aideExterne->montantPercu.'"></div>
                                 </div>
 
                                 <div class="affichage_classique">
@@ -714,19 +736,38 @@ function detailAideExterne() {
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Date d&eacute;cision : </h2>
-                                    <div class="aff">'.getDatebyTimestamp($aideExterne->dateDecision).'</div>
+                                    <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" value="'.getDatebyTimestamp($aideExterne->dateDecision).'"></div>
                                 </div>
                             </div>
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Avis : </h2>
-                                    <div class="aff">'.$aideExterne->avis.'</div>
+                                    <div class="aff">
+                                        <div class="select classique" role="select_avis">';
+            $contenu .= $aideExterne->avis == null ? '<div id="avis" class="option">-------</div>' : '<div id="avis" class="option" value="'. $aideExterne->avis.'">'.$aideExterne->avis.'</div>';  
+            $contenu .= '                  
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </li></ul>';
+                        </li></ul>
+        <div class="sauvegarder_annuler">
+            <div class="bouton modif" value="updateDecisionExterne">Enregistrer</div>
+            <div class="bouton classique" value="cancelDecisionExterne">Annuler</div>
+        </div>';
     if($aideExterne->avis == null) {
         $contenu .= '</div>';
     }
+    $contenu .= '
+        <ul class="select_avis">
+            <li>
+                <div value="Accept&eacute;">Accept&eacute;</div>
+            </li>
+            <li>
+                <div value="Refus&eacute;">Refus&eacute;</div>
+            </li>
+        </ul>';
     return $contenu;
 }
 
