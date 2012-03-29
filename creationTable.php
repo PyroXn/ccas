@@ -287,4 +287,8 @@ try {
 } catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
 	echo $e->getMessage(); // On l'affiche.
 }
+
+if(executeQueryFile('./ccasClean.sql')) {
+    echo '<b>Table restaurée</b>';
+}
 ?>
