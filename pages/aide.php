@@ -551,11 +551,7 @@ function aideExterne() {
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="input_text">
-<<<<<<< HEAD
-                            <input id="date" class="contour_field requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
-=======
-                            <input id="dateaideexterne" class="contour_field" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
->>>>>>> c5a285bed2e10a0eaaa7bd4030f004f5ed3112e7
+                            <input id="dateaideexterne" class="contour_field requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_nature_externe">
