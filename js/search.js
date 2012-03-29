@@ -243,6 +243,35 @@ $(function() {
     $('.liste_suggestion > li').live('hover', function() {
         $(this).toggleClass('selection');
     });
+    
+    $('.afficherArchivage').live("click", function() {
+        var ligne = $(this);
+        if (!$(this).hasClass('archiveVisible')) {
+        
+            var datastring;
+            datastring = 'table=' + $(this).attr('table') + '&idObjet=' + $(this).attr('idObjet');
+            if ($(this).hasClass('isGlobal')) {
+                datastring += '&global=true';
+            } else {
+                datastring += '&global=false';
+            }
+            console.log(datastring);
+            $.ajax({
+                type: "POST",
+                url: "./index.php?p=afficherArchive",
+                data: datastring,
+                cache: false,
+                success: function(html)
+                {
+                    console.log($(this));
+                    ligne.after(html);
+                }
+            });
+        } else {
+            ligne.next().remove();
+        }
+        $(this).toggleClass('archiveVisible');
+    });
 });
 
 function autoComplete(searchbox, table, champ) {

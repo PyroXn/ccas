@@ -361,6 +361,11 @@ table {
     padding-left: 10px;
 }
 
+.afficherArchivage {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .affichage_classique {
     font: normal 13px arial,sans-serif;
     padding: 10px 0;
