@@ -288,7 +288,9 @@ try {
 	echo $e->getMessage(); // On l'affiche.
 }
 
-if(executeQueryFile('./ccasClean.sql')) {
-    echo '<b>Table restaurée</b>';
-}
+//if(executeQueryFile('./ccasClean.sql')) {
+//    echo '<b>Table restaurée</b>';
+//} else {
+//    echo '<b>Table bug</b>';
+//}
 ?>

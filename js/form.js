@@ -167,6 +167,9 @@ $(function() {
                 }
             });
         }
+        if ($(this).parent().hasClass("select_historique_type_action")) {
+            searchTableHistorique();
+        }
             
     });
     
@@ -737,7 +740,6 @@ $(function() {
                 cache: false,
                 //Succès de la requête
                 success: function(data) {
-                    console.log("SUCCESS : " + data);
                     $('#contenu').html(data);
                 }
             });
