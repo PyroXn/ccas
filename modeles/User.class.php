@@ -10,8 +10,8 @@ class User extends Doctrine_Record {
         $this->hasColumn('password', 'string', 80);
         $this->hasColumn('nomcomplet', 'string', 200, array('default' => ' '));
         $this->hasColumn('idInstruct', 'integer', 5);
-        $this->hasColumn('level', 'string', 5, array('default' => ' '));
-        $this->hasColumn('actif', 'integer',1, array('default' => '0'));
+        $this->hasColumn('actif', 'integer',1, array('default' => '1'));
+        $this->hasColumn('idRole', 'integer', 5);
         $this->option('orderBy', 'nomcomplet ASC');
     }
     
@@ -21,6 +21,12 @@ class User extends Doctrine_Record {
             'foreign' => 'idUser'
                 )
         );
+         $this->hasOne('role as role',
+    		array(
+    			'local' => 'idRole', 
+    			'foreign' => 'id'
+    		)
+    	);
     }
 
 }
