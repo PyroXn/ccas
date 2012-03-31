@@ -62,7 +62,7 @@ class Droit {
                 return "Acc&eacute;s panneau d'administration";
                 break;
             case 0x02:
-                return 'acc&eacute;s panneau de configuration';
+                return 'Acc&eacute;s panneau de configuration';
                 break;
             case 0x04:
                 return 'Acc&eacute;s panneau document g&eacute;n&eacute;ral';
@@ -140,6 +140,16 @@ class Droit {
                 return "Droit de modification d'une action";
                 break;
         }
+    }
+    
+    /*
+     * renvoie vrai si la permission passée en param contien le droit passé en param
+     */
+    public static function isAcces($permissions, $droit) {
+        if (((int)$permissions & $droit)) {
+            return true;
+        }
+        return false;
     }
 }
 ?>

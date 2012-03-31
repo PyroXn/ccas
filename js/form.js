@@ -2,6 +2,10 @@ $(function() {
     $('#newfoyer').click(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_foyer"]'))
     });
+    $('#newRole').live("click", function() {
+        console.log('LA');
+        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_role"]'))
+    });
     
     $('#newUser').live("click", function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_utilisateur"]'))
@@ -390,6 +394,9 @@ $(function() {
                         datastring += '&commentaire='+$('#commentaireBon').val()+'&instruct='+$('#idinstruct').attr('value');
                         console.log(datastring);
                         break;
+                    case 'creation_role':
+                        datastring += '&designationRole='+$('#designationRole').val();
+                        break;
                 }
                 $.ajax({
                     type: 'post',
@@ -439,6 +446,9 @@ $(function() {
                                 break;
                             case 'addBonInterne':
                                 $('#contenu').html(data.detail);
+                                break;
+                            case 'creation_role':
+                                $('#contenu').html(data.role);
                                 break;
                         }
                     }

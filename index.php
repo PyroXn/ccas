@@ -243,9 +243,9 @@ function login() {
     } else {
         include_once('./lib/config.php');
         $user = Doctrine_Core::getTable('user')->findOneByLoginAndPassword($_POST['log'], md5($_POST['pwd']));
-        if ($user != null && $user->actif == 0) {
+        if ($user != null && $user->actif == 1) {
             $_SESSION['userId'] = $user->id;
-            $_SESSION['level'] = $user->level;
+//            $_SESSION['level'] = $user->level;
             header('Location: index.php?p=home');
         } else {
             $title = '';
@@ -372,6 +372,9 @@ function generationHeaderNavigation($mode) {
             $retour = '
                 <div id="accueilAdmin" href="#" class="page_header_link active">
                     <span class="label">Administration - Accueil</span>
+                </div>
+                <div id="managerole" href="#" class="page_header_link">
+                    <span class="label">G&eacute;rer les roles</span>
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
                     <span class="label">G&eacute;rer les utilisateurs</span>
