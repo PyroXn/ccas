@@ -1084,8 +1084,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Contenu de la table `user`
 --
 
-INSERT INTO `user` (`id`, `login`, `password`, `nomcomplet`, `idinstruct`, `level`, `actif`) VALUES
-(1, 'Florian', '56910c52ed70539e3ce0391edeb6d339', 'Janson Florian', 0, '1111', 0);
+INSERT INTO `user` (`id`, `login`, `password`, `nomcomplet`, `idinstruct`, `actif`, `idRole`) VALUES
+(1, 'Florian', '56910c52ed70539e3ce0391edeb6d339', 'Janson Florian', 0, 1, null);
 
 -- --------------------------------------------------------
 

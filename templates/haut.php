@@ -64,12 +64,12 @@
                         <div class="menu_option">
                             <ul class="liste_menu_option">
                                 <?php
-                                if(isAuthorized("0100")) {
+//                                if(isAuthorized("0100")) {
                                     echo '<li><a clas="" href="index.php?p=config">Configuration</a></li>';
-                                }
-                                if(isAuthorized("1000")) { 
+//                                }
+//                                if(isAuthorized("1000")) { 
                                     echo '<li><a class="" href="index.php?p=admin" >Administration</a></li>';
-                                }
+//                                }
                                 ?>
                                 <li>
                                     <a class="deconnexion" href="index.php?p=deconnexion" >Deconnexion</a>

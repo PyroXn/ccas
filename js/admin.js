@@ -5,5 +5,14 @@ $(function() {
             alert("ok");
         }
     });
+    
+    $('#permissions_configurator_tabs > li').live("click",function() {
+        var pane = "#"+$('.selected').attr('id') + "_pane";
+        var currentPane = "#"+$(this).attr('id') + "_pane";
+        $('.selected').toggleClass('selected');
+        $(this).toggleClass('selected');
+        $(currentPane).toggle();
+        $(pane).toggle();
+    });
 });
         
