@@ -1,9 +1,15 @@
 <?php
 
 include_once('./lib/config.php');
-include_once('./pages/Droit.class.php');
 
-echo 4096|32;
+
+    $retour = '';
+    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accepté'));
+    foreach($aides as $aide) {
+        $retour .= $aide->id;
+    }
+    echo $retour;
+
 //$q = Doctrine_Query::create()
 //                ->from('depense')
 //                ->where('datecreation < ?', 1333007766)
