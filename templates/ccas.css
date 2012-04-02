@@ -387,9 +387,9 @@ legend {
     font-size: 12px;
 }
 .permission {
+    font-size: 12px;
     cursor: pointer;
     color: #00A400;
-    margin-bottom: 15px;
 }
 
 
@@ -446,7 +446,7 @@ legend {
 }
 
 .colonne50 {
-    
+
     display: inline-block;
     width: 49%;
 }
@@ -561,7 +561,7 @@ legend {
 }
 
 .addElem {
-/*    position: absolute;*/
+    /*    position: absolute;*/
     height: 16px;
     width: 16px;
     background: white url('./img/ajouter.png') no-repeat;
@@ -571,4 +571,83 @@ legend {
 
 .create_bon_interne {
     cursor: pointer;
+}
+
+
+/***** Gestion des roles*****/
+.tab_menu {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    position: relative;
+    border-bottom: 1px solid #BBB;
+}
+
+.tab_menu ul {
+    position: absolute;
+    bottom: -1px;
+    padding: 0px;
+    margin: 0;
+    list-style: none;
+}
+
+.tab_menu .selected, .tab_menu li:hover {
+    color: #444;
+    display: block;
+}
+
+.tab_menu .selected, .tab_menu li.selected:hover {
+    background-color: white;
+    border: 1px solid #BBB;
+    border-bottom: 1px solid white;
+}
+
+.tab_menu .selected {
+    font-weight: bold;
+}
+
+.tab_menu li {
+    float: left;
+    display: block;
+    font-size: 11px;
+    border: 1px solid #CCC;
+    border-bottom: 1px solid #BBB;
+    background-color: #EBEBEB;
+    margin: 0 0 0 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+
+    color: #777;
+    border-top: 1px solid #BBB;
+    padding: 3px 6px 5px 6px;
+}
+
+.tab_menu li a {
+    color: inherit;
+    float: left;
+}
+
+.permission_list .tab_pane {
+    border: 1px solid #AAA;
+    border-top: 0;
+    padding: 10px;
+}
+
+.permission_list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 715px;
+}
+
+.permission_list ul li {
+    margin: 0px;
+    padding: 0;
+    font-weight: normal;
+    clear: both;
+    background-color: transparent;
 }

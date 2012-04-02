@@ -139,11 +139,67 @@ function affichagePermissions() {
     include_once('Droit.class.php');
     $retour = '';
     $retour .= '
-        <fieldset>
-            <legend>Permissions g&eacute;n&eacute;rales</legend>
-            <div class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_ADMIN).'</div>'.listRole($roles, Droit::$ACCES_ADMIN).'
-            <div class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_CONFIG).'
-        </fieldset>';
+        <div style="margin: 10px 0 0 0; clear: both; height: 30px;" class="tab_menu">
+            <ul id="permissions_configurator_tabs">
+                <li class="selected" id="configurator_tab_general"><a href="#">Permissions g&eacute;n&eacute;rales</a></li>
+                <li id="configurator_tab_documents"><a href="#">Permissions sur les documents</a></li>
+                <li id="configurator_tab_individu"><a href="#">Permissions sur les menus d\'individu</a></li>
+                <li id="configurator_tab_modif_creation"><a href="#">Permissions de modification et de cr&eacute;ation</a></li>
+                <li id="configurator_tab_aide"><a href="#">Permissions sur la partie aide</a></li>
+            </ul>
+        </div>';
+    $retour .= '
+        <div id="permissions_configurator_tabs_panes" class="permission_list">
+            <div id="configurator_tab_general_pane" class="tab_pane">
+                <ul>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_ADMIN).'</span>'.listRole($roles, Droit::$ACCES_ADMIN).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_CONFIG).'</span>'.listRole($roles, Droit::$ACCES_CONFIG).'</li>
+                </ul>
+            </div>
+            <div id="configurator_tab_documents_pane" class="tab_pane" style="display: none;">
+                <ul>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_DOCUMENT).'</span>'.listRole($roles, Droit::$ACCES_DOCUMENT).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_AJOUT_DOCUMENT).'</span>'.listRole($roles, Droit::$DROIT_AJOUT_DOCUMENT).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_SUPPRESSION_DOCUMENT).'</span>'.listRole($roles, Droit::$DROIT_SUPPRESSION_DOCUMENT).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_TELECHARGEMENT_DOCUMENT).'</span>'.listRole($roles, Droit::$DROIT_TELECHARGEMENT_DOCUMENT).'</li>
+                </ul>
+            </div>
+            <div id="configurator_tab_individu_pane" class="tab_pane" style="display: none;">
+                <ul>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_FOYER).'</span>'.listRole($roles, Droit::$ACCES_FOYER).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_GENERALITES).'</span>'.listRole($roles, Droit::$ACCES_GENERALITES).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_BUDGET).'</span>'.listRole($roles, Droit::$ACCES_BUDGET).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_AIDES).'</span>'.listRole($roles, Droit::$ACCES_AIDES).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_ACTIONS).'</span>'.listRole($roles, Droit::$ACCES_ACTIONS).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_HISTORIQUE_INDIVIDU).'</span>'.listRole($roles, Droit::$ACCES_HISTORIQUE_INDIVIDU).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$ACCES_DOCUMENT_INDIVIDU).'</span>'.listRole($roles, Droit::$ACCES_DOCUMENT_INDIVIDU).'</li>
+                </ul>
+            </div>
+            <div id="configurator_tab_modif_creation_pane" class="tab_pane" style="display: none;">
+                <ul>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_CREATION_FOYER).'</span>'.listRole($roles, Droit::$DROIT_CREATION_FOYER).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_CREATION_INDIVIDU).'</span>'.listRole($roles, Droit::$DROIT_CREATION_INDIVIDU).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_MODIFICATION_FOYER).'</span>'.listRole($roles, Droit::$DROIT_MODIFICATION_FOYER).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_MODIFICATION_INDIVIDU).'</span>'.listRole($roles, Droit::$DROIT_MODIFICATION_INDIVIDU).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_MODIFICATION_GENERALITES).'</span>'.listRole($roles, Droit::$DROIT_MODIFICATION_GENERALITES).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_MODIFICATION_BUDGET).'</span>'.listRole($roles, Droit::$DROIT_MODIFICATION_BUDGET).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_ARCHIVER_BUDGET).'</span>'.listRole($roles, Droit::$DROIT_ARCHIVER_BUDGET).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_CREATION_ACTION).'</span>'.listRole($roles, Droit::$DROIT_CREATION_ACTION).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_MODIFICATION_ACTION).'</span>'.listRole($roles, Droit::$DROIT_MODIFICATION_ACTION).'</li>
+                </ul>
+            </div>
+            <div id="configurator_tab_aide_pane" class="tab_pane" style="display: none;">
+                <ul>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_CREATION_AIDE_INTERNE).'</span>'.listRole($roles, Droit::$DROIT_CREATION_AIDE_INTERNE).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_CREATION_AIDE_EXTERNE).'</span>'.listRole($roles, Droit::$DROIT_CREATION_AIDE_EXTERNE).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_AJOUT_DECISION).'</span>'.listRole($roles, Droit::$DROIT_AJOUT_DECISION).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_MODIFICATION_DECISION).'</span>'.listRole($roles, Droit::$DROIT_MODIFICATION_DECISION).'</li>
+                    <li><span class="permission">'.Droit::getStaticDesignation(Droit::$DROIT_CREATION_BON_INTERNE).'</span>'.listRole($roles, Droit::$DROIT_CREATION_BON_INTERNE).'</li>
+                </ul>
+            </div>
+        </div>';
+        
+   
     
     return $retour;
 }
