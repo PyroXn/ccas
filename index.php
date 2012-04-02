@@ -398,6 +398,7 @@ function accueilContenu() {
     </script>
         <h2>Tableau de bord</h2>';
     $retour .= graphNewUsager();
+    $retour .= graphNbAideAccepte();
         
     return $retour;
 }

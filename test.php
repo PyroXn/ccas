@@ -1,6 +1,13 @@
 <?php
 
 include_once('./lib/config.php');
+
+    $retour = '';
+    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accepté'));
+    foreach($aides as $aide) {
+        $retour .= $aide->id;
+    }
+    echo $retour;
 //$q = Doctrine_Query::create()
 //                ->from('depense')
 //                ->where('datecreation < ?', 1333007766)
@@ -9,11 +16,11 @@ include_once('./lib/config.php');
 //        
 //        echo $q->id;
 
-$credits = Doctrine_Core::getTable('credit')->findByIdIndividu(6332);
-
-if(!isset($credits->id)) {
-    echo "ok";
-}
+//$credits = Doctrine_Core::getTable('credit')->findByIdIndividu(6332);
+//
+//if(!isset($credits->id)) {
+//    echo "ok";
+//}
 //    require('./lib/fpdf.php');
 //    $pdf = new FPDF();
 //    $pdf->AddPage();
