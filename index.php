@@ -60,6 +60,18 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         editUser();
         break;
+    case 'addPermission':
+        include_once('./pages/admin.php');
+        addPermission();
+        break;
+    case 'removePermission':
+        include_once('./pages/admin.php');
+        removePermission();
+        break;
+    case 'removeRole':
+        include_once('./pages/admin.php');
+        removeRole();
+        break;
     case 'updateChefDeFamille':
         include_once('./pages/individu.php');
         updateChefDeFamille();

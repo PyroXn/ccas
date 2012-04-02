@@ -382,16 +382,11 @@ fieldset {
     padding-left: 25px;
     border:1px solid #DCDCDC;
 }
+
 legend {
     color: #F77F00;
     font-size: 12px;
 }
-.permission {
-    font-size: 12px;
-    cursor: pointer;
-    color: #00A400;
-}
-
 
 .messageJS {
     display: none;
@@ -631,6 +626,10 @@ legend {
     float: left;
 }
 
+.permission_list {
+    padding-bottom: 25px;
+}
+
 .permission_list .tab_pane {
     border: 1px solid #AAA;
     border-top: 0;
@@ -645,9 +644,62 @@ legend {
 }
 
 .permission_list ul li {
-    margin: 0px;
-    padding: 0;
+    margin-bottom: 7px;
     font-weight: normal;
     clear: both;
     background-color: transparent;
+}
+
+.rounded_box {
+    display: none;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 5px;
+    margin: 5px 5px 10px 0px;
+    font-size: 12px;
+    background-color: white;
+    border-color: #CCC;
+}
+
+.rounded_box table {
+    width: 100%;
+}
+
+.rounded_box .role {
+    text-align: left;
+}
+
+.rounded_box .acces {
+    width: 60px; 
+    text-align: center;
+}
+
+.rounded_box .acces span {
+    position: relative;
+    left: -1px;
+}
+
+.rounded_box th {
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.rounded_box .ligne {
+    padding: 2px;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.rounded_box table tbody tr:hover {
+    background-color: #F1F1F1;
+}
+
+.permission {
+    font-size: 12px;
+    cursor: pointer;
+    color: #00A400;
 }

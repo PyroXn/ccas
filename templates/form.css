@@ -245,20 +245,7 @@
     padding-bottom: 5px;
 }
 
-.checkbox, .checkboxChefFamille {
-    position: relative;
-    left: 5px;
-    top: 2px;
-    background: white;
-    border: 1px solid #1C5180;
-    cursor: pointer;
-    display: -moz-inline-box;
-    display: inline-block;
-    height: 11px;
-    width: 11px;
-}
-
-.checkbox, .checkboxScolarise {
+.checkbox, .checkboxChefFamille, .checkboxScolarise, .checkboxPermission {
     position: relative;
     left: 5px;
     top: 2px;
@@ -280,7 +267,7 @@
     background-color: #EBEBE4;
 }
 
-.delete_individu, .delete_ligne {
+.delete_individu, .delete_ligne, .delete_role {
     background: transparent url('./img/delete.png') no-repeat;
     display: inline-block;
     width: 16px;

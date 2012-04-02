@@ -66,7 +66,8 @@ function form() {
         case 'creation_role':
             include_once('./pages/admin.php');
             creationRole($_POST['designationRole']);
-            $retour = array('role' => '');
+            $retour = manageRole();
+            $retour = array('role' => $retour);
             echo json_encode($retour);
             break;
     }

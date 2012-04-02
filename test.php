@@ -3,7 +3,7 @@
 include_once('./lib/config.php');
 include_once('./pages/Droit.class.php');
 
-echo Droit::$DROIT_MODIFICATION_ACTION;
+echo 4096|32;
 //$q = Doctrine_Query::create()
 //                ->from('depense')
 //                ->where('datecreation < ?', 1333007766)
