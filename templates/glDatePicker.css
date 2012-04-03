@@ -130,3 +130,9 @@
 	color:#666;
 	cursor:wait;
 }
+
+.ui-datepicker div.ui-datepicker-buttonpane button.ui-datepicker-current {
+    font-weight: bold;
+    opacity: 1;
+    filter:Alpha(Opacity=100);
+}

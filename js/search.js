@@ -162,8 +162,15 @@ $(function() {
     $('.input_date').live('click', function() {
             $(this).datepicker({
                 showOn:'focus',
-                showAnim: 'slideDown'
+                showAnim: 'slideDown',
+                showButtonPanel: 'true',
+                changeMonth: true,
+		changeYear: true
             }).focus();
+    });
+    
+    $('button.ui-datepicker-current').live('click', function() {
+        $.datepicker._curInst.input.datepicker('setDate', new Date()).datepicker('hide').blur();
     });
     
     $('.autoComplete').live("keyup", function(evenement)  {
