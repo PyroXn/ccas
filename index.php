@@ -437,11 +437,14 @@ function accueilContenu() {
     include_once('./pages/graphique.php');
     $retour = '
     <script type="text/javascript">
-            $("#newusager").visualize();
+            $("#graphNewUsager").visualize();
+            $("#graphTypeAction").visualize({type: "bar", height: "150px", width: "700px"});
+            $("#graphTypeAide").visualize();
     </script>
         <h2>Tableau de bord</h2>';
     $retour .= graphNewUsager();
-    $retour .= graphNbAideAccepte();
+    $retour .= graphTypeAction();
+    $retour .= graphTypeAide();
         
     return $retour;
 }

@@ -30,7 +30,7 @@ function graphNewUsager() {
                 </ul>
             </div>
             <div class="colonne">
-                <table id="newusager" class="hide">
+                <table id="graphNewUsager" class="hide">
                     <caption>R&eacute;partition des nouveaux usagers en '.date('Y').'</caption>
                     <thead>
                         <tr>
@@ -55,13 +55,66 @@ $retour .= '</tr>
 return $retour;
 }
 
-function graphNbAideAccepte() {
+function graphTypeAction() {
     include_once('./lib/config.php');
     $retour = '';
-    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accepté'));
-    foreach($aides as $aide) {
-        $retour .= $aide->id;
+    $tab = array();
+    $actions = Doctrine_Core::getTable('action')->findAll();
+    foreach($actions as $action) {
+        if(!array_key_exists($action->typeaction->libelle, $tab)) {
+            $tab[$action->typeaction->libelle] = 1;
+        } else {
+            $tab[$action->typeaction->libelle] += 1;
+        }
     }
+    $retour = '<h3>Type action</h3>
+        <table id="graphTypeAction" class="hide">
+                    <caption>Nombre et type d\'action</caption>
+                    <thead>
+                        <tr>
+                            <td></td>';
+    foreach($tab as $key => $value) {
+        $retour .= '<th scope="col">'.$key.'</th>';
+    }
+    $retour .= '</tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Nombre et typos action</th>';
+    foreach($tab as $key => $value) {
+        $retour .= '<td>'.$value.'</td>';
+    }
+    $retour .= '</tr>
+                    </tbody>
+                </table>';
+    return $retour;
+    
+}
+
+function graphTypeAide() {
+    include_once('./lib/config.php');
+    $retour = '';
+    
+    $aidesExternes = Doctrine_Core::getTable('aideexterne')->findAll();
+    $aidesInternes = Doctrine_Core::getTable('aideinterne')->findAll();
+    $retour = '<h3>Type d\'aide</h3>
+        <table id="graphTypeAide" class="hide">
+                    <caption>Type d\'aide</caption>
+                    <thead>
+                        <tr>
+                            <td></td>
+                                <th scope="col">Aides Internes</th>
+                                <th scope="col">Aides Externes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Type d\'aide</th>';
+    $retour .= '<td>'.count($aidesInternes).'</td>';
+    $retour .= '<td>'.count($aidesExternes).'</td>';
+    $retour .= '</tr>
+                    </tbody>
+                </table>';
     return $retour;
     
 }
