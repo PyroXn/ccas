@@ -1084,8 +1084,28 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Contenu de la table `user`
 --
 
-INSERT INTO `user` (`id`, `login`, `password`, `nomcomplet`, `idinstruct`, `level`, `actif`) VALUES
-(1, 'Florian', '56910c52ed70539e3ce0391edeb6d339', 'Janson Florian', 0, '1111', 0);
+INSERT INTO `user` (`id`, `login`, `password`, `nomcomplet`, `idinstruct`, `actif`, `idRole`) VALUES
+(1, 'Florian', '56910c52ed70539e3ce0391edeb6d339', 'Janson Florian', 0, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `role`
+--
+
+CREATE TABLE IF NOT EXISTS `role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `designation` varchar(50) DEFAULT ' ',
+  `permissions` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`id`, `designation`, `permissions`) VALUES
+(1, ' admin', 1);
 
 -- --------------------------------------------------------
 

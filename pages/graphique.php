@@ -54,4 +54,15 @@ $retour .= '</tr>
         ';
 return $retour;
 }
+
+function graphNbAideAccepte() {
+    include_once('./lib/config.php');
+    $retour = '';
+    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accepté'));
+    foreach($aides as $aide) {
+        $retour .= $aide->id;
+    }
+    return $retour;
+    
+}
 ?>

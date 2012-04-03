@@ -33,6 +33,18 @@ class Historique extends Doctrine_Record {
             case 4:
                 return 'Archiver';
                 break;
+            case 'Création':
+                return 1;
+                break;
+            case 'Modification':
+                return 2;
+                break;
+            case 'Suppression':
+                return 3;
+                break;
+            case 'Archiver':
+                return 4;
+                break;
         }
     }
 

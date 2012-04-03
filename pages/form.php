@@ -62,7 +62,14 @@ function form() {
             $detail = detailAideInterne();
             $retour = array('detail' => $detail);
             echo json_encode($retour);
-            break;            
+            break;
+        case 'creation_role':
+            include_once('./pages/admin.php');
+            creationRole($_POST['designationRole']);
+            $retour = manageRole();
+            $retour = array('role' => $retour);
+            echo json_encode($retour);
+            break;
     }
 }
 

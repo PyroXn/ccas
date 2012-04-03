@@ -60,6 +60,18 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         editUser();
         break;
+    case 'addPermission':
+        include_once('./pages/admin.php');
+        addPermission();
+        break;
+    case 'removePermission':
+        include_once('./pages/admin.php');
+        removePermission();
+        break;
+    case 'removeRole':
+        include_once('./pages/admin.php');
+        removeRole();
+        break;
     case 'updateChefDeFamille':
         include_once('./pages/individu.php');
         updateChefDeFamille();
@@ -243,9 +255,9 @@ function login() {
     } else {
         include_once('./lib/config.php');
         $user = Doctrine_Core::getTable('user')->findOneByLoginAndPassword($_POST['log'], md5($_POST['pwd']));
-        if ($user != null && $user->actif == 0) {
+        if ($user != null && $user->actif == 1) {
             $_SESSION['userId'] = $user->id;
-            $_SESSION['level'] = $user->level;
+            $_SESSION['permissions'] = $user->role->permissions;
             header('Location: index.php?p=home');
         } else {
             $title = '';
@@ -373,6 +385,9 @@ function generationHeaderNavigation($mode) {
                 <div id="accueilAdmin" href="#" class="page_header_link active">
                     <span class="label">Administration - Accueil</span>
                 </div>
+                <div id="managerole" href="#" class="page_header_link">
+                    <span class="label">G&eacute;rer les roles</span>
+                </div>
                 <div id="manageuser" href="#" class="page_header_link">
                     <span class="label">G&eacute;rer les utilisateurs</span>
                 </div>';
@@ -398,6 +413,7 @@ function accueilContenu() {
     </script>
         <h2>Tableau de bord</h2>';
     $retour .= graphNewUsager();
+    $retour .= graphNbAideAccepte();
         
     return $retour;
 }

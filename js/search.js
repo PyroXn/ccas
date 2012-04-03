@@ -287,8 +287,21 @@ $( "#datepicker" ).datepicker();
 
 function searchTableHistorique() {
     var datastring = 'table=historique';
+    if ($('#ligneRechercheTableHistorique').hasClass('isGlobal')) {
+        datastring += '&global=true';
+    } else {
+        datastring += '&idIndividu='+$('#list_individu').children('.current').children().attr('id_individu');
+    }
     $('#ligneRechercheTableHistorique').find('[columnName]').each(function(){
-        datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
+        if($(this).is('div')) {
+            if($(this).text() != '--------') {
+                datastring += '&' + $(this).attr('columnName') + '=' + $(this).text();
+            }
+        } else {
+            if($(this).val() != '') {
+                datastring += '&' + $(this).attr('columnName') + '=' + $(this).val();
+            }
+        }
     });
         
     console.log(datastring);
