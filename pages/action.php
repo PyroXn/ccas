@@ -53,7 +53,7 @@ function action() {
             <h2>Actions</h2>
            <div class="colonne_droite">
                  <div class="input_text">
-                    <input id="date" class="contour_field requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                    <input id="date" class="contour_field input_date requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
                 </div>
                 <div class="select classique" role="select_motifaction">
                     <div id="typeaction" class="option">Type d\'action</div>

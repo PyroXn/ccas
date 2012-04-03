@@ -12,6 +12,7 @@ class Historique extends Doctrine_Record {
         $this->hasColumn('date', 'integer', 50, array('default' => '0'));
         $this->hasColumn('idUser', 'integer', 5);
         $this->hasColumn('idIndividu', 'integer', 5);
+        $this->option('orderBy', 'id DESC');
     }
 
     public static $Creation = 1;
