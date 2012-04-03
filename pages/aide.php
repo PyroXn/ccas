@@ -13,8 +13,14 @@ function aideInterne() {
     $instructs =  Doctrine_Core::getTable('instruct')->findAll();
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $contenu = '
-        <div class="bouton ajout" id="createAideInterne">Ajouter une aide interne</div> -&nbsp;&nbsp;&nbsp;&nbsp;<div class="bouton ajout" id="createAideExterne">Ajouter une aide externe</div>
+    $contenu = '';
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_AIDE_INTERNE)) {
+        $contenu .= '<div class="bouton ajout" id="createAideInterne" style="margin-right: 20px;">Ajouter une aide interne</div>';
+    }
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_AIDE_EXTERNE)) {
+        $contenu .= '<div class="bouton ajout" id="createAideExterne">Ajouter une aide externe</div>';
+    }
+    $contenu .= '
         <h3>Aides Internes :</h3>
             <div class="bubble tableau_classique_wrapper">
                 <table class="tableau_classique" cellpadding="0" cellspacing="0">
@@ -202,7 +208,9 @@ function detailAideInterne() {
     $contenu .= '<ul class="list_classique"><li class="ligne_list_classique">'.$testaffichage.'</li></ul>';
             
         if($aideInterne->avis == null) {
-            $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une d&eacute;cision</div>';
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_APPORTER_DECISION)) {
+                $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une d&eacute;cision</div>';
+            }
             $contenu .= '<div id="decision">';
         }
         $contenu .= '<h3 id="idAide" value="'.$aideInterne->id.'">D&eacute;cision :</h3>
@@ -268,7 +276,12 @@ function detailAideInterne() {
                          </li>
                      </ul>';
     $contenu .= '
-        <h3>Bon d\'aide <span class="addElem" role="addBonInterne"></span></h3>
+        <h3>Bon d\'aide ';
+    
+        if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_BON_INTERNE)) {
+            $contenu .= '<span class="addElem" role="addBonInterne"></span>';
+        }
+        $contenu .= '</h3>
             <div class="bubble tableau_classique_wrapper">
                 <table class="tableau_classique" cellpadding="0" cellspacing="0">
                     <thead>
@@ -716,7 +729,9 @@ function detailAideExterne() {
                         </div>
                     </li></ul>';
         if($aideExterne->avis == null) {
-            $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une d&eacute;cision</div>';
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_APPORTER_DECISION)) {
+                $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une d&eacute;cision</div>';
+            }
             $contenu .= '<div id="decision">';
         }
         $contenu .= '<h3 id="idAide" value="'.$aideExterne->id.'">D&eacute;cision :</h3>

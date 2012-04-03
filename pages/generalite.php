@@ -19,7 +19,11 @@ function generalite() {
 function afficherInfoPerso($user) {
     $retour = '
     <div>
-        <h3><span>Informations personnelles</span>  <span class="edit"></span></h3>
+        <h3><span>Informations personnelles</span> ';
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_GENERALITES)) { 
+        $retour .= '<span class="edit"></span>';
+    }
+    $retour .= '</h3>
             <ul class="list_classique">
                 <li class="ligne_list_classique">
                     <div class="colonne">
@@ -80,7 +84,11 @@ return $retour;
 function afficherContact($user) {
     $retour = '
     <div>
-        <h3><span>T&eacute;l&egrave;phone / Email</span>  <span class="edit"></span></h3>
+        <h3><span>T&eacute;l&egrave;phone / Email</span> ';
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_GENERALITES)) { 
+        $retour .= '<span class="edit"></span>';
+    }
+    $retour .= '</h3>
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">
@@ -106,7 +114,11 @@ function afficherContact($user) {
 function afficherSituationPro($user) {
     $retour = '
     <div class="colonne50">
-        <h3><span>Situation professionnelle</span>  <span class="edit"></span></h3>
+        <h3><span>Situation professionnelle</span> ';
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_GENERALITES)) { 
+        $retour .= '<span class="edit"></span>';
+    }
+        $retour .= '</h3>
         <ul class="list_classique">
             <li class="ligne_list_classique">';
 $retour .=      '<div class="colonne_large">
@@ -152,7 +164,11 @@ return $retour;
 function afficherSituationScolaire($user) {
     $retour = '
     <div class="colonne50">
-        <h3><span>Situation scolaire</span>  <span class="edit"></span></h3>
+        <h3><span>Situation scolaire</span> ';
+        if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_GENERALITES)) { 
+            $retour .= '<span class="edit"></span>';
+        }
+        $retour .= '</h3>
         <ul class="list_classique">
             <li class="ligne_list_classique" >
                 <div class="colonne_large">
@@ -213,7 +229,11 @@ function afficherSituationScolaire($user) {
 function afficherCouvertureSocial($user) {
     $retour = '
     <div>
-        <h3><span>Couverture sociale</span>  <span class="edit"></span></h3>
+        <h3><span>Couverture sociale</span> ';
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_GENERALITES)) { 
+        $retour .= '<span class="edit"></span>';
+    }
+    $retour .= '</h3>
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">
@@ -274,7 +294,11 @@ $retour .= '<div class="fleche_bas"> </div>
 function afficherMutuelle($user) {
     $retour = '
     <div>
-        <h3><span>Mutuelle</span>  <span class="edit"></span></h3>
+        <h3><span>Mutuelle</span> ';
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_GENERALITES)) { 
+        $retour .= '<span class="edit"></span>';
+    }
+    $retour .= '</h3>
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">
@@ -314,7 +338,11 @@ return $retour;
 function afficherCAF($user) {
     $retour = '
     <div>
-        <h3><span>CAF</span>  <span class="edit"></span></h3>
+        <h3><span>CAF</span> ';
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_GENERALITES)) { 
+        $retour .= '<span class="edit"></span>';
+    }
+    $retour .= '</h3>
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">

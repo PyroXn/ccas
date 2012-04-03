@@ -124,15 +124,17 @@ $(function() {
     });
     
     $('.checkboxChefFamille').live("click", function(){
-        if(!$(this).hasClass('checkbox_active')) {
-            $('.checkbox_active').toggleClass('checkbox_active');
-            $(this).toggleClass('checkbox_active');
-            $('.update').css({
-                "display":"block"
-            });
-            $('.update').css({
-                "margin-right":"0"
-            });
+        if (!$(this).attr('disabled')) {
+            if(!$(this).hasClass('checkbox_active')) {
+                $('.checkbox_active').toggleClass('checkbox_active');
+                $(this).toggleClass('checkbox_active');
+                $('.update').css({
+                    "display":"block"
+                });
+                $('.update').css({
+                    "margin-right":"0"
+                });
+            }
         }
     });
     
@@ -315,7 +317,6 @@ $(function() {
                 success: function(aideexterne) {
                     console.log(aideexterne);
                     $('#contenu').html(aideexterne.aide);
-                    alert("test");
                 },
                 error: function(aideexterne) {
                     $("#contenu").html(aideexterne.responseText);

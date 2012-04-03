@@ -25,6 +25,7 @@ switch (@$_GET['p']) {
         autoComplete();
         break;
     case 'foyer':
+        include_once('./pages/foyer.php');
         foyer();
         break;
     case 'scroll':
@@ -297,16 +298,6 @@ function search() {
         $i++;
     }
     echo $retour;
-}
-
-function foyer() {
-    include_once('./pages/foyer.php');
-    $_SESSION['idIndividu'] = $_POST['idIndividu'];
-    $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
-    $menu = generationHeaderNavigation('foyer');
-    $contenu = foyerContenu($_POST['idFoyer']);
-    $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu, 'contenu' => $contenu);
-    echo json_encode($retour);
 }
 
 function creationListeByFoyer($idFoyer, $idIndividu) {

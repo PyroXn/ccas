@@ -1,5 +1,14 @@
 <?php
 
+function foyer() {
+    $_SESSION['idIndividu'] = $_POST['idIndividu'];
+    $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
+    $menu = generationHeaderNavigation('foyer');
+    $contenu = foyerContenu($_POST['idFoyer']);
+    $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu, 'contenu' => $contenu);
+    echo json_encode($retour);
+}
+
 function foyerContenu($idFoyer) {
     $contenu = '';
     $contenu .= '<h2>Foyer</h2>';
@@ -82,7 +91,7 @@ function generateInfoFoyer($foyer) {
     $instructs =  Doctrine_Core::getTable('instruct')->findAll();
     $retour = '';
     $retour .= '
-        <div><h3>Foyer';
+        <div><h3>Foyer ';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_FOYER)) {
         $retour .= '<span class="edit">';
     }
@@ -208,14 +217,26 @@ function generateLigneMembreFoyer($individu) {
             <div>
                 <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>
                 <span class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
-                <span class="date_naissance">'. $individu->lienfamille->lien .'</span>
-                <span class="delete_individu droite"></span>
-                <span class="droite"> Chef de famille ';
+                <span class="date_naissance">'. $individu->lienfamille->lien .'</span>';
+                if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_INDIVIDU)) {
+                    $retour .= '<span class="delete_individu droite"></span>';
+                }
+                $retour .= '<span class="droite"> Chef de famille ';
+                
+                if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_INDIVIDU)) {
                     if ($individu->chefDeFamille) {
                         $retour .= '<span class="checkboxChefFamille checkbox_active"></span>';
                     } else {
                         $retour .= '<span class="checkboxChefFamille"></span>';
                     }
+                } else {
+                    if ($individu->chefDeFamille) {
+                        $retour .= '<span class="checkboxChefFamille checkbox_active" disabled></span>';
+                    } else {
+                        $retour .= '<span class="checkboxChefFamille" disabled></span>';
+                    }
+                }
+                    
     $retour .= '</span>
                 
             </div>
