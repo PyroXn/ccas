@@ -266,4 +266,13 @@ function deleteUser() {
     $user->save();
     echo manageUser();
 }
+
+
+function statistique() {
+
+    
+    
+    
+}
+
 ?>

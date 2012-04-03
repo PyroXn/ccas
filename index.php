@@ -406,6 +406,9 @@ function generationHeaderNavigation($mode) {
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
                     <span class="label">G&eacute;rer les utilisateurs</span>
+                </div>
+                <div id="statistique" href="#" class="page_header_link">
+                    <span class="label">Statistiques</span>
                 </div>';
             break;
         case 'config' :

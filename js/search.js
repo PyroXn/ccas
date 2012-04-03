@@ -183,8 +183,20 @@ $(function() {
                 showAnim: 'slideDown',
                 showButtonPanel: 'true',
                 changeMonth: true,
-		changeYear: true
+		changeYear: true,
+                yearRange: 'c-80:c+5',
+                showTrigger: '#calImg'
             }).focus();
+    });
+
+    $('.ui-datepicker').live("mousewheel", function(event, delta){
+        if(delta < 0){
+            $(this).find('.ui-datepicker-next').click();
+        } else {
+            $(this).find('.ui-datepicker-prev').click();
+        }
+        event.preventDefault();
+        event.stopPropagation();
     });
     
     $('button.ui-datepicker-current').live('click', function() {
