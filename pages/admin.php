@@ -1,7 +1,6 @@
 <?php
 
 function homeAdmin() {
-    include_once('./pages/contenu.php');
     $title = 'Accueil';
     $contenu = '
         <div id="menu_gauche"></div>
@@ -11,8 +10,7 @@ function homeAdmin() {
                     </div>
                 </div>
                 <div id="contenu_wrapper">
-                    <div id="contenu">' . accueilAdmin() . '
-                    <div>
+                    <div id="contenu">' . manageRole() . '</div>
                 </div>
                 ';
     display($title, $contenu);

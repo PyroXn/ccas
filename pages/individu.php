@@ -17,9 +17,38 @@ function updateChefDeFamille() {
     echo foyerContenu($_POST['idFoyer']);
 }
 
+function createIndividu($idFoyer, $civilite, $nom, $prenom, $dateNaissance, $idLienFamille) {
+    include_once('./lib/config.php');
+    include_once('./pages/budget.php');
+    include_once('./pages/foyer.php');
+    
+    $individu = new Individu();
+    $individu->civilite = $civilite;
+    $individu->nom = $nom;
+    $individu->prenom = $prenom;
+    $individu->idFoyer = $idFoyer;
+    if ($dateNaissance != 0) {
+        $date = explode('/', $dateNaissance);
+        $individu->dateNaissance = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
+    } else {
+        $individu->dateNaissance = 0;
+    }
+    
+    $individu->idLienFamille = $idLienFamille;
+    $individu->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Creation, 'individu', $_SESSION['userId'], $individu->id);
+    
+    createRessource($individu->id);
+    createDepense($individu->id);
+    createDette($individu->id);
+    return FoyerContenu($idFoyer);
+}
+
 function deleteIndividu() {
     include_once('./lib/config.php');
-    include_once('./pages/contenu.php');
+    include_once('./pages/foyer.php');
     include_once('./index.php');
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $individu->delete();
@@ -31,125 +60,6 @@ function deleteIndividu() {
     $contenu = foyerContenu($_POST['idFoyer']);
     $retour = array('listeIndividu' => $listeIndividu, 'contenu' => $contenu);
     echo json_encode($retour);
-}
-
-function updateRessource() {
-    include_once('./lib/config.php');
-    $individu = Doctrine_Core::getTable('ressource')->getLastFicheRessource($_POST['idIndividu']);
-    $individu->salaire = $_POST['salaire'];
-    $individu->chomage = $_POST['chomage'];
-    $individu->revenuAlloc = $_POST['revenuAlloc'];
-    $individu->ass = $_POST['ass'];
-    $individu->aah = $_POST['aah'];
-    $individu->rsaSocle = $_POST['rsaSocle'];
-    $individu->rsaActivite = $_POST['rsaActivite'];
-    $individu->retraitComp = $_POST['retraitComp'];
-    $individu->pensionAlim = $_POST['pensionAlim'];
-    $individu->pensionRetraite = $_POST['pensionRetraite'];
-    $individu->autreRevenu = $_POST['autreRevenu'];
-    $individu->natureAutre = $_POST['natureAutre'];
-    $individu->dateCreation = time();
-    $individu->save();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Modification, 'ressource', $_SESSION['userId'], $_POST['idIndividu']);
-}
-
-function updateDepense() {
-    include_once('./lib/config.php');
-    $individu = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
-    $individu->impotRevenu = $_POST['impotRevenu'];
-    $individu->impotLocaux = $_POST['impotLocaux'];
-    $individu->pensionAlim = $_POST['pensionAlim'];
-    $individu->mutuelle = $_POST['mutuelle'];
-    $individu->electricite = $_POST['electricite'];
-    $individu->gaz = $_POST['gaz'];
-    $individu->eau = $_POST['eau'];
-    $individu->chauffage = $_POST['chauffage'];
-    $individu->telephonie = $_POST['telephonie'];
-    $individu->internet = $_POST['internet'];
-    $individu->television = $_POST['television'];
-    $individu->autreDepense = $_POST['autreDepense'];
-    $individu->natureDepense = $_POST['natureDepense'];
-    $individu->dateCreation = time();
-    $individu->save();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Modification, 'depense', $_SESSION['userId'], $_POST['idIndividu']);
-}
-
-function updateDette() {
-    include_once('./lib/config.php');
-    $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
-    $dette->arriereLocatif = $_POST['arriereLocatif'];
-    $dette->fraisHuissier = $_POST['fraisHuissier'];
-    $dette->autreDette = $_POST['autreDette'];
-    $dette->natureDette = $_POST['natureDette'];
-    $dette->arriereElectricite = $_POST['arriereElec'];
-    $dette->prestaElec = $_POST['prestaElec'];
-    $dette->arriereGaz = $_POST['arriereGaz'];
-    $dette->prestaGaz = $_POST['prestaGaz'];
-    $dette->dateCreation = time();
-    $dette->save();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Modification, 'dette', $_SESSION['userId'], $_POST['idIndividu']);
-}
-
-function updateDepenseHabitation() {
-    include_once('./lib/config.php');
-    $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($_POST['idIndividu']);
-    $ressource->aideLogement = $_POST['apl'];
-    $ressource->save();
-    
-    $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
-    $depense->loyer = $_POST['loyer'];
-    $depense->save();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Modification, 'depense habitation', $_SESSION['userId'], $_POST['idIndividu']);
-}
-
-function archiveRessource() {
-    include_once('./lib/config.php');
-    include_once('./pages/contenu.php');
-    include_once('./pages/form.php');
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Archiver, 'ressource', $_SESSION['userId'], $_POST['idIndividu']);
-    createRessource($_POST['idIndividu']);
-    echo budget();
-}
-
-function archiveDepense() {
-    include_once('./lib/config.php');
-    include_once('./pages/contenu.php');
-    include_once('./pages/form.php');
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Archiver, 'depense', $_SESSION['userId'], $_POST['idIndividu']);
-    createDepense($_POST['idIndividu']);
-    echo budget();
-}
-
-function archiveDette() {
-    include_once('./lib/config.php');
-    include_once('./pages/contenu.php');
-    include_once('./pages/form.php');
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Archiver, 'dette', $_SESSION['userId'], $_POST['idIndividu']);
-    createDette($_POST['idIndividu']);
-    echo budget();
-}
-
-function deleteCredit() {
-    include_once('./lib/config.php');
-    include_once('./pages/contenu.php');
-    $credit = Doctrine_Core::getTable('credit')->find($_POST['id']);
-    $credit->delete();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Suppression, 'credit', $_SESSION['userId'], $credit->idIndividu);
-    
-    echo budget();   
 }
 
 function updateContact() {

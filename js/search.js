@@ -61,6 +61,9 @@ $(function() {
                     offset = $("#list_individu").height();
                     //On remet la valeur à faux car c'est fini
                     load = false;
+                },
+                error: function(data) {
+                    $('.individu:last').after(data.responseText);
                 }
             });
         }
@@ -91,6 +94,9 @@ $(function() {
                     $("#list_individu").html(html.listeIndividu);
                     $("#page_header_navigation").html(html.menu);
                     $('#contenu').html(html.contenu);
+                },
+                error: function(html) {
+                    $("#contenu").html(html.responseText);
                 }
             });
         } else {
@@ -103,6 +109,9 @@ $(function() {
                 {
                     $("#page_header_navigation").html(html.menu);
                     $("#contenu").html(html.contenu);
+                },
+                error: function(html) {
+                    $("#contenu").html(html.responseText);
                 }
             });
             var searchbox = $("#search").val();
@@ -126,6 +135,9 @@ $(function() {
             success: function(html)
             {
                 $("#contenu").html(html);
+            },
+            error: function(html) {
+                $("#contenu").html(html.responseText);
             }
         });
     });
@@ -141,6 +153,9 @@ $(function() {
             success: function(html)
             {
                 $("#contenu").html(html);
+            },
+            error: function(html) {
+                $("#contenu").html(html.responseText);
             }
         });
     });
@@ -155,15 +170,18 @@ $(function() {
             success: function(html)
             {
                 $("#contenu").html(html);
+            },
+            error: function(html) {
+                $("#contenu").html(html.responseText);
             }
         });
     });
      
     $('.input_date').live('click', function() {
-            $(this).datepicker({
-                showOn:'focus',
-                showAnim: 'slideDown'
-            }).focus();
+        $(this).datepicker({
+            showOn:'focus',
+            showAnim: 'slideDown'
+        }).focus();
     });
     
     $('.autoComplete').live("keyup", function(evenement)  {
@@ -270,8 +288,10 @@ $(function() {
                 cache: false,
                 success: function(html)
                 {
-                    console.log($(this));
                     ligne.after(html);
+                },
+                error: function(html) {
+                    ligne.after(html.responseText);
                 }
             });
         } else {
@@ -314,6 +334,9 @@ function searchTableHistorique() {
         success: function(tableHistorique) {
             //                console.log(tableStatique);
             $("#contenu_table_historique").html(tableHistorique);
+        },
+        error: function(tableHistorique) {
+            $("#contenu_table_historique").html(tableHistorique.responseText);
         }
     });
 }
@@ -331,6 +354,9 @@ function autoComplete(searchbox, table, champ) {
         {
             $('#suggestion').html(html);
             $('.liste_suggestion > li:first').focus();
+        },
+        error: function(html) {
+            $('#suggestion').html(html.responseText);
         }
     });
 }
@@ -358,6 +384,9 @@ function search(searchbox) {
         success: function(html)
         {
             $("#list_individu").html(html);	
+        },
+        error: function(html) {
+            $("#list_individu").html(html.responseText);
         }
     });
 }
@@ -368,12 +397,12 @@ function calculTailleInputSearch() {
         - parseInt($('#search').css("margin-left")) - 1
     });
     
-function createPickers(context) {
-  $(".datefield", context || document).datepicker({
-    showAnim:'fadeIn',
-    dateFormat:'dd/mm/yy',
-    changeMonth:true,
-    changeYear:true
-  });
-}
+    function createPickers(context) {
+        $(".datefield", context || document).datepicker({
+            showAnim:'fadeIn',
+            dateFormat:'dd/mm/yy',
+            changeMonth:true,
+            changeYear:true
+        });
+    }
 }

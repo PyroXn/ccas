@@ -82,35 +82,35 @@ switch (@$_GET['p']) {
         deleteIndividu();
         break;
     case 'updateressource':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         updateRessource();
         break;
     case 'updatedepense':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         updateDepense();
         break;
     case 'updatedepensehabitation':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         updateDepenseHabitation();
         break;
     case 'updatedette':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         updateDette();
         break;
     case 'archiveressource':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         archiveRessource();
         break;
     case 'archivedepense':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         archiveDepense();
         break;
     case 'archivedette':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         archiveDette();
         break;
     case 'deletecredit':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         deleteCredit();
         break;
     case 'updatecontact':
@@ -138,7 +138,7 @@ switch (@$_GET['p']) {
         updateSituationScolaire();
         break;
     case 'updateFoyer':
-        include_once('./pages/contenu.php');
+        include_once('./pages/foyer.php');
         updateFoyer();
         break;
     case 'updateinfoperso':
@@ -300,7 +300,7 @@ function search() {
 }
 
 function foyer() {
-    include_once('./pages/contenu.php');
+    include_once('./pages/foyer.php');
     $_SESSION['idIndividu'] = $_POST['idIndividu'];
     $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
     $menu = generationHeaderNavigation('foyer');
@@ -410,10 +410,7 @@ function generationHeaderNavigation($mode) {
             break;
         case 'admin' :
             $retour .= '
-                <div id="accueilAdmin" href="#" class="page_header_link active">
-                    <span class="label">Administration - Accueil</span>
-                </div>
-                <div id="managerole" href="#" class="page_header_link">
+                <div id="managerole" href="#" class="page_header_link active">
                     <span class="label">G&eacute;rer les r&ocirc;les</span>
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
