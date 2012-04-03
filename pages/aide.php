@@ -737,6 +737,9 @@ function detailAideExterne() {
                                 <div class="affichage_classique">
                                     <h2>Date d&eacute;cision : </h2>
                                     <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" value="'.getDatebyTimestamp($aideExterne->dateDecision).'"></div>
+                                        <input type="text" class="picker" name="test" value="" />
+
+
                                 </div>
                             </div>
                             <div class="colonne_classique">

@@ -1,4 +1,9 @@
 $(function() {
+
+    
+    $(document).ready(function(){ 
+$( "#datepicker" ).datepicker();
+}); 
     calculTailleInputSearch();
     
     $(window).resize(function(){
@@ -158,7 +163,9 @@ $(function() {
         });
     });
      
- 
+ 	$('input.picker').live('click', function() {
+		$(this).datepicker({showOn:'focus'}).focus();
+	});
     $('.autoComplete').live("keyup", function(evenement)  {
         var codeTouche = evenement.which || evenement.keyCode;
         var searchbox = $(this).val();
@@ -360,4 +367,13 @@ function calculTailleInputSearch() {
         "width" : $('#menu_gauche').outerWidth() - $('.add').outerWidth(true) 
         - parseInt($('#search').css("margin-left"))
     });
+    
+function createPickers(context) {
+  $(".datefield", context || document).datepicker({
+    showAnim:'fadeIn',
+    dateFormat:'dd/mm/yy',
+    changeMonth:true,
+    changeYear:true
+  });
+}
 }
