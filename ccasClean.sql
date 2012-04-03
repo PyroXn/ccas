@@ -1105,7 +1105,7 @@ CREATE TABLE IF NOT EXISTS `role` (
 --
 
 INSERT INTO `role` (`id`, `designation`, `permissions`) VALUES
-(1, ' admin', 1);
+(1, ' admin', 134217727);
 
 -- --------------------------------------------------------
 

@@ -1,6 +1,7 @@
 <?php
 
 include_once('./lib/config.php');
+include_once('./pages/Droit.class.php');
 ini_set('session.gc_maxlifetime', 3600); 
 session_start();
 if (!isset($_SESSION['userId'])) {
@@ -198,8 +199,11 @@ function home() {
     $title = 'Accueil';
     $contenu = '
         <div id="menu_gauche">
-            <input id="search" class="contour_field" type="text" placeholder="Search..."/><a id="newfoyer" href="#" class="add" original-title="Ajouter un foyer"></a>
-            <div id="side_individu">
+            <input id="search" class="contour_field" type="text" placeholder="Search..."/>';
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_FOYER)) {
+                $contenu .= '<a id="newfoyer" href="#" class="add" original-title="Ajouter un foyer"></a>';
+            }
+            $contenu .= '<div id="side_individu">
                 <ul id="list_individu">';
     $individus = Doctrine_Core::getTable('individu');
     $contenu .= '<div class="nb_individu">' . $individus->count() . '</div>';
@@ -342,13 +346,17 @@ function generationHeaderNavigation($mode) {
     $retour = '';
     switch ($mode) {
         case 'accueil' :
-            $retour = '
+            $retour .= '
                 <div id="accueil" class="page_header_link active">
                     <span class="label">Accueil</span>
-                </div>
+                </div>';
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_DOCUMENT)) { 
+                 $retour .= '
                  <div id="document" class="page_header_link">
                     <span class="label">Documents</span>
-                </div>
+                </div>';
+            }
+                $retour .= '
                 <div id="statistique" class="page_header_link">
                     <span class="label">Statistiques</span>
                 </div>
@@ -357,31 +365,51 @@ function generationHeaderNavigation($mode) {
                 </div>';
             break;
         case 'foyer' :
-            $retour = '
-                <div id="foyer" class="page_header_link active">
-                    <span class="label">Foyer</span>
-                </div>
-                <div id="generalites" class="page_header_link">
-                    <span class="label">G&#233;n&#233;ralit&#233;s</span>
-                </div>
-                <div id="budget" class="page_header_link">
-                    <span class="label">Budget</span>
-                </div>
-                <div id="aides" class="page_header_link">
-                    <span class="label">Aides</span>
-                </div>
-                 <div id="actions" class="page_header_link">
-                    <span class="label">Actions</span>
-                </div>
-                <div id="historique" class="page_header_link">
-                    <span class="label">Historique</span>
-                </div>
-                <div id="documents" class="page_header_link">
-                    <span class="label">Documents</span>
-                </div>';
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_FOYER)) { 
+                $retour .= '
+                    <div id="foyer" class="page_header_link active">
+                        <span class="label">Foyer</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_GENERALITES)) { 
+                $retour .= '
+                    <div id="generalites" class="page_header_link">
+                        <span class="label">G&#233;n&#233;ralit&#233;s</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_BUDGET)) { 
+                $retour .= '
+                    <div id="budget" class="page_header_link">
+                        <span class="label">Budget</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_AIDES)) { 
+                $retour .= '
+                    <div id="aides" class="page_header_link">
+                        <span class="label">Aides</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_ACTIONS)) { 
+                $retour .= '
+                     <div id="actions" class="page_header_link">
+                        <span class="label">Actions</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_HISTORIQUE_INDIVIDU)) {
+                $retour .= '
+                    <div id="historique" class="page_header_link">
+                        <span class="label">Historique</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_DOCUMENT_INDIVIDU)) {
+                $retour .= '
+                    <div id="documents" class="page_header_link">
+                        <span class="label">Documents</span>
+                    </div>';
+            }
             break;
         case 'admin' :
-            $retour = '
+            $retour .= '
                 <div id="accueilAdmin" href="#" class="page_header_link active">
                     <span class="label">Administration - Accueil</span>
                 </div>
@@ -393,7 +421,7 @@ function generationHeaderNavigation($mode) {
                 </div>';
             break;
         case 'config' :
-            $retour = '
+            $retour .= '
                 <div id="accueilConfig" href="#" class="page_header_link active">
                     <span class="label">Configuration - Accueil</span>
                 </div>

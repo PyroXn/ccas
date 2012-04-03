@@ -22,21 +22,9 @@
         <div id="navigationbar">
             <ul id="navigationlist">
                 <li class="navigationligne">
-                    <a id="" class="lien_navigation" href="#" title="Ccas">
+                    <a id="" class="lien_navigation current" href="index.php" title="Ccas">
                         <span class="border_top"></span>
                         <span class="categorie">Ccas</span>
-                    </a>
-                </li>
-                <li class="navigationligne">
-                    <a id="" class="lien_navigation current" href="#" title="Expulsion">
-                        <span class="border_top"></span>
-                        <span class="categorie">Expulsion</span>
-                    </a>
-                </li>
-                <li class="navigationligne">
-                    <a id="" class="lien_navigation" href="#" title="Opif">
-                        <span class="border_top"></span>
-                        <span class="categorie">Opif</span>
                     </a>
                 </li>
             </ul>

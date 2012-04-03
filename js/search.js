@@ -365,7 +365,7 @@ function search(searchbox) {
 function calculTailleInputSearch() {
     $('#search').css({
         "width" : $('#menu_gauche').outerWidth() - $('.add').outerWidth(true) 
-        - parseInt($('#search').css("margin-left"))
+        - parseInt($('#search').css("margin-left")) - 1
     });
     
 function createPickers(context) {
