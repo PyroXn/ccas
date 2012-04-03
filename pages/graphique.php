@@ -10,26 +10,22 @@ function graphNewUsager() {
         $arrayCreation[] = $foyer->dateInscription;
     }
     $result = getAnneeAndMois($arrayCreation);
-    $retour = '<h3>Nombre de nouveaux usagers</h3>
-        <div class="colonne">
+    $retour = '<div class="colonne">
+        <h3>Nombre de nouveaux usagers</h3>
             <ul>';
 
     for($i=0; $i < count($result['year']); $i++) {
-        $retour .= '<li>Annee : '.$result['year'][$i].' : '.$result['total'][$result['year'][$i]].'</li>';
+        $retour .= '<li>'.$result['year'][$i].' : '.$result['total'][$result['year'][$i]].'</li>';
     }
         $retour .= '
-            </ul>
-        </div>';
+            </ul>';
         $retour .= '
-            <div class="colonne">
                 <ul>';
         for($u=0; $u < count($result['month']); $u++) {
-            $retour .= '<li>Mois : '.$mois[$result['month'][$u]].' : '.$result['total'][$result['month'][$u]].'</li>';
+            $retour .= '<li>'.$mois[$result['month'][$u]].' : '.$result['total'][$result['month'][$u]].'</li>';
         }
         $retour .= '
                 </ul>
-            </div>
-            <div class="colonne">
                 <table id="graphNewUsager" class="hide">
                     <caption>R&eacute;partition des nouveaux usagers en '.date('Y').'</caption>
                     <thead>
@@ -50,8 +46,7 @@ $retour .= '
 $retour .= '</tr>		
 	</tbody>
             </table>
-        </div>
-        ';
+        </div>';
 return $retour;
 }
 
@@ -97,7 +92,7 @@ function graphTypeAide() {
     
     $aidesExternes = Doctrine_Core::getTable('aideexterne')->findAll();
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findAll();
-    $retour = '<h3>Type d\'aide</h3>
+    $retour = '<div class="colonne"><h3>Type d\'aide</h3>
         <table id="graphTypeAide" class="hide">
                     <caption>Type d\'aide</caption>
                     <thead>
@@ -114,7 +109,7 @@ function graphTypeAide() {
     $retour .= '<td>'.count($aidesExternes).'</td>';
     $retour .= '</tr>
                     </tbody>
-                </table>';
+                </table></div>';
     return $retour;
     
 }

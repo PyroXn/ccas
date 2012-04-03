@@ -48,10 +48,13 @@ function getAnneeAndMois($arrayTimestamp) {
     $nb = array();
     for($i=0; $i < count($arrayTimestamp); $i++) { // On parcourt tout les foyers
         $date = explode('/', date('d/n/Y', $arrayTimestamp[$i]));
+        if($date[2] == '1970') {
+            $date[2] = 'Aucunes donn&eacute;es';
+        }
         if(!in_array($date[2], $arrayYear)) { // année
             $arrayYear[] = $date[2];
             $nb[$date[2]] = 1;
-            sort($arrayYear);
+            sort($arrayYear, SORT_NUMERIC);
         } else {
             $nb[$date[2]] += 1;
         }

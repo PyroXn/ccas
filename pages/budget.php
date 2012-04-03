@@ -272,8 +272,8 @@ function afficherCredits($credits) {
                             $retour .= '
                                 <tr name="'.$credit->id.'">
                                     <td>'.$credit->organisme.'</td>
-                                    <td> '.$credit->mensualite.'</td>
-                                    <td> '.$credit->dureeMois.'</td>
+                                    <td> '.$credit->mensualite.'&euro;/mois</td>
+                                    <td> '.$credit->dureeMois.' mois</td>
                                     <td> '.$credit->totalRestant.'</td>
                                     <td><span class="delete_credit"></span></td>
                                 </tr>';

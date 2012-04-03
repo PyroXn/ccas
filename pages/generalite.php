@@ -92,7 +92,7 @@ function afficherContact($user) {
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">
-                    <span class="attribut">T&eacute;l&agrave;phone :</span>
+                    <span class="attribut">T&eacute;l&eacute;phone :</span>
                     <span><input class="contour_field input_char" type="text" id="telephone" value="'.$user->telephone.'" disabled/></span>
                 </div>
                 <div class="colonne">
@@ -395,7 +395,7 @@ function updateContact() {
     $individu->save();
     
     include_once('./pages/historique.php');
-    createHistorique(Historique::$Modification, 'télèphone / email', $_SESSION['userId'], $_POST['idIndividu']);
+    createHistorique(Historique::$Modification, 't&eacute;l&eacute;phone / email', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateSituationProfessionnelle() {

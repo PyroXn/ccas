@@ -431,8 +431,8 @@ function accueilContenu() {
     </script>
         <h2>Tableau de bord</h2>';
     $retour .= graphNewUsager();
-    $retour .= graphTypeAction();
     $retour .= graphTypeAide();
+    $retour .= graphTypeAction();
         
     return $retour;
 }
