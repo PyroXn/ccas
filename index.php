@@ -114,27 +114,27 @@ switch (@$_GET['p']) {
         deleteCredit();
         break;
     case 'updatecontact':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateContact();
         break;
     case 'updatecaf':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateCaf();
         break;
     case 'updatemutuelle':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateMutuelle();
         break;
     case 'updatecouverture':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateCouvertureSociale();
         break;
     case 'updatesituationprofessionnelle':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateSituationProfessionnelle();
         break;
     case 'updateSituationScolaire':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateSituationScolaire();
         break;
     case 'updateFoyer':
@@ -142,7 +142,7 @@ switch (@$_GET['p']) {
         updateFoyer();
         break;
     case 'updateinfoperso':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateInfoPerso();
         break;
     case 'generateEcranStatique':
