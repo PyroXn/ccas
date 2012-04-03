@@ -113,7 +113,7 @@ function generateInfoFoyer($foyer) {
                     <div class="colonne">
                         <span class="attribut">Secteur :</span>
                         <div class="select classique" role="select_secteur" disabled>';
-    $retour .= $foyer->idSecteur == null || ' ' ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
+    $retour .= $foyer->idSecteur == null || $foyer->idSecteur == ' ' ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
     $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -126,14 +126,14 @@ function generateInfoFoyer($foyer) {
                     <div class="colonne">
                         <span class="attribut">Type :</span>
                         <div class="select classique" role="select_typelogement" disabled>';
-$retour .= $foyer->typeLogement == null || ' '  ? '<div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
+$retour .= $foyer->typeLogement == null || $foyer->typeLogement == ' ' ? '<div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                 </div>
                 </div>
                    <div class="colonne">
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statutlogement" disabled>';
-$retour .= $foyer->typeAppartenance == null || ' '  ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
+$retour .= $foyer->typeAppartenance == null || $foyer->typeAppartenance == ' ' ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                    </div>
@@ -150,14 +150,14 @@ $retour .= '<div class="fleche_bas"> </div>
                     <div class="colonne">
                         <span class="attribut">Bailleur :</span>
                         <div class="select classique" role="select_bailleur" disabled>';
-$retour .= $foyer->idBailleur == null || ' '  ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
+$retour .= $foyer->idBailleur == null || $foyer->idBailleur == ' ' ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Instructeur :</span>
                         <div class="select classique" role="select_instruct" disabled>';
-$retour .= $foyer->idInstruct == null || ' '  ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
+$retour .= $foyer->idInstruct == null || $foyer->idInstruct == null ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                     </div>

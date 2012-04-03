@@ -81,7 +81,7 @@ function aideInterne() {
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
-                <input id="date" class="contour_field requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                <input id="date" class="contour_field input_date requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
             </div>
             <div class="select classique" role="select_nature_interne">
                 <div id="nature" class="option">Nature</div>
@@ -363,10 +363,10 @@ function detailAideInterne() {
            <div class="colonne_droite">
             <input type="hidden" id="idinstruct" value="'.$aideInterne->idInstruct.'">
              <div class="input_text">
-                <input id="dateprevue" class="contour_field" type="text" title="Date" placeholder="Date de remise pr&eacute;vue">
+                <input id="dateprevue" class="contour_field input_date" type="text" title="Date" placeholder="Date de remise pr&eacute;vue">
             </div>
             <div class="input_text">
-                <input id="dateeffective" class="contour_field" type="text" title="Date" placeholder="Date de remise &eacute;ffective">
+                <input id="dateeffective" class="contour_field input_date" type="text" title="Date" placeholder="Date de remise &eacute;ffective">
             </div>
             <div class="input_text">
                 <input id="montant" class="contour_field input_num" type="text" title="Montant" placeholder="Montant">
@@ -586,7 +586,7 @@ function aideExterne() {
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="input_text">
-                            <input id="dateaideexterne" class="contour_field requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                            <input id="dateaideexterne" class="contour_field input_date requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_nature_externe">
