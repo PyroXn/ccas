@@ -464,7 +464,7 @@ $(function() {
                                 $("#contenu").html(data.budget);
                                 break;
                             case 'creation_action':
-                                $('#contenu').html(data.action);
+                                $('#contenu').html(data.actions);
                                 break;
                             case 'creation_aide_interne':
                                 $('#contenu').html(data.aide);

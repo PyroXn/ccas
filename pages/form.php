@@ -39,7 +39,7 @@ function form() {
             include_once('./pages/action.php');
             createAction($_POST['date'], $_POST['typeaction'], $_POST['motif'], $_POST['suiteadonner'], $_POST['suitedonnee'], $_POST['instruct'], $_POST['idIndividu']);
             $action = action();
-            $retour = array('action' => $action);
+            $retour = array('actions' => $action);
             echo json_encode($retour);
             break;
         case 'creation_aide_interne':
