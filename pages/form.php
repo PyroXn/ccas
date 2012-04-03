@@ -1,10 +1,12 @@
 <?php
-
+/*
+ * Les formulaire lors du save arrive ici.
+ */
 function form() {
     $table = $_POST['table'];
     switch ($table) {
          case 'creation_foyer':
-             include_once('./pages/contenu.php');
+             include_once('./pages/foyer.php');
              $tab = creationFoyer($_POST['civilite'], $_POST['nom'], $_POST['prenom']);
              $listeIndividu = creationListeByFoyer($tab['idFoyer'], $tab['idIndividu']);
              $menu = generationHeaderNavigation('foyer');
@@ -20,16 +22,14 @@ function form() {
              echo json_encode($retour);
              break;
         case 'creation_individu':
-//            include_once('./pages/contenu.php');
-//            include_once('./index.php');
-            
+            include_once('./pages/individu.php');
             $newIndividu = createIndividu($_POST['idFoyer'], $_POST['civilite'], $_POST['nom'], $_POST['prenom'], $_POST['naissance'], $_POST['idlienfamille']);
             $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividuCourant']);
             $retour = array('listeIndividu' => $listeIndividu, 'newIndividu' => $newIndividu);
             echo json_encode($retour);
             break;
         case 'creation_credit':
-            include_once('./pages/contenu.php');
+            include_once('./pages/budget.php');
             createCredit($_POST['idIndividu'], $_POST['organisme'], $_POST['mensualite'], $_POST['duree'], $_POST['total']);
             $budget = budget();
             $retour = array('budget' => $budget);
@@ -71,104 +71,5 @@ function form() {
             echo json_encode($retour);
             break;
     }
-}
-
-
-function creationFoyer($civilite, $nom, $prenom) {
-    include_once('./lib/config.php');
-    $foyer = new Foyer();
-    $foyer->dateInscription = time();
-    $foyer->save();
-    $individu = new Individu();
-    $individu->civilite = $civilite;
-    $individu->nom = $nom;
-    $individu->prenom = $prenom;
-    $individu->chefDeFamille = true;
-    $individu->idFoyer = $foyer->id;
-    $individu->save();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Creation, 'foyer', $_SESSION['userId'], $individu->id);
- 
-    createRessource($individu->id);
-    createDepense($individu->id);
-    createDette($individu->id);
-    
-    return array('idFoyer' => $foyer->id, 'idIndividu' => $individu->id);
-//    return creationListeByFoyer($foyer->id, $individu->id);
-}
-
-function createRessource($idIndividu) {
-    $ressource = new Ressource();
-    $ressource->idIndividu = $idIndividu;
-    $ressource->dateCreation = time();
-    $ressource->save();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Creation, 'ressource', $_SESSION['userId'], $idIndividu);
-} 
-
-function createDepense($idIndividu) {
-    $depense = new Depense();
-    $depense->idIndividu = $idIndividu;
-    $depense->dateCreation = time();
-    $depense->save();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Creation, 'depense', $_SESSION['userId'], $idIndividu);
-}
-
-function createDette($idIndividu) {
-     
-    $dette = new Dette();
-    $dette->idIndividu = $idIndividu;
-    $dette->dateCreation = time();
-    $dette->save();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Creation, 'dette', $_SESSION['userId'], $idIndividu);
-}
-
-function createIndividu($idFoyer, $civilite, $nom, $prenom, $dateNaissance, $idLienFamille) {
-    include_once('./lib/config.php');
-    include_once('./pages/contenu.php');
-    
-    $individu = new Individu();
-    $individu->civilite = $civilite;
-    $individu->nom = $nom;
-    $individu->prenom = $prenom;
-    $individu->idFoyer = $idFoyer;
-    if ($dateNaissance != 0) {
-        $date = explode('/', $dateNaissance);
-        $individu->dateNaissance = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
-    } else {
-        $individu->dateNaissance = 0;
-    }
-    
-    $individu->idLienFamille = $idLienFamille;
-    $individu->save();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Creation, 'individu', $_SESSION['userId'], $individu->id);
-    
-    createRessource($individu->id);
-    createDepense($individu->id);
-    createDette($individu->id);
-    return FoyerContenu($idFoyer);
-}
-
-function createCredit($idIndividu, $organisme, $mensualite, $duree, $total) {
-    include_once('./lib/config.php');
-    $credit = new Credit();
-    $credit->organisme = $organisme;
-    $credit->mensualite = $mensualite;
-    $credit->dureeMois = $duree;
-    $credit->totalRestant = $total;
-    $credit->idIndividu = $idIndividu;
-    $credit->dateAjout = time();
-    $credit->save();
-    
-    include_once('./pages/historique.php');
-    createHistorique(Historique::$Creation, 'credit', $_SESSION['userId'], $idIndividu);
 }
 ?>

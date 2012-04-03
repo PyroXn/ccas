@@ -43,40 +43,5 @@ $(function() {
             $(this).attr("name","passive");
         }
     });
-    
-    $('#submitedit').live("click", function() {
-        var id = $('#idedit').val();
-        var login = $('#loginedit').val();
-        var pwd = $('#pwdedit').val();
-        var nomcomplet = $('#nomcompletedit').val();
-        $.ajax({
-            url: './index.php?p=edituser',
-            type:'POST',
-            data: "idedit="+id+"&loginedit="+login+"&pwdedit="+pwd+"&nomcompletedit="+nomcomplet,
-            success: function(data) {
-                message("Le compte utilisateur de "+nomcomplet+" a bien &eacute;t&eacute; modifi&eacute.","manageuser");     
-            }
-        });
-    });
-
-
-  
-    message = function(message,url) {
-        var valider ='<div id="ok" class="bouton modif">Ok</div>';
-        $('#ecran_gris').toggle();
-        $('.messageJS').css ({
-            "display":"block"
-        });
-        $('#messageJS').html(message+" " + valider);
-        $("#ok").bind("click", function(){
-            $('#ecran_gris').toggle();
-            $('.messageJS').css ({
-                "display":"none"
-            });
-            if(url != null) {
-                $(location).attr('href','index.php?p='+url);
-            }
-        });
-    }
 });
         

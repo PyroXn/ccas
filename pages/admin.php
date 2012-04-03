@@ -1,7 +1,6 @@
 <?php
 
 function homeAdmin() {
-    include_once('./pages/contenu.php');
     $title = 'Accueil';
     $contenu = '
         <div id="menu_gauche"></div>
@@ -11,8 +10,7 @@ function homeAdmin() {
                     </div>
                 </div>
                 <div id="contenu_wrapper">
-                    <div id="contenu">' . accueilAdmin() . '
-                    <div>
+                    <div id="contenu">' . manageRole() . '</div>
                 </div>
                 ';
     display($title, $contenu);
@@ -162,8 +160,7 @@ function affichagePermissions() {
                 <ul>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_CREATION_AIDE_INTERNE) . '</span>' . listRole($roles, Droit::$DROIT_CREATION_AIDE_INTERNE) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_CREATION_AIDE_EXTERNE) . '</span>' . listRole($roles, Droit::$DROIT_CREATION_AIDE_EXTERNE) . '</li>
-                    <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_AJOUT_DECISION) . '</span>' . listRole($roles, Droit::$DROIT_AJOUT_DECISION) . '</li>
-                    <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_MODIFICATION_DECISION) . '</span>' . listRole($roles, Droit::$DROIT_MODIFICATION_DECISION) . '</li>
+                    <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_APPORTER_DECISION) . '</span>' . listRole($roles, Droit::$DROIT_APPORTER_DECISION) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_CREATION_BON_INTERNE) . '</span>' . listRole($roles, Droit::$DROIT_CREATION_BON_INTERNE) . '</li>
                 </ul>
             </div>

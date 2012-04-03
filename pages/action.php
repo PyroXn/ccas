@@ -32,7 +32,11 @@ function action() {
             <td>'.$action->suiteADonner.'</td>
             <td>'.$action->suitedonnee.'</td>
             <td>'.$action->instruct->nom.'</td>
-            <td><span class="edit_action" idAction="'.$action->id.'"></span></td>
+            <td>';
+        if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_ACTION)) {
+            $contenu .= '<span class="edit_action" idAction="'.$action->id.'"></span>';
+        }
+        $contenu .= '</td>
         </tr>';
         $i++;
     }
@@ -41,9 +45,11 @@ function action() {
                          <td colspan="7" align="center">< Aucune action n\'a &eacute;t&eacute; &eacute;ffectu&eacute;e > </td>
                      </tr>';
     }
-    $contenu .= '</tbody></table></div>';    
-    $contenu .= '<div class="bouton ajout" id="createAction">Ajouter une action</div>
-    <div class="formulaire" action="creation_action">
+    $contenu .= '</tbody></table></div>';
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_ACTION)) {
+        $contenu .= '<div class="bouton ajout" id="createAction">Ajouter une action</div>';
+    }
+    $contenu .= '<div class="formulaire" action="creation_action">
             <h2>Actions</h2>
            <div class="colonne_droite">
                  <div class="input_text">

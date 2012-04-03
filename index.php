@@ -1,6 +1,7 @@
 <?php
 
 include_once('./lib/config.php');
+include_once('./pages/Droit.class.php');
 ini_set('session.gc_maxlifetime', 3600); 
 session_start();
 if (!isset($_SESSION['userId'])) {
@@ -24,6 +25,7 @@ switch (@$_GET['p']) {
         autoComplete();
         break;
     case 'foyer':
+        include_once('./pages/foyer.php');
         foyer();
         break;
     case 'scroll':
@@ -81,67 +83,67 @@ switch (@$_GET['p']) {
         deleteIndividu();
         break;
     case 'updateressource':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         updateRessource();
         break;
     case 'updatedepense':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         updateDepense();
         break;
     case 'updatedepensehabitation':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         updateDepenseHabitation();
         break;
     case 'updatedette':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         updateDette();
         break;
     case 'archiveressource':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         archiveRessource();
         break;
     case 'archivedepense':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         archiveDepense();
         break;
     case 'archivedette':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         archiveDette();
         break;
     case 'deletecredit':
-        include_once('./pages/individu.php');
+        include_once('./pages/budget.php');
         deleteCredit();
         break;
     case 'updatecontact':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateContact();
         break;
     case 'updatecaf':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateCaf();
         break;
     case 'updatemutuelle':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateMutuelle();
         break;
     case 'updatecouverture':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateCouvertureSociale();
         break;
     case 'updatesituationprofessionnelle':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateSituationProfessionnelle();
         break;
     case 'updateSituationScolaire':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateSituationScolaire();
         break;
     case 'updateFoyer':
-        include_once('./pages/contenu.php');
+        include_once('./pages/foyer.php');
         updateFoyer();
         break;
     case 'updateinfoperso':
-        include_once('./pages/individu.php');
+        include_once('./pages/generalite.php');
         updateInfoPerso();
         break;
     case 'generateEcranStatique':
@@ -198,8 +200,11 @@ function home() {
     $title = 'Accueil';
     $contenu = '
         <div id="menu_gauche">
-            <input id="search" class="contour_field" type="text" placeholder="Search..."/><a id="newfoyer" href="#" class="add" original-title="Ajouter un foyer"></a>
-            <div id="side_individu">
+            <input id="search" class="contour_field" type="text" placeholder="Search..."/>';
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_FOYER)) {
+                $contenu .= '<a id="newfoyer" href="#" class="add" original-title="Ajouter un foyer"></a>';
+            }
+            $contenu .= '<div id="side_individu">
                 <ul id="list_individu">';
     $individus = Doctrine_Core::getTable('individu');
     $contenu .= '<div class="nb_individu">' . $individus->count() . '</div>';
@@ -295,16 +300,6 @@ function search() {
     echo $retour;
 }
 
-function foyer() {
-    include_once('./pages/contenu.php');
-    $_SESSION['idIndividu'] = $_POST['idIndividu'];
-    $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
-    $menu = generationHeaderNavigation('foyer');
-    $contenu = foyerContenu($_POST['idFoyer']);
-    $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu, 'contenu' => $contenu);
-    echo json_encode($retour);
-}
-
 function creationListeByFoyer($idFoyer, $idIndividu) {
     $retour = '';
     $foyer = Doctrine_Core::getTable('foyer')->find($idFoyer);
@@ -342,13 +337,17 @@ function generationHeaderNavigation($mode) {
     $retour = '';
     switch ($mode) {
         case 'accueil' :
-            $retour = '
+            $retour .= '
                 <div id="accueil" class="page_header_link active">
                     <span class="label">Accueil</span>
-                </div>
+                </div>';
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_DOCUMENT)) { 
+                 $retour .= '
                  <div id="document" class="page_header_link">
                     <span class="label">Documents</span>
-                </div>
+                </div>';
+            }
+                $retour .= '
                 <div id="statistique" class="page_header_link">
                     <span class="label">Statistiques</span>
                 </div>
@@ -357,35 +356,52 @@ function generationHeaderNavigation($mode) {
                 </div>';
             break;
         case 'foyer' :
-            $retour = '
-                <div id="foyer" class="page_header_link active">
-                    <span class="label">Foyer</span>
-                </div>
-                <div id="generalites" class="page_header_link">
-                    <span class="label">G&#233;n&#233;ralit&#233;s</span>
-                </div>
-                <div id="budget" class="page_header_link">
-                    <span class="label">Budget</span>
-                </div>
-                <div id="aides" class="page_header_link">
-                    <span class="label">Aides</span>
-                </div>
-                 <div id="actions" class="page_header_link">
-                    <span class="label">Actions</span>
-                </div>
-                <div id="historique" class="page_header_link">
-                    <span class="label">Historique</span>
-                </div>
-                <div id="documents" class="page_header_link">
-                    <span class="label">Documents</span>
-                </div>';
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_FOYER)) { 
+                $retour .= '
+                    <div id="foyer" class="page_header_link active">
+                        <span class="label">Foyer</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_GENERALITES)) { 
+                $retour .= '
+                    <div id="generalites" class="page_header_link">
+                        <span class="label">G&#233;n&#233;ralit&#233;s</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_BUDGET)) { 
+                $retour .= '
+                    <div id="budget" class="page_header_link">
+                        <span class="label">Budget</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_AIDES)) { 
+                $retour .= '
+                    <div id="aides" class="page_header_link">
+                        <span class="label">Aides</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_ACTIONS)) { 
+                $retour .= '
+                     <div id="actions" class="page_header_link">
+                        <span class="label">Actions</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_HISTORIQUE_INDIVIDU)) {
+                $retour .= '
+                    <div id="historique" class="page_header_link">
+                        <span class="label">Historique</span>
+                    </div>';
+            }
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_DOCUMENT_INDIVIDU)) {
+                $retour .= '
+                    <div id="documents" class="page_header_link">
+                        <span class="label">Documents</span>
+                    </div>';
+            }
             break;
         case 'admin' :
-            $retour = '
-                <div id="accueilAdmin" href="#" class="page_header_link active">
-                    <span class="label">Administration - Accueil</span>
-                </div>
-                <div id="managerole" href="#" class="page_header_link">
+            $retour .= '
+                <div id="managerole" href="#" class="page_header_link active">
                     <span class="label">G&eacute;rer les r&ocirc;les</span>
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
@@ -393,7 +409,7 @@ function generationHeaderNavigation($mode) {
                 </div>';
             break;
         case 'config' :
-            $retour = '
+            $retour .= '
                 <div id="accueilConfig" href="#" class="page_header_link active">
                     <span class="label">Configuration - Accueil</span>
                 </div>
@@ -409,11 +425,14 @@ function accueilContenu() {
     include_once('./pages/graphique.php');
     $retour = '
     <script type="text/javascript">
-            $("#newusager").visualize();
+            $("#graphNewUsager").visualize();
+            $("#graphTypeAction").visualize({type: "bar", height: "150px", width: "700px"});
+            $("#graphTypeAide").visualize();
     </script>
         <h2>Tableau de bord</h2>';
     $retour .= graphNewUsager();
-    $retour .= graphNbAideAccepte();
+    $retour .= graphTypeAction();
+    $retour .= graphTypeAide();
         
     return $retour;
 }

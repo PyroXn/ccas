@@ -9,6 +9,9 @@ $(function() {
             //Succès de la requête
             success: function(user) {
                 $('#contenu').html(user);
+            },
+            error: function(user) {
+                $("#contenu").html(user.responseText);
             }
         });
     });
@@ -37,6 +40,9 @@ $(function() {
                 cache: false,
                 //Succès de la requête
                 success: function() {
+                },
+                error: function(html) {
+                    $("#contenu").html(html.responseText);
                 }
             });
         } else {
@@ -47,6 +53,9 @@ $(function() {
                 cache: false,
                 //Succès de la requête
                 success: function() {
+                },
+                error: function(html) {
+                    $("#contenu").html(html.responseText);
                 }
             });
         }
@@ -62,6 +71,9 @@ $(function() {
             //Succès de la requête
             success: function(role) {
                 $('#contenu').html(role);
+            },
+            error: function(role) {
+                $("#contenu").html(role.responseText);
             }
         });
     });

@@ -262,7 +262,7 @@
     background: white url('./img/check-sprite.gif') 2px center no-repeat;
 }
 
-.checkbox[disabled] {
+.checkbox[disabled], .checkboxChefFamille[disabled], .checkboxScolarise[disabled], .checkboxPermission[disabled] {
     cursor: default;
     background-color: #EBEBE4;
 }

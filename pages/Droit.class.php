@@ -49,8 +49,8 @@ class Droit {
      */
     public static $DROIT_CREATION_AIDE_INTERNE = 0x100000;  //droit création aide interne
     public static $DROIT_CREATION_AIDE_EXTERNE = 0x200000;  //droit création aide externe
-    public static $DROIT_AJOUT_DECISION = 0x400000;         //droit ajout d'une décision
-    public static $DROIT_MODIFICATION_DECISION = 0x800000;  //droit de modification d'une décision
+    public static $DROIT_APPORTER_DECISION = 0x400000;         //droit ajout d'une décision
+//    public static $DROIT_MODIFICATION_DECISION = 0x800000;  //droit de modification d'une décision
     public static $DROIT_CREATION_BON_INTERNE = 0x1000000;  //droit de création d'un bon interne
     
     public static $DROIT_CREATION_ACTION = 0x2000000;        //droit création action
@@ -125,11 +125,11 @@ class Droit {
                 return 'Droit cr&eacute;ation aide externe';
                 break;
             case 0x400000:
-                return "Droit ajout d'une d&eacute;cision";
+                return "Droit d'apporter une d&eacute;cision";
                 break;
-            case 0x800000:
-                return "Droit de modification d'une d&eacute;cision";
-                break;
+//            case 0x800000:
+//                return "Droit de modification d'une d&eacute;cision";
+//                break;
             case 0x1000000:
                 return "Droit de cr&eacute;ation d'un bon interne";
                 break;

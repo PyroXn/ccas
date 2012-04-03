@@ -124,15 +124,17 @@ $(function() {
     });
     
     $('.checkboxChefFamille').live("click", function(){
-        if(!$(this).hasClass('checkbox_active')) {
-            $('.checkbox_active').toggleClass('checkbox_active');
-            $(this).toggleClass('checkbox_active');
-            $('.update').css({
-                "display":"block"
-            });
-            $('.update').css({
-                "margin-right":"0"
-            });
+        if (!$(this).attr('disabled')) {
+            if(!$(this).hasClass('checkbox_active')) {
+                $('.checkbox_active').toggleClass('checkbox_active');
+                $(this).toggleClass('checkbox_active');
+                $('.update').css({
+                    "display":"block"
+                });
+                $('.update').css({
+                    "margin-right":"0"
+                });
+            }
         }
     });
     
@@ -255,6 +257,9 @@ $(function() {
                     effacer();
                     $("#contenu").html(data);
                     
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
                 }
             });
         } else if(value == 'updateDecisionInterne') {
@@ -276,6 +281,9 @@ $(function() {
                 success: function(aideinterne) {
                     console.log(aideinterne);
                     $('#contenu').html(aideinterne.aide);
+                },
+                error: function(aideinterne) {
+                    $("#contenu").html(aideinterne.responseText);
                 }
             });
         } else if(value == 'cancelDecisionInterne') {
@@ -290,6 +298,9 @@ $(function() {
                 success: function(html)
                 {
                     $("#contenu").html(html);
+                },
+                error: function(html) {
+                    $("#contenu").html(html.responseText);
                 }
             });
         } else if(value == 'updateDecisionExterne') {
@@ -306,7 +317,9 @@ $(function() {
                 success: function(aideexterne) {
                     console.log(aideexterne);
                     $('#contenu').html(aideexterne.aide);
-                    alert("test");
+                },
+                error: function(aideexterne) {
+                    $("#contenu").html(aideexterne.responseText);
                 }
             });
         } else if(value == 'cancelDecisionExterne') {
@@ -321,6 +334,9 @@ $(function() {
                 success: function(html)
                 {
                     $("#contenu").html(html);
+                },
+                error: function(html) {
+                    $("#contenu").html(html.responseText);
                 }
             });
         }
@@ -463,6 +479,9 @@ $(function() {
                                 $('#contenu').html(data.role);
                                 break;
                         }
+                    },
+                    error: function(data) {
+                        $("#contenu").html(data.responseText);
                     }
                 });
             }
@@ -483,6 +502,9 @@ $(function() {
                 success: function(contenu) {
                     console.log(contenu);
                     $('#contenu').html(contenu);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
             
@@ -503,6 +525,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         } else if(value == 'updateDepense') {
@@ -522,6 +547,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -537,6 +565,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -555,6 +586,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -570,6 +604,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -585,6 +622,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -605,6 +645,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -631,6 +674,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -648,6 +694,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -667,6 +716,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -688,6 +740,9 @@ $(function() {
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -708,6 +763,9 @@ $(function() {
                     console.log('SUCCESS INFO PERSO');
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
+                },
+                error: function(contenu) {
+                    $("#contenu").html(contenu.responseText);
                 }
             });
         }
@@ -763,6 +821,9 @@ $(function() {
                 //Succès de la requête
                 success: function(data) {
                     $('#contenu').html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
                 }
             });
         } else if($(this).parent().attr('role') == "depense") {
@@ -775,6 +836,9 @@ $(function() {
                 //Succès de la requête
                 success: function(data) {
                     $('#contenu').html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
                 }
             });
         } else if($(this).parent().attr('role') == "dette") {
@@ -787,6 +851,9 @@ $(function() {
                 //Succès de la requête
                 success: function(data) {
                     $('#contenu').html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
                 }
             });
         }
@@ -809,6 +876,9 @@ $(function() {
             success: function(data) {
                 $("#list_individu").html(data.listeIndividu);
                 $('#contenu').html(data.contenu);
+            },
+            error: function(data) {
+                $("#contenu").html(data.responseText);
             }
         });
     });
@@ -824,6 +894,9 @@ $(function() {
             cache: false,
             success: function(data) {
                 $("#contenu").html(data);
+            },
+            error: function(data) {
+                $("#contenu").html(data.responseText);
             }
         });
     });
@@ -838,6 +911,9 @@ $(function() {
             cache: false,
             success: function() {
                 searchTableStatique();
+            },
+            error: function(data) {
+                $("#contenu").html(data.responseText);
             }
         });
     });
@@ -865,6 +941,9 @@ $(function() {
                 $('#suiteadonner_edit').val(data.suiteadonner);
                 $('#suitedonnee_edit').val(data.suitedonnee);
                 $('#instruct_edit').val(data.instruct);
+            },
+            error: function(data) {
+                $("#contenu").html(data.responseText);
             }
         });
         
@@ -895,6 +974,9 @@ $(function() {
                 loc.text('V');
                 loc.attr('href', name);
                 loc.attr('target','_blank');
+            },
+            error: function(data) {
+                $("#contenu").html(data.responseText);
             }
         });
            
@@ -923,6 +1005,9 @@ function searchTableStatique() {
         success: function(tableStatique) {
             //                console.log(tableStatique);
             $("#contenu_table_statique").html(tableStatique);
+        },
+        error: function(tableStatique) {
+            $("#contenu_table_statique").html(tableStatique.responseText);
         }
     });
 }
