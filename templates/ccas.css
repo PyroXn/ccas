@@ -703,3 +703,7 @@ legend {
     cursor: pointer;
     color: #00A400;
 }
+
+div.ui-datepicker{
+ font-size:12px;
+}

@@ -1,9 +1,5 @@
 $(function() {
 
-    
-    $(document).ready(function(){ 
-$( "#datepicker" ).datepicker();
-}); 
     calculTailleInputSearch();
     
     $(window).resize(function(){
@@ -163,9 +159,13 @@ $( "#datepicker" ).datepicker();
         });
     });
      
- 	$('input.picker').live('click', function() {
-		$(this).datepicker({showOn:'focus'}).focus();
-	});
+    $('.input_date').live('click', function() {
+            $(this).datepicker({
+                showOn:'focus',
+                showAnim: 'slideDown'
+            }).focus();
+    });
+    
     $('.autoComplete').live("keyup", function(evenement)  {
         var codeTouche = evenement.which || evenement.keyCode;
         var searchbox = $(this).val();
