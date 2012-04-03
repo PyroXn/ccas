@@ -510,7 +510,7 @@ legend {
     color: #3A505B;
 }
 
-.edit, .edit_ligne, .edit_action, .edit_aide_interne, .edit_aide_externe {
+.edit, .edit_ligne, .edit_action, .edit_aide_interne, .edit_aide_externe, .edit_user {
     background: url('./img/edit.png') transparent no-repeat;
     width: 16px;
     height: 16px;
@@ -702,4 +702,8 @@ legend {
     font-size: 12px;
     cursor: pointer;
     color: #00A400;
+}
+
+div.ui-datepicker{
+ font-size:12px;
 }

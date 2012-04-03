@@ -67,6 +67,8 @@
 <script src="./js/jsUpload/jquery.fileupload.js"></script>
 <script src="./js/jsUpload/jquery.fileupload-ip.js"></script>
 <script src="./js/jsUpload/jquery.fileupload-ui.js"></script>
+<script src="./js/jquery-ui-1.8.18.custom.min.js"></script>
+<script src="./js/jquery.ui.datepicker-fr.js"></script>
 
     </body>
 </html>
