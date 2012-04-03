@@ -44,19 +44,6 @@ $(function() {
         }
     });
     
-    $('.edituser').click(function() {
-        var user = $(this).attr('name');
-        $.ajax({
-            url: './index.php?p=edituser',
-            type:'POST',
-            data: "user="+user,
-            //Succès de la requête
-            success: function(data) {
-                $('#useredit').html(data);
-            }
-        });
-    });
-    
     $('#submitedit').live("click", function() {
         var id = $('#idedit').val();
         var login = $('#loginedit').val();

@@ -56,9 +56,9 @@ switch (@$_GET['p']) {
         include_once('./pages/aide.php');
         echo detailAideExterne();
         break;
-    case 'edituser':
+    case 'deleteUser':
         include_once('./pages/admin.php');
-        editUser();
+        deleteUser();
         break;
     case 'addPermission':
         include_once('./pages/admin.php');
@@ -386,7 +386,7 @@ function generationHeaderNavigation($mode) {
                     <span class="label">Administration - Accueil</span>
                 </div>
                 <div id="managerole" href="#" class="page_header_link">
-                    <span class="label">G&eacute;rer les roles</span>
+                    <span class="label">G&eacute;rer les r&ocirc;les</span>
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
                     <span class="label">G&eacute;rer les utilisateurs</span>

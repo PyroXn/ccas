@@ -16,12 +16,6 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
     });
     
-    //    $('#createCredit').live("click", function() {        
-    //        var newPosition = new Object();
-    //        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_credit"]').width()/2;
-    //        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_credit"]').height();
-    //        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_credit"]'));
-    //    });
     $('.addElem').live("click", function() {
         console.log("addElem");
         var action = $(this).attr('role');
@@ -32,7 +26,20 @@ $(function() {
         creationForm(newPosition, $(this).outerHeight(), form);
     });
     
-    $('#createAction').live("click", function() {        
+    $('.edit_user').live("click",function() {
+        var form = $('.formulaire[action="creation_utilisateur"]');
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - $(form).width()/2;
+        newPosition.top = $(window).height()/2 - $(form).height();
+        creationForm(newPosition, $(this).outerHeight(), $(form));
+        var ligne = $(this).parent().parent();
+        form.find('#newlogin').val(ligne.find('[login]').text());
+        form.find('#newnomcomplet').val(ligne.find('[nomcomplet]').text());
+        form.find('#newrole').text(ligne.find('[role]').text());
+        form.attr('iduser', $(this).attr('idUser'));
+    });
+    
+    $('#createAction').live("click", function() {
         var newPosition = new Object();
         newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_action"]').width()/2;
         newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_action"]').height();
@@ -191,7 +198,7 @@ $(function() {
             formActuel.find('.requis').each(function(){
                 if ($(this).val() == '') {
                     traitement = false;
-                    $(this).toggleClass('a_completer');
+                    $(this).removeClass('a_completer');
                 }
             });
             formActuel.toggle();
@@ -341,6 +348,11 @@ $(function() {
                         datastring += '&login='+$('#newlogin').val();
                         datastring += '&pwd='+$('#newpwd').val();
                         datastring += '&nomcomplet='+$('#newnomcomplet').val();
+                        datastring += '&role='+$('#newrole').text();
+                        var iduser = formActuel.attr('iduser');
+                        if (typeof iduser !== 'undefined' && iduser !== false) {
+                            datastring += '&iduser='+iduser;
+                        }
                         break;
                     case 'creation_individu':
                         datastring += '&idFoyer=' + $('#list_individu').children('.current').children().attr('id_foyer');

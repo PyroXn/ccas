@@ -13,8 +13,8 @@ function form() {
              echo json_encode($retour);
              break;
          case 'creation_utilisateur':
-             include_once('./pages/contenu.php');
-             createUser($_POST['login'], $_POST['pwd'], $_POST['nomcomplet']);
+             include_once('./pages/admin.php');
+             createUser($_POST['login'], $_POST['pwd'], $_POST['nomcomplet'], $_POST['role']);
              $page = manageUser();
              $retour = array('tableau' =>$page);
              echo json_encode($retour);
@@ -127,16 +127,6 @@ function createDette($idIndividu) {
     
     include_once('./pages/historique.php');
     createHistorique(Historique::$Creation, 'dette', $_SESSION['userId'], $idIndividu);
-}
-
-function createUser($login,$password,$nomcomplet) {
-    include_once('./lib/config.php');
-    $user = new User();
-    $user->login = $login;
-    $user->password = md5($password);
-    $user->nomcomplet = $nomcomplet;
-    $user->save();
-    
 }
 
 function createIndividu($idFoyer, $civilite, $nom, $prenom, $dateNaissance, $idLienFamille) {
