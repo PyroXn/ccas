@@ -194,7 +194,8 @@ function afficherDepenses($depense) {
 function afficherDettes($dette) {
     $retour = '
         <div>
-            <h3 role="dette">Dettes ';if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
+            <h3 role="dette">Dettes ';
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
         $retour .= '<span class="edit"></span>';
     }
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ARCHIVER_BUDGET)) {

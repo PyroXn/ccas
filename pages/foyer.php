@@ -4,7 +4,11 @@ function foyer() {
     $_SESSION['idIndividu'] = $_POST['idIndividu'];
     $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
     $menu = generationHeaderNavigation('foyer');
-    $contenu = foyerContenu($_POST['idFoyer']);
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_FOYER)) {
+        $contenu = foyerContenu($_POST['idFoyer']);
+    } else {
+        $contenu = 'Vous n\'avez pas les droits pour afficher la fiche Foyer';
+    }
     $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu, 'contenu' => $contenu);
     echo json_encode($retour);
 }
