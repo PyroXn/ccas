@@ -37,14 +37,14 @@ function afficherInfoPerso($user) {
                     <div class="colonne">
                         <span class="attribut">Situation Familiale :</span>
                         <div class="select classique" role="select_situation" disabled>';
-$retour .= $user->idSitMatri == null || ' ' ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.$user->situationmatri->situation.'</div>';  
+$retour .= $user->idSitMatri == null || $user->idSitMatri == ' ' ? '<div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.$user->situationmatri->situation.'</div>';  
 $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Nationalit&eacute; :</span>
                         <div class="select classique" role="select_natio" disabled>';
-$retour .= $user->idNationalite == null || ' ' ? '<div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.$user->nationalite->nationalite.'</div>';  
+$retour .= $user->idNationalite == null || $user->idNationalite == ' ' ? '<div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.$user->nationalite->nationalite.'</div>';  
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                 </li>
@@ -62,14 +62,14 @@ $retour .= '<div class="fleche_bas"> </div>
                     <div class="colonne">
                         <span class="attribut">Sexe :</span>
                         <div class="select classique" role="select_sexe" disabled>';
-$retour .= $user->sexe == null || ' ' ? '<div id="sexe" class="option" value=" ">-----</div>' : '<div id="sexe" class="option" value="'.$user->sexe.'">'.$user->sexe.'</div>';  
+$retour .= $user->sexe == null || $user->sexe == ' ' ? '<div id="sexe" class="option" value=" ">-----</div>' : '<div id="sexe" class="option" value="'.$user->sexe.'">'.$user->sexe.'</div>';  
 $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statut" disabled>';
-$retour .= $user->idLienFamille == null || ' ' ? '<div id="statut" class="option" value=" ">-----</div>' : '<div id="statut" class="option" value="'.$user->idLienFamille.'">'.$user->lienfamille->lien.'</div>';  
+$retour .= $user->idLienFamille == null || $user->idLienFamille == ' ' ? '<div id="statut" class="option" value=" ">-----</div>' : '<div id="statut" class="option" value="'.$user->idLienFamille.'">'.$user->lienfamille->lien.'</div>';  
 $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -124,7 +124,7 @@ function afficherSituationPro($user) {
 $retour .=      '<div class="colonne_large">
                     <span class="attribut">Profession :</span>
                     <div class="select classique" role="select_profession" disabled>';
-$retour .= $user->idNiveauEtude == null || ' ' ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.$user->profession->profession.'</div>';  
+$retour .= $user->idNiveauEtude == null || $user->idNiveauEtude == ' ' ? '<div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.$user->profession->profession.'</div>';  
 $retour .= '
                         <div class="fleche_bas"> </div>
                     </div>
@@ -195,7 +195,7 @@ function afficherSituationScolaire($user) {
                     <div class="colonne_large">
                         <span class="attribut">Classe :</span>
                         <div class="select classique" role="select_etude" disabled>';
-    $retour .= $user->idNiveauEtude == null || ' ' ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
+    $retour .= $user->idNiveauEtude == null || $user->idNiveauEtude == ' ' ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
     $retour .= '
                             <div class="fleche_bas"> </div>
                         </div>
@@ -211,7 +211,7 @@ function afficherSituationScolaire($user) {
                     <div class="colonne_large">
                         <span class="attribut">Niveau &eacute;tude :</span>
                         <div class="select classique" role="select_etude" disabled>';
-    $retour .= $user->idNiveauEtude == null || ' ' ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
+    $retour .= $user->idNiveauEtude == null || $user->idNiveauEtude == ' ' ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
     $retour .= '
                             <div class="fleche_bas"> </div>
                         </div>
@@ -253,7 +253,7 @@ function afficherCouvertureSocial($user) {
                 <div class="colonne">
                     <span class="attribut">R&eacute;gime :</span>
                     <div class="select classique" role="select_regime" disabled>';
-$retour .= $user->regime == null || ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.$user->regime.'</div>';                   
+$retour .= $user->regime == null || $user->regime == ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.$user->regime.'</div>';                   
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -262,7 +262,7 @@ $retour .= '<div class="fleche_bas"> </div>
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
                     <div class="select classique" role="select_couv" disabled>';
-$retour .= $user->idCaisseSecu == null || ' ' ? '<div id="caisseCouv" class="option" value=" ">-----</div>' : '<div id="caisseCouv" class="option" value="'.$user->idCaisseSecu.'">'.$user->secu->appelation.'</div>';                   
+$retour .= $user->idCaisseSecu == null || $user->idCaisseSecu == ' ' ? '<div id="caisseCouv" class="option" value=" ">-----</div>' : '<div id="caisseCouv" class="option" value="'.$user->idCaisseSecu.'">'.$user->secu->appelation.'</div>';                   
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -304,7 +304,7 @@ function afficherMutuelle($user) {
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
                     <div class="select classique" role="select_mut" disabled>';
-$retour .= $user->idCaisseMut == null || ' ' ? '<div id="mutuelle" class="option" value="">-----</div>' : '<div id="mutuelle" class="option" value="'.$user->idCaisseMut.'">'.$user->mutuelle->appelation.'</div>';                   
+$retour .= $user->idCaisseMut == null || $user->idCaisseMut == ' ' ? '<div id="mutuelle" class="option" value="">-----</div>' : '<div id="mutuelle" class="option" value="'.$user->idCaisseMut.'">'.$user->mutuelle->appelation.'</div>';                   
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                     <span class="attribut">CMUC : </span>';
@@ -348,7 +348,7 @@ function afficherCAF($user) {
                 <div class="colonne">
                     <span class="attribut">Caisse :</span>
                     <div class="select classique" role="select_caf" disabled>';
-$retour .= $user->idCaisseCaf == null || ' ' ? '<div id="caf" class="option" value="">-----</div>' : '<div id="caf" class="option" value="'.$user->idCaisseCaf.'">'.$user->caf->appelation.'</div>';                   
+$retour .= $user->idCaisseCaf == null || $user->idCaisseCaf == ' ' ? '<div id="caf" class="option" value="">-----</div>' : '<div id="caf" class="option" value="'.$user->idCaisseCaf.'">'.$user->caf->appelation.'</div>';                   
 $retour .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
