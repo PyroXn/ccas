@@ -1,9 +1,16 @@
 $(function() {
-    $('#test').live("click",function() {
-        var name = $(this).attr('name');
-        if(confirm("Confirmer la d\351sactivation du compte utilisateur "+name+" ?")) {
-            alert("ok");
-        }
+    $('.delete_user').live("click",function() {
+        var idUser = $(this).attr('idUser');
+        $.ajax({
+            url: './index.php?p=deleteUser',
+            type:'POST',
+            data: "idUser="+idUser,
+            cache: false,
+            //Succès de la requête
+            success: function(user) {
+                $('#contenu').html(user);
+            }
+        });
     });
     
     $('#permissions_configurator_tabs > li').live("click",function() {
