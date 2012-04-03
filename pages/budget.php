@@ -13,7 +13,7 @@ function budget() {
         <div>
             <h3>D&eacute;penses habitation ';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
-        $contenu .= '<span class="edit">';
+        $contenu .= '<span class="edit"></span>';
     }
     $contenu .= '</h3>
             <ul class="list_classique">
@@ -44,7 +44,7 @@ function budget() {
 function afficherRessources($ressource) {
     $retour = '<div><h3 role="ressource"><span>Ressources</span>  ';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
-        $retour .= '<span class="edit">';
+        $retour .= '<span class="edit"></span>';
     }
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ARCHIVER_BUDGET)) {
         $retour .= '<span class="archive"></span> ';
@@ -117,7 +117,7 @@ function afficherDepenses($depense) {
         <div>
             <h3 role="depense">D&eacute;penses ';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
-        $retour .= '<span class="edit">';
+        $retour .= '<span class="edit"></span>';
     }
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ARCHIVER_BUDGET)) {
         $retour .= '<span class="archive"></span> ';
@@ -195,7 +195,7 @@ function afficherDettes($dette) {
     $retour = '
         <div>
             <h3 role="dette">Dettes ';if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
-        $retour .= '<span class="edit">';
+        $retour .= '<span class="edit"></span>';
     }
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ARCHIVER_BUDGET)) {
         $retour .= '<span class="archive"></span> ';
