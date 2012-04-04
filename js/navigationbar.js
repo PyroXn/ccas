@@ -5,12 +5,15 @@
  */
 if($.cookie("css")) {
     $("link.switchable").attr("href",$.cookie("css"));
+    $("link.switchable2").attr("href",$.cookie("css2"));
 }
 
 $(function() {
     $("#cssSwitch li a").click(function() { 
         $("link.switchable").attr("href",$(this).attr('rel'));
+        $("link.switchable2").attr("href",$(this).attr('rel2'));
         $.cookie("css",$(this).attr('rel'), {expires: 30, path: '/'});
+        $.cookie("css2",$(this).attr('rel2'), {expires: 30, path: '/'});
         $('body').hide().fadeIn(1250);
         return false;
     });

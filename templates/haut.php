@@ -5,7 +5,7 @@
         <title>ccas</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="./templates/navigationbar.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="./templates/ccas.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./templates/ccas.css" class="switchable2" />
         <link rel="stylesheet" type="text/css" href="./templates/tipsy.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/glDatePicker.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/form.css" class="switchable" />
@@ -25,10 +25,10 @@
             </ul>
             <ul id="cssSwitch">
                 <li>
-                    <a href="#" rel="./templates/form.css" class="cssform1" title="Thème classique"></a>
+                    <a href="#" rel="./templates/form.css" rel2="./templates/ccas.css" class="cssform1" title="Th&egrave;me classique"></a>
                 </li>
                 <li>
-                    <a href="#" rel="./templates/form2.css" class="cssform2" title="Thème en couleur"></a>
+                    <a href="#" rel="./templates/form2.css" rel2="./templates/ccas2.css" class="cssform2" title="Th&egrave;me en couleur"></a>
                 </li>
             </ul>
             <div id="navigationright">

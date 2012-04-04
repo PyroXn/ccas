@@ -44,7 +44,7 @@ function foyerContenu($idFoyer) {
         </ul>';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_INDIVIDU)) {
         $contenu .= '
-            <div value="add" class="bouton ajout">
+            <div id="newIndividu" value="add" class="bouton ajout">
                 <i class="icon-add"></i>
                 <span>Ajouter un individu</span>
             </div>';
