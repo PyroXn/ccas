@@ -15,7 +15,11 @@
                     <input id="form_3" class="contour_field requis" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
+<!--                    <div class="bouton modif" value="save">Enregistrer</div>-->
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save icon-white"></i>
+                        <span>Enregistrer</span>
+                    </div>
                     <div class="bouton classique" value="cancel">Annuler</div>
                 </div>
             </div>
