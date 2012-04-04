@@ -2,8 +2,8 @@
 
 function updateChefDeFamille() {
     include_once('./lib/config.php');
-    include_once('./pages/contenu.php');
-    $individu = Doctrine_Core::getTable('individu')->findOneByIdFoyerAndChefDeFamille(1, 1);
+    include_once('./pages/foyer.php');
+    $individu = Doctrine_Core::getTable('individu')->findOneByIdFoyerAndChefDeFamille($_POST['idFoyer'], 1);
     $individu->chefDeFamille = 0;
     $individu->save();
     
