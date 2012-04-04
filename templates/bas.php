@@ -37,6 +37,7 @@
         <div id="ecran_gris"></div>
         <script type="text/javascript" src="./js/enhance.js"></script>
         <script type="text/javascript" src="./js/jquery.js"></script>
+        <script type="text/javascript" src="./js/jquery.cookie.js"></script>
         <script type="text/javascript" src="./js/visualize.jQuery.js"></script>
         <script type="text/javascript" src="./js/navigationbar.js"></script>
         <script type="text/javascript" src="./js/search.js"></script>
