@@ -84,13 +84,6 @@
     width: 17px;
 }
 
-/*#navigationbar #option:hover {
-    background-color: white;
-    background-position: 5px -21px;
-    border-color: #BEBEBE;
-    padding-top: 1px;
-}*/
-
 .configuration {
     background-color: white;
     background-position: 5px -21px;
@@ -133,5 +126,43 @@
     background-color: #EFF3FB;
 }
 
+/***CSS SWITCHER***/
+ul#cssSwitch {
+    position: relative;
+    left: 50%;
+    top: 7px;
+}
+
+ul#cssSwitch li {
+    float:left;
+    margin-right: 4px; 
+    width:14px;
+    height:14px;
+}
+ul#cssSwitch li a {
+    border:1px solid #050505; 
+    cursor:pointer; 
+    display:block; 
+    position: relative; 
+    width:14px; 
+    height:14px;
+    moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+ul#cssSwitch li a.cssform1 {
+    background-color:#e83231; 
+}
+ul#cssSwitch li a.cssform1:hover { 
+    background-color:#ca1615; 
+    border:1px solid #d8d8d8;
+}
+ul#cssSwitch li a.cssform2 { 
+    background-color:#61ab18; 
+}
+ul#cssSwitch li a.cssform2:hover { 
+    background-color:#4d8a11; 
+    border:1px solid #d8d8d8;  
+}
 
 

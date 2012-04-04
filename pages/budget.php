@@ -32,7 +32,10 @@ function budget() {
                 </div>
                 </li>
             </ul>
-            <div class="bouton modif update" value="updateDepenseHabitation">Enregistrer</div>
+            <div value="updateDepenseHabitation" class="bouton modif update">
+                <i class="icon-save"></i>
+                <span>Enregistrer</span>
+            </div>
             <div class="clearboth"></div>
         </div>';
     $contenu .= afficherDettes($dette);
@@ -106,7 +109,10 @@ function afficherRessources($ressource) {
                         </div>
                    </li>
                 </ul>
-                <div class="bouton modif update" value="updateRessource">Enregistrer</div>
+                <div value="updateRessource" class="bouton modif update">
+                    <i class="icon-save"></i>
+                    <span>Enregistrer</span>
+                </div>
                 <div class="clearboth"></div>
             </div>';
     return $retour;
@@ -185,7 +191,10 @@ function afficherDepenses($depense) {
                    </div>
                </li>
             </ul>
-            <div class="bouton modif update" value="updateDepense">Enregistrer</div>
+            <div value="updateDepense" class="bouton modif update">
+                <i class="icon-save"></i>
+                <span>Enregistrer</span>
+            </div>
             <div class="clearboth"></div>
         </div>';
     return $retour;
@@ -242,7 +251,10 @@ function afficherDettes($dette) {
                         </div>
                     </li>
                 </ul>
-                <div class="bouton modif update" value="updateDette">Enregistrer</div>
+                <div value="updateDette" class="bouton modif update">
+                    <i class="icon-save"></i>
+                    <span>Enregistrer</span>
+                </div>
                 <div class="clearboth"></div>
             </div>';
     return $retour;
@@ -306,8 +318,14 @@ function afficherCredits($credits) {
                     <input id="total" class="contour_field" type="text" title="Total Restant" placeholder="Total Restant">
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
             </div>
         </div>';

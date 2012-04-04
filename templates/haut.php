@@ -8,15 +8,10 @@
         <link rel="stylesheet" type="text/css" href="./templates/ccas.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/tipsy.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/glDatePicker.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="./templates/form.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./templates/form.css" class="switchable" />
         <link rel="stylesheet" type="text/css" href="./templates/ui-lightness/jquery-ui-1.8.18.custom.css" media="screen" />
         
-<!--         Bootstrap CSS Toolkit styles 
-<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap.min.css" />
- Bootstrap styles for responsive website layout, supporting different screen sizes 
-<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-responsive.min.css" />-->
-<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<link rel="stylesheet" href="./templates/css/jquery.fileupload-ui.css" />
+        <link rel="stylesheet" href="./templates/css/jquery.fileupload-ui.css" />
     </head>
     <body>
         <div id="navigationbar">
@@ -26,6 +21,14 @@
                         <span class="border_top"></span>
                         <span class="categorie">Ccas</span>
                     </a>
+                </li>
+            </ul>
+            <ul id="cssSwitch">
+                <li>
+                    <a href="#" rel="./templates/form.css" class="cssform1" title="Thème classique"></a>
+                </li>
+                <li>
+                    <a href="#" rel="./templates/form2.css" class="cssform2" title="Thème en couleur"></a>
                 </li>
             </ul>
             <div id="navigationright">
