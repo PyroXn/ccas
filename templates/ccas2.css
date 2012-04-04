@@ -257,12 +257,12 @@ input[type=submit] , input[type=reset], input[type=button] {
     background-color: white;
     font-family: "Lucida grande", Tahoma, Verdana, Arial, Sans-serif;
     font-size: 11px;
-    border: 1px solid #9D9D9D;
+    border: 1px solid black;
 }
 
 #side_individu li {
     padding-bottom: 2px;
-    border-bottom: 1px dotted #9D9D9D;
+    border-bottom: 1px dotted black;
     color: #222;
 }
 
@@ -276,18 +276,18 @@ input[type=submit] , input[type=reset], input[type=button] {
 }
 
 #side_individu .current {
-    background-color: #2D2D2D;
-    background-image: -ms-linear-gradient(bottom, #2D2D2D, #5e5e5e 5px);
-    background-image: -moz-linear-gradient(bottom, #5e5e5e, #2D2D2D 5px);
-    background-image: -o-linear-gradient(bottom, #2D2D2D, #5e5e5e 5px);
-    background-image: -webkit-gradient(linear, left bottom, left top, from(#2D2D2D), to(#5e5e5e));
-    background-image: -webkit-linear-gradient(bottom, #5e5e5e, #2D2D2D 5px);
-    background-image: linear-gradient(bottom, #2D2D2D, #5e5e5e 5px);
+    background-color: #5BB75B;
+    background-image: -ms-linear-gradient(bottom, #51A351, #62C462 15px);
+    background-image: -moz-linear-gradient(bottom, #62C462, #51A351 15px);
+    background-image: -o-linear-gradient(bottom, #51A351, #5e5e5e 15px);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#51A351), to(#62C462));
+    background-image: -webkit-linear-gradient(bottom, #62C462, #51A351 15px);
+    background-image: linear-gradient(bottom, #51A351, #62C462 15px);
 
     -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
     -moz-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
     box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
-    color: #DDD;
+    color: white;
     padding-left: 20px;
 }
 
