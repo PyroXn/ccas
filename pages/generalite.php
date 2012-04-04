@@ -75,7 +75,10 @@ $retour .= '<div class="fleche_bas"> </div>
                     </div>
                 </li>
             </ul>
-            <div class="bouton modif update" value="updateInfoPerso">Enregistrer</div>
+            <div value="updateInfoPerso" class="bouton modif update">
+                <i class="icon-save"></i>
+                <span>Enregistrer</span>
+            </div>
             <div class="clearboth"></div>
         </div>';
 return $retour;
@@ -105,7 +108,10 @@ function afficherContact($user) {
                 </div>
             </li>
         </ul>
-        <div class="bouton modif update" value="updateContact">Enregistrer</div>
+        <div value="updateContact" class="bouton modif update">
+            <i class="icon-save"></i>
+            <span>Enregistrer</span>
+        </div>
         <div class="clearboth"></div>
     </div>';
     return $retour;
@@ -155,7 +161,10 @@ $retour .= '
                 </div> 
             </li>
         </ul>
-        <div class="bouton modif update" value="updateSituationProfessionnelle">Enregistrer</div>
+        <div value="updateSituationProfessionnelle" class="bouton modif update">
+            <i class="icon-save"></i>
+            <span>Enregistrer</span>
+        </div>
         <div class="clearboth"></div>
     </div>';
 return $retour;
@@ -219,7 +228,10 @@ function afficherSituationScolaire($user) {
                 </li>
             </div>
         </ul>
-        <div class="bouton modif update" value="updateSituationScolaire">Enregistrer</div>
+        <div value="updateSituationScolaire" class="bouton modif update">
+            <i class="icon-save"></i>
+            <span>Enregistrer</span>
+        </div>
         <div class="clearboth"></div>
     </div>';
     
@@ -285,7 +297,10 @@ $retour .= '<div class="fleche_bas"> </div>
                 </div>
             </li>
         </ul>
-        <div class="bouton modif update" value="updateCouvertureSocial">Enregistrer</div>
+        <div value="updateCouvertureSocial" class="bouton modif update">
+            <i class="icon-save"></i>
+            <span>Enregistrer</span>
+        </div>
         <div class="clearboth"></div>
     </div>';
     return $retour;
@@ -329,7 +344,10 @@ $retour .= '
                 </div>
             </li>
         </ul>
-        <div class="bouton modif update" value="updateMutuelle">Enregistrer</div>
+        <div value="updateMutuelle" class="bouton modif update">
+            <i class="icon-save"></i>
+            <span>Enregistrer</span>
+        </div>
         <div class="clearboth"></div>
     </div>';
 return $retour;
@@ -358,7 +376,10 @@ $retour .= '<div class="fleche_bas"> </div>
                 </div>
             </li>
         </ul>
-        <div class="bouton modif update" value="updateCaf">Enregistrer</div>
+        <div value="updateCaf" class="bouton modif update">
+            <i class="icon-save"></i>
+            <span>Enregistrer</span>
+        </div>
         <div class="clearboth"></div>
     </div>';
 return $retour;

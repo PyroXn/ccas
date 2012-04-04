@@ -43,10 +43,17 @@ function foyerContenu($idFoyer) {
     $contenu .= '
         </ul>';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_INDIVIDU)) {
-        $contenu .= '<div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>';
+        $contenu .= '
+            <div value="add" class="bouton ajout">
+                <i class="icon-add"></i>
+                <span>Ajouter un individu</span>
+            </div>';
     }
     $contenu .= '
-        <div class="bouton modif update" value="updateMembreFoyer">Enregistrer</div>
+        <div value="updateMembreFoyer" class="bouton modif update">
+            <i class="icon-save"></i>
+            <span>Enregistrer</span>
+        </div>
         <div class="formulaire" action="creation_individu">
             <h2>Individu</h2>
             <div class="colonne_droite">
@@ -68,8 +75,14 @@ function foyerContenu($idFoyer) {
                     <div class="fleche_bas"></div>
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -168,7 +181,11 @@ $retour .= '<div class="fleche_bas"> </div>
                </li>
             </ul>';
        
-$retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</div>
+$retour .= '
+            <div value="updateFoyer" class="bouton modif update">
+                <i class="icon-save"></i>
+                <span>Enregistrer</span>
+            </div>
             <div class="clearboth"></div>
         </div>';
  $retour .= situationFinanciere($foyer->id);

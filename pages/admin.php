@@ -20,8 +20,11 @@ function manageUser() {
     include_once('./lib/config.php');
     $users = Doctrine_Core::getTable('user')->findByActif(1);
     $roles = Doctrine_Core::getTable('role')->findAll();
-    $contenu = '   
-        <div id="newUser" class="bouton ajout" value="add">Ajouter un utilisateur</div>
+    $contenu = '
+        <div id="newUser" class="bouton ajout" value="add">
+            <i class="icon-add"></i>
+            <span>Ajouter un utilisateur</span>
+        </div>
         <div class="formulaire" action="creation_utilisateur">
             <h2>Utilisateur</h2>
             <div class="colonne_droite">
@@ -39,8 +42,14 @@ function manageUser() {
                     <div class="fleche_bas"> </div>
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,7 +91,10 @@ function manageUser() {
 function manageRole() {
     $retour = '';
     $retour .= '
-        <div id="newRole" class="bouton ajout" value="add">Ajouter un r&ocirc;le</div>
+        <div id="newRole" class="bouton ajout" value="add">
+            <i class="icon-add"></i>
+            <span>Ajouter un r&ocirc;le</span>
+        </div>
         <div class="formulaire" action="creation_role">
             <h2>Role</h2>
             <div class="colonne_droite">
@@ -90,8 +102,14 @@ function manageRole() {
                     <input id="designationRole" class="contour_field requis" type="text" title="D&eacute;signation" placeholder="D&eacute;signation">
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
             </div>
         </div>';

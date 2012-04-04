@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="./templates/ccas.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/tipsy.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/glDatePicker.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="./templates/form.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./templates/form2.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/ui-lightness/jquery-ui-1.8.18.custom.css" media="screen" />
         
         <link rel="stylesheet" href="./templates/css/jquery.fileupload-ui.css" />

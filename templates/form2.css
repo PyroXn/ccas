@@ -1,4 +1,6 @@
 /***BOUTON***/
+
+
 .bouton {
     display: inline-block;
     padding: 4px 10px 4px;
@@ -6,10 +8,12 @@
     font-size: 13px;
     line-height: 18px;
     text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    color: white;
     vertical-align: middle;
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+    border: 1px solid #CCC;
     border-color: #E6E6E6 #E6E6E6 #BFBFBF;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     filter: progid:dximagetransform.microsoft.gradient(enabled=false);
@@ -23,6 +27,17 @@
     cursor: pointer;
 }
 
+.bouton:hover {
+    text-decoration: none;
+    background-color: #E6E6E6;
+    background-position: 0 -15px;
+    -webkit-transition: background-position 0.1s linear;
+    -moz-transition: background-position 0.1s linear;
+    -ms-transition: background-position 0.1s linear;
+    -o-transition: background-position 0.1s linear;
+    transition: background-position 0.1s linear;
+}
+
 .classique {
     background-color: whiteSmoke;
     background-image: -moz-linear-gradient(top, white, #E6E6E6);
@@ -32,43 +47,45 @@
     background-image: -o-linear-gradient(top, white, #E6E6E6);
     background-image: linear-gradient(top, white, #E6E6E6);
     color: #333;
-    border: 1px solid #CCC;
-}
-
-.classique:hover {
-    text-decoration: none;
-    background-color: #E6E6E6;
-    background-position: 0 -15px;
-    -webkit-transition: background-position 0.1s linear;
-    -moz-transition: background-position 0.1s linear;
-    -ms-transition: background-position 0.1s linear;
-    -o-transition: background-position 0.1s linear;
-    transition: background-position 0.1s linear;
-    color: #333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
 }
 
 .modif {
-    background-color: #4D90FE;
-    background-image: -webkit-linear-gradient(top,#4D90FE,#4787ED);
-    background-image: -moz-linear-gradient(top,#4D90FE,#4787ED);
-    background-image: -ms-linear-gradient(top,#4D90FE,#4787ED);
-    background-image: -o-linear-gradient(top,#4D90FE,#4787ED);
-    background-image: linear-gradient(top,#4D90FE,#4787ED);
-    border: 1px solid #3079ED;
-    color: white;
+    background-color: #0074CC;
+    background-image: -moz-linear-gradient(top, #08C, #05C);
+    background-image: -ms-linear-gradient(top, #08C, #05C);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#08C), to(#05C));
+    background-image: -webkit-linear-gradient(top, #08C, #05C);
+    background-image: -o-linear-gradient(top, #08C, #05C);
+    background-image: linear-gradient(top, #08C, #05C);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0055cc', GradientType=0);
+    border-color: #05C #05C #003580;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
 }
 
 .modif:hover {
-    background-color: #357AE8;
-    background-image: -webkit-linear-gradient(top,#4D90FE,#357AE8);
-    background-image: -moz-linear-gradient(top,#4D90FE,#357AE8);
-    background-image: -ms-linear-gradient(top,#4D90FE,#357AE8);
-    background-image: -o-linear-gradient(top,#4D90FE,#357AE8);
-    background-image: linear-gradient(top,#4D90FE,#357AE8);
-    border: 1px solid #2F5BB7;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    background-color: #05C;
+}
+
+.ajout {
+    background-color: #5BB75B;
+    background-image: -moz-linear-gradient(top, #62C462, #51A351);
+    background-image: -ms-linear-gradient(top, #62C462, #51A351);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62C462), to(#51A351));
+    background-image: -webkit-linear-gradient(top, #62C462, #51A351);
+    background-image: -o-linear-gradient(top, #62C462, #51A351);
+    background-image: linear-gradient(top, #62C462, #51A351);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c462', endColorstr='#51a351', GradientType=0);
+    border-color: #51A351 #51A351 #387038;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.ajout:hover {
+    background-color: #51A351;
 }
 
 [class^="icon-"], [class*=" icon-"] {
@@ -82,6 +99,23 @@
     background-repeat: no-repeat;
 }
 
+.icon-black {
+    background-image: url("img/glyphicons-black.png");
+}
+
 .icon-save {
     background-position: -96px -24px;
+}
+
+.icon-cancel {
+    background-position: -216px -95px;
+}
+
+.icon-add {
+    background-position: -408px -96px;
+}
+
+.update {
+    display: none;
+    float: right;
 }
