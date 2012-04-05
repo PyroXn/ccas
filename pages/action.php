@@ -6,6 +6,7 @@ function action() {
     $types = Doctrine_Core::getTable('type')->findByCategorie(2); // Type Action
     $instructs = Doctrine_Core::getTable('instruct')->findByInterne(1); // Instruct interne
     $contenu = '<h2>Actions</h2>';
+    
     $contenu .= '<div><h3><span>Suivi des actions</span></h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
@@ -53,11 +54,13 @@ function action() {
                 <span>Ajouter une action</span>
             </div>';
     }
-    $contenu .= '<div class="formulaire" action="creation_action">
+    
+    $contenu .= '
+        <div class="formulaire" action="creation_action">
             <h2>Actions</h2>
-           <div class="colonne_droite">
-                 <div class="input_text">
-                    <input id="date" class="contour_field input_date requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+            <div class="colonne_droite">
+                <div class="input_text">
+                    <input id="date" class="contour_field requis input_date" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
                 </div>
                 <div class="select classique" role="select_motifaction">
                     <div id="typeaction" class="option">Type d\'action</div>
@@ -67,10 +70,10 @@ function action() {
                     <input id="motif" class="contour_field requis" type="text" title="Motif" placeholder="Motif">
                 </div>
                 <div class="input_text">
-                    <input id="suiteadonner" class="contour_field" type="text" title="Suite à donner" placeholder="Suite &agrave; donner">
+                    <input id="suiteadonner" class="contour_field" type="text" title="Suite &agrave; donner" placeholder="Suite &agrave; donner">
                 </div>
                 <div class="input_text">
-                    <input id="suitedonnee" class="contour_field" type="text" title="Suite donnée" placeholder="Suite donn&eacute;e">
+                    <input id="suitedonnee" class="contour_field" type="text" title="Suite donn&eacute;e" placeholder="Suite donn&eacute;e">
                 </div>
                 <div class="select classique" role="select_instruct">
                     <div id="instruct" class="option">Instructeur</div>
@@ -86,9 +89,8 @@ function action() {
                         <span>Annuler</span>
                     </div>
                 </div>
-
-           </div>
-   </div>
+            </div>
+        </div>
    <div class="formulaire" action="edit_action">
             <h2>Actions</h2>
            <div class="colonne_droite">
