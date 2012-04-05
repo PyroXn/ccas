@@ -14,8 +14,14 @@
                     <input id="form_3" class="contour_field requis" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,6 +35,8 @@
         </ul>
         <div id="ecran_gris"></div>
         <script type="text/javascript" src="./js/jquery.js"></script>
+        <script type="text/javascript" src="./js/jquery.cookie.js"></script>
+        
         <script type="text/javascript" src="./js/navigationbar.js"></script>
         <script type="text/javascript" src="./js/search.js"></script>
         <script type="text/javascript" src="./js/jquery.tipsy.js"></script>

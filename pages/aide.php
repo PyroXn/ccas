@@ -15,10 +15,18 @@ function aideInterne() {
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $contenu = '';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_AIDE_INTERNE)) {
-        $contenu .= '<div class="bouton ajout" id="createAideInterne" style="margin-right: 20px;">Ajouter une aide interne</div>';
+        $contenu .= '
+            <div id="createAideInterne" class="bouton ajout" style="margin-right: 20px;">
+                <i class="icon-add"></i>
+                <span>Ajouter une aide interne</span>
+            </div>';
     }
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_AIDE_EXTERNE)) {
-        $contenu .= '<div class="bouton ajout" id="createAideExterne">Ajouter une aide externe</div>';
+        $contenu .= '
+            <div id="createAideExterne" class="bouton ajout">
+                <i class="icon-add"></i>
+                <span>Ajouter une aide externe</span>
+            </div>';
     }
     $contenu .= '
         <h3>Aides Internes :</h3>
@@ -100,8 +108,14 @@ function aideInterne() {
             </div>
             
             <div class="sauvegarder_annuler">
-                <div class="bouton modif" value="save">Enregistrer</div>
-                <div class="bouton classique" value="cancel">Annuler</div>
+                <div value="save" class="bouton modif">
+                    <i class="icon-save"></i>
+                    <span>Enregistrer</span>
+                </div>
+                <div value="cancel" class="bouton classique">
+                    <i class="icon-cancel icon-black"></i>
+                    <span>Annuler</span>
+                </div>
             </div>
 
        </div>
@@ -209,7 +223,11 @@ function detailAideInterne() {
             
         if($aideInterne->avis == null) {
             if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_APPORTER_DECISION)) {
-                $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une d&eacute;cision</div>';
+                $contenu .= '
+                    <div id="updateDecision" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Apporter une d&eacute;cision</span>
+                    </div>';
             }
             $contenu .= '<div id="decision">';
         }
@@ -327,8 +345,14 @@ function detailAideInterne() {
                      </ul>';
     $contenu .= '
         <div class="sauvegarder_annuler">
-            <div class="bouton modif" value="updateDecisionInterne">Enregistrer</div>
-            <div class="bouton classique" value="cancelDecisionInterne">Annuler</div>
+            <div value="updateDecisionInterne" class="bouton modif">
+                <i class="icon-save"></i>
+                <span>Enregistrer</span>
+            </div>
+            <div value="cancelDecisionInterne" class="bouton classique">
+                <i class="icon-cancel icon-black"></i>
+                <span>Annuler</span>
+            </div>
         </div>';
     if($aideInterne->avis == null) {
         $contenu .= '</div>';
@@ -375,8 +399,14 @@ function detailAideInterne() {
                 <input id="commentaireBon" class="contour_field" type="text" title="Commentaire" placeholder="Commentaire">
             </div>
             <div class="sauvegarder_annuler">
-                <div class="bouton modif" value="save">Enregistrer</div>
-                <div class="bouton classique" value="cancel">Annuler</div>
+                <div value="save" class="bouton modif">
+                    <i class="icon-save"></i>
+                    <span>Enregistrer</span>
+                </div>
+                <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                </div>
             </div>
 
            </div>
@@ -611,8 +641,14 @@ function aideExterne() {
                             <input id="montantdemande" class="contour_field" type="text" title="Montant demand&eacute;" placeholder="Montant demand&eacute;">
                         </div>
                         <div class="sauvegarder_annuler">
-                            <div class="bouton modif" value="save">Enregistrer</div>
-                            <div class="bouton classique" value="cancel">Annuler</div>
+                            <div value="save" class="bouton modif">
+                                <i class="icon-save"></i>
+                                <span>Enregistrer</span>
+                            </div>
+                            <div value="cancel" class="bouton classique">
+                                <i class="icon-cancel icon-black"></i>
+                                <span>Annuler</span>
+                            </div>
                         </div>
                    </div>
              </div>';
@@ -730,7 +766,11 @@ function detailAideExterne() {
                     </li></ul>';
         if($aideExterne->avis == null) {
             if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_APPORTER_DECISION)) {
-                $contenu .= '<div class="bouton modif" id="updateDecision">Apporter une d&eacute;cision</div>';
+                $contenu .= '
+                    <div id="updateDecision" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Apporter une d&eacute;cision</span>
+                    </div>';
             }
             $contenu .= '<div id="decision">';
         }
@@ -769,7 +809,14 @@ function detailAideExterne() {
                         </li></ul>
         <div class="sauvegarder_annuler">
             <div class="bouton modif" value="updateDecisionExterne">Enregistrer</div>
-            <div class="bouton classique" value="cancelDecisionExterne">Annuler</div>
+            <div value="updateDecisionExterne" class="bouton modif">
+                <i class="icon-save"></i>
+                <span>Enregistrer</span>
+            </div>
+            <div value="cancelDecisionExterne" class="bouton classique">
+                <i class="icon-cancel icon-black"></i>
+                <span>Annuler</span>
+            </div>
         </div>';
     if($aideExterne->avis == null) {
         $contenu .= '</div>';

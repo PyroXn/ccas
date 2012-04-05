@@ -128,10 +128,10 @@ $(function() {
             if(!$(this).hasClass('checkbox_active')) {
                 $('.checkbox_active').toggleClass('checkbox_active');
                 $(this).toggleClass('checkbox_active');
-                $('.update').css({
+                $('.update[value="updateMembreFoyer"]').css({
                     "display":"block"
                 });
-                $('.update').css({
+                $('.update[value="updateMembreFoyer"]').css({
                     "margin-right":"0"
                 });
             }

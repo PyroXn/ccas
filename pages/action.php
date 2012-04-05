@@ -47,7 +47,11 @@ function action() {
     }
     $contenu .= '</tbody></table></div>';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_ACTION)) {
-        $contenu .= '<div class="bouton ajout" id="createAction">Ajouter une action</div>';
+        $contenu .= '
+            <div id="createAction" class="bouton ajout">
+                <i class="icon-add"></i>
+                <span>Ajouter une action</span>
+            </div>';
     }
     $contenu .= '<div class="formulaire" action="creation_action">
             <h2>Actions</h2>
@@ -73,8 +77,14 @@ function action() {
                     <div class="fleche_bas"> </div>
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
 
            </div>
@@ -101,8 +111,14 @@ function action() {
                     <input id="instruct_edit" class="contour_field" type="text" title="Instructeur" disabled/>
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="edit_action">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="edit_action" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
 
            </div>
