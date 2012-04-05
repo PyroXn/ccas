@@ -1,14 +1,17 @@
 <?php
 
 include_once('./lib/config.php');
+include_once('./pages/graphique.php');
 
+$tab = getLastYear();
+print_r($tab[8]['nb']);
 
-    $retour = '';
-    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accepté'));
-    foreach($aides as $aide) {
-        $retour .= $aide->id;
-    }
-    echo $retour;
+//    $retour = '';
+//    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accepté'));
+//    foreach($aides as $aide) {
+//        $retour .= $aide->id;
+//    }
+//    echo $retour;
 
 //$q = Doctrine_Query::create()
 //                ->from('depense')

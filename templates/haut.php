@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="./templates/glDatePicker.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/form.css" class="switchable" />
         <link rel="stylesheet" type="text/css" href="./templates/ui-lightness/jquery-ui-1.8.18.custom.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./templates/jquery.jqplot.min.css" media="screen" />
         
         <link rel="stylesheet" href="./templates/css/jquery.fileupload-ui.css" />
     </head>

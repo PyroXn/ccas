@@ -71,7 +71,7 @@ function foyerContenu($idFoyer) {
                     <input id="form_4" class="contour_field date" type="text" title="Date de naissance" placeholder="Date de naissance">
                 </div>
                 <div class="select classique" role="select_lien_famille">
-                    <div id="form_5" class="option">'. $lienFamilles[0]->lien .'</div>
+                    <div id="form_5" class="option" value=" ">Lien de famille</div>
                     <div class="fleche_bas"></div>
                 </div>
                 <div class="sauvegarder_annuler">
