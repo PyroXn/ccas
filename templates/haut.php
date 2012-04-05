@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="./templates/glDatePicker.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/form.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/ui-lightness/jquery-ui-1.8.18.custom.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./templates/jquery.jqplot.min.css" media="screen" />
         
 <!--         Bootstrap CSS Toolkit styles 
 <link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap.min.css" />

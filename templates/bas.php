@@ -1,5 +1,4 @@
 
-        <div id="messageJS" class="messageJS"></div>
         <div id="suggestion"></div>
         <div class="formulaire" action="creation_foyer">
             <h2>Foyer</h2>
@@ -29,32 +28,18 @@
             </li>
         </ul>
         <div id="ecran_gris"></div>
-        <script type="text/javascript" src="./js/enhance.js"></script>
         <script type="text/javascript" src="./js/jquery.js"></script>
-        <script type="text/javascript" src="./js/visualize.jQuery.js"></script>
         <script type="text/javascript" src="./js/navigationbar.js"></script>
         <script type="text/javascript" src="./js/search.js"></script>
         <script type="text/javascript" src="./js/jquery.tipsy.js"></script>
         <script type="text/javascript" src="./js/form.js"></script>
         <script type="text/javascript" src="./js/admin.js"></script>
-        <script>
         
-        </script>
-        
-                <script type="text/javascript">
-		// Run capabilities test
-		enhance({
-                                                       loadScripts: [
-				{src: 'js/excanvas.js', iecondition: 'all'},
-				'js/visualize.jQuery.js',
-				'js/example.js'
-			],
-			loadStyles: [
-				'templates/cssvisualize/visualize.css',
-				'templates/cssvisualize/visualize-dark.css'
-			]	
-		});   
-    </script>
+        <script type="text/javascript" src="./js/jqplotPlugins/jquery.jqplot.min.js"></script>
+        <script type="text/javascript" src="./js/jqplotPlugins/jqplot.pointLabels.min.js"></script>
+        <script type="text/javascript" src="./js/jqplotPlugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="./js/jqplotPlugins/jqplot.barRenderer.min.js"></script>
+       
     
     
 <script src="./js/jsUpload/jquery.ui.widget.js"></script>

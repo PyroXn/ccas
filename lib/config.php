@@ -41,6 +41,7 @@ function getDatebyTimestamp($timestamp) {
     return $timestamp == 0 ? '0' : date('d/m/Y', $timestamp);
 }
 
+
 function getAnneeAndMois($arrayTimestamp) {
     $now = explode('/', date('d/m/Y', time()));
     $arrayYear = array();

@@ -348,6 +348,9 @@ function generationHeaderNavigation($mode) {
                 </div>';
             }
                 $retour .= '
+                <div id="tableaubord" class="page_header_link">
+                    <span class="label">Tableau de bord</span>
+                </div>
                 <div id="statistique" class="page_header_link">
                     <span class="label">Statistiques</span>
                 </div>
@@ -423,16 +426,8 @@ function generationHeaderNavigation($mode) {
 
 function accueilContenu() {
     include_once('./pages/graphique.php');
-    $retour = '
-    <script type="text/javascript">
-            $("#graphNewUsager").visualize();
-            $("#graphTypeAction").visualize({type: "bar", height: "150px", width: "700px"});
-            $("#graphTypeAide").visualize();
-    </script>
-        <h2>Tableau de bord</h2>';
-    $retour .= graphNewUsager();
-    $retour .= graphTypeAide();
-    $retour .= graphTypeAction();
+   
+        $retour = '<h2>Accueil</h2>';
         
     return $retour;
 }
