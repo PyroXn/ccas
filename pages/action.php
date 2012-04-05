@@ -6,7 +6,13 @@ function action() {
     $types = Doctrine_Core::getTable('type')->findByCategorie(2); // Type Action
     $instructs = Doctrine_Core::getTable('instruct')->findByInterne(1); // Instruct interne
     $contenu = '<h2>Actions</h2>';
-    
+        if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_ACTION)) {
+        $contenu .= '
+            <div id="createAction" class="bouton ajout">
+                <i class="icon-add"></i>
+                <span>Ajouter une action</span>
+            </div>';
+    }
     $contenu .= '<div><h3><span>Suivi des actions</span></h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
@@ -47,13 +53,7 @@ function action() {
                      </tr>';
     }
     $contenu .= '</tbody></table></div>';
-    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_ACTION)) {
-        $contenu .= '
-            <div id="createAction" class="bouton ajout">
-                <i class="icon-add"></i>
-                <span>Ajouter une action</span>
-            </div>';
-    }
+    
     
     $contenu .= '
         <div class="formulaire" action="creation_action">
