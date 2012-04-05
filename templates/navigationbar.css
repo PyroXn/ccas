@@ -128,9 +128,9 @@
 
 /***CSS SWITCHER***/
 ul#cssSwitch {
-    position: relative;
+/*    position: relative;
     left: 50%;
-    top: 7px;
+    top: 7px;*/
 }
 
 ul#cssSwitch li {
