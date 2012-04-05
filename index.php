@@ -282,7 +282,7 @@ function search() {
     if ($nb != 0) {
         $retour .= '<div class="nb_individu">' . $nb . '</div>';
     } else {
-        $retour .= '<div class="nb_individu">Aucun r&#233;sultat</div>';
+        $retour .= '<div class="nb_individu">Aucun rÃ©sultat</div>';
     }
 
     $i = 1;
@@ -328,8 +328,8 @@ function creationListeByFoyer($idFoyer, $idIndividu) {
 }
 
 /* genere la barre de navigation de la page selon le mode 
- * je pense à plusieurs mode de creation, si on doit générer le menu lorsqu'on click
- * sur un individu (cas le plus commun je pense), mais aussi générer le menu quand 
+ * je pense ï¿½ plusieurs mode de creation, si on doit gï¿½nï¿½rer le menu lorsqu'on click
+ * sur un individu (cas le plus commun je pense), mais aussi gï¿½nï¿½rer le menu quand 
  * on est dans l'administration
  */
 
@@ -368,7 +368,7 @@ function generationHeaderNavigation($mode) {
             if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_GENERALITES)) { 
                 $retour .= '
                     <div id="generalites" class="page_header_link">
-                        <span class="label">G&#233;n&#233;ralit&#233;s</span>
+                        <span class="label">GÃ©nÃ©ralitÃ©</span>
                     </div>';
             }
             if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_BUDGET)) { 

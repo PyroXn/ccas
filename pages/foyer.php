@@ -65,7 +65,7 @@ function foyerContenu($idFoyer) {
                     <input id="form_2" class="contour_field requis" type="text" title="Nom" placeholder="Nom">
                 </div>
                 <div class="input_text">
-                    <input id="form_3" class="contour_field requis" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
+                    <input id="form_3" class="contour_field requis" type="text" title="Prénom" placeholder="Prénom">
                 </div>
                 <div class="input_text">
                     <input id="form_4" class="contour_field date" type="text" title="Date de naissance" placeholder="Date de naissance">
