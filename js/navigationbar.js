@@ -1,7 +1,7 @@
 /*
- * Pour éviter que le style par défaut n?apparaisse furtivement pendant le chargement de la page, 
+ * Pour Ã©viter que le style par dÃ©faut n?apparaisse furtivement pendant le chargement de la page, 
  * il faut placer la condition en dehors de la fonction document ready bien qu?il ne 
- * soit généralement pas recommandé de manipuler le DOM avant le chargement complet du document.
+ * soit gÃ©nÃ©ralement pas recommandÃ© de manipuler le DOM avant le chargement complet du document.
  */
 if($.cookie("css")) {
     $("link.switchable").attr("href",$.cookie("css"));

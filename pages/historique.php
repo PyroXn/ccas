@@ -115,11 +115,11 @@ function creationRecherche($global) {
                     <span><input class="contour_field input_char rechercheHistorique" type="text" columnName="utilisateur" value=""/></span>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">date inf&eacute;rieur &agrave; : </span>
+                    <span class="attribut">date inférieur à : </span>
                     <span><input class="contour_field input_date rechercheHistorique" size="10" type="text" columnName="dateInf" value=""/></span>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">date sup&eacute;rieur &agrave; : </span>
+                    <span class="attribut">date supérieur à : </span>
                     <span><input class="contour_field input_date rechercheHistorique" size="10" type="text" columnName="dateSup" value=""/></span>
                 </div>
             </li>
@@ -203,7 +203,7 @@ function searchHistorique() {
     }
     if(isset ($_POST['action'])) {
         $req .= $premierPassage ? 'typeAction =? ' : 'and typeAction = ? ';
-        $param[] = Historique::getStaticValue(utf8_decode($_POST['action']));
+        $param[] = Historique::getStaticValue($_POST['action']);
         $premierPassage = false;
     }
     if ($req == '') {
@@ -247,7 +247,7 @@ function affichageArchive() {
                 </div>
                 <div class="colonne_classique">
                     <div class="affichage_classique">
-                        <h2>All. Ch&ocirc;mage : </h2>
+                        <h2>All. Chômage : </h2>
                         <div class="aff">'.$q->chomage.'</div>
                     </div>
                     <div class="affichage_classique">
@@ -265,7 +265,7 @@ function affichageArchive() {
                         <div class="aff">'.$q->revenuAlloc.'</div>
                     </div>
                     <div class="affichage_classique">
-                        <h2>RSA Activit&eacute; : </h2>
+                        <h2>RSA Activité : </h2>
                         <div class="aff">'.$q->rsaActivite.'</div>
                     </div>
                     <div class="affichage_classique">
@@ -292,25 +292,25 @@ function affichageArchive() {
             $retour .= '
                 <div class="colonne_classique">
                     <div class="affichage_classique">
-                        <h2>Imp&ocirc;ts revenu : </h2>
+                        <h2>Impôts revenu : </h2>
                         <div class="aff">'.$q->impotRevenu.'</div>
                     </div>
                     <div class="affichage_classique">
-                        <h2>Electricit&eacute; : </h2>
+                        <h2>Electricité : </h2>
                         <div class="aff">'.$q->electricite.'</div>
                     </div>
                     <div class="affichage_classique">
-                        <h2>T&eacute;l&eacute;phonie : </h2>
+                        <h2>Téléphonie : </h2>
                         <div class="aff">'.$q->telephonie.'</div>
                     </div>
                     <div class="affichage_classique">
-                        <h2>Autres D&eacute;penses : </h2>
+                        <h2>Autres Dépenses : </h2>
                         <div class="aff">'.$q->autreDepense.'</div>
                     </div>
                 </div>
                 <div class="colonne_classique">
                     <div class="affichage_classique">
-                        <h2>Imp&ocirc;ts locaux : </h2>
+                        <h2>Impôts locaux : </h2>
                         <div class="aff">'.$q->impotLocaux.'</div>
                     </div>
                     <div class="affichage_classique">
@@ -322,7 +322,7 @@ function affichageArchive() {
                         <div class="aff">'.$q->internet.'</div>
                     </div>
                     <div class="affichage_classique">
-                        <h2>D&eacute;tail : </h2>
+                        <h2>Détail : </h2>
                         <div class="aff">'.$q->natureDepense.'</div>
                     </div>
                 </div>
@@ -336,7 +336,7 @@ function affichageArchive() {
                         <div class="aff">'.$q->eau.'</div>
                     </div>
                     <div class="affichage_classique">
-                        <h2>T&eacute;l&eacute;vision : </h2>
+                        <h2>Télévision : </h2>
                         <div class="aff">'.$q->television.'</div>
                     </div>
                 </div>
@@ -355,15 +355,15 @@ function affichageArchive() {
             $retour .= '
                 <div class="colonne_classique">
                     <div class="affichage_classique">
-                        <h2>Arri&eacute;r&eacute; locatif : </h2>
+                        <h2>Arriéré locatif : </h2>
                         <div class="aff">'.$q->arriereLocatif.'</div>
                     </div>
                     <div class="affichage_classique">
-                        <h2>Arri&eacute;r&eacute; &eacute;lectricit&eacute; : </h2>
+                        <h2>Arriéré électricité : </h2>
                         <div class="aff">'.$q->arriereElectricite.'</div>
                     </div>
                     <div class="affichage_classique">
-                        <h2>Arri&eacute;r&eacute; gaz : </h2>
+                        <h2>Arriéré gaz : </h2>
                         <div class="aff">'.$q->arriereGaz.'</div>
                     </div>
                 </div>

@@ -174,7 +174,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=generateEcranStatique',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
                     $("#tableStatique").html(data);
                 }
@@ -233,7 +233,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=saveTableStatique',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
@@ -250,7 +250,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateaction',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
@@ -432,7 +432,7 @@ $(function() {
                     data: datastring,
                     url: './index.php?p=form',
                     cache: false,
-                    //Succès de la requête
+                    //SuccÃ©s de la requÃªte
                     success: function(data) {
                         console.log("SUCCESS FONCTION PORC");
                         $('#ecran_gris').toggle();
@@ -457,7 +457,7 @@ $(function() {
                                 break;
                             case 'creation_individu':
                                 $("#list_individu").html(data.listeIndividu);
-                                /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
+                                /*Si lenteur possibilitÃ© de ne regÃ©nÃ©rÃ© que la liste et pas tous le contenu*/
                                 $('#contenu').html(data.newIndividu);
                                 break;
                             case 'creation_credit':
@@ -499,7 +499,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateChefDeFamille',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(contenu) {
                     console.log(contenu);
                     $('#contenu').html(contenu);
@@ -522,7 +522,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateressource',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -544,7 +544,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatedepense',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -562,7 +562,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatedepensehabitation',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -583,7 +583,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatedette',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -601,7 +601,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatecontact',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -619,7 +619,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatecaf',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -642,7 +642,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatemutuelle',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -671,7 +671,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatecouverture',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -691,7 +691,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatesituationprofessionnelle',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -713,7 +713,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateSituationScolaire',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -737,7 +737,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateFoyer',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     loc.parent().find('input').attr("disabled","disabled");
                     slideBouton(loc);
@@ -759,7 +759,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateinfoperso',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     console.log('SUCCESS INFO PERSO');
                     loc.parent().find('input').attr("disabled","disabled");
@@ -778,7 +778,7 @@ $(function() {
         $('.input_text').children().val('');
     }
     
-    //permet l'affichage des formulaires flottant entouré de gris
+    //permet l'affichage des formulaires flottant entourÃ© de gris
     function creationForm(x, h, form) {
         console.log("creationForm");
         console.log(form);
@@ -819,7 +819,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=archiveressource',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
                     $('#contenu').html(data);
                 },
@@ -834,7 +834,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=archivedepense',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
                     $('#contenu').html(data);
                 },
@@ -849,7 +849,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=archivedette',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
                     $('#contenu').html(data);
                 },
@@ -873,7 +873,7 @@ $(function() {
             data: datastring,
             url: './index.php?p=deleteIndividu',
             cache: false,
-            //Succès de la requête
+            //SuccÃ©s de la requÃªte
             success: function(data) {
                 $("#list_individu").html(data.listeIndividu);
                 $('#contenu').html(data.contenu);
@@ -1002,7 +1002,7 @@ function searchTableStatique() {
         data: datastring,
         url: './index.php?p=searchTableStatique',
         cache: false,
-        //Succès de la requête
+        //SuccÃ©s de la requÃªte
         success: function(tableStatique) {
             //                console.log(tableStatique);
             $("#contenu_table_statique").html(tableStatique);

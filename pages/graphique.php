@@ -10,7 +10,7 @@ function tableauBord() {
 function graphNewUsager() {
     include_once('./lib/config.php');
     $mois = array('1' => 'Janvier', '2' => 'Fevrier', '3' => 'Mars', '4' => 'Avril', '5' => 'Mai', '6' => 'Juin', '7' => 'Juillet', '8' => 'Ao&ucirc;t', '9' => 'Septembre', '10' => 'Octobre', '11' => 'Novembre', '12' => 'Decembre');
-    $tab = getLastYear(); // On charge le tableau tri�
+    $tab = getLastYear(); // On charge le tableau trié
     $s1 = '[';
     $x = '[';
         
@@ -34,7 +34,7 @@ function graphNewUsager() {
         var ticks = ".$x.";
          
         plot2 = $.jqplot('graphNewUsager', [s1], {
-            title: 'R&eacute;partition annuelle des nouveaux foyers',
+            title: 'Répartition annuelle des nouveaux foyers',
             seriesDefaults: {
                 renderer:$.jqplot.BarRenderer,
                 pointLabels: { show: true }
@@ -65,7 +65,7 @@ function graphNewUsager() {
 //    $retour .= '
 //            <div class="colonne">
 //                <table id="graphNewUsager" class="hide">
-//                    <caption>R&eacute;partition des nouveaux usagers en ' . date('Y') . '</caption>
+//                    <caption>Répartition des nouveaux usagers en ' . date('Y') . '</caption>
 //                    <thead>
 //                        <tr>
 //                            <td></td>';
@@ -122,7 +122,7 @@ function graphTypeAction() {
         var ticks = ".$x.";
          
         plot2 = $.jqplot('graphTypeAction', [s1], {
-            title: 'R&eacute;partition des actions les plus utilis&eacute;s',
+            title: 'Répartition des actions les plus utilisés',
             seriesDefaults: {
                 renderer:$.jqplot.BarRenderer,
                 pointLabels: { show: true }
@@ -198,7 +198,7 @@ function graphTypeAideInterne() {
         var ticks = ".$x.";
 
     plot2 = $.jqplot('graphTypeAideInterne', [s1, s2], {
-        title: 'R&eacute;partition des aides les plus demand&eacute;s, par sexe',
+        title: 'Répartition des aides les plus demandés, par sexe',
         seriesDefaults: {
             renderer:$.jqplot.BarRenderer,
             pointLabels: { show: true }
@@ -264,7 +264,7 @@ INNER JOIN individu i on i.id = ai.idindividu
 ORDER BY homme+femme DESC
 LIMIT 6");
     $result = $st->fetchAll();
-//    $typeAides = Doctrine_Core::getTable('type')->findByCategorie(1); // Libell� aide interne
+//    $typeAides = Doctrine_Core::getTable('type')->findByCategorie(1); // Libellé aide interne
 //    foreach ($typeAides as $aide) {
 //        $nbAide = Doctrine_Core::getTable('aideinterne')->findByIdAideDemandee($aide->id);
 //        $con = Doctrine_Manager::getInstance()->connection();

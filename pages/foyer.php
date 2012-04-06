@@ -116,7 +116,7 @@ function generateInfoFoyer($foyer) {
             <ul class="list_classique">
                 <li class="ligne_list_classique">
                     <div class="colonne">
-                        <span class="attribut">N&deg; :</span>
+                        <span class="attribut">N° :</span>
                         <span><input type="text" class="contour_field input_num" id="numrue" value="'.$foyer->numRue.'" disabled/></span>
                     </div>
                     <div class="colonne">
@@ -155,7 +155,7 @@ $retour .= '<div class="fleche_bas"> </div>
                         <span><input class="contour_field input_num" type="text" id="surface" value="'.$foyer->logSurface.'" disabled/></span>
                   </div>
                   <div class="colonne">
-                        <span class="attribut">Date d\'entr&eacute;e :</span>
+                        <span class="attribut">Date d\'entrée :</span>
                         <span><input class="contour_field input_date" type="text" id="dateentree" size="10" value="'.getDatebyTimestamp($foyer->logDateArrive).'" disabled/></span>
                   </div>
                </li>
@@ -300,25 +300,25 @@ function situationFinanciere($idFoyer) {
                 $totalCredit = $totalCredit + $credit->mensualite;
             }
     }
-        $contenu = '<div><h3>Situation financi&egrave;re de la famille</h3>';
+        $contenu = '<div><h3>Situation financière de la famille</h3>';
         $contenu .= '
             <ul class="list_classique">
                     <li class="ligne_list_classique">
                         <div class="colonne">
                             <span class="attribut">Total ressources :</span>
-                            <span>'.$totalRessource.'&euro;</span>
+                            <span>'.$totalRessource.'€</span>
                         </div>
                         <div class="colonne">
-                            <span class="attribut">Total d&eacute;penses :</span>
-                            <span>'.$totalDepense.'&euro;</span>
+                            <span class="attribut">Total dépenses :</span>
+                            <span>'.$totalDepense.'€</span>
                         </div>
                         <div class="colonne">
                             <span class="attribut">Total dettes :</span>
-                            <span>'.$totalDette.'&euro;</span>
+                            <span>'.$totalDette.'€</span>
                         </div>
                         <div class="colonne">
                             <span class="attribut">Total credits :</span>
-                            <span>'.$totalCredit.'&euro;</span>
+                            <span>'.$totalCredit.'€</span>
                         </div>
                     </li>
             </ul>

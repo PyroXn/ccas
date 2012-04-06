@@ -3,7 +3,7 @@ function generalite() {
     include_once('./lib/config.php');
     $user = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     
-    $contenu = '<h2>G&eacute;n&eacute;ralit&eacute;s</h2>';
+    $contenu = '<h2>Généralités</h2>';
     $contenu .= afficherInfoPerso($user);
     $contenu .= afficherContact($user);
     $contenu .= afficherSituationPro($user);
@@ -42,7 +42,7 @@ $retour .= '<div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
-                        <span class="attribut">Nationalit&eacute; :</span>
+                        <span class="attribut">Nationalité :</span>
                         <div class="select classique" role="select_natio" disabled>';
 $retour .= $user->idNationalite == null || $user->idNationalite == ' ' ? '<div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.$user->nationalite->nationalite.'</div>';  
 $retour .= '<div class="fleche_bas"> </div>
@@ -87,7 +87,7 @@ return $retour;
 function afficherContact($user) {
     $retour = '
     <div>
-        <h3><span>T&eacute;l&egrave;phone / Email</span> ';
+        <h3><span>Télèphone / Email</span> ';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_GENERALITES)) { 
         $retour .= '<span class="edit"></span>';
     }
@@ -95,7 +95,7 @@ function afficherContact($user) {
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">
-                    <span class="attribut">T&eacute;l&eacute;phone :</span>
+                    <span class="attribut">Téléphone :</span>
                     <span><input class="contour_field input_char" type="text" id="telephone" value="'.$user->telephone.'" disabled/></span>
                 </div>
                 <div class="colonne">
@@ -146,13 +146,13 @@ $retour .= '
                     <span><input class="contour_field input_date" size="10" type="text" id="dateinscriptionpe" value="'.getDatebyTimestamp($user->dateInscriptionPe).'" disabled/></span>
                 </div>
                 <div class="colonne_large">
-                    <span class="attribut">N&deg; dossier P.E :</span>
+                    <span class="attribut">N° dossier P.E :</span>
                     <span><input class="contour_field input_char" type="text" id="numdossierpe" value="'.$user->numDossierPe.'" disabled/></span>
                 </div>
             </li>    
             <li class="ligne_list_classique">
                 <div class="colonne_large">
-                    <span class="attribut">D&eacute;but droits P.E :</span>
+                    <span class="attribut">Début droits P.E :</span>
                     <span><input class="contour_field input_date" size="10" type="text" id="datedebutdroitpe" value="'.getDatebyTimestamp($user->dateDebutDroitPe).'" disabled/></span>
                 </div>
                 <div class="colonne_large">
@@ -181,7 +181,7 @@ function afficherSituationScolaire($user) {
         <ul class="list_classique">
             <li class="ligne_list_classique" >
                 <div class="colonne_large">
-                    <span class="attribut">actuellement scolaris&eacute; :</span>';
+                    <span class="attribut">actuellement scolarisé :</span>';
                         if($user->scolarise == 1) {
                             $retour .= '<span id="checkboxScolarise" class="checkbox checkbox_active" value="1"></span>';
                         } else {
@@ -196,7 +196,7 @@ function afficherSituationScolaire($user) {
             }
     $retour .='<li class="ligne_list_classique">
                     <div class="colonne_large">
-                        <span class="attribut">&Eacute;tablissement :</span>
+                        <span class="attribut">établissement :</span>
                         <span><input class="contour_field input_char" type="text" id="etablissementscolaire" value="'.$user->etablissementScolaire.'" disabled/></span>
                     </div>
                 </li>
@@ -218,7 +218,7 @@ function afficherSituationScolaire($user) {
             }
     $retour .='<li class="ligne_list_classique">
                     <div class="colonne_large">
-                        <span class="attribut">Niveau &eacute;tude :</span>
+                        <span class="attribut">Niveau étude :</span>
                         <div class="select classique" role="select_etude" disabled>';
     $retour .= $user->idNiveauEtude == null || $user->idNiveauEtude == ' ' ? '<div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
     $retour .= '
@@ -249,7 +249,7 @@ function afficherCouvertureSocial($user) {
         <ul class="list_classique">
             <li class="ligne_list_classique">
                 <div class="colonne">
-                    <span class="attribut">Assur&eacute; : </span>';
+                    <span class="attribut">Assuré : </span>';
     if($user->assure == 1) {
         $retour .= '<span id="assure" class="checkbox checkbox_active" value="1"></span>';
     } else {
@@ -258,12 +258,12 @@ function afficherCouvertureSocial($user) {
                     
     $retour .= '</div>
                 <div class="colonne">
-                    <span class="attribut">N&deg; :</span>
+                    <span class="attribut">N° :</span>
                     <span><input maxlength="13" class="contour_field input_numsecu" type="text" id="numsecu" value="'.$user->numSecu.'" size="13" disabled/></span>
                     <span><input maxlength="2" class="contour_field input_cle" type="text" id="clefsecu" value="'.$user->clefSecu.'" size="2" disabled/></span>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">R&eacute;gime :</span>
+                    <span class="attribut">Régime :</span>
                     <div class="select classique" role="select_regime" disabled>';
 $retour .= $user->regime == null || $user->regime == ' ' ? '<div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.$user->regime.'</div>';                   
 $retour .= '<div class="fleche_bas"> </div>
@@ -288,7 +288,7 @@ $retour .= '<div class="fleche_bas"> </div>
     $retour .= '
                 </div>
                 <div class="colonne">
-                    <span class="attribut">Date d&eacute;but droit :</span>
+                    <span class="attribut">Date début droit :</span>
                     <span><input class="contour_field input_date" size="10" type="text" id="datedebutcouvsecu" value="'.getDatebyTimestamp($user->dateDebutCouvSecu).'" disabled/></span>
                 </div>
                 <div class="colonne">
@@ -331,11 +331,11 @@ if($user->CMUC == 1) {
 $retour .= '
                 </div>
                 <div class="colonne">
-                    <span class="attribut">N&deg; adh&eacute;rent :</span>
+                    <span class="attribut">N° adhérent :</span>
                     <span><input class="contour_field input_char" type="text" id="numadherentmut" value="'.$user->numAdherentMut.'" disabled/></span>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">Date d&eacute;but :</span>
+                    <span class="attribut">Date début :</span>
                     <span><input class="contour_field input_date" size="10" type="text" id="datedebutcouvmut" value="'.getDatebyTimestamp($user->dateDebutCouvMut).'" disabled/></span>
                 </div>
                 <div class="colonne">
@@ -371,7 +371,7 @@ $retour .= '<div class="fleche_bas"> </div>
                     </div>
                 </div>
                 <div class="colonne">
-                    <span class="attribut">N&deg; allocataire :</span>
+                    <span class="attribut">N° allocataire :</span>
                     <span><input class="contour_field input_char" type="text" id="numallocatairecaf" value="'.$user->numAllocataireCaf.'" disabled/></span>
                 </div>
             </li>
@@ -416,7 +416,7 @@ function updateContact() {
     $individu->save();
     
     include_once('./pages/historique.php');
-    createHistorique(Historique::$Modification, 't&eacute;l&eacute;phone / email', $_SESSION['userId'], $_POST['idIndividu']);
+    createHistorique(Historique::$Modification, 'téléphone / email', $_SESSION['userId'], $_POST['idIndividu']);
 }
 
 function updateSituationProfessionnelle() {
@@ -571,7 +571,7 @@ function creationComboBox() {
                 <div value="Local">Local</div>
             </li>
             <li>
-                <div value="G&eacute;n&eacute;ral">G&eacute;n&eacute;ral</div>
+                <div value="Général">Général</div>
             </li>
         </ul>';
     

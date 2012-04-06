@@ -22,7 +22,7 @@ function action() {
                       <th>Date</th>
                       <th>Actions</th>
                       <th>Motif</th>
-                      <th>Suite &agrave; donner</th>
+                      <th>Suite à donner</th>
                       <th>Suite donnee</th>
                       <th>Instructeur</th>
                       <th></th>
@@ -49,7 +49,7 @@ function action() {
     }
     if($i == 1) {
         $contenu .=  '<tr>
-                         <td colspan="7" align="center">< Aucune action n\'a &eacute;t&eacute; &eacute;ffectu&eacute;e > </td>
+                         <td colspan="7" align="center">< Aucune action n\'a été éffectuée > </td>
                      </tr>';
     }
     $contenu .= '</tbody></table></div>';
@@ -70,10 +70,10 @@ function action() {
                     <input id="motif" class="contour_field requis" type="text" title="Motif" placeholder="Motif">
                 </div>
                 <div class="input_text">
-                    <input id="suiteadonner" class="contour_field" type="text" title="Suite &agrave; donner" placeholder="Suite &agrave; donner">
+                    <input id="suiteadonner" class="contour_field" type="text" title="Suite à donner" placeholder="Suite à donner">
                 </div>
                 <div class="input_text">
-                    <input id="suitedonnee" class="contour_field" type="text" title="Suite donn&eacute;e" placeholder="Suite donn&eacute;e">
+                    <input id="suitedonnee" class="contour_field" type="text" title="Suite donnée" placeholder="Suite donnée">
                 </div>
                 <div class="select classique" role="select_instruct">
                     <div id="instruct" class="option">Instructeur</div>
@@ -104,10 +104,10 @@ function action() {
                     <input id="motif_edit" class="contour_field" type="text" title="Motif">
                 </div>
                 <div class="input_text">
-                    <input id="suiteadonner_edit" class="contour_field" type="text" title="Suite &agrave; donner">
+                    <input id="suiteadonner_edit" class="contour_field" type="text" title="Suite à donner">
                 </div>
                 <div class="input_text">
-                    <input id="suitedonnee_edit" class="contour_field" type="text" title="Suite donn&eacute;e">
+                    <input id="suitedonnee_edit" class="contour_field" type="text" title="Suite donnée">
                 </div>
                 <div class="input_text">
                     <input id="instruct_edit" class="contour_field" type="text" title="Instructeur" disabled/>

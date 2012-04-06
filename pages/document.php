@@ -3,8 +3,8 @@
 function getDocumentIndividu() {
     
     $dir_nom = './document/'.$_POST['idIndividu'];
-    $dir = opendir($dir_nom) or die('Erreur de listage : le répertoire n\'existe pas'); // on ouvre le contenu du dossier courant
-    $fichier= array(); // on déclare le tableau contenant le nom des fichiers
+    $dir = opendir($dir_nom) or die('Erreur de listage : le rÃ©pertoire n\'existe pas'); // on ouvre le contenu du dossier courant
+    $fichier= array(); // on dÃ©clare le tableau contenant le nom des fichiers
     $arrayExtension = array();
     while($element = readdir($dir)) {
             if($element != '.' && $element != '..') {
@@ -23,8 +23,8 @@ function getDocumentIndividu() {
                         <tr class="header">
                             <th>Nom document</th>
                             <th>Type fichier</th>
-                            <th>Date dernière modification</th>
-                            <th>Télécharger</th>
+                            <th>Date derniÃ©re modification</th>
+                            <th>TÃ©lÃ©charger</th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -57,7 +57,7 @@ function getDocumentIndividu() {
         }
     } else {
         $contenu .= '<tr>
-                         <td colspan=9 align=center>< Aucune document n\'a été attribué à cet individu > </td>
+                         <td colspan=9 align=center>< Aucune document n\'a Ã©tÃ© attribuÃ© Ã  cet individu > </td>
                      </tr>';
     }
 

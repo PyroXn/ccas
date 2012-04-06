@@ -405,10 +405,10 @@ function generationHeaderNavigation($mode) {
         case 'admin' :
             $retour .= '
                 <div id="managerole" href="#" class="page_header_link active">
-                    <span class="label">G&eacute;rer les r&ocirc;les</span>
+                    <span class="label">Gérer les rôles</span>
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
-                    <span class="label">G&eacute;rer les utilisateurs</span>
+                    <span class="label">Gérer les utilisateurs</span>
                 </div>';
             break;
         case 'config' :

@@ -49,256 +49,256 @@
 include 'lib/config.php';
 
 // Si elle existe, supprimez la base existante.
-// Attention, cela vide totalement la base de données !
+// Attention, cela vide totalement la base de donnÃ©es !
 Doctrine_Core::dropDatabases();
 
-// Création de la base (uniquement si elle n'EXISTE PAS)
+// CrÃ©ation de la base (uniquement si elle n'EXISTE PAS)
 Doctrine_Core::createDatabases();
 try {
-	$table = Doctrine_Core::getTable('Bailleur'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Bailleur'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Decideur'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Decideur'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Etude'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Etude'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Foyer'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Foyer'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Individu'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Individu'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Instruct'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Instruct'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('LienFamille'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('LienFamille'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Nationalite'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Nationalite'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Profession'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Profession'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Rue'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Rue'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Secteur'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Secteur'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('SituationMatri'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('SituationMatri'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Type'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Type'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('User'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('User'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Ville'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Ville'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('AideExterne'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('AideExterne'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('AideInterne'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('AideInterne'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('ressource'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('ressource'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Dette'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Dette'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Depense'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Depense'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Credit'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Credit'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Organisme'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Organisme'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('LibelleOrganisme'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('LibelleOrganisme'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('Action'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('Action'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('BonAide'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('BonAide'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('historique'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('historique'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 try {
-	$table = Doctrine_Core::getTable('role'); // On récupère l'objet de la table.
+	$table = Doctrine_Core::getTable('role'); // On rÃ©cupÃ©re l'objet de la table.
 	$connexion->export->createTable($table->getTableName(), 
-		                           $table->getColumns()); // Puis, on la crée.
-        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
-} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+		                           $table->getColumns()); // Puis, on la crÃ©e.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien Ã©tÃ© crÃ©Ã©e</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancÃ©e.
 	echo $e->getMessage(); // On l'affiche.
 }
 
 if(executeQueryFile('./ccasClean.sql')) {
-    echo '<b>Table restaurée</b>';
+    echo '<b>Table restaurÃ©e</b>';
 } else {
     echo '<b>Table bug</b>';
 }

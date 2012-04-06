@@ -3,7 +3,6 @@
 class Foyer extends Doctrine_Record {
 
     public function setTableDefinition() {
-        // On définit le nom de notre table : « news ».
         $this->setTableName('foyer');
 
         //Puis, tous les champs

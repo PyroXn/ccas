@@ -2,7 +2,7 @@
 
 require_once './lib/Doctrine.php';
 spl_autoload_register(array('Doctrine_Core', 'autoload'));
-Doctrine_Core::loadModels('./modeles/'); //demande d'inclure les modèles se situant dans le dossier indiqué. 
+Doctrine_Core::loadModels('./modeles/'); //demande d'inclure les modï¿½les se situant dans le dossier indiquï¿½. 
 //
 //$cfg = 'modeles';
 //$dossier = opendir($cfg);
@@ -20,8 +20,8 @@ $connexion->setCharset('utf8');
 
 /**
  *
- * @param type $level Indiquer l'autorisation spécifique : 0010 - 1000 - 0100 - 0001
- * @return Vrai si user autorisé
+ * @param type $level Indiquer l'autorisation spï¿½cifique : 0010 - 1000 - 0100 - 0001
+ * @return Vrai si user autorisï¿½
  */
 function isAuthorized($level) {
     $find = false;
@@ -50,9 +50,9 @@ function getAnneeAndMois($arrayTimestamp) {
     for($i=0; $i < count($arrayTimestamp); $i++) { // On parcourt tout les foyers
         $date = explode('/', date('d/n/Y', $arrayTimestamp[$i]));
         if($date[2] == '1970') {
-            $date[2] = 'Aucunes donn&eacute;es';
+            $date[2] = 'Aucunes donnÃ©es';
         }
-        if(!in_array($date[2], $arrayYear)) { // année
+        if(!in_array($date[2], $arrayYear)) { // annï¿½e
             $arrayYear[] = $date[2];
             $nb[$date[2]] = 1;
             sort($arrayYear, SORT_NUMERIC);
