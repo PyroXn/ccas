@@ -9,9 +9,9 @@ class Action extends Doctrine_Record {
             'autoincrement' => true));
         $this->hasColumn('date', 'integer', 20, array('default' => '0'));
         $this->hasColumn('idAction', 'integer', 5, array('default' => '0'));
-        $this->hasColumn('motif', 'string', 150, array('default' => ' '));
-        $this->hasColumn('suiteADonner', 'string', 150, array('default' => ' '));
-        $this->hasColumn('suitedonnee', 'string', 150, array('default' => ' '));
+        $this->hasColumn('motif', 'string', 150, array('notnull' => true, 'default' => ''));
+        $this->hasColumn('suiteADonner', 'string', 150, array('notnull' => true, 'default' => ''));
+        $this->hasColumn('suitedonnee', 'string', 150, array('notnull' => true, 'default' => ''));
         $this->hasColumn('idInstruct', 'integer', 5, array('default' => '0'));
         $this->hasColumn('idIndividu', 'integer', 5, array('default' => '0'));
         $this->option('orderBy', 'id DESC');

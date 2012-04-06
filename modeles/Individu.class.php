@@ -12,31 +12,31 @@ class Individu extends Doctrine_Record
         $this->hasColumn('civilite', 'string', 50);
         $this->hasColumn('nom', 'string', 50);
         $this->hasColumn('prenom', 'string', 50);
-        $this->hasColumn('nomMarital', 'string', 50,array('default' => ' '));
-        $this->hasColumn('nomUsage', 'string', 50,array('default' => ' '));
+        $this->hasColumn('nomMarital', 'string', 50,array('notnull' => true, 'default' => ''));
+        $this->hasColumn('nomUsage', 'string', 50,array('notnull' => true, 'default' => ''));
         $this->hasColumn('chefDeFamille', 'boolean', 1, array('default' => '0'));
         $this->hasColumn('dateNaissance', 'integer', 50,array('default' => '0'));
-        $this->hasColumn('sexe', 'string', 10,array('default' => ' '));
-        $this->hasColumn('telephone', 'string', 50, array('default' => ' '));
-        $this->hasColumn('portable', 'string', 50,array('default' => ' '));
-        $this->hasColumn('email', 'string', 50,array('default' => ' '));
+        $this->hasColumn('sexe', 'string', 10,array('notnull' => true, 'default' => ''));
+        $this->hasColumn('telephone', 'string', 50, array('notnull' => true, 'default' => ''));
+        $this->hasColumn('portable', 'string', 50,array('notnull' => true, 'default' => ''));
+        $this->hasColumn('email', 'string', 50,array('notnull' => true, 'default' => ''));
         $this->hasColumn('assure', 'boolean', 1,array('default' => '0'));
         $this->hasColumn('numSecu', 'integer', 20,array('default' => '0'));
         $this->hasColumn('clefSecu', 'integer', 10,array('default' => '0'));
-        $this->hasColumn('regime', 'string', 50,array('default' => ' '));
+        $this->hasColumn('regime', 'string', 50,array('notnull' => true, 'default' => ''));
         $this->hasColumn('cmu', 'boolean', 1,array('default' => '0'));
         $this->hasColumn('dateDebutCouvSecu', 'integer', 50,array('default' => '0'));
         $this->hasColumn('dateFinCouvSecu', 'integer', 50,array('default' => '0'));
-        $this->hasColumn('numAdherentMut', 'string', 50, array('default' => ''));
+        $this->hasColumn('numAdherentMut', 'string', 50, array('notnull' => true, 'default' => ''));
         $this->hasColumn('dateDebutCouvMut', 'integer', 50,array('default' => '0'));
         $this->hasColumn('dateFinCouvMut', 'integer', 50, array('default' => '0'));
         $this->hasColumn('CMUC', 'boolean', 1,array('default' => '0'));
-        $this->hasColumn('employeur', 'string', 50,array('default' => ''));
+        $this->hasColumn('employeur', 'string', 50,array('notnull' => true, 'default' => ''));
         $this->hasColumn('dateInscriptionPe', 'integer', 50,array('default' => '0'));
         $this->hasColumn('dateDebutDroitPe', 'integer', 50,array('default' => '0'));
         $this->hasColumn('dateFinDroitPe', 'integer', 50, array('default' => '0'));
-        $this->hasColumn('numDossierPe', 'string', 20, array('default' => ' '));
-        $this->hasColumn('numAllocataireCaf', 'string', 20, array('default' => ' '));
+        $this->hasColumn('numDossierPe', 'string', 20, array('notnull' => true, 'default' => ''));
+        $this->hasColumn('numAllocataireCaf', 'string', 20, array('notnull' => true, 'default' => ''));
         $this->hasColumn('idLienFamille', 'integer', 5);               //cle etrangere
         $this->hasColumn('idCaisseCaf', 'integer', 5);            //cle etrangere ==> A FAIRE
         $this->hasColumn('idNiveauEtude', 'integer', 5);          //cle etrangere
@@ -48,7 +48,7 @@ class Individu extends Doctrine_Record
         $this->hasColumn('idVilleNaissance', 'integer', 20);       //cle etrangere
         $this->hasColumn('idFoyer', 'integer', 8);       //cle etrangere
         $this->hasColumn('scolarise', 'boolean', 1,array('default' => '0'));        
-        $this->hasColumn('etablissementScolaire', 'string', 50,array('default' => ' '));        
+        $this->hasColumn('etablissementScolaire', 'string', 50,array('notnull' => true, 'default' => ''));        
         
         $this->option('orderBy', 'nom ASC');
     }

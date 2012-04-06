@@ -21,7 +21,7 @@ class Depense extends Doctrine_Record {
         $this->hasColumn('assurance', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('credit', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('autreDepense', 'float', null, array('type' => 'float', 'default' => 0));
-        $this->hasColumn('natureDepense', 'string', 150, array('default' => ' '));
+        $this->hasColumn('natureDepense', 'string', 150, array('notnull' => true, 'default' => ''));
         $this->hasColumn('loyer', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('idIndividu', 'integer', 5);
         $this->hasColumn('dateCreation', 'integer', 20, array('default' => '0'));

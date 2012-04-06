@@ -8,7 +8,7 @@ class Historique extends Doctrine_Record {
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
         $this->hasColumn('typeAction', 'integer', 3, array('default' => '0'));
-        $this->hasColumn('objet', 'string', 255, array('default' => ' '));
+        $this->hasColumn('objet', 'string', 255, array('notnull' => true, 'default' => ''));
         $this->hasColumn('date', 'integer', 50, array('default' => '0'));
         $this->hasColumn('idUser', 'integer', 5);
         $this->hasColumn('idIndividu', 'integer', 5);
