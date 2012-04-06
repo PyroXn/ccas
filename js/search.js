@@ -251,14 +251,6 @@ $(function() {
             $('#suggestion').css("display", "none");
         }
     });
-        
-    $('.autoComplete').live("click", function() {
-        $(this).attr('autocomplete', 'off');
-    });
-        
-    $('.autoComplete').live("blur", function()  {
-        $('#suggestion').css("display", "none");
-    });
     
     $('.liste_suggestion > li').live("click", function() {
         var focus = $(this);
