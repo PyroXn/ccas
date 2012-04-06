@@ -328,8 +328,8 @@ function creationListeByFoyer($idFoyer, $idIndividu) {
 }
 
 /* genere la barre de navigation de la page selon le mode 
- * je pense � plusieurs mode de creation, si on doit g�n�rer le menu lorsqu'on click
- * sur un individu (cas le plus commun je pense), mais aussi g�n�rer le menu quand 
+ * je pense à plusieurs mode de creation, si on doit générer le menu lorsqu'on click
+ * sur un individu (cas le plus commun je pense), mais aussi générer le menu quand 
  * on est dans l'administration
  */
 

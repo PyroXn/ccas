@@ -9,7 +9,7 @@ class Instruct extends Doctrine_Record {
         $this->hasColumn('nom', 'string', 255, array('default' => ' '));
         $this->hasColumn('adresse', 'string', 255, array('default' => ' '));
         $this->hasColumn('telephone', 'string', 15, array('default' => ' '));
-        $this->hasColumn('interne', 'boolean', 1, array('default' => '0')); // Booléen : 1 : interne ; 0 : externe
+        $this->hasColumn('interne', 'boolean', 1, array('default' => '0')); // BoolÃ©en : 1 : interne ; 0 : externe
         }
 }
 ?>
