@@ -110,14 +110,20 @@ $(function() {
         if (!$(this).attr('disabled')) {
             //permet de generaliser sur tous les select
             var attr = '.'+$(this).attr('role');
-            console.log(attr);
+            
+            $(attr).toggle();
             var x = $(this).offset();
             var h = $(this).outerHeight();
-            $(attr).toggle();
+            var l = $(this).outerWidth();
+            //les -2 correspondent à la bordure de 1px de chacun des 2 cotés
+            $(attr).css("min-width", l-2);
+            var lAttr = $(attr).outerWidth();
+            console.log(attr);
             $(attr).offset({
                 top:x.top+h,
-                left:x.left
+                left:x.left+l-lAttr
             });
+            
             $(this).children('.option').toggleClass('en_attente');
             $(attr).toggleClass('en_execution');
         }
@@ -139,14 +145,7 @@ $(function() {
     });
     
     $('#checkboxScolarise').live("click", function(){
-        if ($(this).hasClass("checkbox_active")) {
-            $(".scolarise").hide();
-            $(".nonscolarise").fadeIn(500);
-        }
-        else {
-            $(".nonscolarise").hide();
-            $(".scolarise").fadeIn(500);
-        }
+        $('#ligneScolaire').toggleClass('nonscolarise');
     });
     
     $('.checkbox').live("click", function(){
@@ -524,7 +523,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -546,7 +545,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -564,7 +563,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -585,7 +584,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -603,7 +602,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -621,7 +620,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -644,7 +643,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -673,7 +672,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -693,7 +692,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -715,7 +714,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -739,7 +738,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -762,7 +761,7 @@ $(function() {
                 //Succés de la requête
                 success: function() {
                     console.log('SUCCESS INFO PERSO');
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -771,6 +770,7 @@ $(function() {
             });
         }
     });
+    
     
     
     
@@ -794,14 +794,17 @@ $(function() {
     }
     
     $('.edit').live("click", function() {
-        console.log($(this).parent().next().children().find('input').attr('disabled'));
         var attr = $(this).parent().next().children().find('input').attr('disabled');
         if (typeof attr !== 'undefined' && attr !== false) {
             $(this).parent().next().children().find('input').removeAttr('disabled');
             $(this).parent().next().children().find('[class^=select]').removeAttr('disabled');
+            $(this).parent().next().children().find('textarea').removeAttr('disabled');
+            $(this).parent().next().children().find('[class^=checkbox]').removeAttr('disabled');
         } else {
             $(this).parent().next().children().find('input').attr('disabled','');
             $(this).parent().next().children().find('[class^=select]').attr('disabled','');
+            $(this).parent().next().children().find('textarea').attr('disabled','');
+            $(this).parent().next().children().find('[class^=checkbox]').attr('disabled','');
         }
         var update = $(this).parent().parent().children('.update');
         slideBouton(update);
@@ -983,6 +986,13 @@ $(function() {
            
     });
 });
+
+function relockAll(loc) {
+    loc.parent().find('input').attr('disabled','');
+    loc.parent().find('[class^=select]').attr('disabled','');
+    loc.parent().find('textarea').attr('disabled','');
+    loc.parent().find('[class^=checkbox]').attr('disabled','');
+}
 
 function searchTableStatique() {
     var datastring = 'table=' + $('#ligneRechercheTableStatique').attr('table');

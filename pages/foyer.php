@@ -126,57 +126,62 @@ function generateInfoFoyer($foyer) {
                     <div class="colonne">
                         <span class="attribut">Secteur :</span>
                         <div class="select classique" role="select_secteur" disabled>';
-    $retour .= $foyer->idSecteur == null || $foyer->idSecteur == ' ' ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
-    $retour .= '<div class="fleche_bas"> </div>
+    $retour .= verifieValeurNull($foyer->idSecteur) ? '
+                            <div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
+    $retour .= '            <div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Ville :</span>
                         <span><input type="text" class="contour_field input_char autoComplete" id="ville" table="ville" champ="libelle" value="'.$foyer->ville->libelle.'" valeur="'.$foyer->ville->id.'" disabled/></span>
                     </div>
-               </li>
-               <li class="ligne_list_classique">
                     <div class="colonne">
                         <span class="attribut">Type :</span>
                         <div class="select classique" role="select_typelogement" disabled>';
-$retour .= $foyer->typeLogement == null || $foyer->typeLogement == ' ' ? '<div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
-$retour .= '<div class="fleche_bas"> </div>
-                </div>
-                </div>
+$retour .= verifieValeurNull($foyer->typeLogement) ? '
+                            <div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
+$retour .= '                <div class="fleche_bas"> </div>
+                        </div>
+                    </div>
+                </li>
+               <li class="ligne_list_classique">
                    <div class="colonne">
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statutlogement" disabled>';
-$retour .= $foyer->typeAppartenance == null || $foyer->typeAppartenance == ' ' ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
-$retour .= '<div class="fleche_bas"> </div>
+$retour .= verifieValeurNull($foyer->typeAppartenance) ? '
+                            <div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
+$retour .= '                <div class="fleche_bas"> </div>
+                        </div>
                     </div>
-                   </div>
-                   <div class="colonne">
+                    <div class="colonne">
                         <span class="attribut">Surface :</span>
                         <span><input class="contour_field input_num" type="text" id="surface" value="'.$foyer->logSurface.'" disabled/></span>
-                  </div>
-                  <div class="colonne">
+                    </div>
+                    <div class="colonne">
                         <span class="attribut">Date d\'entrée :</span>
-                        <span><input class="contour_field input_date" type="text" id="dateentree" size="10" value="'.getDatebyTimestamp($foyer->logDateArrive).'" disabled/></span>
-                  </div>
-               </li>
-               <li class="ligne_list_classique">
+                        <span><input class="contour_field input_date" type="text" id="dateentree" size="10" '.getDatebyTimestampInput($foyer->logDateArrive).' disabled/></span>
+                    </div>
                     <div class="colonne">
                         <span class="attribut">Bailleur :</span>
                         <div class="select classique" role="select_bailleur" disabled>';
-$retour .= $foyer->idBailleur == null || $foyer->idBailleur == ' ' ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
-$retour .= '<div class="fleche_bas"> </div>
-                    </div>
+$retour .= verifieValeurNull($foyer->idBailleur) ? '
+                            <div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
+$retour .= '                <div class="fleche_bas"> </div>
+                        </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Instructeur :</span>
                         <div class="select classique" role="select_instruct" disabled>';
-$retour .= $foyer->idInstruct == null || $foyer->idInstruct == null ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
-$retour .= '<div class="fleche_bas"> </div>
+$retour .= verifieValeurNull($foyer->idInstruct) ? '
+                            <div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
+$retour .= '                <div class="fleche_bas"> </div>
+                        </div>
                     </div>
-                    </div>
+                </li>
+                <li class="ligne_list_classique">
                     <div class="colonne_large">
-                        <span class="attribut_for_large">Note :</span>
-                        <span><input class="contour_field input_char_for_large" type="text" id="note" value="'.$foyer->notes.'" disabled/></span>
+                        <span class="attribut">Note :</span>
+                        <span><textarea class="contour_field input_char" type="text" id="note" disabled>'.$foyer->notes.'</textarea></span>
                     </div>
                </li>
             </ul>';

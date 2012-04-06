@@ -260,7 +260,7 @@ function detailAideInterne() {
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Date décision : </h2>
-                                    <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" value="'.getDatebyTimestamp($aideInterne->dateDecision).'"></div>
+                                    <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideInterne->dateDecision).'></div>
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Vigilance : </h2>
@@ -791,7 +791,7 @@ function detailAideExterne() {
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Date décision : </h2>
-                                    <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" value="'.getDatebyTimestamp($aideExterne->dateDecision).'"></div>
+                                    <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideExterne->dateDecision).'></div>
                                  </div>
                             </div>
                             <div class="colonne_classique">

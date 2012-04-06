@@ -37,6 +37,17 @@ function isAuthorized($level) {
     }
 }
 
+/*
+ * return vrai si == null, 0 ou ''
+ */
+function verifieValeurNull($val) {
+    return $val == null || $val == '' || $val == 0;
+}
+
+function getDatebyTimestampInput($timestamp) {
+    return $timestamp == 0 ? 'placeholder = "jj / mm / aaaa"' : 'value = "'.date('d/m/Y', $timestamp).'"';
+}
+
 function getDatebyTimestamp($timestamp) {
     return $timestamp == 0 ? '0' : date('d/m/Y', $timestamp);
 }

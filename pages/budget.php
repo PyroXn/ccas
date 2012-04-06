@@ -55,55 +55,54 @@ function afficherRessources($ressource) {
     $retour .= '<span class="timemaj">'.getDatebyTimestamp($ressource->dateCreation).'</span></h3>';
     $retour .= '<ul class="list_classique">
                     <li class="ligne_list_classique">
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">Salaire : </span>
                             <span><input class="contour_field input_num" type="text" id="salaire" value="'.$ressource->salaire.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">All. Chômage : </span>
                             <span><input class="contour_field input_num" type="text" id="chomage" value="'.$ressource->chomage.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">All. familiales : </span>
                             <span><input class="contour_field input_num" type="text" id="revenuAlloc" value="'.$ressource->revenuAlloc.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">ASS : </span>
                             <span><input class="contour_field input_num" type="text" id="ass" value="'.$ressource->ass.'" disabled/></span>
                         </div>
-                   </li>
-                   <li class="ligne_list_classique">
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">AAH : </span>
                             <span><input class="contour_field input_num" type="text" id="aah" value="'.$ressource->aah.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                    
+                        <div class="colonne_num">
                             <span class="attribut">RSA Socle : </span>
                             <span><input class="contour_field input_num" type="text" id="rsaSocle" value="'.$ressource->rsaSocle.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                    </li>
+                    <li class="ligne_list_classique">
+                        <div class="colonne_num">
                             <span class="attribut">RSA Activité : </span>
                             <span><input class="contour_field input_num" type="text" id="rsaActivite" value="'.$ressource->rsaActivite.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">Retraite compl  : </span>
                             <span><input class="contour_field input_num" type="text" id="retraitComp" value="'.$ressource->retraitComp.'" disabled/></span>
                         </div>
-                   </li>
-                   <li class="ligne_list_classique">
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">P. alimentaire : </span>
                             <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$ressource->pensionAlim.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">P. de retraite : </span>
                             <span><input class="contour_field input_num" type="text" id="pensionRetraite" value="'.$ressource->pensionRetraite.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">Autres revenus  : </span>
                             <span><input class="contour_field input_num" type="text" id="autreRevenu" value="'.$ressource->autreRevenu.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">Nature : </span>
                             <span><input class="contour_field input_char" type="text" id="natureRevenu" value="'.$ressource->natureAutre.'" disabled/></span>
                         </div>
@@ -131,65 +130,63 @@ function afficherDepenses($depense) {
     $retour .= '<span class="timemaj">'.getDatebyTimestamp($depense->dateCreation).'</span></h3>
             <ul class="list_classique">
                 <li class="ligne_list_classique">
-                    <div class="colonne">
+                    <div class="colonne_num">
                         <span class="attribut">Impôts revenu : </span>
                         <span><input class="contour_field input_num" type="text" id="impotRevenu" value="'.$depense->impotRevenu.'" disabled/></span>
                      </div>
-                    <div class="colonne">
+                    <div class="colonne_num">
                         <span class="attribut">Impôts locaux : </span>
                         <span><input class="contour_field input_num" type="text" id="impotLocaux" value="'.$depense->impotLocaux.'" disabled/></span>
                     </div>
-                    <div class="colonne">
-                    <span class="attribut">P. alimentaire :</span>
-                    <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$depense->pensionAlim.'" disabled/></span>
-                     </div>
-                     <div class="colonne">
-                    <span class="attribut">Mutuelle : </span>
-                    <span><input class="contour_field input_num" type="text" id="mutuelle" value="'.$depense->mutuelle.'" disabled/></span>
+                    <div class="colonne_num">
+                        <span class="attribut">P. alimentaire :</span>
+                        <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$depense->pensionAlim.'" disabled/></span>
                     </div>
-                </li>
-                <li class="ligne_list_classique">
-                    <div class="colonne">
+                    <div class="colonne_num">
+                        <span class="attribut">Mutuelle : </span>
+                        <span><input class="contour_field input_num" type="text" id="mutuelle" value="'.$depense->mutuelle.'" disabled/></span>
+                    </div>
+                    <div class="colonne_num">
                         <span class="attribut">Electricité : </span>
                         <span><input class="contour_field input_num" type="text" id="electricite" value="'.$depense->electricite.'" disabled/></span>
                     </div>
-                    <div class="colonne">
+                    <div class="colonne_num">
                         <span class="attribut">Gaz : </span>
                         <span><input class="contour_field input_num" type="text" id="gaz" value="'.$depense->gaz.'" disabled/></span>
                     </div>
-                    <div class="colonne">
+                </li>
+                <li class="ligne_list_classique">
+                    <div class="colonne_num">
                         <span class="attribut">Eau : </span>
                         <span><input class="contour_field input_num" type="text" id="eau" value="'.$depense->eau.'" disabled/></span>
                     </div>
-                    <div class="colonne">
+                    <div class="colonne_num">
                         <span class="attribut">Chauffage :</span>
                         <span><input class="contour_field input_num" type="text" id="chauffage" value="'.$depense->chauffage.'" disabled/></span>
                     </div>
-               </li>
-               <li class="ligne_list_classique">
-                   <div class="colonne">
+                    <div class="colonne_num">
                         <span class="attribut">Téléphonie : </span>
                         <span><input class="contour_field input_num" type="text" id="telephonie" value="'.$depense->telephonie.'" disabled/></span>
-                   </div>
-                   <div class="colonne">
+                    </div>
+                    <div class="colonne_num">
                         <span class="attribut">Internet : </span>
                         <span><input class="contour_field input_num" type="text" id="internet" value="'.$depense->internet.'" disabled/></span>
-                  </div>
-                  <div class="colonne">
+                    </div>
+                    <div class="colonne_num">
                         <span class="attribut">Télévision : </span>
                         <span><input class="contour_field input_num" type="text" id="television" value="'.$depense->television.'" disabled/></span>
-                   </div>
-               </li>
-               <li class="ligne_list_classique">
-                   <div class="colonne">
+                    </div>
+                    <div class="colonne_num">
                         <span class="attribut">Autres Dépenses : </span>
                         <span><input class="contour_field input_num" type="text" id="autreDepense" value="'.$depense->autreDepense.'" disabled/></span>
-                   </div>
-                   <div class="colonne_large">
-                        <span class="attribut_for_large">Détail : </span>
-                        <span><input class="contour_field  input_char_for_large" type="text" id="natureDepense" value="'.$depense->natureDepense.'" disabled/></span>
-                   </div>
-               </li>
+                    </div>
+                </li>
+                <li class="ligne_list_classique">
+                    <div class="colonne_large">
+                        <span class="attribut">Détail : </span>
+                        <span><textarea class="contour_field  input_char" type="text" id="natureDepense" disabled>'.$depense->natureDepense.'</textarea></span>
+                    </div>
+                </li>
             </ul>
             <div value="updateDepense" class="bouton modif update">
                 <i class="icon-save"></i>

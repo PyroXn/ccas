@@ -412,62 +412,27 @@ legend {
 /*** BUDGET ***/
 .colonne {
     display: inline-block;
-    width: 24%;
+    width: 19%;
 }
 
-.colonne5 {
+.colonne_num {
     display: inline-block;
-    width: 5%;
-}
-
-.colonne10 {
-    display: inline-block;
-    width: 10%;
-}
-
-.colonne15 {
-    display: inline-block;
-    width: 15%;
-}
-
-.colonne20 {
-    display: inline-block;
-    width: 20%;
-}
-
-.colonne40 {
-    display: inline-block;
-    width: 39%;
-}
-
-.colonne50 {
-
-    display: inline-block;
-    width: 49%;
+    width: 16%;
 }
 
 .colonne_large {
     display: inline-block;
     width: 48%;
-}
-
-.attribut_for_large {
-    display: inline-block;
-    width: 25%;
-    font-weight: bold;
-    text-align: right;
-}
-
-.input_char_for_large {
-    width: 70%;
-    padding: 4px 6px;
+    vertical-align: top;
 }
 
 .attribut {
-    display: inline-block;
-    width: 50%;
+    display: block;
+    width: 80%;
+    font-size: 12px;
     font-weight: bold;
-    text-align: right;
+    padding-bottom: 3px;
+/*    text-align: center;*/
 }
 
 .formulaire .attribut {
@@ -479,16 +444,18 @@ legend {
 }
 
 .input_num {
-    width: 20%;
+    width: 80%;
     padding: 4px 6px;
 }
 
 .input_char {
-    width: 42%;
+    width: 80%;
+    max-width: 90%;
     padding: 4px 6px;
 }
 
 .input_date {
+    width: 80%;
     text-align: center;
     padding: 4px 6px;
 }

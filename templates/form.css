@@ -161,7 +161,7 @@
     position: relative;
     display: inline-block;
     padding: 1px 18px 0 6px;
-
+    min-width: 80%;
 }
 
 .option {
@@ -211,7 +211,7 @@
     margin: 0;
     outline: none;
     padding: 6px 0;
-
+    
     max-height: 200px;
     overflow: auto;
 }
@@ -227,7 +227,7 @@
     cursor: pointer;
     list-style: none;
     margin: 0;
-    padding: 6px 7em 6px 30px;
+    padding: 6px 4em 6px 30px;
     white-space: nowrap;
 }
 
@@ -394,4 +394,8 @@ table {
 
 .a_completer {
     border-color: red;
+}
+
+.nonscolarise {
+    display: none;
 }
