@@ -40,10 +40,7 @@ $(function() {
     });
     
     $('#createAction').live("click", function() {
-        var newPosition = new Object();
-        newPosition.left = $(window).width()/2 - $('.formulaire[action="creation_action"]').width()/2;
-        newPosition.top = $(window).height()/2 - $('.formulaire[action="creation_action"]').height();
-        creationForm(newPosition, $(this).outerHeight(), $('.formulaire[action="creation_action"]'));
+        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_action"]'));
     });
 
     $('#newTableGenerique').live("click", function() {
@@ -145,7 +142,9 @@ $(function() {
     });
     
     $('#checkboxScolarise').live("click", function(){
-        $('#ligneScolaire').toggleClass('nonscolarise');
+        if (!$(this).attr('disabled')) {
+            $('#ligneScolaire').toggleClass('nonscolarise');
+        }
     });
     
     $('.checkbox').live("click", function(){
@@ -197,9 +196,16 @@ $(function() {
             $('.en_attente').toggleClass('en_attente');
             $('#ecran_gris').toggle();
             formActuel.find('.requis').each(function(){
-                if ($(this).val() == '') {
-                    traitement = false;
-                    $(this).removeClass('a_completer');
+                if ($(this).is('input')) {
+                    if ($(this).val() == '') {
+                        traitement = false;
+                        $(this).removeClass('a_completer');
+                    }
+                } else if ($(this).hasClass('option')) {
+                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+                        traitement = false;
+                        $(this).parent().removeClass('a_completer');
+                    }
                 }
             });
             formActuel.toggle();
@@ -342,10 +348,22 @@ $(function() {
         else if(value=='save') {
             var traitement = true;
             formActuel.find('.requis').each(function(){
-                if ($(this).val() == '') {
-                    traitement = false;
-                    $(this).toggleClass('a_completer');
+                if ($(this).is('input')) {
+                    if ($(this).val() == '') {
+                        traitement = false;
+                        $(this).addClass('a_completer');
+                    } else {
+                        $(this).removeClass('a_completer');
+                    }
+                } else if ($(this).hasClass('option')) {
+                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+                        traitement = false;
+                        $(this).parent().addClass('a_completer');
+                    } else {
+                        $(this).parent().removeClass('a_completer');
+                    }
                 }
+                
             });
             if (traitement) {
                 //commun a tous les form
@@ -437,9 +455,16 @@ $(function() {
                         $('#ecran_gris').toggle();
                         formActuel.toggle();
                         formActuel.find('.requis').each(function(){
-                            if ($(this).val() == '') {
-                                traitement = false;
-                                $(this).toggleClass('a_completer');
+                            if ($(this).is('input')) {
+                                if ($(this).val() == '') {
+                                    traitement = false;
+                                    $(this).removeClass('a_completer');
+                                }
+                            } else if ($(this).hasClass('option')) {
+                                if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+                                    traitement = false;
+                                    $(this).parent().toggleClass('a_completer');
+                                }
                             }
                         });
                         effacer();

@@ -304,6 +304,10 @@ $retour .= verifieValeurNull($user->idCaisseMut) ? '
                         <div id="mutuelle" class="option" value="">-----</div>' : '<div id="mutuelle" class="option" value="'.$user->idCaisseMut.'">'.$user->mutuelle->appelation.'</div>';                   
 $retour .= '            <div class="fleche_bas"> </div>
                     </div>
+                </div>
+            </li>
+            <li class="ligne_list_classique">
+                <div class="colonne">
                     <span class="attribut">CMUC : </span>';
 if($user->CMUC == 1) {
     $retour .= '<span id="cmuc" class="checkbox checkbox_active" disabled></span>';

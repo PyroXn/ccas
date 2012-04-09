@@ -63,7 +63,7 @@ function action() {
                     <input id="date" class="contour_field requis input_date" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
                 </div>
                 <div class="select classique" role="select_motifaction">
-                    <div id="typeaction" class="option">Type d\'action</div>
+                    <div id="typeaction" class="option requis">Type d\'action</div>
                     <div class="fleche_bas"> </div>
                 </div>
                 <div class="input_text">
@@ -76,7 +76,7 @@ function action() {
                     <input id="suitedonnee" class="contour_field" type="text" title="Suite donnée" placeholder="Suite donnée">
                 </div>
                 <div class="select classique" role="select_instruct">
-                    <div id="instruct" class="option">Instructeur</div>
+                    <div id="instruct" class="option requis">Instructeur</div>
                     <div class="fleche_bas"> </div>
                 </div>
                 <div class="sauvegarder_annuler">

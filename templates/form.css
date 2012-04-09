@@ -40,6 +40,15 @@
     color: #333;
 }
 
+.classique[disabled] { 
+    background-color: #ebebe4;
+    background-image: -webkit-linear-gradient(top,#ebebe4,#F1F1F1);
+    background-image: -moz-linear-gradient(top,#ebebe4,#F1F1F1);
+    background-image: -ms-linear-gradient(top,#ebebe4,#F1F1F1);
+    background-image: -o-linear-gradient(top,#ebebe4,#F1F1F1);
+    background-image: linear-gradient(top,#ebebe4,#F1F1F1);
+}
+
 .modif {
     background-color: #4D90FE;
     background-image: -webkit-linear-gradient(top,#4D90FE,#4787ED);
@@ -137,6 +146,10 @@
 .formulaire input[type=text], .formulaire input[type=password] {
     padding: 4px 6px;
     width: 300px;
+}
+
+.formulaire .select {
+    width: 288px;
 }
 
 .formulaire input[type=text]:hover, .formulaire input[type=text]:focus, .formulaire input[type=password]:hover, .formulaire input[type=password]:focus,

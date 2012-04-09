@@ -74,32 +74,32 @@ function aideInterne() {
     $contenu .= '<div class="formulaire" action="creation_aide_interne">
         <h2>Aide interne</h2>
        <div class="colonne_droite">
-             <div class="select classique" role="select_typeaide_interne">
-                <div id="typeaideinterne" class="option">Type d\'aide</div>
+            <div class="select classique" role="select_typeaide_interne">
+                <div id="typeaideinterne" class="option requis">Type d\'aide</div>
                 <div class="fleche_bas"> </div>
             </div>
             <div class="clearboth"></div>
             <div class="select classique" role="select_instruct">
-                <div id="instruct" class="option">Instructeur</div>
+                <div id="instruct" class="option requis">Instructeur</div>
                 <div class="fleche_bas"> </div>
             </div>
             <div class="clearboth"></div>
             <div class="select classique" role="select_orga">
-                <div id="orga" class="option">Organisme</div>
+                <div id="orga" class="option requis">Organisme</div>
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
                 <input id="date" class="contour_field input_date requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
             </div>
             <div class="select classique" role="select_nature_interne">
-                <div id="nature" class="option">Nature</div>
+                <div id="nature" class="option requis">Nature</div>
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
                 <input id="proposition" class="contour_field" type="text" title="Proposition" placeholder="Proposition">
             </div>
             <div class="select classique" role="select_etat">
-                <div id="etat" class="option">Etat</div>
+                <div id="etat" class="option requis">Etat</div>
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
@@ -602,17 +602,17 @@ function aideExterne() {
                    <h2>Aide Externe</h2>
                    <div class="colonne_droite">
                         <div class="select classique" role="select_typeaide_externe">
-                            <div id="typeaideexterne" class="option">Type d\'aide</div>
+                            <div id="typeaideexterne" class="option requis">Type d\'aide</div>
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_instruct">
-                            <div id="instructexterne" class="option">Instructeur</div>
+                            <div id="instructexterne" class="option requis">Instructeur</div>
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_orga_ext">
-                            <div id="orgaext" class="option">Organisme</div>
+                            <div id="orgaext" class="option requis">Organisme</div>
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="input_text">
@@ -620,17 +620,17 @@ function aideExterne() {
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_nature_externe">
-                            <div id="natureaideexterne" class="option">Nature</div>
+                            <div id="natureaideexterne" class="option requis">Nature</div>
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_distrib">
-                            <div id="distrib" class="option">Distributeur</div>
+                            <div id="distrib" class="option requis">Distributeur</div>
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="clearboth"></div>
                         <div class="select classique" role="select_etat">
-                            <div id="etatexterne" class="option">Etat</div>
+                            <div id="etatexterne" class="option requis">Etat</div>
                             <div class="fleche_bas"> </div>
                         </div>
                         <div class="input_text">
