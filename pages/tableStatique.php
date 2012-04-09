@@ -68,7 +68,10 @@ function generateEcranStatique($table) {
             
     
     $retour .= '
-        <div id="newTableGenerique" class="bouton ajout" value="add" table="'.$table.'">Ajout '.$table.'</div>
+        <div id="newTableGenerique" class="bouton ajout" value="add" table="'.$table.'">
+            <i class="icon-add"></i>
+            <span>Ajout '.$table.'</span>
+        </div>
         <h3>'.$table.'</h3>
         <ul id="contenu_table_statique" class="list_classique">';
     $retour .= generateContenuTableStatique($table, $tableStatique, $tableStatique->findAll());
@@ -188,7 +191,14 @@ function generateFormulaireByTable($table, $columnNames) {
     $retour .= '
             <div class="sauvegarder_annuler">
                 <div class="bouton modif" value="saveTableStatique">Enregistrer</div>
-                <div class="bouton classique" value="cancel">Annuler</div>
+                <div value="saveTableStatique" class="bouton modif">
+                    <i class="icon-save"></i>
+                    <span>Enregistrer</span>
+                </div>
+                <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                </div>
             </div>
         </div>
     </div>';
@@ -217,7 +227,10 @@ function generateEcranStatiqueEnTab($table) {
             
     
     $retour .= '
-        <div id="newTableGenerique" class="bouton ajout" value="add" table="'.$table.'">Ajout '.$table.'</div>
+        <div id="newTableGenerique" class="bouton ajout" value="add" table="'.$table.'">
+            <i class="icon-add"></i>
+            <span>Ajout '.$table.'</span>
+        </div>
         <h3>'.$table.'</h3>';
     $retour .= '
         <div class="bubble tableau_classique_wrapper">

@@ -12,17 +12,17 @@ $(function() {
         search(searchbox);
     });
     
-    $("#side_individu").scroll(function(){ // On surveille l'évènement scroll
-        /* la fonction offset permet de récupérer la valeur X et Y d'un élément
-            dans une page. Ici on récupère la position de la derniere li qui 
+    $("#side_individu").scroll(function(){ // On surveille l'Ã©vÃ©nement scroll
+        /* la fonction offset permet de rÃ©cupÃ©rer la valeur X et Y d'un Ã©lÃ©ment
+            dans une page. Ici on rÃ©cupÃ©re la position de la derniere li qui 
             a pour classe : ".individu" */
         var offset = $("#list_individu").height();
         var load = false; // aucun chargement d'individu n'est en cours
 
                     
-        /* Si l'élément offset est en bas de scroll, si aucun chargement 
-                n'est en cours, si le nombre d'individu affiché est supérieur 
-                à 100 et si tout les individus ne sont pas affichés, alors on 
+        /* Si l'Ã©lÃ©ment offset est en bas de scroll, si aucun chargement 
+                n'est en cours, si le nombre d'individu affichÃ© est supÃ©rieur 
+                Ã  100 et si tout les individus ne sont pas affichÃ©s, alors on 
                 lance la fonction. */
         console.log("\n offset.top" + offset + "\n " + "Height" + $("#side_individu").height() + "\n " + "scrollTop" + $(this)[0].scrollTop
             + "\n " + "total = " + (offset-$("#side_individu").height() <= $(this)[0].scrollTop));
@@ -30,10 +30,10 @@ $(function() {
         if((offset-$("#side_individu").height() <= $(this)[0].scrollTop) 
             && load==false && ($('.individu').size()>=100) && 
             ($('.individu').size()!=$('.nb_individu').text())){
-            // la valeur passe à vrai, on va charger
+            // la valeur passe Ã  vrai, on va charger
             load = true;
  
-            //On récupère le nombre d'individu affiché global
+            //On rÃ©cupÃ©re le nombre d'individu affichÃ© global
             var nb_individu_total = $('.individu:last').attr('id');
                         
             //On affiche un loader (trop aps ca fait lag)
@@ -50,16 +50,16 @@ $(function() {
                 //                data: 'last='+nb_individu_total,
                 data: "last=" + nb_individu_total+ "&searchword=" + searchbox,
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
  
                     //On masque le loader (fait lag et du coup buger)
                     //$('.loadmore').fadeOut(500);
-                    /* On affiche le résultat après le dernier individu */
+                    /* On affiche le rÃ©sultat aprÃ¨s le dernier individu */
                     $('.individu:last').after(data);
                     /* On actualise la valeur offset du dernier individu */
                     offset = $("#list_individu").height();
-                    //On remet la valeur à faux car c'est fini
+                    //On remet la valeur Ã  faux car c'est fini
                     load = false;
                 },
                 error: function(data) {
@@ -218,8 +218,8 @@ $(function() {
                         var champ = parent.attr('champ');
                         selectionList(selection, table, champ);
                     }
-                    //Touche entrée
-                    console.log("Touche entrée");
+                    //Touche entrÃ©e
+                    console.log("Touche entrÃ©e");
                     break;
                 case 40:
                     var selection = $('.selection');
@@ -263,14 +263,6 @@ $(function() {
             $('#suggestion').css("display", "none");
         }
     });
-        
-    $('.autoComplete').live("click", function() {
-        $(this).attr('autocomplete', 'off');
-    });
-        
-    $('.autoComplete').live("blur", function()  {
-        $('#suggestion').css("display", "none");
-    });
     
     $('.liste_suggestion > li').live("click", function() {
         var focus = $(this);
@@ -283,7 +275,7 @@ $(function() {
         selectionList(focus, table, champ);
     });
     
-    //le hover permet de chopper l'evenment à l'entrer et à la sortie, le toggleClass prend donc tous son sens!
+    //le hover permet de chopper l'evenment Ã  l'entrer et Ã  la sortie, le toggleClass prend donc tous son sens!
     $('.liste_suggestion > li').live('hover', function() {
         $(this).toggleClass('selection');
     });
@@ -349,7 +341,7 @@ function searchTableHistorique() {
         data: datastring,
         url: './index.php?p=searchTableHistorique',
         cache: false,
-        //Succès de la requête
+        //SuccÃ©s de la requÃªte
         success: function(tableHistorique) {
             //                console.log(tableStatique);
             $("#contenu_table_historique").html(tableHistorique);

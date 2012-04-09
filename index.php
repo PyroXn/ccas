@@ -286,7 +286,7 @@ function search() {
     if ($nb != 0) {
         $retour .= '<div class="nb_individu">' . $nb . '</div>';
     } else {
-        $retour .= '<div class="nb_individu">Aucun r&#233;sultat</div>';
+        $retour .= '<div class="nb_individu">Aucun résultat</div>';
     }
 
     $i = 1;
@@ -332,8 +332,8 @@ function creationListeByFoyer($idFoyer, $idIndividu) {
 }
 
 /* genere la barre de navigation de la page selon le mode 
- * je pense � plusieurs mode de creation, si on doit g�n�rer le menu lorsqu'on click
- * sur un individu (cas le plus commun je pense), mais aussi g�n�rer le menu quand 
+ * je pense à plusieurs mode de creation, si on doit générer le menu lorsqu'on click
+ * sur un individu (cas le plus commun je pense), mais aussi générer le menu quand 
  * on est dans l'administration
  */
 
@@ -352,6 +352,9 @@ function generationHeaderNavigation($mode) {
                 </div>';
             }
                 $retour .= '
+                <div id="tableaubord" class="page_header_link">
+                    <span class="label">Tableau de bord</span>
+                </div>
                 <div id="statistique" class="page_header_link">
                     <span class="label">Statistiques</span>
                 </div>
@@ -369,7 +372,7 @@ function generationHeaderNavigation($mode) {
             if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_GENERALITES)) { 
                 $retour .= '
                     <div id="generalites" class="page_header_link">
-                        <span class="label">G&#233;n&#233;ralit&#233;s</span>
+                        <span class="label">Généralité</span>
                     </div>';
             }
             if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_BUDGET)) { 
@@ -406,10 +409,10 @@ function generationHeaderNavigation($mode) {
         case 'admin' :
             $retour .= '
                 <div id="managerole" href="#" class="page_header_link active">
-                    <span class="label">G&eacute;rer les r&ocirc;les</span>
+                    <span class="label">Gérer les rôles</span>
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
-                    <span class="label">G&eacute;rer les utilisateurs</span>
+                    <span class="label">Gérer les utilisateurs</span>
                 </div>
                 <div id="statistique" href="#" class="page_header_link">
                     <span class="label">Statistiques</span>
@@ -430,16 +433,8 @@ function generationHeaderNavigation($mode) {
 
 function accueilContenu() {
     include_once('./pages/graphique.php');
-    $retour = '
-    <script type="text/javascript">
-            $("#graphNewUsager").visualize();
-            $("#graphTypeAction").visualize({type: "bar", height: "150px", width: "700px"});
-            $("#graphTypeAide").visualize();
-    </script>
-        <h2>Tableau de bord</h2>';
-    $retour .= graphNewUsager();
-    $retour .= graphTypeAction();
-    $retour .= graphTypeAide();
+   
+        $retour = '<h2>Accueil</h2>';
         
     return $retour;
 }

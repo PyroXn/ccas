@@ -6,6 +6,13 @@ function action() {
     $types = Doctrine_Core::getTable('type')->findByCategorie(2); // Type Action
     $instructs = Doctrine_Core::getTable('instruct')->findByInterne(1); // Instruct interne
     $contenu = '<h2>Actions</h2>';
+        if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_ACTION)) {
+        $contenu .= '
+            <div id="createAction" class="bouton ajout">
+                <i class="icon-add"></i>
+                <span>Ajouter une action</span>
+            </div>';
+    }
     $contenu .= '<div><h3><span>Suivi des actions</span></h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
@@ -15,7 +22,7 @@ function action() {
                       <th>Date</th>
                       <th>Actions</th>
                       <th>Motif</th>
-                      <th>Suite &agrave; donner</th>
+                      <th>Suite à donner</th>
                       <th>Suite donnee</th>
                       <th>Instructeur</th>
                       <th></th>
@@ -42,18 +49,18 @@ function action() {
     }
     if($i == 1) {
         $contenu .=  '<tr>
-                         <td colspan="7" align="center">< Aucune action n\'a &eacute;t&eacute; &eacute;ffectu&eacute;e > </td>
+                         <td colspan="7" align="center">< Aucune action n\'a été éffectuée > </td>
                      </tr>';
     }
     $contenu .= '</tbody></table></div>';
-    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_ACTION)) {
-        $contenu .= '<div class="bouton ajout" id="createAction">Ajouter une action</div>';
-    }
-    $contenu .= '<div class="formulaire" action="creation_action">
+    
+    
+    $contenu .= '
+        <div class="formulaire" action="creation_action">
             <h2>Actions</h2>
-           <div class="colonne_droite">
-                 <div class="input_text">
-                    <input id="date" class="contour_field input_date requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+            <div class="colonne_droite">
+                <div class="input_text">
+                    <input id="date" class="contour_field requis input_date" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
                 </div>
                 <div class="select classique" role="select_motifaction">
                     <div id="typeaction" class="option">Type d\'action</div>
@@ -63,22 +70,27 @@ function action() {
                     <input id="motif" class="contour_field requis" type="text" title="Motif" placeholder="Motif">
                 </div>
                 <div class="input_text">
-                    <input id="suiteadonner" class="contour_field" type="text" title="Suite � donner" placeholder="Suite &agrave; donner">
+                    <input id="suiteadonner" class="contour_field" type="text" title="Suite à donner" placeholder="Suite à donner">
                 </div>
                 <div class="input_text">
-                    <input id="suitedonnee" class="contour_field" type="text" title="Suite donn�e" placeholder="Suite donn&eacute;e">
+                    <input id="suitedonnee" class="contour_field" type="text" title="Suite donnée" placeholder="Suite donnée">
                 </div>
                 <div class="select classique" role="select_instruct">
                     <div id="instruct" class="option">Instructeur</div>
                     <div class="fleche_bas"> </div>
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
-
-           </div>
-   </div>
+            </div>
+        </div>
    <div class="formulaire" action="edit_action">
             <h2>Actions</h2>
            <div class="colonne_droite">
@@ -92,17 +104,23 @@ function action() {
                     <input id="motif_edit" class="contour_field" type="text" title="Motif">
                 </div>
                 <div class="input_text">
-                    <input id="suiteadonner_edit" class="contour_field" type="text" title="Suite &agrave; donner">
+                    <input id="suiteadonner_edit" class="contour_field" type="text" title="Suite à donner">
                 </div>
                 <div class="input_text">
-                    <input id="suitedonnee_edit" class="contour_field" type="text" title="Suite donn&eacute;e">
+                    <input id="suitedonnee_edit" class="contour_field" type="text" title="Suite donnée">
                 </div>
                 <div class="input_text">
                     <input id="instruct_edit" class="contour_field" type="text" title="Instructeur" disabled/>
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="edit_action">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="edit_action" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
 
            </div>

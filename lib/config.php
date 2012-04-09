@@ -2,7 +2,7 @@
 
 require_once './lib/Doctrine.php';
 spl_autoload_register(array('Doctrine_Core', 'autoload'));
-Doctrine_Core::loadModels('./modeles/'); //demande d'inclure les modèles se situant dans le dossier indiqué. 
+Doctrine_Core::loadModels('./modeles/'); //demande d'inclure les modules se situant dans le dossier indiquÃ©. 
 //
 //$cfg = 'modeles';
 //$dossier = opendir($cfg);
@@ -20,8 +20,8 @@ $connexion->setCharset('utf8');
 
 /**
  *
- * @param type $level Indiquer l'autorisation spécifique : 0010 - 1000 - 0100 - 0001
- * @return Vrai si user autorisé
+ * @param type $level Indiquer l'autorisation spÃ©cifique : 0010 - 1000 - 0100 - 0001
+ * @return Vrai si user autorisÃ©
  */
 function isAuthorized($level) {
     $find = false;
@@ -37,9 +37,21 @@ function isAuthorized($level) {
     }
 }
 
+/*
+ * return vrai si == null, 0 ou ''
+ */
+function verifieValeurNull($val) {
+    return $val == null || $val == '' || $val == 0;
+}
+
+function getDatebyTimestampInput($timestamp) {
+    return $timestamp == 0 ? 'placeholder = "jj / mm / aaaa"' : 'value = "'.date('d/m/Y', $timestamp).'"';
+}
+
 function getDatebyTimestamp($timestamp) {
     return $timestamp == 0 ? '0' : date('d/m/Y', $timestamp);
 }
+
 
 function getAnneeAndMois($arrayTimestamp) {
     $now = explode('/', date('d/m/Y', time()));
@@ -48,10 +60,13 @@ function getAnneeAndMois($arrayTimestamp) {
     $nb = array();
     for($i=0; $i < count($arrayTimestamp); $i++) { // On parcourt tout les foyers
         $date = explode('/', date('d/n/Y', $arrayTimestamp[$i]));
-        if(!in_array($date[2], $arrayYear)) { // année
+        if($date[2] == '1970') {
+            $date[2] = 'Aucunes donnÃ©es';
+        }
+        if(!in_array($date[2], $arrayYear)) { // annÃ©e
             $arrayYear[] = $date[2];
             $nb[$date[2]] = 1;
-            sort($arrayYear);
+            sort($arrayYear, SORT_NUMERIC);
         } else {
             $nb[$date[2]] += 1;
         }

@@ -110,14 +110,20 @@ $(function() {
         if (!$(this).attr('disabled')) {
             //permet de generaliser sur tous les select
             var attr = '.'+$(this).attr('role');
-            console.log(attr);
+            
+            $(attr).toggle();
             var x = $(this).offset();
             var h = $(this).outerHeight();
-            $(attr).toggle();
+            var l = $(this).outerWidth();
+            //les -2 correspondent Ã  la bordure de 1px de chacun des 2 cotÃ©s
+            $(attr).css("min-width", l-2);
+            var lAttr = $(attr).outerWidth();
+            console.log(attr);
             $(attr).offset({
                 top:x.top+h,
-                left:x.left
+                left:x.left+l-lAttr
             });
+            
             $(this).children('.option').toggleClass('en_attente');
             $(attr).toggleClass('en_execution');
         }
@@ -128,10 +134,10 @@ $(function() {
             if(!$(this).hasClass('checkbox_active')) {
                 $('.checkbox_active').toggleClass('checkbox_active');
                 $(this).toggleClass('checkbox_active');
-                $('.update').css({
+                $('.update[value="updateMembreFoyer"]').css({
                     "display":"block"
                 });
-                $('.update').css({
+                $('.update[value="updateMembreFoyer"]').css({
                     "margin-right":"0"
                 });
             }
@@ -139,14 +145,7 @@ $(function() {
     });
     
     $('#checkboxScolarise').live("click", function(){
-        if ($(this).hasClass("checkbox_active")) {
-            $(".scolarise").hide();
-            $(".nonscolarise").fadeIn(500);
-        }
-        else {
-            $(".nonscolarise").hide();
-            $(".scolarise").fadeIn(500);
-        }
+        $('#ligneScolaire').toggleClass('nonscolarise');
     });
     
     $('.checkbox').live("click", function(){
@@ -174,7 +173,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=generateEcranStatique',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
                     $("#tableStatique").html(data);
                 }
@@ -233,7 +232,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=saveTableStatique',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
@@ -250,7 +249,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateaction',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
@@ -432,7 +431,7 @@ $(function() {
                     data: datastring,
                     url: './index.php?p=form',
                     cache: false,
-                    //Succès de la requête
+                    //SuccÃ©s de la requÃªte
                     success: function(data) {
                         console.log("SUCCESS FONCTION PORC");
                         $('#ecran_gris').toggle();
@@ -457,13 +456,14 @@ $(function() {
                                 break;
                             case 'creation_individu':
                                 $("#list_individu").html(data.listeIndividu);
-                                /*Si lenteur possibilité de ne regénéré que la liste et pas tous le contenu*/
+                                /*Si lenteur possibilitÃ© de ne regÃ©nÃ©rÃ© que la liste et pas tous le contenu*/
                                 $('#contenu').html(data.newIndividu);
                                 break;
                             case 'creation_credit':
                                 $("#contenu").html(data.budget);
                                 break;
                             case 'creation_action':
+                                console.log(data);
                                 $('#contenu').html(data.actions);
                                 break;
                             case 'creation_aide_interne':
@@ -498,7 +498,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateChefDeFamille',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(contenu) {
                     console.log(contenu);
                     $('#contenu').html(contenu);
@@ -521,9 +521,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateressource',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -543,9 +543,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatedepense',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -561,9 +561,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatedepensehabitation',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -582,9 +582,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatedette',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -600,9 +600,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatecontact',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -618,9 +618,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatecaf',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -641,9 +641,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatemutuelle',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -670,9 +670,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatecouverture',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -690,9 +690,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updatesituationprofessionnelle',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -712,9 +712,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateSituationScolaire',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -736,9 +736,9 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateFoyer',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -758,10 +758,10 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=updateinfoperso',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                     console.log('SUCCESS INFO PERSO');
-                    loc.parent().find('input').attr("disabled","disabled");
+                    relockAll(loc);
                     slideBouton(loc);
                 },
                 error: function(contenu) {
@@ -773,11 +773,12 @@ $(function() {
     
     
     
+    
     function effacer() {
         $('.input_text').children().val('');
     }
     
-    //permet l'affichage des formulaires flottant entouré de gris
+    //permet l'affichage des formulaires flottant entourÃ© de gris
     function creationForm(x, h, form) {
         console.log("creationForm");
         console.log(form);
@@ -793,14 +794,17 @@ $(function() {
     }
     
     $('.edit').live("click", function() {
-        console.log($(this).parent().next().children().find('input').attr('disabled'));
         var attr = $(this).parent().next().children().find('input').attr('disabled');
         if (typeof attr !== 'undefined' && attr !== false) {
             $(this).parent().next().children().find('input').removeAttr('disabled');
             $(this).parent().next().children().find('[class^=select]').removeAttr('disabled');
+            $(this).parent().next().children().find('textarea').removeAttr('disabled');
+            $(this).parent().next().children().find('[class^=checkbox]').removeAttr('disabled');
         } else {
             $(this).parent().next().children().find('input').attr('disabled','');
             $(this).parent().next().children().find('[class^=select]').attr('disabled','');
+            $(this).parent().next().children().find('textarea').attr('disabled','');
+            $(this).parent().next().children().find('[class^=checkbox]').attr('disabled','');
         }
         var update = $(this).parent().parent().children('.update');
         slideBouton(update);
@@ -818,7 +822,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=archiveressource',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
                     $('#contenu').html(data);
                 },
@@ -833,7 +837,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=archivedepense',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
                     $('#contenu').html(data);
                 },
@@ -848,7 +852,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=archivedette',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function(data) {
                     $('#contenu').html(data);
                 },
@@ -872,7 +876,7 @@ $(function() {
             data: datastring,
             url: './index.php?p=deleteIndividu',
             cache: false,
-            //Succès de la requête
+            //SuccÃ©s de la requÃªte
             success: function(data) {
                 $("#list_individu").html(data.listeIndividu);
                 $('#contenu').html(data.contenu);
@@ -983,6 +987,13 @@ $(function() {
     });
 });
 
+function relockAll(loc) {
+    loc.parent().find('input').attr('disabled','');
+    loc.parent().find('[class^=select]').attr('disabled','');
+    loc.parent().find('textarea').attr('disabled','');
+    loc.parent().find('[class^=checkbox]').attr('disabled','');
+}
+
 function searchTableStatique() {
     var datastring = 'table=' + $('#ligneRechercheTableStatique').attr('table');
     $('#ligneRechercheTableStatique').find('[columnName]').each(function(){
@@ -1001,7 +1012,7 @@ function searchTableStatique() {
         data: datastring,
         url: './index.php?p=searchTableStatique',
         cache: false,
-        //Succès de la requête
+        //SuccÃ©s de la requÃªte
         success: function(tableStatique) {
             //                console.log(tableStatique);
             $("#contenu_table_statique").html(tableStatique);

@@ -6,7 +6,7 @@ class Role extends Doctrine_Record {
         $this->setTableName('role');
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('designation', 'string', 50, array('default' => ' '));
+        $this->hasColumn('designation', 'string', 50, array('notnull' => true, 'default' => ''));
         $this->hasColumn('permissions', 'integer', 11, array('notnull' => true));
     }
 

@@ -4,7 +4,11 @@ function foyer() {
     $_SESSION['idIndividu'] = $_POST['idIndividu'];
     $listeIndividu = creationListeByFoyer($_POST['idFoyer'], $_POST['idIndividu']);
     $menu = generationHeaderNavigation('foyer');
-    $contenu = foyerContenu($_POST['idFoyer']);
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_FOYER)) {
+        $contenu = foyerContenu($_POST['idFoyer']);
+    } else {
+        $contenu = 'Vous n\'avez pas les droits pour afficher la fiche Foyer';
+    }
     $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu, 'contenu' => $contenu);
     echo json_encode($retour);
 }
@@ -39,10 +43,17 @@ function foyerContenu($idFoyer) {
     $contenu .= '
         </ul>';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_INDIVIDU)) {
-        $contenu .= '<div id="newIndividu" class="bouton ajout" value="add">Ajouter un individu</div>';
+        $contenu .= '
+            <div id="newIndividu" value="add" class="bouton ajout">
+                <i class="icon-add"></i>
+                <span>Ajouter un individu</span>
+            </div>';
     }
     $contenu .= '
-        <div class="bouton modif update" value="updateMembreFoyer">Enregistrer</div>
+        <div value="updateMembreFoyer" class="bouton modif update">
+            <i class="icon-save"></i>
+            <span>Enregistrer</span>
+        </div>
         <div class="formulaire" action="creation_individu">
             <h2>Individu</h2>
             <div class="colonne_droite">
@@ -54,18 +65,24 @@ function foyerContenu($idFoyer) {
                     <input id="form_2" class="contour_field requis" type="text" title="Nom" placeholder="Nom">
                 </div>
                 <div class="input_text">
-                    <input id="form_3" class="contour_field requis" type="text" title="Pr&#233;nom" placeholder="Pr&#233;nom">
+                    <input id="form_3" class="contour_field requis" type="text" title="Prénom" placeholder="Prénom">
                 </div>
                 <div class="input_text">
                     <input id="form_4" class="contour_field date" type="text" title="Date de naissance" placeholder="Date de naissance">
                 </div>
                 <div class="select classique" role="select_lien_famille">
-                    <div id="form_5" class="option">'. $lienFamilles[0]->lien .'</div>
+                    <div id="form_5" class="option" value=" ">Lien de famille</div>
                     <div class="fleche_bas"></div>
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,7 +116,7 @@ function generateInfoFoyer($foyer) {
             <ul class="list_classique">
                 <li class="ligne_list_classique">
                     <div class="colonne">
-                        <span class="attribut">N&deg; :</span>
+                        <span class="attribut">N° :</span>
                         <span><input type="text" class="contour_field input_num" id="numrue" value="'.$foyer->numRue.'" disabled/></span>
                     </div>
                     <div class="colonne">
@@ -109,62 +126,71 @@ function generateInfoFoyer($foyer) {
                     <div class="colonne">
                         <span class="attribut">Secteur :</span>
                         <div class="select classique" role="select_secteur" disabled>';
-    $retour .= $foyer->idSecteur == null || $foyer->idSecteur == ' ' ? '<div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
-    $retour .= '<div class="fleche_bas"> </div>
+    $retour .= verifieValeurNull($foyer->idSecteur) ? '
+                            <div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
+    $retour .= '            <div class="fleche_bas"> </div>
                         </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Ville :</span>
                         <span><input type="text" class="contour_field input_char autoComplete" id="ville" table="ville" champ="libelle" value="'.$foyer->ville->libelle.'" valeur="'.$foyer->ville->id.'" disabled/></span>
                     </div>
-               </li>
-               <li class="ligne_list_classique">
                     <div class="colonne">
                         <span class="attribut">Type :</span>
                         <div class="select classique" role="select_typelogement" disabled>';
-$retour .= $foyer->typeLogement == null || $foyer->typeLogement == ' ' ? '<div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
-$retour .= '<div class="fleche_bas"> </div>
-                </div>
-                </div>
+$retour .= verifieValeurNull($foyer->typeLogement) ? '
+                            <div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
+$retour .= '                <div class="fleche_bas"> </div>
+                        </div>
+                    </div>
+                </li>
+               <li class="ligne_list_classique">
                    <div class="colonne">
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statutlogement" disabled>';
-$retour .= $foyer->typeAppartenance == null || $foyer->typeAppartenance == ' ' ? '<div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
-$retour .= '<div class="fleche_bas"> </div>
+$retour .= verifieValeurNull($foyer->typeAppartenance) ? '
+                            <div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
+$retour .= '                <div class="fleche_bas"> </div>
+                        </div>
                     </div>
-                   </div>
-                   <div class="colonne">
+                    <div class="colonne">
                         <span class="attribut">Surface :</span>
                         <span><input class="contour_field input_num" type="text" id="surface" value="'.$foyer->logSurface.'" disabled/></span>
-                  </div>
-                  <div class="colonne">
-                        <span class="attribut">Date d\'entr&eacute;e :</span>
-                        <span><input class="contour_field input_date" type="text" id="dateentree" size="10" value="'.getDatebyTimestamp($foyer->logDateArrive).'" disabled/></span>
-                  </div>
-               </li>
-               <li class="ligne_list_classique">
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Date d\'entrée :</span>
+                        <span><input class="contour_field input_date" type="text" id="dateentree" size="10" '.getDatebyTimestampInput($foyer->logDateArrive).' disabled/></span>
+                    </div>
                     <div class="colonne">
                         <span class="attribut">Bailleur :</span>
                         <div class="select classique" role="select_bailleur" disabled>';
-$retour .= $foyer->idBailleur == null || $foyer->idBailleur == ' ' ? '<div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
-$retour .= '<div class="fleche_bas"> </div>
-                    </div>
+$retour .= verifieValeurNull($foyer->idBailleur) ? '
+                            <div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
+$retour .= '                <div class="fleche_bas"> </div>
+                        </div>
                     </div>
                     <div class="colonne">
                         <span class="attribut">Instructeur :</span>
                         <div class="select classique" role="select_instruct" disabled>';
-$retour .= $foyer->idInstruct == null || $foyer->idInstruct == null ? '<div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
-$retour .= '<div class="fleche_bas"> </div>
+$retour .= verifieValeurNull($foyer->idInstruct) ? '
+                            <div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
+$retour .= '                <div class="fleche_bas"> </div>
+                        </div>
                     </div>
-                    </div>
+                </li>
+                <li class="ligne_list_classique">
                     <div class="colonne_large">
-                        <span class="attribut_for_large">Note :</span>
-                        <span><input class="contour_field input_char_for_large" type="text" id="note" value="'.$foyer->notes.'" disabled/></span>
+                        <span class="attribut">Note :</span>
+                        <span><textarea class="contour_field input_char" type="text" id="note" disabled>'.$foyer->notes.'</textarea></span>
                     </div>
                </li>
             </ul>';
        
-$retour .= '<div class="bouton modif update" value="updateFoyer">Enregistrer</div>
+$retour .= '
+            <div value="updateFoyer" class="bouton modif update">
+                <i class="icon-save"></i>
+                <span>Enregistrer</span>
+            </div>
             <div class="clearboth"></div>
         </div>';
  $retour .= situationFinanciere($foyer->id);
@@ -279,25 +305,25 @@ function situationFinanciere($idFoyer) {
                 $totalCredit = $totalCredit + $credit->mensualite;
             }
     }
-        $contenu = '<div><h3>Situation financi&egrave;re de la famille</h3>';
+        $contenu = '<div><h3>Situation financière de la famille</h3>';
         $contenu .= '
             <ul class="list_classique">
                     <li class="ligne_list_classique">
                         <div class="colonne">
                             <span class="attribut">Total ressources :</span>
-                            <span>'.$totalRessource.'&euro;</span>
+                            <span>'.$totalRessource.'€</span>
                         </div>
                         <div class="colonne">
-                            <span class="attribut">Total d&eacute;penses :</span>
-                            <span>'.$totalDepense.'&euro;</span>
+                            <span class="attribut">Total dépenses :</span>
+                            <span>'.$totalDepense.'€</span>
                         </div>
                         <div class="colonne">
                             <span class="attribut">Total dettes :</span>
-                            <span>'.$totalDette.'&euro;</span>
+                            <span>'.$totalDette.'€</span>
                         </div>
                         <div class="colonne">
                             <span class="attribut">Total credits :</span>
-                            <span>'.$totalCredit.'&euro;</span>
+                            <span>'.$totalCredit.'€</span>
                         </div>
                     </li>
             </ul>

@@ -62,6 +62,10 @@ function contenu() {
             include_once './pages/historique.php';
             echo affichageHistorique();
             break;
+        case 'tableaubord':
+            include_once './pages/graphique.php';
+            echo tableauBord();
+            break;
     }
 }
 ?>

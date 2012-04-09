@@ -11,7 +11,7 @@ function budget() {
     $contenu .= afficherDepenses($depense);
     $contenu .= '          
         <div>
-            <h3>D&eacute;penses habitation ';
+            <h3>Dépenses habitation ';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
         $contenu .= '<span class="edit"></span>';
     }
@@ -27,12 +27,15 @@ function budget() {
                     <span><input class="contour_field input_num" type="text" id="apl" value="'.$ressource->aideLogement.'" disabled/></span>
                </div>
                <div class="colonne">
-                    <span class="attribut">R&eacute;siduel : </span>
+                    <span class="attribut">Résiduel : </span>
                     <span>'.($depense->loyer - $ressource->aideLogement).'</span>
                 </div>
                 </li>
             </ul>
-            <div class="bouton modif update" value="updateDepenseHabitation">Enregistrer</div>
+            <div value="updateDepenseHabitation" class="bouton modif update">
+                <i class="icon-save"></i>
+                <span>Enregistrer</span>
+            </div>
             <div class="clearboth"></div>
         </div>';
     $contenu .= afficherDettes($dette);
@@ -52,61 +55,63 @@ function afficherRessources($ressource) {
     $retour .= '<span class="timemaj">'.getDatebyTimestamp($ressource->dateCreation).'</span></h3>';
     $retour .= '<ul class="list_classique">
                     <li class="ligne_list_classique">
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">Salaire : </span>
                             <span><input class="contour_field input_num" type="text" id="salaire" value="'.$ressource->salaire.'" disabled/></span>
                         </div>
-                        <div class="colonne">
-                            <span class="attribut">All. Ch&ocirc;mage : </span>
+                        <div class="colonne_num">
+                            <span class="attribut">All. Chômage : </span>
                             <span><input class="contour_field input_num" type="text" id="chomage" value="'.$ressource->chomage.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">All. familiales : </span>
                             <span><input class="contour_field input_num" type="text" id="revenuAlloc" value="'.$ressource->revenuAlloc.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">ASS : </span>
                             <span><input class="contour_field input_num" type="text" id="ass" value="'.$ressource->ass.'" disabled/></span>
                         </div>
-                   </li>
-                   <li class="ligne_list_classique">
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">AAH : </span>
                             <span><input class="contour_field input_num" type="text" id="aah" value="'.$ressource->aah.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                    
+                        <div class="colonne_num">
                             <span class="attribut">RSA Socle : </span>
                             <span><input class="contour_field input_num" type="text" id="rsaSocle" value="'.$ressource->rsaSocle.'" disabled/></span>
                         </div>
-                        <div class="colonne">
-                            <span class="attribut">RSA Activit&eacute; : </span>
+                    </li>
+                    <li class="ligne_list_classique">
+                        <div class="colonne_num">
+                            <span class="attribut">RSA Activité : </span>
                             <span><input class="contour_field input_num" type="text" id="rsaActivite" value="'.$ressource->rsaActivite.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">Retraite compl  : </span>
                             <span><input class="contour_field input_num" type="text" id="retraitComp" value="'.$ressource->retraitComp.'" disabled/></span>
                         </div>
-                   </li>
-                   <li class="ligne_list_classique">
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">P. alimentaire : </span>
                             <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$ressource->pensionAlim.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">P. de retraite : </span>
                             <span><input class="contour_field input_num" type="text" id="pensionRetraite" value="'.$ressource->pensionRetraite.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">Autres revenus  : </span>
                             <span><input class="contour_field input_num" type="text" id="autreRevenu" value="'.$ressource->autreRevenu.'" disabled/></span>
                         </div>
-                        <div class="colonne">
+                        <div class="colonne_num">
                             <span class="attribut">Nature : </span>
                             <span><input class="contour_field input_char" type="text" id="natureRevenu" value="'.$ressource->natureAutre.'" disabled/></span>
                         </div>
                    </li>
                 </ul>
-                <div class="bouton modif update" value="updateRessource">Enregistrer</div>
+                <div value="updateRessource" class="bouton modif update">
+                    <i class="icon-save"></i>
+                    <span>Enregistrer</span>
+                </div>
                 <div class="clearboth"></div>
             </div>';
     return $retour;
@@ -115,7 +120,7 @@ function afficherRessources($ressource) {
 function afficherDepenses($depense) {
     $retour = '
         <div>
-            <h3 role="depense">D&eacute;penses ';
+            <h3 role="depense">Dépenses ';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
         $retour .= '<span class="edit"></span>';
     }
@@ -125,67 +130,68 @@ function afficherDepenses($depense) {
     $retour .= '<span class="timemaj">'.getDatebyTimestamp($depense->dateCreation).'</span></h3>
             <ul class="list_classique">
                 <li class="ligne_list_classique">
-                    <div class="colonne">
-                        <span class="attribut">Imp&ocirc;ts revenu : </span>
+                    <div class="colonne_num">
+                        <span class="attribut">Impôts revenu : </span>
                         <span><input class="contour_field input_num" type="text" id="impotRevenu" value="'.$depense->impotRevenu.'" disabled/></span>
                      </div>
-                    <div class="colonne">
-                        <span class="attribut">Imp&ocirc;ts locaux : </span>
+                    <div class="colonne_num">
+                        <span class="attribut">Impôts locaux : </span>
                         <span><input class="contour_field input_num" type="text" id="impotLocaux" value="'.$depense->impotLocaux.'" disabled/></span>
                     </div>
-                    <div class="colonne">
-                    <span class="attribut">P. alimentaire :</span>
-                    <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$depense->pensionAlim.'" disabled/></span>
-                     </div>
-                     <div class="colonne">
-                    <span class="attribut">Mutuelle : </span>
-                    <span><input class="contour_field input_num" type="text" id="mutuelle" value="'.$depense->mutuelle.'" disabled/></span>
+                    <div class="colonne_num">
+                        <span class="attribut">P. alimentaire :</span>
+                        <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$depense->pensionAlim.'" disabled/></span>
                     </div>
-                </li>
-                <li class="ligne_list_classique">
-                    <div class="colonne">
-                        <span class="attribut">Electricit&eacute; : </span>
+                    <div class="colonne_num">
+                        <span class="attribut">Mutuelle : </span>
+                        <span><input class="contour_field input_num" type="text" id="mutuelle" value="'.$depense->mutuelle.'" disabled/></span>
+                    </div>
+                    <div class="colonne_num">
+                        <span class="attribut">Electricité : </span>
                         <span><input class="contour_field input_num" type="text" id="electricite" value="'.$depense->electricite.'" disabled/></span>
                     </div>
-                    <div class="colonne">
+                    <div class="colonne_num">
                         <span class="attribut">Gaz : </span>
                         <span><input class="contour_field input_num" type="text" id="gaz" value="'.$depense->gaz.'" disabled/></span>
                     </div>
-                    <div class="colonne">
+                </li>
+                <li class="ligne_list_classique">
+                    <div class="colonne_num">
                         <span class="attribut">Eau : </span>
                         <span><input class="contour_field input_num" type="text" id="eau" value="'.$depense->eau.'" disabled/></span>
                     </div>
-                    <div class="colonne">
+                    <div class="colonne_num">
                         <span class="attribut">Chauffage :</span>
                         <span><input class="contour_field input_num" type="text" id="chauffage" value="'.$depense->chauffage.'" disabled/></span>
                     </div>
-               </li>
-               <li class="ligne_list_classique">
-                   <div class="colonne">
-                        <span class="attribut">T&eacute;l&eacute;phonie : </span>
+                    <div class="colonne_num">
+                        <span class="attribut">Téléphonie : </span>
                         <span><input class="contour_field input_num" type="text" id="telephonie" value="'.$depense->telephonie.'" disabled/></span>
-                   </div>
-                   <div class="colonne">
+                    </div>
+                    <div class="colonne_num">
                         <span class="attribut">Internet : </span>
                         <span><input class="contour_field input_num" type="text" id="internet" value="'.$depense->internet.'" disabled/></span>
-                  </div>
-                  <div class="colonne">
-                        <span class="attribut">T&eacute;l&eacute;vision : </span>
+                    </div>
+                    <div class="colonne_num">
+                        <span class="attribut">Télévision : </span>
                         <span><input class="contour_field input_num" type="text" id="television" value="'.$depense->television.'" disabled/></span>
-                   </div>
-               </li>
-               <li class="ligne_list_classique">
-                   <div class="colonne">
-                        <span class="attribut">Autres D&eacute;penses : </span>
+                    </div>
+                    <div class="colonne_num">
+                        <span class="attribut">Autres Dépenses : </span>
                         <span><input class="contour_field input_num" type="text" id="autreDepense" value="'.$depense->autreDepense.'" disabled/></span>
-                   </div>
-                   <div class="colonne_large">
-                        <span class="attribut_for_large">D&eacute;tail : </span>
-                        <span><input class="contour_field  input_char_for_large" type="text" id="natureDepense" value="'.$depense->natureDepense.'" disabled/></span>
-                   </div>
-               </li>
+                    </div>
+                </li>
+                <li class="ligne_list_classique">
+                    <div class="colonne_large">
+                        <span class="attribut">Détail : </span>
+                        <span><textarea class="contour_field  input_char" type="text" id="natureDepense" disabled>'.$depense->natureDepense.'</textarea></span>
+                    </div>
+                </li>
             </ul>
-            <div class="bouton modif update" value="updateDepense">Enregistrer</div>
+            <div value="updateDepense" class="bouton modif update">
+                <i class="icon-save"></i>
+                <span>Enregistrer</span>
+            </div>
             <div class="clearboth"></div>
         </div>';
     return $retour;
@@ -194,7 +200,8 @@ function afficherDepenses($depense) {
 function afficherDettes($dette) {
     $retour = '
         <div>
-            <h3 role="dette">Dettes ';if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
+            <h3 role="dette">Dettes ';
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
         $retour .= '<span class="edit"></span>';
     }
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ARCHIVER_BUDGET)) {
@@ -204,7 +211,7 @@ function afficherDettes($dette) {
                 <ul class="list_classique">
                     <li class="ligne_list_classique">
                         <div class="colonne">
-                            <span class="attribut">Arri&eacute;r&eacute; locatif : </span>
+                            <span class="attribut">Arriéré locatif : </span>
                             <span><input class="contour_field input_num" type="text" id="arriereLocatif" value="'.$dette->arriereLocatif.'" disabled/></span>
                         </div>
                         <div class="colonne">
@@ -222,7 +229,7 @@ function afficherDettes($dette) {
                     </li>
                     <li class="ligne_list_classique">
                         <div class="colonne">
-                            <span class="attribut">Arri&eacute;r&eacute; &eacute;lectricit&eacute; : </span>
+                            <span class="attribut">Arriéré électricité : </span>
                             <span><input class="contour_field input_num" type="text" id="arriereElec" value="'.$dette->arriereElectricite.'" disabled/></span>
                         </div>
                         <div class="colonne">
@@ -232,7 +239,7 @@ function afficherDettes($dette) {
                     </li>
                     <li class="ligne_list_classique">
                         <div class="colonne">
-                            <span class="attribut">Arri&eacute;r&eacute; gaz : </span>
+                            <span class="attribut">Arriéré gaz : </span>
                             <span><input class="contour_field input_num" type="text" id="arriereGaz" value="'.$dette->arriereGaz.'" disabled/></span>
                         </div>
                         <div class="colonne">
@@ -241,7 +248,10 @@ function afficherDettes($dette) {
                         </div>
                     </li>
                 </ul>
-                <div class="bouton modif update" value="updateDette">Enregistrer</div>
+                <div value="updateDette" class="bouton modif update">
+                    <i class="icon-save"></i>
+                    <span>Enregistrer</span>
+                </div>
                 <div class="clearboth"></div>
             </div>';
     return $retour;
@@ -250,7 +260,7 @@ function afficherDettes($dette) {
 function afficherCredits($credits) {
     $retour ='
         <div class="colonne_large">
-            <h3>Cr&eacute;dits ';
+            <h3>Crédits ';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
         $retour .= '<span class="addElem"  id="createCredit" role="creation_credit"></span>';
     }
@@ -260,8 +270,8 @@ function afficherCredits($credits) {
                     <thead>
                         <tr class="header">
                             <th>Organisme</th>
-                            <th>Mensualit&eacute;</th>
-                            <th>Dur&eacute;e</th>
+                            <th>Mensualité</th>
+                            <th>Durée</th>
                             <th>Montant restant</th>
                             <th>Actions</th>
                         </tr>
@@ -272,8 +282,8 @@ function afficherCredits($credits) {
                             $retour .= '
                                 <tr name="'.$credit->id.'">
                                     <td>'.$credit->organisme.'</td>
-                                    <td> '.$credit->mensualite.'</td>
-                                    <td> '.$credit->dureeMois.'</td>
+                                    <td> '.$credit->mensualite.'€/mois</td>
+                                    <td> '.$credit->dureeMois.' mois</td>
                                     <td> '.$credit->totalRestant.'</td>
                                     <td><span class="delete_credit"></span></td>
                                 </tr>';
@@ -281,7 +291,7 @@ function afficherCredits($credits) {
                     } else {
                         $retour .= '
                             <tr>
-                                <td colspan=9 align=center>< Aucun cr&eacute;dit n\'est enregistr&eacute; pour cet individu > </td>
+                                <td colspan=9 align=center>< Aucun crédit n\'est enregistré pour cet individu > </td>
                             </tr>';
                     }
                 $retour .= '
@@ -290,7 +300,7 @@ function afficherCredits($credits) {
             </div>
         </div>
         <div class="formulaire" action="creation_credit">
-            <h2>Cr&eacute;dit</h2>
+            <h2>Crédit</h2>
             <div class="colonne_droite">
                 <div class="input_text">
                     <input id="organisme" class="contour_field" type="text" title="Organisme" placeholder="Organisme">
@@ -299,14 +309,20 @@ function afficherCredits($credits) {
                     <input id="mensualite" class="contour_field" type="text" title="Mensualite" placeholder="Mensualite">
                 </div>
                 <div class="input_text">
-                    <input id="duree" class="contour_field" type="text" title="Dur&eacute;e" placeholder="Dur&eacute;e">
+                    <input id="duree" class="contour_field" type="text" title="Durée" placeholder="Durée">
                 </div>
                 <div class="input_text">
                     <input id="total" class="contour_field" type="text" title="Total Restant" placeholder="Total Restant">
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
             </div>
         </div>';

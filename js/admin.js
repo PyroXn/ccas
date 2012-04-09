@@ -6,7 +6,7 @@ $(function() {
             type:'POST',
             data: "idUser="+idUser,
             cache: false,
-            //Succès de la requête
+            //SuccÃ©s de la requÃªte
             success: function(user) {
                 $('#contenu').html(user);
             },
@@ -38,7 +38,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=addPermission',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                 },
                 error: function(html) {
@@ -51,7 +51,7 @@ $(function() {
                 data: datastring,
                 url: './index.php?p=removePermission',
                 cache: false,
-                //Succès de la requête
+                //SuccÃ©s de la requÃªte
                 success: function() {
                 },
                 error: function(html) {
@@ -68,7 +68,7 @@ $(function() {
             data: datastring,
             url: './index.php?p=removeRole',
             cache: false,
-            //Succès de la requête
+            //SuccÃ©s de la requÃªte
             success: function(role) {
                 $('#contenu').html(role);
             },

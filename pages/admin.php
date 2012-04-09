@@ -20,8 +20,11 @@ function manageUser() {
     include_once('./lib/config.php');
     $users = Doctrine_Core::getTable('user')->findByActif(1);
     $roles = Doctrine_Core::getTable('role')->findAll();
-    $contenu = '   
-        <div id="newUser" class="bouton ajout" value="add">Ajouter un utilisateur</div>
+    $contenu = '
+        <div id="newUser" class="bouton ajout" value="add">
+            <i class="icon-add"></i>
+            <span>Ajouter un utilisateur</span>
+        </div>
         <div class="formulaire" action="creation_utilisateur">
             <h2>Utilisateur</h2>
             <div class="colonne_droite">
@@ -35,12 +38,18 @@ function manageUser() {
                     <input class="contour_field requis" type="text" title="Nom complet" placeholder="Nom complet" name="nomcomplet" id="newnomcomplet">
                 </div>
                 <div class="select classique" role="select_role">
-                    <div class="option" id="newrole">R&ocirc;le</div>
+                    <div class="option" id="newrole">Rôle</div>
                     <div class="fleche_bas"> </div>
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,7 +67,7 @@ function manageUser() {
                     <tr class="header">
                         <th>Nom complet</th>
                         <th>Login</th>
-                        <th>R&ocirc;le</th>
+                        <th>Rôle</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -71,7 +80,7 @@ function manageUser() {
                 <td login>' . $user->login . '</td>
                 <td role>' . $user->role->designation . '</td>
                 <td  class="icon"><span class="edit_user" original-title="Modifier le compte" idUser="' . $user->id . '"></span></td>
-                <td  class="icon"><span class="delete_user" original-title="D&eacute;sactiver ' . $user->login . '" idUser="' . $user->id . '"></span></td>
+                <td  class="icon"><span class="delete_user" original-title="Désactiver ' . $user->login . '" idUser="' . $user->id . '"></span></td>
                 
             </tr>';
     }
@@ -82,16 +91,25 @@ function manageUser() {
 function manageRole() {
     $retour = '';
     $retour .= '
-        <div id="newRole" class="bouton ajout" value="add">Ajouter un r&ocirc;le</div>
+        <div id="newRole" class="bouton ajout" value="add">
+            <i class="icon-add"></i>
+            <span>Ajouter un rôle</span>
+        </div>
         <div class="formulaire" action="creation_role">
             <h2>Role</h2>
             <div class="colonne_droite">
                 <div class="input_text">
-                    <input id="designationRole" class="contour_field requis" type="text" title="D&eacute;signation" placeholder="D&eacute;signation">
+                    <input id="designationRole" class="contour_field requis" type="text" title="Désignation" placeholder="Désignation">
                 </div>
                 <div class="sauvegarder_annuler">
-                    <div class="bouton modif" value="save">Enregistrer</div>
-                    <div class="bouton classique" value="cancel">Annuler</div>
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
                 </div>
             </div>
         </div>';
@@ -109,10 +127,10 @@ function affichagePermissions() {
     $retour .= '
         <div style="margin: 10px 0 0 0; clear: both; height: 30px;" class="tab_menu">
             <ul id="permissions_configurator_tabs">
-                <li class="selected" id="configurator_tab_general"><a href="#">Permissions g&eacute;n&eacute;rales</a></li>
+                <li class="selected" id="configurator_tab_general"><a href="#">Permissions générales</a></li>
                 <li id="configurator_tab_documents"><a href="#">Permissions sur les documents</a></li>
                 <li id="configurator_tab_individu"><a href="#">Permissions sur les menus d\'individu</a></li>
-                <li id="configurator_tab_modif_creation"><a href="#">Permissions de modification et de cr&eacute;ation</a></li>
+                <li id="configurator_tab_modif_creation"><a href="#">Permissions de modification et de création</a></li>
                 <li id="configurator_tab_aide"><a href="#">Permissions sur la partie aide</a></li>
             </ul>
         </div>';
@@ -169,7 +187,7 @@ function affichagePermissions() {
             <table class="tableau_classique" cellpadding="0" cellspacing="0">
                 <thead>
                     <tr class="header">
-                      <th>D&eacute;signation</th>
+                      <th>Désignation</th>
                       <th>Nombres d\'utilisateurs</th>
                       <th></th>
                     </tr>
@@ -194,8 +212,8 @@ function listRole($roles, $droit) {
             <table cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
-                        <th class="role">R&ocirc;le</th>
-                        <th class="acces">Acc&eacute;s</th>
+                        <th class="role">Rôle</th>
+                        <th class="acces">Accés</th>
                     </tr>
                 </thead>
                 <tbody>';

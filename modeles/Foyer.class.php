@@ -3,7 +3,6 @@
 class Foyer extends Doctrine_Record {
 
     public function setTableDefinition() {
-        // On définit le nom de notre table : « news ».
         $this->setTableName('foyer');
 
         //Puis, tous les champs
@@ -23,7 +22,7 @@ class Foyer extends Doctrine_Record {
         $this->hasColumn('logDateArrive', 'integer', 20, array('default' => '0')); // timestamp
         $this->hasColumn('logSurface', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('idInstruct', 'integer', 5);
-        $this->hasColumn('notes', 'string', 255, array('default' => ' '));
+        $this->hasColumn('notes', 'string', 255, array('notnull' => true, 'default' => ''));
     }
 
     public function setUp() {
