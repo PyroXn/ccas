@@ -415,13 +415,4 @@ function calculTailleInputSearch() {
         "width" : $('#menu_gauche').outerWidth() - $('.add').outerWidth(true) 
         - parseInt($('#search').css("margin-left")) - 1
     });
-    
-    function createPickers(context) {
-        $(".datefield", context || document).datepicker({
-            showAnim:'fadeIn',
-            dateFormat:'dd/mm/yy',
-            changeMonth:true,
-            changeYear:true
-        });
-    }
 }

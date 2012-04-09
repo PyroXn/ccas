@@ -270,9 +270,134 @@ function deleteUser() {
 
 function statistique() {
 
+    $csp = Doctrine_Core::getTable('profession')->findAll();    
     
-    
-    
+    $contenu ='<div class="rounded_box" style="display: block; ">
+                   <table cellpadding="0" cellspacing="0">
+                       <thead>
+                           <tr>
+                               <th class="role">Information souhait&eacute;e</th>
+                           </tr>
+                       </thead>
+                       <tbody name="groupe1">
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="group1" value="nbinscrit"> Nombre d\'inscrit</td>
+                           </tr>
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="group1" value="nbaide"> Nombre d\'aide</td>
+                           </tr>
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="group1" value="montant"> Montants accord&eacute;s</td>
+                           </tr>
+                           
+                       </tbody>
+                   </table>
+               </div>
+               <div class="rounded_box" style="display: block; ">
+                   <table cellpadding="0" cellspacing="0">
+                       <thead>
+                           <tr>
+                               <th class="role">Par</th>
+                           </tr>
+                       </thead>
+                       <tbody name="groupe2">
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="group2" value="trancheage"> Tranche d\'&acirc;ge</td>
+                           </tr>
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="group2" value="csp"> Cat&eacute;gorie socioprofessionnelle</td>
+                           </tr>
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="group2" value="sexe"> Sexe</td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </div>
+               <div class="rounded_box" style="display: block; ">
+                   <table cellpadding="0" cellspacing="0">
+                       <thead>
+                           <tr>
+                               <th class="role">P&eacute;riode</th>
+                           </tr>
+                       </thead>
+                       <tbody name="groupe3">
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="group3" value="mois"> Mois</td>
+                           </tr>
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="group3" value="trimestre"> Trimestre</td>
+                           </tr>
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="group3" value="an"> Ann&eacute;e</td>
+                           </tr>
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="group3" value="periode"> P&eacute;riode donn&eacute;e</td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </div>
+               <div class="admin_stat">
+               </div>';
+
+    $con = Doctrine_Manager::getInstance()->connection();
+    $st = $con->execute("SELECT ae.id as idaide, i.id as idindividu ,ae.datedemande, t.libelle as libelleaide, ae.avis, ROUND(montantpercu, 2) as montant, '0' as interne
+                         FROM aideexterne ae
+                         INNER JOIN  individu i on i.id = ae.idindividu
+                         LEFT JOIN type t on ae.idaidedemandee = t.id
+
+                         UNION
+
+                         SELECT ai.id as idaide, i.id as idindividu,ai.datedemande, t.libelle as libelleaide, ai.avis, 
+                             ROUND((SELECT IF(SUM(montant)<>'', SUM(montant), 0)  
+                             FROM bonaide ba
+                             WHERE ba.idaideinterne = ai.id), 2) as montant, '1' as interne
+                         FROM aideinterne ai
+                         INNER JOIN  individu i on i.id = ai.idindividu
+                         INNER JOIN type t on t.id = ai.idaidedemandee");
+    // fetch query result
+    $result = $st->fetchAll();
+
+    $tabTemp = $result;
+
+
+    return $contenu;
 }
 
+function genererStat() {
+    include_once('./lib/config.php');
+    $gp1 = $_POST['groupe1'];
+    $gp2 = $_POST['groupe2'];
+    $gp3 = $_POST['groupe3'];
+    
+    $x = "";
+    $y = "";
+
+    SWITCH ($groupe2) {
+        case 'trancheage' :
+            $x = array('moins de 18 ans', '18-25 ans', '16-40 ans', '41-60 ans', 'plus de 60 ans');
+            break;
+        case 'csp' :
+                foreach($professions as $profession) {
+                    array_push($x, $profession->profession);
+                }
+            break;            
+        case 'sexe' :
+            $x = array('Homme', 'Femme');
+            break;
+        }
+    
+    SWITCH ($groupe1) {
+        //Nombre d\'inscritNombre d\'aideMontants accord&eacute;s
+        case 'nbinscrit' :
+            
+            break;
+        case 'nbaide' :
+            break;
+        case 'montant' :
+            break;  
+    }
+    
+    
+    echo "ahahahahahahah";
+}
 ?>

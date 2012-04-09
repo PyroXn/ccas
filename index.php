@@ -74,6 +74,10 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         removeRole();
         break;
+    case 'genererStat':
+        include_once('./pages/admin.php');
+        genererStat();
+        break;
     case 'updateChefDeFamille':
         include_once('./pages/individu.php');
         updateChefDeFamille();

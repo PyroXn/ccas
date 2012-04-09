@@ -77,4 +77,24 @@ $(function() {
             }
         });
     });
+    
+    $('.radio_stat').live('change', function(){
+        var datastring = 'groupe1=' + $("input[name='groupe1']:checked").val() 
+                       + '&groupe2=' + $("input[name='groupe2']:checked").val()
+                       + '&groupe3=' + $("input[name='groupe3']:checked").val();
+        $.ajax({
+            type: 'POST',
+            data: datastring,
+            url: './index.php?p=genererStat',
+            cache: false,
+            //Succès de la requête
+            success: function(graph) {
+                alert('succes');
+                $('#graph_stat').html(graph);
+            },
+            error: function() {
+                $("#graph_stat").html();
+            }
+        });
+    });
 });    
