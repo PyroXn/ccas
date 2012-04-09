@@ -38,6 +38,10 @@ function contenu() {
             include_once('./pages/admin.php');
             echo manageUser();
             break;
+        case 'statistique' :
+            include_once('./pages/admin.php');
+            echo statistique();
+            break;
         case 'managerole' :
             include_once('./pages/admin.php');
             echo manageRole();

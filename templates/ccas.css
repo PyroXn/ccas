@@ -15,7 +15,7 @@ body {
 ul {
     list-style: none outside none;
 }
-
+	
 .clearboth {
     clear: both;
     display: block;
@@ -223,15 +223,6 @@ input[type=submit] , input[type=reset], input[type=button] {
     -webkit-border-radius: 3px 3px 0 0;
     -moz-border-radius: 3px 3px 0 0;
     border-radius: 3px 3px 0 0;
-}
-
-#page_header .page_header_link {
-    font-weight: bold;
-    line-height: 20px;
-    margin: 0 1px;
-    padding: 0 10px;
-    display: block;
-    float: left;
 }
 
 .label {

@@ -74,6 +74,10 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         removeRole();
         break;
+    case 'genererStat':
+        include_once('./pages/admin.php');
+        genererStat();
+        break;
     case 'updateChefDeFamille':
         include_once('./pages/individu.php');
         updateChefDeFamille();
@@ -409,6 +413,9 @@ function generationHeaderNavigation($mode) {
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
                     <span class="label">Gérer les utilisateurs</span>
+                </div>
+                <div id="statistique" href="#" class="page_header_link">
+                    <span class="label">Statistiques</span>
                 </div>';
             break;
         case 'config' :
