@@ -9,7 +9,7 @@ if($.cookie("css")) {
 }
 
 $(function() {
-    $("#cssSwitch li a").click(function() { 
+    $(".css_switch").click(function() { 
         $("link.switchable").attr("href",$(this).attr('rel'));
         $("link.switchable2").attr("href",$(this).attr('rel2'));
         $.cookie("css",$(this).attr('rel'), {expires: 30, path: '/'});

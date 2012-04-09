@@ -24,16 +24,15 @@
                     </a>
                 </li>
             </ul>
-            <ul id="cssSwitch">
-                <li>
-                    <a href="#" rel="./templates/form.css" rel2="./templates/ccas.css" class="cssform1" title="Thème classique"></a>
-                </li>
-                <li>
-                    <a href="#" rel="./templates/form2.css" rel2="./templates/ccas2.css" class="cssform2" title="Thème en couleur"></a>
-                </li>
-            </ul>
+            
             <div id="navigationright">
                 <ul id="connexionlist">
+                    <li class="navigationligne">
+                        <a href="#" rel="./templates/form.css" rel2="./templates/ccas.css" class="css_switch cssform1" title="Thème classique"></a>
+                    </li>
+                    <li class="navigationligne">
+                        <a href="#" rel="./templates/form2.css" rel2="./templates/ccas2.css" class="css_switch cssform2" title="Thème en couleur"></a>
+                    </li>
                     <li class="navigationligne">
                         <a class="lien_navigation" href="index.php" title="Accueil">
                             <span class="border_top"></span>
@@ -41,7 +40,7 @@
                             include_once('./lib/config.php');
                             if(isset($_SESSION['userId'])) {
                                 $user = Doctrine_Core::getTable('user')->find($_SESSION['userId']);
-                                echo '<span class="categorie">'.$user->nomcomplet.'</span>';
+                                echo '<span class="categorie"><span class="home"></span>'.$user->nomcomplet.'</span>';
                             } else {
                                 echo  '<span class="categorie">No Connect</span>';
                             }
