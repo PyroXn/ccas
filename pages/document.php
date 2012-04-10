@@ -2,68 +2,68 @@
 
 function getDocumentIndividu() {
     
-    $dir_nom = './document/'.$_POST['idIndividu'];
-    $dir = opendir($dir_nom) or die('Erreur de listage : le répertoire n\'existe pas'); // on ouvre le contenu du dossier courant
-    $fichier= array(); // on déclare le tableau contenant le nom des fichiers
-    $arrayExtension = array();
-    while($element = readdir($dir)) {
-            if($element != '.' && $element != '..') {
-                    if (!is_dir($dir_nom.'/'.$element)) {$fichier[] = $element;}
-            }
-    }
-
-    closedir($dir);
-    
-    
-    $contenu = '
-        <h3>Documents :</h3>
-            <div class="bubble tableau_classique_wrapper">
-                <table class="tableau_classique" cellpadding="0" cellspacing="0">
-                    <thead>
-                        <tr class="header">
-                            <th>Nom document</th>
-                            <th>Type fichier</th>
-                            <th>Date derniére modification</th>
-                            <th>Télécharger</th>
-                        </tr>
-                    </thead>
-                    <tbody>';
-    if(!empty($fichier)) {
-        $i = 1;
-        foreach($fichier as $file) {
-            $extension = pathinfo($dir_nom.'/'.$file, PATHINFO_EXTENSION);
-
-            $i % 2 ? $contenu .= '<tr name="'.$file.'">' : $contenu .= '<tr class="alt" name="'.$file.'">';
-            $contenu .= '<td>'.$file.'</td>
-                         <td> ';
-            switch ($extension) {
-                case "doc":
-                case "docx":
-                    $contenu .= 'Microsoft word';
-                    break;
-                case "xls":
-                case "xlsx":
-                    $contenu .= 'Microsoft excel';
-                    break;
-                case "pdf":
-                    echo "pdf";
-                    break;
-            }
-         $contenu .=    '</td>
-                         <td> '.getDatebyTimestamp(filemtime($dir_nom.'/'.$file)).'</td>
-                         <td><span class="open_doc"></span></td>
-                        </tr>';
-            $i++;
+    $dir_nom = './document/'.$_POST['idFoyer'].'/'.$_POST['idIndividu'];
+    //renvoie faux si le repertoire existe pas
+    if (file_exists($dir_nom)){ 
+        $dir = opendir($dir_nom);// on ouvre le contenu du dossier courant
+        $fichier= array(); // on déclare le tableau contenant le nom des fichiers
+        $arrayExtension = array();
+        while($element = readdir($dir)) {
+                if($element != '.' && $element != '..') {
+                        if (!is_dir($dir_nom.'/'.$element)) {$fichier[] = $element;}
+                }
         }
+        closedir($dir);
+        $contenu = '
+            <h3>Documents :</h3>
+                <div class="bubble tableau_classique_wrapper">
+                    <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr class="header">
+                                <th>Nom document</th>
+                                <th>Type fichier</th>
+                                <th>Date derniére modification</th>
+                                <th>Télécharger</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
+        if(!empty($fichier)) {
+            foreach($fichier as $file) {
+                $extension = pathinfo($dir_nom.'/'.$file, PATHINFO_EXTENSION);
+
+                $contenu .= '<tr name="'.$file.'">';
+                $contenu .= '<td>'.$file.'</td>
+                             <td> ';
+                switch ($extension) {
+                    case "doc":
+                    case "docx":
+                        $contenu .= 'Microsoft word';
+                        break;
+                    case "xls":
+                    case "xlsx":
+                        $contenu .= 'Microsoft excel';
+                        break;
+                    case "pdf":
+                        $contenu .= 'pdf';
+                        break;
+                }
+             $contenu .=    '</td>
+                             <td> '.getDatebyTimestamp(filemtime($dir_nom.'/'.$file)).'</td>
+                             <td><a href="'.$dir_nom.'/'.$file.'" target=_blank class="open_doc"></a></td>
+                            </tr>';
+            }
+        } else {
+            $contenu .= '<tr>
+                             <td colspan=9 align=center>< Aucune document n\'a été attribué à cet individu > </td>
+                         </tr>';
+        }
+
+        $contenu .= '</tbody></table>';
+
+        return $contenu;
     } else {
-        $contenu .= '<tr>
-                         <td colspan=9 align=center>< Aucune document n\'a été attribué à cet individu > </td>
-                     </tr>';
+        return 'Erreur de listage : le répertoire n\'existe pas. Il est possible qu\'aucun document n\'éxiste pour cet individu.';
     }
-
-    $contenu .= '</tbody></table>';
-
-    return utf8_encode($contenu);
 }
 
 
