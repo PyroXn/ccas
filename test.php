@@ -3,11 +3,10 @@
 include_once('./lib/config.php');
 include_once('./pages/graphique.php');
 
-$tab = getLastYear();
-print_r($tab[8]['nb']);
+echo time() .' '. mktime(0, 0, 0, date('m'), date('d'), date('Y')); ;
 
 //    $retour = '';
-//    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accepté'));
+//    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Acceptï¿½'));
 //    foreach($aides as $aide) {
 //        $retour .= $aide->id;
 //    }

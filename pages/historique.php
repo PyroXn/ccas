@@ -13,7 +13,13 @@ function createHistorique($typeAction, $objet, $idUser, $idIndividu) {
 
 function affichageHistoriqueByIndividu() {
     $contenu = creationRecherche(false);
-    $historiques = Doctrine_Core::getTable('historique')->findByIdIndividu($_POST['idIndividu']);
+    //trop lent
+//    $historiques = Doctrine_Core::getTable('historique')->findByIdIndividuAndD($_POST['idIndividu']);
+    $historiques = Doctrine_Query::create()
+        ->from('historique')
+        ->where('idIndividu = ?', $_POST['idIndividu'])
+        ->andWhere('date >= ?', mktime(0, 0, 0, date('m'), date('d'), date('Y')))
+        ->execute();
     $contenu .= '<div><h3>Historique</h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
@@ -34,7 +40,12 @@ function affichageHistoriqueByIndividu() {
 
 function affichageHistorique() {
     $contenu = creationRecherche(true);
-    $historiques = Doctrine_Core::getTable('historique')->findAll();
+    //trop lent
+//    $historiques = Doctrine_Core::getTable('historique')->findAll();
+    $historiques = Doctrine_Query::create()
+        ->from('historique')
+        ->where('date >= ?', mktime(0, 0, 0, date('m'), date('d'), date('Y')))
+        ->execute();
     $contenu .= '<div><h3>Historique</h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
@@ -120,7 +131,7 @@ function creationRecherche($global) {
                 </div>
                 <div class="colonne">
                     <span class="attribut">date supérieur à : </span>
-                    <span><input class="contour_field input_date rechercheHistorique" size="10" type="text" columnName="dateSup" value=""/></span>
+                    <span><input class="contour_field input_date rechercheHistorique" size="10" type="text" columnName="dateSup" '.getDatebyTimestampInput(time()).'/></span>
                 </div>
             </li>
         </ul>

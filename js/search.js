@@ -314,6 +314,9 @@ $(function() {
     $('.rechercheHistorique').live("keyup", function() {
         searchTableHistorique();
     });
+    $('.rechercheHistorique').live("change", function() {
+        searchTableHistorique();
+    });
 });
 
 function searchTableHistorique() {
