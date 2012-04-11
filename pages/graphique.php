@@ -92,49 +92,53 @@ function graphTypeAction() {
     include_once('./lib/config.php');
     $tab = array();
     $actions = Doctrine_Core::getTable('action')->findAll();
-    foreach ($actions as $action) {
-        if (!array_key_exists($action->typeaction->libelle, $tab)) {
-            $tab[$action->typeaction->libelle] = 1;
-        } else {
-            $tab[$action->typeaction->libelle] += 1;
-        }
-    }
-    $x = '[';
-    $s1 = '[';
-    $i = 0;
-    foreach($tab as $key => $value) {
-        if($i < 12) {
-            $x = $x.'"'.$key.'", ';
-            $s1 = $s1.''.$value.', ';
-            $i++;
-        }
-    }
-
-    $x = substr($x, 0, strlen($x)-2);
-    $s1 = substr($s1, 0, strlen($s1)-2);
-    $x[strlen($x)] = ']';
-    $s1[strlen($s1)] = ']';
-
-    $retour = '<div id="graphTypeAction" style="height:250px;width:800px; "></div>';
-        $retour .= "
-         <script type='text/javascript'>
-            var s1 = ".$s1.";
-        var ticks = ".$x.";
-         
-        plot2 = $.jqplot('graphTypeAction', [s1], {
-            title: 'Répartition des actions les plus utilisés',
-            seriesDefaults: {
-                renderer:$.jqplot.BarRenderer,
-                pointLabels: { show: true }
-            },
-            axes: {
-                xaxis: {
-                    renderer: $.jqplot.CategoryAxisRenderer,
-                    ticks: ticks
-                }
+    $retour = '';
+    if(count($actions) > 0) {
+        foreach ($actions as $action) {
+            if (!array_key_exists($action->typeaction->libelle, $tab)) {
+                $tab[$action->typeaction->libelle] = 1;
+            } else {
+                $tab[$action->typeaction->libelle] += 1;
             }
-        });
-         </script>";
+        }
+        arsort($tab);
+        $x = '[';
+        $s1 = '[';
+        $i = 0;
+        foreach($tab as $key => $value) {
+            if($i < 12) {
+                $x = $x.'"'.$key.'", ';
+                $s1 = $s1.''.$value.', ';
+                $i++;
+            }
+        }
+
+        $x = substr($x, 0, strlen($x)-2);
+        $s1 = substr($s1, 0, strlen($s1)-2);
+        $x[strlen($x)] = ']';
+        $s1[strlen($s1)] = ']';
+
+        $retour = '<div id="graphTypeAction" style="height:250px;width:800px; "></div>';
+            $retour .= "
+            <script type='text/javascript'>
+                var s1 = ".$s1.";
+            var ticks = ".$x.";
+
+            plot2 = $.jqplot('graphTypeAction', [s1], {
+                title: 'Répartition des actions les plus utilisés',
+                seriesDefaults: {
+                    renderer:$.jqplot.BarRenderer,
+                    pointLabels: { show: true }
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        ticks: ticks
+                    }
+                }
+            });
+            </script>";
+    }
 //    $retour = '
 //        <table id="graphTypeAction" class="hide">
 //                    <caption>Nombre et type d\'action</caption>
