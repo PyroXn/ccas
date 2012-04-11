@@ -7,11 +7,22 @@ function getDocumentIndividu() {
     if (file_exists($dir_nom)){ 
         $dir = opendir($dir_nom);// on ouvre le contenu du dossier courant
         $fichier= array(); // on déclare le tableau contenant le nom des fichiers
+        $dossier= array();
         $arrayExtension = array();
         while($element = readdir($dir)) {
                 if($element != '.' && $element != '..') {
                         if (!is_dir($dir_nom.'/'.$element)) {$fichier[] = $element;}
+                        else { $dossier[] = $element; }
                 }
+        }
+        while($tab = current($dossier)) {
+            $sousDir = opendir($dir_nom.'/'.$tab);
+            while($dos = readdir($sousDir)) {
+                if($dos != '.' && $dos != '..') {
+                            if (!is_dir($dir_nom.'/'.$tab.'/'.$dos)) {$fichier[] = '/'.$tab.'/'.$dos;}
+                }
+            }
+            next($dossier);
         }
         closedir($dir);
         $contenu = '

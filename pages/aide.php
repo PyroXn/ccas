@@ -319,7 +319,7 @@ function detailAideInterne() {
 
     if (sizeof($bonAides) != null) {
         foreach($bonAides as $bonAide) {
-            $chemin = './document/'.$bonAide->aideInterne->individu->id.'/'.$bonAide->aideInterne->id;
+            $chemin = './document/'.$bonAide->aideInterne->individu->idFoyer.'/'.$bonAide->aideInterne->individu->id.'/'.$bonAide->aideInterne->id;
             $i % 2 ? $contenu .= '<tr name="'.$bonAide->id.'">' : $contenu .= '<tr class="alt" name="'.$bonAide->id.'">';
             $contenu .= '<td>'.$bonAide->aideInterne->typeAideDemandee->libelle.'</td>
                                     <td> '.getDatebyTimestamp($bonAide->dateRemisePrevue).'</td>
@@ -327,7 +327,7 @@ function detailAideInterne() {
                                     <td> '.$bonAide->instruct->nom.'</td>                                
                                     <td> '.$bonAide->montant.'€</td>
                                     <td>'.$bonAide->commentaire.'</td>
-                                    <td>'.pdfExist($chemin, $bonAide->id).'</td>
+                                    <td>'.pdfExist($chemin, $bonAide->id, $bonAide->dateRemisePrevue).'</td>
                         </tr>';
             $i++;
         }
@@ -537,15 +537,20 @@ function creationPDFBonInterne($bon) {
     $num = $bon->aideInterne->individu->foyer->numRue;
     $idIndividu = $bon->aideInterne->individu->id;
     $lettres = int2str($bon->montant);
-    $chemin = './document/'.$idIndividu;
+    $chemin = './document/'.$bon->aideInterne->individu->idFoyer;
     $idAide = $bon->aideInterne->id;
     $numBon = $bon->id;
     if(!is_dir($chemin)) {
         mkdir($chemin);
     }
-    if(!is_dir($chemin.'/'.$idAide)) {
-        mkdir($chemin.'/'.$idAide);
+    if(!is_dir($chemin.'/'.$bon->aideInterne->individu->id)) {
+        mkdir($chemin.'/'.$bon->aideInterne->individu->id);
     }
+    if(!is_dir($chemin.'/'.$bon->aideInterne->individu->id.'/'.$idAide)) {
+        mkdir($chemin.'/'.$bon->aideInterne->individu->id.'/'.$idAide);
+    }
+    $chemin = $chemin.'/'.$bon->aideInterne->individu->id.'/'.$idAide;
+    $dateBon = $bon->dateRemisePrevue;
     include_once('./lib/PDF/generateBon.php');
 }
 
@@ -834,11 +839,12 @@ function detailAideExterne() {
     return $contenu;
 }
 
-function pdfExist($chemin, $idBon) {
-    if(is_dir($chemin) && file_exists($chemin.'/'.$idBon.'.pdf')) {
-        return '<a name="'.$chemin.'/'.$idBon.'.pdf" href="'.$chemin.'/'.$idBon.'.pdf" target="_blank">V</a>';
+function pdfExist($chemin, $idBon, $date) {
+    $date = date('d-m-Y', $date);
+    if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf')) {
+        return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" target="_blank">V</a>';
     } else {
-        return '<a name="'.$chemin.'/'.$idBon.'.pdf" idBon="'.$idBon.'" class="create_bon_interne">C</a>';
+        return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" class="create_bon_interne">C</a>';
     }
 }
 
