@@ -82,20 +82,20 @@ function getDocument() {
                             <!-- The fileinput-button span is used to style the file input field as button -->
                             <span class="btn btn-success fileinput-button">
                                 <i class="icon-plus icon-white"></i>
-                                <span>Add files...</span>
+                                <span>Ajouter un fichier</span>
                                 <input type="file" name="files[]" multiple>
                             </span>
                             <button type="submit" class="btn btn-primary start">
                                 <i class="icon-upload icon-white"></i>
-                                <span>Start upload</span>
+                                <span>Envoyer le fichier</span>
                             </button>
                             <button type="reset" class="btn btn-warning cancel">
                                 <i class="icon-ban-circle icon-white"></i>
-                                <span>Cancel upload</span>
+                                <span>Annuler l\'envois</span>
                             </button>
                             <button type="button" class="btn btn-danger delete">
                                 <i class="icon-trash icon-white"></i>
-                                <span>Delete</span>
+                                <span>Supprimer</span>
                             </button>
                             <input type="checkbox" class="toggle">
                         </div>

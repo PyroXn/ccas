@@ -2,7 +2,9 @@
 function tableauBord() {
     $retour = '<h2>Tableau de bord</h2>';
     $retour .= graphNewUsager();
+    $retour .= '<br /><br />';
     $retour .= graphTypeAction();
+    $retour .= '<br /><br />';
     $retour .= graphTypeAideInterne();
     return $retour;
 }
@@ -202,7 +204,7 @@ function graphTypeAideInterne() {
         var ticks = ".$x.";
 
     plot2 = $.jqplot('graphTypeAideInterne', [s1, s2], {
-        title: 'Répartition des aides les plus demandés, par sexe',
+        title: 'Répartition par sexe des aides les plus demandés',
         seriesDefaults: {
             renderer:$.jqplot.BarRenderer,
             pointLabels: { show: true }
