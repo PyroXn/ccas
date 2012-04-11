@@ -366,13 +366,13 @@ function generationHeaderNavigation($mode) {
             if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_FOYER)) { 
                 $retour .= '
                     <div id="foyer" class="page_header_link active">
-                        <span class="label">Foyer</span>
+                        <span class="label">Logement</span>
                     </div>';
             }
             if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_GENERALITES)) { 
                 $retour .= '
                     <div id="generalites" class="page_header_link">
-                        <span class="label">Généralité</span>
+                        <span class="label">Généralités</span>
                     </div>';
             }
             if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_BUDGET)) { 
