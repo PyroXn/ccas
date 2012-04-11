@@ -126,7 +126,7 @@ function getDocument() {
                 <div class="modal-footer">
                     <a class="btn modal-download" target="_blank">
                         <i class="icon-download"></i>
-                        <span>Download</span>
+                        <span>Télécharger</span>
                     </a>
                     <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
                         <i class="icon-play icon-white"></i>

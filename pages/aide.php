@@ -431,6 +431,7 @@ function createAideInterne($typeAide, $date, $instruct, $nature, $proposition, $
     $aide->idOrganisme = $organisme;
     $aide->aideUrgente = $urgence;
     $aide->save();
+    createPDFRapportSocial($idIndividu);
 }
 
 function createAideExterne($typeAide, $date, $instruct, $nature, $idDistrib, $etat, $idIndividu, $organisme, $urgence, $montantDemande) {
@@ -851,6 +852,14 @@ function createPDFRapportSocial($idIndividu) {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($idIndividu);
     $famille = $individu->foyer->individu;
+    $idFoyer = $individu->idFoyer;
+    $chemin = './document/'.$idFoyer;
+    if(!is_dir($chemin)) {
+        mkdir($chemin);
+    }
+    if(!is_dir($chemin.'/'.$individu->id)) {
+        mkdir($chemin.'/'.$individu->id);
+    }
     $nomComplet = $individu->civilite .' '. $individu->nom.' '. $individu->prenom;
     include_once('./lib/PDF/generateRapport.php');   
 }
