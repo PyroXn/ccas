@@ -255,39 +255,44 @@ function graphTypeAideInterne() {
 function getDataGraphAideInterne() {
     include_once('./lib/config.php');
     $tab = array();
-//    $nbAide = Doctrine_Core::getTable('aideinterne')->findByIdAideDemandee($aide->id);
+	
     $con = Doctrine_Manager::getInstance()->connection();
-    $st = $con->execute("SELECT distinct(t.libelle), (SELECT count(*) FROM individu INNER JOIN aideinterne ai on ai.idindividu = individu.id INNER JOIN type ty on ty.id = ai.idaidedemandee WHERE sexe = 'Homme' AND ty.libelle = t.libelle) as homme, (SELECT count(*) FROM individu INNER JOIN aideinterne ai on ai.idindividu = individu.id INNER JOIN type ty on ty.id = ai.idaidedemandee WHERE sexe = 'Femme' AND ty.libelle = t.libelle) as femme
-FROM aideinterne ai
-INNER JOIN type t on t.id = ai.idaidedemandee
-INNER JOIN individu i on i.id = ai.idindividu
-ORDER BY homme+femme DESC
-LIMIT 6");
+    $con->execute("CREATE TEMPORARY TABLE h(
+					libelle VARCHAR(40) NOT NULL,
+					homme int(6) NOT NULL);
+
+					INSERT INTO h 
+					SELECT distinct(t.libelle), count(*) homme
+					FROM aideinterne ai
+					INNER JOIN type t on t.id = ai.idaidedemandee
+					INNER JOIN individu i on i.id = ai.idindividu
+					WHERE sexe = 'Homme'
+					GROUP BY t.libelle;");
+
+	$con->execute("CREATE TEMPORARY TABLE f(
+					libelle VARCHAR(40) NOT NULL,
+					femme int(6) NOT NULL);
+
+					INSERT INTO f
+					SELECT distinct(t.libelle), count(*) homme
+					FROM aideinterne ai
+					INNER JOIN type t on t.id = ai.idaidedemandee
+					INNER JOIN individu i on i.id = ai.idindividu
+					WHERE sexe = 'Femme'
+					GROUP BY t.libelle;");
+
+	$st = $con->execute("SELECT h.libelle, h.homme, f.femme
+						FROM h
+						INNER JOIN f on f.libelle = h.libelle
+						ORDER BY homme+femme DESC
+						LIMIT 6");
+	
     $result = $st->fetchAll();
-//    $typeAides = Doctrine_Core::getTable('type')->findByCategorie(1); // Libellé aide interne
-//    foreach ($typeAides as $aide) {
-//        $nbAide = Doctrine_Core::getTable('aideinterne')->findByIdAideDemandee($aide->id);
-//        $con = Doctrine_Manager::getInstance()->connection();
-//        $st = $con->execute("SELECT count(*) as nbHomme FROM aideinterne ai INNER JOIN individu i on i.id=ai.idindividu WHERE i.sexe='Masculin'");
-//        $result = $st->fetchAll();
-//        if (count($nbAide) != 0) {
-//            foreach($nbAide as $aide) {
-//                if(!array_key_exists($typeAides->libelle, $tab)) {
-//                    $tab[$typeAides->libelle]['Homme'] = 0;
-//                    $tab[$typeAides->libelle]['Femme'] = 0;
-//                }
-//                if($aide->individu->sexe == 'Homme') {
-//                    $tab[$typeAides->libelle]['Homme'] += 1;
-//                } else {
-//                    $tab[$typeAides->libelle]['Femme'] += 1;
-//                }
-//            }
-//            
-//        }
-//    }
-//        print_r($result[1]);
-//    exit();
-//    arsort($tab);
+	
+	//DELETE TEMP TABLE
+	$con->execute("Drop Table h;");
+	$con->execute("Drop Table f;");
+	
     return $result;
 }
 
