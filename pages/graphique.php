@@ -1,6 +1,6 @@
 <?php
 function tableauBord() {
-    $retour = '<h2>Tableau de bord</h2>';
+    $retour = '';
     $retour .= graphNewUsager();
     $retour .= '<br /><br />';
     $retour .= graphTypeAction();

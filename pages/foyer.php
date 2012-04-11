@@ -15,7 +15,7 @@ function foyer() {
 
 function foyerContenu($idFoyer) {
     $contenu = '';
-    $contenu .= '<h2>Foyer</h2>';
+    $contenu .= '';
     $foyer = Doctrine_Core::getTable('foyer')->find($idFoyer);
 
     function sortFoyer($a, $b) {

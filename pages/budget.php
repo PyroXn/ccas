@@ -6,7 +6,7 @@ function budget() {
     $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
     $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
     $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($_POST['idIndividu']);
-    $contenu = '<h2>Budget</h2>';
+    $contenu = '';
     $contenu .= afficherRessources($ressource);
     $contenu .= afficherDepenses($depense);
     $contenu .= '          

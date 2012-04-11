@@ -5,7 +5,7 @@ function action() {
     $actions = Doctrine_Core::getTable('action')->findByIdIndividu($_POST['idIndividu']);
     $types = Doctrine_Core::getTable('type')->findByCategorie(2); // Type Action
     $instructs = Doctrine_Core::getTable('instruct')->findByInterne(1); // Instruct interne
-    $contenu = '<h2>Actions</h2>';
+    $contenu = '';
         if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_ACTION)) {
         $contenu .= '
             <div id="createAction" class="bouton ajout">

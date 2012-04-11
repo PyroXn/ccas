@@ -3,7 +3,7 @@ function generalite() {
     include_once('./lib/config.php');
     $user = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     
-    $contenu = '<h2>Généralités</h2>';
+    $contenu = '';
     $contenu .= afficherInfoPerso($user);
     $contenu .= afficherContact($user);
     $contenu .= afficherSituationPro($user);
