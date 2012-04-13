@@ -219,8 +219,9 @@ function home() {
         } else {
             $contenu .= '<li class="impair individu" id="' . $i . '">';
         }
+        $chefFamille = $individu->chefDeFamille ? ' <span class="chef_famille"></span>' : '';
         $contenu .= '
-                           <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                           <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom .$chefFamille.'</span>
                  </li>';
         $i++;
     }
@@ -296,8 +297,9 @@ function search() {
         } else {
             $retour .= '<li class="impair individu" id="' . $i . '">';
         }
+        $chefFamille = $individu->chefDeFamille ? ' <span class="chef_famille"></span>' : '';
         $retour .= '
-                         <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                         <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom .$chefFamille.'</span>
                  </li>';
         $i++;
     }
@@ -323,8 +325,9 @@ function creationListeByFoyer($idFoyer, $idIndividu) {
                 $retour .= '<li class="impair individu" id="' . $i . '">';
             }
         }
+        $chefFamille = $individu->chefDeFamille ? ' <span class="chef_famille"></span>' : '';
         $retour .= '
-                        <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . ' </span>
+                        <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom .$chefFamille.'</span>
                 </li>';
         $i++;
     }
@@ -458,8 +461,9 @@ function scroll() {
         } else {
             $retour .= '<li class="impair individu" id="' . $i . '">';
         }
+        $chefFamille = $individu->chefDeFamille ? ' <span class="chef_famille"></span>' : '';
         $retour .= '
-                    <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                    <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom .$chefFamille.'</span>
             </li>';
         $i++;
     }

@@ -282,6 +282,20 @@ input[type=submit] , input[type=reset], input[type=button] {
     padding-left: 20px;
 }
 
+.chef_famille {
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    width: 14px;
+    height: 14px;
+    background-image: url("img/glyphicons-black.png");
+    background-position: -168px 0;
+}
+
+.current .chef_famille {
+    background-image: url("img/glyphicons-white.png");
+}
+
 .nb_individu {
     padding-left: 3px;
     font-style: italic;
