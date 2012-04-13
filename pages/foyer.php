@@ -169,6 +169,13 @@ $retour .= verifieValeurNull($foyer->idBailleur) ? '
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
+                <li class="ligne_list_classique">
+                    <div class="colonne_large">
+                        <span class="attribut">Note :</span>
+                        <span><textarea class="contour_field input_char" type="text" id="note" disabled>'.$foyer->notes.'</textarea></span>
+                    </div>
+                </li>
+                <li class="ligne_list_classique">
                     <div class="colonne">
                         <span class="attribut">Instructeur :</span>
                         <div class="select classique" role="select_instruct" disabled>';
@@ -177,13 +184,16 @@ $retour .= verifieValeurNull($foyer->idInstruct) ? '
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
+                    <div class="colonne">
+                        <span class="attribut">Suivi par le ccas : </span>';
+        if($foyer->instruct->interne == 1) {
+            $retour .= '<span class="checkbox checkbox_active" value="1" disabled></span>';
+        } else {
+            $retour .= '<span class="checkbox" value="0" disabled></span>';
+        }
+
+        $retour .= '</div>
                 </li>
-                <li class="ligne_list_classique">
-                    <div class="colonne_large">
-                        <span class="attribut">Note :</span>
-                        <span><textarea class="contour_field input_char" type="text" id="note" disabled>'.$foyer->notes.'</textarea></span>
-                    </div>
-               </li>
             </ul>';
        
 $retour .= '
