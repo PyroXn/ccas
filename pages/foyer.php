@@ -116,6 +116,32 @@ function generateInfoFoyer($foyer) {
             <ul class="list_classique">
                 <li class="ligne_list_classique">
                     <div class="colonne">
+                        <span class="attribut">Instructeur :</span>
+                        <div class="select classique" role="select_instruct" disabled>';
+$retour .= verifieValeurNull($foyer->idInstruct) ? '
+                            <div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
+$retour .= '                <div class="fleche_bas"> </div>
+                        </div>
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Suivi par le ccas : </span>';
+/* $('#instruct').live('change', function() {
+        if ($(this).attr(interne) == 1) {
+            console.log('interne');
+        } else {
+            console.log('externe');
+        }
+    });*/
+        if($foyer->instruct->interne == 1) {
+            $retour .= '<span class="checkbox checkbox_active lock" value="1" disabled></span>';
+        } else {
+            $retour .= '<span class="checkbox lock" value="0" disabled></span>';
+        }
+
+        $retour .= '</div>
+                </li>
+                <li class="ligne_list_classique">
+                    <div class="colonne">
                         <span class="attribut">N° :</span>
                         <span><input type="text" class="contour_field input_num" id="numrue" value="'.$foyer->numRue.'" disabled/></span>
                     </div>
@@ -175,25 +201,6 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span><textarea class="contour_field input_char" type="text" id="note" disabled>'.$foyer->notes.'</textarea></span>
                     </div>
                 </li>
-                <li class="ligne_list_classique">
-                    <div class="colonne">
-                        <span class="attribut">Instructeur :</span>
-                        <div class="select classique" role="select_instruct" disabled>';
-$retour .= verifieValeurNull($foyer->idInstruct) ? '
-                            <div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
-$retour .= '                <div class="fleche_bas"> </div>
-                        </div>
-                    </div>
-                    <div class="colonne">
-                        <span class="attribut">Suivi par le ccas : </span>';
-        if($foyer->instruct->interne == 1) {
-            $retour .= '<span class="checkbox checkbox_active" value="1" disabled></span>';
-        } else {
-            $retour .= '<span class="checkbox" value="0" disabled></span>';
-        }
-
-        $retour .= '</div>
-                </li>
             </ul>';
        
 $retour .= '
@@ -208,7 +215,7 @@ $retour .= '
  $retour .= '<ul class="select_instruct">';
     foreach($instructs as $instruct) {
         $retour .= '<li>
-                                <div value="'.$instruct->id.'">'.$instruct->nom.'</div>
+                                <div value="'.$instruct->id.'" interne='.$instruct->interne.'>'.$instruct->nom.'</div>
                            </li>';
     }
     $retour .= '</ul>';
