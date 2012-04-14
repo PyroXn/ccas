@@ -837,7 +837,9 @@ $(function() {
             $(this).parent().next().children().find('input').removeAttr('disabled');
             $(this).parent().next().children().find('[class^=select]').removeAttr('disabled');
             $(this).parent().next().children().find('textarea').removeAttr('disabled');
-            $(this).parent().next().children().find('[class^=checkbox]').removeAttr('disabled');
+            if (!$(this).parent().next().children().find('[class^=checkbox]').hasClass('lock')) {
+                $(this).parent().next().children().find('[class^=checkbox]').removeAttr('disabled');
+            }
         } else {
             $(this).parent().next().children().find('input').attr('disabled','');
             $(this).parent().next().children().find('[class^=select]').attr('disabled','');
