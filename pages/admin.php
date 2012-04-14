@@ -132,6 +132,7 @@ function affichagePermissions() {
                 <li id="configurator_tab_individu"><a href="#">Permissions sur les menus d\'individu</a></li>
                 <li id="configurator_tab_modif_creation"><a href="#">Permissions de modification et de création</a></li>
                 <li id="configurator_tab_aide"><a href="#">Permissions sur la partie aide</a></li>
+                <li id="configurator_tab_tableaubord"><a href="#">Permissions sur les tableaux de bords</a></li>
             </ul>
         </div>';
     $retour .= '
@@ -180,6 +181,11 @@ function affichagePermissions() {
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_CREATION_AIDE_EXTERNE) . '</span>' . listRole($roles, Droit::$DROIT_CREATION_AIDE_EXTERNE) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_APPORTER_DECISION) . '</span>' . listRole($roles, Droit::$DROIT_APPORTER_DECISION) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_CREATION_BON_INTERNE) . '</span>' . listRole($roles, Droit::$DROIT_CREATION_BON_INTERNE) . '</li>
+                </ul>
+            </div>
+            <div id="configurator_tab_tableaubord_pane" class="tab_pane" style="display: none;">
+                <ul>
+                    <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_ACCES_GRAPH_INSTRUCT) . '</span>' . listRole($roles, Droit::$DROIT_ACCES_GRAPH_INSTRUCT) . '</li>
                 </ul>
             </div>
         </div>';

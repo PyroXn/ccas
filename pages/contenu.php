@@ -63,7 +63,7 @@ function contenu() {
             echo affichageHistorique();
             break;
         case 'tableaubord':
-            include_once './pages/graphique.php';
+            include_once './pages/tableauBord.php';
             echo tableauBord();
             break;
     }

@@ -288,7 +288,7 @@ function detailAideInterne() {
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Commentaire : </h2>
-                                    <div class="aff"><textarea class="contour_field input_char" type="text" id="commentaire">'.$aideInterne->commentaire.'</textarea></div>
+                                    <div class="aff"><textarea class="contour_field input_char" id="commentaire">'.$aideInterne->commentaire.'</textarea></div>
                                 </div>
                             <div>
                          </li>
@@ -340,7 +340,7 @@ function detailAideInterne() {
                  <h3>Rapport :</h3>
                      <ul class="list_classique">
                          <li class="ligne_list_classique">
-                            <span><textarea class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="rapport" >'.$aideInterne->rapport.'</textarea></span>
+                            <span><textarea rows="8" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="rapport" >'.$aideInterne->rapport.'</textarea></span>
                          </li>
                      </ul>';
     $contenu .= '
@@ -559,7 +559,7 @@ function aideExterne() {
     $organismesExternes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(6);
     $naturesExternes = Doctrine_Core::getTable('type')->findByCategorie(6);
     $typesAidesExternes = Doctrine_Core::getTable('type')->findByCategorie(7);
-    $instructs =  Doctrine_Core::getTable('instruct')->findAll();
+    $instructs =  Doctrine_Core::getTable('instruct')->findByInterne(1);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $distributeurs = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(3);
     $contenu = '

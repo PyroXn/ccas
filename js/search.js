@@ -178,15 +178,15 @@ $(function() {
     });
      
     $('.input_date').live('click', function() {
-            $(this).datepicker({
-                showOn:'focus',
-                showAnim: 'slideDown',
-                showButtonPanel: 'true',
-                changeMonth: true,
-		changeYear: true,
-                yearRange: 'c-80:c+5',
-                showTrigger: '#calImg'
-            }).focus();
+        $(this).datepicker({
+            showOn:'focus',
+            showAnim: 'slideDown',
+            showButtonPanel: 'true',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: 'c-80:c+5',
+            showTrigger: '#calImg'
+        }).focus();
     });
 
     $('.ui-datepicker').live("mousewheel", function(event, delta){
@@ -201,6 +201,10 @@ $(function() {
     
     $('button.ui-datepicker-current').live('click', function() {
         $.datepicker._curInst.input.datepicker('setDate', new Date()).datepicker('hide').blur();
+    });
+    
+    $('.autoComplete').live("click", function() {  	
+        $(this).attr('autocomplete', 'off');	  	
     });
     
     $('.autoComplete').live("keyup", function(evenement)  {

@@ -181,7 +181,20 @@ $(function() {
         if ($(this).parent().hasClass("select_historique_type_action")) {
             searchTableHistorique();
         }
-            
+        if($(this).parent().hasClass("select_graph_instruct")) {
+            var stringdata = 'id='+$(this).children().attr('value');
+            console.log(stringdata);
+            $.ajax({
+                type: 'post',
+                data: stringdata,
+                url: './index.php?p=graphinstruct',
+                cache: false,
+                success: function(graphInstruct) {
+                    console.log('Success : '+graphInstruct);
+                    $("#graphTypeAction").html(graphInstruct);
+                }
+            })
+        }  
     });
     
     $('.bouton').live("click", function() {

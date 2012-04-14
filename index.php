@@ -194,6 +194,10 @@ switch (@$_GET['p']) {
         include_once('./pages/historique.php');
         searchHistorique();
         break;
+    case 'graphinstruct':
+        include_once('./pages/tableauBord.php');
+        changeGraphInstruct();
+        break;
     default:
         home();
         break;
@@ -348,7 +352,7 @@ function generationHeaderNavigation($mode) {
             if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_DOCUMENT)) { 
                  $retour .= '
                  <div id="document" class="page_header_link">
-                    <span class="label">Documents</span>
+                    <span class="label">Documents Types</span>
                 </div>';
             }
                 $retour .= '
@@ -432,7 +436,6 @@ function generationHeaderNavigation($mode) {
 }
 
 function accueilContenu() {
-    include_once('./pages/graphique.php');
    
         $retour = '<h2>Accueil</h2>';
         
