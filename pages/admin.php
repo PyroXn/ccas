@@ -299,13 +299,13 @@ function statistique() {
                        </thead>
                        <tbody name="groupe1">
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="group1" value="nbinscrit"> Nombre d\'inscrit</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbinscrit"> Nombre d\'inscrit</td>
                            </tr>
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="group1" value="nbaide"> Nombre d\'aide</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaide"> Nombre d\'aide</td>
                            </tr>
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="group1" value="montant"> Montants accord&eacute;s</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="montant"> Montants accord&eacute;s</td>
                            </tr>
                            
                        </tbody>
@@ -320,15 +320,21 @@ function statistique() {
                        </thead>
                        <tbody name="groupe2">
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="group2" value="trancheage"> Tranche d\'&acirc;ge</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="trancheage"> Tranche d\'&acirc;ge</td>
                            </tr>
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="group2" value="csp"> Cat&eacute;gorie socioprofessionnelle</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="csp"> Cat&eacute;gorie socioprofessionnelle</td>
                            </tr>
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="group2" value="sexe"> Sexe</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="sexe"> Sexe</td>
                            </tr>
-                       </tbody>
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="secteur"> Secteur</td>
+                           </tr>
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="typeFamille"> Type de famille</td>
+                           </tr>
+                      </tbody>
                    </table>
                </div>
                <div class="rounded_box" style="display: block; ">
@@ -340,42 +346,28 @@ function statistique() {
                        </thead>
                        <tbody name="groupe3">
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="group3" value="mois"> Mois</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="tout" checked> Tout</td>
                            </tr>
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="group3" value="trimestre"> Trimestre</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="mois"> Mois</td>
                            </tr>
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="group3" value="an"> Ann&eacute;e</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="trimestre"> Trimestre</td>
                            </tr>
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="group3" value="periode"> P&eacute;riode donn&eacute;e</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="an"> Ann&eacute;e</td>
+                           </tr>
+                           <tr>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="periode"> P&eacute;riode donn&eacute;e</td>
                            </tr>
                        </tbody>
                    </table>
                </div>
-               <div class="admin_stat">
+               <div id="graph_stat">
+               
                </div>';
 
-    $con = Doctrine_Manager::getInstance()->connection();
-    $st = $con->execute("SELECT ae.id as idaide, i.id as idindividu ,ae.datedemande, t.libelle as libelleaide, ae.avis, ROUND(montantpercu, 2) as montant, '0' as interne
-                         FROM aideexterne ae
-                         INNER JOIN  individu i on i.id = ae.idindividu
-                         LEFT JOIN type t on ae.idaidedemandee = t.id
 
-                         UNION
-
-                         SELECT ai.id as idaide, i.id as idindividu,ai.datedemande, t.libelle as libelleaide, ai.avis, 
-                             ROUND((SELECT IF(SUM(montant)<>'', SUM(montant), 0)  
-                             FROM bonaide ba
-                             WHERE ba.idaideinterne = ai.id), 2) as montant, '1' as interne
-                         FROM aideinterne ai
-                         INNER JOIN  individu i on i.id = ai.idindividu
-                         INNER JOIN type t on t.id = ai.idaidedemandee");
-    // fetch query result
-    $result = $st->fetchAll();
-
-    $tabTemp = $result;
 
 
     return $contenu;
@@ -387,35 +379,177 @@ function genererStat() {
     $gp2 = $_POST['groupe2'];
     $gp3 = $_POST['groupe3'];
     
-    $x = "";
-    $y = "";
-
-    SWITCH ($groupe2) {
-        case 'trancheage' :
-            $x = array('moins de 18 ans', '18-25 ans', '16-40 ans', '41-60 ans', 'plus de 60 ans');
-            break;
-        case 'csp' :
-                foreach($professions as $profession) {
-                    array_push($x, $profession->profession);
-                }
-            break;            
-        case 'sexe' :
-            $x = array('Homme', 'Femme');
-            break;
-        }
+    $select = 'SELECT';
+    $from = ' FROM individu i';
+    $join = '';
+    $where = '';
+    $groupby = '';
+    $orderby = ' ORDER BY';
+    $titre = '';
+    $finTitre = '';
+    $nomColDate ='';
+    $joinFoyer = false;
     
-    SWITCH ($groupe1) {
-        //Nombre d\'inscritNombre d\'aideMontants accord&eacute;s
-        case 'nbinscrit' :
-            
+    SWITCH ($gp1) {
+        case 'nbinscrit' : 
+            $select .= ' count(distinct(i.id)) as nbindiv ';
+            $orderby .= ' count(distinct(i.id))';
+            $join .= ' INNER JOIN foyer f on f.id = i.idfoyer ';
+            $joinFoyer = true;
+            $nomColDate = 'dateinscription';
+            $titre = 'Nombre d\'inscrit ';
             break;
-        case 'nbaide' :
+        case 'nbaide' : 
+            $select .= ' count(distinct(ai.id)) as nbaide';
+            $join .= ' INNER JOIN aideinterne ai on ai.idindividu = i.id ';
+            $orderby .= ' nbaide';
+            $nomColDate = 'datedemande';
+            $titre = 'Nombre d\'aide demandée ';
             break;
-        case 'montant' :
-            break;  
+        case 'montant' : 
+            $select .= ' SUM(montant) as montant';
+            $join .= ' INNER JOIN aideinterne ai on ai.idindividu = i.id 
+                       INNER JOIN bonaide ba on ba.idaideinterne = ai.id ';
+            $orderby .= ' montant';
+            $nomColDate = 'dateremiseeffective';
+            $titre = 'Montant total des aides accordées ';
+            break;
+    }
+    
+        SWITCH ($gp3) {
+        case 'tout' : 
+            break;
+        case 'mois' : 
+            $where .= ' WHERE '.$nomColDate.' > '.mktime(0,0,0, date("m"),1, date("Y")).'';
+            $finTitre .= '';
+            break;
+        case 'an' : 
+            $where .= ' WHERE '.$nomColDate.' > '.mktime(0,0,0, 1,1, date("Y")).'';
+            break;
+        case 'periode' : 
+            $where .= ' WHERE '.$nomColDate.' BETWEEN '.mktime(0,0,0, 1,1, date("Y")).' AND ';
+            break;
     }
     
     
-    echo "ahahahahahahah";
+    
+    SWITCH ($gp2) {
+        case 'trancheage' :
+            $temp = $select.', "moins de 18 ans"
+                    FROM individu i 
+                    '.$join.' 
+                    '.$where.' AND YEAR(CURDATE()) - DATE_FORMAT( DATE_ADD(  "1970-01-01", INTERVAL datenaissance SECOND ) ,  "%Y" )<18
+                    UNION
+                    '.$select.', "18-25 ans"
+                    FROM individu i
+                    '.$join.'
+                    '.$where.' AND YEAR(CURDATE()) - DATE_FORMAT( DATE_ADD(  "1970-01-01", INTERVAL datenaissance SECOND ) ,  "%Y" ) between 18 and 25
+                    UNION
+                    '.$select.', "25-59 ans"
+                    FROM individu i
+                    '.$join.'
+                    '.$where.' AND YEAR(CURDATE()) - DATE_FORMAT( DATE_ADD(  "1970-01-01", INTERVAL datenaissance SECOND ) ,  "%Y" ) between 26 and 59
+                    UNION
+                    '.$select.', "plus de 60 ans"
+                    FROM individu i
+                    '.$join.'
+                    '.$where.' AND YEAR(CURDATE()) - DATE_FORMAT( DATE_ADD(  "1970-01-01", INTERVAL datenaissance SECOND ) ,  "%Y" ) >60';
+            $select = $temp;
+            $from = '';
+            $join = '';
+            $where ='';
+            $orderby = '';
+            $titre .= 'par tranche d\'âge';
+            break;
+        case 'csp' : 
+            $select .= ', profession';
+            $groupby .= 'GROUP BY profession';
+            $join .= 'INNER JOIN profession p on p.id = i.idprofession';
+            $titre .= 'par catégories socioprofessionnelles';
+            break;
+        case 'sexe' : 
+            $select .= ', IF(sexe = "","Aucune information" ,sexe) ';
+            $groupby .= 'GROUP BY sexe';
+            $titre .= 'par sexe';
+            break;
+       case 'secteur' : 
+            $select .= ', secteur';
+            $groupby .= 'GROUP BY secteur';
+            if (!$joinFoyer) {
+                $join .= ' INNER JOIN foyer f on f.id = i.idfoyer ';
+            }
+            $join .= ' INNER JOIN secteur s on s.id = f.idsecteur';
+            $titre .= 'par secteur';
+            break;
+       case 'typefamille' : 
+            $select .= ', situation';
+            $groupby .= 'GROUP BY situation';
+            if (!$joinFoyer) {
+                $join .= ' INNER JOIN foyer f on f.id = i.idfoyer ';
+            }
+            $join .= 'INNER JOIN situationFamilliale sf on sf.id = f.idsitfam';
+            $titre .= 'par situation familliale';
+            break;
+    }
+    
+    $titre = $titre.$finTitre;
+    
+    
+    $req = $select.' '.$from.' '.$join.' '.$where.' '.$groupby.' '.$orderby;
+    echo $req;
+    echo "<br/>";
+   // echo $titre;
+    $con = Doctrine_Manager::getInstance()->connection();
+    $st = $con->execute($req);
+    // fetch query result
+    $result = $st->fetchAll();
+
+    genererGraph($result, $titre);
+}
+
+function genererGraph($tab, $titre) {
+    include_once('./lib/config.php');
+    $y = '[';
+    $x = '[';
+//    arsort($tab);
+    foreach($tab as $tableau) {
+           $x = $x.'"'.$tableau[1].'", ';
+           $y = $y.''.$tableau[0].', ';
+    }
+    
+    $x = substr($x, 0, strlen($x)-2);
+    $y = substr($y, 0, strlen($y)-2);
+    $x[strlen($x)] = ']';
+    $y[strlen($y)] = ']';
+    
+    
+    echo "<br/>";
+    echo $x;
+    echo "<br/>";
+    echo $y;
+//    exit();
+    
+    
+    $retour = '<div id="graphstat" style="height:250px;width:1000px; "></div>';
+        $retour .= "
+         <script type='text/javascript'>
+            var s1 = ".$y.";
+        var ticks = ".$x.";
+         
+        plot2 = $.jqplot('graphstat', [s1], {
+            title: '".addslashes($titre)."',
+            seriesDefaults: {
+                renderer:$.jqplot.BarRenderer,
+                pointLabels: { show: true }
+            },
+            axes: {
+                xaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: ticks
+                }
+            }
+        });
+         </script>";
+    echo $retour;
 }
 ?>

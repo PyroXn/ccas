@@ -978,6 +978,30 @@ INSERT INTO `situationmatri` (`id`, `situation`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `situationfamilliale`
+--
+
+CREATE TABLE IF NOT EXISTS `situationfamilliale` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `situation` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Contenu de la table `situationfamilliale`
+--
+
+INSERT INTO `situationfamilliale` (`id`, `situation`) VALUES
+(1, 'Homme seul'),
+(2, 'Femme seule'),
+(3, 'Couple sans enfant'),
+(4, 'Famille monoparentale'),
+(5, 'fammile recomposée'),
+(6, 'Famille nucléaire');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `type`
 --
 

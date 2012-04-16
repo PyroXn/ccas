@@ -22,6 +22,7 @@ class Foyer extends Doctrine_Record {
         $this->hasColumn('logDateArrive', 'integer', 20, array('default' => '0')); // timestamp
         $this->hasColumn('logSurface', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('idInstruct', 'integer', 5);
+        $this->hasColumn('idSitFam', 'integer', 5);        
         $this->hasColumn('notes', 'string', 255, array('notnull' => true, 'default' => ''));
     }
 
@@ -73,6 +74,13 @@ class Foyer extends Doctrine_Record {
         $this->hasOne(
                 'type as statutlogement', array(
             'local' => 'typeAppartenance',
+            'foreign' => 'id'
+                )
+        );
+        
+        $this->hasOne(
+                'situationfamilliale as sitfam', array(
+            'local' => 'idsitfam',
             'foreign' => 'id'
                 )
         );

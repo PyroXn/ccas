@@ -79,22 +79,27 @@ $(function() {
     });
     
     $('.radio_stat').live('change', function(){
-        var datastring = 'groupe1=' + $("input[name='groupe1']:checked").val() 
-                       + '&groupe2=' + $("input[name='groupe2']:checked").val()
-                       + '&groupe3=' + $("input[name='groupe3']:checked").val();
-        $.ajax({
-            type: 'POST',
-            data: datastring,
-            url: './index.php?p=genererStat',
-            cache: false,
-            //Succès de la requête
-            success: function(graph) {
-                alert('succes');
-                $('#graph_stat').html(graph);
-            },
-            error: function() {
-                $("#graph_stat").html();
+        if ($('input[type=radio][name=groupe1]:checked').length != 0 &&
+            $('input[type=radio][name=groupe2]:checked').length != 0 &&
+            $('input[type=radio][name=groupe3]:checked').length != 0) {
+                var t = $(this).parent().parent().parent();
+                var datastring = 'groupe1=' + $("input[type=radio][name=groupe1]:checked").val() 
+                               + '&groupe2=' + $("input[type=radio][name=groupe2]:checked").val()
+                               + '&groupe3=' + $("input[type=radio][name=groupe3]:checked").val();
+                console.log(datastring);
+                $.ajax({
+                    type: 'POST',
+                    data: datastring,
+                    url: './index.php?p=genererStat',
+                    cache: false,
+                    //Succï¿½s de la requï¿½te
+                    success: function(graph) {
+                        $('#graph_stat').html(graph);
+                    },
+                    error: function() {
+                        $("#graph_stat").html();
+                    }
+                });
             }
-        });
     });
 });    
