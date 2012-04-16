@@ -4,15 +4,19 @@ function updateChefDeFamille() {
     include_once('./lib/config.php');
     include_once('./pages/foyer.php');
     $individu = Doctrine_Core::getTable('individu')->findOneByIdFoyerAndChefDeFamille($_POST['idFoyer'], 1);
-    $individu->chefDeFamille = 0;
-    $individu->save();
+    
+    //gestion du cas si il n'existe pas de chef de famille (ne doit pas arriver)
+    if ($individu != null) {
+        $individu->chefDeFamille = 0;
+        $individu->save();
+    }
     
     $individuNewChefFamille = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $individuNewChefFamille->chefDeFamille = 1;
     $individuNewChefFamille->save();
     
     include_once('./pages/historique.php');
-    createHistorique(Historique::$Modification, 'individu', $_SESSION['userId'], $individu->id);
+    createHistorique(Historique::$Modification, 'individu', $_SESSION['userId'], $individuNewChefFamille->id);
     
     echo foyerContenu($_POST['idFoyer']);
 }

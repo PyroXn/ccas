@@ -194,6 +194,10 @@ switch (@$_GET['p']) {
         include_once('./pages/historique.php');
         searchHistorique();
         break;
+    case 'graphinstruct':
+        include_once('./pages/tableauBord.php');
+        changeGraphInstruct();
+        break;
     default:
         home();
         break;
@@ -219,8 +223,9 @@ function home() {
         } else {
             $contenu .= '<li class="impair individu" id="' . $i . '">';
         }
+        $chefFamille = $individu->chefDeFamille ? ' <span class="chef_famille"></span>' : '';
         $contenu .= '
-                           <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                           <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom .$chefFamille.'</span>
                  </li>';
         $i++;
     }
@@ -296,8 +301,9 @@ function search() {
         } else {
             $retour .= '<li class="impair individu" id="' . $i . '">';
         }
+        $chefFamille = $individu->chefDeFamille ? ' <span class="chef_famille"></span>' : '';
         $retour .= '
-                         <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                         <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom .$chefFamille.'</span>
                  </li>';
         $i++;
     }
@@ -323,8 +329,9 @@ function creationListeByFoyer($idFoyer, $idIndividu) {
                 $retour .= '<li class="impair individu" id="' . $i . '">';
             }
         }
+        $chefFamille = $individu->chefDeFamille ? ' <span class="chef_famille"></span>' : '';
         $retour .= '
-                        <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . ' </span>
+                        <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom .$chefFamille.'</span>
                 </li>';
         $i++;
     }
@@ -348,7 +355,7 @@ function generationHeaderNavigation($mode) {
             if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_DOCUMENT)) { 
                  $retour .= '
                  <div id="document" class="page_header_link">
-                    <span class="label">Documents</span>
+                    <span class="label">Documents Types</span>
                 </div>';
             }
                 $retour .= '
@@ -432,7 +439,6 @@ function generationHeaderNavigation($mode) {
 }
 
 function accueilContenu() {
-    include_once('./pages/graphique.php');
    
         $retour = '<h2>Accueil</h2>';
         
@@ -458,8 +464,9 @@ function scroll() {
         } else {
             $retour .= '<li class="impair individu" id="' . $i . '">';
         }
+        $chefFamille = $individu->chefDeFamille ? ' <span class="chef_famille"></span>' : '';
         $retour .= '
-                    <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom . '</span>
+                    <span class="label" id_foyer="' . $individu->idFoyer . '" id_individu="' . $individu->id . '">' . $individu->nom . ' ' . $individu->prenom .$chefFamille.'</span>
             </li>';
         $i++;
     }

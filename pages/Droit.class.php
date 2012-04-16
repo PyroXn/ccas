@@ -52,9 +52,14 @@ class Droit {
     public static $DROIT_APPORTER_DECISION = 0x400000;         //droit ajout d'une décision
 //    public static $DROIT_MODIFICATION_DECISION = 0x800000;  //droit de modification d'une décision
     public static $DROIT_CREATION_BON_INTERNE = 0x1000000;  //droit de création d'un bon interne
-    
     public static $DROIT_CREATION_ACTION = 0x2000000;        //droit création action
     public static $DROIT_MODIFICATION_ACTION = 0x4000000;    //droit modification action
+    
+    /*
+     * Graph
+     */
+    public static $DROIT_ACCES_GRAPH_INSTRUCT = 0x8000000;    //accès graph action par instruct
+    
     
     public static function getStaticDesignation($i) {
         switch ($i) {
@@ -138,6 +143,10 @@ class Droit {
                 break;
             case 0x4000000:
                 return "Droit de modification d'une action";
+                break;
+            
+            case 0x8000000:
+                return 'Droit d\'accès au graphique des actions par instructeur';
                 break;
         }
     }

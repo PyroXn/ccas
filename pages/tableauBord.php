@@ -93,7 +93,8 @@ function graphNewUsager() {
 function graphTypeAction() {
     include_once('./lib/config.php');
     $tab = array();
-    $actions = Doctrine_Core::getTable('action')->findAll();
+    $limite = mktime(0, 0, 0, 1, 1, date('Y'));
+    $actions = Doctrine_Core::getTable('action')->getActionAfter($limite)->execute();
     $retour = '';
     if(count($actions) > 0) {
         foreach ($actions as $action) {
@@ -119,15 +120,33 @@ function graphTypeAction() {
         $s1 = substr($s1, 0, strlen($s1)-2);
         $x[strlen($x)] = ']';
         $s1[strlen($s1)] = ']';
-
-        $retour = '<div id="graphTypeAction" style="height:250px;width:800px; "></div>';
+        
+        if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ACCES_GRAPH_INSTRUCT)) {
+            // On liste les instruct interne actif
+            $instructs = Doctrine_Core::getTable('instruct')->findByInterne(1);
+            $retour .= '
+                <div class="select classique" role="select_graph_instruct">
+                    <div id="graphByInstruct" class="option" value=" ">-----</div>  
+                    <div class="fleche_bas"> </div>
+                </div>';
+            $retour .= '<ul class="select_graph_instruct">';      
+            foreach($instructs as $instruct) {
+                $retour .= '<li>
+                                        <div value="'.$instruct->id.'">'.$instruct->nom.'</div>
+                                   </li>';
+            }
+            $retour .= '</ul>';
+        }
+        
+        
+        $retour .= '<div id="graphTypeAction" style="height:250px;width:800px; "></div>';
             $retour .= "
             <script type='text/javascript'>
                 var s1 = ".$s1.";
             var ticks = ".$x.";
 
             plot2 = $.jqplot('graphTypeAction', [s1], {
-                title: 'Répartition des actions les plus utilisés',
+                title: 'Répartition des actions par année',
                 seriesDefaults: {
                     renderer:$.jqplot.BarRenderer,
                     pointLabels: { show: true }
@@ -167,14 +186,15 @@ function graphTypeAction() {
 function graphTypeAideInterne() {
     include_once('./lib/config.php');
     $tab = getDataGraphAideInterne();
+
     $s1 = '[';
     $s2 = '[';
     $x = '[';
     foreach($tab as $t) {
         $trouve = false;
-        $i = 12;
+        $i = 10;
         if(strlen($t['libelle']) > 15) {
-            while(!$trouve) {
+            while(!$trouve && $i < strlen($t['libelle'])) {
                 if($t['libelle'][$i] != ' ') {
                     $i++;
                 } else {
@@ -185,17 +205,19 @@ function graphTypeAideInterne() {
             }
         }
         $x = $x.'"'.$t['libelle'].'", ';
-        $s1 = $s1.''.$t['homme'].', ';
-        $s2 = $s2.''.$t['femme'].', ';
+        $interne = $t['total'] - $t['externe'];
+        $s1 = $s1.''.$interne.', ';
+        $s2 = $s2.''.$t['externe'].', ';
     }
     
+
     $x = substr($x, 0, strlen($x)-2);
     $s1 = substr($s1, 0, strlen($s1)-2);
     $s2 = substr($s2, 0, strlen($s2)-2);
     $x[strlen($x)] = ']';
     $s1[strlen($s1)] = ']';
     $s2[strlen($s2)] = ']';
-    
+
     $retour = '<div id="graphTypeAideInterne" style="height:250px;width:800px; "></div>';
     $retour .= "
      <script type='text/javascript'>
@@ -204,14 +226,14 @@ function graphTypeAideInterne() {
         var ticks = ".$x.";
 
     plot2 = $.jqplot('graphTypeAideInterne', [s1, s2], {
-        title: 'Répartition par sexe des aides les plus demandés',
+        title: 'Répartition des aides les plus demandés',
         seriesDefaults: {
             renderer:$.jqplot.BarRenderer,
             pointLabels: { show: true }
         },
         series:[
-            {label:'Homme'},
-            {label:'Femme'}
+            {label:'Décideur Interne'},
+            {label:'Décideur Externe'}
         ],
         legend: {
             show: true,
@@ -225,72 +247,95 @@ function graphTypeAideInterne() {
         },
     });
      </script>";
-//    $retour = '';
-//    $retour = '<div class="colonne">
-//        <table id="graphTypeAide" class="hide">
-//                    <caption>Type d\'aide</caption>
-//                    <thead>
-//                        <tr>
-//                            <td></td>';
-//    $i = 0;
-//    foreach ($result as $key => $value) {
-//        if ($i < 10) {
-//            $retour .= '<th scope="col">' . $key . '</th>';
-//            $i++;
-//        }
-//    }
-//    $retour .= '
-//                        </tr>
-//                    </thead>
-//                    <tbody>
-//                        <tr>
-//                            <th scope="row">Type d\'aide</th>';
-//    $i = 0;
-//    foreach ($result as $key => $value) {
-//        if ($i < 10) {
-//            $retour .= '<td>' . $value . '</td>';
-//            $i++;
-//        }
-//    }
-//    $retour .= '</tr>
-//                    </tbody>
-//                </table></div>';
     return $retour;
+}
+
+function getDataGraphIntruct($idInstruct) {
+    include_once('./lib/config.php');
+    $tab = array();
+    $limite = mktime(0, 0, 0, 1, 1, date('Y'));
+    $actions = Doctrine_Core::getTable('action')->getActionByInstructAfter($limite, $idInstruct)->execute();
+    $retour = '';
+    if(count($actions) > 0) {
+        foreach ($actions as $action) {
+            if (!array_key_exists($action->typeaction->libelle, $tab)) {
+                $tab[$action->typeaction->libelle] = 1;
+            } else {
+                $tab[$action->typeaction->libelle] += 1;
+            }
+        }
+        arsort($tab);
+        $x = '[';
+        $s1 = '[';
+        $i = 0;
+        foreach($tab as $key => $value) {
+            if($i < 12) {
+                $x = $x.'"'.$key.'", ';
+                $s1 = $s1.''.$value.', ';
+                $i++;
+            }
+        }
+
+        $x = substr($x, 0, strlen($x)-2);
+        $s1 = substr($s1, 0, strlen($s1)-2);
+        $x[strlen($x)] = ']';
+        $s1[strlen($s1)] = ']';
+        $retour = '<div id="graphTypeAction" style="height:250px;width:800px; "></div>';
+        $retour .= "
+            <script type='text/javascript'>
+                var s1 = ".$s1.";
+            var ticks = ".$x.";
+
+            plot2 = $.jqplot('graphTypeAction', [s1], {
+                title: 'Répartition des actions par année',
+                seriesDefaults: {
+                    renderer:$.jqplot.BarRenderer,
+                    pointLabels: { show: true }
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        ticks: ticks
+                    }
+                }
+            });
+            </script>";
+    }
+   echo $retour;
 }
 
 function getDataGraphAideInterne() {
     include_once('./lib/config.php');
-    $tab = array();
-	
+    $limite = mktime(0, 0, 0, 1, 1, date('Y'));
     $con = Doctrine_Manager::getInstance()->connection();
     $con->execute("CREATE TEMPORARY TABLE h(
 					libelle VARCHAR(40) NOT NULL,
-					homme int(6) NOT NULL);
+					total int(6) NOT NULL);
 
 					INSERT INTO h 
-					SELECT distinct(t.libelle), count(*) homme
+					SELECT distinct(t.libelle), count(*) total
 					FROM aideinterne ai
-					INNER JOIN type t on t.id = ai.idaidedemandee
-					INNER JOIN individu i on i.id = ai.idindividu
-					WHERE sexe = 'Homme'
+					INNER JOIN instruct i on i.id = ai.idinstruct
+                                                                                          LEFT JOIN type t on t.id = ai.idaidedemandee
 					GROUP BY t.libelle;");
 
-	$con->execute("CREATE TEMPORARY TABLE f(
-					libelle VARCHAR(40) NOT NULL,
-					femme int(6) NOT NULL);
+    $con->execute("CREATE TEMPORARY TABLE f(
+                                    libelle VARCHAR(40) NOT NULL,
+                                    externe int(6) NOT NULL);
 
-					INSERT INTO f
-					SELECT distinct(t.libelle), count(*) homme
-					FROM aideinterne ai
-					INNER JOIN type t on t.id = ai.idaidedemandee
-					INNER JOIN individu i on i.id = ai.idindividu
-					WHERE sexe = 'Femme'
-					GROUP BY t.libelle;");
+                                    INSERT INTO f
+                                    SELECT distinct(t.libelle), count(*) externe
+                                    FROM aideinterne ai
+                                    INNER JOIN type t on t.id = ai.idaidedemandee
+                                    INNER JOIN instruct i on i.id = ai.idinstruct
+                                    WHERE i.interne = 0
 
-	$st = $con->execute("SELECT h.libelle, h.homme, f.femme
+                                    GROUP BY t.libelle;");
+
+	$st = $con->execute("SELECT IF(h.libelle <> '', h.libelle, f.libelle) libelle, IF(h.total <> '', h.total, '0') total, f.externe externe
 						FROM h
-						INNER JOIN f on f.libelle = h.libelle
-						ORDER BY homme+femme DESC
+						RIGHT JOIN f on f.libelle = h.libelle
+						ORDER BY h.total DESC
 						LIMIT 6");
 	
     $result = $st->fetchAll();
@@ -326,13 +371,11 @@ function getLastYear() {
     
 }
 
-function getLastYear2() {
-    $now = time() - 36720000;
-    $con = Doctrine_Manager::getInstance()->connection();
-    $st = $con->execute("SELECT DATE_FORMAT(DATE_ADD('1970-01-01', INTERVAL dateinscription SECOND),  '%M' ) as month, count(dateinscription) as nb FROM foyer
-WHERE dateinscription > ".$now." GROUP BY month");
-    $result = $st->fetchAll();
-    return $result;
+/*
+ * Function qui permet le switch de graph action par instruct
+ */
+function changeGraphInstruct() {
+    $retour = getDataGraphIntruct($_POST['id']);
+    echo $retour;
 }
-
 ?>

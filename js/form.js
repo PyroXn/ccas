@@ -181,7 +181,20 @@ $(function() {
         if ($(this).parent().hasClass("select_historique_type_action")) {
             searchTableHistorique();
         }
-            
+        if($(this).parent().hasClass("select_graph_instruct")) {
+            var stringdata = 'id='+$(this).children().attr('value');
+            console.log(stringdata);
+            $.ajax({
+                type: 'post',
+                data: stringdata,
+                url: './index.php?p=graphinstruct',
+                cache: false,
+                success: function(graphInstruct) {
+                    console.log('Success : '+graphInstruct);
+                    $("#graphTypeAction").html(graphInstruct);
+                }
+            })
+        }  
     });
     
     $('.bouton').live("click", function() {
@@ -824,7 +837,9 @@ $(function() {
             $(this).parent().next().children().find('input').removeAttr('disabled');
             $(this).parent().next().children().find('[class^=select]').removeAttr('disabled');
             $(this).parent().next().children().find('textarea').removeAttr('disabled');
-            $(this).parent().next().children().find('[class^=checkbox]').removeAttr('disabled');
+            if (!$(this).parent().next().children().find('[class^=checkbox]').hasClass('lock')) {
+                $(this).parent().next().children().find('[class^=checkbox]').removeAttr('disabled');
+            }
         } else {
             $(this).parent().next().children().find('input').attr('disabled','');
             $(this).parent().next().children().find('[class^=select]').attr('disabled','');

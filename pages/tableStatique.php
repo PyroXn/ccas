@@ -30,6 +30,9 @@ function comboTableStatique() {
                 <div>nationalite</div>
             </li>
             <li>
+                <div>organisme</div>
+            </li>
+            <li>
                 <div>profession</div>
             </li>
             <li>
