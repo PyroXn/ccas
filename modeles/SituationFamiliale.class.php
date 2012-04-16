@@ -1,8 +1,8 @@
 <?php
 
-class SituationFamilliale extends Doctrine_Record {
+class SituationFamiliale extends Doctrine_Record {
     public function setTableDefinition() {
-        $this->setTableName('situationfamilliale');
+        $this->setTableName('situationfamiliale');
         
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));

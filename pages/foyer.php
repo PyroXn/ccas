@@ -106,6 +106,7 @@ function generateInfoFoyer($foyer) {
     $types =  Doctrine_Core::getTable('type')->findAll();
     $bailleurs =  Doctrine_Core::getTable('bailleur')->findAll();
     $instructs =  Doctrine_Core::getTable('instruct')->findAll();
+    $sitfams = Doctrine_Core::getTable('situationfamiliale')->findAll();
     $retour = '';
     $retour .= '
         <div><h3>Foyer ';
@@ -139,6 +140,18 @@ $retour .= '                <div class="fleche_bas"> </div>
         }
 
         $retour .= '</div>
+                    <div class="colonne">
+                    </div>
+                    <div class="colonne">
+                    </div>
+                    <div class="colonne">
+                        <span class="attribut">Situation familiale :</span>
+                        <div class="select classique" role="select_sit_fam" disabled>';
+    $retour .= verifieValeurNull($foyer->idSitFam) ? '
+                            <div id="sitfam" class="option">-----</div>':'<div id="sitfam" class="option" value="'.$foyer->idSitFam.'">'.$foyer->situationfamiliale->situation.'</div>';
+    $retour .= '            <div class="fleche_bas"> </div>
+                        </div>
+                    </div>
                 </li>
                 <li class="ligne_list_classique">
                     <div class="colonne">
@@ -251,6 +264,15 @@ $retour .= '
                            </li>';
     }
     $retour .= '</ul>';
+    
+    $retour .= '<ul class="select_sit_fam">';
+    foreach($sitfams as $sitfam) {
+        $retour .= '<li>
+                        <div value="'.$sitfam->id.'">'.$sitfam->situation.'</div>
+                    </li>';
+    }
+    $retour .= '</ul>';
+    
     return $retour;
 }
 
@@ -360,6 +382,7 @@ function updateFoyer() {
     $foyer->typeAppartenance = $_POST['statut'];
     $foyer->logSurface = $_POST['surface'];
     $foyer->idInstruct = $_POST['instruct'];
+    $foyer->idSitFam = $_POST['sitfam'];
     $foyer->notes = $_POST['notes'];
     if($_POST['dateentree'] != 0) {
         $date = explode('/', $_POST['dateentree']);

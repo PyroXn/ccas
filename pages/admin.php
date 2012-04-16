@@ -338,7 +338,7 @@ function statistique() {
                                <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="secteur"> Secteur</td>
                            </tr>
                            <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="typeFamille"> Type de famille</td>
+                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="typefamille"> Type de famille</td>
                            </tr>
                       </tbody>
                    </table>
@@ -493,8 +493,8 @@ function genererStat() {
             if (!$joinFoyer) {
                 $join .= ' INNER JOIN foyer f on f.id = i.idfoyer ';
             }
-            $join .= 'INNER JOIN situationFamilliale sf on sf.id = f.idsitfam';
-            $titre .= 'par situation familliale';
+            $join .= 'INNER JOIN situationfamiliale sf on sf.id = f.idsitfam';
+            $titre .= 'par situation familiale';
             break;
     }
     

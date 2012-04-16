@@ -8,9 +8,6 @@ class Foyer extends Doctrine_Record {
         //Puis, tous les champs
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-//        $this->hasColumn('nom', 'string', 100);
-//        $this->hasColumn('prenom', 'string', 100);
-
         $this->hasColumn('numRue', 'integer', 10, array('default' => '0'));
         $this->hasColumn('idRue', 'integer', 10);
         $this->hasColumn('idSecteur', 'integer', 10);
@@ -79,8 +76,8 @@ class Foyer extends Doctrine_Record {
         );
         
         $this->hasOne(
-                'situationfamilliale as sitfam', array(
-            'local' => 'idsitfam',
+                'situationfamiliale as situationfamiliale', array(
+            'local' => 'idSitFam',
             'foreign' => 'id'
                 )
         );
