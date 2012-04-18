@@ -11,22 +11,41 @@ function getDocumentIndividu() {
         $arrayExtension = array();
         while($element = readdir($dir)) {
                 if($element != '.' && $element != '..') {
-                        if (!is_dir($dir_nom.'/'.$element)) {$fichier[] = $element;}
+                        if (!is_dir($dir_nom.'/'.$element)) {
+                            $name = basename($dir_nom.'/'.$element);
+                            $debut = substr($name, 0, 3);
+                            if($debut == 'Rap') {
+                                $fichier['rapport'][] = $element;
+                            } elseif($debut == 'bon') {
+                                $fichier['bon'][] = $element; // N'est normalement jamais utilisé ici
+                            } else {
+                                $fichier['autre'][] = $element;
+                            }
+                            
+                            }
                         else { $dossier[] = $element; }
                 }
         }
-        while($tab = current($dossier)) {
+        while($tab = current($dossier)) { // On parcourt les sous repertoires
             $sousDir = opendir($dir_nom.'/'.$tab);
             while($dos = readdir($sousDir)) {
                 if($dos != '.' && $dos != '..') {
-                            if (!is_dir($dir_nom.'/'.$tab.'/'.$dos)) {$fichier[] = '/'.$tab.'/'.$dos;}
+                            if (!is_dir($dir_nom.'/'.$tab.'/'.$dos)) {
+                                $name = basename($dir_nom.'/'.$tab.'/'.$dos);
+                                $debut = substr($name, 0, 3);
+                                if($debut == 'bon') {
+                                    $fichier['bon'][] = '/'.$tab.'/'.$dos;
+                   
+                                }
+                                
+                                }
                 }
             }
             next($dossier);
         }
         closedir($dir);
         $contenu = '
-            <h3>Documents :</h3>
+            <h3>Rapport social</h3>
                 <div class="bubble tableau_classique_wrapper">
                     <table class="tableau_classique" cellpadding="0" cellspacing="0">
                         <thead>
@@ -38,8 +57,8 @@ function getDocumentIndividu() {
                             </tr>
                         </thead>
                         <tbody>';
-        if(!empty($fichier)) {
-            foreach($fichier as $file) {
+        if(!empty($fichier['rapport'])) {
+            foreach($fichier['rapport'] as $file) {
                 $extension = pathinfo($dir_nom.'/'.$file, PATHINFO_EXTENSION);
 
                 $contenu .= '<tr name="'.$file.'">';
@@ -55,7 +74,7 @@ function getDocumentIndividu() {
                         $contenu .= 'Microsoft excel';
                         break;
                     case "pdf":
-                        $contenu .= 'pdf';
+                        $contenu .= 'Document PDF';
                         break;
                 }
              $contenu .=    '</td>
@@ -65,12 +84,105 @@ function getDocumentIndividu() {
             }
         } else {
             $contenu .= '<tr>
-                             <td colspan=9 align=center>< Aucune document n\'a été attribué à cet individu > </td>
+                             <td colspan=9 align=center>< Aucun rapport social n\'a été crée pour cet individu > </td>
+                         </tr>';
+        }
+
+        $contenu .= '</tbody></table></div>';
+        
+        // BON AIDE
+        
+        $contenu .= '
+            <h3>Bon d\'aide</h3>
+                <div class="bubble tableau_classique_wrapper">
+                    <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr class="header">
+                                <th>Nom document</th>
+                                <th>Type fichier</th>
+                                <th>Date derniére modification</th>
+                                <th>Télécharger</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
+        if(!empty($fichier['bon'])) {
+            foreach($fichier['bon'] as $file) {
+                $extension = pathinfo($dir_nom.'/'.$file, PATHINFO_EXTENSION);
+                
+                $contenu .= '<tr name="'.$file.'">';
+                $contenu .= '<td>'.basename($file).'</td>
+                             <td> ';
+                switch ($extension) {
+                    case "doc":
+                    case "docx":
+                        $contenu .= 'Microsoft word';
+                        break;
+                    case "xls":
+                    case "xlsx":
+                        $contenu .= 'Microsoft excel';
+                        break;
+                    case "pdf":
+                        $contenu .= 'Document PDF';
+                        break;
+                }
+             $contenu .=    '</td>
+                             <td> '.getDatebyTimestamp(filemtime($dir_nom.'/'.$file)).'</td>
+                             <td><a href="'.$dir_nom.'/'.$file.'" target=_blank class="open_doc"></a></td>
+                            </tr>';
+            }
+        } else {
+            $contenu .= '<tr>
+                             <td colspan=9 align=center>< Aucun bon d\'aide n\'a été crée pour cet individu > </td>
+                         </tr>';
+        }
+
+        $contenu .= '</tbody></table></div>';
+        // AUTRES DOCS
+             $contenu .= '
+            <h3>Autre Document</h3>
+                <div class="bubble tableau_classique_wrapper">
+                    <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr class="header">
+                                <th>Nom document</th>
+                                <th>Type fichier</th>
+                                <th>Date derniére modification</th>
+                                <th>Télécharger</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
+        if(!empty($fichier['autre'])) {
+            foreach($fichier['autre'] as $file) {
+                $extension = pathinfo($dir_nom.'/'.$file, PATHINFO_EXTENSION);
+
+                $contenu .= '<tr name="'.$file.'">';
+                $contenu .= '<td>'.$file.'</td>
+                             <td> ';
+                switch ($extension) {
+                    case "doc":
+                    case "docx":
+                        $contenu .= 'Microsoft word';
+                        break;
+                    case "xls":
+                    case "xlsx":
+                        $contenu .= 'Microsoft excel';
+                        break;
+                    case "pdf":
+                        $contenu .= 'Document PDF';
+                        break;
+                }
+             $contenu .=    '</td>
+                             <td> '.getDatebyTimestamp(filemtime($dir_nom.'/'.$file)).'</td>
+                             <td><a href="'.$dir_nom.'/'.$file.'" target=_blank class="open_doc"></a></td>
+                            </tr>';
+            }
+        } else {
+            $contenu .= '<tr>
+                             <td colspan=4 align=center>< Aucun autre document n\'a été crée pour cet individu > </td>
                          </tr>';
         }
 
         $contenu .= '</tbody></table>';
-
         return $contenu;
     } else {
         return 'Erreur de listage : le répertoire n\'existe pas. Il est possible qu\'aucun document n\'éxiste pour cet individu.';

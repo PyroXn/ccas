@@ -21,22 +21,18 @@
         </tr>
         <tr>
             <th>Exercice</th>
-            <th>N° d'ordre</th>
+            <th>N° de bon</th>
             <th>Article</th>
             <th>Fonction</th>
         </tr>
         <tr>
             <td></td>
-            <td></td>
-            <td></td>
+            <td><span class="numBon"><?php echo $numBon; ?></span></td>
+            <td><?php echo date('d/m/Y'); ?></td>
             <td></td>
             <td></td>
         </tr>
     </table>
-    <div class="espace"></div>
-    <div id="titre">
-        BON DE COMMANDE N° <span class="numBon"><?php echo $numBon; ?></span>
-    </div>
     <div class="espace"></div>
     Emis par : <div class="underline" width="470"></div> pour le C.C.A.S. <br />
     M. <div class="underline" width="720"></div>

@@ -226,7 +226,7 @@ function graphTypeAideInterne() {
         var ticks = ".$x.";
 
     plot2 = $.jqplot('graphTypeAideInterne', [s1, s2], {
-        title: 'Répartition des aides les plus demandés',
+        title: 'Répartition des aides internes les plus demandés',
         seriesDefaults: {
             renderer:$.jqplot.BarRenderer,
             pointLabels: { show: true }
@@ -253,6 +253,7 @@ function graphTypeAideInterne() {
 function getDataGraphIntruct($idInstruct) {
     include_once('./lib/config.php');
     $tab = array();
+    $instruct = Doctrine_Core::getTable('instruct')->find($idInstruct);
     $limite = mktime(0, 0, 0, 1, 1, date('Y'));
     $actions = Doctrine_Core::getTable('action')->getActionByInstructAfter($limite, $idInstruct)->execute();
     $retour = '';
@@ -287,7 +288,7 @@ function getDataGraphIntruct($idInstruct) {
             var ticks = ".$x.";
 
             plot2 = $.jqplot('graphTypeAction', [s1], {
-                title: 'Répartition des actions par année',
+                title: 'Répartition des actions de <b>".$instruct->nom."</b> par année',
                 seriesDefaults: {
                     renderer:$.jqplot.BarRenderer,
                     pointLabels: { show: true }
@@ -317,6 +318,7 @@ function getDataGraphAideInterne() {
 					FROM aideinterne ai
 					INNER JOIN instruct i on i.id = ai.idinstruct
                                                                                           LEFT JOIN type t on t.id = ai.idaidedemandee
+                                                                                          WHERE ai.datedemande > ".$limite."
 					GROUP BY t.libelle;");
 
     $con->execute("CREATE TEMPORARY TABLE f(
@@ -329,12 +331,12 @@ function getDataGraphAideInterne() {
                                     INNER JOIN type t on t.id = ai.idaidedemandee
                                     INNER JOIN instruct i on i.id = ai.idinstruct
                                     WHERE i.interne = 0
-
+                                    AND ai.datedemande > ".$limite."
                                     GROUP BY t.libelle;");
 
-	$st = $con->execute("SELECT IF(h.libelle <> '', h.libelle, f.libelle) libelle, IF(h.total <> '', h.total, '0') total, f.externe externe
+	$st = $con->execute("SELECT h.libelle libelle, IF(h.total <> '', h.total, '0') total, IF(f.externe <> '', f.externe, '0') externe
 						FROM h
-						RIGHT JOIN f on f.libelle = h.libelle
+						LEFT JOIN f on f.libelle = h.libelle
 						ORDER BY h.total DESC
 						LIMIT 6");
 	

@@ -857,7 +857,35 @@ function createPDFBonInternetEtAffichage($idBon) {
 function createPDFRapportSocial($idIndividu) {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($idIndividu);
+    $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($idIndividu);
+    $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($idIndividu);
+    $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($idIndividu);
+    $credit = Doctrine_Core::getTable('credit')->find($idIndividu);
     $famille = $individu->foyer->individu;
+    $salaireEnfant = 0;
+    $totalCredit = 0;
+    $nbEnfant = 0;
+    if($credit != null) {
+        foreach($credit as $c) {
+            $totalCredit += $c->mensualite;
+        }
+    }
+    foreach($famille as $f) {
+        if($f->idLienFamille == 3 || $f->idLienFamille == 5 || $f->idLienFamille == 12 || $f->idLienFamille == 16) {
+            $conjoint =  Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
+            if($conjoint == null) {
+                $salaireConjoint = 0;
+            } else {
+                $salaireConjoint = $conjoint->salaire;
+            }
+        } elseif ($f->idLienFamille == 1) {
+            $nbEnfant += 1;
+            $ressourceEn = Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
+            if($ressourceEn != null) {
+                $salaireEnfant = $salaireEnfant + $ressourceEn->salaire;
+            }
+        }
+    }
     $idFoyer = $individu->idFoyer;
     $chemin = './document/'.$idFoyer;
     if(!is_dir($chemin)) {
