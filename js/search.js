@@ -211,8 +211,6 @@ $(function() {
                 },
                 onClose: function() {
                     if ($('#datedebut').val() != '' && $('#datefin').val() != '')  {
-                                            alert("admin");
-
                         genererGraphstat();
                     }
                 }

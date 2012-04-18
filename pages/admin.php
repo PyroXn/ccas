@@ -309,7 +309,13 @@ function statistique() {
                                    <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbinscrit"> Nombre d\'inscrit</td>
                                </tr>
                                <tr>
-                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaide"> Nombre d\'aide</td>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaide"> Nombre d\'aide demandée</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaideurg"> Nombre d\'aide urgente demandée</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaideext"> Nombre d\'aide externe</td>
                                </tr>
                                <tr>
                                    <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="montant"> Montants accord&eacute;s</td>
@@ -395,6 +401,7 @@ function genererStat() {
     $from = ' FROM individu i';
     $join = '';
     $where = '';
+    $wheresuite = '';
     $groupby = '';
     $orderby = ' ORDER BY';
     $titre = '';
@@ -418,6 +425,21 @@ function genererStat() {
         case 'nbaide' : 
             $select .= ' count(distinct(ai.id)) as nbaide';
             $join .= ' INNER JOIN aideinterne ai on ai.idindividu = i.id ';
+            $orderby .= ' nbaide';
+            $nomColDate = 'datedemande';
+            $titre = 'Nombre d\'aide demandée ';
+            break;
+        case 'nbaideurg' : 
+            $select .= ' count(distinct(ai.id)) as nbaide';
+            $join .= ' INNER JOIN aideinterne ai on ai.idindividu = i.id ';
+            $orderby .= ' nbaide';
+            $nomColDate = 'datedemande';
+            $titre = 'Nombre d\'aide demandée ';
+            $wheresuite .= ' AND ai.aideurgente = 1 ';
+            break;
+        case 'nbaideext' : 
+            $select .= ' count(distinct(ae.id)) as nbaide';
+            $join .= ' INNER JOIN aideexterne ae on ae.idindividu = i.id ';
             $orderby .= ' nbaide';
             $nomColDate = 'datedemande';
             $titre = 'Nombre d\'aide demandée ';
@@ -455,32 +477,37 @@ function genererStat() {
                     FROM individu i 
                     '.$join.' 
                     '.$where.' AND YEAR(CURDATE()) - DATE_FORMAT( DATE_ADD(  "1970-01-01", INTERVAL datenaissance SECOND ) ,  "%Y" )<18
+                    '.$wheresuite.'
                     UNION
                     '.$select.', "18-25 ans"
                     FROM individu i
                     '.$join.'
                     '.$where.' AND YEAR(CURDATE()) - DATE_FORMAT( DATE_ADD(  "1970-01-01", INTERVAL datenaissance SECOND ) ,  "%Y" ) between 18 and 25
+                    '.$wheresuite.'
                     UNION
                     '.$select.', "25-59 ans"
                     FROM individu i
                     '.$join.'
                     '.$where.' AND YEAR(CURDATE()) - DATE_FORMAT( DATE_ADD(  "1970-01-01", INTERVAL datenaissance SECOND ) ,  "%Y" ) between 26 and 59
+                    '.$wheresuite.'
                     UNION
                     '.$select.', "plus de 60 ans"
                     FROM individu i
                     '.$join.'
-                    '.$where.' AND YEAR(CURDATE()) - DATE_FORMAT( DATE_ADD(  "1970-01-01", INTERVAL datenaissance SECOND ) ,  "%Y" ) >60';
+                    '.$where.' AND YEAR(CURDATE()) - DATE_FORMAT( DATE_ADD(  "1970-01-01", INTERVAL datenaissance SECOND ) ,  "%Y" ) >60
+                    '.$wheresuite;
             $select = $temp;
             $from = '';
             $join = '';
-            $where ='';
+            $where = '';
+            $wheresuite = '';
             $orderby = '';
             $titre .= 'par tranche d\'âge';
             break;
         case 'csp' : 
             $select .= ', profession';
-            $groupby .= 'GROUP BY profession';
-            $join .= 'INNER JOIN profession p on p.id = i.idprofession';
+            $groupby .= ' GROUP BY profession';
+            $join .= ' INNER JOIN profession p on p.id = i.idprofession';
             $titre .= 'par catégories socioprofessionnelles';
             break;
         case 'sexe' : 
@@ -512,7 +539,7 @@ function genererStat() {
     $titre = $titre.$finTitre;
     
 
-    $req = $select.' '.$from.' '.$join.' '.$where.' '.$groupby.' '.$orderby;
+    $req = $select.$from.$join.$where.$wheresuite.$groupby.$orderby;
     
 //    echo 'TITRE   :   '.$titre.'<br/><br/>';
 //    echo $req;
