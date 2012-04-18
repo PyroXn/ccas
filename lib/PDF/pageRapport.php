@@ -37,7 +37,7 @@
                 Situation Matrimoniale : <?php echo $individu->situationmatri->situation; ?>
             </td>
             <td width="350" class="left">
-                Nb d'enfants :
+                Nb d'enfants : <?php echo $nbEnfant; ?>
             </td>
         </tr>
         <tr>
@@ -85,13 +85,12 @@
                 <td><?php echo $fam->nom .' '. $fam->prenom; ?></td>
                 <td><?php echo $fam->lienfamille->lien; ?></td>
                 <td><?php echo getDatebyTimestamp($fam->dateNaissance); ?></td>
-                <td></td>
+                <td><?php echo $fam->profession->profession.' '. $fam->employeur.' '.$fam->etablissementScolaire; ?></td>
             </tr>
             <?php
         }
         ?>
     </table>
-
 </page>
 <page>
     <div id="titre" class="left">
@@ -108,63 +107,63 @@
         </tr>
         <tr>
             <td>Salaire du demandeur</td>
-            <td></td>
+            <td><?php echo $ressource->salaire; ?></td>
             <td>Loyer (taux plein)</td>
-            <td></td>
+            <td><?php echo $depense->loyer; ?></td>
         </tr>
         <tr>
             <td>Salaire du conjoint</td>
-            <td></td>
+            <td><?php echo $salaireConjoint; ?></td>
             <td>Loyer (résiduel)</td>
-            <td></td>
+            <td><?php echo $depense->loyer-$ressource->aideLogement; ?></td>
         </tr>
         <tr>
             <td>Indemnité de stage</td>
             <td></td>
-            <td>Charges locatives</td>
-            <td></td>
+            <td>Gaz</td>
+            <td><?php echo $depense->gaz; ?></td>
         </tr>
         <tr>
             <td>Salaire des enfants</td>
-            <td></td>
-            <td>EDF / GDF</td>
-            <td></td>
+            <td><?php echo $salaireEnfant; ?></td>
+            <td>Electricité</td>
+            <td><?php echo $depense->electricite; ?></td>
         </tr>
         <tr>
             <td>Complément aux indemnités</td>
             <td></td>
             <td>EAU</td>
-            <td></td>
+            <td><?php echo $depense->eau; ?></td>
         </tr>
         <tr>
             <td>IJSS</td>
             <td></td>
             <td>Téléphone</td>
-            <td></td>
+            <td><?php echo $depense->telephonie; ?></td>
         </tr>
         <tr>
             <td>RSA socle</td>
-            <td></td>
+            <td><?php echo $ressource->rsaSocle; ?></td>
             <td>Assurance voiture</td>
             <td></td>
         </tr>
         <tr>
             <td>RSA activité</td>
-            <td></td>
+            <td><?php echo $ressource->rsaActivite; ?></td>
             <td>Assurance habitation</td>
             <td></td>
         </tr>
         <tr>
             <td>AAH</td>
-            <td></td>
+            <td><?php echo $ressource->aah; ?></td>
             <td>Mutuelle</td>
-            <td></td>
+            <td><?php echo $depense->mutuelle; ?></td>
         </tr>
         <tr>
             <td>Chomage</td>
-            <td></td>
+            <td><?php echo $ressource->chomage; ?></td>
             <td>Impots sur le revenu</td>
-            <td></td>
+            <td><?php echo $depense->impotRevenu; ?></td>
         </tr>
         <tr>
             <th colspan="2">Pensions</th>
@@ -173,15 +172,15 @@
         </tr>
         <tr>
             <td class="large">Retraite</td>
-            <td class="large"></td>
+            <td class="large"><?php echo $ressource->pensionRetraite; ?></td>
             <td class="large">Autres</td>
-            <td class="large"></td>
+            <td class="large"><?php echo $depense->autreDepense; ?></td>
         </tr>
         <tr>
             <td class="large">Complémentaires</td>
-            <td class="large"></td>
+            <td class="large"><?php echo $ressource->retraitComp; ?></td>
             <td class="large"><b>TOTAL CHARGES MENSUELLES (A)</b></td>
-            <td class="large"></td>
+            <td class="large"><?php echo array_sum(array($depense->loyer-$ressource->aideLogement, $depense->gaz, $depense->electricite, $depense->eau, $depense->mutuelle, $depense->impotRevenu, $depense->autreDepense)); ?></td>
         </tr>
         <tr>
             <td>Rente A.T</td>
@@ -191,8 +190,8 @@
         <tr>
             <td>Invalidité</td>
             <td></td>
-            <td class="top left" rowspan="4">Nature et créanciers :</td>
-            <td rowspan="4"></td>
+            <td class="top left" rowspan="4">Total des crédits :</td>
+            <td rowspan="4"><?php echo $totalCredit; ?></td>
         </tr>
         <tr>
             <td>Aide sociale à l'enfance</td>
@@ -210,11 +209,11 @@
             <td>ATA</td>
             <td></td>
             <td><b>TOTAL CREDITS (B)</b></td>
-            <td></td>
+            <td><?php echo $totalCredit; ?></td>
         </tr>
         <tr>
             <td>Pension alimentaire</td>
-            <td></td>
+            <td><?php echo $ressource->pensionAlim; ?></td>
             <td class="top left" rowspan="3">Factures ponctuelles :</td>
             <td rowspan="3"></td>
         </tr>

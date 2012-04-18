@@ -1,9 +1,8 @@
 <?php
-
 include_once('./lib/config.php');
-include_once('./pages/graphique.php');
+include_once('./pages/aide.php');
+createPDFRapportSocial(7);
 
-echo time() .' '. mktime(0, 0, 0, date('m'), date('d'), date('Y')); ;
 
 //    $retour = '';
 //    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accept�'));
