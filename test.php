@@ -1,7 +1,6 @@
 <?php
-include_once('./lib/config.php');
-include_once('./pages/aide.php');
-createPDFRapportSocial(7);
+//include_once('./lib/config.php');
+include_once('./lib/PDF/generateMandat.php');
 
 
 //    $retour = '';

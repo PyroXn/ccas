@@ -897,4 +897,10 @@ function createPDFRapportSocial($idIndividu) {
     $nomComplet = $individu->civilite .' '. $individu->nom.' '. $individu->prenom;
     include_once('./lib/PDF/generateRapport.php');   
 }
+
+function createPDFMandat($type) {
+    include_once('./lib/config.php');
+    // CODE POUR LE MANDAT
+    include_once('./lib/PDF/generateMandat.php');
+}
 ?>
