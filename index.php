@@ -78,6 +78,10 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         genererStat();
         break;
+    case 'genererPeriode':
+        include_once('./pages/admin.php');
+        genererPeriode();
+        break;
     case 'updateChefDeFamille':
         include_once('./pages/individu.php');
         updateChefDeFamille();

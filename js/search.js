@@ -188,6 +188,37 @@ $(function() {
             showTrigger: '#calImg'
         }).focus();
     });
+    
+    $('.input_date_graph').live('click', function() {
+        var dates =  $(this).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 3,
+                showOn:'focus',
+                showAnim: 'slideDown',
+                showButtonPanel: 'true',
+                changeYear: true,
+                yearRange: 'c-80:c+5',
+                showTrigger: '#calImg',
+                onSelect: function( selectedDate ) {
+                        var option = this.id == "datedebut" ? "minDate" : "maxDate",
+                                instance = $( this ).data( "datepicker" ),
+                                date = $.datepicker.parseDate(
+                                        instance.settings.dateFormat ||
+                                        $.datepicker._defaults.dateFormat,
+                                        selectedDate, instance.settings );
+                        dates.not( this ).datepicker( "option", option, date );
+                },
+                onClose: function() {
+                    if ($('#datedebut').val() != '' && $('#datefin').val() != '')  {
+                                            alert("admin");
+
+                        genererGraphstat();
+                    }
+                }
+        }).focus();
+    });
+    
 
     $('.ui-datepicker').live("mousewheel", function(event, delta){
         if(delta < 0){
@@ -414,4 +445,31 @@ function calculTailleInputSearch() {
         "width" : $('#menu_gauche').outerWidth() - $('.add').outerWidth(true) 
         - parseInt($('#search').css("margin-left")) - 1
     });
+}
+
+
+function genererGraphstat() {
+    if ($('input[type=radio][name=groupe1]:checked').length != 0 &&
+        $('input[type=radio][name=groupe2]:checked').length != 0 &&
+        $('input[type=radio][name=groupe3]:checked').length != 0) {
+            var t = $(this).parent().parent().parent();
+            var datastring = 'groupe1=' + $("input[type=radio][name=groupe1]:checked").val() 
+                           + '&groupe2=' + $("input[type=radio][name=groupe2]:checked").val()
+                           + '&groupe3=' + $("input[type=radio][name=groupe3]:checked").val()
+                           + '&datedebut=' + $('#datedebut').val() + '&datefin=' + $('#datefin').val();;
+            console.log(datastring);
+            $.ajax({
+                type: 'POST',
+                data: datastring,
+                url: './index.php?p=genererStat',
+                cache: false,
+                //Succ�s de la requ�te
+                success: function(graph) {
+                    $('#graph_stat').html(graph);
+                },
+                error: function() {
+                    $("#graph_stat").html();
+                }
+            });
+    }
 }

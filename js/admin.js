@@ -78,28 +78,39 @@ $(function() {
         });
     });
     
+
     $('.radio_stat').live('change', function(){
-        if ($('input[type=radio][name=groupe1]:checked').length != 0 &&
-            $('input[type=radio][name=groupe2]:checked').length != 0 &&
-            $('input[type=radio][name=groupe3]:checked').length != 0) {
-                var t = $(this).parent().parent().parent();
-                var datastring = 'groupe1=' + $("input[type=radio][name=groupe1]:checked").val() 
-                               + '&groupe2=' + $("input[type=radio][name=groupe2]:checked").val()
-                               + '&groupe3=' + $("input[type=radio][name=groupe3]:checked").val();
-                console.log(datastring);
-                $.ajax({
+        if ($("input[type=radio][name=groupe3]:checked").val() != "periode") {
+                    $.ajax({
                     type: 'POST',
-                    data: datastring,
-                    url: './index.php?p=genererStat',
+                    url: './index.php?p=genererPeriode',
                     cache: false,
                     //Succ�s de la requ�te
                     success: function(graph) {
-                        $('#graph_stat').html(graph);
+                        $('#periode_exacte').html("");
+                        
                     },
                     error: function() {
-                        $("#graph_stat").html();
+                        $("#periode_exacte").html();
                     }
                 });
-            }
+        } else if ($("input[type=radio][name=groupe3]:checked").val() == "periode" && $('#datedebut').val() == null && $('#datedebut').val() == null) {
+                $.ajax({
+                    type: 'POST',
+                    url: './index.php?p=genererPeriode',
+                    cache: false,
+                    //Succ�s de la requ�te
+                    success: function(graph) {
+                        $('#periode_exacte').html(graph);
+                        $('#graph_stat').html("");
+                    },
+                    error: function() {
+                        $("#periode_exacte").html();
+                    }
+                });
+        } 
+        if ($("input[type=radio][name=groupe3]:checked").val() != "periode") {
+            genererGraphstat();
+        } 
     });
 });    

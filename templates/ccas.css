@@ -418,6 +418,7 @@ legend {
 .colonne {
     display: inline-block;
     width: 19%;
+    vertical-align:top;
 }
 
 .colonne_num {

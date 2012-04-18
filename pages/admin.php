@@ -296,86 +296,90 @@ function statistique() {
 
     $csp = Doctrine_Core::getTable('profession')->findAll();    
     
-    $contenu ='<div class="rounded_box" style="display: block; ">
-                   <table cellpadding="0" cellspacing="0">
-                       <thead>
-                           <tr>
-                               <th class="role">Information souhait&eacute;e</th>
-                           </tr>
-                       </thead>
-                       <tbody name="groupe1">
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbinscrit"> Nombre d\'inscrit</td>
-                           </tr>
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaide"> Nombre d\'aide</td>
-                           </tr>
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="montant"> Montants accord&eacute;s</td>
-                           </tr>
-                           
-                       </tbody>
-                   </table>
+    $contenu ='<div class="colonne">
+                   <div class="rounded_box" style="display: block; ">
+                       <table cellpadding="0" cellspacing="0">
+                           <thead>
+                               <tr>
+                                   <th class="role">Information souhait&eacute;e</th>
+                               </tr>
+                           </thead>
+                           <tbody name="groupe1">
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbinscrit"> Nombre d\'inscrit</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaide"> Nombre d\'aide</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="montant"> Montants accord&eacute;s</td>
+                               </tr>
+
+                           </tbody>
+                       </table>
+                   </div>
                </div>
-               <div class="rounded_box" style="display: block; ">
-                   <table cellpadding="0" cellspacing="0">
-                       <thead>
-                           <tr>
-                               <th class="role">Par</th>
-                           </tr>
-                       </thead>
-                       <tbody name="groupe2">
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="trancheage"> Tranche d\'&acirc;ge</td>
-                           </tr>
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="csp"> Cat&eacute;gorie socioprofessionnelle</td>
-                           </tr>
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="sexe"> Sexe</td>
-                           </tr>
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="secteur"> Secteur</td>
-                           </tr>
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="typefamille"> Type de famille</td>
-                           </tr>
-                      </tbody>
-                   </table>
+               <div class="colonne">
+                   <div class="rounded_box" style="display: block; ">
+                       <table cellpadding="0" cellspacing="0">
+                           <thead>
+                               <tr>
+                                   <th class="role">Par</th>
+                               </tr>
+                           </thead>
+                           <tbody name="groupe2">
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="trancheage"> Tranche d\'&acirc;ge</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="csp"> Cat&eacute;gorie socioprofessionnelle</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="sexe"> Sexe</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="secteur"> Secteur</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe2" value="typefamille"> Type de famille</td>
+                               </tr>
+                          </tbody>
+                       </table>
+                   </div>
                </div>
-               <div class="rounded_box" style="display: block; ">
-                   <table cellpadding="0" cellspacing="0">
-                       <thead>
-                           <tr>
-                               <th class="role">P&eacute;riode</th>
-                           </tr>
-                       </thead>
-                       <tbody name="groupe3">
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="tout" checked> Tout</td>
-                           </tr>
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="mois"> Mois</td>
-                           </tr>
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="trimestre"> Trimestre</td>
-                           </tr>
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="an"> Ann&eacute;e</td>
-                           </tr>
-                           <tr>
-                               <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="periode"> P&eacute;riode donn&eacute;e</td>
-                           </tr>
-                       </tbody>
-                   </table>
+               <div class="colonne">
+                   <div class="rounded_box" style="display: block; ">
+                       <table cellpadding="0" cellspacing="0">
+                           <thead>
+                               <tr>
+                                   <th class="role">P&eacute;riode</th>
+                               </tr>
+                           </thead>
+                           <tbody name="groupe3">
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="tout" checked> Tout</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="mois"> Mois</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="an"> Ann&eacute;e</td>
+                               </tr>
+                               <tr>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe3" value="periode"> P&eacute;riode donn&eacute;e</td>
+                               </tr>
+                           </tbody>
+                       </table>
+                   </div>
                </div>
-               <div id="graph_stat">
                
+               <div class="colonne">
+                   <div id="periode_exacte">       
+                   </div>
+               </div>
+               <div id="graph_stat">       
                </div>';
-
-
-
-
+    
     return $contenu;
 }
 
@@ -384,6 +388,8 @@ function genererStat() {
     $gp1 = $_POST['groupe1'];
     $gp2 = $_POST['groupe2'];
     $gp3 = $_POST['groupe3'];
+    $dateDebut = explode('/', $_POST['datedebut']);
+    $dateFin = explode('/', $_POST['datefin']);
     
     $select = 'SELECT';
     $from = ' FROM individu i';
@@ -395,6 +401,10 @@ function genererStat() {
     $finTitre = '';
     $nomColDate ='';
     $joinFoyer = false;
+    
+
+    
+    
     
     SWITCH ($gp1) {
         case 'nbinscrit' : 
@@ -422,23 +432,23 @@ function genererStat() {
             break;
     }
     
-        SWITCH ($gp3) {
-        case 'tout' : 
-            break;
+    SWITCH ($gp3) {
         case 'mois' : 
             $where .= ' WHERE '.$nomColDate.' > '.mktime(0,0,0, date("m"),1, date("Y")).'';
-            $finTitre .= '';
+            $finTitre .= '<br/> sur le mois courant';
             break;
         case 'an' : 
             $where .= ' WHERE '.$nomColDate.' > '.mktime(0,0,0, 1,1, date("Y")).'';
+            $finTitre .= '<br/> pour l\'année civile courante';
             break;
-        case 'periode' : 
-            $where .= ' WHERE '.$nomColDate.' BETWEEN '.mktime(0,0,0, 1,1, date("Y")).' AND ';
+        case 'periode' :
+            if ($dateDebut != '' && $dateFin != '') {
+                $where .= ' WHERE '.$nomColDate.' BETWEEN '.mktime(0, 0, 0, $dateDebut[1], $dateDebut[0], $dateDebut[2]).' AND '.mktime(0, 0, 0, $dateFin[1], $dateFin[0], $dateFin[2]);
+            }
+            $finTitre .= '<br/> du '.$dateDebut[0].'/'.$dateDebut[1].'/'.$dateDebut[2].' au '.$dateFin[0].'/'.$dateFin[1].'/'.$dateFin[2];
             break;
     }
-    
-    
-    
+
     SWITCH ($gp2) {
         case 'trancheage' :
             $temp = $select.', "moins de 18 ans"
@@ -498,13 +508,16 @@ function genererStat() {
             break;
     }
     
+    
     $titre = $titre.$finTitre;
     
-    
+
     $req = $select.' '.$from.' '.$join.' '.$where.' '.$groupby.' '.$orderby;
-    echo $req;
-    echo "<br/>";
-   // echo $titre;
+    
+//    echo 'TITRE   :   '.$titre.'<br/><br/>';
+//    echo $req;
+//    echo "<br/>";
+    
     $con = Doctrine_Manager::getInstance()->connection();
     $st = $con->execute($req);
     // fetch query result
@@ -517,7 +530,6 @@ function genererGraph($tab, $titre) {
     include_once('./lib/config.php');
     $y = '[';
     $x = '[';
-//    arsort($tab);
     foreach($tab as $tableau) {
            $x = $x.'"'.$tableau[1].'", ';
            $y = $y.''.$tableau[0].', ';
@@ -528,13 +540,10 @@ function genererGraph($tab, $titre) {
     $x[strlen($x)] = ']';
     $y[strlen($y)] = ']';
     
-    
-    echo "<br/>";
-    echo $x;
-    echo "<br/>";
-    echo $y;
-//    exit();
-    
+//    echo "<br/>";
+//    echo $x;
+//    echo "<br/>";
+//    echo $y;    
     
     $retour = '<div id="graphstat" style="height:250px;width:1000px; "></div>';
         $retour .= "
@@ -558,4 +567,36 @@ function genererGraph($tab, $titre) {
          </script>";
     echo $retour;
 }
+
+function genererPeriode() {
+      echo '<div class="rounded_box" style="display: block; ">
+               <table cellpadding="0" cellspacing="0">
+                   <thead>
+                       <tr>
+                           <th class="role">P&eacute;riode exacte</th>
+                       </tr>
+                   </thead>
+                   <tbody name="groupe3">
+                       <tr>
+                           <td class="ligne">                        
+                               <span class="attribut">Date début :</span>
+                               <span>
+                                   <input class="contour_field input_date_graph test" type="text" size="10" id="datedebut">
+                               </span>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td class="ligne">                        
+                               <span class="attribut">Date fin :</span>
+                               <span>
+                                   <input class="input_date_graph test" type="text" size="10" id="datefin">
+                               </span>
+                           </td>
+                       </tr>
+                   </tbody>
+               </table>
+           </div>';
+}
+
+
 ?>
