@@ -33,9 +33,8 @@ function getDocumentIndividu() {
                             if (!is_dir($dir_nom.'/'.$tab.'/'.$dos)) {
                                 $name = basename($dir_nom.'/'.$tab.'/'.$dos);
                                 $debut = substr($name, 0, 3);
-                                if($debut == 'bon') {
+                                if($debut == 'bon' || $debut == 'Man') {
                                     $fichier['bon'][] = '/'.$tab.'/'.$dos;
-                   
                                 }
                                 
                                 }

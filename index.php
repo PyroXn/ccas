@@ -186,9 +186,9 @@ switch (@$_GET['p']) {
         include_once('./pages/aide.php');
         updateDecisionExterne();
         break;
-    case 'createPDFBonInterne':
+    case 'createPDF':
         include_once('./pages/aide.php');
-        createPDFBonInternetEtAffichage($_POST['idBon']);
+        createPDF($_POST['idBon']);
         break;
     case 'afficherArchive':
         include_once('./pages/historique.php');

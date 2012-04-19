@@ -450,6 +450,7 @@ $(function() {
                         datastring += '&idAide='+idAide+'&dateprevue='+$('#dateprevue').val();
                         datastring += '&dateeffective='+$('#dateeffective').val()+'&montant='+$('#montant').val();
                         datastring += '&commentaire='+$('#commentaireBon').val()+'&instruct='+$('#idinstruct').attr('value');
+                        datastring += '&typebon='+$('#typebon').attr('value');
                         console.log(datastring);
                         break;
                     case 'creation_role':
@@ -1011,7 +1012,7 @@ $(function() {
         $.ajax({
             type: 'post',
             data: datastring,
-            url: './index.php?p=createPDFBonInterne',
+            url: './index.php?p=createPDF',
             cache: false,
             success: function() {
                 console.log("succes");
@@ -1026,6 +1027,7 @@ $(function() {
         });
            
     });
+    
 });
 
 function relockAll(loc) {
