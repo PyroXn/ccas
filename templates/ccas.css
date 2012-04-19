@@ -541,6 +541,9 @@ legend {
     cursor: pointer;
 }
 
+.create_rapport_social {
+    cursor: pointer;
+}
 
 /***** Gestion des roles*****/
 .tab_menu {

@@ -42,6 +42,7 @@ function aideInterne() {
                             <th>Montant</th>
                             <th>Date décision</th>
                             <th>Détails</th>
+                            <th>Rapport Social</th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -53,6 +54,7 @@ function aideInterne() {
             foreach($bons as $bon) {
                 $total += $bon->montant;
             }
+            $chemin = './document/'.$aideInterne->individu->idFoyer.'/'.$aideInterne->individu->id;
             $i % 2 ? $contenu .= '<tr name="'.$aideInterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideInterne->id.'">';
             $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
                                     <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
@@ -62,6 +64,7 @@ function aideInterne() {
                                     <td> '.$total.'€</td>
                                     <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
                                     <td><span class="edit_aide_interne"></span></td>
+                                    <td>'.rapportExist($chemin, $aideInterne->id).'</td>
                         </tr>';
             $i++;
         }
@@ -321,14 +324,17 @@ function detailAideInterne() {
     if (sizeof($bonAides) != null) {
         foreach($bonAides as $bonAide) {
             switch($bonAide->typeBon) {
-                case 1:
+                case BonAide::$BonAide:
                     $type = 'Bon d\'aide';
                     break;
-                case 2:
-                    $type = 'Mandat d\'aide urgente';
+                case BonAide::$MandatSecoursUrgence:
+                    $type = 'Secours en urgence';
                     break;
-                case 3:
-                    $type = 'Mandat autres secours';
+                case BonAide::$AutreMandat:
+                    $type = 'Autres secours';
+                    break;
+                case BonAide::$MandatRSA:
+                    $type = 'R.S.A.';
                     break;
             }
             $chemin = './document/'.$bonAide->aideInterne->individu->idFoyer.'/'.$bonAide->aideInterne->individu->id.'/'.$bonAide->aideInterne->id;
@@ -396,13 +402,16 @@ function detailAideInterne() {
     $contenu .= '</ul>';
     $contenu .= '<ul class="select_typebon">
                                 <li>
-                                    <div value="1">Bon d\'aide</div>
+                                    <div value="'.BonAide::$BonAide.'">'.BonAide::$BonAideLibelle.'</div>
                                 </li>
                                 <li>
-                                    <div value="2">Mandat d\'aide urgente</div>
+                                    <div value="'.BonAide::$MandatSecoursUrgence.'">'.BonAide::$MandatSecoursUrgenceLibelle.'</div>
                                 </li>
                                 <li>
-                                    <div value="3">Mandat autres secours</div>
+                                    <div value="'.BonAide::$AutreMandat.'">'.BonAide::$AutreMandatLibelle.'</div>
+                                </li>
+                                <li>
+                                    <div value="'.BonAide::$MandatRSA.'">'.BonAide::$MandatRSALibelle.'</div>
                                 </li>
                             </ul>';
     // FORMULAIRE
@@ -442,6 +451,33 @@ function detailAideInterne() {
     return $contenu;
 }
 
+function rapportSocial($idAide) {
+    $retour = '<h2 id="numAide" idAide="'.$idAide.'">Création du rapport social</h2>';
+    $retour .= '<h3>Motif de la demande</h3>
+                        <ul class="list_classique">
+                            <li class="ligne_list_classique">
+                                <span><textarea rows="8" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="motif" ></textarea></span>
+                            </li>
+                       </ul>
+                       <h3>Evaluation sociale</h3>
+                       <ul class="list_classique">
+                            <li class="ligne_list_classique">
+                                <span><textarea rows="14" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="evaluation" ></textarea></span>
+                            </li>
+                        </ul>
+                        <div class="sauvegarder_annuler">
+                            <div value="create_rapport" class="bouton modif">
+                                <i class="icon-save"></i>
+                                <span>Créer le rapport social</span>
+                            </div>
+                            <div value="cancel" class="bouton classique">
+                                    <i class="icon-cancel icon-black"></i>
+                                    <span>Annuler</span>
+                            </div>
+                        </div>';
+    echo $retour;
+}
+
 function createAideInterne($typeAide, $date, $instruct, $nature, $proposition, $etat, $idIndividu, $organisme, $urgence) {
     $aide = new AideInterne();
     if($date != 0) {
@@ -459,7 +495,7 @@ function createAideInterne($typeAide, $date, $instruct, $nature, $proposition, $
     $aide->idOrganisme = $organisme;
     $aide->aideUrgente = $urgence;
     $aide->save();
-    createPDFRapportSocial($idIndividu);
+//    createPDFRapportSocial($idIndividu);
 }
 
 function createAideExterne($typeAide, $date, $instruct, $nature, $idDistrib, $etat, $idIndividu, $organisme, $urgence, $montantDemande) {
@@ -556,16 +592,20 @@ function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $monta
     
     include_once('./pages/historique.php');
     switch($bon->typeBon) {
-        case 1:
-            createHistorique(Historique::$Creation, 'bon interne', $_SESSION['userId'], $bon->aideInterne->individu->id);
+        case BonAide::$BonAide:
+            createHistorique(Historique::$Creation, BonAide::$BonAideLibelle, $_SESSION['userId'], $bon->aideInterne->individu->id);
             creationPDFBonInterne($bon);
             break;
-        case 2:
-            createHistorique(Historique::$Creation, 'mandat d\aide urgente', $_SESSION['userId'], $bon->aideInterne->individu->id);
+        case BonAide::$MandatSecoursUrgence:
+            createHistorique(Historique::$Creation, BonAide::$MandatSecoursUrgenceLibelle, $_SESSION['userId'], $bon->aideInterne->individu->id);
             createPDFMandat($bon);
             break;
-        case 3:
-            createHistorique(Historique::$Creation, 'mandat autres secours', $_SESSION['userId'], $bon->aideInterne->individu->id);
+        case BonAide::$AutreMandat:
+            createHistorique(Historique::$Creation, BonAide::$AutreMandatLibelle, $_SESSION['userId'], $bon->aideInterne->individu->id);
+            createPDFMandat($bon);
+            break;
+        case BonAide::$MandatRSA:
+            createHistorique(Historique::$Creation, BonAide::$MandatRSALibelle, $_SESSION['userId'], $bon->aideInterne->individu->id);
             createPDFMandat($bon);
             break;
     }
@@ -882,18 +922,28 @@ function detailAideExterne() {
     return $contenu;
 }
 
+function rapportExist($chemin, $idAide) { // $chemin == ./IdFoyer/IdIndividu
+    if(is_dir($chemin) && file_exists($chemin.'/RapportSocial_'.$idAide.'.pdf')) {
+        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank">Visualiser</a>';
+    } else {
+        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" idAide="'.$idAide.'" class="create_rapport_social">Créer</a>';
+    }
+}
+
 function pdfExist($chemin, $idBon, $date, $typeBon) {
     $date = date('d-m-Y', $date);
     switch($typeBon) {
-        case 1:
-            if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf')) {
+        case BonAide::$BonAide:
+            if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$idBon.'.pdf')) {
                 return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" target="_blank">V</a>';
             } else {
                 return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne">C</a>';
             }
             break;
-       case 2:
-            if(is_dir($chemin) && file_exists($chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf')) {
+       case BonAide::$AutreMandat:
+       case BonAide::$MandatRSA:
+       case BonAide::$MandatSecoursUrgence:
+            if(is_dir($chemin) && file_exists($chemin.'/Mandat_'.$idBon.'.pdf')) {
                 return '<a name="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" target="_blank">V</a>';
             } else {
                 return '<a name="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne">C</a>';
@@ -907,18 +957,19 @@ function createPDF($idBon) {
     include_once('./lib/config.php');
     $bon = Doctrine_Core::getTable('bonaide')->find($idBon);
     switch($bon->typeBon) {
-        case 1:
+        case BonAide::$BonAide:
             creationPDFBonInterne($bon);
             break;
-        case 2:
-        case 3:
+       case BonAide::$AutreMandat:
+       case BonAide::$MandatRSA:
+       case BonAide::$MandatSecoursUrgence:
             createPDFMandat($bon);
             break;
     }
     
 }
 
-function createPDFRapportSocial($idIndividu) {
+function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($idIndividu);
     $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($idIndividu);
@@ -928,7 +979,8 @@ function createPDFRapportSocial($idIndividu) {
     $famille = $individu->foyer->individu;
     $salaireEnfant = 0;
     $totalCredit = 0;
-    $nbEnfant = 0;
+    $nbEnfant = 0; 
+    $salaireConjoint = 0;
     if($credit != null) {
         foreach($credit as $c) {
             $totalCredit += $c->mensualite;
@@ -937,7 +989,7 @@ function createPDFRapportSocial($idIndividu) {
     foreach($famille as $f) {
         if($f->idLienFamille == 3 || $f->idLienFamille == 5 || $f->idLienFamille == 12 || $f->idLienFamille == 16) {
             $conjoint =  Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
-            if($conjoint == null) {
+            if(count($conjoint) < 1) {
                 $salaireConjoint = 0;
             } else {
                 $salaireConjoint = $conjoint->salaire;
@@ -960,18 +1012,39 @@ function createPDFRapportSocial($idIndividu) {
     }
     $nomComplet = $individu->civilite .' '. $individu->nom.' '. $individu->prenom;
     include_once('./lib/PDF/generateRapport.php');   
+    // On réaffiche la page aide
+    $retour = aide();
+    echo $retour;
 }
 
 function createPDFMandat($bon) {
     include_once('./lib/int2str.php');
-    $beneficaire = $bon->aideInterne->individu->civilite .' '. $bon->aideInterne->individu->nom .' '. $bon->aideInterne->individu->prenom;
+    $nom = $bon->aideInterne->individu->nom ;
+    $prenom = $bon->aideInterne->individu->prenom;
     $rue = $bon->aideInterne->individu->foyer->rue->rue;
     $num = $bon->aideInterne->individu->foyer->numRue;
+    $ville = $bon->aideInterne->individu->ville->libelle;
     $idIndividu = $bon->aideInterne->individu->id;
     $lettres = int2str($bon->montant);
     $chemin = './document/'.$bon->aideInterne->individu->idFoyer;
     $idAide = $bon->aideInterne->id;
     $numBon = $bon->id;
+    switch($bon->typeBon) {
+        case BonAide::$MandatSecoursUrgence:
+            $objet = BonAide::$MandatSecoursUrgenceLibelle;
+            $article = '6561';
+            $fonction = '5234';
+            break;
+        case BonAide::$AutreMandat:
+            $objet = BonAide::$AutreMandatLibelle;
+            $article = '6568';
+            $fonction = '5234';
+            break;
+        case BonAide::$MandatRSA:
+            $objet = BonAide::$MandatRSALibelle;
+            $article = '6562';
+            $fonction = '5234';         
+    }
     if(!is_dir($chemin)) {
         mkdir($chemin);
     }

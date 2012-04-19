@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td></td>
-            <td class="center">article 6561 - fonction 5234</td>
+            <td class="center">article <?php echo $article; ?> - fonction <?php echo $fonction; ?></td>
             <td>&nbsp;pièce n°</td>
         </tr>
         <tr>
@@ -28,18 +28,19 @@
             &nbsp;n°5003 29 N</td>
             <td colspan="3">
             &nbsp;<u>Objet de la dépense</u><br />
-            &nbsp;SECOURS EN URGENCE
+            &nbsp;<?php echo $objet; ?>
             </td>
         </tr>
         <tr>
             <td rowspan="2">
                 &nbsp;créancier<br />
-                &nbsp;Nom :<br />
-                &nbsp;Prénom :<br />
-                &nbsp;Adresse :<br /><br />
+                &nbsp;Nom : <?php echo $nom; ?><br />
+                &nbsp;Prénom : <?php echo $prenom; ?><br />
+                &nbsp;Adresse : <?php echo $num.' '.$rue; ?><br />
+                                                <?php echo $ville; ?><br />
             </td>
             <td>
-                &nbsp;Montant attribué :
+                &nbsp;Montant attribué : <?php echo $bon->montant; ?>
             </td>
             <td colspan="2"></td>
         </tr>
@@ -50,7 +51,7 @@
         <tr>
             <td>&nbsp;Vu, bon à payer ou à virer<br />&nbsp;pour la somme de :</td>
             <td>&nbsp;Somme nette à payer ou à<br />&nbsp;virer :</td>
-            <td colspan="2"></td>
+            <td colspan="2"><?php echo $bon->montant; ?></td>
         </tr>
         <tr>
             <td>&nbsp;Pour acquit de la somme<br />
@@ -59,11 +60,13 @@
             <br /><br /><br /></td>
             <td class="noBorder">
                 &nbsp;Arrêté le présent ordre de<br /><br />
+                <div width="200" class="separateur"><?php echo $lettres.' euros'; ?></div>
                 <br /><br /><br />
                 &nbsp;Hayange, le
                 <br /><br /><br /><br /></td>
-            <td class="noBorder" colspan="2">
-                &nbsp;paiement à la somme de :<br /><br /><br /><br />
+            <td class="noBorder" colspan="2"><br />
+                &nbsp;paiement à la somme de :<br /><br /><br />
+                <div width="330" class="separateur"></div><br />
                 &nbsp;Le Président du C.C.A.S.<br />
                 &nbsp;Par délégation, la Vice-Présidente<br />
                 &nbsp;le Directeur
@@ -92,7 +95,7 @@
         </tr>
         <tr>
             <td></td>
-            <td class="center">article 6561 - fonction 5234</td>
+            <td class="center">article <?php echo $article; ?> - fonction <?php echo $fonction; ?></td>
             <td>&nbsp;pièce n°</td>
         </tr>
         <tr>
@@ -102,18 +105,19 @@
             &nbsp;n°5003 29 N</td>
             <td colspan="3">
             &nbsp;<u>Objet de la dépense</u><br />
-            &nbsp;SECOURS EN URGENCE
+            &nbsp;<?php echo $objet; ?>
             </td>
         </tr>
         <tr>
             <td rowspan="2">
                 &nbsp;créancier<br />
-                &nbsp;Nom :<br />
-                &nbsp;Prénom :<br />
-                &nbsp;Adresse :<br /><br />
+                &nbsp;Nom : <?php echo $nom; ?><br />
+                &nbsp;Prénom : <?php echo $prenom; ?><br />
+                &nbsp;Adresse : <?php echo $num.' '.$rue; ?><br />
+                                                <?php echo $ville; ?><br />
             </td>
             <td>
-                &nbsp;Montant attribué :
+                &nbsp;Montant attribué : <?php echo $bon->montant; ?>
             </td>
             <td colspan="2"></td>
         </tr>
@@ -124,7 +128,7 @@
         <tr>
             <td>&nbsp;Vu, bon à payer ou à virer<br />&nbsp;pour la somme de :</td>
             <td>&nbsp;Somme nette à payer ou à<br />&nbsp;virer :</td>
-            <td colspan="2"></td>
+            <td colspan="2"><?php echo $bon->montant; ?></td>
         </tr>
         <tr>
             <td>&nbsp;Pour acquit de la somme<br />
@@ -133,15 +137,17 @@
             <br /><br /><br /></td>
             <td class="noBorder">
                 &nbsp;Arrêté le présent ordre de<br /><br />
-                <br /><br />
+                <div width="200" class="separateur"><?php echo $lettres.' euros'; ?></div>
+                <br /><br /><br />
                 &nbsp;Hayange, le
                 <br /><br /><br /><br /></td>
-            <td class="noBorder" colspan="2">
+            <td class="noBorder" colspan="2"><br />
                 &nbsp;paiement à la somme de :<br /><br /><br />
+                <div width="330" class="separateur"></div><br />
                 &nbsp;Le Président du C.C.A.S.<br />
                 &nbsp;Par délégation, la Vice-Présidente<br />
                 &nbsp;le Directeur
-                <br /><br /><br />
+                <br /><br /><br /><br />
             </td>
         </tr>
     </table>
