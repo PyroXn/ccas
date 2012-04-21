@@ -352,7 +352,7 @@ function detailAideInterne() {
         }
     } else {
         $contenu .= '<tr>
-                         <td colspan=6 align=center>< Aucun bon n\'a encore été délivré pour cette aide > </td>
+                         <td colspan=8 align=center>< Aucun bon n\'a encore été délivré pour cette aide > </td>
                      </tr>';
     }
     $contenu .= '</tbody></table></div>

@@ -357,6 +357,20 @@ $(function() {
                     $("#contenu").html(html.responseText);
                 }
             });
+        } else if(value == 'ajout_doc_type') {
+            $("#upload").upload('upload.php', function(retour) {
+                console.log(retour);
+                    if(retour != '') {
+                         $('#ecran_gris').toggle();
+                         formActuel.toggle();
+                         effacer();
+                        $('#contenu').html(retour);
+                    }
+                    else{
+                        alert("non");
+                        $('#result').html("L'upload a échoué");
+                    }
+            }, 'html');
         }
         else if(value=='save') {
             var traitement = true;
