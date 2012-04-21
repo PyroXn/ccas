@@ -279,7 +279,7 @@ function getDocument() {
         }
     } else {
         $contenu .= '<tr>
-                             <td colspan=9 align=center>< Aucun bon d\'aide n\'a été crée pour cet individu > </td>
+                             <td colspan=9 align=center>< Aucun document type n\'a été publié > </td>
                          </tr>';
     }
     $contenu .= '</tbody></table>';
