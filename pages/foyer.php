@@ -86,6 +86,22 @@ function foyerContenu($idFoyer) {
                 </div>
             </div>
         </div>
+        <div class="formulaire" action="suppression_individu">
+            <h2>Individu</h2>
+            <div class="colonne_droite">
+                <span>Etes-vous sur de vouloir supprimer l\'individu.</span>
+                <div class="sauvegarder_annuler">
+                    <div value="delete_individu" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Oui</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Non</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <ul class="select_lien_famille">';
     
         

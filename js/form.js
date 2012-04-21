@@ -832,6 +832,103 @@ $(function() {
                 }
             });
         }
+        else if (value == 'delete_credit') {
+            var id = formActuel.attr('idCredit');
+            datastring = 'id='+id+'&idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=deletecredit',
+                cache: false,
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $("#contenu").html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
+                }
+            });
+        }
+        else if (value == 'delete_individu') {
+            var idIndividuADelete = formActuel.attr('idIndividuADelete');
+            datastring = 'idFoyer=' + formActuel.attr('idFoyer');
+            datastring += '&idIndividu=' + idIndividuADelete;
+            datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=deleteIndividu',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $("#list_individu").html(data.listeIndividu);
+                    $('#contenu').html(data.contenu);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
+                }
+            });
+        }
+        else if (value == 'archive_ressource') {
+            datastring = 'idIndividu='+idIndividu;
+            console.log('ARCHIVE ressource ' + datastring);
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archiveressource',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $('#contenu').html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
+                }
+            });
+        }
+        else if (value == 'archive_depense') {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archivedepense',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $('#contenu').html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
+                }
+            });
+        }
+        else if (value == 'archive_dette') {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archivedette',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $('#contenu').html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
+                }
+            });
+        }
     });
     
     
@@ -877,101 +974,48 @@ $(function() {
     
     $('.archive').live("click", function() {
         console.log('ARCHIVE');
-        var datastring;
-        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
         if($(this).parent().attr('role') == "ressource") {
-            datastring = 'idIndividu='+idIndividu;
-            console.log('ARCHIVE ressource ' + datastring);
-            $.ajax({
-                type: 'post',
-                data: datastring,
-                url: './index.php?p=archiveressource',
-                cache: false,
-                //Succés de la requête
-                success: function(data) {
-                    $('#contenu').html(data);
-                },
-                error: function(data) {
-                    $("#contenu").html(data.responseText);
-                }
-            });
+            var form = $('.formulaire[action="archive_ressource"]');
+            var newPosition = new Object();
+            newPosition.left = $(window).width()/2 - form.width()/2;
+            newPosition.top = $(window).height()/2 - form.height();
+            creationForm(newPosition, $(this).outerHeight(), form);
         } else if($(this).parent().attr('role') == "depense") {
-            datastring = 'idIndividu='+idIndividu;
-            $.ajax({
-                type: 'post',
-                data: datastring,
-                url: './index.php?p=archivedepense',
-                cache: false,
-                //Succés de la requête
-                success: function(data) {
-                    $('#contenu').html(data);
-                },
-                error: function(data) {
-                    $("#contenu").html(data.responseText);
-                }
-            });
+            var form = $('.formulaire[action="archive_depense"]');
+            var newPosition = new Object();
+            newPosition.left = $(window).width()/2 - form.width()/2;
+            newPosition.top = $(window).height()/2 - form.height();
+            creationForm(newPosition, $(this).outerHeight(), form);
         } else if($(this).parent().attr('role') == "dette") {
-            datastring = 'idIndividu='+idIndividu;
-            $.ajax({
-                type: 'post',
-                data: datastring,
-                url: './index.php?p=archivedette',
-                cache: false,
-                //Succés de la requête
-                success: function(data) {
-                    $('#contenu').html(data);
-                },
-                error: function(data) {
-                    $("#contenu").html(data.responseText);
-                }
-            });
+            var form = $('.formulaire[action="archive_dette"]');
+            var newPosition = new Object();
+            newPosition.left = $(window).width()/2 - form.width()/2;
+            newPosition.top = $(window).height()/2 - form.height();
+            creationForm(newPosition, $(this).outerHeight(), form);
         }
     });
     
-    $('.delete').live("click", function() {
-        
+    $('.delete_credit').live("click", function() {
+        var form = $('.formulaire[action="suppression_credit"]');
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        creationForm(newPosition, $(this).outerHeight(), form);
+        var id = $(this).parent().parent().attr('name');
+        form.attr('idCredit', id);
     });
     
     $('.delete_individu').live("click", function() {
+        var form = $('.formulaire[action="suppression_individu"]');
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        creationForm(newPosition, $(this).outerHeight(), form);
+        console.log($(this).parent().parent());
+        var idIndividuADelete = $(this).parent().parent().attr('id_individu');
         var idFoyer = $(this).parent().parent().attr('id_foyer');
-        var idIndividu = $(this).parent().parent().attr('id_individu');
-        var datastring = 'idFoyer=' + idFoyer;
-        datastring += '&idIndividu=' + idIndividu;
-        datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
-        console.log(datastring);
-        $.ajax({
-            type: 'post',
-            dataType:'json',
-            data: datastring,
-            url: './index.php?p=deleteIndividu',
-            cache: false,
-            //Succés de la requête
-            success: function(data) {
-                $("#list_individu").html(data.listeIndividu);
-                $('#contenu').html(data.contenu);
-            },
-            error: function(data) {
-                $("#contenu").html(data.responseText);
-            }
-        });
-    });
-    
-    $('.delete_credit').live("click", function() {
-        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
-        var id = $(this).parent().parent().attr('name');
-        datastring = 'id='+id+'&idIndividu='+idIndividu;
-        $.ajax({
-            type: 'post',
-            data: datastring,
-            url: './index.php?p=deletecredit',
-            cache: false,
-            success: function(data) {
-                $("#contenu").html(data);
-            },
-            error: function(data) {
-                $("#contenu").html(data.responseText);
-            }
-        });
+        form.attr('idIndividuADelete', idIndividuADelete);
+        form.attr('idFoyer', idFoyer);
     });
     
     $('.delete_ligne').live("click", function() {
