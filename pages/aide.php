@@ -41,12 +41,12 @@ function aideInterne() {
                             <th>Avis</th>
                             <th>Montant</th>
                             <th>Date décision</th>
+                            <th>Vigilance</th>
                             <th>Détails</th>
                             <th>Rapport Social</th>
                         </tr>
                     </thead>
                     <tbody>';
-    $i = 1;
     if (sizeof($aidesInternes) != null) {
         foreach($aidesInternes as $aideInterne) {
             $total = 0;
@@ -55,22 +55,27 @@ function aideInterne() {
                 $total += $bon->montant;
             }
             $chemin = './document/'.$aideInterne->individu->idFoyer.'/'.$aideInterne->individu->id;
-            $i % 2 ? $contenu .= '<tr name="'.$aideInterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideInterne->id.'">';
+            $contenu .= '<tr name="'.$aideInterne->id.'">';
             $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
                                     <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
                                     <td> '.$aideInterne->etat.'</td>
                                     <td> '.$aideInterne->natureAide->libelle.'</td>
                                     <td> '.$aideInterne->avis.'</td>
                                     <td> '.$total.'€</td>
-                                    <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
-                                    <td><span class="edit_aide_interne"></span></td>
+                                    <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>';
+                                    if ($aideInterne->vigilance) {
+                                        $contenu .= '<td><span class="vigilance"></span></td>';
+                                    } else {
+                                        $contenu .= '<td></td>';
+                                    }
+                                    $contenu .= '<td><span class="edit_aide_interne"></span></td>
                                     <td>'.rapportExist($chemin, $aideInterne->id).'</td>
+                                    
                         </tr>';
-            $i++;
         }
     } else {
         $contenu .= '<tr>
-                         <td colspan=9 align=center>< Aucune aide interne n\'a été attribuée à cet individu > </td>
+                         <td colspan=10 align=center>< Aucune aide interne n\'a été attribuée à cet individu > </td>
                      </tr>';
     }
     $contenu .= '</tbody></table></div>';

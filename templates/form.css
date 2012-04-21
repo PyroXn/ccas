@@ -174,7 +174,11 @@
     position: relative;
     display: inline-block;
     padding: 1px 18px 0 6px;
-    min-width: 80%;
+    min-width: 80%;    
+}
+
+.court {
+    min-width: 250px;
 }
 
 .option {

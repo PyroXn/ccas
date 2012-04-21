@@ -134,9 +134,9 @@ $retour .= '                <div class="fleche_bas"> </div>
         }
     });*/
         if($foyer->instruct->interne == 1) {
-            $retour .= '<span class="checkbox checkbox_active lock" value="1" disabled></span>';
+            $retour .= '<span id="checkbox_instruct" class="checkbox checkbox_active lock" value="1" disabled></span>';
         } else {
-            $retour .= '<span class="checkbox lock" value="0" disabled></span>';
+            $retour .= '<span id="checkbox_instruct" class="checkbox lock" value="0" disabled></span>';
         }
 
         $retour .= '</div>

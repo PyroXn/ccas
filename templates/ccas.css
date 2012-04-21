@@ -522,6 +522,16 @@ legend {
     cursor: pointer;
 }
 
+.vigilance {
+    background: transparent url('./img/glyphicons-red.png') no-repeat;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    width: 14px;
+    height: 14px;
+    background-position: -144px -120px;
+}
+
 /**** AIDES INTERNES ****/
 
 #decision {
