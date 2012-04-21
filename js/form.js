@@ -351,6 +351,7 @@ $(function() {
                 }
             });
         } else if(value == 'updateDecisionExterne') {
+            var traitement = true;
            $('#decisionRequis').find('.requis').each(function(){
                 if ($(this).is('input')) {
                     if ($(this).val() == '') {
