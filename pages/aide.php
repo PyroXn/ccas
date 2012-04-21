@@ -10,7 +10,7 @@ function aideInterne() {
     $organismes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(5);
     $natures = Doctrine_Core::getTable('type')->findByCategorie(5);
     $typesaides = Doctrine_Core::getTable('type')->findByCategorie(1);
-    $instructs =  Doctrine_Core::getTable('instruct')->findAll();
+    $allinstructs =  Doctrine_Core::getTable('instruct')->findAll();
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $contenu = '';
@@ -79,7 +79,7 @@ function aideInterne() {
                 <div class="fleche_bas"> </div>
             </div>
             <div class="clearboth"></div>
-            <div class="select classique" role="select_instruct">
+            <div class="select classique" role="select_instruct2">
                 <div id="instruct" class="option requis">Instructeur</div>
                 <div class="fleche_bas"> </div>
             </div>
@@ -144,10 +144,10 @@ foreach($typesaides as $type) {
                             </li>';
     }
     $contenu .= '</ul>';
-    $contenu .= '<ul class="select_instruct">';
-    foreach($instructs as $instruct) {
+    $contenu .= '<ul class="select_instruct2">';
+    foreach($allinstructs as $allinstruct) {
         $contenu .= '<li>
-                                <div value="'.$instruct->id.'">'.$instruct->nom.'</div>
+                                <div value="'.$allinstruct->id.'">'.$allinstruct->nom.'</div>
                            </li>';
     }
     $contenu .= '</ul>';
