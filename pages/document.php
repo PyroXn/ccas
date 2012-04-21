@@ -220,6 +220,7 @@ function getDocumentIndividu() {
 
 function getDocument() {
     include_once('./lib/config.php');
+    include_once('./pages/Droit.class.php');
     $dir_nom = './document/';
     if (file_exists($dir_nom)) {
         $dir = opendir($dir_nom); // on ouvre le contenu du dossier courant
