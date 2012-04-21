@@ -88,7 +88,6 @@ $(function() {
                     //Succ�s de la requ�te
                     success: function(graph) {
                         $('#periode_exacte').html("");
-                        
                     },
                     error: function() {
                         $("#periode_exacte").html();
@@ -109,7 +108,9 @@ $(function() {
                     }
                 });
         } 
-        if ($("input[type=radio][name=groupe3]:checked").val() != "periode") {
+        if ($("input[type=radio][name=groupe3]:checked").val() != "periode" ||
+           (($("input[type=radio][name=groupe3]:checked").val() == "periode" && 
+             $('#datedebut').val() != null && $('#datedebut').val() != null))) {
             genererGraphstat();
         } 
     });
