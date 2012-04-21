@@ -303,16 +303,16 @@ function afficherCredits($credits) {
             <h2>Crédit</h2>
             <div class="colonne_droite">
                 <div class="input_text">
-                    <input id="organisme" class="contour_field" type="text" title="Organisme" placeholder="Organisme">
+                    <input id="organisme" class="contour_field requis" type="text" title="Organisme" placeholder="Organisme">
                 </div>
                 <div class="input_text">
-                    <input id="mensualite" class="contour_field" type="text" title="Mensualite" placeholder="Mensualite">
+                    <input id="mensualite" class="contour_field requis" type="text" title="Mensualite" placeholder="Mensualite">
                 </div>
                 <div class="input_text">
-                    <input id="duree" class="contour_field" type="text" title="Durée" placeholder="Durée">
+                    <input id="duree" class="contour_field requis" type="text" title="Durée" placeholder="Durée">
                 </div>
                 <div class="input_text">
-                    <input id="total" class="contour_field" type="text" title="Total Restant" placeholder="Total Restant">
+                    <input id="total" class="contour_field requis" type="text" title="Total Restant" placeholder="Total Restant">
                 </div>
                 <div class="sauvegarder_annuler">
                     <div value="save" class="bouton modif">

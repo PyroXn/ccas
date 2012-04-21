@@ -532,6 +532,10 @@ legend {
     background-position: -144px -120px;
 }
 
+.tableau_classique .vigilance_ligne td {
+    color: red;
+}
+
 /**** AIDES INTERNES ****/
 
 #decision {

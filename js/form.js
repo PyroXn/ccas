@@ -928,6 +928,10 @@ $(function() {
         }
     });
     
+    $('.delete').live("click", function() {
+        
+    });
+    
     $('.delete_individu').live("click", function() {
         var idFoyer = $(this).parent().parent().attr('id_foyer');
         var idIndividu = $(this).parent().parent().attr('id_individu');

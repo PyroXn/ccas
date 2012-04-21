@@ -55,7 +55,7 @@ function aideInterne() {
                 $total += $bon->montant;
             }
             $chemin = './document/'.$aideInterne->individu->idFoyer.'/'.$aideInterne->individu->id;
-            $contenu .= '<tr name="'.$aideInterne->id.'">';
+            $aideInterne->vigilance ? $contenu .= '<tr class="vigilance_ligne" name="'.$aideInterne->id.'">' :  $contenu .= '<tr name="'.$aideInterne->id.'">';
             $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
                                     <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
                                     <td> '.$aideInterne->etat.'</td>
