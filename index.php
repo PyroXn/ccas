@@ -2,8 +2,7 @@
 
 include_once('./lib/config.php');
 include_once('./pages/Droit.class.php');
-ini_set('session.gc_maxlifetime', 3600); 
-session_start();
+
 if (!isset($_SESSION['userId'])) {
     login();
     exit();
