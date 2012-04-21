@@ -1,7 +1,6 @@
 <?php
 
 include_once('./lib/config.php');
-include_once('./pages/Droit.class.php');
 
 if (!isset($_SESSION['userId'])) {
     login();

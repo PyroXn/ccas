@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once('./pages/Droit.class.php');
 require_once './lib/Doctrine.php';
 spl_autoload_register(array('Doctrine_Core', 'autoload'));
 Doctrine_Core::loadModels('./modeles/'); //demande d'inclure les modules se situant dans le dossier indiqué. 
