@@ -235,14 +235,14 @@ function detailAideInterne() {
             $contenu .= '<div id="decision">';
         }
         $contenu .= '<h3 id="idAide" value="'.$aideInterne->id.'">Décision :</h3>
-                     <ul class="list_classique">
+                     <ul id="decisionRequis" class="list_classique">
                          <li class="ligne_list_classique">
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Aide accordée : </h2>
                                     <div class="aff">
                                         <div class="select classique" role="select_typeaide_interne">';
-            $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option">Type d\'aide</div>' : '<div id="aideaccorde" class="option" value="'. $aideInterne->idAideAccordee .'">'.$aideInterne->typeAideAccordee->libelle.'</div>';  
+            $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option requis">Type d\'aide</div>' : '<div id="aideaccorde requis" class="option requis" value="'. $aideInterne->idAideAccordee .'">'.$aideInterne->typeAideAccordee->libelle.'</div>';  
             $contenu .= '
                                             <div class="fleche_bas"> </div>
                                         </div>
@@ -252,7 +252,7 @@ function detailAideInterne() {
                                     <h2>Avis : </h2>
                                     <div class="aff">
                                         <div class="select classique" role="select_avis">';
-            $contenu .= $aideInterne->avis == null ? '<div id="avis" class="option">-------</div>' : '<div id="avis" class="option" value="'. $aideInterne->avis.'">'.$aideInterne->avis.'</div>';  
+            $contenu .= $aideInterne->avis == null ? '<div id="avis" class="option requis">-------</div>' : '<div id="avis" class="option requis" value="'. $aideInterne->avis.'">'.$aideInterne->avis.'</div>';  
             $contenu .= '                  
                                             <div class="fleche_bas"> </div>
                                         </div>
@@ -263,7 +263,7 @@ function detailAideInterne() {
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Date décision : </h2>
-                                    <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideInterne->dateDecision).'></div>
+                                    <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideInterne->dateDecision).'></div>
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Vigilance : </h2>
@@ -283,7 +283,7 @@ function detailAideInterne() {
                                     <h2>Décideur : </h2>
                                     <div class="aff">
                                         <div class="select classique" role="select_decideur">';
-        $contenu .= $aideInterne->idDecideur == null ? '<div id="decideur" class="option">Decideur</div>' : '<div id="decideur" class="option" value="'. $aideInterne->idDecideur .'">'.$aideInterne->decideur->decideur.'</div>';  
+        $contenu .= $aideInterne->idDecideur == null ? '<div id="decideur" class="option requis">Decideur</div>' : '<div id="decideur" class="option requis" value="'. $aideInterne->idDecideur .'">'.$aideInterne->decideur->decideur.'</div>';  
         $contenu .= '
                                             <div class="fleche_bas"> </div>
                                         </div>
@@ -864,12 +864,12 @@ function detailAideExterne() {
             $contenu .= '<div id="decision">';
         }
         $contenu .= '<h3 id="idAide" value="'.$aideExterne->id.'">Décision :</h3>
-                     <ul class="list_classique">
+                     <ul id="decisionRequis" class="list_classique">
                         <li class="ligne_list_classique">
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Montant per&ccedil;u : </h2>
-                                    <div class="aff"><input class="contour_field input_num" type="text" id="montantPercu"  value="'.$aideExterne->montantPercu.'"></div>
+                                    <div class="aff"><input class="contour_field input_num requis" type="text" id="montantPercu"  value="'.$aideExterne->montantPercu.'"></div>
                                 </div>
 
                                 <div class="affichage_classique">
@@ -880,7 +880,7 @@ function detailAideExterne() {
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Date décision : </h2>
-                                    <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideExterne->dateDecision).'></div>
+                                    <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideExterne->dateDecision).'></div>
                                  </div>
                             </div>
                             <div class="colonne_classique">
@@ -888,7 +888,7 @@ function detailAideExterne() {
                                     <h2>Avis : </h2>
                                     <div class="aff">
                                         <div class="select classique" role="select_avis">';
-            $contenu .= $aideExterne->avis == null ? '<div id="avis" class="option">-------</div>' : '<div id="avis" class="option" value="'. $aideExterne->avis.'">'.$aideExterne->avis.'</div>';  
+            $contenu .= $aideExterne->avis == null ? '<div id="avis" class="option requis">-------</div>' : '<div id="avis" class="option requis" value="'. $aideExterne->avis.'">'.$aideExterne->avis.'</div>';  
             $contenu .= '                  
                                             <div class="fleche_bas"> </div>
                                         </div>
@@ -897,7 +897,6 @@ function detailAideExterne() {
                             </div>
                         </li></ul>
         <div class="sauvegarder_annuler">
-            <div class="bouton modif" value="updateDecisionExterne">Enregistrer</div>
             <div value="updateDecisionExterne" class="bouton modif">
                 <i class="icon-save"></i>
                 <span>Enregistrer</span>

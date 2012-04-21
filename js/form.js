@@ -281,29 +281,51 @@ $(function() {
                 }
             });
         } else if(value == 'updateDecisionInterne') {
-            var vigilance = 0;
-            if($('#vigilance').hasClass('checkbox_active')) {
-                vigilance = 1;
-            }
-            datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&aide='+$('#aideaccorde').attr('value');
-            datastring += '&date='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
-            datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
-            datastring += '&rapport='+$('#rapport').val()+'&decideur='+$('#decideur').attr('value');
-            console.log(datastring);
-            $.ajax({
-                type: 'post',
-                dataType:'json',
-                data: datastring,
-                url: './index.php?p=updatedecisioninterne',
-                cache: false,
-                success: function(aideinterne) {
-                    console.log(aideinterne);
-                    $('#contenu').html(aideinterne.aide);
-                },
-                error: function(aideinterne) {
-                    $("#contenu").html(aideinterne.responseText);
+            var traitement = true;
+            console.log($('#decisionRequis'));
+            $('#decisionRequis').find('.requis').each(function(){
+                if ($(this).is('input')) {
+                    if ($(this).val() == '') {
+                        traitement = false;
+                        $(this).addClass('a_completer');
+                    } else {
+                        $(this).removeClass('a_completer');
+                    }
+                } else if ($(this).hasClass('option')) {
+                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+                        traitement = false;
+                        $(this).parent().addClass('a_completer');
+                    } else {
+                        $(this).parent().removeClass('a_completer');
+                    }
                 }
+                
             });
+            if(traitement) {
+                var vigilance = 0;
+                if($('#vigilance').hasClass('checkbox_active')) {
+                    vigilance = 1;
+                }
+                datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&aide='+$('#aideaccorde').attr('value');
+                datastring += '&date='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
+                datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
+                datastring += '&rapport='+$('#rapport').val()+'&decideur='+$('#decideur').attr('value');
+                console.log(datastring);
+                $.ajax({
+                    type: 'post',
+                    dataType:'json',
+                    data: datastring,
+                    url: './index.php?p=updatedecisioninterne',
+                    cache: false,
+                    success: function(aideinterne) {
+                        console.log(aideinterne);
+                        $('#contenu').html(aideinterne.aide);
+                    },
+                    error: function(aideinterne) {
+                        $("#contenu").html(aideinterne.responseText);
+                    }
+                });
+            }
         } else if(value == 'cancelDecisionInterne') {
             var idMenu = 'aides';
             var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
@@ -322,24 +344,44 @@ $(function() {
                 }
             });
         } else if(value == 'updateDecisionExterne') {
-            datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&montantPercu='+$('#montantPercu').val();
-            datastring += '&dateDecision='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
-            datastring += '&commentaire='+$('#commentaire').val();
-            console.log(datastring);
-            $.ajax({
-                type: 'post',
-                dataType:'json',
-                data: datastring,
-                url: './index.php?p=updatedecisionexterne',
-                cache: false,
-                success: function(aideexterne) {
-                    console.log(aideexterne);
-                    $('#contenu').html(aideexterne.aide);
-                },
-                error: function(aideexterne) {
-                    $("#contenu").html(aideexterne.responseText);
+           $('#decisionRequis').find('.requis').each(function(){
+                if ($(this).is('input')) {
+                    if ($(this).val() == '') {
+                        traitement = false;
+                        $(this).addClass('a_completer');
+                    } else {
+                        $(this).removeClass('a_completer');
+                    }
+                } else if ($(this).hasClass('option')) {
+                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+                        traitement = false;
+                        $(this).parent().addClass('a_completer');
+                    } else {
+                        $(this).parent().removeClass('a_completer');
+                    }
                 }
+                
             });
+            if(traitement) {
+                datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&montantPercu='+$('#montantPercu').val();
+                datastring += '&dateDecision='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
+                datastring += '&commentaire='+$('#commentaire').val();
+                console.log(datastring);
+                $.ajax({
+                    type: 'post',
+                    dataType:'json',
+                    data: datastring,
+                    url: './index.php?p=updatedecisionexterne',
+                    cache: false,
+                    success: function(aideexterne) {
+                        console.log(aideexterne);
+                        $('#contenu').html(aideexterne.aide);
+                    },
+                    error: function(aideexterne) {
+                        $("#contenu").html(aideexterne.responseText);
+                    }
+                });
+            }
         } else if(value == 'cancelDecisionExterne') {
             var idMenu = 'aides';
             var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
