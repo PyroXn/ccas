@@ -178,6 +178,13 @@ $(function() {
                 }
             });
         }
+        if ($(this).parent().hasClass("select_instruct")) {
+            if ($(this).children().attr('interne') == 1) {
+                $('#checkbox_instruct').addClass('checkbox_active');
+            } else {
+                $('#checkbox_instruct').removeClass('checkbox_active');
+            }
+        }
         if ($(this).parent().hasClass("select_historique_type_action")) {
             searchTableHistorique();
         }
@@ -975,6 +982,10 @@ $(function() {
                 }
             });
         }
+    });
+    
+    $('.delete').live("click", function() {
+        
     });
     
     $('.delete_individu').live("click", function() {

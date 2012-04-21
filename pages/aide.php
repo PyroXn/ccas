@@ -10,7 +10,7 @@ function aideInterne() {
     $organismes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(5);
     $natures = Doctrine_Core::getTable('type')->findByCategorie(5);
     $typesaides = Doctrine_Core::getTable('type')->findByCategorie(1);
-    $instructs =  Doctrine_Core::getTable('instruct')->findAll();
+    $allinstructs =  Doctrine_Core::getTable('instruct')->findAll();
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $contenu = '';
@@ -41,12 +41,12 @@ function aideInterne() {
                             <th>Avis</th>
                             <th>Montant</th>
                             <th>Date décision</th>
+                            <th>Vigilance</th>
                             <th>Détails</th>
                             <th>Rapport Social</th>
                         </tr>
                     </thead>
                     <tbody>';
-    $i = 1;
     if (sizeof($aidesInternes) != null) {
         foreach($aidesInternes as $aideInterne) {
             $total = 0;
@@ -55,22 +55,27 @@ function aideInterne() {
                 $total += $bon->montant;
             }
             $chemin = './document/'.$aideInterne->individu->idFoyer.'/'.$aideInterne->individu->id;
-            $i % 2 ? $contenu .= '<tr name="'.$aideInterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideInterne->id.'">';
+            $aideInterne->vigilance ? $contenu .= '<tr class="vigilance_ligne" name="'.$aideInterne->id.'">' :  $contenu .= '<tr name="'.$aideInterne->id.'">';
             $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
                                     <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
                                     <td> '.$aideInterne->etat.'</td>
                                     <td> '.$aideInterne->natureAide->libelle.'</td>
                                     <td> '.$aideInterne->avis.'</td>
                                     <td> '.$total.'€</td>
-                                    <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
-                                    <td><span class="edit_aide_interne"></span></td>
+                                    <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>';
+                                    if ($aideInterne->vigilance) {
+                                        $contenu .= '<td><span class="vigilance"></span></td>';
+                                    } else {
+                                        $contenu .= '<td></td>';
+                                    }
+                                    $contenu .= '<td><span class="edit_aide_interne"></span></td>
                                     <td>'.rapportExist($chemin, $aideInterne->id).'</td>
+                                    
                         </tr>';
-            $i++;
         }
     } else {
         $contenu .= '<tr>
-                         <td colspan=9 align=center>< Aucune aide interne n\'a été attribuée à cet individu > </td>
+                         <td colspan=10 align=center>< Aucune aide interne n\'a été attribuée à cet individu > </td>
                      </tr>';
     }
     $contenu .= '</tbody></table></div>';
@@ -82,7 +87,7 @@ function aideInterne() {
                 <div class="fleche_bas"> </div>
             </div>
             <div class="clearboth"></div>
-            <div class="select classique" role="select_instruct">
+            <div class="select classique" role="select_instruct2">
                 <div id="instruct" class="option requis">Instructeur</div>
                 <div class="fleche_bas"> </div>
             </div>
@@ -147,10 +152,10 @@ foreach($typesaides as $type) {
                             </li>';
     }
     $contenu .= '</ul>';
-    $contenu .= '<ul class="select_instruct">';
-    foreach($instructs as $instruct) {
+    $contenu .= '<ul class="select_instruct2">';
+    foreach($allinstructs as $allinstruct) {
         $contenu .= '<li>
-                                <div value="'.$instruct->id.'">'.$instruct->nom.'</div>
+                                <div value="'.$allinstruct->id.'">'.$allinstruct->nom.'</div>
                            </li>';
     }
     $contenu .= '</ul>';

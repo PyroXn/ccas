@@ -3,7 +3,7 @@
 //TODO marche pas avec bailleur et instruct
 function comboTableStatique() {
     $retour = '
-        <div class="select classique" role="select_table_statique">
+        <div class="select classique court" role="select_table_statique">
             <div id="choixTableStatique" class="option">bailleur</div>
             <div class="fleche_bas"> </div>
         </div>

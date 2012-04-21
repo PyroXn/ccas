@@ -513,12 +513,12 @@ function genererStat() {
             break;
         case 'sexe' : 
             $select .= ', IF(sexe = "","Aucune information" ,sexe) ';
-            $groupby .= 'GROUP BY sexe';
+            $groupby .= ' GROUP BY sexe';
             $titre .= 'par sexe';
             break;
        case 'secteur' : 
             $select .= ', secteur';
-            $groupby .= 'GROUP BY secteur';
+            $groupby .= ' GROUP BY secteur';
             if (!$joinFoyer) {
                 $join .= ' INNER JOIN foyer f on f.id = i.idfoyer ';
             }
@@ -527,7 +527,7 @@ function genererStat() {
             break;
        case 'typefamille' : 
             $select .= ', situation';
-            $groupby .= 'GROUP BY situation';
+            $groupby .= ' GROUP BY situation';
             if (!$joinFoyer) {
                 $join .= ' INNER JOIN foyer f on f.id = i.idfoyer ';
             }
@@ -609,7 +609,7 @@ function genererPeriode() {
                            <td class="ligne">                        
                                <span class="attribut">Date début :</span>
                                <span>
-                                   <input class="contour_field input_date_graph test" type="text" size="10" id="datedebut">
+                                   <input class="contour_field input_date_graph" type="text" size="10" id="datedebut">
                                </span>
                            </td>
                        </tr>
@@ -617,7 +617,7 @@ function genererPeriode() {
                            <td class="ligne">                        
                                <span class="attribut">Date fin :</span>
                                <span>
-                                   <input class="input_date_graph test" type="text" size="10" id="datefin">
+                                   <input class="input_date_graph" type="text" size="10" id="datefin">
                                </span>
                            </td>
                        </tr>

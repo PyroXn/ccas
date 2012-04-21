@@ -189,31 +189,21 @@ $(function() {
         }).focus();
     });
     
+    
     $('.input_date_graph').live('click', function() {
-        var dates =  $(this).datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 3,
-                showOn:'focus',
-                showAnim: 'slideDown',
-                showButtonPanel: 'true',
-                changeYear: true,
-                yearRange: 'c-80:c+5',
-                showTrigger: '#calImg',
-                onSelect: function( selectedDate ) {
-                        var option = this.id == "datedebut" ? "minDate" : "maxDate",
-                                instance = $( this ).data( "datepicker" ),
-                                date = $.datepicker.parseDate(
-                                        instance.settings.dateFormat ||
-                                        $.datepicker._defaults.dateFormat,
-                                        selectedDate, instance.settings );
-                        dates.not( this ).datepicker( "option", option, date );
-                },
-                onClose: function() {
-                    if ($('#datedebut').val() != '' && $('#datefin').val() != '')  {
-                        genererGraphstat();
-                    }
+        $(this).datepicker({
+            showOn:'focus',
+            showAnim: 'slideDown',
+            showButtonPanel: 'true',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: 'c-80:c+5',
+            showTrigger: '#calImg',
+            onClose: function() {
+                if ($('#datedebut').val() != '' && $('#datefin').val() != '')  {
+                    genererGraphstat();
                 }
+            }
         }).focus();
     });
     
