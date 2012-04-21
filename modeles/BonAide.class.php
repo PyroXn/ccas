@@ -13,8 +13,18 @@ class BonAide extends Doctrine_Record {
         $this->hasColumn('dateRemiseEffective', 'integer', 20);
         $this->hasColumn('montant', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('commentaire', 'string',250);
+        $this->hasColumn('typeBon', 'integer', 1, array('notnull' => true, 'default' => '1'));
     }
-
+    
+    public static $BonAide = 1;
+    public static $BonAideLibelle = 'Bon d\'aide';
+    public static $MandatSecoursUrgence = 2;
+    public static $MandatSecoursUrgenceLibelle = 'SECOURS EN URGENCE';
+    public static $AutreMandat = 3;
+    public static $AutreMandatLibelle = 'AUTRES SECOURS';
+    public static $MandatRSA = 4;
+    public static $MandatRSALibelle = 'R.S.A.';
+    
     public function setUp() {
         $this->hasOne('aideInterne as aideInterne', array(
             'local' => 'idAideInterne',

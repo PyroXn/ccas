@@ -58,7 +58,7 @@ function form() {
             break;
         case 'addBonInterne':
             include_once('./pages/aide.php');
-            addBonInterne($_POST['idAide'], $_POST['instruct'], $_POST['dateprevue'], $_POST['dateeffective'], $_POST['montant'], $_POST['commentaire']);
+            addBonInterne($_POST['idAide'], $_POST['instruct'], $_POST['dateprevue'], $_POST['dateeffective'], $_POST['montant'], $_POST['commentaire'], $_POST['typebon']);
             $detail = detailAideInterne();
             $retour = array('detail' => $detail);
             echo json_encode($retour);

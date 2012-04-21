@@ -186,9 +186,9 @@ switch (@$_GET['p']) {
         include_once('./pages/aide.php');
         updateDecisionExterne();
         break;
-    case 'createPDFBonInterne':
+    case 'createPDF':
         include_once('./pages/aide.php');
-        createPDFBonInternetEtAffichage($_POST['idBon']);
+        createPDF($_POST['idBon']);
         break;
     case 'afficherArchive':
         include_once('./pages/historique.php');
@@ -201,6 +201,14 @@ switch (@$_GET['p']) {
     case 'graphinstruct':
         include_once('./pages/tableauBord.php');
         changeGraphInstruct();
+        break;
+    case 'createrapport':
+        include_once('./pages/aide.php');
+        createPDFRapportSocial($_POST['idIndividu'], $_POST['motif'], $_POST['evaluation'], $_POST['idAide']);
+        break;
+    case 'rapportsocial':
+        include_once('./pages/aide.php');
+        rapportSocial($_POST['idAide']);
         break;
     default:
         home();

@@ -450,6 +450,7 @@ $(function() {
                         datastring += '&idAide='+idAide+'&dateprevue='+$('#dateprevue').val();
                         datastring += '&dateeffective='+$('#dateeffective').val()+'&montant='+$('#montant').val();
                         datastring += '&commentaire='+$('#commentaireBon').val()+'&instruct='+$('#idinstruct').attr('value');
+                        datastring += '&typebon='+$('#typebon').attr('value');
                         console.log(datastring);
                         break;
                     case 'creation_role':
@@ -523,6 +524,22 @@ $(function() {
                     }
                 });
             }
+        } else if(value == 'create_rapport') {
+            var aide = $('#numAide').attr('idAide');
+            datastring = 'motif='+$('#motif').val()+'&evaluation='+$('#evaluation').val()+'&idIndividu='+idIndividu+'&idAide='+aide;
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=createrapport',
+                cache: false,
+                success: function(pageaide) {
+                    $('#contenu').html(pageaide);
+                },
+                error: function(pageaide) {
+                    $('#contenu').html(pageaide.responseText);
+                }
+            });
         } else if (value == 'updateMembreFoyer') {
             var membreFoyer = $('.checkbox_active').parent().parent().parent();
             console.log(membreFoyer);
@@ -1011,7 +1028,7 @@ $(function() {
         $.ajax({
             type: 'post',
             data: datastring,
-            url: './index.php?p=createPDFBonInterne',
+            url: './index.php?p=createPDF',
             cache: false,
             success: function() {
                 console.log("succes");
@@ -1026,6 +1043,27 @@ $(function() {
         });
            
     });
+    
+    $('.create_rapport_social').live("click", function() {
+        var loc = $(this);
+        var name = $(this).attr('name');
+        var datastring = "idAide=" + $(this).attr('idAide');
+        console.log(datastring);
+        $.ajax({
+            type: 'post',
+            data: datastring,
+            url: './index.php?p=rapportsocial',
+            cache: false,
+            success: function(retour) {
+                $('#contenu').html(retour);
+            },
+            error: function(data) {
+                $("#contenu").html(data.responseText);
+            }
+        });
+           
+    });
+    
 });
 
 function relockAll(loc) {

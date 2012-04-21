@@ -16,8 +16,10 @@ function getDocumentIndividu() {
                             $debut = substr($name, 0, 3);
                             if($debut == 'Rap') {
                                 $fichier['rapport'][] = $element;
+                                arsort($fichier['rapport']);
                             } elseif($debut == 'bon') {
                                 $fichier['bon'][] = $element; // N'est normalement jamais utilisé ici
+                                
                             } else {
                                 $fichier['autre'][] = $element;
                             }
@@ -33,17 +35,24 @@ function getDocumentIndividu() {
                             if (!is_dir($dir_nom.'/'.$tab.'/'.$dos)) {
                                 $name = basename($dir_nom.'/'.$tab.'/'.$dos);
                                 $debut = substr($name, 0, 3);
-                                if($debut == 'bon') {
+                                if($debut == 'bon' || $debut == 'Man') {
                                     $fichier['bon'][] = '/'.$tab.'/'.$dos;
-                   
-                                }
-                                
-                                }
+                                }                         
+                            }
                 }
             }
             next($dossier);
         }
         closedir($dir);
+    function sortBon($a, $b) {
+        $sc = explode('_', $a);
+        $sc2 = explode('_', $b);
+        if($sc[1] > $sc2[1]) {
+            return -1;
+        } 
+        return 1;
+    }
+    usort($fichier['bon'], 'sortBon');
         $contenu = '
             <h3>Rapport social</h3>
                 <div class="bubble tableau_classique_wrapper">
