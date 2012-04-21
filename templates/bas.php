@@ -43,6 +43,8 @@
         <script type="text/javascript" src="./js/form.js"></script>
         <script type="text/javascript" src="./js/admin.js"></script>
         
+        <script type="text/javascript" src="./js/jquery.upload.js"></script>
+        
         <script type="text/javascript" src="./js/jqplotPlugins/jquery.jqplot.min.js"></script>
         <script type="text/javascript" src="./js/jqplotPlugins/jqplot.pointLabels.min.js"></script>
         <script type="text/javascript" src="./js/jqplotPlugins/jqplot.categoryAxisRenderer.min.js"></script>
@@ -50,16 +52,6 @@
        
     
     
-<script src="./js/jsUpload/jquery.ui.widget.js"></script>
-<script src="./js/jsUpload/tmpl.min.js"></script>
-<script src="./js/jsUpload/load-image.min.js"></script>
-<script src="./js/jsUpload/canvas-to-blob.min.js"></script>
-<script src="./js/jsUpload/bootstrap.min.js"></script>
-<script src="./js/jsUpload/bootstrap-image-gallery.min.js"></script>
-<script src="./js/jsUpload/jquery.iframe-transport.js"></script>
-<script src="./js/jsUpload/jquery.fileupload.js"></script>
-<script src="./js/jsUpload/jquery.fileupload-ip.js"></script>
-<script src="./js/jsUpload/jquery.fileupload-ui.js"></script>
 <script src="./js/jquery-ui-1.8.18.custom.min.js"></script>
 <script src="./js/jquery.ui.datepicker-fr.js"></script>
 
