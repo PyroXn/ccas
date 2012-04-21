@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Jeu 19 Avril 2012 à 21:09
+-- Généré le : Sam 21 Avril 2012 à 20:54
 -- Version du serveur: 5.1.61
 -- Version de PHP: 5.3.6-13ubuntu3.6
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `aideexterne` (
   `montantpercu` float(18,2) DEFAULT '0.00',
   `commentaire` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Contenu de la table `aideexterne`
@@ -97,7 +97,9 @@ INSERT INTO `aideexterne` (`id`, `idindividu`, `datedemande`, `idorganisme`, `na
 (27, 1103, 1319666400, 28, '66', 0, 69, 35, 10, 'Terminé', 'Accepté', 0, 306.85, 306.85, 'Avons sollicité le FSL pour l''octroi du dépôt de garantie nécessaire à l''entrée de Mr au foyer ADOMA. ACCORD reçu le 17/11/2011'),
 (28, 510, 1323817200, 28, '66', 0, 69, 38, 0, 'Terminé', '', 0, 0.00, 0.00, 'Fsl accès aux lieux envoyé ce jour.Demande aide financière assurance , premier loyer + dépot de garantie.'),
 (29, 469, 1323990000, 28, '0', 0, 69, 38, 6, 'Terminé', '', 0, 295.56, 0.00, 'Madame perçoit l''AAH à hauteur de 743,62 euros.A son fils à charge.Demande FSL pour facture Energie.Envoi ce jour.'),
-(30, 88, 1323990000, 28, '66', 0, 69, 38, 0, 'Terminé', '', 0, 0.00, 0.00, 'Dette locative de 428,90 euros.Envoi FSL ce jour (attente versement de l''ass, dossier en cours)');
+(30, 88, 1323990000, 28, '66', 0, 69, 38, 0, 'Terminé', '', 0, 0.00, 0.00, 'Dette locative de 428,90 euros.Envoi FSL ce jour (attente versement de l''ass, dossier en cours)'),
+(31, 7, 1331593200, 28, '68', 0, 71, 29, 9, 'Terminé', 'Accepté', 1333490400, 45.00, 45.00, 'ok'),
+(32, 1144, 1334354400, 28, '68', 0, 71, 27, 4, 'Terminé', 'Accepté', 1335304800, 0.00, 0.00, '');
 
 -- --------------------------------------------------------
 
@@ -124,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `aideinterne` (
   `commentaire` varchar(250) NOT NULL DEFAULT '',
   `rapport` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1516 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1521 ;
 
 --
 -- Contenu de la table `aideinterne`
@@ -1628,7 +1630,12 @@ INSERT INTO `aideinterne` (`id`, `idindividu`, `datedemande`, `idorganisme`, `na
 (1512, 560, 1325026800, 14, 65, 0, 23, 9, 'Terminé', 'Sollicite une aide pour l''achat d''une bouteille de gaz\ndevis = 38.90?', 'Accepté', 1, 1325113200, 0, 23, 'ACCORD pour une aide à l''achat d''une bouteille de Gaz, payable à l''intermarché.   Vigilance : ', ''),
 (1513, 472, 1325113200, 15, 64, 0, 23, 11, 'Terminé', 'Sollicite une aide à l''énergie pour une facture impayée de 57,39?\nCf rapport Mme MACALUSO, CMS.', 'Refusé', 1, 1325113200, 0, 23, 'REFUS. Voir pour un dossier FSL.   Vigilance : ', ''),
 (1514, 476, 1325113200, 15, 65, 0, 7, 11, 'Terminé', 'Sollicite une aide alimentaire.\nCf rapport Mme MACALUSO, CMS.', 'Accepté', 1, 1325113200, 0, 7, 'ACCORD pour un bon alimentaire de 40?.   Vigilance : ', ''),
-(1515, 1145, 1324335600, 15, 64, 0, 10, 28, 'Terminé', '', 'Accepté', 3, 1333490400, 0, 10, '', '');
+(1515, 1145, 1324335600, 15, 64, 0, 10, 28, 'Terminé', '', 'Accepté', 3, 1333490400, 0, 10, '', ''),
+(1516, 7, 1338933600, 14, 64, 0, 10, 27, 'Terminé', '', 'undefined', 0, 0, 0, 0, '', ''),
+(1517, 7, 1327100400, 15, 65, 0, 27, 27, 'Terminé', '', 'undefined', 0, 0, 0, 0, '', ''),
+(1518, 1144, 1327100400, 16, 65, 0, 10, 29, 'Terminé', '', 'undefined', 0, 0, 0, 0, '', ''),
+(1519, 1145, 1327100400, 17, 65, 0, 7, 30, 'En cours', '', NULL, NULL, 0, 0, NULL, '', NULL),
+(1520, 1145, 1327100400, 14, 65, 0, 3, 27, 'Terminé', '', 'Refusé', 3, 1334959200, 0, 6, '', '');
 
 -- --------------------------------------------------------
 
@@ -2334,7 +2341,14 @@ CREATE TABLE IF NOT EXISTS `credit` (
   `idindividu` bigint(20) DEFAULT '0',
   `dateajout` bigint(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `credit`
+--
+
+INSERT INTO `credit` (`id`, `organisme`, `mensualite`, `dureemois`, `totalrestant`, `idindividu`, `dateajout`) VALUES
+(1, '', 0.00, 0, 0.00, 7, 1335018930);
 
 -- --------------------------------------------------------
 
@@ -3111,7 +3125,7 @@ CREATE TABLE IF NOT EXISTS `historique` (
   `iduser` bigint(20) DEFAULT NULL,
   `idindividu` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Contenu de la table `historique`
@@ -3125,7 +3139,26 @@ INSERT INTO `historique` (`id`, `typeaction`, `objet`, `date`, `iduser`, `idindi
 (5, 4, 'dette', 1334859450, 1, 3),
 (6, 1, 'dette', 1334859450, 1, 3),
 (7, 3, 'individu', 1334859533, 1, 3),
-(8, 2, 'aide interne', 1334859975, 1, 1145);
+(8, 2, 'aide interne', 1334859975, 1, 1145),
+(9, 1, 'aide externe', 1335002642, 1, 7),
+(10, 2, 'aide externe', 1335002676, 1, 7),
+(11, 2, 'aide externe', 1335002686, 1, 7),
+(12, 1, 'credit', 1335018930, 1, 7),
+(13, 2, 'aide interne', 1335026645, 1, 7),
+(14, 2, 'aide interne', 1335026832, 1, 7),
+(15, 2, 'aide interne', 1335026837, 1, 7),
+(16, 2, 'aide interne', 1335027001, 1, 7),
+(17, 2, 'aide interne', 1335027041, 1, 1144),
+(18, 2, 'aide interne', 1335027155, 1, 1144),
+(19, 2, 'aide interne', 1335027208, 1, 1145),
+(20, 2, 'aide interne', 1335027267, 1, 1145),
+(21, 2, 'aide interne', 1335027521, 1, 1144),
+(22, 2, 'aide interne', 1335027583, 1, 1144),
+(23, 2, 'aide interne', 1335027650, 1, 1144),
+(24, 2, 'aide interne', 1335027675, 1, 1145),
+(25, 2, 'aide interne', 1335028465, 1, 1145),
+(26, 1, 'aide externe', 1335029782, 1, 1144),
+(27, 2, 'aide externe', 1335030561, 1, 1144);
 
 -- --------------------------------------------------------
 
@@ -4647,7 +4680,7 @@ CREATE TABLE IF NOT EXISTS `role` (
 --
 
 INSERT INTO `role` (`id`, `designation`, `permissions`) VALUES
-(1, ' admin', 134217727);
+(1, ' admin', 939524095);
 
 -- --------------------------------------------------------
 
@@ -4940,8 +4973,6 @@ INSERT INTO `secteur` (`id`, `secteur`) VALUES
 
 --
 -- Structure de la table `situationfamiliale`
-<<<<<<< HEAD
-=======
 --
 
 CREATE TABLE IF NOT EXISTS `situationfamiliale` (
@@ -4954,20 +4985,19 @@ CREATE TABLE IF NOT EXISTS `situationfamiliale` (
 
 --
 -- Structure de la table `situationfamilliale`
->>>>>>> c73dc1861e9f9eb766f9715c1e6d81549439234f
 --
 
-CREATE TABLE IF NOT EXISTS `situationfamiliale` (
+CREATE TABLE IF NOT EXISTS `situationfamilliale` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `situation` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Contenu de la table `situationfamiliale`
+-- Contenu de la table `situationfamilliale`
 --
 
-INSERT INTO `situationfamiliale` (`id`, `situation`) VALUES
+INSERT INTO `situationfamilliale` (`id`, `situation`) VALUES
 (1, 'Homme seul'),
 (2, 'Femme seule'),
 (3, 'Couple sans enfant'),
@@ -5022,7 +5052,6 @@ INSERT INTO `type` (`id`, `categorie`, `libelle`) VALUES
 (1, 1, 'Bon alimentaire commission'),
 (3, 1, 'Aide au chauffage tranche B'),
 (4, 1, 'Aide au chauffage tranche A'),
-(5, 1, ''),
 (6, 1, 'Aide au chauffage tranche C'),
 (7, 1, 'Aide alimentaire commission'),
 (8, 1, 'Aide alimentaire d''urgence'),
