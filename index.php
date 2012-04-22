@@ -212,6 +212,10 @@ switch (@$_GET['p']) {
         include_once('./pages/document.php');
         destroyFile($_POST['file']);
         break;
+    case 'cancelrapport':
+        include_once('./pages/aide.php');
+        cancelRapport();
+        break;
     default:
         home();
         break;

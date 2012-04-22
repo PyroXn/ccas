@@ -475,7 +475,7 @@ function rapportSocial($idAide) {
                                 <i class="icon-save"></i>
                                 <span>Créer le rapport social</span>
                             </div>
-                            <div value="cancel" class="bouton classique">
+                            <div value="cancelRapport" class="bouton classique">
                                     <i class="icon-cancel icon-black"></i>
                                     <span>Annuler</span>
                             </div>
@@ -1061,5 +1061,11 @@ function createPDFMandat($bon) {
     $chemin = $chemin.'/'.$bon->aideInterne->individu->id.'/'.$idAide;
     $dateBon = $bon->dateRemisePrevue;
     include_once('./lib/PDF/generateMandat.php');
+}
+
+function cancelRapport() {
+    include_once('./pages/aide.php');
+    $aide = aide();
+    echo $aide;
 }
 ?>

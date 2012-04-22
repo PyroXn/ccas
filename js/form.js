@@ -365,6 +365,20 @@ $(function() {
                     $("#contenu").html(html.responseText);
                 }
             });
+        } else if(value == 'cancelRapport') {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: "POST",
+                url: "./index.php?p=cancelrapport",
+                data: datastring,
+                cache: false,
+                success: function(html) {
+                    $('#contenu').html(html);
+                },
+                error: function(html) {
+                    $('#contenu').html(html.responseText);
+                }
+            });
         } else if(value == 'updateDecisionExterne') {
             var traitement = true;
            $('#decisionRequis').find('.requis').each(function(){
