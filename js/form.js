@@ -17,7 +17,6 @@ $(function() {
     });
     
     $('.delete_doc').live("click", function() {
-        alert("ok");
         var file = $(this).attr('name');
         datastring = 'file='+file;
         $.ajax({
