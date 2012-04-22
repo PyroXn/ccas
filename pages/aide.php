@@ -939,18 +939,18 @@ function pdfExist($chemin, $idBon, $date, $typeBon) {
     switch($typeBon) {
         case BonAide::$BonAide:
             if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$idBon.'.pdf')) {
-                return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" target="_blank" class="open_doc"></a>';
+                return '<a name="'.$chemin.'/bonAide_'.$idBon.'.pdf" href="'.$chemin.'/bonAide_'.$idBon.'.pdf" target="_blank" class="open_doc"></a>';
             } else {
-                return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne creer"></a>';
+                return '<a name="'.$chemin.'/bonAide_'.$idBon.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne creer"></a>';
             }
             break;
        case BonAide::$AutreMandat:
        case BonAide::$MandatRSA:
        case BonAide::$MandatSecoursUrgence:
             if(is_dir($chemin) && file_exists($chemin.'/Mandat_'.$idBon.'.pdf')) {
-                return '<a name="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" target="_blank" class="open_doc"></a>';
+                return '<a name="'.$chemin.'/Mandat_'.$idBon.'.pdf" href="'.$chemin.'/Mandat_'.$idBon.'.pdf" target="_blank" class="open_doc"></a>';
             } else {
-                return '<a name="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne creer"></a>';
+                return '<a name="'.$chemin.'/Mandat_'.$idBon.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne creer"></a>';
             }
             break;
     }
