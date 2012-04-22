@@ -123,7 +123,7 @@ function generateColonneByType($table, $columnName, $recherche=false, $attribut=
             break;
         case 'float' :
         case 'integer' :
-            if (preg_match('#id[a-zA-Z]+#', $columnName)) {
+            if (preg_match('#^id[a-zA-Z]+#', $columnName)) {
                 $columnName = substr($columnName, 2);
                 $retour .= '
                 <div class="colonne">
@@ -166,13 +166,22 @@ function generateFormulaireByTable($table, $columnNames) {
                 case 'float' :
                 case 'string' :
                 case 'integer' :
-                    if (preg_match('#id[a-zA-Z]+#', $columnName)) {
+                    if (preg_match('#^id[a-zA-Z]+#', $columnName)) {
+                        $columnNameId = $columnName;
                         $columnName = substr($columnName, 2);
                         $retour .= '
-                        <div class="select classique" columnName='.$columnName.'>
+                        <div class="select classique" columnName='.$columnNameId.' role="select_'.$columnName.'">
                             <div class="option">------</div>
                             <div class="fleche_bas"></div>
                         </div>';
+                        $cleEtrangere = Doctrine_Core::getTable($columnName)->findAll();
+                        $retour .= '<ul class="select_'.$columnName.'">';
+                        foreach($cleEtrangere as $cle) {
+                        $retour .= '<li>
+                                <div value="'.$cle->id.'">'.$cle->libelle.'</div>
+                           </li>';
+                        }
+                        $retour .= '</ul>';
                     } else {
                         $retour .= '
                         <div class="input_text" columnName='.$columnName.'>
@@ -193,7 +202,6 @@ function generateFormulaireByTable($table, $columnNames) {
     }
     $retour .= '
             <div class="sauvegarder_annuler">
-                <div class="bouton modif" value="saveTableStatique">Enregistrer</div>
                 <div value="saveTableStatique" class="bouton modif">
                     <i class="icon-save"></i>
                     <span>Enregistrer</span>
@@ -242,7 +250,7 @@ function generateEcranStatiqueEnTab($table) {
                     <tr class="header">';
                         foreach ($columnNames as $columnName) {
                             if ($columnName != 'id') {
-                                if (preg_match('#id[a-zA-Z]+#', $columnName)) {
+                                if (preg_match('#^id[a-zA-Z]+#', $columnName)) {
                                     $columnName = substr($columnName, 2);
                                 }
                                 $retour .= '<th>'.$columnName.'</th>';
@@ -296,12 +304,14 @@ function generateColonneByTypeEnTab($table, $columnName, $recherche=false, $attr
             break;
         case 'float' :
         case 'integer' :
-                if (preg_match('#id[a-zA-Z]+#', $columnName)) {
+                if (preg_match('#^id[a-zA-Z]+#', $columnName)) {
+                    $columnNameId = $columnName;
                     $columnName = substr($columnName, 2);
                     if ($attribut != 0) {
-                        $retour .= '<td columnName='.$columnName.'>'.$attribut.'</td>';
+                        $cleEtrangere = Doctrine_Core::getTable($columnName)->findOneBy("id", $attribut);
+                        $retour .= '<td columnName='.$columnNameId.' idCleEtrangere='.$cleEtrangere->id.'>'.$cleEtrangere->libelle.'</td>';
                     } else {
-                        $retour .= '<td columnName='.$columnName.'></td>';
+                        $retour .= '<td columnName='.$columnNameId.'></td>';
                     }
                 } else {
                     $retour .= '<td columnName='.$columnName.'>'.$attribut.'</td>';

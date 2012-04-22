@@ -93,8 +93,16 @@ $(function() {
                         value == '1' ? $(this).addClass('checkbox_active') : $(this).removeClass('checkbox_active');
                     }
                 });
+            } else if($(this).children().hasClass('option')) {
+                var valuecle = $(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).text();
+                var idcle = $(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).attr('idcleetrangere');
+                $(this).children().each(function(){
+                    if ($(this).hasClass('option')) {
+                        $(this).text(valuecle);
+                        $(this).attr('value', idcle);
+                    }
+                });                
             } else if (tab) {
-                
                 $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).text());
             } else {
                 $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).val());
@@ -248,6 +256,8 @@ $(function() {
                     } else {
                         datastring += '&'+$(this).attr('columnName')+'=0';
                     }
+                } else if($(this).children().hasClass('option')) {
+                    datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
                 } else {
                     datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
                 }
@@ -264,6 +274,9 @@ $(function() {
                     formActuel.toggle();
                     effacer();
                     searchTableStatique();
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
                 }
             });
         } else if(value=='edit_action') {

@@ -220,7 +220,7 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span class="attribut">Bailleur :</span>
                         <div class="select classique" role="select_bailleur" disabled>';
 $retour .= verifieValeurNull($foyer->idBailleur) ? '
-                            <div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
+                            <div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nombailleur.'</div>';
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@ $retour .= '
  $retour .= '<ul class="select_bailleur">';
     foreach($bailleurs as $bailleur) {
         $retour .= '<li>
-                                <div value="'.$bailleur->id.'">'.$bailleur->nomBailleur.'</div>
+                                <div value="'.$bailleur->id.'">'.$bailleur->nombailleur.'</div>
                            </li>';
     }
     $retour .= '</ul>';

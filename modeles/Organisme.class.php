@@ -7,7 +7,7 @@ class Organisme extends Doctrine_Record {
 
         $this->hasColumn('id', 'integer', 8, array('primary' => true,
             'autoincrement' => true));
-        $this->hasColumn('idLibelleOrganisme', 'integer', 5);
+        $this->hasColumn('idlibelleorganisme', 'integer', 5);
         $this->hasColumn('appelation', 'string', 50, array('notnull' => true, 'default' => ''));
         $this->hasColumn('adresse', 'string', 200, array('notnull' => true, 'default' => ''));
         $this->hasColumn('cp', 'string', 10, array('notnull' => true, 'default' => ''));
