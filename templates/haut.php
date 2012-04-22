@@ -32,6 +32,9 @@
                         <a href="#" rel="./templates/form2.css" rel2="./templates/ccas2.css" class="css_switch cssform2" title="Thème en couleur"></a>
                     </li>
                     <li class="navigationligne">
+                        <span class="categorie"><a href="mailto:contact@mydevhouse.com" class="contact"></a></span>
+                    </li>
+                    <li class="navigationligne">
                         <a class="lien_navigation" href="index.php" title="Accueil">
                             <span class="border_top"></span>
                             <?php

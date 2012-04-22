@@ -1,9 +1,7 @@
 <?php
 
 include_once('./lib/config.php');
-include_once('./pages/Droit.class.php');
-ini_set('session.gc_maxlifetime', 3600); 
-session_start();
+
 if (!isset($_SESSION['userId'])) {
     login();
     exit();
@@ -209,6 +207,14 @@ switch (@$_GET['p']) {
     case 'rapportsocial':
         include_once('./pages/aide.php');
         rapportSocial($_POST['idAide']);
+        break;
+    case 'deletedoc':
+        include_once('./pages/document.php');
+        destroyFile($_POST['file']);
+        break;
+    case 'cancelrapport':
+        include_once('./pages/aide.php');
+        cancelRapport();
         break;
     default:
         home();

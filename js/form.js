@@ -16,6 +16,20 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
     });
     
+    $('.delete_doc').live("click", function() {
+        var file = $(this).attr('name');
+        datastring = 'file='+file;
+        $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=deletedoc',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $("#contenu").html(data);
+                }
+            });
+    })
     $('.addElem').live("click", function() {
         console.log("addElem");
         var action = $(this).attr('role');
@@ -361,6 +375,20 @@ $(function() {
                 },
                 error: function(html) {
                     $("#contenu").html(html.responseText);
+                }
+            });
+        } else if(value == 'cancelRapport') {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: "POST",
+                url: "./index.php?p=cancelrapport",
+                data: datastring,
+                cache: false,
+                success: function(html) {
+                    $('#contenu').html(html);
+                },
+                error: function(html) {
+                    $('#contenu').html(html.responseText);
                 }
             });
         } else if(value == 'updateDecisionExterne') {
@@ -1158,9 +1186,9 @@ $(function() {
             success: function() {
                 console.log("succes");
                 
-                loc.text('V');
                 loc.attr('href', name);
                 loc.attr('target','_blank');
+                loc.attr('class', 'open_doc')
             },
             error: function(data) {
                 $("#contenu").html(data.responseText);

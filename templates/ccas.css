@@ -501,6 +501,24 @@ legend {
     vertical-align: middle;
 }
 
+.delete_doc {
+    background: url('./img/delete.png') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.creer {
+    background: url('./img/creer.png') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
 .archive {
     position: relative;
     bottom: 2px;

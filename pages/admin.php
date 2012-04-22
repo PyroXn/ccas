@@ -148,6 +148,7 @@ function affichagePermissions() {
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$ACCES_DOCUMENT) . '</span>' . listRole($roles, Droit::$ACCES_DOCUMENT) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_AJOUT_DOCUMENT) . '</span>' . listRole($roles, Droit::$DROIT_AJOUT_DOCUMENT) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_TELECHARGEMENT_DOCUMENT) . '</span>' . listRole($roles, Droit::$DROIT_TELECHARGEMENT_DOCUMENT) . '</li>
+                    <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_SUPPRESSION_DOCUMENT) . '</span>' . listRole($roles, Droit::$DROIT_SUPPRESSION_DOCUMENT) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_AJOUT_DOC_IND) . '</span>' . listRole($roles, Droit::$DROIT_AJOUT_DOC_IND) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_TELECHARGER_DOC_IND) . '</span>' . listRole($roles, Droit::$DROIT_TELECHARGER_DOC_IND) . '</li>
                 </ul>

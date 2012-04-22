@@ -90,15 +90,15 @@ function getDocumentIndividu() {
                         <tbody>';
         if (!empty($fichier['rapport'])) {
             foreach ($fichier['rapport'] as $file) {
-                $extension = pathinfo($dir_nom . '/' . $file, PATHINFO_EXTENSION);
+                $extension = pathinfo($dir_nom . $file, PATHINFO_EXTENSION);
 
                 $contenu .= '<tr name="' . $file . '">';
                 $contenu .= '<td>' . $file . '</td>
                              <td>'.getNameExtension($extension).'</td>
-                             <td> ' . getDatebyTimestamp(filemtime($dir_nom . '/' . $file)) . '</td>
+                             <td> ' . getDatebyTimestamp(filemtime($dir_nom . $file)) . '</td>
                              <td>';
                 if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_TELECHARGER_DOC_IND)) {
-                    $contenu .= '<a href="' . $dir_nom . '/' . $file . '" target=_blank class="open_doc"></a>';
+                    $contenu .= '<a href="' . $dir_nom . $file . '" target=_blank class="open_doc"></a>';
                 }
                 $contenu .= '</td>
                             </tr>';
@@ -133,10 +133,10 @@ function getDocumentIndividu() {
                 $contenu .= '<tr name="' . $file . '">';
                 $contenu .= '<td>' . basename($file) . '</td>
                              <td>'.getNameExtension($extension).'</td>
-                             <td> ' . getDatebyTimestamp(filemtime($dir_nom . '/' . $file)) . '</td>
+                             <td> ' . getDatebyTimestamp(filemtime($dir_nom . $file)) . '</td>
                              <td>';
                 if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_TELECHARGER_DOC_IND)) {
-                    $contenu .= '<a href="' . $dir_nom . '/' . $file . '" target=_blank class="open_doc"></a>';
+                    $contenu .= '<a href="' . $dir_nom . $file . '" target=_blank class="open_doc"></a>';
                 }
                 $contenu .= '</td>
                                     </tr>';
@@ -168,15 +168,15 @@ function getDocumentIndividu() {
                         <tbody>';
         if (!empty($fichier['autre'])) {
             foreach ($fichier['autre'] as $file) {
-                $extension = pathinfo($dir_nom . '/' . $file, PATHINFO_EXTENSION);
+                $extension = pathinfo($dir_nom . $file, PATHINFO_EXTENSION);
 
                 $contenu .= '<tr name="' . $file . '">';
                 $contenu .= '<td>' . $file . '</td>
                              <td>'.getNameExtension($extension).'</td>
-                             <td> ' . getDatebyTimestamp(filemtime($dir_nom . '/' . $file)) . '</td>
+                             <td> ' . getDatebyTimestamp(filemtime($dir_nom . $file)) . '</td>
                              <td>';
                 if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_TELECHARGER_DOC_IND)) {
-                    $contenu .= '<a href="' . $dir_nom . '/' . $file . '" target=_blank class="open_doc"></a>';
+                    $contenu .= '<a href="' . $dir_nom . $file . '" target=_blank class="open_doc"></a>';
                 }
                     $contenu .= '</td>
                             </tr>';
@@ -214,13 +214,53 @@ function getDocumentIndividu() {
         </div>';
         return $contenu;
     } else {
-        return 'Erreur de listage : le répertoire n\'existe pas. Il est possible qu\'aucun document n\'éxiste pour cet individu.';
+        $contenu = '
+            <h3>Autre Document ';
+        if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_AJOUT_DOC_IND)) {
+            $contenu .= '<span class="addElem" role="ajout_doc"></span>';
+        }
+            $contenu .= '</h3>
+                <div class="bubble tableau_classique_wrapper">
+                    <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr class="header">
+                                <th>Nom document</th>
+                                <th>Type fichier</th>
+                                <th>Date derniére modification</th>
+                                <th>Télécharger</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>';
+$contenu .= '<div class="formulaire" action="ajout_doc">
+        <form action="#" method="post">
+            <h2>Ajouter un document</h2>
+            <div class="colonne_droite">
+                <div id="upload">
+                    <label>Fichier : </label><input name="fichier" type="file" placeholder="test"><br>
+                    <input type="hidden" name="chemin" value="' . $dir_nom . '">
+                    <input type="hidden" name="idIndividu" value="' . $_POST['idIndividu'] . '">
+                    <input type="hidden" name="idFoyer" value="' . $_POST['idFoyer'] . '">
+                </div>
+            </div>
+            <div class="sauvegarder_annuler">
+                <div value="ajout_doc_type" class="bouton modif">
+                    <i class="icon-save"></i>
+                    <span>Envoyer</span>
+                </div>
+                 <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
+        </form>
+        </div>';
+            return $contenu;
     }
 }
 
 function getDocument() {
     include_once('./lib/config.php');
-    include_once('./pages/Droit.class.php');
     $dir_nom = './document/';
     if (file_exists($dir_nom)) {
         $dir = opendir($dir_nom); // on ouvre le contenu du dossier courant
@@ -260,7 +300,7 @@ function getDocument() {
                                 <th>Nom document</th>
                                 <th>Type fichier</th>
                                 <th>Date derniére modification</th>
-                                <th>Télécharger</th>
+                                <th>Télécharger/Supprimer</th>
                             </tr>
                         </thead>
                         <tbody>';
@@ -273,14 +313,17 @@ function getDocument() {
                              <td> ' . getDatebyTimestamp(filemtime($dir_nom . '/' . $file)) . '</td>
                              <td>';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_TELECHARGEMENT_DOCUMENT)) {
-        $contenu .= '<a href="' . $dir_nom . '/' . $file . '" target=_blank class="open_doc"></a>';
+        $contenu .= '<a href="' . $dir_nom . $file . '" target=_blank class="open_doc"></a>';
+    }
+     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_SUPPRESSION_DOCUMENT)) {
+        $contenu .= '<a name="' . $dir_nom . $file . '" target=_blank class="delete_doc"></a>';
     }
         $contenu .= '</td>
                             </tr>';
         }
     } else {
         $contenu .= '<tr>
-                             <td colspan=9 align=center>< Aucun bon d\'aide n\'a été crée pour cet individu > </td>
+                             <td colspan=9 align=center>< Aucun document type n\'a été publié > </td>
                          </tr>';
     }
     $contenu .= '</tbody></table>';
@@ -466,6 +509,14 @@ function getNameExtension($ext) {
             break;
     }
     return $contenu;
+}
+
+function destroyFile($path) {
+    if(file_exists($path)) {
+        unlink($path);
+    }
+    $doc = getDocument();
+    echo $doc;
 }
 
 ?>

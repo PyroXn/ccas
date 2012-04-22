@@ -19,7 +19,7 @@ class Droit {
      */
     public static $ACCES_DOCUMENT = 0x04;                   //accés panneau document général
     public static $DROIT_AJOUT_DOCUMENT = 0x08;             //droit ajout de document
-//    public static $DROIT_SUPPRESSION_DOCUMENT = 0x10;       //droit suppression de document
+    public static $DROIT_SUPPRESSION_DOCUMENT = 0x10;       //droit suppression de document
     public static $DROIT_TELECHARGEMENT_DOCUMENT = 0x20;    //droit de téléchargement de document
     
     /*
@@ -81,7 +81,7 @@ class Droit {
                 return 'Droit ajout de document type';
                 break;
             case 0x10:
-                return 'Droit suppression de document';
+                return 'Droit suppression de document type';
                 break;
             case 0x20:
                 return 'Droit de téléchargement de document';
