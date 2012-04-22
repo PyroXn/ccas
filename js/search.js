@@ -275,10 +275,27 @@ $(function() {
                     var champ = $(this).attr('champ');
 
                     //positionnement de la liste de suggestion
+                    var menu = $('#menu_gauche').outerWidth();
+                    var header = $('#page_header').outerHeight();
+                    var bar = $('#navigationbar').outerHeight();
+                    console.log(this);
                     var x = $(this).offset();
-                    var h = $(this).outerHeight();            
-                    $('#suggestion').css("top", x.top+h);
-                    $('#suggestion').css("left", x.left);
+                    var h = $(this).outerHeight();
+                    var l = $(this).outerWidth();
+                    //les -2 correspondent à la bordure de 1px de chacun des 2 cotés
+                    $('#suggestion').css("min-width", l-2);
+                    var lAttr = $('#suggestion').outerWidth();
+                    console.log('#suggestion');
+//                    $('#suggestion').offset({
+//                        top:x.top+h,
+//                        left:x.left+l-lAttr
+//                    });
+//                    var x = $(this).offset();
+//                    var h = $(this).outerHeight();     
+                    console.log('TOP : '+x.top);
+                    console.log('LEFT : '+x.left);
+                    $('#suggestion').css("top", x.top-bar+h-header);
+                    $('#suggestion').css("left", x.left-menu+1);
                     $('#suggestion').css("display", "block");
                     autoComplete(searchbox, table, champ, $(this));
             }
