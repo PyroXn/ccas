@@ -208,6 +208,10 @@ switch (@$_GET['p']) {
         include_once('./pages/aide.php');
         rapportSocial($_POST['idAide']);
         break;
+    case 'deletedoc':
+        include_once('./pages/document.php');
+        destroyFile($_POST['file']);
+        break;
     default:
         home();
         break;

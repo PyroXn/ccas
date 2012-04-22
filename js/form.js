@@ -16,6 +16,21 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
     });
     
+    $('.delete_doc').live("click", function() {
+        alert("ok");
+        var file = $(this).attr('name');
+        datastring = 'file='+file;
+        $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=deletedoc',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $("#contenu").html(data);
+                }
+            });
+    })
     $('.addElem').live("click", function() {
         console.log("addElem");
         var action = $(this).attr('role');
