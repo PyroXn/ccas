@@ -45,6 +45,9 @@ function comboTableStatique() {
                 <div>situationmatri</div>
             </li>
             <li>
+                <div>type</div>
+            </li>
+            <li>
                 <div>ville</div>
             </li> 
         </ul>';

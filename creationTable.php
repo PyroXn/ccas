@@ -307,6 +307,15 @@ try {
 	echo $e->getMessage(); // On l'affiche.
 }
 
+try {
+	$table = Doctrine_Core::getTable('LibelleType'); // On récupére l'objet de la table.
+	$connexion->export->createTable($table->getTableName(), 
+		                           $table->getColumns()); // Puis, on la crée.
+        echo 'La table <b>'.$table->getTableName().'</b> a bien été créée</br>';
+} catch(Doctrine_Connection_Exception $e) { // Si une exception est lancée.
+	echo $e->getMessage(); // On l'affiche.
+}
+
 if(executeQueryFile('./ccasClean.sql')) {
     echo '<b>Table restaurée</b>';
 } else {

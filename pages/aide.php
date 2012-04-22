@@ -8,8 +8,8 @@ function aide() {
 
 function aideInterne() {
     $organismes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(5);
-    $natures = Doctrine_Core::getTable('type')->findByCategorie(5);
-    $typesaides = Doctrine_Core::getTable('type')->findByCategorie(1);
+    $natures = Doctrine_Core::getTable('type')->findByidlibelletype(5);
+    $typesaides = Doctrine_Core::getTable('type')->findByidlibelletype(1);
     $allinstructs =  Doctrine_Core::getTable('instruct')->findAll();
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
@@ -172,7 +172,7 @@ foreach($natures as $nature) {
 
 function detailAideInterne() {
     $aideInterne = Doctrine_Core::getTable('aideinterne')->findOneById($_POST['idAide']);
-    $typesaides = Doctrine_Core::getTable('type')->findByCategorie(1);
+    $typesaides = Doctrine_Core::getTable('type')->findByidlibelletype(1);
     $decideurs = Doctrine_Core::getTable('decideur')->findAll();
     
     $testaffichage = '
@@ -645,8 +645,8 @@ function creationPDFBonInterne($bon) {
 function aideExterne() {
     $aidesExternes = Doctrine_Core::getTable('aideexterne')->findByIdIndividu($_POST['idIndividu']);
     $organismesExternes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(6);
-    $naturesExternes = Doctrine_Core::getTable('type')->findByCategorie(6);
-    $typesAidesExternes = Doctrine_Core::getTable('type')->findByCategorie(7);
+    $naturesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(6);
+    $typesAidesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(7);
     $instructs =  Doctrine_Core::getTable('instruct')->findByInterne(1);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $distributeurs = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(3);

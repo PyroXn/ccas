@@ -257,7 +257,7 @@ $retour .= '
     $retour .= '</ul>';
  $retour .= '<ul class="select_statutlogement">';
  foreach($types as $t) {
-     if($t->categorie == 3) {
+     if($t->idlibelletype == 3) {
      $retour .= '<li>
                             <div value="'.$t->id.'">'.$t->libelle.'</div>
                         </li>';
@@ -266,7 +266,7 @@ $retour .= '
  $retour .= '</ul>';
  $retour .= '<ul class="select_typelogement">';
  foreach($types as $t) {
-     if($t->categorie == 4) {
+     if($t->idlibelletype == 4) {
      $retour .= '<li>
                             <div value="'.$t->id.'">'.$t->libelle.'</div>
                         </li>';
