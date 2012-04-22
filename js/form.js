@@ -1174,9 +1174,9 @@ $(function() {
             success: function() {
                 console.log("succes");
                 
-                loc.text('V');
                 loc.attr('href', name);
                 loc.attr('target','_blank');
+                loc.attr('class', 'open_doc')
             },
             error: function(data) {
                 $("#contenu").html(data.responseText);
