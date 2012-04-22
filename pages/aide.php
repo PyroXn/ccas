@@ -996,7 +996,9 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
             if(count($conjoint) < 1) {
                 $salaireConjoint = 0;
             } else {
-                $salaireConjoint = $conjoint->salaire;
+                if(isset($conjoint->salaire) && $conjoint->salaire > 0) {
+                    $salaireConjoint = $conjoint->salaire;
+                }
             }
         } elseif ($f->idLienFamille == 1) {
             $nbEnfant += 1;
