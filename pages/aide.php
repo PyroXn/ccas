@@ -247,7 +247,7 @@ function detailAideInterne() {
                                     <h2>Aide accordée : </h2>
                                     <div class="aff">
                                         <div class="select classique" role="select_typeaide_interne">';
-            $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option requis">Type d\'aide</div>' : '<div id="aideaccorde requis" class="option requis" value="'. $aideInterne->idAideAccordee .'">'.$aideInterne->typeAideAccordee->libelle.'</div>';  
+            $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option requis">Type d\'aide</div>' : '<div id="aideaccorde" class="option requis" value="'. $aideInterne->idAideAccordee .'">'.$aideInterne->typeAideAccordee->libelle.'</div>';  
             $contenu .= '
                                             <div class="fleche_bas"> </div>
                                         </div>
@@ -928,9 +928,9 @@ function detailAideExterne() {
 
 function rapportExist($chemin, $idAide) { // $chemin == ./IdFoyer/IdIndividu
     if(is_dir($chemin) && file_exists($chemin.'/RapportSocial_'.$idAide.'.pdf')) {
-        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank">Visualiser</a>';
+        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank" class="open_doc"></a>';
     } else {
-        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" idAide="'.$idAide.'" class="create_rapport_social">Créer</a>';
+        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" idAide="'.$idAide.'" class="create_rapport_social creer"></a>';
     }
 }
 
@@ -939,18 +939,18 @@ function pdfExist($chemin, $idBon, $date, $typeBon) {
     switch($typeBon) {
         case BonAide::$BonAide:
             if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$idBon.'.pdf')) {
-                return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" target="_blank">V</a>';
+                return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" target="_blank" class="open_doc"></a>';
             } else {
-                return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne">C</a>';
+                return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne creer"></a>';
             }
             break;
        case BonAide::$AutreMandat:
        case BonAide::$MandatRSA:
        case BonAide::$MandatSecoursUrgence:
             if(is_dir($chemin) && file_exists($chemin.'/Mandat_'.$idBon.'.pdf')) {
-                return '<a name="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" target="_blank">V</a>';
+                return '<a name="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" target="_blank" class="open_doc"></a>';
             } else {
-                return '<a name="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne">C</a>';
+                return '<a name="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne creer"></a>';
             }
             break;
     }
