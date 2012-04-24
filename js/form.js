@@ -540,6 +540,83 @@ $(function() {
                     $('#contenu').html(pageaide.responseText);
                 }
             });
+            
+        } else if(value == 'create_tab_demande_commission') {
+            var traitement = true;
+            $('#demande_commission').find('.requis').each(function(){
+                if ($(this).is('input')) {
+                    if ($(this).val() == '') {
+                        traitement = false;
+                        $(this).addClass('a_completer');
+                    } else {
+                        $(this).removeClass('a_completer');
+                    }
+                } else if ($(this).hasClass('option')) {
+                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+                        traitement = false;
+                        $(this).parent().addClass('a_completer');
+                    } else {
+                        $(this).parent().removeClass('a_completer');
+                    }
+                }
+            });
+            if (traitement) {      
+                var datastring =  'datedebut=' + $('#datedebut').val() + '&datefin=' + $('#datefin').val()
+                      +'&withDecission=' + "0";
+                console.log(datastring);
+                $.ajax({
+                    type: 'post',
+                    data: datastring,
+                    url: './index.php?p=genererTabCommission',
+                    cache: false,
+                    success: function(retour) {
+                        $('#contenu').html(retour);
+                    },
+                    error: function(data) {
+                        $("#contenu").html(data.responseText);
+                    }
+                });
+            }
+            
+            
+
+        
+        } else if(value == 'create_tab_decision_commission') {
+                        var traitement = true;
+            $('#decision_commission').find('.requis').each(function(){
+                if ($(this).is('input')) {
+                    if ($(this).val() == '') {
+                        traitement = false;
+                        $(this).addClass('a_completer');
+                    } else {
+                        $(this).removeClass('a_completer');
+                    }
+                } else if ($(this).hasClass('option')) {
+                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+                        traitement = false;
+                        $(this).parent().addClass('a_completer');
+                    } else {
+                        $(this).parent().removeClass('a_completer');
+                    }
+                }
+            });
+            if (traitement) {      
+                var datastring =  'datecommission=' + $('#datecommission').val() +'&withDecission=' + "1";
+                console.log(datastring);
+                $.ajax({
+                    type: 'post',
+                    data: datastring,
+                    url: './index.php?p=genererTabCommission',
+                    cache: false,
+                    success: function(retour) {
+                        $('#contenu').html(retour);
+                    },
+                    error: function(data) {
+                        $("#contenu").html(data.responseText);
+                    }
+                });
+            }
+
         } else if (value == 'updateMembreFoyer') {
             var membreFoyer = $('.checkbox_active').parent().parent().parent();
             console.log(membreFoyer);
@@ -1063,7 +1140,6 @@ $(function() {
         });
            
     });
-    
 });
 
 function relockAll(loc) {

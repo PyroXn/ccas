@@ -62,6 +62,10 @@ function contenu() {
             include_once './pages/historique.php';
             echo affichageHistorique();
             break;
+        case 'tabcommission':
+            include_once './pages/tabCommission.php';
+            echo ecranTabCommission();
+            break;
         case 'tableaubord':
             include_once './pages/tableauBord.php';
             echo tableauBord();

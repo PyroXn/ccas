@@ -541,7 +541,7 @@ legend {
     cursor: pointer;
 }
 
-.create_rapport_social {
+.create_rapport_social, .create_tab_demande_commission, .create_tab_decision_commission {
     cursor: pointer;
 }
 
