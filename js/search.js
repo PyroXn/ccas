@@ -357,6 +357,8 @@ $(function() {
     $('.rechercheHistorique').live("change", function() {
         searchTableHistorique();
     });
+    
+    
 });
 
 function searchTableHistorique() {
@@ -461,7 +463,7 @@ function genererGraphstat() {
             var datastring = 'groupe1=' + $("input[type=radio][name=groupe1]:checked").val() 
                            + '&groupe2=' + $("input[type=radio][name=groupe2]:checked").val()
                            + '&groupe3=' + $("input[type=radio][name=groupe3]:checked").val()
-                           + '&datedebut=' + $('#datedebut').val() + '&datefin=' + $('#datefin').val();;
+                           + '&datedebut=' + $('#datedebut').val() + '&datefin=' + $('#datefin').val();
             console.log(datastring);
             $.ajax({
                 type: 'POST',

@@ -76,6 +76,14 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         genererStat();
         break;
+    case 'ecranTabCommission':
+        include_once('./pages/tabCommission.php');
+        ecranTabCommission();
+        break;
+    case 'genererTabCommission':
+        include_once('./pages/tabCommission.php');
+        genererTabCommission();
+        break;
     case 'genererPeriode':
         include_once('./pages/admin.php');
         genererPeriode();
@@ -383,6 +391,9 @@ function generationHeaderNavigation($mode) {
                 <div id="statistique" class="page_header_link">
                     <span class="label">Statistiques</span>
                 </div>
+                <div id="tabcommission" class="page_header_link">
+                    <span class="label">Tableau de commission</span>
+                </div>
                 <div id="historiqueGlobal" class="page_header_link">
                     <span class="label">Historique</span>
                 </div>';
@@ -438,9 +449,6 @@ function generationHeaderNavigation($mode) {
                 </div>
                 <div id="manageuser" href="#" class="page_header_link">
                     <span class="label">Gérer les utilisateurs</span>
-                </div>
-                <div id="statistique" href="#" class="page_header_link">
-                    <span class="label">Statistiques</span>
                 </div>';
             break;
         case 'config' :

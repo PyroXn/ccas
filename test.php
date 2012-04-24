@@ -1,6 +1,6 @@
 <?php
 //include_once('./lib/config.php');
-include_once('./lib/PDF/generateMandat.php');
+include_once('./lib/PDF/generateTabCommission.php');
 
 
 //    $retour = '';
