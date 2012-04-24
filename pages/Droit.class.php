@@ -60,6 +60,11 @@ class Droit {
      */
     public static $DROIT_ACCES_GRAPH_INSTRUCT = 0x8000000;    //accès graph action par instruct
     
+    /*
+     * Document
+     */
+    public static $DROIT_AJOUT_DOC_IND = 0X10000000; // droit d'ajout de document liés à un individu
+    public static $DROIT_TELECHARGER_DOC_IND = 0X20000000; // droit d'ajout de document liés à un individu
     
     public static function getStaticDesignation($i) {
         switch ($i) {
@@ -73,10 +78,10 @@ class Droit {
                 return 'Accés panneau document général';
                 break;
             case 0x08:
-                return 'Droit ajout de document';
+                return 'Droit ajout de document type';
                 break;
             case 0x10:
-                return 'Droit suppression de document';
+                return 'Droit suppression de document type';
                 break;
             case 0x20:
                 return 'Droit de téléchargement de document';
@@ -147,6 +152,12 @@ class Droit {
             
             case 0x8000000:
                 return 'Droit d\'accès au graphique des actions par instructeur';
+                break;
+            case 0X10000000:
+                return 'Droit d\'ajouter des documents liés aux individus';
+                break;
+            case 0X20000000:
+                return 'Droit de télécharger des documents liés aux individus';
                 break;
         }
     }

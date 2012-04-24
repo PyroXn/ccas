@@ -86,6 +86,22 @@ function foyerContenu($idFoyer) {
                 </div>
             </div>
         </div>
+        <div class="formulaire" action="suppression_individu">
+            <h2>Individu</h2>
+            <div class="colonne_droite">
+                <span>Etes-vous sur de vouloir supprimer l\'individu.</span>
+                <div class="sauvegarder_annuler">
+                    <div value="delete_individu" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Oui</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Non</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <ul class="select_lien_famille">';
     
         
@@ -134,9 +150,9 @@ $retour .= '                <div class="fleche_bas"> </div>
         }
     });*/
         if($foyer->instruct->interne == 1) {
-            $retour .= '<span class="checkbox checkbox_active lock" value="1" disabled></span>';
+            $retour .= '<span id="checkbox_instruct" class="checkbox checkbox_active lock" value="1" disabled></span>';
         } else {
-            $retour .= '<span class="checkbox lock" value="0" disabled></span>';
+            $retour .= '<span id="checkbox_instruct" class="checkbox lock" value="0" disabled></span>';
         }
 
         $retour .= '</div>
@@ -204,7 +220,7 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span class="attribut">Bailleur :</span>
                         <div class="select classique" role="select_bailleur" disabled>';
 $retour .= verifieValeurNull($foyer->idBailleur) ? '
-                            <div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nomBailleur.'</div>';
+                            <div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nombailleur.'</div>';
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -235,13 +251,13 @@ $retour .= '
  $retour .= '<ul class="select_bailleur">';
     foreach($bailleurs as $bailleur) {
         $retour .= '<li>
-                                <div value="'.$bailleur->id.'">'.$bailleur->nomBailleur.'</div>
+                                <div value="'.$bailleur->id.'">'.$bailleur->nombailleur.'</div>
                            </li>';
     }
     $retour .= '</ul>';
  $retour .= '<ul class="select_statutlogement">';
  foreach($types as $t) {
-     if($t->categorie == 3) {
+     if($t->idlibelletype == 3) {
      $retour .= '<li>
                             <div value="'.$t->id.'">'.$t->libelle.'</div>
                         </li>';
@@ -250,7 +266,7 @@ $retour .= '
  $retour .= '</ul>';
  $retour .= '<ul class="select_typelogement">';
  foreach($types as $t) {
-     if($t->categorie == 4) {
+     if($t->idlibelletype == 4) {
      $retour .= '<li>
                             <div value="'.$t->id.'">'.$t->libelle.'</div>
                         </li>';

@@ -501,6 +501,24 @@ legend {
     vertical-align: middle;
 }
 
+.delete_doc {
+    background: url('./img/delete.png') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.creer {
+    background: url('./img/creer.png') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
 .archive {
     position: relative;
     bottom: 2px;
@@ -520,6 +538,20 @@ legend {
     width: 16px;
     height: 16px;
     cursor: pointer;
+}
+
+.vigilance {
+    background: transparent url('./img/glyphicons-red.png') no-repeat;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    width: 14px;
+    height: 14px;
+    background-position: -144px -120px;
+}
+
+.tableau_classique .vigilance_ligne td {
+    color: red;
 }
 
 /**** AIDES INTERNES ****/

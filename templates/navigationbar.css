@@ -71,6 +71,16 @@
     margin-right: 5px;
 }
 
+#navigationbar .contact {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url("img/glyphicons-white.png");
+    background-position: -70px 0;
+    vertical-align: middle;
+/*    margin-right: 5px;*/
+}
+
 #connexionlist {
     position: absolute;
     right: 0;

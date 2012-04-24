@@ -11,8 +11,6 @@
         <link rel="stylesheet" type="text/css" href="./templates/form.css" class="switchable" />
         <link rel="stylesheet" type="text/css" href="./templates/ui-lightness/jquery-ui-1.8.18.custom.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/jquery.jqplot.min.css" media="screen" />
-        
-        <link rel="stylesheet" href="./templates/css/jquery.fileupload-ui.css" />
     </head>
     <body>
         <div id="navigationbar">
@@ -32,6 +30,9 @@
                     </li>
                     <li class="navigationligne">
                         <a href="#" rel="./templates/form2.css" rel2="./templates/ccas2.css" class="css_switch cssform2" title="Thème en couleur"></a>
+                    </li>
+                    <li class="navigationligne">
+                        <span class="categorie"><a href="mailto:contact@mydevhouse.com" class="contact"></a></span>
                     </li>
                     <li class="navigationligne">
                         <a class="lien_navigation" href="index.php" title="Accueil">

@@ -16,6 +16,20 @@ $(function() {
         creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_individu"]'))
     });
     
+    $('.delete_doc').live("click", function() {
+        var file = $(this).attr('name');
+        datastring = 'file='+file;
+        $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=deletedoc',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $("#contenu").html(data);
+                }
+            });
+    })
     $('.addElem').live("click", function() {
         console.log("addElem");
         var action = $(this).attr('role');
@@ -93,8 +107,16 @@ $(function() {
                         value == '1' ? $(this).addClass('checkbox_active') : $(this).removeClass('checkbox_active');
                     }
                 });
+            } else if($(this).children().hasClass('option')) {
+                var valuecle = $(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).text();
+                var idcle = $(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).attr('idcleetrangere');
+                $(this).children().each(function(){
+                    if ($(this).hasClass('option')) {
+                        $(this).text(valuecle);
+                        $(this).attr('value', idcle);
+                    }
+                });                
             } else if (tab) {
-                
                 $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).text());
             } else {
                 $(this).children().val($(tmp.find('[columnName="'+$(this).attr('columnName')+'"]')).val());
@@ -178,6 +200,13 @@ $(function() {
                 }
             });
         }
+        if ($(this).parent().hasClass("select_instruct")) {
+            if ($(this).children().attr('interne') == 1) {
+                $('#checkbox_instruct').addClass('checkbox_active');
+            } else {
+                $('#checkbox_instruct').removeClass('checkbox_active');
+            }
+        }
         if ($(this).parent().hasClass("select_historique_type_action")) {
             searchTableHistorique();
         }
@@ -241,6 +270,8 @@ $(function() {
                     } else {
                         datastring += '&'+$(this).attr('columnName')+'=0';
                     }
+                } else if($(this).children().hasClass('option')) {
+                    datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
                 } else {
                     datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
                 }
@@ -257,6 +288,9 @@ $(function() {
                     formActuel.toggle();
                     effacer();
                     searchTableStatique();
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
                 }
             });
         } else if(value=='edit_action') {
@@ -281,29 +315,51 @@ $(function() {
                 }
             });
         } else if(value == 'updateDecisionInterne') {
-            var vigilance = 0;
-            if($('#vigilance').hasClass('checkbox_active')) {
-                vigilance = 1;
-            }
-            datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&aide='+$('#aideaccorde').attr('value');
-            datastring += '&date='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
-            datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
-            datastring += '&rapport='+$('#rapport').val()+'&decideur='+$('#decideur').attr('value');
-            console.log(datastring);
-            $.ajax({
-                type: 'post',
-                dataType:'json',
-                data: datastring,
-                url: './index.php?p=updatedecisioninterne',
-                cache: false,
-                success: function(aideinterne) {
-                    console.log(aideinterne);
-                    $('#contenu').html(aideinterne.aide);
-                },
-                error: function(aideinterne) {
-                    $("#contenu").html(aideinterne.responseText);
+            var traitement = true;
+            console.log($('#decisionRequis'));
+            $('#decisionRequis').find('.requis').each(function(){
+                if ($(this).is('input')) {
+                    if ($(this).val() == '') {
+                        traitement = false;
+                        $(this).addClass('a_completer');
+                    } else {
+                        $(this).removeClass('a_completer');
+                    }
+                } else if ($(this).hasClass('option')) {
+                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+                        traitement = false;
+                        $(this).parent().addClass('a_completer');
+                    } else {
+                        $(this).parent().removeClass('a_completer');
+                    }
                 }
+                
             });
+            if(traitement) {
+                var vigilance = 0;
+                if($('#vigilance').hasClass('checkbox_active')) {
+                    vigilance = 1;
+                }
+                datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&aide='+$('#aideaccorde').attr('value');
+                datastring += '&date='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
+                datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
+                datastring += '&rapport='+$('#rapport').val()+'&decideur='+$('#decideur').attr('value');
+                console.log(datastring);
+                $.ajax({
+                    type: 'post',
+                    dataType:'json',
+                    data: datastring,
+                    url: './index.php?p=updatedecisioninterne',
+                    cache: false,
+                    success: function(aideinterne) {
+                        console.log(aideinterne);
+                        $('#contenu').html(aideinterne.aide);
+                    },
+                    error: function(aideinterne) {
+                        $("#contenu").html(aideinterne.responseText);
+                    }
+                });
+            }
         } else if(value == 'cancelDecisionInterne') {
             var idMenu = 'aides';
             var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
@@ -321,25 +377,60 @@ $(function() {
                     $("#contenu").html(html.responseText);
                 }
             });
-        } else if(value == 'updateDecisionExterne') {
-            datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&montantPercu='+$('#montantPercu').val();
-            datastring += '&dateDecision='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
-            datastring += '&commentaire='+$('#commentaire').val();
-            console.log(datastring);
+        } else if(value == 'cancelRapport') {
+            datastring = 'idIndividu='+idIndividu;
             $.ajax({
-                type: 'post',
-                dataType:'json',
+                type: "POST",
+                url: "./index.php?p=cancelrapport",
                 data: datastring,
-                url: './index.php?p=updatedecisionexterne',
                 cache: false,
-                success: function(aideexterne) {
-                    console.log(aideexterne);
-                    $('#contenu').html(aideexterne.aide);
+                success: function(html) {
+                    $('#contenu').html(html);
                 },
-                error: function(aideexterne) {
-                    $("#contenu").html(aideexterne.responseText);
+                error: function(html) {
+                    $('#contenu').html(html.responseText);
                 }
             });
+        } else if(value == 'updateDecisionExterne') {
+            var traitement = true;
+           $('#decisionRequis').find('.requis').each(function(){
+                if ($(this).is('input')) {
+                    if ($(this).val() == '') {
+                        traitement = false;
+                        $(this).addClass('a_completer');
+                    } else {
+                        $(this).removeClass('a_completer');
+                    }
+                } else if ($(this).hasClass('option')) {
+                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+                        traitement = false;
+                        $(this).parent().addClass('a_completer');
+                    } else {
+                        $(this).parent().removeClass('a_completer');
+                    }
+                }
+                
+            });
+            if(traitement) {
+                datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&montantPercu='+$('#montantPercu').val();
+                datastring += '&dateDecision='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
+                datastring += '&commentaire='+$('#commentaire').val();
+                console.log(datastring);
+                $.ajax({
+                    type: 'post',
+                    dataType:'json',
+                    data: datastring,
+                    url: './index.php?p=updatedecisionexterne',
+                    cache: false,
+                    success: function(aideexterne) {
+                        console.log(aideexterne);
+                        $('#contenu').html(aideexterne.aide);
+                    },
+                    error: function(aideexterne) {
+                        $("#contenu").html(aideexterne.responseText);
+                    }
+                });
+            }
         } else if(value == 'cancelDecisionExterne') {
             var idMenu = 'aides';
             var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
@@ -357,6 +448,20 @@ $(function() {
                     $("#contenu").html(html.responseText);
                 }
             });
+        } else if(value == 'ajout_doc_type') {
+            $("#upload").upload('upload.php', function(retour) {
+                console.log(retour);
+                    if(retour != '') {
+                         $('#ecran_gris').toggle();
+                         formActuel.toggle();
+                         effacer();
+                        $('#contenu').html(retour);
+                    }
+                    else{
+                        alert("non");
+                        $('#result').html("L'upload a échoué");
+                    }
+            }, 'html');
         }
         else if(value=='save') {
             var traitement = true;
@@ -902,6 +1007,103 @@ $(function() {
                 }
             });
         }
+        else if (value == 'delete_credit') {
+            var id = formActuel.attr('idCredit');
+            datastring = 'id='+id+'&idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=deletecredit',
+                cache: false,
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $("#contenu").html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
+                }
+            });
+        }
+        else if (value == 'delete_individu') {
+            var idIndividuADelete = formActuel.attr('idIndividuADelete');
+            datastring = 'idFoyer=' + formActuel.attr('idFoyer');
+            datastring += '&idIndividu=' + idIndividuADelete;
+            datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
+            console.log(datastring);
+            $.ajax({
+                type: 'post',
+                dataType:'json',
+                data: datastring,
+                url: './index.php?p=deleteIndividu',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $("#list_individu").html(data.listeIndividu);
+                    $('#contenu').html(data.contenu);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
+                }
+            });
+        }
+        else if (value == 'archive_ressource') {
+            datastring = 'idIndividu='+idIndividu;
+            console.log('ARCHIVE ressource ' + datastring);
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archiveressource',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $('#contenu').html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
+                }
+            });
+        }
+        else if (value == 'archive_depense') {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archivedepense',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $('#contenu').html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
+                }
+            });
+        }
+        else if (value == 'archive_dette') {
+            datastring = 'idIndividu='+idIndividu;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=archivedette',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $('#contenu').html(data);
+                },
+                error: function(data) {
+                    $("#contenu").html(data.responseText);
+                }
+            });
+        }
     });
     
     
@@ -947,97 +1149,48 @@ $(function() {
     
     $('.archive').live("click", function() {
         console.log('ARCHIVE');
-        var datastring;
-        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
         if($(this).parent().attr('role') == "ressource") {
-            datastring = 'idIndividu='+idIndividu;
-            console.log('ARCHIVE ressource ' + datastring);
-            $.ajax({
-                type: 'post',
-                data: datastring,
-                url: './index.php?p=archiveressource',
-                cache: false,
-                //Succés de la requête
-                success: function(data) {
-                    $('#contenu').html(data);
-                },
-                error: function(data) {
-                    $("#contenu").html(data.responseText);
-                }
-            });
+            var form = $('.formulaire[action="archive_ressource"]');
+            var newPosition = new Object();
+            newPosition.left = $(window).width()/2 - form.width()/2;
+            newPosition.top = $(window).height()/2 - form.height();
+            creationForm(newPosition, $(this).outerHeight(), form);
         } else if($(this).parent().attr('role') == "depense") {
-            datastring = 'idIndividu='+idIndividu;
-            $.ajax({
-                type: 'post',
-                data: datastring,
-                url: './index.php?p=archivedepense',
-                cache: false,
-                //Succés de la requête
-                success: function(data) {
-                    $('#contenu').html(data);
-                },
-                error: function(data) {
-                    $("#contenu").html(data.responseText);
-                }
-            });
+            var form = $('.formulaire[action="archive_depense"]');
+            var newPosition = new Object();
+            newPosition.left = $(window).width()/2 - form.width()/2;
+            newPosition.top = $(window).height()/2 - form.height();
+            creationForm(newPosition, $(this).outerHeight(), form);
         } else if($(this).parent().attr('role') == "dette") {
-            datastring = 'idIndividu='+idIndividu;
-            $.ajax({
-                type: 'post',
-                data: datastring,
-                url: './index.php?p=archivedette',
-                cache: false,
-                //Succés de la requête
-                success: function(data) {
-                    $('#contenu').html(data);
-                },
-                error: function(data) {
-                    $("#contenu").html(data.responseText);
-                }
-            });
+            var form = $('.formulaire[action="archive_dette"]');
+            var newPosition = new Object();
+            newPosition.left = $(window).width()/2 - form.width()/2;
+            newPosition.top = $(window).height()/2 - form.height();
+            creationForm(newPosition, $(this).outerHeight(), form);
         }
     });
     
-    $('.delete_individu').live("click", function() {
-        var idFoyer = $(this).parent().parent().attr('id_foyer');
-        var idIndividu = $(this).parent().parent().attr('id_individu');
-        var datastring = 'idFoyer=' + idFoyer;
-        datastring += '&idIndividu=' + idIndividu;
-        datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
-        console.log(datastring);
-        $.ajax({
-            type: 'post',
-            dataType:'json',
-            data: datastring,
-            url: './index.php?p=deleteIndividu',
-            cache: false,
-            //Succés de la requête
-            success: function(data) {
-                $("#list_individu").html(data.listeIndividu);
-                $('#contenu').html(data.contenu);
-            },
-            error: function(data) {
-                $("#contenu").html(data.responseText);
-            }
-        });
+    $('.delete_credit').live("click", function() {
+        var form = $('.formulaire[action="suppression_credit"]');
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        creationForm(newPosition, $(this).outerHeight(), form);
+        var id = $(this).parent().parent().attr('name');
+        form.attr('idCredit', id);
     });
     
-    $('.delete_credit').live("click", function() {
-        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
-        var id = $(this).parent().parent().attr('name');
-        datastring = 'id='+id+'&idIndividu='+idIndividu;
-        $.ajax({
-            type: 'post',
-            data: datastring,
-            url: './index.php?p=deletecredit',
-            cache: false,
-            success: function(data) {
-                $("#contenu").html(data);
-            },
-            error: function(data) {
-                $("#contenu").html(data.responseText);
-            }
-        });
+    $('.delete_individu').live("click", function() {
+        var form = $('.formulaire[action="suppression_individu"]');
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        creationForm(newPosition, $(this).outerHeight(), form);
+        console.log($(this).parent().parent());
+        var idIndividuADelete = $(this).parent().parent().attr('id_individu');
+        var idFoyer = $(this).parent().parent().attr('id_foyer');
+        form.attr('idIndividuADelete', idIndividuADelete);
+        form.attr('idFoyer', idFoyer);
     });
     
     $('.delete_ligne').live("click", function() {
@@ -1110,9 +1263,9 @@ $(function() {
             success: function() {
                 console.log("succes");
                 
-                loc.text('V');
                 loc.attr('href', name);
                 loc.attr('target','_blank');
+                loc.attr('class', 'open_doc')
             },
             error: function(data) {
                 $("#contenu").html(data.responseText);

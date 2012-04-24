@@ -8,8 +8,8 @@ function aide() {
 
 function aideInterne() {
     $organismes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(5);
-    $natures = Doctrine_Core::getTable('type')->findByCategorie(5);
-    $typesaides = Doctrine_Core::getTable('type')->findByCategorie(1);
+    $natures = Doctrine_Core::getTable('type')->findByidlibelletype(5);
+    $typesaides = Doctrine_Core::getTable('type')->findByidlibelletype(1);
     $allinstructs =  Doctrine_Core::getTable('instruct')->findAll();
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
@@ -41,12 +41,12 @@ function aideInterne() {
                             <th>Avis</th>
                             <th>Montant</th>
                             <th>Date décision</th>
+                            <th>Vigilance</th>
                             <th>Détails</th>
                             <th>Rapport Social</th>
                         </tr>
                     </thead>
                     <tbody>';
-    $i = 1;
     if (sizeof($aidesInternes) != null) {
         foreach($aidesInternes as $aideInterne) {
             $total = 0;
@@ -55,22 +55,27 @@ function aideInterne() {
                 $total += $bon->montant;
             }
             $chemin = './document/'.$aideInterne->individu->idFoyer.'/'.$aideInterne->individu->id;
-            $i % 2 ? $contenu .= '<tr name="'.$aideInterne->id.'">' : $contenu .= '<tr class="alt" name="'.$aideInterne->id.'">';
+            $aideInterne->vigilance ? $contenu .= '<tr class="vigilance_ligne" name="'.$aideInterne->id.'">' :  $contenu .= '<tr name="'.$aideInterne->id.'">';
             $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
                                     <td> '.$aideInterne->typeAideDemandee->libelle.'</td>
                                     <td> '.$aideInterne->etat.'</td>
                                     <td> '.$aideInterne->natureAide->libelle.'</td>
                                     <td> '.$aideInterne->avis.'</td>
                                     <td> '.$total.'€</td>
-                                    <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>
-                                    <td><span class="edit_aide_interne"></span></td>
+                                    <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>';
+                                    if ($aideInterne->vigilance) {
+                                        $contenu .= '<td><span class="vigilance"></span></td>';
+                                    } else {
+                                        $contenu .= '<td></td>';
+                                    }
+                                    $contenu .= '<td><span class="edit_aide_interne"></span></td>
                                     <td>'.rapportExist($chemin, $aideInterne->id).'</td>
+                                    
                         </tr>';
-            $i++;
         }
     } else {
         $contenu .= '<tr>
-                         <td colspan=9 align=center>< Aucune aide interne n\'a été attribuée à cet individu > </td>
+                         <td colspan=10 align=center>< Aucune aide interne n\'a été attribuée à cet individu > </td>
                      </tr>';
     }
     $contenu .= '</tbody></table></div>';
@@ -167,7 +172,7 @@ foreach($natures as $nature) {
 
 function detailAideInterne() {
     $aideInterne = Doctrine_Core::getTable('aideinterne')->findOneById($_POST['idAide']);
-    $typesaides = Doctrine_Core::getTable('type')->findByCategorie(1);
+    $typesaides = Doctrine_Core::getTable('type')->findByidlibelletype(1);
     $decideurs = Doctrine_Core::getTable('decideur')->findAll();
     
     $testaffichage = '
@@ -235,14 +240,14 @@ function detailAideInterne() {
             $contenu .= '<div id="decision">';
         }
         $contenu .= '<h3 id="idAide" value="'.$aideInterne->id.'">Décision :</h3>
-                     <ul class="list_classique">
+                     <ul id="decisionRequis" class="list_classique">
                          <li class="ligne_list_classique">
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Aide accordée : </h2>
                                     <div class="aff">
                                         <div class="select classique" role="select_typeaide_interne">';
-            $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option">Type d\'aide</div>' : '<div id="aideaccorde" class="option" value="'. $aideInterne->idAideAccordee .'">'.$aideInterne->typeAideAccordee->libelle.'</div>';  
+            $contenu .= $aideInterne->idAideAccordee == null ? '<div id="aideaccorde" class="option requis">Type d\'aide</div>' : '<div id="aideaccorde" class="option requis" value="'. $aideInterne->idAideAccordee .'">'.$aideInterne->typeAideAccordee->libelle.'</div>';  
             $contenu .= '
                                             <div class="fleche_bas"> </div>
                                         </div>
@@ -252,7 +257,7 @@ function detailAideInterne() {
                                     <h2>Avis : </h2>
                                     <div class="aff">
                                         <div class="select classique" role="select_avis">';
-            $contenu .= $aideInterne->avis == null ? '<div id="avis" class="option">-------</div>' : '<div id="avis" class="option" value="'. $aideInterne->avis.'">'.$aideInterne->avis.'</div>';  
+            $contenu .= $aideInterne->avis == null ? '<div id="avis" class="option requis">-------</div>' : '<div id="avis" class="option requis" value="'. $aideInterne->avis.'">'.$aideInterne->avis.'</div>';  
             $contenu .= '                  
                                             <div class="fleche_bas"> </div>
                                         </div>
@@ -263,7 +268,7 @@ function detailAideInterne() {
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Date décision : </h2>
-                                    <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideInterne->dateDecision).'></div>
+                                    <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideInterne->dateDecision).'></div>
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Vigilance : </h2>
@@ -283,7 +288,7 @@ function detailAideInterne() {
                                     <h2>Décideur : </h2>
                                     <div class="aff">
                                         <div class="select classique" role="select_decideur">';
-        $contenu .= $aideInterne->idDecideur == null ? '<div id="decideur" class="option">Decideur</div>' : '<div id="decideur" class="option" value="'. $aideInterne->idDecideur .'">'.$aideInterne->decideur->decideur.'</div>';  
+        $contenu .= $aideInterne->idDecideur == null ? '<div id="decideur" class="option requis">Decideur</div>' : '<div id="decideur" class="option requis" value="'. $aideInterne->idDecideur .'">'.$aideInterne->decideur->decideur.'</div>';  
         $contenu .= '
                                             <div class="fleche_bas"> </div>
                                         </div>
@@ -352,7 +357,7 @@ function detailAideInterne() {
         }
     } else {
         $contenu .= '<tr>
-                         <td colspan=6 align=center>< Aucun bon n\'a encore été délivré pour cette aide > </td>
+                         <td colspan=8 align=center>< Aucun bon n\'a encore été délivré pour cette aide > </td>
                      </tr>';
     }
     $contenu .= '</tbody></table></div>
@@ -470,7 +475,7 @@ function rapportSocial($idAide) {
                                 <i class="icon-save"></i>
                                 <span>Créer le rapport social</span>
                             </div>
-                            <div value="cancel" class="bouton classique">
+                            <div value="cancelRapport" class="bouton classique">
                                     <i class="icon-cancel icon-black"></i>
                                     <span>Annuler</span>
                             </div>
@@ -640,8 +645,8 @@ function creationPDFBonInterne($bon) {
 function aideExterne() {
     $aidesExternes = Doctrine_Core::getTable('aideexterne')->findByIdIndividu($_POST['idIndividu']);
     $organismesExternes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(6);
-    $naturesExternes = Doctrine_Core::getTable('type')->findByCategorie(6);
-    $typesAidesExternes = Doctrine_Core::getTable('type')->findByCategorie(7);
+    $naturesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(6);
+    $typesAidesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(7);
     $instructs =  Doctrine_Core::getTable('instruct')->findByInterne(1);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $distributeurs = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(3);
@@ -864,12 +869,12 @@ function detailAideExterne() {
             $contenu .= '<div id="decision">';
         }
         $contenu .= '<h3 id="idAide" value="'.$aideExterne->id.'">Décision :</h3>
-                     <ul class="list_classique">
+                     <ul id="decisionRequis" class="list_classique">
                         <li class="ligne_list_classique">
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Montant per&ccedil;u : </h2>
-                                    <div class="aff"><input class="contour_field input_num" type="text" id="montantPercu"  value="'.$aideExterne->montantPercu.'"></div>
+                                    <div class="aff"><input class="contour_field input_num requis" type="text" id="montantPercu"  value="'.$aideExterne->montantPercu.'"></div>
                                 </div>
 
                                 <div class="affichage_classique">
@@ -880,7 +885,7 @@ function detailAideExterne() {
                             <div class="colonne_classique">
                                 <div class="affichage_classique">
                                     <h2>Date décision : </h2>
-                                    <div class="aff"><input class="contour_field input_date" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideExterne->dateDecision).'></div>
+                                    <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideExterne->dateDecision).'></div>
                                  </div>
                             </div>
                             <div class="colonne_classique">
@@ -888,7 +893,7 @@ function detailAideExterne() {
                                     <h2>Avis : </h2>
                                     <div class="aff">
                                         <div class="select classique" role="select_avis">';
-            $contenu .= $aideExterne->avis == null ? '<div id="avis" class="option">-------</div>' : '<div id="avis" class="option" value="'. $aideExterne->avis.'">'.$aideExterne->avis.'</div>';  
+            $contenu .= $aideExterne->avis == null ? '<div id="avis" class="option requis">-------</div>' : '<div id="avis" class="option requis" value="'. $aideExterne->avis.'">'.$aideExterne->avis.'</div>';  
             $contenu .= '                  
                                             <div class="fleche_bas"> </div>
                                         </div>
@@ -897,7 +902,6 @@ function detailAideExterne() {
                             </div>
                         </li></ul>
         <div class="sauvegarder_annuler">
-            <div class="bouton modif" value="updateDecisionExterne">Enregistrer</div>
             <div value="updateDecisionExterne" class="bouton modif">
                 <i class="icon-save"></i>
                 <span>Enregistrer</span>
@@ -924,9 +928,9 @@ function detailAideExterne() {
 
 function rapportExist($chemin, $idAide) { // $chemin == ./IdFoyer/IdIndividu
     if(is_dir($chemin) && file_exists($chemin.'/RapportSocial_'.$idAide.'.pdf')) {
-        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank">Visualiser</a>';
+        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank" class="open_doc"></a>';
     } else {
-        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" idAide="'.$idAide.'" class="create_rapport_social">Créer</a>';
+        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" idAide="'.$idAide.'" class="create_rapport_social creer"></a>';
     }
 }
 
@@ -935,18 +939,18 @@ function pdfExist($chemin, $idBon, $date, $typeBon) {
     switch($typeBon) {
         case BonAide::$BonAide:
             if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$idBon.'.pdf')) {
-                return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" target="_blank">V</a>';
+                return '<a name="'.$chemin.'/bonAide_'.$idBon.'.pdf" href="'.$chemin.'/bonAide_'.$idBon.'.pdf" target="_blank" class="open_doc"></a>';
             } else {
-                return '<a name="'.$chemin.'/bonAide_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne">C</a>';
+                return '<a name="'.$chemin.'/bonAide_'.$idBon.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne creer"></a>';
             }
             break;
        case BonAide::$AutreMandat:
        case BonAide::$MandatRSA:
        case BonAide::$MandatSecoursUrgence:
             if(is_dir($chemin) && file_exists($chemin.'/Mandat_'.$idBon.'.pdf')) {
-                return '<a name="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" href="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" target="_blank">V</a>';
+                return '<a name="'.$chemin.'/Mandat_'.$idBon.'.pdf" href="'.$chemin.'/Mandat_'.$idBon.'.pdf" target="_blank" class="open_doc"></a>';
             } else {
-                return '<a name="'.$chemin.'/Mandat_'.$idBon.'_'.$date.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne">C</a>';
+                return '<a name="'.$chemin.'/Mandat_'.$idBon.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne creer"></a>';
             }
             break;
     }
@@ -992,7 +996,9 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
             if(count($conjoint) < 1) {
                 $salaireConjoint = 0;
             } else {
-                $salaireConjoint = $conjoint->salaire;
+                if(isset($conjoint->salaire) && $conjoint->salaire > 0) {
+                    $salaireConjoint = $conjoint->salaire;
+                }
             }
         } elseif ($f->idLienFamille == 1) {
             $nbEnfant += 1;
@@ -1057,5 +1063,11 @@ function createPDFMandat($bon) {
     $chemin = $chemin.'/'.$bon->aideInterne->individu->id.'/'.$idAide;
     $dateBon = $bon->dateRemisePrevue;
     include_once('./lib/PDF/generateMandat.php');
+}
+
+function cancelRapport() {
+    include_once('./pages/aide.php');
+    $aide = aide();
+    echo $aide;
 }
 ?>

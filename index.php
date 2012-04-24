@@ -1,9 +1,7 @@
 <?php
 
 include_once('./lib/config.php');
-include_once('./pages/Droit.class.php');
-ini_set('session.gc_maxlifetime', 3600); 
-session_start();
+
 if (!isset($_SESSION['userId'])) {
     login();
     exit();
@@ -217,6 +215,14 @@ switch (@$_GET['p']) {
     case 'rapportsocial':
         include_once('./pages/aide.php');
         rapportSocial($_POST['idAide']);
+        break;
+    case 'deletedoc':
+        include_once('./pages/document.php');
+        destroyFile($_POST['file']);
+        break;
+    case 'cancelrapport':
+        include_once('./pages/aide.php');
+        cancelRapport();
         break;
     default:
         home();
@@ -459,10 +465,46 @@ function generationHeaderNavigation($mode) {
 }
 
 function accueilContenu() {
-   
-        $retour = '<h2>Accueil</h2>';
-        
-    return $retour;
+    include_once('./lib/config.php');
+    $historique = Doctrine_Core::getTable('historique')->getHistoByUser($_SESSION['userId'])->execute();
+    $retour = '<h2>Accueil</h2>';
+    $retour .= '
+        <h3>Vos 10 dernières actions</h3>
+         <div class="bubble tableau_classique_wrapper">
+            <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr class="header">
+                    <th>Individu</th>
+                      <th>Action</th>
+                      <th>Objet</th>
+                      <th>Utilisateur</th>
+                      <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="contenu_table_historique">';
+    foreach($historique as $histo) {
+        if ($histo->typeAction == Historique::$Archiver) {
+            $q = Doctrine_Query::create()
+                ->from($historique->objet)
+                ->where('datecreation < ?', $historique->date)
+                ->andWhere('idIndividu = ?', $historique->idIndividu)
+                ->orderBy('datecreation DESC')
+                ->fetchOne();
+            $retour .= '<tr class="afficherArchivage" idObjet='.$q->id.' table='.$histo->objet.'>';
+        } else {
+            $retour .= '<tr>';
+        }
+        $retour .= '<td>'.$histo->individu->nom.' '.$histo->individu->prenom.'</td>';
+        $retour .= '
+            <td>'.Historique::getStaticValue($histo->typeAction).'</td>
+            <td>'.$histo->objet.'</td>
+            <td>'.$histo->user->login.'</td>
+            <td>'.getDatebyTimestamp($histo->date).'</td>
+        </tr>';
+    }
+    $retour .= '</tbody>
+        </table>';
+     return $retour;
 }
 
 function accueil() {

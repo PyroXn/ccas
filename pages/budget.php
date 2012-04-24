@@ -41,6 +41,56 @@ function budget() {
     $contenu .= afficherDettes($dette);
     $contenu .= afficherCredits($credits);
     
+    $contenu .= 
+        '<div class="formulaire" action="archive_ressource">
+            <h2>Individu</h2>
+            <div class="colonne_droite">
+                <span>Etes-vous sur de vouloir archiver la fiche ressource ?</span>
+                <div class="sauvegarder_annuler">
+                    <div value="archive_ressource" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Oui</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Non</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="formulaire" action="archive_depense">
+            <h2>Individu</h2>
+            <div class="colonne_droite">
+                <span>Etes-vous sur de vouloir archiver la fiche depense ?</span>
+                <div class="sauvegarder_annuler">
+                    <div value="archive_depense" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Oui</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Non</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="formulaire" action="archive_dette">
+            <h2>Individu</h2>
+            <div class="colonne_droite">
+                <span>Etes-vous sur de vouloir archiver la fiche dette ?</span>
+                <div class="sauvegarder_annuler">
+                    <div value="archive_dette" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Oui</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Non</span>
+                    </div>
+                </div>
+            </div>
+        </div>';
+    
     return $contenu;
 }
 
@@ -273,7 +323,7 @@ function afficherCredits($credits) {
                             <th>Mensualité</th>
                             <th>Durée</th>
                             <th>Montant restant</th>
-                            <th>Actions</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -303,16 +353,16 @@ function afficherCredits($credits) {
             <h2>Crédit</h2>
             <div class="colonne_droite">
                 <div class="input_text">
-                    <input id="organisme" class="contour_field" type="text" title="Organisme" placeholder="Organisme">
+                    <input id="organisme" class="contour_field requis" type="text" title="Organisme" placeholder="Organisme">
                 </div>
                 <div class="input_text">
-                    <input id="mensualite" class="contour_field" type="text" title="Mensualite" placeholder="Mensualite">
+                    <input id="mensualite" class="contour_field requis" type="text" title="Mensualite" placeholder="Mensualite">
                 </div>
                 <div class="input_text">
-                    <input id="duree" class="contour_field" type="text" title="Durée" placeholder="Durée">
+                    <input id="duree" class="contour_field requis" type="text" title="Durée" placeholder="Durée">
                 </div>
                 <div class="input_text">
-                    <input id="total" class="contour_field" type="text" title="Total Restant" placeholder="Total Restant">
+                    <input id="total" class="contour_field requis" type="text" title="Total Restant" placeholder="Total Restant">
                 </div>
                 <div class="sauvegarder_annuler">
                     <div value="save" class="bouton modif">
@@ -322,6 +372,22 @@ function afficherCredits($credits) {
                     <div value="cancel" class="bouton classique">
                         <i class="icon-cancel icon-black"></i>
                         <span>Annuler</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="formulaire" action="suppression_credit">
+            <h2>Crédit</h2>
+            <div class="colonne_droite">
+                <span>Etes-vous sur de vouloir supprimer le crédit.</span>
+                <div class="sauvegarder_annuler">
+                    <div value="delete_credit" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Oui</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Non</span>
                     </div>
                 </div>
             </div>

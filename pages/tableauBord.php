@@ -125,7 +125,7 @@ function graphTypeAction() {
             // On liste les instruct interne actif
             $instructs = Doctrine_Core::getTable('instruct')->findByInterne(1);
             $retour .= '
-                <div class="select classique" role="select_graph_instruct">
+                <div class="select classique court" role="select_graph_instruct">
                     <div id="graphByInstruct" class="option" value=" ">-----</div>  
                     <div class="fleche_bas"> </div>
                 </div>';
