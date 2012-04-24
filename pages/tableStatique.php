@@ -118,10 +118,12 @@ function generateColonneByType($table, $columnName, $recherche=false, $attribut=
     $type = $table->getTypeOfColumn($columnName);
     switch ($type) {
         case 'string':
+            $cantBeNull = $table->getColumnDefinition($columnName);
+            $cantBeNull['notnull'] == 1 ? $class = 'requis' : $class = '';
             $retour .= '
             <div class="colonne">
                 <span class="attribut">'.$columnName.' : </span>
-                <span><input class="contour_field input_char '.$recherche.'" type="text" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
+                <span><input class="contour_field input_char '.$recherche.' '.$class.'" type="text" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
             </div>';
             break;
         case 'float' :
@@ -186,9 +188,11 @@ function generateFormulaireByTable($table, $columnNames) {
                         }
                         $retour .= '</ul>';
                     } else {
+                        $cantBeNull = $table->getColumnDefinition($columnName);
+                        $cantBeNull['notnull'] == 1 ? $class = 'requis' : $class = '';
                         $retour .= '
                         <div class="input_text" columnName='.$columnName.'>
-                            <input class="contour_field" type="text" title="'.$columnName.'" placeholder="'.$columnName.'">
+                            <input class="contour_field '.$class.'" type="text" title="'.$columnName.'" placeholder="'.$columnName.'">
                         </div>';
                     }
                     break;
