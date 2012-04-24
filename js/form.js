@@ -317,25 +317,25 @@ $(function() {
         } else if(value == 'updateDecisionInterne') {
             var traitement = true;
             console.log($('#decisionRequis'));
-            $('#decisionRequis').find('.requis').each(function(){
-                if ($(this).is('input')) {
-                    if ($(this).val() == '') {
-                        traitement = false;
-                        $(this).addClass('a_completer');
-                    } else {
-                        $(this).removeClass('a_completer');
-                    }
-                } else if ($(this).hasClass('option')) {
-                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
-                        traitement = false;
-                        $(this).parent().addClass('a_completer');
-                    } else {
-                        $(this).parent().removeClass('a_completer');
-                    }
-                }
-                
-            });
-            if(traitement) {
+//            $('#decisionRequis').find('.requis').each(function(){
+//                if ($(this).is('input')) {
+//                    if ($(this).val() == '') {
+//                        traitement = false;
+//                        $(this).addClass('a_completer');
+//                    } else {
+//                        $(this).removeClass('a_completer');
+//                    }
+//                } else if ($(this).hasClass('option')) {
+//                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+//                        traitement = false;
+//                        $(this).parent().addClass('a_completer');
+//                    } else {
+//                        $(this).parent().removeClass('a_completer');
+//                    }
+//                }
+//                
+//            });
+            if(findRequis($('#decisionRequis'))) {
                 var vigilance = 0;
                 if($('#vigilance').hasClass('checkbox_active')) {
                     vigilance = 1;
@@ -392,26 +392,7 @@ $(function() {
                 }
             });
         } else if(value == 'updateDecisionExterne') {
-            var traitement = true;
-           $('#decisionRequis').find('.requis').each(function(){
-                if ($(this).is('input')) {
-                    if ($(this).val() == '') {
-                        traitement = false;
-                        $(this).addClass('a_completer');
-                    } else {
-                        $(this).removeClass('a_completer');
-                    }
-                } else if ($(this).hasClass('option')) {
-                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
-                        traitement = false;
-                        $(this).parent().addClass('a_completer');
-                    } else {
-                        $(this).parent().removeClass('a_completer');
-                    }
-                }
-                
-            });
-            if(traitement) {
+            if(findRequis($('#decisionRequis'))) {
                 datastring = 'idIndividu='+idIndividu+'&idAide='+$('#idAide').attr('value')+'&montantPercu='+$('#montantPercu').val();
                 datastring += '&dateDecision='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
                 datastring += '&commentaire='+$('#commentaire').val();
@@ -464,26 +445,26 @@ $(function() {
             }, 'html');
         }
         else if(value=='save') {
-            var traitement = true;
-            formActuel.find('.requis').each(function(){
-                if ($(this).is('input')) {
-                    if ($(this).val() == '') {
-                        traitement = false;
-                        $(this).addClass('a_completer');
-                    } else {
-                        $(this).removeClass('a_completer');
-                    }
-                } else if ($(this).hasClass('option')) {
-                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
-                        traitement = false;
-                        $(this).parent().addClass('a_completer');
-                    } else {
-                        $(this).parent().removeClass('a_completer');
-                    }
-                }
-                
-            });
-            if (traitement) {
+//            var traitement = true;
+//            formActuel.find('.requis').each(function(){
+//                if ($(this).is('input')) {
+//                    if ($(this).val() == '') {
+//                        traitement = false;
+//                        $(this).addClass('a_completer');
+//                    } else {
+//                        $(this).removeClass('a_completer');
+//                    }
+//                } else if ($(this).hasClass('option')) {
+//                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+//                        traitement = false;
+//                        $(this).parent().addClass('a_completer');
+//                    } else {
+//                        $(this).parent().removeClass('a_completer');
+//                    }
+//                }
+//                
+//            });
+            if (findRequis(formActuel)) {
                 //commun a tous les form
                 var table = formActuel.attr('action');
                 var datastring = 'table=' + table;
@@ -573,19 +554,20 @@ $(function() {
                         console.log("SUCCESS FONCTION PORC");
                         $('#ecran_gris').toggle();
                         formActuel.toggle();
-                        formActuel.find('.requis').each(function(){
-                            if ($(this).is('input')) {
-                                if ($(this).val() == '') {
-                                    traitement = false;
-                                    $(this).removeClass('a_completer');
-                                }
-                            } else if ($(this).hasClass('option')) {
-                                if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
-                                    traitement = false;
-                                    $(this).parent().toggleClass('a_completer');
-                                }
-                            }
-                        });
+                        findRequis(formActuel);
+//                        formActuel.find('.requis').each(function(){
+//                            if ($(this).is('input')) {
+//                                if ($(this).val() == '') {
+//                                    traitement = false;
+//                                    $(this).removeClass('a_completer');
+//                                }
+//                            } else if ($(this).hasClass('option')) {
+//                                if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+//                                    traitement = false;
+//                                    $(this).parent().toggleClass('a_completer');
+//                                }
+//                            }
+//                        });
                         effacer();
 
                         switch(table){
@@ -648,24 +630,7 @@ $(function() {
             
         } else if(value == 'create_tab_demande_commission') {
             var traitement = true;
-            $('#demande_commission').find('.requis').each(function(){
-                if ($(this).is('input')) {
-                    if ($(this).val() == '') {
-                        traitement = false;
-                        $(this).addClass('a_completer');
-                    } else {
-                        $(this).removeClass('a_completer');
-                    }
-                } else if ($(this).hasClass('option')) {
-                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
-                        traitement = false;
-                        $(this).parent().addClass('a_completer');
-                    } else {
-                        $(this).parent().removeClass('a_completer');
-                    }
-                }
-            });
-            if (traitement) {      
+               if(findRequis($('#demande_commission'))) {    
                 var datastring =  'datedebut=' + $('#datedebut').val() + '&datefin=' + $('#datefin').val()
                       +'&withDecission=' + "0";
                 console.log(datastring);
@@ -688,24 +653,7 @@ $(function() {
         
         } else if(value == 'create_tab_decision_commission') {
                         var traitement = true;
-            $('#decision_commission').find('.requis').each(function(){
-                if ($(this).is('input')) {
-                    if ($(this).val() == '') {
-                        traitement = false;
-                        $(this).addClass('a_completer');
-                    } else {
-                        $(this).removeClass('a_completer');
-                    }
-                } else if ($(this).hasClass('option')) {
-                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
-                        traitement = false;
-                        $(this).parent().addClass('a_completer');
-                    } else {
-                        $(this).parent().removeClass('a_completer');
-                    }
-                }
-            });
-            if (traitement) {      
+             if(findRequis($('#demande_commission'))) {    
                 var datastring =  'datecommission=' + $('#datecommission').val() +'&withDecission=' + "1";
                 console.log(datastring);
                 $.ajax({
@@ -1336,4 +1284,26 @@ function slideBouton(update) {
         "margin-right":"0"
     });
     $(update.after()).slideToggle();
+}
+
+function findRequis(select) {
+    var traitement = true;
+    select.find('.requis').each(function(){
+        if ($(this).is('input')) {
+       if ($(this).val() == '') {
+                        traitement = false;
+                        $(this).addClass('a_completer');
+                    } else {
+                        $(this).removeClass('a_completer');
+                    }
+                } else if ($(this).hasClass('option')) {
+                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
+                        traitement = false;
+                        $(this).parent().addClass('a_completer');
+                    } else {
+                        $(this).parent().removeClass('a_completer');
+                    }
+                }
+    });
+    return traitement;
 }
