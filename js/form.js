@@ -630,24 +630,7 @@ $(function() {
             
         } else if(value == 'create_tab_demande_commission') {
             var traitement = true;
-            $('#demande_commission').find('.requis').each(function(){
-                if ($(this).is('input')) {
-                    if ($(this).val() == '') {
-                        traitement = false;
-                        $(this).addClass('a_completer');
-                    } else {
-                        $(this).removeClass('a_completer');
-                    }
-                } else if ($(this).hasClass('option')) {
-                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
-                        traitement = false;
-                        $(this).parent().addClass('a_completer');
-                    } else {
-                        $(this).parent().removeClass('a_completer');
-                    }
-                }
-            });
-            if (traitement) {      
+               if(findRequis($('#demande_commission'))) {    
                 var datastring =  'datedebut=' + $('#datedebut').val() + '&datefin=' + $('#datefin').val()
                       +'&withDecission=' + "0";
                 console.log(datastring);
@@ -670,24 +653,7 @@ $(function() {
         
         } else if(value == 'create_tab_decision_commission') {
                         var traitement = true;
-            $('#decision_commission').find('.requis').each(function(){
-                if ($(this).is('input')) {
-                    if ($(this).val() == '') {
-                        traitement = false;
-                        $(this).addClass('a_completer');
-                    } else {
-                        $(this).removeClass('a_completer');
-                    }
-                } else if ($(this).hasClass('option')) {
-                    if ($(this).attr('value') == undefined || $(this).attr('value') == '') {
-                        traitement = false;
-                        $(this).parent().addClass('a_completer');
-                    } else {
-                        $(this).parent().removeClass('a_completer');
-                    }
-                }
-            });
-            if (traitement) {      
+             if(findRequis($('#demande_commission'))) {    
                 var datastring =  'datecommission=' + $('#datecommission').val() +'&withDecission=' + "1";
                 console.log(datastring);
                 $.ajax({
