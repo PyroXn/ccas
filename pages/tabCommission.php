@@ -99,6 +99,8 @@ function genererTabCommission() {
                 WHERE ai.avis <> ""
                 AND datedemande BETWEEN '.mktime(0, 0, 0, $dateDebut[1], $dateDebut[0], $dateDebut[2]).' AND '.mktime(0, 0, 0, $dateFin[1], $dateFin[0], $dateFin[2]).' 
                 GROUP BY i.id';
+//        echo $req;
+//        exit();
         $con = Doctrine_Manager::getInstance()->connection();
         $st = $con->execute($req);
         $result = $st->fetchAll();

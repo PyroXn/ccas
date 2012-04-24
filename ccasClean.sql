@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mar 24 Avril 2012 à 16:16
+-- Généré le : Mar 24 Avril 2012 à 16:32
 -- Version du serveur: 5.1.58
 -- Version de PHP: 5.3.6-13ubuntu3.6
 
@@ -98,8 +98,8 @@ INSERT INTO `aideexterne` (`id`, `idindividu`, `datedemande`, `idorganisme`, `na
 (28, 510, 1323817200, 28, '66', 0, 69, 38, 0, 'Terminé', '', 0, 0.00, 0.00, 'Fsl accès aux lieux envoyé ce jour.Demande aide financière assurance , premier loyer + dépot de garantie.'),
 (29, 469, 1323990000, 28, '0', 0, 69, 38, 6, 'Terminé', '', 0, 295.56, 0.00, 'Madame perçoit l''AAH à hauteur de 743,62 euros.A son fils à charge.Demande FSL pour facture Energie.Envoi ce jour.'),
 (30, 88, 1323990000, 28, '66', 0, 69, 38, 0, 'Terminé', '', 0, 0.00, 0.00, 'Dette locative de 428,90 euros.Envoi FSL ce jour (attente versement de l''ass, dossier en cours)'),
-(31, 7, 1331593200, 28, '68', 0, 71, 29, 9, 'Terminé', 'Accepté', 1333490400, 45.00, 45.00, 'ok'),
-(32, 1144, 1334354400, 28, '68', 0, 71, 27, 4, 'Terminé', 'Accepté', 1335304800, 0.00, 0.00, '');
+(31, 7, 1331593200, 28, '68', 0, 69, 29, 9, 'Terminé', 'Accepté', 1333490400, 45.00, 45.00, 'ok'),
+(32, 1144, 1334354400, 28, '68', 0, 69, 27, 4, 'Terminé', 'Accepté', 1335304800, 0.00, 0.00, '');
 
 -- --------------------------------------------------------
 
@@ -8512,7 +8512,82 @@ CREATE TABLE IF NOT EXISTS `type` (
   `idlibelletype` bigint(20) DEFAULT '0',
   `libelle` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+
+--
+-- Contenu de la table `type`
+--
+
+INSERT INTO `type` (`id`, `idlibelletype`, `libelle`) VALUES
+(1, 1, 'Bon alimentaire commission'),
+(3, 1, 'Aide au chauffage tranche B'),
+(4, 1, 'Aide au chauffage tranche A'),
+(5, 1, ''),
+(6, 1, 'Aide au chauffage tranche C'),
+(7, 1, 'Aide alimentaire commission'),
+(8, 1, 'Aide alimentaire d''urgence'),
+(9, 1, 'Bon alimentaire en urgence'),
+(10, 1, 'Aide à l''emploi (transp., vêt., formation..)'),
+(11, 1, 'Aide aux obsèques'),
+(12, 1, 'Aides crêche, colo, centre aéré, cantine...'),
+(13, 1, 'Aides diverses'),
+(14, 1, 'Facture téléphone'),
+(15, 1, 'Fournitures scolaires'),
+(16, 1, 'Frais médicaux et pharmacie'),
+(17, 1, 'Loyer'),
+(18, 1, 'Mobilier, déménagement'),
+(19, 1, 'Assurances (habitation, voiture...)'),
+(20, 1, 'Prime de Noël couple'),
+(21, 1, 'Prime de Noël personne seule'),
+(22, 1, 'Tickets de bus'),
+(23, 1, 'Energie'),
+(24, 1, 'Demande de Domiciliation au CCAS'),
+(25, 1, 'Prime de Noel deux personnes'),
+(26, 1, 'Prime de Noël pour deux personnes'),
+(27, 1, 'Aide à la mobilité'),
+(29, 1, 'PRET'),
+(30, 1, 'Nuit d''hôtel'),
+(31, 1, 'Eau'),
+(32, 1, 'secours en argent'),
+(33, 2, 'FSL'),
+(34, 2, 'Convoc expulsion'),
+(35, 2, 'Rapport expulsion'),
+(36, 2, 'Envoi courrier'),
+(37, 2, 'Visite à domicile'),
+(38, 2, 'Demande Aide Financière'),
+(39, 2, 'Constitution dossier BDF'),
+(40, 2, 'FSL ACCORD'),
+(41, 2, 'FSL REFUS'),
+(42, 2, 'Entretien bureau'),
+(43, 2, 'Permanence'),
+(44, 2, 'Aide Fi REFUS'),
+(45, 2, 'Aide Fi ACCORD'),
+(46, 2, 'CTD'),
+(47, 2, 'CTR'),
+(48, 2, 'Remise Chèque Fondation Abbé Pierre'),
+(49, 2, 'Autres'),
+(50, 3, 'Locataire'),
+(51, 3, 'Propriétaire'),
+(52, 3, 'Hébergé'),
+(53, 4, 'Chambre'),
+(54, 4, 'Studio'),
+(55, 4, 'Maison'),
+(56, 4, 'Hébergé'),
+(57, 4, 'F1'),
+(58, 4, 'F2'),
+(59, 4, 'F4'),
+(60, 4, 'F4'),
+(61, 4, 'F5'),
+(62, 4, 'F6'),
+(63, 4, 'F7'),
+(64, 5, '1 ère demande'),
+(65, 5, 'Renouvellement'),
+(66, 6, 'logement'),
+(67, 6, 'Energie'),
+(68, 6, 'Eau'),
+(69, 7, 'Demande FSL'),
+(70, 7, 'Caisse de retraite'),
+(71, 7, 'Aide fondation Abbé Pierre');
 
 -- --------------------------------------------------------
 
