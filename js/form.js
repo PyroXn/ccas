@@ -276,23 +276,25 @@ $(function() {
                     datastring += '&'+$(this).attr('columnName')+'=' + $(this).children().val();
                 }
             });
-            console.log(datastring);
-            $.ajax({
-                type: 'post',
-                data: datastring,
-                url: './index.php?p=saveTableStatique',
-                cache: false,
-                //Succés de la requête
-                success: function() {
-                    $('#ecran_gris').toggle();
-                    formActuel.toggle();
-                    effacer();
-                    searchTableStatique();
-                },
-                error: function(data) {
-                    $("#contenu").html(data.responseText);
-                }
-            });
+            if(findRequis(form)) {
+                console.log(datastring);
+                $.ajax({
+                    type: 'post',
+                    data: datastring,
+                    url: './index.php?p=saveTableStatique',
+                    cache: false,
+                    //Succés de la requête
+                    success: function() {
+                        $('#ecran_gris').toggle();
+                        formActuel.toggle();
+                        effacer();
+                        searchTableStatique();
+                    },
+                    error: function(data) {
+                        $("#contenu").html(data.responseText);
+                    }
+                });
+            }
         } else if(value=='edit_action') {
             var idAction = $(this).attr('idAction');
             datastring = 'idAction='+idAction+'&idIndividu='+idIndividu+'&date='+$('#date_edit').val()+'&motif='+$('#motif_edit').val();
