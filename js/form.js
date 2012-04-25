@@ -631,9 +631,8 @@ $(function() {
             });
             
         } else if(value == 'create_tab_demande_commission') {
-            var traitement = true;
                if(findRequis($('#demande_commission'))) {    
-                var datastring =  'datedebut=' + $('#datedebut').val() + '&datefin=' + $('#datefin').val()
+                var datastring = 'datedebut=' + $('#datedebut').val() + '&datefin=' + $('#datefin').val()
                       +'&withDecission=' + "0";
                 console.log(datastring);
                 $.ajax({
@@ -642,7 +641,8 @@ $(function() {
                     url: './index.php?p=genererTabCommission',
                     cache: false,
                     success: function(retour) {
-                        $('#contenu').html(retour);
+                        $('#dialogTab').html(retour);
+                        $('#iPDF').dialog({ position: ['center',100], width: 500, height: 500 });
                     },
                     error: function(data) {
                         $("#contenu").html(data.responseText);
@@ -654,7 +654,6 @@ $(function() {
 
         
         } else if(value == 'create_tab_decision_commission') {
-                        var traitement = true;
              if(findRequis($('#demande_commission'))) {    
                 var datastring =  'datecommission=' + $('#datecommission').val() +'&withDecission=' + "1";
                 console.log(datastring);
@@ -664,7 +663,8 @@ $(function() {
                     url: './index.php?p=genererTabCommission',
                     cache: false,
                     success: function(retour) {
-                        $('#contenu').html(retour);
+                        $('#dialogTab').html(retour);
+                        $('#iPDF').dialog({ position: ['center',100], width: 500, height: 500 });
                     },
                     error: function(data) {
                         $("#contenu").html(data.responseText);

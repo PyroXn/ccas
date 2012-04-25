@@ -61,15 +61,24 @@ function ecranTabCommission() {
                $retour .=  '</div>
                        </li>
                        <li class="ligne_list_classique">
-                           <a value="create_tab_decision_commission" class="bouton modif" target="_blank">Créer le tableau de décision de commission</a>
+                            <div value="create_tab_decision_commission" class="bouton modif">
+                                <span>Créer le tableau de décision de commission</span>
+                            </div>
                        </li>
                    </ul>
+               </div>
+               <div id="dialogTab">
                </div>';
     return $retour;
 }
 
 function genererTabCommission() {
     $withDecission = $_POST['withDecission'];
+    
+        echo '<div id="dialogTab">
+              <iframe id="iPDF" width="100%" height="500" src="./PDFTabCommission2.pdf"></iframe>
+              </div>';
+        
     if($withDecission == "1") {
         $dateCommission = explode('/', $_POST['datecommission']);
         $req = 'SELECT i.id, i.nom, i.prenom, f.numrue, r.rue, t.libelle aidedemandee, ai.proposition, ai.avis, SUM(montant) montant_total, count(ba.id) quantite, ai.commentaire
@@ -85,7 +94,7 @@ function genererTabCommission() {
         $con = Doctrine_Manager::getInstance()->connection();
         $st = $con->execute($req);
         $result = $st->fetchAll();
-        $titre = 'Demandes passées à la commission du '.$dateCommission[1].'/'.$dateCommission[0].'/'.$dateCommission[2];
+        $titre = 'Demandes passées à la commission du '.$dateCommission[0].'/'.$dateCommission[1].'/'.$dateCommission[2];
     } else {
         $dateDebut = explode('/', $_POST['datedebut']);
         $dateFin = explode('/', $_POST['datefin']);
@@ -99,14 +108,12 @@ function genererTabCommission() {
                 WHERE ai.avis <> ""
                 AND datedemande BETWEEN '.mktime(0, 0, 0, $dateDebut[1], $dateDebut[0], $dateDebut[2]).' AND '.mktime(0, 0, 0, $dateFin[1], $dateFin[0], $dateFin[2]).' 
                 GROUP BY i.id';
-//        echo $req;
-//        exit();
         $con = Doctrine_Manager::getInstance()->connection();
         $st = $con->execute($req);
         $result = $st->fetchAll();
-        $titre = 'Demandes pour la période du '.$dateDebut[1].'/'.$dateDebut[0].'/'.$dateDebut[2].' au '.$dateFin[1].'/'.$dateFin[0].'/'.$dateFin[2];
+        $titre = 'Demandes pour la période du '.$dateDebut[0].'/'.$dateDebut[1].'/'.$dateDebut[2].' au '.$dateFin[0].'/'.$dateFin[1].'/'.$dateFin[2];
     }
-    
+    echo $req;
     include_once('./lib/PDF/generateTabCommission.php');
 }
 ?>
