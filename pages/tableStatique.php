@@ -118,10 +118,12 @@ function generateColonneByType($table, $columnName, $recherche=false, $attribut=
     $type = $table->getTypeOfColumn($columnName);
     switch ($type) {
         case 'string':
+            $cantBeNull = $table->getColumnDefinition($columnName);
+            $cantBeNull['notnull'] == 1 ? $class = 'requis' : $class = '';
             $retour .= '
             <div class="colonne">
                 <span class="attribut">'.$columnName.' : </span>
-                <span><input class="contour_field input_char '.$recherche.'" type="text" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
+                <span><input class="contour_field input_char '.$recherche.' '.$class.'" type="text" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
             </div>';
             break;
         case 'float' :
@@ -134,10 +136,12 @@ function generateColonneByType($table, $columnName, $recherche=false, $attribut=
                     <span><input type="text" class="contour_field input_char autoComplete" id="'.$columnName.'" table="'.$columnName.'" champ="libelle" value="'.$attribut.'"'.$disabled.'/></span>
                 </div>';        
             } else {
+                $cantBeNull = $table->getColumnDefinition($columnName);
+                $cantBeNull['notnull'] == 1 ? $class = 'requis' : $class = '';
                 $retour .= '
                 <div class="colonne">
                     <span class="attribut">'.$columnName.' :</span>
-                    <span><input type="text" class="contour_field input_num" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
+                    <span><input type="text" class="contour_field input_num '.$class.'" columnName='.$columnName.' value="'.$attribut.'"'.$disabled.'/></span>
                 </div>';
             }
             
@@ -174,7 +178,7 @@ function generateFormulaireByTable($table, $columnNames) {
                         $columnName = substr($columnName, 2);
                         $retour .= '
                         <div class="select classique" columnName='.$columnNameId.' role="select_'.$columnName.'">
-                            <div class="option">------</div>
+                            <div class="option requis">------</div>
                             <div class="fleche_bas"></div>
                         </div>';
                         $cleEtrangere = Doctrine_Core::getTable($columnName)->findAll();
@@ -186,9 +190,11 @@ function generateFormulaireByTable($table, $columnNames) {
                         }
                         $retour .= '</ul>';
                     } else {
+                        $cantBeNull = $table->getColumnDefinition($columnName);
+                        $cantBeNull['notnull'] == 1 ? $class = 'requis' : $class = '';
                         $retour .= '
                         <div class="input_text" columnName='.$columnName.'>
-                            <input class="contour_field" type="text" title="'.$columnName.'" placeholder="'.$columnName.'">
+                            <input class="contour_field '.$class.'" type="text" title="'.$columnName.'" placeholder="'.$columnName.'">
                         </div>';
                     }
                     break;
