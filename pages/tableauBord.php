@@ -232,8 +232,8 @@ function graphTypeAideInterne() {
             pointLabels: { show: true }
         },
         series:[
-            {label:'Décideur Interne'},
-            {label:'Décideur Externe'}
+            {label:'Instructeur Interne'},
+            {label:'Instructeur Externe'}
         ],
         legend: {
             show: true,

@@ -6,11 +6,10 @@
     <div id="telephone">
         <b>Téléphone : 03 82 82 49 00</b>
     </div>
-    <div class="espace"></div>
     <table>
         <tr>
-            <th colspan="2" width="285">
-                Numéro de l'enregistrement
+            <th rowspan="2" width="250">
+                BON ALIMENTAIRE 
             </th>
             <th rowspan="2" width="150">
                 Date du bon
@@ -20,56 +19,25 @@
             </th>
         </tr>
         <tr>
-            <th>Exercice</th>
-            <th>N° de bon</th>
             <th>Article</th>
             <th>Fonction</th>
         </tr>
         <tr>
-            <td></td>
             <td><span class="numBon"><?php echo $numBon; ?></span></td>
             <td><?php echo date('d/m/Y'); ?></td>
             <td></td>
             <td></td>
         </tr>
     </table>
-    <div class="espace"></div>
     Emis par : <div class="underline" width="470"></div> pour le C.C.A.S. <br />
     M. <div class="underline" width="720"></div>
-    est invité à fournir les prestations suivantes :
-    <div class="espace"></div>
-    <table>
-        <tr>
-            <th width="350">Denrées alimentaires (<b>boissons alcoolisées exclues</b>)
-            et produits de 1ère nécessité</th>
-            <th width="125"></th>
-            <td class="noBorder" rowspan="2">(case correspondate à cocher)</td>
-        </tr>
-        <tr>
-            <th height="30">Autres : (préciser)</th>
-            <th></th>
-        </tr>
-    </table>
-    <div class="espace"></div>
-    <div class="underline" width="735"></div>
-    <div class="underline" width="735"></div>
-    <div class="underline" width="735"></div>
-    <div class="underline" width="735"></div>
-    <div class="underline" width="735"></div>
-    <div class="underline" width="735"></div>
-    <div class="espace"></div>
     Pour un montant maximum de : <div class="underline" width="100"><?php echo $bon->montant; ?></div> euros : Soit en toutes lettres : <div class="underline" width="238"><?php echo $lettres; ?> euros</div>
-    <div class="underline" width="735"></div>   
-    <div class="espace"></div>
     Bénéficiaire : <div class="underline" width="655"><?php echo $beneficaire; ?></div>
     Rue : <div class="underline" width="333"><?php echo $rue; ?></div> N° <div class="underline" width="333"><?php echo $num; ?></div>
-    <div class="espace"></div>
     Signature du bénéficiaire :
-    <div class="espace"></div>
-    <div class="espace"></div>
     <table>
         <tr>
-            <td class="signature" width="240" height="90">
+            <td class="signature" width="240" height="60">
                 La directrice du C.C.A.S. :<br />
                 Le : <div class="underline" width="50"></div> 201<div class="underline" width="20"></div>
             </td>
@@ -83,11 +51,10 @@
             </td>
         </tr>
     </table>
-    <div id="espace"></div>
-    <div id="espace"></div>
     <div id="footer">
         La facture datée, arrêtée en toutes lettres doit être présentée en DEUX exemplaires, au plus tard dans le mois qui suit l'exécution de la
-        commande. Le volet de couleur vert sera obligatoirement joint à la facture, <b>accompagné d'un relevé d'identité bancaire</b>, adressés en mairie, à
+        commande. Le volet sera obligatoirement joint à la facture, <b>accompagné d'un relevé d'identité bancaire</b>, adressés en mairie, à
         Monsieur le Président du C.C.A.S., Place de la Résistance et de la Déportation 57701 HAYANGE CEDEX.
     </div>
+    
 </page>
