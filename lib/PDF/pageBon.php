@@ -9,7 +9,7 @@
     <table>
         <tr>
             <th rowspan="2" width="250">
-                BON ALIMENTAIRE 
+                <?php echo $typeBon; ?> 
             </th>
             <th rowspan="2" width="150">
                 Date du bon
