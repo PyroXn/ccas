@@ -141,6 +141,7 @@ function affichagePermissions() {
                 <ul>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$ACCES_ADMIN) . '</span>' . listRole($roles, Droit::$ACCES_ADMIN) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$ACCES_CONFIG) . '</span>' . listRole($roles, Droit::$ACCES_CONFIG) . '</li>
+                    <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_ACCES_TAB_COM) . '</span>' . listRole($roles, Droit::$DROIT_ACCES_TAB_COM) . '</li>
                 </ul>
             </div>
             <div id="configurator_tab_documents_pane" class="tab_pane" style="display: none;">

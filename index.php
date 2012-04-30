@@ -390,11 +390,13 @@ function generationHeaderNavigation($mode) {
                 </div>
                 <div id="statistique" class="page_header_link">
                     <span class="label">Statistiques</span>
-                </div>
-                <div id="tabcommission" class="page_header_link">
+                </div>';
+                if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ACCES_TAB_COM)) { 
+                $retour .= '<div id="tabcommission" class="page_header_link">
                     <span class="label">Tableau de commission</span>
-                </div>
-                <div id="historiqueGlobal" class="page_header_link">
+                </div>';
+                }
+                $retour .= '<div id="historiqueGlobal" class="page_header_link">
                     <span class="label">Historique</span>
                 </div>';
             break;
