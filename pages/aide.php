@@ -330,16 +330,19 @@ function detailAideInterne() {
         foreach($bonAides as $bonAide) {
             switch($bonAide->typeBon) {
                 case BonAide::$BonAide:
-                    $type = 'Bon d\'aide';
+                    $type = BonAide::$BonAideLibelle;
                     break;
                 case BonAide::$MandatSecoursUrgence:
-                    $type = 'Secours en urgence';
+                    $type = BonAide::$MandatSecoursUrgenceLibelle;
                     break;
                 case BonAide::$AutreMandat:
-                    $type = 'Autres secours';
+                    $type = BonAide::$AutreMandatLibelle;
                     break;
                 case BonAide::$MandatRSA:
-                    $type = 'R.S.A.';
+                    $type = BonAide::$MandatRSALibelle;
+                    break;
+                case BonAide::$BonAideUrgence:
+                    $type = bonAide::$BonAideUrgenceLibelle;
                     break;
             }
             $chemin = './document/'.$bonAide->aideInterne->individu->idFoyer.'/'.$bonAide->aideInterne->individu->id.'/'.$bonAide->aideInterne->id;
@@ -408,6 +411,9 @@ function detailAideInterne() {
     $contenu .= '<ul class="select_typebon">
                                 <li>
                                     <div value="'.BonAide::$BonAide.'">'.BonAide::$BonAideLibelle.'</div>
+                                </li>
+                                <li>
+                                    <div value="'.BonAide::$BonAideUrgence.'">'.BonAide::$BonAideUrgenceLibelle.'</div>
                                 </li>
                                 <li>
                                     <div value="'.BonAide::$MandatSecoursUrgence.'">'.BonAide::$MandatSecoursUrgenceLibelle.'</div>
@@ -620,6 +626,14 @@ function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $monta
 function creationPDFBonInterne($bon) {
     // On génére le bon
     include_once('./lib/int2str.php');
+    switch($bon->typeBon) {
+        case BonAide::$BonAide:
+            $typeBon = BonAide::$BonAideLibelle;
+            break;
+        case BonAide::$BonAideUrgence:
+            $typeBon = BonAide::$BonAideUrgenceLibelle;
+            break;
+    }
     $beneficaire = $bon->aideInterne->individu->civilite .' '. $bon->aideInterne->individu->nom .' '. $bon->aideInterne->individu->prenom;
     $rue = $bon->aideInterne->individu->foyer->rue->rue;
     $num = $bon->aideInterne->individu->foyer->numRue;
@@ -962,6 +976,7 @@ function createPDF($idBon) {
     $bon = Doctrine_Core::getTable('bonaide')->find($idBon);
     switch($bon->typeBon) {
         case BonAide::$BonAide:
+        case BonAide::$BonAideUrgence:
             creationPDFBonInterne($bon);
             break;
        case BonAide::$AutreMandat:
