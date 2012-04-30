@@ -952,6 +952,7 @@ function pdfExist($chemin, $idBon, $date, $typeBon) {
     $date = date('d-m-Y', $date);
     switch($typeBon) {
         case BonAide::$BonAide:
+        case bonAide::$BonAideUrgence:
             if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$idBon.'.pdf')) {
                 return '<a name="'.$chemin.'/bonAide_'.$idBon.'.pdf" href="'.$chemin.'/bonAide_'.$idBon.'.pdf" target="_blank" class="open_doc"></a>';
             } else {

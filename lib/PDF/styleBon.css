@@ -6,8 +6,8 @@
         Purpose of the stylesheet follows.
 */
 page {
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 12px;
+    line-height: 20px;
 }
 
 #nomCentre {
@@ -22,7 +22,7 @@ page {
     text-align: right;
 }
 .espace {
-    height: 25px;
+    height: 10px;
     width: 100%;
 }
 
