@@ -17,13 +17,15 @@ class BonAide extends Doctrine_Record {
     }
     
     public static $BonAide = 1;
-    public static $BonAideLibelle = 'Bon d\'aide';
+    public static $BonAideLibelle = 'BON ALIMENTAIRE COMISSION';
     public static $MandatSecoursUrgence = 2;
     public static $MandatSecoursUrgenceLibelle = 'SECOURS EN URGENCE';
     public static $AutreMandat = 3;
     public static $AutreMandatLibelle = 'AUTRES SECOURS';
     public static $MandatRSA = 4;
     public static $MandatRSALibelle = 'R.S.A.';
+    public static $BonAideUrgence = 5;
+    public static $BonAideUrgenceLibelle = 'BON ALIMENTAIRE URGENCE';
     
     public function setUp() {
         $this->hasOne('aideInterne as aideInterne', array(
