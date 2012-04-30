@@ -23,7 +23,7 @@
             <th>Fonction</th>
         </tr>
         <tr>
-            <td><span class="numBon"><?php echo $numBon; ?></span></td>
+            <td>N°<span class="numBon"><?php echo $numBon; ?></span></td>
             <td><?php echo date('d/m/Y'); ?></td>
             <td></td>
             <td></td>
@@ -33,7 +33,7 @@
     M. <div class="underline" width="720"></div>
     Pour un montant maximum de : <div class="underline" width="100"><?php echo $bon->montant; ?></div> euros : Soit en toutes lettres : <div class="underline" width="238"><?php echo $lettres; ?> euros</div>
     Bénéficiaire : <div class="underline" width="655"><?php echo $beneficaire; ?></div>
-    Rue : <div class="underline" width="333"><?php echo $rue; ?></div> N° <div class="underline" width="333"><?php echo $num; ?></div>
+    Adresse : <div class="underline" width="650">N°<?php echo $num; ?> <?php echo $rue; ?></div>
     Signature du bénéficiaire :
     <table>
         <tr>
@@ -56,6 +56,7 @@
         commande. Le volet sera obligatoirement joint à la facture, <b>accompagné d'un relevé d'identité bancaire</b>, adressés en mairie, à
         Monsieur le Président du C.C.A.S., Place de la Résistance et de la Déportation 57701 HAYANGE CEDEX.
     </div>
+    <div class="espace"></div>
     <div class="espace"></div>
     <div id="nomCentre">
         <b>CENTRE COMMUNAL D'ACTION SOCIALE DE HAYANGE</b>
@@ -80,7 +81,7 @@
             <th>Fonction</th>
         </tr>
         <tr>
-            <td><span class="numBon"><?php echo $numBon; ?></span></td>
+            <td>N°<span class="numBon"><?php echo $numBon; ?></span></td>
             <td><?php echo date('d/m/Y'); ?></td>
             <td></td>
             <td></td>
@@ -90,7 +91,7 @@
     M. <div class="underline" width="720"></div>
     Pour un montant maximum de : <div class="underline" width="100"><?php echo $bon->montant; ?></div> euros : Soit en toutes lettres : <div class="underline" width="238"><?php echo $lettres; ?> euros</div>
     Bénéficiaire : <div class="underline" width="655"><?php echo $beneficaire; ?></div>
-    Rue : <div class="underline" width="333"><?php echo $rue; ?></div> N° <div class="underline" width="333"><?php echo $num; ?></div>
+    Adresse : <div class="underline" width="650">N°<?php echo $num; ?> <?php echo $rue; ?></div>
     Signature du bénéficiaire :
     <table>
         <tr>
@@ -113,6 +114,7 @@
         commande. Le volet sera obligatoirement joint à la facture, <b>accompagné d'un relevé d'identité bancaire</b>, adressés en mairie, à
         Monsieur le Président du C.C.A.S., Place de la Résistance et de la Déportation 57701 HAYANGE CEDEX.
     </div>
+    <div class="espace"></div>
     <div class="espace"></div>
     <div id="nomCentre">
         <b>CENTRE COMMUNAL D'ACTION SOCIALE DE HAYANGE</b>
@@ -137,7 +139,7 @@
             <th>Fonction</th>
         </tr>
         <tr>
-            <td><span class="numBon"><?php echo $numBon; ?></span></td>
+            <td>N°<span class="numBon"><?php echo $numBon; ?></span></td>
             <td><?php echo date('d/m/Y'); ?></td>
             <td></td>
             <td></td>
@@ -147,7 +149,7 @@
     M. <div class="underline" width="720"></div>
     Pour un montant maximum de : <div class="underline" width="100"><?php echo $bon->montant; ?></div> euros : Soit en toutes lettres : <div class="underline" width="238"><?php echo $lettres; ?> euros</div>
     Bénéficiaire : <div class="underline" width="655"><?php echo $beneficaire; ?></div>
-    Rue : <div class="underline" width="333"><?php echo $rue; ?></div> N° <div class="underline" width="333"><?php echo $num; ?></div>
+    Adresse : <div class="underline" width="650">N°<?php echo $num; ?> <?php echo $rue; ?></div>
     Signature du bénéficiaire :
     <table>
         <tr>

@@ -149,6 +149,16 @@ function afficherRessources($ressource) {
                             <span><input class="contour_field input_num" type="text" id="pensionRetraite" value="'.$ressource->pensionRetraite.'" disabled/></span>
                         </div>
                         <div class="colonne_num">
+                            <span class="attribut">P. d\'invalidité : </span>
+                            <span><input class="contour_field input_num" type="text" id="invalide" value="'.$ressource->pensionInvalide.'" disabled/></span>
+                        </div>
+                        <div class="colonne_num">
+                            <span class="attribut">IJSS : </span>
+                            <span><input class="contour_field input_num" type="text" id="ijss" value="'.$ressource->ijss.'" disabled/></span>
+                        </div>
+                    </li>
+                <li class="ligne_list_classique">
+                        <div class="colonne_num">
                             <span class="attribut">Autres revenus  : </span>
                             <span><input class="contour_field input_num" type="text" id="autreRevenu" value="'.$ressource->autreRevenu.'" disabled/></span>
                         </div>
@@ -453,7 +463,9 @@ function updateRessource() {
     $individu->rsaActivite = $_POST['rsaActivite'];
     $individu->retraitComp = $_POST['retraitComp'];
     $individu->pensionAlim = $_POST['pensionAlim'];
+    $individu->pensionInvalide = $_POST['pensionInvalide'];
     $individu->pensionRetraite = $_POST['pensionRetraite'];
+    $individu->ijss = $_POST['ijss'];
     $individu->autreRevenu = $_POST['autreRevenu'];
     $individu->natureAutre = $_POST['natureAutre'];
     $individu->dateCreation = time();

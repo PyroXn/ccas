@@ -288,16 +288,4 @@
 <page>
     <div id="titre" class="left"><u>Evalutation sociale :</u></div>
     <div class="verylarge largeur"><?php echo $evaluation; ?></div>
-    <table>
-        <tr>
-            <th width="100">DATE</th>
-            <th width="340">AIDES ET ORGANISMES SOLLICITES</th>
-            <th width="300">DECISIONS ET MONTANTS</th>
-        </tr>
-        <tr>
-            <td class="verylarge"></td>
-            <td class="verylarge"></td>
-            <td class="verylarge"></td>
-        </tr>
-    </table>
 </page>

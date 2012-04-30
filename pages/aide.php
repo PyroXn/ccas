@@ -607,6 +607,10 @@ function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $monta
             createHistorique(Historique::$Creation, BonAide::$BonAideLibelle, $_SESSION['userId'], $bon->aideInterne->individu->id);
             creationPDFBonInterne($bon);
             break;
+        case BonAide::$BonAideUrgence:
+            createHistorique(Historique::$Creation, BonAide::$BonAideUrgenceLibelle, $_SESSION['userId'], $bon->aideInterne->individu->id);
+            creationPDFBonInterne($bon);
+            break;
         case BonAide::$MandatSecoursUrgence:
             createHistorique(Historique::$Creation, BonAide::$MandatSecoursUrgenceLibelle, $_SESSION['userId'], $bon->aideInterne->individu->id);
             createPDFMandat($bon);

@@ -342,7 +342,7 @@ function situationFinanciere($idFoyer) {
         $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($individu->id);
         if(isset($ressource->id)) {
             $arrayRessource = array($ressource->salaire, $ressource->chomage, $ressource->revenuAlloc, $ressource->ass, $ressource->aah, $ressource->rsaSocle,
-                                            $ressource->rsaActivite, $ressource->pensionAlim, $ressource->pensionRetraite, $ressource->retraitComp, $ressource->autreRevenu, $ressource->aideLogement);
+                                            $ressource->rsaActivite, $ressource->pensionAlim, $ressource->pensionRetraite, $ressource->pensionInvalide, $ressource->ijss, $ressource->retraitComp, $ressource->autreRevenu, $ressource->aideLogement);
             $totalRessource =  $totalRessource + array_sum($arrayRessource);
         }
         if(isset($depense->id)) {

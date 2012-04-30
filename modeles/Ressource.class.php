@@ -22,6 +22,8 @@ class Ressource extends Doctrine_Record {
         $this->hasColumn('idIndividu', 'integer', 10,array('default' => '0'));
         $this->hasColumn('aideLogement', 'float',null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('dateCreation', 'integer', 20,array('default' => '0'));
+        $this->hasColumn('ijss', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('pensionInvalide', 'float', null, array('type' => 'float', 'default' => 0));
     }
     
     public function setUp() {

@@ -703,6 +703,7 @@ $(function() {
             datastring += '&retraitComp='+$('#retraitComp').val()+'&pensionAlim='+$('#pensionAlim').val();
             datastring += '&pensionRetraite='+$('#pensionRetraite').val()+'&autreRevenu='+$('#autreRevenu').val();
             datastring += '&natureAutre='+$('#natureRevenu').val();
+            datastring += '&pensionInvalide='+$('#invalide').val()+'&ijss='+$('#ijss').val();
             $.ajax({
                 type: 'post',
                 data: datastring,
