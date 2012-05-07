@@ -112,42 +112,43 @@ function getDocumentIndividu() {
         $contenu .= '</tbody></table></div>';
 
         // BON AIDE
+        if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ACCES_DOC_REMIS)) {
+            $contenu .= '
+                <h3>Bon Alimentaire / Mandat</h3>
+                    <div class="bubble tableau_classique_wrapper">
+                        <table class="tableau_classique" cellpadding="0" cellspacing="0">
+                            <thead>
+                                <tr class="header">
+                                    <th>Nom document</th>
+                                    <th>Type fichier</th>
+                                    <th>Date derniére modification</th>
+                                    <th>Télécharger</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+            if (!empty($fichier['bon'])) {
+                foreach ($fichier['bon'] as $file) {
+                    $extension = pathinfo($dir_nom . '/' . $file, PATHINFO_EXTENSION);
 
-        $contenu .= '
-            <h3>Bon d\'aide / Mandat</h3>
-                <div class="bubble tableau_classique_wrapper">
-                    <table class="tableau_classique" cellpadding="0" cellspacing="0">
-                        <thead>
-                            <tr class="header">
-                                <th>Nom document</th>
-                                <th>Type fichier</th>
-                                <th>Date derniére modification</th>
-                                <th>Télécharger</th>
-                            </tr>
-                        </thead>
-                        <tbody>';
-        if (!empty($fichier['bon'])) {
-            foreach ($fichier['bon'] as $file) {
-                $extension = pathinfo($dir_nom . '/' . $file, PATHINFO_EXTENSION);
-
-                $contenu .= '<tr name="' . $file . '">';
-                $contenu .= '<td>' . basename($file) . '</td>
-                             <td>'.getNameExtension($extension).'</td>
-                             <td> ' . getDatebyTimestamp(filemtime($dir_nom . $file)) . '</td>
-                             <td>';
-                if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_TELECHARGER_DOC_IND)) {
-                    $contenu .= '<a href="' . $dir_nom . $file . '" target=_blank class="open_doc"></a>';
+                    $contenu .= '<tr name="' . $file . '">';
+                    $contenu .= '<td>' . basename($file) . '</td>
+                                 <td>'.getNameExtension($extension).'</td>
+                                 <td> ' . getDatebyTimestamp(filemtime($dir_nom . $file)) . '</td>
+                                 <td>';
+                    if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_TELECHARGER_DOC_IND)) {
+                        $contenu .= '<a href="' . $dir_nom . $file . '" target=_blank class="open_doc"></a>';
+                    }
+                    $contenu .= '</td>
+                                        </tr>';
                 }
-                $contenu .= '</td>
-                                    </tr>';
+            } else {
+                $contenu .= '<tr>
+                                 <td colspan=9 align=center>< Aucun bon d\'aide n\'a été crée pour cet individu > </td>
+                             </tr>';
             }
-        } else {
-            $contenu .= '<tr>
-                             <td colspan=9 align=center>< Aucun bon d\'aide n\'a été crée pour cet individu > </td>
-                         </tr>';
-        }
 
-        $contenu .= '</tbody></table></div>';
+            $contenu .= '</tbody></table></div>';
+        }
         // AUTRES DOCS
         $contenu .= '
             <h3>Autre Document ';

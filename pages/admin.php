@@ -310,19 +310,19 @@ function statistique() {
                            </thead>
                            <tbody name="groupe1">
                                <tr>
-                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbinscrit"> Nombre d\'inscrit</td>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbinscrit"> Nombre d\'inscrits</td>
                                </tr>
                                <tr>
-                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaide"> Nombre d\'aide demandée</td>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaide"> Nombre d\'aides demandées</td>
                                </tr>
                                <tr>
-                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaideurg"> Nombre d\'aide urgente demandée</td>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaideurg"> Nombre d\'aides urgentes demandées</td>
                                </tr>
                                <tr>
-                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaideext"> Nombre d\'aide externe</td>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="nbaideext"> Nombre d\'aides externes</td>
                                </tr>
                                <tr>
-                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="montant"> Montants accord&eacute;s</td>
+                                   <td class="ligne"><input type="radio" class="radio_stat" name="groupe1" value="montant"> Montants accordés</td>
                                </tr>
 
                            </tbody>

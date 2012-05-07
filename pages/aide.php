@@ -957,10 +957,10 @@ function pdfExist($chemin, $bon) {
         switch($bon->typeBon) {
             case BonAide::$BonAide:
             case bonAide::$BonAideUrgence:
-                if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$bon->id.'.pdf')) {
-                    return '<a name="'.$chemin.'/bonAide_'.$bon->id.'.pdf" href="'.$chemin.'/bonAide_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                if(is_dir($chemin) && file_exists($chemin.'/bonAlimentaire_'.$bon->id.'.pdf')) {
+                    return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" href="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
                 } else {
-                    return '<a name="'.$chemin.'/bonAide_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                    return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
                 }
                 break;
            case BonAide::$AutreMandat:
@@ -978,8 +978,8 @@ function pdfExist($chemin, $bon) {
             switch($bon->typeBon) {
                 case BonAide::$BonAide:
                 case bonAide::$BonAideUrgence:
-                    if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$bon->id.'.pdf')) {
-                        return '<a name="'.$chemin.'/bonAide_'.$bon->id.'.pdf" href="'.$chemin.'/bonAide_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a>';
+                    if(is_dir($chemin) && file_exists($chemin.'/bonAlimentaire_'.$bon->id.'.pdf')) {
+                        return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" href="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a>';
                     }
                     break;
                case BonAide::$AutreMandat:
