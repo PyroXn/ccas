@@ -573,7 +573,7 @@ legend {
     /*    position: absolute;*/
     height: 16px;
     width: 16px;
-    background: white url('./img/ajouter.png') no-repeat;
+    background: url('./img/ajouter.png') no-repeat;
     cursor: pointer;
     float: right;
 }
