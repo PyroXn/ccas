@@ -66,6 +66,7 @@ class Droit {
     public static $DROIT_AJOUT_DOC_IND = 0X10000000; // droit d'ajout de document liés à un individu
     public static $DROIT_TELECHARGER_DOC_IND = 0X20000000; // droit d'ajout de document liés à un individu
     public static $DROIT_ACCES_TAB_COM = 0X40000000; // droit d'accès au tableau de comission
+    public static $DROIT_ACCES_DOC_REMIS = 0X80000000; // droit d'accès aux docs remis
     
     public static function getStaticDesignation($i) {
         switch ($i) {
@@ -162,6 +163,9 @@ class Droit {
                 break;
             case 0X40000000:
                 return 'Droit d\'accès au tableau de comissions';
+                break;
+            case 0X80000000:
+                return 'Droit d\'accès aux documents remis';
                 break;
         }
     }

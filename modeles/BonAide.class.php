@@ -14,6 +14,7 @@ class BonAide extends Doctrine_Record {
         $this->hasColumn('montant', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('commentaire', 'string',250);
         $this->hasColumn('typeBon', 'integer', 1, array('notnull' => true, 'default' => '1'));
+        $this->hasColumn('docRemis', 'integer', 1, array('notnull' => true, 'default' => '0'));
     }
     
     public static $BonAide = 1;

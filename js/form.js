@@ -1245,6 +1245,24 @@ $(function() {
         });
            
     });
+    
+    $('.doc_remis').live("click", function() {
+        var idBon = $(this).attr('idBon');
+        var idAide = $(this).attr('idAide');
+        var datastring = 'idBon='+idBon+'&idAide='+idAide;
+        $.ajax ({
+            type: 'post',
+            data: datastring,
+            url: './index.php?p=docremis',
+            cache: false,
+            success: function(aide) {
+                $('#contenu').html(aide);
+            },
+            error: function(data) {
+                $('#contenu').html(data);
+            }
+        });
+    });
 });
 
 function relockAll(loc) {

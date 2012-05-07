@@ -510,6 +510,15 @@ legend {
     vertical-align: middle;
 }
 
+.doc_remis {
+    background: url('./img/check.png') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
 .creer {
     background: url('./img/creer.png') transparent no-repeat;
     width: 16px;

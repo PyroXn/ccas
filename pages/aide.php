@@ -354,7 +354,7 @@ function detailAideInterne() {
                                     <td> '.$bonAide->instruct->nom.'</td>                                
                                     <td> '.$bonAide->montant.'€</td>
                                     <td>'.$bonAide->commentaire.'</td>
-                                    <td>'.pdfExist($chemin, $bonAide->id, $bonAide->dateRemisePrevue, $bonAide->typeBon).'</td>
+                                    <td>'.pdfExist($chemin, $bonAide).'</td>
                         </tr>';
             $i++;
         }
@@ -952,26 +952,45 @@ function rapportExist($chemin, $idAide) { // $chemin == ./IdFoyer/IdIndividu
     }
 }
 
-function pdfExist($chemin, $idBon, $date, $typeBon) {
-    $date = date('d-m-Y', $date);
-    switch($typeBon) {
-        case BonAide::$BonAide:
-        case bonAide::$BonAideUrgence:
-            if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$idBon.'.pdf')) {
-                return '<a name="'.$chemin.'/bonAide_'.$idBon.'.pdf" href="'.$chemin.'/bonAide_'.$idBon.'.pdf" target="_blank" class="open_doc"></a>';
-            } else {
-                return '<a name="'.$chemin.'/bonAide_'.$idBon.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne creer"></a>';
+function pdfExist($chemin, $bon) {
+    if($bon->docRemis == 0) {
+        switch($bon->typeBon) {
+            case BonAide::$BonAide:
+            case bonAide::$BonAideUrgence:
+                if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$bon->id.'.pdf')) {
+                    return '<a name="'.$chemin.'/bonAide_'.$bon->id.'.pdf" href="'.$chemin.'/bonAide_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                } else {
+                    return '<a name="'.$chemin.'/bonAide_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                }
+                break;
+           case BonAide::$AutreMandat:
+           case BonAide::$MandatRSA:
+           case BonAide::$MandatSecoursUrgence:
+                if(is_dir($chemin) && file_exists($chemin.'/Mandat_'.$bon->id.'.pdf')) {
+                    return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" href="'.$chemin.'/Mandat_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                } else {
+                    return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                }
+                break;
+        }
+    } else {
+         if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ACCES_DOC_REMIS)) {
+            switch($bon->typeBon) {
+                case BonAide::$BonAide:
+                case bonAide::$BonAideUrgence:
+                    if(is_dir($chemin) && file_exists($chemin.'/bonAide_'.$bon->id.'.pdf')) {
+                        return '<a name="'.$chemin.'/bonAide_'.$bon->id.'.pdf" href="'.$chemin.'/bonAide_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a>';
+                    }
+                    break;
+               case BonAide::$AutreMandat:
+               case BonAide::$MandatRSA:
+               case BonAide::$MandatSecoursUrgence:
+                    if(is_dir($chemin) && file_exists($chemin.'/Mandat_'.$bon->id.'.pdf')) {
+                        return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" href="'.$chemin.'/Mandat_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a>';
+                    } 
+                    break;
             }
-            break;
-       case BonAide::$AutreMandat:
-       case BonAide::$MandatRSA:
-       case BonAide::$MandatSecoursUrgence:
-            if(is_dir($chemin) && file_exists($chemin.'/Mandat_'.$idBon.'.pdf')) {
-                return '<a name="'.$chemin.'/Mandat_'.$idBon.'.pdf" href="'.$chemin.'/Mandat_'.$idBon.'.pdf" target="_blank" class="open_doc"></a>';
-            } else {
-                return '<a name="'.$chemin.'/Mandat_'.$idBon.'.pdf" idBon="'.$idBon.'" typeBon="'.$typeBon.'" class="create_bon_interne creer"></a>';
-            }
-            break;
+         }
     }
     
 }
@@ -1093,5 +1112,20 @@ function cancelRapport() {
     include_once('./pages/aide.php');
     $aide = aide();
     echo $aide;
+}
+
+function docRemisBouton($idBon, $idAide) {
+    return '<a id="bonRemis" idBon="'.$idBon.'" idAide="'.$idAide.'" class="doc_remis"></a>';
+}
+
+function docRemis() {
+    $idBon = $_POST['idBon'];
+    $bon =  Doctrine_Core::getTable('bonaide')->find($idBon);
+    $bon->docRemis = 1;
+    $bon->save();
+    
+    $pageaide = detailAideInterne();
+    echo $pageaide;
+    
 }
 ?>

@@ -224,6 +224,10 @@ switch (@$_GET['p']) {
         include_once('./pages/aide.php');
         cancelRapport();
         break;
+    case 'docremis':
+        include_once('./pages/aide.php');
+        docRemis();
+        break;
     default:
         home();
         break;
@@ -266,7 +270,7 @@ function home() {
                 </div>
                 <div id="contenu_wrapper">
                     <div id="contenu">
-                        '.accueilContenu().'
+                       '.accueilContenu().'
                     </div>
                 </div>
                 ';
