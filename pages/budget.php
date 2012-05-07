@@ -236,12 +236,20 @@ function afficherDepenses($depense) {
                         <span class="attribut">Télévision : </span>
                         <span><input class="contour_field input_num" type="text" id="television" value="'.$depense->television.'" disabled/></span>
                     </div>
+                     <div class="colonne_num">
+                        <span class="attribut">Assurance Voiture : </span>
+                        <span><input class="contour_field input_num" type="text" id="assuranceVoiture" value="'.$depense->assuranceVoiture.'" disabled/></span>
+                    </div>
+                </li>
+                <li class="ligne_list_classique">
+                    <div class="colonne_num">
+                        <span class="attribut">Assurance Habitation : </span>
+                        <span><input class="contour_field input_num" type="text" id="assuranceHabitation" value="'.$depense->assuranceHabitation.'" disabled/></span>
+                    </div>
                     <div class="colonne_num">
                         <span class="attribut">Autres Dépenses : </span>
                         <span><input class="contour_field input_num" type="text" id="autreDepense" value="'.$depense->autreDepense.'" disabled/></span>
                     </div>
-                </li>
-                <li class="ligne_list_classique">
                     <div class="colonne_large">
                         <span class="attribut">Détail : </span>
                         <span><textarea class="contour_field  input_char" type="text" id="natureDepense" disabled>'.$depense->natureDepense.'</textarea></span>
@@ -491,6 +499,8 @@ function updateDepense() {
     $individu->television = $_POST['television'];
     $individu->autreDepense = $_POST['autreDepense'];
     $individu->natureDepense = $_POST['natureDepense'];
+    $individu->assuranceVoiture = $_POST['assuranceVoiture'];
+    $individu->assuranceHabitation = $_POST['assuranceHabitation'];
     $individu->dateCreation = time();
     $individu->save();
     

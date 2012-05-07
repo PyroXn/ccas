@@ -1005,6 +1005,10 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
     $totalCredit = 0;
     $nbEnfant = 0; 
     $salaireConjoint = 0;
+    $totalDette = 0;
+    if($dette != null) {
+            $totalDette = array_sum(array($dette->arriereLocatif, $dette->fraisHuissier, $dette->arriereElectricite, $dette->arriereGaz, $dette->autreDette));
+    }
     if($credit != null) {
         foreach($credit as $c) {
             $totalCredit += $c->mensualite;

@@ -348,7 +348,7 @@ function situationFinanciere($idFoyer) {
         if(isset($depense->id)) {
             $arrayDepense = array($depense->impotRevenu, $depense->impotLocaux, $depense->pensionAlim, $depense->mutuelle, $depense->electricite, $depense->gaz,
                                             $depense->eau, $depense->chauffage, $depense->telephonie, $depense->internet, $depense->television, $depense->assurance, $depense->credit,
-                                            $depense->autreDepense, $depense->loyer);
+                                            $depense->autreDepense, $depense->loyer, $depense->assuranceVoiture, $depense->assuranceHabitation);
             $totalDepense = $totalDepense + array_sum($arrayDepense);
         }
         if(isset($dette->id)) {

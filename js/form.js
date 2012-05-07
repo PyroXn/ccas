@@ -726,6 +726,7 @@ $(function() {
             datastring += '&chauffage='+$('#chauffage').val()+'&telephonie='+$('#telephonie').val();
             datastring += '&internet='+$('#internet').val()+'&television='+$('#television').val();
             datastring += '&autreDepense='+$('#autreDepense').val()+'&natureDepense='+$('#natureDepense').val();
+            datastring += '&assuranceVoiture='+$('#assuranceVoiture').val()+'&assuranceHabitation='+$('#assuranceHabitation').val();
             $.ajax({
                 type: 'post',
                 data: datastring,
