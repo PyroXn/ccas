@@ -288,9 +288,7 @@ function getDocument() {
     if (isset($fichier)) {
         usort($fichier, 'sortDoc');
     }
-    $contenu = '<script type="text/javascript">
-                                $(".addElem").tipsy();
-                            </script>';
+    $contenu = '';
     $contenu .= '
             <h3>Documents Types';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_AJOUT_DOCUMENT)) {

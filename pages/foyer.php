@@ -293,10 +293,7 @@ $retour .= '
 }
 
 function generateLigneMembreFoyer($individu) {
-    $retour = '<script type="text/javascript">
-                        $(".delete_individu").tipsy();
-                        </script>';
-    $retour .= '
+    $retour = '
         <li class="ligne_list_classique" id_foyer='.$individu->idFoyer.' id_individu='.$individu->id.'>
             <div>
                 <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>

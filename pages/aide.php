@@ -13,12 +13,7 @@ function aideInterne() {
     $allinstructs =  Doctrine_Core::getTable('instruct')->findAll();
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $contenu = '<script type="text/javascript">
-                            $(".edit_aide_interne").tipsy();
-                            $(".open_doc").tipsy();
-                            $(".create_rapport_social").tipsy();
-                            $(".delete_aide").tipsy();
-                            </script>';
+    $contenu = '';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_AIDE_INTERNE)) {
         $contenu .= '
             <div id="createAideInterne" class="bouton ajout" style="margin-right: 20px;">
@@ -671,9 +666,7 @@ function aideExterne() {
     $instructs =  Doctrine_Core::getTable('instruct')->findByInterne(1);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $distributeurs = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(3);
-    $contenu = '<script type="text/javascript">
-                        $(".edit_aide_externe").tipsy();
-                        </script>';
+    $contenu = '';
     $contenu .= '
         <h3>Aides Externes :</h3>
             <div class="bubble tableau_classique_wrapper">

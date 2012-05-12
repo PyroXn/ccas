@@ -238,4 +238,11 @@
 		}
 	};
     $('.add').tipsy();
+    $('.delete_individu').tipsy({live: true});
+    $(".edit_aide_interne").tipsy({live: true});
+    $(".open_doc").tipsy({live: true});
+    $(".create_rapport_social").tipsy({live: true});
+    $(".delete_aide").tipsy({live: true});
+    $(".edit_aide_externe").tipsy({live: true});
+    $(".addElem").tipsy({live: true});
 })(jQuery);
