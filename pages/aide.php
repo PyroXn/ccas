@@ -13,7 +13,12 @@ function aideInterne() {
     $allinstructs =  Doctrine_Core::getTable('instruct')->findAll();
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $contenu = '';
+    $contenu = '<script type="text/javascript">
+                            $(".edit_aide_interne").tipsy();
+                            $(".open_doc").tipsy();
+                            $(".create_rapport_social").tipsy();
+                            $(".delete_aide").tipsy();
+                            </script>';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_AIDE_INTERNE)) {
         $contenu .= '
             <div id="createAideInterne" class="bouton ajout" style="margin-right: 20px;">
@@ -42,8 +47,7 @@ function aideInterne() {
                             <th>Montant</th>
                             <th>Date décision</th>
                             <th>Vigilance</th>
-                            <th>Détails</th>
-                            <th>Rapport Social</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -68,8 +72,7 @@ function aideInterne() {
                                     } else {
                                         $contenu .= '<td></td>';
                                     }
-                                    $contenu .= '<td><span class="edit_aide_interne"></span></td>
-                                    <td>'.rapportExist($chemin, $aideInterne->id).'</td>
+                                    $contenu .= '<td><span class="edit_aide_interne" original-title="Afficher toutes les informations"></span> '.rapportExist($chemin, $aideInterne->id).' <span class="delete_aide" original-title="Supprimer l\'aide"></span></td>
                                     
                         </tr>';
         }
@@ -668,7 +671,10 @@ function aideExterne() {
     $instructs =  Doctrine_Core::getTable('instruct')->findByInterne(1);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $distributeurs = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(3);
-    $contenu = '
+    $contenu = '<script type="text/javascript">
+                        $(".edit_aide_externe").tipsy();
+                        </script>';
+    $contenu .= '
         <h3>Aides Externes :</h3>
             <div class="bubble tableau_classique_wrapper">
                 <table class="tableau_classique" cellpadding="0" cellspacing="0">
@@ -698,7 +704,7 @@ function aideExterne() {
                                     <td> '.$aideExterne->avis.'</td>
                                     <td> '.$aideExterne->montantPercu.' €</td>
                                     <td> '.getDatebyTimestamp($aideExterne->dateDecision).'</td>
-                                    <td><span class="edit_aide_externe"></span></td>
+                                    <td><span class="edit_aide_externe" original-title="Afficher toutes les informations"></span></td>
                         </tr>';
             $i++;
         }
@@ -946,9 +952,9 @@ function detailAideExterne() {
 
 function rapportExist($chemin, $idAide) { // $chemin == ./IdFoyer/IdIndividu
     if(is_dir($chemin) && file_exists($chemin.'/RapportSocial_'.$idAide.'.pdf')) {
-        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank" class="open_doc"></a>';
+        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank" class="open_doc" original-title="Ouvrir le rapport social"></a>';
     } else {
-        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" idAide="'.$idAide.'" class="create_rapport_social creer"></a>';
+        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" idAide="'.$idAide.'" class="create_rapport_social creer" original-title="Créer le rapport social"></a>';
     }
 }
 
@@ -1127,5 +1133,13 @@ function docRemis() {
     $pageaide = detailAideInterne();
     echo $pageaide;
     
+}
+
+function deleteAide() {
+    $idAide = $_POST['idAide'];
+    $aide = Doctrine_Core::getTable('aideinterne')->find($idAide);
+    $aide->delete();
+    $aide = aide();
+    echo $aide;  
 }
 ?>

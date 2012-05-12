@@ -288,10 +288,13 @@ function getDocument() {
     if (isset($fichier)) {
         usort($fichier, 'sortDoc');
     }
-    $contenu = '
+    $contenu = '<script type="text/javascript">
+                                $(".addElem").tipsy();
+                            </script>';
+    $contenu .= '
             <h3>Documents Types';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_AJOUT_DOCUMENT)) {
-        $contenu .= '<span class="addElem" role="ajout_doc_type"></span>';
+        $contenu .= '<span class="addElem" role="ajout_doc_type" original-title="Ajouter un document type"></span>';
     }
         $contenu .= '</h3>
                 <div class="bubble tableau_classique_wrapper">

@@ -6,7 +6,10 @@ function budget() {
     $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
     $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
     $credits = Doctrine_Core::getTable('credit')->findByIdIndividu($_POST['idIndividu']);
-    $contenu = '';
+    $contenu = '<script type=\'text/javascript\'>
+                                $(".archive").tipsy();
+                                $(".addElem").tipsy();
+                            </script>';
     $contenu .= afficherRessources($ressource);
     $contenu .= afficherDepenses($depense);
     $contenu .= '          
@@ -100,7 +103,7 @@ function afficherRessources($ressource) {
         $retour .= '<span class="edit"></span>';
     }
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ARCHIVER_BUDGET)) {
-        $retour .= '<span class="archive"></span> ';
+        $retour .= '<span class="archive" original-title="Archiver les ressources"></span> ';
     }
     $retour .= '<span class="timemaj">'.getDatebyTimestamp($ressource->dateCreation).'</span></h3>';
     $retour .= '<ul class="list_classique">
@@ -185,7 +188,7 @@ function afficherDepenses($depense) {
         $retour .= '<span class="edit"></span>';
     }
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ARCHIVER_BUDGET)) {
-        $retour .= '<span class="archive"></span> ';
+        $retour .= '<span class="archive" original-title="Archiver les dépenses"></span> ';
     }
     $retour .= '<span class="timemaj">'.getDatebyTimestamp($depense->dateCreation).'</span></h3>
             <ul class="list_classique">
@@ -273,7 +276,7 @@ function afficherDettes($dette) {
         $retour .= '<span class="edit"></span>';
     }
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ARCHIVER_BUDGET)) {
-        $retour .= '<span class="archive"></span> ';
+        $retour .= '<span class="archive" original-title="Archiver les dettes"></span> ';
     }
     $retour .= '<span class="timemaj">'.getDatebyTimestamp($dette->dateCreation).'</span></h3>
                 <ul class="list_classique">
@@ -330,7 +333,7 @@ function afficherCredits($credits) {
         <div class="colonne_large">
             <h3>Crédits ';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_BUDGET)) {
-        $retour .= '<span class="addElem"  id="createCredit" role="creation_credit"></span>';
+        $retour .= '<span class="addElem"  id="createCredit" role="creation_credit" original-title="Ajouter un crédit"></span>';
     }
     $retour .= '</h3>
             <div class="bubble tableau_classique_wrapper">

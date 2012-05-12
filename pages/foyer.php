@@ -293,14 +293,17 @@ $retour .= '
 }
 
 function generateLigneMembreFoyer($individu) {
-    $retour = '
+    $retour = '<script type="text/javascript">
+                        $(".delete_individu").tipsy();
+                        </script>';
+    $retour .= '
         <li class="ligne_list_classique" id_foyer='.$individu->idFoyer.' id_individu='.$individu->id.'>
             <div>
                 <span class="label">' . $individu->nom . ' ' . $individu->prenom .'</span>
                 <span class="date_naissance">'. date('d/m/Y', $individu->dateNaissance) .'</span>
                 <span class="date_naissance">'. $individu->lienfamille->lien .'</span>';
                 if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_INDIVIDU)) {
-                    $retour .= '<span class="delete_individu droite"></span>';
+                    $retour .= '<span class="delete_individu droite" original-title="Supprimer l\'individu"></span>';
                 }
                 $retour .= '<span class="droite"> Chef de famille ';
                 

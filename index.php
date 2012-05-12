@@ -228,6 +228,10 @@ switch (@$_GET['p']) {
         include_once('./pages/aide.php');
         docRemis();
         break;
+    case 'deleteaide':
+        include_once('./pages/aide.php');
+        deleteAide();
+        break;
     default:
         home();
         break;

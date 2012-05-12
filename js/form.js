@@ -1263,6 +1263,24 @@ $(function() {
             }
         });
     });
+    
+    $('.delete_aide').live("click", function() {
+        var idAide = $(this).parent().parent().attr('name');
+        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
+        datastring = 'idAide='+idAide+'&idIndividu='+idIndividu;
+         $.ajax ({
+            type: 'post',
+            data: datastring,
+            url: './index.php?p=deleteaide',
+            cache: false,
+            success: function(aide) {
+                $('#contenu').html(aide);
+            },
+            error: function(data) {
+                $('#contenu').html(data);
+            }
+        });
+    });
 });
 
 function relockAll(loc) {
