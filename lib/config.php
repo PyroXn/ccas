@@ -42,6 +42,9 @@ function isAuthorized($level) {
  * return vrai si == null, 0 ou ''
  */
 function verifieValeurNull($val) {
+    if (is_string($val)) {
+        return $val == null || $val == '';
+    }
     return $val == null || $val == '' || $val == 0;
 }
 
