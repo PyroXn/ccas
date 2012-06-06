@@ -642,7 +642,7 @@ $(function() {
                     cache: false,
                     success: function(retour) {
                         $('#dialogTab').html(retour);
-                        $('#iPDF').dialog({ position: ['center',100], width: 500, height: 500 });
+                        $('#iPDF').dialog({position: ['center',100], width: 500, height: 500});
                     },
                     error: function(data) {
                         $("#contenu").html(data.responseText);
@@ -664,7 +664,7 @@ $(function() {
                     cache: false,
                     success: function(retour) {
                         $('#dialogTab').html(retour);
-                        $('#iPDF').dialog({ position: ['center',100], width: 500, height: 500 });
+                        $('#iPDF').dialog({position: ['center',100], width: 500, height: 500});
                     },
                     error: function(data) {
                         $("#contenu").html(data.responseText);
@@ -700,7 +700,7 @@ $(function() {
             datastring += '&chomage='+$('#chomage').val()+'&revenuAlloc='+$('#revenuAlloc').val();
             datastring += '&ass='+$('#ass').val()+'&aah='+$('#aah').val();
             datastring += '&rsaSocle='+$('#rsaSocle').val()+'&rsaActivite='+$('#rsaActivite').val();
-            datastring += '&retraitComp='+$('#retraitComp').val()+'&pensionAlim='+$('#pensionAlim').val();
+            datastring += '&retraitComp='+$('#retraitComp').val()+'&pensionAlim='+$('#pensionAlimRessource').val();
             datastring += '&pensionRetraite='+$('#pensionRetraite').val()+'&autreRevenu='+$('#autreRevenu').val();
             datastring += '&natureAutre='+$('#natureRevenu').val();
             datastring += '&pensionInvalide='+$('#invalide').val()+'&ijss='+$('#ijss').val();
@@ -719,8 +719,9 @@ $(function() {
                 }
             });
         } else if(value == 'updateDepense') {
+            console.log($('#pensionAlimDepense').val());
             datastring = 'idIndividu='+idIndividu+'&impotRevenu='+$('#impotRevenu').val();
-            datastring += '&impotLocaux='+$('#impotLocaux').val()+'&pensionAlim='+$('#pensionAlim').val();
+            datastring += '&impotLocaux='+$('#impotLocaux').val()+'&pensionAlim='+$('#pensionAlimDepense').val();
             datastring += '&mutuelle='+$('#mutuelle').val()+'&electricite='+$('#electricite').val();
             datastring += '&gaz='+$('#gaz').val()+'&eau='+$('#eau').val();
             datastring += '&chauffage='+$('#chauffage').val()+'&telephonie='+$('#telephonie').val();

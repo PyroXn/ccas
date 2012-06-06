@@ -145,7 +145,7 @@ function afficherRessources($ressource) {
                         </div>
                         <div class="colonne_num">
                             <span class="attribut">P. alimentaire : </span>
-                            <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$ressource->pensionAlim.'" disabled/></span>
+                            <span><input class="contour_field input_num" type="text" id="pensionAlimRessource" value="'.$ressource->pensionAlim.'" disabled/></span>
                         </div>
                         <div class="colonne_num">
                             <span class="attribut">P. de retraite : </span>
@@ -203,7 +203,7 @@ function afficherDepenses($depense) {
                     </div>
                     <div class="colonne_num">
                         <span class="attribut">P. alimentaire :</span>
-                        <span><input class="contour_field input_num" type="text" id="pensionAlim" value="'.$depense->pensionAlim.'" disabled/></span>
+                        <span><input class="contour_field input_num" type="text" id="pensionAlimDepense" value="'.$depense->pensionAlim.'" disabled/></span>
                     </div>
                     <div class="colonne_num">
                         <span class="attribut">Mutuelle : </span>
