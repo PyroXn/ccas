@@ -18,7 +18,7 @@ class BonAide extends Doctrine_Record {
     }
     
     public static $BonAide = 1;
-    public static $BonAideLibelle = 'BON ALIMENTAIRE COMISSION';
+    public static $BonAideLibelle = 'BON ALIMENTAIRE COMMISSION';
     public static $MandatSecoursUrgence = 2;
     public static $MandatSecoursUrgenceLibelle = 'SECOURS EN URGENCE';
     public static $AutreMandat = 3;
