@@ -32,6 +32,7 @@ $(function() {
     $('.checkboxPermission').live("click", function(){
         $(this).toggleClass('checkbox_active');
         var datastring = 'droit=' + $(this).attr('droit') + '&idRole=' + $(this).attr('idRole');
+        console.log(datastring);
         if ($(this).hasClass('checkbox_active')) {
             $.ajax({
                 type: 'post',
