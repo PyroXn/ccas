@@ -35,18 +35,23 @@
         
         <?php 
             foreach ($result as $ligne) {
-                echo '<tr>
+                $retour = '<tr>
                           <td>'.$ligne["nom"].' '.$ligne["prenom"].'<br/>
                               '.$ligne["numrue"].' '.$ligne["rue"].'
                           </td>
                           <td>'.$ligne["aidedemandee"].'
                           </td>
                           <td  width="300">'.$ligne["proposition"].'
-                          </td>
-                          <td width="300"><b>Avis:</b> '.$ligne["avis"].'<br/><b>Quantité:</b> '.$ligne["quantite"].'<br/><b>Montant total:</b> '.$ligne["montant_total"].' €
+                          </td>';
+                if ($withDecission == 1) {
+                          $retour .= '<td width="300"><b>Avis:</b> '.$ligne["avis"].'<br/><b>Quantité:</b> '.$ligne["quantite"].'<br/><b>Montant total:</b> '.$ligne["montant_total"].' €
                               <br/><b>Commentaires:</b> '.$ligne["commentaire"].'
-                          </td>
-                      </tr>';
+                          </td>';
+                } else {
+                    $retour .= '<td></td>';
+                }
+                $retour .= '</tr>';
+                echo $retour;
             };
         ?>
     </table>

@@ -519,7 +519,7 @@ $(function() {
                         datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
                         datastring += '&nature='+$('#nature').attr('value')+'&proposition='+$('#proposition').val();
                         datastring += '&etat='+$('#etat').attr('value')+'&orga='+$('#orga').attr('value')+'&urgence='+urgence;
-                        console.log(datastring);
+                        console.log("DATE :" + $('#date').val());
                         break;
                     case 'creation_aide_externe':
                         var urgence = 0;

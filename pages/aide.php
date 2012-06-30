@@ -95,7 +95,7 @@ function aideInterne() {
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
-                <input id="date" class="contour_field input_date requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                <input id="date" class="contour_field input_date requis" type="text" title="Date" placeholder="Date de la demande d\'aide">
             </div>
             <div class="select classique" role="select_nature_interne">
                 <div id="nature" class="option requis">Nature</div>
@@ -491,7 +491,7 @@ function createAideInterne($typeAide, $date, $instruct, $nature, $proposition, $
     $aide = new AideInterne();
     if($date != 0) {
         $date1 = explode('/', $date);
-        $aide->dateDemande = mktime(0, 0, 0, $date[1], $date1[0], $date1[2]);
+        $aide->dateDemande = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
     } else {
         $aide->dateDemande = 0;
     }
