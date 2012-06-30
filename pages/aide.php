@@ -294,7 +294,7 @@ function detailAideInterne() {
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Commentaire : </h2>
-                                    <div class="aff"><textarea class="contour_field" id="commentaire">'.$aideInterne->commentaire.'</textarea></div>
+                                    <div class="aff"><textarea class="contour_field input_char" id="commentaire">'.$aideInterne->commentaire.'</textarea></div>
                                 </div>
                             <div>
                          </li>
