@@ -4,7 +4,7 @@ function action() {
     include_once('./lib/config.php');
     $actions = Doctrine_Core::getTable('action')->findByIdIndividu($_POST['idIndividu']);
     $types = Doctrine_Core::getTable('type')->findByidlibelletype(2); // Type Action
-    $instructs = Doctrine_Core::getTable('instruct')->findByInterne(1); // Instruct interne
+    $instructs = Doctrine_Core::getTable('instruct')->findByInterneAndActif(1, 1); // Instruct interne
     $contenu = '';
         if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_ACTION)) {
         $contenu .= '

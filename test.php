@@ -1,8 +1,11 @@
 <?php
-//include_once('./lib/config.php');
-include_once('./lib/PDF/generateTabCommission.php');
-
-
+include_once('./lib/config.php');
+//include_once('./lib/PDF/generateTabCommission.php');
+$instructs = Doctrine_Core::getTable('instruct')->findByInterneAndActif(1, 1); // Instruct interne
+foreach($instructs as $instruct) {
+        echo $instruct->nom;
+    }
+    
 //    $retour = '';
 //    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accept�'));
 //    foreach($aides as $aide) {

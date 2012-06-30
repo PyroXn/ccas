@@ -10,7 +10,7 @@ function aideInterne() {
     $organismes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(5);
     $natures = Doctrine_Core::getTable('type')->findByidlibelletype(5);
     $typesaides = Doctrine_Core::getTable('type')->findByidlibelletype(1);
-    $allinstructs =  Doctrine_Core::getTable('instruct')->findAll();
+    $allinstructs =  Doctrine_Core::getTable('instruct')->findByActifAndInterne(1, 1);
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $contenu = '';
@@ -663,7 +663,7 @@ function aideExterne() {
     $organismesExternes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(6);
     $naturesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(6);
     $typesAidesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(7);
-    $instructs =  Doctrine_Core::getTable('instruct')->findByInterne(1);
+    $instructs =  Doctrine_Core::getTable('instruct')->findByActif(1);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $distributeurs = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(3);
     $contenu = '';
