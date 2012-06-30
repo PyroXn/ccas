@@ -957,18 +957,18 @@ function pdfExist($chemin, $bon) {
             case BonAide::$BonAide:
             case bonAide::$BonAideUrgence:
                 if(is_dir($chemin) && file_exists($chemin.'/bonAlimentaire_'.$bon->id.'.pdf')) {
-                    return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" href="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                    return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" href="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" target="_blank" class="open_doc" original-title="Ouvrir le document"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
                 } else {
-                    return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                    return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer" original-title="Ouvrir le document"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
                 }
                 break;
            case BonAide::$AutreMandat:
            case BonAide::$MandatRSA:
            case BonAide::$MandatSecoursUrgence:
                 if(is_dir($chemin) && file_exists($chemin.'/Mandat_'.$bon->id.'.pdf')) {
-                    return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" href="'.$chemin.'/Mandat_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                    return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" href="'.$chemin.'/Mandat_'.$bon->id.'.pdf" target="_blank" class="open_doc" original-title="Ouvrir le document"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
                 } else {
-                    return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                    return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer" original-title="Ouvrir le document"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
                 }
                 break;
         }
@@ -1114,7 +1114,7 @@ function cancelRapport() {
 }
 
 function docRemisBouton($idBon, $idAide) {
-    return '<a id="bonRemis" idBon="'.$idBon.'" idAide="'.$idAide.'" class="doc_remis"></a>';
+    return '<a id="bonRemis" idBon="'.$idBon.'" idAide="'.$idAide.'" class="doc_remis" original-title="Ce document a été remis"></a>';
 }
 
 function docRemis() {

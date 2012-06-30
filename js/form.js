@@ -992,6 +992,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function(data) {
+                    $(".tipsy").remove();
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
                     $("#list_individu").html(data.listeIndividu);
@@ -1215,7 +1216,7 @@ $(function() {
             cache: false,
             success: function() {
                 console.log("succes");
-                
+                $(".tipsy").remove();
                 loc.attr('href', name);
                 loc.attr('target','_blank');
                 loc.attr('class', 'open_doc')
@@ -1238,6 +1239,7 @@ $(function() {
             url: './index.php?p=rapportsocial',
             cache: false,
             success: function(retour) {
+                $(".tipsy").remove();
                 $('#contenu').html(retour);
             },
             error: function(data) {
@@ -1257,6 +1259,7 @@ $(function() {
             url: './index.php?p=docremis',
             cache: false,
             success: function(aide) {
+                $(".tipsy").remove();
                 $('#contenu').html(aide);
             },
             error: function(data) {
@@ -1275,6 +1278,7 @@ $(function() {
             url: './index.php?p=deleteaide',
             cache: false,
             success: function(aide) {
+                $(".tipsy").remove();
                 $('#contenu').html(aide);
             },
             error: function(data) {
