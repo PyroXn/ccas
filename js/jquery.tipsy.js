@@ -245,4 +245,6 @@
     $(".delete_aide").tipsy({live: true});
     $(".edit_aide_externe").tipsy({live: true});
     $(".addElem").tipsy({live: true});
+    $("#bonRemis").tipsy({live: true});
+    $(".create_bon_interne").tipsy({live: true});
 })(jQuery);
