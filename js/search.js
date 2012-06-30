@@ -152,7 +152,9 @@ $(function() {
             cache: false,
             success: function(html)
             {
+                $(".tipsy").remove();
                 $("#contenu").html(html);
+                
             },
             error: function(html) {
                 $("#contenu").html(html.responseText);
@@ -169,6 +171,7 @@ $(function() {
             cache: false,
             success: function(html)
             {
+                $(".tipsy").remove();
                 $("#contenu").html(html);
             },
             error: function(html) {

@@ -519,7 +519,7 @@ $(function() {
                         datastring += '&date='+$('#date').val()+'&instruct='+$('#instruct').attr('value');
                         datastring += '&nature='+$('#nature').attr('value')+'&proposition='+$('#proposition').val();
                         datastring += '&etat='+$('#etat').attr('value')+'&orga='+$('#orga').attr('value')+'&urgence='+urgence;
-                        console.log(datastring);
+                        console.log("DATE :" + $('#date').val());
                         break;
                     case 'creation_aide_externe':
                         var urgence = 0;
@@ -642,7 +642,7 @@ $(function() {
                     cache: false,
                     success: function(retour) {
                         $('#dialogTab').html(retour);
-                        $('#iPDF').dialog({ position: ['center',100], width: 500, height: 500 });
+                        $('#iPDF').dialog({position: ['center',100], width: 500, height: 500});
                     },
                     error: function(data) {
                         $("#contenu").html(data.responseText);
@@ -664,7 +664,7 @@ $(function() {
                     cache: false,
                     success: function(retour) {
                         $('#dialogTab').html(retour);
-                        $('#iPDF').dialog({ position: ['center',100], width: 500, height: 500 });
+                        $('#iPDF').dialog({position: ['center',100], width: 500, height: 500});
                     },
                     error: function(data) {
                         $("#contenu").html(data.responseText);
@@ -700,7 +700,7 @@ $(function() {
             datastring += '&chomage='+$('#chomage').val()+'&revenuAlloc='+$('#revenuAlloc').val();
             datastring += '&ass='+$('#ass').val()+'&aah='+$('#aah').val();
             datastring += '&rsaSocle='+$('#rsaSocle').val()+'&rsaActivite='+$('#rsaActivite').val();
-            datastring += '&retraitComp='+$('#retraitComp').val()+'&pensionAlim='+$('#pensionAlim').val();
+            datastring += '&retraitComp='+$('#retraitComp').val()+'&pensionAlim='+$('#pensionAlimRessource').val();
             datastring += '&pensionRetraite='+$('#pensionRetraite').val()+'&autreRevenu='+$('#autreRevenu').val();
             datastring += '&natureAutre='+$('#natureRevenu').val();
             datastring += '&pensionInvalide='+$('#invalide').val()+'&ijss='+$('#ijss').val();
@@ -719,8 +719,9 @@ $(function() {
                 }
             });
         } else if(value == 'updateDepense') {
+            console.log($('#pensionAlimDepense').val());
             datastring = 'idIndividu='+idIndividu+'&impotRevenu='+$('#impotRevenu').val();
-            datastring += '&impotLocaux='+$('#impotLocaux').val()+'&pensionAlim='+$('#pensionAlim').val();
+            datastring += '&impotLocaux='+$('#impotLocaux').val()+'&pensionAlim='+$('#pensionAlimDepense').val();
             datastring += '&mutuelle='+$('#mutuelle').val()+'&electricite='+$('#electricite').val();
             datastring += '&gaz='+$('#gaz').val()+'&eau='+$('#eau').val();
             datastring += '&chauffage='+$('#chauffage').val()+'&telephonie='+$('#telephonie').val();
@@ -991,6 +992,7 @@ $(function() {
                 cache: false,
                 //Succés de la requête
                 success: function(data) {
+                    $(".tipsy").remove();
                     $('#ecran_gris').toggle();
                     formActuel.toggle();
                     $("#list_individu").html(data.listeIndividu);
@@ -1214,7 +1216,7 @@ $(function() {
             cache: false,
             success: function() {
                 console.log("succes");
-                
+                $(".tipsy").remove();
                 loc.attr('href', name);
                 loc.attr('target','_blank');
                 loc.attr('class', 'open_doc')
@@ -1237,6 +1239,7 @@ $(function() {
             url: './index.php?p=rapportsocial',
             cache: false,
             success: function(retour) {
+                $(".tipsy").remove();
                 $('#contenu').html(retour);
             },
             error: function(data) {
@@ -1256,6 +1259,7 @@ $(function() {
             url: './index.php?p=docremis',
             cache: false,
             success: function(aide) {
+                $(".tipsy").remove();
                 $('#contenu').html(aide);
             },
             error: function(data) {
@@ -1274,6 +1278,7 @@ $(function() {
             url: './index.php?p=deleteaide',
             cache: false,
             success: function(aide) {
+                $(".tipsy").remove();
                 $('#contenu').html(aide);
             },
             error: function(data) {

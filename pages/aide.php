@@ -10,7 +10,7 @@ function aideInterne() {
     $organismes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(5);
     $natures = Doctrine_Core::getTable('type')->findByidlibelletype(5);
     $typesaides = Doctrine_Core::getTable('type')->findByidlibelletype(1);
-    $allinstructs =  Doctrine_Core::getTable('instruct')->findAll();
+    $allinstructs =  Doctrine_Core::getTable('instruct')->findByActifAndInterne(1, 1);
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $contenu = '';
@@ -95,7 +95,7 @@ function aideInterne() {
                 <div class="fleche_bas"> </div>
             </div>
             <div class="input_text">
-                <input id="date" class="contour_field input_date requis" type="text" title="Date" placeholder="Date - jj/mm/aaaa">
+                <input id="date" class="contour_field input_date requis" type="text" title="Date" placeholder="Date de la demande d\'aide">
             </div>
             <div class="select classique" role="select_nature_interne">
                 <div id="nature" class="option requis">Nature</div>
@@ -294,7 +294,7 @@ function detailAideInterne() {
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Commentaire : </h2>
-                                    <div class="aff"><textarea class="contour_field" id="commentaire">'.$aideInterne->commentaire.'</textarea></div>
+                                    <div class="aff"><textarea class="contour_field input_char" id="commentaire">'.$aideInterne->commentaire.'</textarea></div>
                                 </div>
                             <div>
                          </li>
@@ -491,7 +491,7 @@ function createAideInterne($typeAide, $date, $instruct, $nature, $proposition, $
     $aide = new AideInterne();
     if($date != 0) {
         $date1 = explode('/', $date);
-        $aide->dateDemande = mktime(0, 0, 0, $date[1], $date1[0], $date1[2]);
+        $aide->dateDemande = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
     } else {
         $aide->dateDemande = 0;
     }
@@ -663,7 +663,7 @@ function aideExterne() {
     $organismesExternes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(6);
     $naturesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(6);
     $typesAidesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(7);
-    $instructs =  Doctrine_Core::getTable('instruct')->findByInterne(1);
+    $instructs =  Doctrine_Core::getTable('instruct')->findByActif(1);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
     $distributeurs = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(3);
     $contenu = '';
@@ -957,18 +957,18 @@ function pdfExist($chemin, $bon) {
             case BonAide::$BonAide:
             case bonAide::$BonAideUrgence:
                 if(is_dir($chemin) && file_exists($chemin.'/bonAlimentaire_'.$bon->id.'.pdf')) {
-                    return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" href="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                    return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" href="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" target="_blank" class="open_doc" original-title="Ouvrir le document"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
                 } else {
-                    return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                    return '<a name="'.$chemin.'/bonAlimentaire_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer" original-title="Ouvrir le document"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
                 }
                 break;
            case BonAide::$AutreMandat:
            case BonAide::$MandatRSA:
            case BonAide::$MandatSecoursUrgence:
                 if(is_dir($chemin) && file_exists($chemin.'/Mandat_'.$bon->id.'.pdf')) {
-                    return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" href="'.$chemin.'/Mandat_'.$bon->id.'.pdf" target="_blank" class="open_doc"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                    return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" href="'.$chemin.'/Mandat_'.$bon->id.'.pdf" target="_blank" class="open_doc" original-title="Ouvrir le document"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
                 } else {
-                    return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
+                    return '<a name="'.$chemin.'/Mandat_'.$bon->id.'.pdf" idBon="'.$bon->id.'" typeBon="'.$bon->typeBon.'" class="create_bon_interne creer" original-title="Ouvrir le document"></a> - '.  docRemisBouton($bon->id, $bon->idAideInterne);
                 }
                 break;
         }
@@ -1114,7 +1114,7 @@ function cancelRapport() {
 }
 
 function docRemisBouton($idBon, $idAide) {
-    return '<a id="bonRemis" idBon="'.$idBon.'" idAide="'.$idAide.'" class="doc_remis"></a>';
+    return '<a id="bonRemis" idBon="'.$idBon.'" idAide="'.$idAide.'" class="doc_remis" original-title="Ce document a été remis"></a>';
 }
 
 function docRemis() {

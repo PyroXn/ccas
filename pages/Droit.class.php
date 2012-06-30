@@ -65,8 +65,8 @@ class Droit {
      */
     public static $DROIT_AJOUT_DOC_IND = 0X10000000; // droit d'ajout de document liés à un individu
     public static $DROIT_TELECHARGER_DOC_IND = 0X20000000; // droit d'ajout de document liés à un individu
-    public static $DROIT_ACCES_TAB_COM = 0X40000000; // droit d'accès au tableau de comission
-    public static $DROIT_ACCES_DOC_REMIS = 0X80000000; // droit d'accès aux docs remis
+    public static $DROIT_ACCES_TAB_COM = 0X40000000; // droit d'accès au tableau de commission
+    public static $DROIT_ACCES_DOC_REMIS = 0X800000; // droit d'accès aux docs remis
     
     public static function getStaticDesignation($i) {
         switch ($i) {
@@ -139,9 +139,9 @@ class Droit {
             case 0x400000:
                 return "Droit d'apporter une décision";
                 break;
-//            case 0x800000:
-//                return "Droit de modification d'une décision";
-//                break;
+            case 0X800000:
+                return 'Droit d\'accès aux documents remis';
+                break;
             case 0x1000000:
                 return "Droit de création d'un bon interne";
                 break;
@@ -151,7 +151,6 @@ class Droit {
             case 0x4000000:
                 return "Droit de modification d'une action";
                 break;
-            
             case 0x8000000:
                 return 'Droit d\'accès au graphique des actions par instructeur';
                 break;
@@ -162,10 +161,7 @@ class Droit {
                 return 'Droit de télécharger des documents liés aux individus';
                 break;
             case 0X40000000:
-                return 'Droit d\'accès au tableau de comissions';
-                break;
-            case 0X80000000:
-                return 'Droit d\'accès aux documents remis';
+                return 'Droit d\'accès au tableau de commissions';
                 break;
         }
     }

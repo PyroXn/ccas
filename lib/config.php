@@ -42,7 +42,8 @@ function isAuthorized($level) {
  * return vrai si == null, 0 ou ''
  */
 function verifieValeurNull($val) {
-    return $val == null || $val == '' || $val == 0;
+    $val = (string) $val;
+    return $val == null || $val == '' || $val == '0';
 }
 
 function getDatebyTimestampInput($timestamp) {
