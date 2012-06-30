@@ -78,7 +78,7 @@ function genererTabCommission() {
         echo '<div id="dialogTab">
               <iframe id="iPDF" width="100%" height="500" src="./PDFTabCommission2.pdf"></iframe>
               </div>';
-        
+            
     if($withDecission == "1") {
         $dateCommission = explode('/', $_POST['datecommission']);
         $req = 'SELECT i.id, i.nom, i.prenom, f.numrue, r.rue, t.libelle aidedemandee, ai.proposition, ai.avis, SUM(montant) montant_total, count(ba.id) quantite, ai.commentaire
@@ -86,11 +86,11 @@ function genererTabCommission() {
                 INNER JOIN foyer f on f.id = i.idfoyer
                 INNER JOIN rue r on r.id = f.idrue
                 INNER JOIN aideinterne ai on ai.idindividu = i.id
-                INNER JOIN type t on t.libelle = ai.idaidedemandee
-                INNER JOIN bonaide ba on ba.idaideinterne = ai.id
+                INNER JOIN type t on t.id = ai.idaidedemandee
+                LEFT JOIN bonaide ba on ba.idaideinterne = ai.id
                 WHERE ai.avis <> ""
                 AND datedecision = '.mktime(0, 0, 0, $dateCommission[1], $dateCommission[0], $dateCommission[2]).'
-                GROUP BY i.id';
+                GROUP BY ai.id';
         $con = Doctrine_Manager::getInstance()->connection();
         $st = $con->execute($req);
         $result = $st->fetchAll();
@@ -98,14 +98,13 @@ function genererTabCommission() {
     } else {
         $dateDebut = explode('/', $_POST['datedebut']);
         $dateFin = explode('/', $_POST['datefin']);
-        $req = 'SELECT i.id, i.nom, i.prenom, f.numrue, r.rue, t.libelle aidedemandee, ai.proposition, ai.avis, SUM(montant) montant_total, count(ba.id) quantite, ai.commentaire
+        $req = 'SELECT i.id, i.nom, i.prenom, f.numrue, r.rue, t.libelle aidedemandee, ai.proposition, ai.avis, ai.commentaire
                 FROM individu i
                 INNER JOIN foyer f on f.id = i.idfoyer
                 INNER JOIN rue r on r.id = f.idrue
                 INNER JOIN aideinterne ai on ai.idindividu = i.id
                 INNER JOIN type t on t.id = ai.idaidedemandee
-                INNER JOIN bonaide ba on ba.idaideinterne = ai.id
-                WHERE ai.avis <> ""
+                WHERE ai.avis = ""
                 AND datedemande BETWEEN '.mktime(0, 0, 0, $dateDebut[1], $dateDebut[0], $dateDebut[2]).' AND '.mktime(0, 0, 0, $dateFin[1], $dateFin[0], $dateFin[2]).' 
                 GROUP BY i.id';
         $con = Doctrine_Manager::getInstance()->connection();
@@ -113,7 +112,7 @@ function genererTabCommission() {
         $result = $st->fetchAll();
         $titre = 'Demandes pour la période du '.$dateDebut[0].'/'.$dateDebut[1].'/'.$dateDebut[2].' au '.$dateFin[0].'/'.$dateFin[1].'/'.$dateFin[2];
     }
-    echo $req;
+//    echo $req;
     include_once('./lib/PDF/generateTabCommission.php');
 }
 ?>
