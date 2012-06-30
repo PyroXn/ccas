@@ -325,13 +325,19 @@
     border: 1px solid #CACACA;
 }
 
+.tableau_accueil {
+    width: 45%;
+    margin: 0;
+    border-radius: 3px;
+    border: 1px solid #CACACA;
+}
 table {
     border-collapse: collapse;
     border-spacing: 0;
     font-size: 13px;
 }
 
-.tableau_classique th {
+.tableau_classique th, .tableau_accueil th {
     text-align: left;
     font-weight: bold;
     padding: 6px 3px;
@@ -364,7 +370,7 @@ table {
     vertical-align: middle;
 }
 
-.tableau_classique td.icon {
+.tableau_classique td.icon, .tableau_accueil td.icon{
     width: 17px;
     padding-right: 2px;
     padding-left: 10px;

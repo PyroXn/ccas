@@ -477,11 +477,24 @@ function generationHeaderNavigation($mode) {
 function accueilContenu() {
     include_once('./lib/config.php');
     $historique = Doctrine_Core::getTable('historique')->getHistoByUser($_SESSION['userId'])->execute();
-    $retour = '<h2>Accueil</h2>';
+    $retour = '<h2>CCAS MDH</h2>';
+    $retour .= 'MDH CCAS est une solution souple et évolutive qui gère l’ensemble des aides et dispositifs traités par votre CCAS.<br />
+    Il est articulé autour d’un dossier unique pour tous les usagers du CCAS, commun à l’ensemble des modules, et véritable point d’entrée de tous les traitements.<br /><br />
+    <b>Editions</b><br /> 
+Toutes les éditions réglementaires (imprimés, autres formulaires) sont livrées en standard dans le logiciel. Le contrat de maintenance vous garantit la mise à jour de ces éditions en cas de changement de réglementation. <br />
+    <b>Statistiques </b><br />
+L’application dispose d’un module pour la génération des tableaux de bord et de statistiques sur l’activité du service. <br />
+Ce module est livré avec une bibliothèque importante de requêtes et d’indicateurs. <br />
+    <b>Droits d’accès</b><br />
+L’accès aux données est sécurisé par un système d’habilitations qui permet de gérer les droits d’accès des utilisateurs en fonction de leur profil. 
+Chaque fonctionnalité du logiciel est habilitée : accès à un module, onglet, zone spécifique d’un écran, droit total ou limité à la consultation, etc. <br />
+<b>Conservation des données </b><br />
+Toutes les données saisies dans le logiciel sont historisées (parcours professionnel, éléments financiers, logement, changement de contexte familial, demandes d’aides, …). <br />
+Le suivi des dossiers est ainsi facilité par une recherche rapide des informations, dès l’accueil d’un usager. ';
     $retour .= '
         <h3>Vos 10 dernières actions</h3>
          <div class="bubble tableau_classique_wrapper">
-            <table class="tableau_classique" cellpadding="0" cellspacing="0">
+            <table class="tableau_accueil" cellpadding="0" cellspacing="0">
                 <thead>
                     <tr class="header">
                     <th>Individu</th>

@@ -18,7 +18,7 @@
                 <li class="navigationligne">
                     <a id="" class="lien_navigation current" href="index.php" title="Ccas">
                         <span class="border_top"></span>
-                        <span class="categorie">CCAS</span>
+                        <span class="categorie">CCAS v1.0</span>
                     </a>
                 </li>
             </ul>
