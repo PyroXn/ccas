@@ -1,4 +1,5 @@
 <?php
+
 //include_once('./lib/config.php');
 //include_once('./lib/PDF/generateTabCommission.php');
 
@@ -13,6 +14,13 @@ echo '<br />';
 echo $date1[2];
 echo '<br />';
 echo mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
+include_once('./lib/config.php');
+//include_once('./lib/PDF/generateTabCommission.php');
+$instructs = Doctrine_Core::getTable('instruct')->findByInterneAndActif(1, 1); // Instruct interne
+foreach($instructs as $instruct) {
+        echo $instruct->nom;
+    }
+    
 //    $retour = '';
 //    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accept�'));
 //    foreach($aides as $aide) {

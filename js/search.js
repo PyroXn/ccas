@@ -154,6 +154,7 @@ $(function() {
             {
                 $(".tipsy").remove();
                 $("#contenu").html(html);
+                
             },
             error: function(html) {
                 $("#contenu").html(html.responseText);
