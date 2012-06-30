@@ -403,8 +403,8 @@ table {
 
 .affichage_classique textarea {
     vertical-align: top;
-    min-height: 30px;
-    width: 250px;
+    min-height: 50px;
+    width: 500px;
     resize: vertical;
 }
 
