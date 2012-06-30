@@ -86,7 +86,7 @@ $(function() {
                     url: './index.php?p=genererPeriode',
                     cache: false,
                     //Succ�s de la requ�te
-                    success: function(graph) {
+                    success: function() {
                         $('#periode_exacte').html("");
                     },
                     error: function() {
@@ -109,8 +109,9 @@ $(function() {
                 });
         } 
         if ($("input[type=radio][name=groupe3]:checked").val() != "periode" ||
-           (($("input[type=radio][name=groupe3]:checked").val() == "periode" && 
-             $('#datedebut').val() != null && $('#datedebut').val() != null))) {
+            ($("input[type=radio][name=groupe3]:checked").val() == "periode" && 
+             ($('#datedebut').val() != null && $('#datedebut').val() != '' && $('#datedebut').val() != 'undefined') && 
+             ($('#datefin').val() != null && $('#datefin').val() != '' && $('#datefin').val() != 'undefined'))) {
             genererGraphstat();
         } 
     });

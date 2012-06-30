@@ -8437,20 +8437,20 @@ CREATE TABLE IF NOT EXISTS `situationfamiliale` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `situationfamilliale`
+-- Structure de la table `situationfamiliale`
 --
 
-CREATE TABLE IF NOT EXISTS `situationfamilliale` (
+CREATE TABLE IF NOT EXISTS `situationfamiliale` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `situation` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Contenu de la table `situationfamilliale`
+-- Contenu de la table `situationfamiliale`
 --
 
-INSERT INTO `situationfamilliale` (`id`, `situation`) VALUES
+INSERT INTO `situationfamiliale` (`id`, `situation`) VALUES
 (1, 'Homme seul'),
 (2, 'Femme seule'),
 (3, 'Couple sans enfant'),
