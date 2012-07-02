@@ -21,9 +21,6 @@ function comboTableStatique() {
                 <div>instruct</div>
             </li>
             <li>
-                <div>libelleorganisme</div>
-            </li>
-            <li>
                 <div>lienfamille</div>
             </li>
             <li>

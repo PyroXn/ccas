@@ -462,11 +462,11 @@ function generationHeaderNavigation($mode) {
                 </div>';
             break;
         case 'config' :
-            $retour .= '
-                <div id="accueilConfig" href="#" class="page_header_link active">
+            /*<div id="accueilConfig" href="#" class="page_header_link active">
                     <span class="label">Configuration - Accueil</span>
-                </div>
-                <div id="ecranTableStatique" href="#" class="page_header_link">
+                </div>*/
+            $retour .= '
+                <div id="ecranTableStatique" href="#" class="page_header_link active">
                     <span class="label">Tables statique</span>
                 </div>';
             break;
@@ -477,7 +477,36 @@ function generationHeaderNavigation($mode) {
 function accueilContenu() {
     include_once('./lib/config.php');
     $historique = Doctrine_Core::getTable('historique')->getHistoByUser($_SESSION['userId'])->execute();
-    $retour = '<h2>Accueil</h2>';
+    $retour = '<div class="acceuilpresentation">
+                    <h2>CCAS MDH</h2>';
+    $retour .= '<p>MDH CCAS est une solution souple et évolutive qui gère l’ensemble des aides et dispositifs traités par votre CCAS.</p>
+    <p>Il est articulé autour d’un dossier unique pour tous les usagers du CCAS, commun à l’ensemble des modules, et véritable point d’entrée de tous les traitements.</p>';
+    $retour .= '
+        <ul id="methodologie">
+            <li class="analyse">
+                <span class="image_hover"></span>
+                <span class="titre_liste">Editions</span>
+                <span class="paragraphe_liste">Toutes les éditions réglementaires (imprimés, autres formulaires) sont livrées en standard dans le logiciel. Le contrat de maintenance vous garantit la mise à jour de ces éditions en cas de changement de réglementation.
+                </span>
+            </li>
+            <li class="creation">
+                <span class="image_hover"></span>
+                <span class="titre_liste">Statistiques</span>
+                <span class="paragraphe_liste">L’application dispose d’un module pour la génération des tableaux de bord et de statistiques sur l’activité du service. Ce module est livré avec une bibliothèque importante de requêtes et d’indicateurs.</span>
+            </li>
+            <li class="livraison">
+                <span class="image_hover"></span>
+                <span class="titre_liste">Sécurité</span>
+                <span class="paragraphe_liste">L’accès aux données est sécurisé par un système d’habilitations qui permet de gérer les droits d’accès des utilisateurs en fonction de leur profil. Chaque fonctionnalité du logiciel est habilitée : accès à un module, onglet, zone spécifique d’un écran, droit total ou limité à la consultation, etc. </span>
+            </li>
+            <li class="suivi">
+                <span class="image_hover"></span>
+                <span class="titre_liste">Archivage</span>
+                <span class="paragraphe_liste">Toutes les données saisies dans le logiciel sont historisées (parcours professionnel, éléments financiers, logement, changement de contexte familial, demandes d’aides, …). Le suivi des dossiers est ainsi facilité par une recherche rapide des informations, dès l’accueil d’un usager.</span>
+            </li>
+            </ul></div>';
+
+    $retour .= '<div class="clearboth"></div>';
     $retour .= '
         <h3>Vos 10 dernières actions</h3>
          <div class="bubble tableau_classique_wrapper">

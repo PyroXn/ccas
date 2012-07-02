@@ -724,3 +724,101 @@ legend {
 div.ui-datepicker{
  font-size:12px;
 }
+
+/*****METHODOLOGIE******/
+.acceuilpresentation {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.acceuilpresentation h2 {
+    text-decoration: underline;
+    margin-bottom: 5px;
+}
+
+#methodologie {
+    text-align: center;
+    width: 1000px;
+    margin: 0 auto;
+}
+#methodologie li {
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px 15px 15px 15px;
+    float: left;
+    margin: 0 20px 10px;
+    padding: 20px 5px 25px;
+    width: 171px;
+    height: 450px;
+}
+
+/*#methodologie li:hover {
+    background-color: #d8eaff;
+}*/
+
+#methodologie span.image_hover {
+    background: url("./img/shema_methodologie3.png") no-repeat scroll top left;
+    height: 171px;
+    width: 223px;
+    position: absolute;
+}
+
+#methodologie li .titre_liste {
+    margin-top: 180px;
+    text-align: center;
+}
+
+#methodologie li .paragraphe_liste {
+    margin-top: 180px;
+    text-align: center;
+}
+
+#methodologie li {
+    /***Bug avec firefox centre l'img aussi***/
+    /*   text-align: center;*/
+}
+
+#methodologie li.analyse span.image_hover {
+    background-position: 0px 0px;
+}
+#methodologie li.creation span.image_hover {
+    background-position: -223px 0px;
+}
+#methodologie li.livraison span.image_hover {
+    background-position: -446px 0px;
+}
+#methodologie li.suivi span.image_hover {
+    background-position: -669px 0px;
+}
+
+#methodologie li.analyse:hover span.image_hover {   
+    background-position: 0px -171px;
+}
+/*#methodologie li.analyse:hover {   
+    background-color: #feb2b2;
+}*/
+#methodologie li.creation:hover span.image_hover {   
+    background-position: -223px -171px;
+}
+/*#methodologie li.creation:hover {   
+    background-color: #fdf296;
+}*/
+#methodologie li.livraison:hover span.image_hover {   
+    background-position: -446px -171px;
+}
+/*#methodologie li.livraison:hover {   
+    background-color: #b1e9ad;
+}*/
+#methodologie li.suivi:hover span.image_hover {   
+    background-position: -669px -171px;
+}
+li .titre_liste {
+    display: block;
+    font-size: 24px;
+    /*    font-weight: bold;*/
+    font-family: "kulturista-web-1","kulturista-web-2";
+    margin-bottom: 7px;
+    padding-bottom: 4px;
+}

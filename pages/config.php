@@ -2,6 +2,7 @@
 
 function homeConfig() {
     include_once('./pages/contenu.php');
+    include_once('./pages/tableStatique.php');
     $title = 'Accueil';
     $contenu = '
         <div id="menu_gauche"></div>
@@ -11,14 +12,11 @@ function homeConfig() {
                     </div>
                 </div>
                 <div id="contenu_wrapper">
-                    <div id="contenu">'.accueilConfig().'
+                    <div id="contenu">'.comboTableStatique().'
                     <div>
                 </div>
                 ';
     display($title, $contenu);
 }
 
-function accueilConfig() {
-    
-}
 ?>
