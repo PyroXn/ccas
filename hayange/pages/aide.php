@@ -275,7 +275,7 @@ function detailAideInterne() {
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Quantité : </h2>
-                                    <div class="aff"><input class="contour_field input_num" type="text" id="quantiteaide" value="'. $aideInterne->quantite .'" ></div>
+                                    <div class="aff"><input class="contour_field input_num" type="text" id="quantiteaide" value="'. $aideInterne->quantite .'" size="10"></div>
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Vigilance : </h2>
@@ -303,7 +303,7 @@ function detailAideInterne() {
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Montant total : </h2>
-                                    <div class="aff"><input class="contour_field input_num" type="text" id="montanttotalaide" value="'. $aideInterne->montanttotal .'"  ></div>
+                                    <div class="aff"><input class="contour_field input_num" type="text" id="montanttotalaide" value="'. $aideInterne->montanttotal .'" size="10" ></div>
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Commentaire : </h2>
