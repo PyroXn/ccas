@@ -447,6 +447,7 @@ $(function() {
             }, 'html');
         }
         else if(value=='save') {
+            console.log("TEST PROD");
 //            var traitement = true;
 //            formActuel.find('.requis').each(function(){
 //                if ($(this).is('input')) {
@@ -470,7 +471,6 @@ $(function() {
                 //commun a tous les form
                 var table = formActuel.attr('action');
                 var datastring = 'table=' + table;
-
                 switch(table){
                     //unique pour la creation de foyer
                     case 'creation_foyer':
@@ -897,6 +897,7 @@ $(function() {
             }
             datastring = 'idIndividu='+idIndividu+'&scolarise='+scolarise;
             datastring += '&etablissementscolaire='+$('#etablissementscolaire').val()+'&etude='+$('#etude').val();
+            console.log(datastring);
             $.ajax({
                 type: 'post',
                 data: datastring,

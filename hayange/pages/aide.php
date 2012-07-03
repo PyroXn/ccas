@@ -49,10 +49,10 @@ function aideInterne() {
     if (sizeof($aidesInternes) != null) {
         foreach($aidesInternes as $aideInterne) {
             $total = 0;
-            $bons = Doctrine_Core::getTable('bonaide')->findByIdAideInterne($aideInterne->id);
-            foreach($bons as $bon) {
-                $total += $bon->montant;
-            }
+//            $bons = Doctrine_Core::getTable('bonaide')->findByIdAideInterne($aideInterne->id);
+//            foreach($bons as $bon) {
+//                $total += $bon->montant;
+//            }
             $chemin = './document/'.$aideInterne->individu->idFoyer.'/'.$aideInterne->individu->id;
             $aideInterne->vigilance ? $contenu .= '<tr class="vigilance_ligne" name="'.$aideInterne->id.'">' :  $contenu .= '<tr name="'.$aideInterne->id.'">';
             $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
@@ -60,7 +60,7 @@ function aideInterne() {
                                     <td> '.$aideInterne->etat.'</td>
                                     <td> '.$aideInterne->natureAide->libelle.'</td>
                                     <td> '.$aideInterne->avis.'</td>
-                                    <td> '.$total.'€</td>
+                                    <td> '.$aideInterne->montanttotal.'€</td>
                                     <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>';
                                     if ($aideInterne->vigilance) {
                                         $contenu .= '<td><span class="vigilance"></span></td>';
@@ -254,7 +254,7 @@ function detailAideInterne() {
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Montant : </h2>
-                                    <div class="aff"><input class="contour_field input_num" type="text" id="montantaide" size="10" value="'. $aideInterne->montant .'" ></div>
+                                    <div class="aff"><input class="contour_field input_num" type="text" id="montantaide" size="6" value="'. $aideInterne->montant .'" ></div>
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Avis : </h2>
@@ -275,7 +275,7 @@ function detailAideInterne() {
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Quantité : </h2>
-                                    <div class="aff"><input class="contour_field input_num" type="text" id="quantiteaide" value="'. $aideInterne->quantite .'" size="10"></div>
+                                    <div class="aff"><input class="contour_field input_num" type="text" id="quantiteaide" value="'. $aideInterne->quantite .'" size="6"></div>
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Vigilance : </h2>
@@ -303,7 +303,7 @@ function detailAideInterne() {
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Montant total : </h2>
-                                    <div class="aff"><input class="contour_field input_num" type="text" id="montanttotalaide" value="'. $aideInterne->montanttotal .'" size="10" ></div>
+                                    <div class="aff"><input class="contour_field input_num" type="text" id="montanttotalaide" value="'. $aideInterne->montanttotal .'" size="6" ></div>
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Commentaire : </h2>
