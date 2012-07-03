@@ -1,0 +1,76 @@
+/* 
+    Document   : style
+    Created on : 25 mars 2012, 14:54:14
+    Author     : Zoz
+    Description:
+        Purpose of the stylesheet follows.
+*/
+page {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+#nomCentre {
+    width: 38%;
+    text-align: center;
+    display: inline;
+}
+
+#telephone {
+    display: inline;
+    width: 60%;
+    text-align: right;
+}
+.espace {
+    height: 10px;
+    width: 100%;
+}
+
+table {
+    text-align: center;
+}
+
+.inline {
+    display: inline-block;
+}
+td {
+    height: 20px;
+}
+
+th, td {
+   font-weight: normal;
+   border: solid 1px black;
+}
+
+#titre {
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+}
+
+.numBon {
+    color: red;
+    font-weight: normal;
+}
+
+.underline {
+    display: inline;
+    margin: 0 10px;
+    border-bottom: 1px solid black;
+    height: 15px;
+}
+
+.noBorder {
+    border: none;
+}
+
+.signature {
+    text-align: left;
+    vertical-align: top;
+}
+
+#footer {
+    font-size: 8px;
+    line-height: 14px;
+}
+

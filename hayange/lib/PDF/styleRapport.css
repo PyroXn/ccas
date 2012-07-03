@@ -1,0 +1,67 @@
+/* 
+    Document   : style
+    Created on : 25 mars 2012, 14:54:14
+    Author     : Zoz
+    Description:
+        Purpose of the stylesheet follows.
+*/
+page {
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.espace {
+    height: 25px;
+    width: 100%;
+}
+
+#titre {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.EnteteGauche {
+    text-align: left;
+    display: inline;
+
+}
+
+#date {
+    text-align: right;
+    font-size: 12px;
+}
+
+.left {
+    text-align: left;
+    display: inline;
+    width: 75%;
+}
+
+.top {
+    vertical-align: top;
+}
+table {
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid black;
+    height: 30px;
+}
+
+.noborder {
+    border: none;
+}
+.large {
+    height: 50px;
+}
+
+.verylarge {
+    height: 500px;
+}
+
+.largeur {
+    width: 100%;
+}
+

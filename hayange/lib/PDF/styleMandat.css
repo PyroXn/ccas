@@ -1,0 +1,19 @@
+#titre {
+    text-align: center;
+    display: inline;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+.noBorder {
+    border: none;
+}
+
+.separateur {
+    border-bottom: 1px dashed black;
+}
+

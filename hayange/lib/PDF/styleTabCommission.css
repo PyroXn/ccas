@@ -1,0 +1,60 @@
+/* 
+    Document   : style
+    Created on : 25 mars 2012, 14:54:14
+    Author     : Zoz
+    Description:
+        Purpose of the stylesheet follows.
+*/
+page {
+    font-size: 14px;
+    line-height: 24px;
+}
+
+#adresse_ccas {
+    width: 38%;
+    text-align: left;
+    display: inline;
+}
+
+#date_impression {
+    width: 60%;
+    text-align: right;
+    display: inline;
+    
+}
+
+#titre {
+    width: 100%;
+    text-align: center;
+    display: inline;
+    font-size: 18px;
+}
+
+.tabtitre{
+   margin-left:auto;
+   margin-right:auto;
+}
+
+#telephone {
+    display: inline;
+    width: 60%;
+    text-align: right;
+}
+.espace {
+    height: 25px;
+    width: 100%;
+}
+
+
+th {
+    font-weight: normal;
+    border: solid 1px black;
+    text-align: center;
+}
+
+td {
+   font-weight: normal;
+   border: solid 1px black;
+   text-align: left;
+   vertical-align:top;
+}

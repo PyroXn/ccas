@@ -1,0 +1,301 @@
+/***BOUTON***/
+
+
+.bouton {
+    display: inline-block;
+    padding: 4px 10px 4px;
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    color: white;
+    vertical-align: middle;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+    border: 1px solid #CCC;
+    border-color: #E6E6E6 #E6E6E6 #BFBFBF;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+    border-bottom-color: #B3B3B3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.bouton:hover {
+    text-decoration: none;
+    background-color: #E6E6E6;
+    background-position: 0 -15px;
+    -webkit-transition: background-position 0.1s linear;
+    -moz-transition: background-position 0.1s linear;
+    -ms-transition: background-position 0.1s linear;
+    -o-transition: background-position 0.1s linear;
+    transition: background-position 0.1s linear;
+}
+
+.classique {
+    background-color: whiteSmoke;
+    background-image: -moz-linear-gradient(top, white, #E6E6E6);
+    background-image: -ms-linear-gradient(top, white, #E6E6E6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E6E6E6));
+    background-image: -webkit-linear-gradient(top, white, #E6E6E6);
+    background-image: -o-linear-gradient(top, white, #E6E6E6);
+    background-image: linear-gradient(top, white, #E6E6E6);
+    color: #333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+}
+
+.modif {
+    background-color: #0074CC;
+    background-image: -moz-linear-gradient(top, #08C, #05C);
+    background-image: -ms-linear-gradient(top, #08C, #05C);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#08C), to(#05C));
+    background-image: -webkit-linear-gradient(top, #08C, #05C);
+    background-image: -o-linear-gradient(top, #08C, #05C);
+    background-image: linear-gradient(top, #08C, #05C);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0055cc', GradientType=0);
+    border-color: #05C #05C #003580;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.modif:hover {
+    background-color: #05C;
+}
+
+.ajout {
+    background-color: #5BB75B;
+    background-image: -moz-linear-gradient(top, #62C462, #51A351);
+    background-image: -ms-linear-gradient(top, #62C462, #51A351);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62C462), to(#51A351));
+    background-image: -webkit-linear-gradient(top, #62C462, #51A351);
+    background-image: -o-linear-gradient(top, #62C462, #51A351);
+    background-image: linear-gradient(top, #62C462, #51A351);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c462', endColorstr='#51a351', GradientType=0);
+    border-color: #51A351 #51A351 #387038;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.ajout:hover {
+    background-color: #51A351;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url("img/glyphicons-white.png");
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+}
+
+.icon-black {
+    background-image: url("img/glyphicons-black.png");
+}
+
+.icon-save {
+    background-position: -96px -24px;
+}
+
+.icon-cancel {
+    background-position: -216px -95px;
+}
+
+.icon-add {
+    background-position: -408px -96px;
+}
+
+.update {
+    display: none;
+    float: right;
+}
+
+
+/***FORMULAIRE***/
+#ecran_gris {
+    background-color: #DDD;
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.formulaire {
+    display: none;
+    background-color: white;
+    border: 1px solid #CCC;
+    color: black;
+    outline: 0 none;
+    padding: 10px;
+    position: absolute;
+    top: 3px;
+    z-index: 1001;
+    -moz-box-shadow: 0 1px 5px #ccc;
+    -ms-filter: "progid: DXImageTransform.Microsoft.Shadow(Strength=3, Direction=180, Color='#ccc')";
+    -o-box-shadow: 0 1px 5px #ccc;
+    -webkit-box-shadow: 0 1px 5px #ccc;
+}
+
+.formulaire h2 {
+    float: left;
+    width: 135px;
+    color: #333;
+    font: bold 15px arial,sans-serif;
+    vertical-align: top;
+}
+
+.formulaire .colonne_droite {
+    padding-left: 135px;
+    width: 350px;
+}
+
+.sauvegarder_annuler {
+    margin-top: 8px;
+}
+
+.formulaire input[type=text], .formulaire input[type=password] {
+    padding: 4px 6px;
+    width: 300px;
+}
+
+.formulaire input[type=text]:hover, .formulaire input[type=text]:focus, .formulaire input[type=password]:hover, .formulaire input[type=password]:focus,
+.colonne input[type=text]:hover, .colonne input[type=text]:focus {
+    outline: none;
+}
+
+.formulaire .select {
+    margin-bottom: 5px;
+}
+
+.contour_field {
+    border: 1px solid #D9D9D9;
+    border-top: 1px solid silver;
+}
+
+.input_text{
+    margin-bottom: 5px;
+}
+
+.select {    
+    position: relative;
+    display: inline-block;
+    padding: 1px 18px 0 6px;
+
+}
+
+.option {
+    color: #444;
+    cursor: default;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 23px;
+    list-style: none;
+    text-align: center;
+
+
+}
+
+.fleche_bas {
+    border-color: #777 transparent;
+    border-style: solid;
+    border-width: 4px 4px 0 4px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: 5px;
+    top: 11px;
+}
+
+.select_civilite, .select_lien_famille, .select_sexe, .select_situation, .select_natio, .select_ville, .select_statut,
+.select_etude, .select_profession, .select_regime, .select_couv, .select_mut, .select_caf, #suggestion, .select_secteur, .select_typelogement,
+.select_statutlogement, .select_bailleur, .select_instruct, .select_motifaction, .select_table_statique, .select_typeaide_interne, .select_typeaide_externe, .select_nature_interne, .select_nature_externe, .select_etat,
+.select_orga, .select_orga_ext, .select_distrib, .select_avis, .select_decideur, .select_historique_type_action, .select_role {
+    display: none;
+    z-index: 1002;
+    position: absolute;
+
+    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    -webkit-transition: opacity .218s;
+    -moz-transition: opacity .218s;
+    -ms-transition: opacity .218s;
+    -o-transition: opacity .218s;
+    transition: opacity .218s;
+    background: white;
+    border: 1px solid #CCC;
+    border: 1px solid rgba(0, 0, 0, .2);
+    cursor: default;
+    font-size: 13px;
+    margin: 0;
+    outline: none;
+    padding: 6px 0;
+
+    max-height: 200px;
+    overflow: auto;
+}
+
+.select_civilite li, .select_lien_famille li, .select_sexe li, .select_situation li, .select_natio li, .select_ville li,
+.select_statut li, .select_etude li, .select_profession li, .select_regime li, .select_couv li, .select_mut li, .select_caf li,
+.liste_suggestion li, .select_secteur li, .select_typelogement li, .select_statutlogement li, .select_bailleur li, .select_instruct li,
+.select_motifaction li, .select_table_statique li, .select_typeaide_interne li, .select_typeaide_externe li, .select_nature_interne li, 
+.select_nature_externe li, .select_etat li, .select_orga li, .select_orga_ext li, .select_distrib li, .select_avis li, .select_decideur li,
+.select_historique_type_action li, .select_role li {
+    position: relative;
+    color: #333;
+    cursor: pointer;
+    list-style: none;
+    margin: 0;
+    padding: 6px 7em 6px 30px;
+    white-space: nowrap;
+}
+
+.select_civilite li:hover, .select_lien_famille li:hover, .select_sexe li:hover, .select_situation li:hover, .select_natio li:hover,
+.select_ville li:hover, .select_statut li:hover, .select_etude li:hover, .select_profession li:hover, .select_regime li:hover,
+.select_couv li:hover, .select_mut li:hover, .select_caf li:hover, .liste_suggestion .selection, .select_secteur li:hover, .select_typelogement li:hover,
+.select_statutlogement li:hover, .select_bailleur li:hover, .select_instruct li:hover, .select_motifaction li:hover, .select_table_statique li:hover, .select_typeaide_interne li:hover,  .select_typeaide_externe li:hover,
+.select_nature_interne li:hover,.select_nature_externe li:hover, .select_etat li:hover, .select_orga li:hover, .select_orga_ext li:hover, 
+.select_distrib li:hover, .select_avis li:hover, .select_decideur li:hover, .select_historique_type_action li:hover, .select_role li:hover {
+    background-color: #EEE;
+    border-color: #EEE;
+    border-style: dotted;
+    border-width: 1px 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.checkbox, .checkboxChefFamille, .checkboxScolarise, .checkboxPermission {
+    position: relative;
+    left: 5px;
+    top: 2px;
+    background: white;
+    border: 1px solid #1C5180;
+    cursor: pointer;
+    display: -moz-inline-box;
+    display: inline-block;
+    height: 11px;
+    width: 11px;
+}
+
+.checkbox_active {
+    background: white url('./img/check-sprite.gif') 2px center no-repeat;
+}
+
+.checkbox[disabled], .checkboxChefFamille[disabled], .checkboxScolarise[disabled], .checkboxPermission[disabled] {
+    cursor: default;
+    background-color: #EBEBE4;
+}
