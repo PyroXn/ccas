@@ -49,10 +49,10 @@ function aideInterne() {
     if (sizeof($aidesInternes) != null) {
         foreach($aidesInternes as $aideInterne) {
             $total = 0;
-            $bons = Doctrine_Core::getTable('bonaide')->findByIdAideInterne($aideInterne->id);
-            foreach($bons as $bon) {
-                $total += $bon->montant;
-            }
+//            $bons = Doctrine_Core::getTable('bonaide')->findByIdAideInterne($aideInterne->id);
+//            foreach($bons as $bon) {
+//                $total += $bon->montant;
+//            }
             $chemin = './document/'.$aideInterne->individu->idFoyer.'/'.$aideInterne->individu->id;
             $aideInterne->vigilance ? $contenu .= '<tr class="vigilance_ligne" name="'.$aideInterne->id.'">' :  $contenu .= '<tr name="'.$aideInterne->id.'">';
             $contenu .= '<td>'.getDatebyTimestamp($aideInterne->dateDemande).'</td>
@@ -60,7 +60,7 @@ function aideInterne() {
                                     <td> '.$aideInterne->etat.'</td>
                                     <td> '.$aideInterne->natureAide->libelle.'</td>
                                     <td> '.$aideInterne->avis.'</td>
-                                    <td> '.$total.'€</td>
+                                    <td> '.$aideInterne->montanttotal.'€</td>
                                     <td> '.getDatebyTimestamp($aideInterne->dateDecision).'</td>';
                                     if ($aideInterne->vigilance) {
                                         $contenu .= '<td><span class="vigilance"></span></td>';
@@ -181,7 +181,10 @@ function detailAideInterne() {
             </div>
             <div class="affichage_classique">
                 <h2>Instructeur : </h2>
-                <div class="aff">'.$aideInterne->instruct->nom.'</div>
+                <div class="select classique" role="select_instruct2">
+                    <div id="instruct" class="option requis">'.$aideInterne->instruct->nom.'</div>
+                    <div class="fleche_bas"> </div>
+                </div>
             </div>
             <div class="affichage_classique">
                 <h2>Date demande : </h2>
@@ -237,6 +240,7 @@ function detailAideInterne() {
             }
             $contenu .= '<div id="decision">';
         }
+        // Decision de l'aide
         $contenu .= '<h3 id="idAide" value="'.$aideInterne->id.'">Décision :</h3>
                      <ul id="decisionRequis" class="list_classique">
                          <li class="ligne_list_classique">
@@ -250,6 +254,10 @@ function detailAideInterne() {
                                             <div class="fleche_bas"> </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="affichage_classique">
+                                    <h2>Montant : </h2>
+                                    <div class="aff"><input class="contour_field input_num" type="text" id="montantaide" value="'. $aideInterne->montant .'" ></div>
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Avis : </h2>
@@ -267,6 +275,10 @@ function detailAideInterne() {
                                 <div class="affichage_classique">
                                     <h2>Date décision : </h2>
                                     <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideInterne->dateDecision).'></div>
+                                </div>
+                                <div class="affichage_classique">
+                                    <h2>Quantité : </h2>
+                                    <div class="aff"><input class="contour_field input_num" type="text" id="quantiteaide" value="'. $aideInterne->quantite .'"></div>
                                 </div>
                                 <div class="affichage_classique">
                                     <h2>Vigilance : </h2>
@@ -293,12 +305,19 @@ function detailAideInterne() {
                                     </div>
                                 </div>
                                 <div class="affichage_classique">
-                                    <h2>Commentaire : </h2>
-                                    <div class="aff"><textarea class="contour_field input_char" id="commentaire">'.$aideInterne->commentaire.'</textarea></div>
+                                    <h2>Montant total : </h2>
+                                    <div class="aff"><input class="contour_field input_num" type="text" id="montanttotalaide" value="'. $aideInterne->montanttotal .'" disabled></div>
                                 </div>
                             <div>
                          </li>
+                         <li class="ligne_list_classique">
+                            <div class="affichage_classique">
+                                <h2>Commentaire : </h2>
+                                <div class="aff"><textarea class="contour_field input_char" id="commentaire">'.$aideInterne->commentaire.'</textarea></div>
+                            </div>
+                        </li>
                      </ul>';
+    if ($aideInterne->dateDecision != 0 && $aideInterne->dateDecision != '' && $aideInterne->dateDecision != ' ') {
     $contenu .= '
         <h3>Bon alimentaire / Mandat ';
     
@@ -361,8 +380,9 @@ function detailAideInterne() {
                          <td colspan=8 align=center>< Aucun bon n\'a encore été délivré pour cette aide > </td>
                      </tr>';
     }
-    $contenu .= '</tbody></table></div>
-                 <h3>Rapport :</h3>
+    $contenu .= '</tbody></table></div>';
+    }
+     $contenu .= '<h3>Rapport :</h3>
                      <ul class="list_classique">
                          <li class="ligne_list_classique">
                             <span><textarea rows="8" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="rapport" >'.$aideInterne->rapport.'</textarea></span>
@@ -546,6 +566,9 @@ function updateDecisionInterne() {
     $aide->rapport = $_POST['rapport'];
     $aide->idDecideur = $_POST['decideur'];
     $aide->etat = 'Terminé';
+    $aide->montant = $_POST['montant'];
+    $aide->montanttotal = $_POST['montanttotal'];
+    $aide->quantite = $_POST['quantite'];
     $aide->save();
     
     include_once('./pages/historique.php');

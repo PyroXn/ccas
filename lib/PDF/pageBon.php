@@ -23,7 +23,7 @@
             <th>Fonction</th>
         </tr>
         <tr>
-            <td>N°<span class="numBon"><?php echo $numBon; ?></span></td>
+            <td>N°<span class="numBon"> A - <?php echo $numBon; ?></span></td>
             <td><?php echo date('d/m/Y'); ?></td>
             <td></td>
             <td></td>
@@ -81,7 +81,7 @@
             <th>Fonction</th>
         </tr>
         <tr>
-            <td>N°<span class="numBon"><?php echo $numBon; ?></span></td>
+            <td>N°<span class="numBon"> A - <?php echo $numBon; ?></span></td>
             <td><?php echo date('d/m/Y'); ?></td>
             <td></td>
             <td></td>
@@ -139,7 +139,7 @@
             <th>Fonction</th>
         </tr>
         <tr>
-            <td>N°<span class="numBon"><?php echo $numBon; ?></span></td>
+            <td>N°<span class="numBon"> A - <?php echo $numBon; ?></span></td>
             <td><?php echo date('d/m/Y'); ?></td>
             <td></td>
             <td></td>

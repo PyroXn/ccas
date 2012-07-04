@@ -340,6 +340,10 @@ function getDocument() {
                 <i class="icon-save"></i>
                 <span>Enregistrer</span>
             </div>
+			<div value="cancel" class="bouton classique">
+				<i class="icon-cancel icon-black"></i>
+			<span>Annuler</span>
+                    </div>
         </form>
         </div>';
     echo $contenu;

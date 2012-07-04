@@ -81,7 +81,7 @@ function genererTabCommission() {
             
     if($withDecission == "1") {
         $dateCommission = explode('/', $_POST['datecommission']);
-        $req = 'SELECT i.id, i.nom, i.prenom, f.numrue, r.rue, t.libelle aidedemandee, ai.proposition, ai.avis, SUM(montant) montant_total, count(ba.id) quantite, ai.commentaire
+        $req = 'SELECT i.id, i.nom, i.prenom, f.numrue, r.rue, t.libelle aidedemandee, ai.proposition, ai.avis, SUM(ba.montant) montant_total, count(ba.id) quantite, ai.commentaire
                 FROM individu i
                 INNER JOIN foyer f on f.id = i.idfoyer
                 INNER JOIN rue r on r.id = f.idrue

@@ -38,7 +38,7 @@ function afficherInfoPerso($user) {
                         <span class="attribut">Situation Familiale :</span>
                         <div class="select classique" role="select_situation" disabled>';
 $retour .= verifieValeurNull($user->idSitMatri) ? '
-                            <div id="situation" class="option" value=" ">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.$user->situationmatri->situation.'</div>';  
+                            <div id="situation" class="option" value="">-----</div>' : '<div id="situation" class="option" value="'.$user->idSitMatri.'">'.$user->situationmatri->situation.'</div>';  
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span class="attribut">Nationalité :</span>
                         <div class="select classique" role="select_natio" disabled>';
 $retour .= verifieValeurNull($user->idNationalite) ? '
-                            <div id="nationalite" class="option" value=" ">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.$user->nationalite->nationalite.'</div>';  
+                            <div id="nationalite" class="option" value="">-----</div>' : '<div id="nationalite" class="option" value="'.$user->idNationalite.'">'.$user->nationalite->nationalite.'</div>';  
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span class="attribut">Sexe :</span>
                         <div class="select classique" role="select_sexe" disabled>';
 $retour .= verifieValeurNull($user->sexe) ? '
-                            <div id="sexe" class="option" value=" ">-----</div>' : '<div id="sexe" class="option" value="'.$user->sexe.'">'.$user->sexe.'</div>';  
+                            <div id="sexe" class="option" value="">-----</div>' : '<div id="sexe" class="option" value="'.$user->sexe.'">'.$user->sexe.'</div>';  
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statut" disabled>';
 $retour .= verifieValeurNull($user->idLienFamille) ? '
-                            <div id="statut" class="option" value=" ">-----</div>' : '<div id="statut" class="option" value="'.$user->idLienFamille.'">'.$user->lienfamille->lien.'</div>';  
+                            <div id="statut" class="option" value="">-----</div>' : '<div id="statut" class="option" value="'.$user->idLienFamille.'">'.$user->lienfamille->lien.'</div>';  
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -136,8 +136,8 @@ function afficherSituationPro($user) {
 $retour .=      '<div class="colonne">
                     <span class="attribut">Profession :</span>
                     <div class="select classique" role="select_profession" disabled>';
-$retour .= verifieValeurNull($user->idNiveauEtude) ? '
-                        <div id="profession" class="option" value=" ">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.$user->profession->profession.'</div>';  
+$retour .= verifieValeurNull($user->idProfession) ? '
+                        <div id="profession" class="option" value="">-----</div>' : '<div id="profession" class="option" value="'.$user->idProfession.'">'.$user->profession->profession.'</div>';  
 $retour .= '            <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@ function afficherSituationScolaire($user) {
                     <span class="attribut">Classe :</span>
                     <div class="select classique" role="select_etude" disabled>';
     $retour .= verifieValeurNull($user->idNiveauEtude) ? '
-                        <div id="etude" class="option" value=" ">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
+                        <div id="etude" class="option" value="">-----</div>' : '<div id="etude" class="option" value="'.$user->idNiveauEtude.'">'.$user->etude->etude.'</div>';  
     $retour .= '            <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -245,7 +245,7 @@ function afficherCouvertureSocial($user) {
                     <span class="attribut">Régime :</span>
                     <div class="select classique" role="select_regime" disabled>';
 $retour .= verifieValeurNull($user->regime) ? '
-                        <div id="regime" class="option" value=" ">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.$user->regime.'</div>';                   
+                        <div id="regime" class="option" value="">-----</div>' : '<div id="regime" class="option" value="'.$user->regime.'">'.$user->regime.'</div>';                   
 $retour .= '            <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -255,7 +255,7 @@ $retour .= '            <div class="fleche_bas"> </div>
                     <span class="attribut">Caisse :</span>
                     <div class="select classique" role="select_couv" disabled>';
 $retour .= verifieValeurNull($user->idCaisseSecu) ? '
-                        <div id="caisseCouv" class="option" value=" ">-----</div>' : '<div id="caisseCouv" class="option" value="'.$user->idCaisseSecu.'">'.$user->secu->appelation.'</div>';                   
+                        <div id="caisseCouv" class="option" value="">-----</div>' : '<div id="caisseCouv" class="option" value="'.$user->idCaisseSecu.'">'.$user->secu->appelation.'</div>';                   
 $retour .= '            <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -375,19 +375,14 @@ return $retour;
 function updateInfoPerso() {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $individu->nom = $_POST['nom'];
-    $individu->prenom = $_POST['prenom'];
-    $individu->idSitMatri = $_POST['situation'];
-    $individu->idNationalite = $_POST['nationalite'];
-    if($_POST['datenaissance'] != 0) {
-        $date = explode('/', $_POST['datenaissance']);
-        $individu->dateNaissance = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
-    } else {
-        $individu->dateNaissance = 0;
-    }
-    $individu->idVilleNaissance = $_POST['lieu'];
-    $individu->sexe = $_POST['sexe'];
-    $individu->idLienFamille = $_POST['statut'];
+    setWithoutNull($_POST['nom'], $individu, 'nom');
+    setWithoutNull($_POST['prenom'], $individu, 'prenom');
+    setWithoutNull($_POST['situation'], $individu, 'idSitMatri');
+    setWithoutNull($_POST['nationalite'], $individu, 'idNationalite');
+    setDateWithoutNull($_POST['datenaissance'], $individu, 'dateNaissance');
+    setWithoutNull($_POST['lieu'], $individu, 'idVilleNaissance');
+    setWithoutNull($_POST['sexe'], $individu, 'sexe');
+    setWithoutNull($_POST['statut'], $individu, 'idLienFamille');
     $individu->save();
     
     include_once('./pages/historique.php');
@@ -397,9 +392,9 @@ function updateInfoPerso() {
 function updateContact() {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $individu->telephone = $_POST['telephone'];
-    $individu->portable = $_POST['portable'];
-    $individu->email = $_POST['email'];
+    setWithoutNull($_POST['telephone'], $individu, 'telephone');
+    setWithoutNull($_POST['portable'], $individu, 'portable');
+    setWithoutNull($_POST['email'], $individu, 'email');
     $individu->save();
     
     include_once('./pages/historique.php');
@@ -409,27 +404,12 @@ function updateContact() {
 function updateSituationProfessionnelle() {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $individu->idProfession = $_POST['profession'];
-    $individu->employeur = $_POST['employeur'];
-    if($_POST['inscriptionpe'] != 0) {
-        $date = explode('/', $_POST['inscriptionpe']);
-        $individu->dateInscriptionPe = mktime(0,0,0,$date[1], $date[0], $date[2]);
-    } else {
-        $individu->dateInscriptionPe = 0;
-    }
-    $individu->numDossierPe = $_POST['numdossier'];
-    if($_POST['debutdroit'] != 0) {
-        $date1 = explode('/', $_POST['debutdroit']);
-        $individu->dateDebutDroitPe = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    } else {
-        $individu->dateDebutDroitPe = 0;
-    }
-    if($_POST['findroit'] != 0) {
-        $date2 = explode('/', $_POST['findroit']);
-        $individu->dateFinDroitPe = mktime(0, 0, 0, $date2[1], $date2[0], $date2[2]);
-    } else {
-        $individu->dateFinDroitPe = 0;
-    }
+    setWithoutNull($_POST['profession'], $individu, 'idProfession');
+    setWithoutNull($_POST['employeur'], $individu, 'employeur');
+    setDateWithoutNull($_POST['inscriptionpe'], $individu, 'dateInscriptionPe');
+    setWithoutNull($_POST['numdossier'], $individu, 'numDossierPe');
+    setDateWithoutNull($_POST['debutdroit'], $individu, 'dateDebutDroitPe');
+    setDateWithoutNull($_POST['findroit'], $individu, 'dateFinDroitPe');
     $individu->save();
     
     include_once('./pages/historique.php');
@@ -439,9 +419,9 @@ function updateSituationProfessionnelle() {
 function updateSituationScolaire() {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $individu->scolarise = $_POST['scolarise'];
-    $individu->idNiveauEtude = $_POST['etude'];
-    $individu->etablissementScolaire = $_POST['etablissementscolaire'];
+    setWithoutNull($_POST['scolarise'], $individu, 'scolarise');
+    setWithoutNull($_POST['etude'], $individu, 'idNiveauEtude');
+    setWithoutNull($_POST['etablissementscolaire'], $individu, 'etablissementScolaire');
     $individu->save();
     
     include_once('./pages/historique.php');
@@ -451,24 +431,14 @@ function updateSituationScolaire() {
 function updateCouvertureSociale() {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $individu->assure = $_POST['assure'];
-    $individu->cmu = $_POST['cmu'];
-    $individu->idCaisseSecu = $_POST['caisseCouv'];
-    if($_POST['datedebutcouvsecu'] != 0) {
-        $date1 = explode('/', $_POST['datedebutcouvsecu']);
-        $individu->dateDebutCouvSecu = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    } else {
-        $individu->dateDebutCouvSecu = 0;
-    }
-    if($_POST['datefincouvsecu'] != 0) {
-        $date2 = explode('/', $_POST['datefincouvsecu']);
-        $individu->dateFinCouvSecu = mktime(0, 0, 0, $date2[1], $date2[0], $date2[2]);
-    } else {
-        $individu->dateFinCouvSecu = 0;
-    }
-    $individu->numSecu = $_POST['numsecu'];
-    $individu->clefSecu = $_POST['clefsecu'];
-    $individu->regime = $_POST['regime'];
+    setWithoutNull($_POST['assure'], $individu, 'assure');
+    setWithoutNull($_POST['cmu'], $individu, 'cmu');
+    setWithoutNull($_POST['caisseCouv'], $individu, 'idCaisseSecu');
+    setDateWithoutNull($_POST['datedebutcouvsecu'], $individu, 'dateDebutCouvSecu');
+    setDateWithoutNull($_POST['datefincouvsecu'], $individu, 'dateFinCouvSecu');
+    setWithoutNull($_POST['numsecu'], $individu, 'numSecu');
+    setWithoutNull($_POST['clefsecu'], $individu, 'clefSecu');
+    setWithoutNull($_POST['regime'], $individu, 'regime');
     $individu->save();
     
     include_once('./pages/historique.php');
@@ -478,21 +448,11 @@ function updateCouvertureSociale() {
 function updateMutuelle() {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $individu->idCaisseMut = $_POST['mut'];
-    $individu->CMUC = $_POST['cmuc'];
-    $individu->numAdherentMut = $_POST['numadherentmut'];
-    if($_POST['datedebutcouvmut'] != 0) {
-        $date1 = explode('/', $_POST['datedebutcouvmut']);
-        $individu->dateDebutCouvMut = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    } else {
-        $individu->dateDebutCouvMut = 0;
-    }
-    if($_POST['datefincouvmut'] != 0) {
-        $date2 = explode('/', $_POST['datefincouvmut']);
-        $individu->dateFinCouvMut = mktime(0, 0, 0, $date2[1], $date2[0], $date2[2]);
-    } else {
-        $individu->dateFinCouvMut = 0;
-    }
+    setWithoutNull($_POST['mut'], $individu, 'idCaisseMut');
+    setWithoutNull($_POST['cmuc'], $individu, 'CMUC');
+    setWithoutNull($_POST['numadherentmut'], $individu, 'numAdherentMut');
+    setDateWithoutNull($_POST['datedebutcouvmut'] , $individu, 'dateDebutCouvMut');
+    setDateWithoutNull($_POST['datefincouvmut'] , $individu, 'dateFinCouvMut');
     $individu->save();
     
     include_once('./pages/historique.php');
@@ -502,8 +462,8 @@ function updateMutuelle() {
 function updateCaf() {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $individu->idCaisseCaf = $_POST['caf'];
-    $individu->numAllocataireCaf = $_POST['numallocatairecaf'];
+    setWithoutNull($_POST['caf'], $individu, 'idCaisseCaf');
+    setWithoutNull($_POST['numallocatairecaf'], $individu, 'numAllocataireCaf');
     $individu->save();
     
     include_once('./pages/historique.php');

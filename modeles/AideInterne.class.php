@@ -21,7 +21,10 @@ class AideInterne extends Doctrine_Record {
         $this->hasColumn('vigilance', 'integer',2, array('default' => '0'));
         $this->hasColumn('idAideAccordee', 'integer', 5);
         $this->hasColumn('commentaire', 'string',250, array('notnull' => true, 'default' => ''));
-        $this->hasColumn('rapport', 'string',250);
+        $this->hasColumn('rapport', 'string', 250, array('default' => ''));
+        $this->hasColumn('montant', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('montanttotal', 'float', null, array('type' => 'float', 'default' => 0));
+        $this->hasColumn('quantite', 'integer', 10, array('default' => '0'));
         $this->option('orderBy', 'id DESC');
     }
 

@@ -290,7 +290,7 @@ function createUser($login, $password, $nomcomplet, $role) {
 function deleteUser() {
     include_once('./lib/config.php');
     $user = Doctrine_Core::getTable('user')->find($_POST['idUser']);
-    $user->actif = false;
+    $user->actif = 0;
     $user->save();
     echo manageUser();
 }

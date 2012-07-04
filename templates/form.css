@@ -208,7 +208,7 @@
 .select_etude, .select_profession, .select_regime, .select_couv, .select_mut, .select_caf, #suggestion, .select_secteur, .select_typelogement,
 .select_statutlogement, .select_bailleur, .select_instruct, .select_instruct2, .select_motifaction, .select_table_statique, .select_typeaide_interne, .select_typeaide_externe, .select_nature_interne, .select_nature_externe, .select_etat,
 .select_orga, .select_orga_ext, .select_distrib, .select_avis, .select_decideur, .select_historique_type_action, .select_role, .select_graph_instruct, .select_typebon,
-.select_libelleorganisme {
+.select_libelleorganisme, .select_libelletype {
     display: none;
     z-index: 1002;
     position: absolute;
@@ -239,7 +239,7 @@
 .liste_suggestion li, .select_secteur li, .select_typelogement li, .select_statutlogement li, .select_bailleur li, .select_instruct li, .select_instruct2 li,
 .select_motifaction li, .select_table_statique li, .select_typeaide_interne li, .select_typeaide_externe li, .select_nature_interne li, 
 .select_nature_externe li, .select_etat li, .select_orga li, .select_orga_ext li, .select_distrib li, .select_avis li, .select_decideur li,
-.select_historique_type_action li, .select_role li, .select_graph_instruct li, .select_typebon li, .select_libelleorganisme li {
+.select_historique_type_action li, .select_role li, .select_graph_instruct li, .select_typebon li, .select_libelleorganisme li, .select_libelletype li {
     position: relative;
     color: #333;
     cursor: pointer;
@@ -255,7 +255,7 @@
 .select_statutlogement li:hover, .select_bailleur li:hover, .select_instruct li:hover, .select_instruct2 li:hover, .select_motifaction li:hover, .select_table_statique li:hover, .select_typeaide_interne li:hover,  .select_typeaide_externe li:hover,
 .select_nature_interne li:hover,.select_nature_externe li:hover, .select_etat li:hover, .select_orga li:hover, .select_orga_ext li:hover, 
 .select_distrib li:hover, .select_avis li:hover, .select_decideur li:hover, .select_historique_type_action li:hover, .select_role li:hover, 
-.select_graph_instruct li:hover, .select_typebon li:hover, .select_libelleorganisme li:hover {
+.select_graph_instruct li:hover, .select_typebon li:hover, .select_libelleorganisme li:hover, .select_libelletype li:hover {
     background-color: #EEE;
     border-color: #EEE;
     border-style: dotted;
@@ -404,7 +404,7 @@ table {
 .affichage_classique textarea {
     vertical-align: top;
     min-height: 50px;
-    width: 500px;
+    width: 600px;
     resize: vertical;
 }
 

@@ -361,6 +361,12 @@ $(function() {
         searchTableHistorique();
     });
     
+    $('#montantaide, #quantiteaide').live("change", function() {
+        if ($('#montantaide').val() != '' && $('#montantaide').val() != 0 && $('#quantiteaide').val() != '' && $('#quantiteaide').val() != 0) {
+            $('#montanttotalaide').val($('#montantaide').val() * $('#quantiteaide').val());
+        }
+    })
+    
     
 });
 

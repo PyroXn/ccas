@@ -501,7 +501,7 @@ legend {
     vertical-align: middle;
 }
 
-.delete_doc, .delete_aide  {
+.delete_doc, .delete_aide, .delete_action  {
     background: url('./img/delete.png') transparent no-repeat;
     width: 16px;
     height: 16px;

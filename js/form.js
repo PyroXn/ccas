@@ -346,6 +346,7 @@ $(function() {
                 datastring += '&date='+$('#dateDecision').val()+'&avis='+$('#avis').attr('value');
                 datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
                 datastring += '&rapport='+$('#rapport').val()+'&decideur='+$('#decideur').attr('value');
+                datastring += '&montant='+$('#montantaide').val()+'&montanttotal='+$('#montanttotalaide').val()+'&quantite='+$('#quantiteaide').val();
                 console.log(datastring);
                 $.ajax({
                     type: 'post',
@@ -447,7 +448,6 @@ $(function() {
             }, 'html');
         }
         else if(value=='save') {
-            console.log("TEST PROD");
 //            var traitement = true;
 //            formActuel.find('.requis').each(function(){
 //                if ($(this).is('input')) {
@@ -468,9 +468,11 @@ $(function() {
 //                
 //            });
             if (findRequis(formActuel)) {
+			console.log("dans if");
                 //commun a tous les form
                 var table = formActuel.attr('action');
                 var datastring = 'table=' + table;
+
                 switch(table){
                     //unique pour la creation de foyer
                     case 'creation_foyer':
@@ -543,6 +545,7 @@ $(function() {
                         break;
                     case 'creation_role':
                         datastring += '&designationRole='+$('#designationRole').val();
+						console.log(datastring);
                         break;
                 }
                 $.ajax({
@@ -609,6 +612,7 @@ $(function() {
                         }
                     },
                     error: function(data) {
+					console.log(data.responseText);
                         $("#contenu").html(data.responseText);
                     }
                 });
@@ -875,6 +879,7 @@ $(function() {
             datastring += '&profession='+$('#profession').attr('value')+'&employeur='+$('#employeur').val();
             datastring += '&inscriptionpe='+$('#dateinscriptionpe').val()+'&numdossier='+$('#numdossierpe').val();
             datastring += '&debutdroit='+$('#datedebutdroitpe').val()+'&findroit='+$('#datefindroitpe').val();
+			console.log(datastring);
             $.ajax({
                 type: 'post',
                 data: datastring,
@@ -897,7 +902,7 @@ $(function() {
             }
             datastring = 'idIndividu='+idIndividu+'&scolarise='+scolarise;
             datastring += '&etablissementscolaire='+$('#etablissementscolaire').val()+'&etude='+$('#etude').val();
-            console.log(datastring);
+			console.log(datastring);
             $.ajax({
                 type: 'post',
                 data: datastring,
@@ -1188,6 +1193,26 @@ $(function() {
                 $('#suiteadonner_edit').val(data.suiteadonner);
                 $('#suitedonnee_edit').val(data.suitedonnee);
                 $('#instruct_edit').val(data.instruct);
+            },
+            error: function(data) {
+                $("#contenu").html(data.responseText);
+            }
+        });
+        
+    });
+    
+    $('.delete_action').live("click", function() {
+        var idAction = $(this).attr('idAction');
+        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
+        var datastring = 'id='+idAction+'&idIndividu='+idIndividu;
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            data: datastring,
+            url: './index.php?p=deleteaction',
+            cache: false,
+            success: function(data) {
+                $("#contenu").html(data);
             },
             error: function(data) {
                 $("#contenu").html(data.responseText);

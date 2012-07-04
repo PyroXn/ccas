@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors','On');
 
 include_once('./lib/config.php');
 
@@ -183,6 +185,10 @@ switch (@$_GET['p']) {
     case 'updateaction':
         include_once('./pages/action.php');
         updateAction();
+        break;
+    case 'deleteaction':
+        include_once('./pages/action.php');
+        deleteAction();
         break;
     case 'updatedecisioninterne':
         include_once('./pages/aide.php');

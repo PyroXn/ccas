@@ -39,7 +39,7 @@ class Individu extends Doctrine_Record
         $this->hasColumn('numAllocataireCaf', 'string', 20, array('notnull' => true, 'default' => ''));
         $this->hasColumn('idLienFamille', 'integer', 5);               //cle etrangere
         $this->hasColumn('idCaisseCaf', 'integer', 5);            //cle etrangere ==> A FAIRE
-        $this->hasColumn('idNiveauEtude', 'integer', 5);          //cle etrangere
+        $this->hasColumn('idNiveauEtude', 'integer', 5, array('notnull' => true, 'default' => '0'));          //cle etrangere
         $this->hasColumn('idProfession', 'integer', 5);           //cle etrangere
         $this->hasColumn('idCaisseMut', 'integer', 5);            //cle etrangere ==> A FAIRE
         $this->hasColumn('idCaisseSecu', 'integer', 5);           //cle etrangere == A FAIRE

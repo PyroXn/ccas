@@ -42,6 +42,7 @@ function action() {
             <td>';
         if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_MODIFICATION_ACTION)) {
             $contenu .= '<span class="edit_action" idAction="'.$action->id.'"></span>';
+            $contenu .= '<span class="delete_action" idAction="'.$action->id.'"></span>';
         }
         $contenu .= '</td>
         </tr>';
@@ -196,4 +197,14 @@ function updateAction() {
     
     echo action();
 }
+
+function deleteAction() {
+    include_once('./lib/config.php');
+    $action = Doctrine_Core::getTable('action')->find($_POST['id']);
+    $action->delete();
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Suppression, 'action', $_SESSION['userId'], $action->idIndividu);
+    echo action();
+}
+
 ?>

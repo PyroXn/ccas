@@ -86,7 +86,7 @@ function getAnneeAndMois($arrayTimestamp) {
 }
 
 function executeQueryFile($filesql) {
-                   mysql_connect("localhost", "root", "root");
+                   mysql_connect("localhost", "root", "");
                    mysql_select_db("ccas");
 	$query = file_get_contents($filesql);
 	$array = explode(";\n", $query);
@@ -100,6 +100,25 @@ function executeQueryFile($filesql) {
 	}
 	
 	return $b;
+}
+
+/**
+ *
+ * @param type $valeur
+ * @param type $objet
+ * @param type $attribut Set la donnée si != null
+ */
+function setWithoutNull($valeur, $objet, $attribut) {
+    if ($valeur != '' && $valeur != ' ' && $valeur != null) {
+        $objet->$attribut = $valeur;
+    } 
+}
+
+function setDateWithoutNull($valeur, $objet, $attribut) {
+    if ($valeur != 0 && $valeur != '' && $valeur != ' ' && $valeur != null) {
+        $date1 = explode('/', $valeur);
+        $objet->$attribut = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
+    }
 }
 
 ?>

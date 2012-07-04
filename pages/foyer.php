@@ -136,7 +136,7 @@ function generateInfoFoyer($foyer) {
                         <span class="attribut">Instructeur :</span>
                         <div class="select classique" role="select_instruct" disabled>';
 $retour .= verifieValeurNull($foyer->idInstruct) ? '
-                            <div id="instruct" class="option">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
+                            <div id="instruct" class="option" value="">-----</div>':'<div id="instruct" class="option" value="'.$foyer->idInstruct.'">'.$foyer->instruct->nom.'</div>';
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span class="attribut">Situation familiale :</span>
                         <div class="select classique" role="select_sit_fam" disabled>';
     $retour .= verifieValeurNull($foyer->idSitFam) ? '
-                            <div id="sitfam" class="option">-----</div>':'<div id="sitfam" class="option" value="'.$foyer->idSitFam.'">'.$foyer->situationfamiliale->situation.'</div>';
+                            <div id="sitfam" class="option" value="">-----</div>':'<div id="sitfam" class="option" value="'.$foyer->idSitFam.'">'.$foyer->situationfamiliale->situation.'</div>';
     $retour .= '            <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span class="attribut">Secteur :</span>
                         <div class="select classique" role="select_secteur" disabled>';
     $retour .= verifieValeurNull($foyer->idSecteur) ? '
-                            <div id="secteur" class="option">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
+                            <div id="secteur" class="option" value="">-----</div>':'<div id="secteur" class="option" value="'.$foyer->idSecteur.'">'.$foyer->secteur->secteur.'</div>';
     $retour .= '            <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -194,7 +194,7 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span class="attribut">Type :</span>
                         <div class="select classique" role="select_typelogement" disabled>';
 $retour .= verifieValeurNull($foyer->typeLogement) ? '
-                            <div id="typelogement" class="option">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
+                            <div id="typelogement" class="option" value="">-----</div>':'<div id="typelogement" class="option" value="'.$foyer->typeLogement.'">'.$foyer->typelogement->libelle.'</div>';
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -204,7 +204,7 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span class="attribut">Statut :</span>
                         <div class="select classique" role="select_statutlogement" disabled>';
 $retour .= verifieValeurNull($foyer->typeAppartenance) ? '
-                            <div id="statutlogement" class="option">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
+                            <div id="statutlogement" class="option" value="">-----</div>':'<div id="statutlogement" class="option" value="'.$foyer->typeAppartenance.'">'.$foyer->statutlogement->libelle.'</div>';
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -220,7 +220,7 @@ $retour .= '                <div class="fleche_bas"> </div>
                         <span class="attribut">Bailleur :</span>
                         <div class="select classique" role="select_bailleur" disabled>';
 $retour .= verifieValeurNull($foyer->idBailleur) ? '
-                            <div id="bailleur" class="option">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nombailleur.'</div>';
+                            <div id="bailleur" class="option" value="">-----</div>':'<div id="bailleur" class="option" value="'.$foyer->idBailleur.'">'.$foyer->bailleur->nombailleur.'</div>';
 $retour .= '                <div class="fleche_bas"> </div>
                         </div>
                     </div>
@@ -389,23 +389,18 @@ function situationFinanciere($idFoyer) {
 function updateFoyer() {
     include_once('./lib/config.php');
     $foyer = Doctrine_Core::getTable('foyer')->find($_POST['idFoyer']);
-    $foyer->numRue = $_POST['numrue'];
-    $foyer->idRue = $_POST['rue'];
-    $foyer->idSecteur = $_POST['secteur'];
-    $foyer->idVille = $_POST['ville'];
-    $foyer->idBailleur = $_POST['bailleur'];
-    $foyer->typeLogement = $_POST['type'];
-    $foyer->typeAppartenance = $_POST['statut'];
-    $foyer->logSurface = $_POST['surface'];
-    $foyer->idInstruct = $_POST['instruct'];
-    $foyer->idSitFam = $_POST['sitfam'];
-    $foyer->notes = $_POST['notes'];
-    if($_POST['dateentree'] != 0) {
-        $date = explode('/', $_POST['dateentree']);
-        $foyer->logDateArrive = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
-    } else {
-        $foyer->logDateArrive = 0;
-    }
+    setWithoutNull($_POST['numrue'], $foyer, 'numRue');
+    setWithoutNull($_POST['rue'], $foyer, 'idRue');
+    setWithoutNull($_POST['secteur'], $foyer, 'idSecteur');
+    setWithoutNull($_POST['ville'], $foyer, 'idVille');
+    setWithoutNull($_POST['bailleur'], $foyer, 'idBailleur');
+    setWithoutNull($_POST['type'], $foyer, 'typeLogement');
+    setWithoutNull($_POST['statut'], $foyer, 'typeAppartenance');
+    setWithoutNull($_POST['surface'], $foyer, 'logSurface');
+    setWithoutNull($_POST['instruct'], $foyer, 'idInstruct');
+    setWithoutNull($_POST['sitfam'], $foyer, 'idSitFam');
+    setWithoutNull($_POST['notes'], $foyer, 'notes');
+    setDateWithoutNull($_POST['dateentree'], $foyer, 'logDateArrive');
     $foyer->save();
     
     include_once('./pages/historique.php');
@@ -418,9 +413,9 @@ function creationFoyer($civilite, $nom, $prenom) {
     $foyer->dateInscription = time();
     $foyer->save();
     $individu = new Individu();
-    $individu->civilite = $civilite;
-    $individu->nom = $nom;
-    $individu->prenom = $prenom;
+    setWithoutNull($civilite, $individu, 'civilite');
+    setWithoutNull($nom, $individu, 'nom');
+    setWithoutNull($prenom, $individu, 'prenom');
     $individu->chefDeFamille = true;
     $individu->idFoyer = $foyer->id;
     $individu->save();
