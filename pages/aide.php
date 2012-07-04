@@ -182,7 +182,7 @@ function detailAideInterne() {
             <div class="affichage_classique">
                 <h2>Instructeur : </h2>
                 <div class="select classique" role="select_instruct2">
-                    <div id="instruct" class="option requis">'.$aideInterne->instruct->nom.'</div>
+                    <div id="instruct" class="option">'.$aideInterne->instruct->nom.'</div>
                     <div class="fleche_bas"> </div>
                 </div>
             </div>

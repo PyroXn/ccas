@@ -45,12 +45,12 @@
             <td colspan="2"></td>
         </tr>
         <tr>
-            <td>&nbsp;à précompter</td>
+            <td>&nbsp;&agrave; précompter</td>
             <td colspan="2"></td>
         </tr>
         <tr>
-            <td>&nbsp;Vu, bon à payer ou à virer<br />&nbsp;pour la somme de :</td>
-            <td>&nbsp;Somme nette à payer ou à<br />&nbsp;virer :</td>
+            <td>&nbsp;Vu, bon &agrave; payer ou &agrave; virer<br />&nbsp;pour la somme de :</td>
+            <td>&nbsp;Somme nette &agrave; payer ou &agrave;<br />&nbsp;virer :</td>
             <td colspan="2"><?php echo $bon->montant; ?></td>
         </tr>
         <tr>
@@ -65,7 +65,7 @@
                 &nbsp;Hayange, le
                 <br /><br /><br /><br /></td>
             <td class="noBorder" colspan="2"><br />
-                &nbsp;paiement à la somme de :<br /><br /><br />
+                &nbsp;paiement &agrave; la somme de :<br /><br /><br />
                 <div width="330" class="separateur"></div><br />
                 &nbsp;Le Président du C.C.A.S.<br />
                 &nbsp;Par délégation, la Vice-Présidente<br />
@@ -122,12 +122,12 @@
             <td colspan="2"></td>
         </tr>
         <tr>
-            <td>&nbsp;à précompter</td>
+            <td>&nbsp;&agrave; précompter</td>
             <td colspan="2"></td>
         </tr>
         <tr>
-            <td>&nbsp;Vu, bon à payer ou à virer<br />&nbsp;pour la somme de :</td>
-            <td>&nbsp;Somme nette à payer ou à<br />&nbsp;virer :</td>
+            <td>&nbsp;Vu, bon &agrave; payer ou &agrave; virer<br />&nbsp;pour la somme de :</td>
+            <td>&nbsp;Somme nette &agrave; payer ou &agrave;<br />&nbsp;virer :</td>
             <td colspan="2"><?php echo $bon->montant; ?></td>
         </tr>
         <tr>
@@ -142,7 +142,7 @@
                 &nbsp;Hayange, le
                 <br /><br /><br /><br /></td>
             <td class="noBorder" colspan="2"><br />
-                &nbsp;paiement à la somme de :<br /><br /><br />
+                &nbsp;paiement &agrave; la somme de :<br /><br /><br />
                 <div width="330" class="separateur"></div><br />
                 &nbsp;Le Président du C.C.A.S.<br />
                 &nbsp;Par délégation, la Vice-Présidente<br />

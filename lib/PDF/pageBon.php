@@ -53,7 +53,7 @@
     </table>
     <div id="footer">
         La facture datée, arrêtée en toutes lettres doit être présentée en DEUX exemplaires, au plus tard dans le mois qui suit l'exécution de la
-        commande. Le volet sera obligatoirement joint à la facture, <b>accompagné d'un relevé d'identité bancaire</b>, adressés en mairie, à
+        commande. Le volet sera obligatoirement joint &agrave; la facture, <b>accompagné d'un relevé d'identité bancaire</b>, adressés en mairie, &agrave;
         Monsieur le Président du C.C.A.S., Place de la Résistance et de la Déportation 57701 HAYANGE CEDEX.
     </div>
     <div class="espace"></div>
@@ -111,7 +111,7 @@
     </table>
     <div id="footer">
         La facture datée, arrêtée en toutes lettres doit être présentée en DEUX exemplaires, au plus tard dans le mois qui suit l'exécution de la
-        commande. Le volet sera obligatoirement joint à la facture, <b>accompagné d'un relevé d'identité bancaire</b>, adressés en mairie, à
+        commande. Le volet sera obligatoirement joint &agrave; la facture, <b>accompagné d'un relevé d'identité bancaire</b>, adressés en mairie, &agrave;
         Monsieur le Président du C.C.A.S., Place de la Résistance et de la Déportation 57701 HAYANGE CEDEX.
     </div>
     <div class="espace"></div>
@@ -169,7 +169,7 @@
     </table>
     <div id="footer">
         La facture datée, arrêtée en toutes lettres doit être présentée en DEUX exemplaires, au plus tard dans le mois qui suit l'exécution de la
-        commande. Le volet sera obligatoirement joint à la facture, <b>accompagné d'un relevé d'identité bancaire</b>, adressés en mairie, à
+        commande. Le volet sera obligatoirement joint &agrave; la facture, <b>accompagné d'un relevé d'identité bancaire</b>, adressés en mairie, &agrave;
         Monsieur le Président du C.C.A.S., Place de la Résistance et de la Déportation 57701 HAYANGE CEDEX.
     </div>
 </page>
