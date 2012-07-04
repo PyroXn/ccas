@@ -181,48 +181,72 @@ function detailAideInterne() {
             </div>
             <div class="affichage_classique">
                 <h2>Instructeur : </h2>
-                <div class="select classique" role="select_instruct2">
-                    <div id="instruct" class="option">'.$aideInterne->instruct->nom.'</div>
-                    <div class="fleche_bas"> </div>
+                <div class="aff">
+                    <div class="select classique" role="select_instruct2">
+                        <div id="instruct" class="option">'.$aideInterne->instruct->nom.'</div>
+                        <div class="fleche_bas"> </div>
+                    </div>
                 </div>
             </div>
             <div class="affichage_classique">
                 <h2>Date demande : </h2>
-                <div class="aff">'.getDatebyTimestamp($aideInterne->dateDemande).'</div>
+                <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDemande" size="10" '.getDatebyTimestampInput($aideInterne->dateDemande).'></div>
             </div>
         </div>
         <div class="colonne_classique">
             <div class="affichage_classique">
                 <h2>Aide demandée : </h2>
-                <div class="aff">'.$aideInterne->typeAideDemandee->libelle.'</div>
+                <div class="aff">
+                    <div class="select classique" role="select_typeaide_interne">
+                        <div id="typeaideinterne" class="option">'.$aideInterne->typeAideDemandee->libelle.'</div>
+                        <div class="fleche_bas"> </div>
+                    </div>
+                </div>
             </div>
             <div class="affichage_classique">
                 <h2>Organisme : </h2>
-                <div class="aff">'.$aideInterne->organisme->appelation.'</div>
+                <div class="aff">
+                    <div class="select classique" role="select_orga">
+                        <div id="orga" class="option requis">'.$aideInterne->organisme->appelation.'</div>
+                        <div class="fleche_bas"> </div>
+                    </div>
+                </div>
             </div>
             <div class="affichage_classique">
                 <h2>Nature : </h2>
-                <div class="aff">'.$aideInterne->natureAide->libelle.'</div>
+                <div class="aff">
+                    <div class="select classique" role="select_nature_interne">
+                        <div id="nature" class="option requis">'.$aideInterne->natureAide->libelle.'</div>
+                        <div class="fleche_bas"> </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="colonne_classique">
             <div class="affichage_classique">
                 <h2>Etat : </h2>
-                <div class="aff">'.$aideInterne->etat.'</div>
+                <div class="aff">
+                    <div class="select classique" role="select_etat">
+                        <div id="etat" class="option requis">'.$aideInterne->etat.'</div>
+                        <div class="fleche_bas"> </div>
+                    </div>
+                </div>
             </div>
             <div class="affichage_classique">
                 <h2>Aide urgente : </h2>
                 <div class="aff">';
                 if($aideInterne->aideUrgente == 1) {
-                    $testaffichage .= '<span id="aideUrgente" class="checkbox checkbox_active" value="1" disabled></span>';
+                    $testaffichage .= '<span id="aideUrgente" class="checkbox checkbox_active" value="1"></span>';
                 } else {
-                    $testaffichage .= '<span id="aideUrgente" class="checkbox" value="0" disabled></span>';
+                    $testaffichage .= '<span id="aideUrgente" class="checkbox" value="0"></span>';
                 }
                 $testaffichage .='</div>
             </div>
             <div class="affichage_classique">
                 <h2>Proposition : </h2>
-                <div class="aff">'.$aideInterne->proposition.'</div>
+                <div class="aff">
+                    <input class="contour_field input_num" type="text" id="quantiteaide" value="'. $aideInterne->proposition .'">
+                </div>
             </div>
         </div>
                          ';
