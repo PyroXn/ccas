@@ -148,18 +148,13 @@ function action() {
 function createAction($date, $typeaction, $motif, $suiteadonner, $suitedonnee, $idInstruct, $idIndividu) {
     include_once('./lib/config.php');
     $action = new Action();
-    if($date != 0) {
-        $date1 = explode('/', $date);
-        $action->date = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    } else {
-        $action->date = 0;
-    }
-    $action->idAction = $typeaction;
-    $action->motif = $motif;
-    $action->suiteADonner = $suiteadonner;
-    $action->suitedonnee = $suitedonnee;
-    $action->idInstruct = $idInstruct;
-    $action->idIndividu = $idIndividu;
+    setDateWithoutNull($date, $action, 'date');
+    setWithoutNull($typeaction, $action, 'idAction');
+    setWithoutNull($motif, $action, 'motif');
+    setWithoutNull($suiteadonner, $action, 'suiteADonner');
+    setWithoutNull($suitedonnee, $action, 'suitedonnee');
+    setWithoutNull($idInstruct, $action, 'idInstruct');
+    setWithoutNull($idIndividu, $action, 'idIndividu');
     $action->save();
     
     include_once('./pages/historique.php');
@@ -181,15 +176,10 @@ function getAction() {
 function updateAction() {
     include_once('./lib/config.php');
     $action = Doctrine_Core::getTable('action')->find($_POST['idAction']);
-    $action->motif = $_POST['motif'];
-    $action->suiteADonner = $_POST['suiteadonner'];
-    $action->suitedonnee = $_POST['suitedonnee'];
-    if($_POST['date'] != 0) {
-        $date1 = explode('/', $_POST['date']);
-        $action->date = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    } else {
-        $action->date = 0;
-    }
+    setWithoutNull($_POST['motif'], $action, 'motif');
+    setWithoutNull($_POST['suiteadonner'], $action, 'suiteADonner');
+    setWithoutNull($_POST['suitedonnee'], $action, 'suitedonnee');
+    setDateWithoutNull($_POST['date'], $action, 'date');
     $action->save();
     
     include_once('./pages/historique.php');

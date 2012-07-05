@@ -533,41 +533,31 @@ function rapportSocial($idAide) {
 
 function createAideInterne($typeAide, $date, $instruct, $nature, $proposition, $etat, $idIndividu, $organisme, $urgence) {
     $aide = new AideInterne();
-    if($date != 0) {
-        $date1 = explode('/', $date);
-        $aide->dateDemande = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    } else {
-        $aide->dateDemande = 0;
-    }
-    $aide->nature = $nature;
-    $aide->idAideDemandee = $typeAide;
-    $aide->idInstruct = $instruct;
-    $aide->etat = $etat;
-    $aide->proposition = $proposition;
-    $aide->idIndividu = $idIndividu;
-    $aide->idOrganisme = $organisme;
-    $aide->aideUrgente = $urgence;
+    setDateWithoutNull($date, $aide, 'dateDemande');
+    setWithoutNull($nature, $aide, 'nature');
+    setWithoutNull($typeAide, $aide, 'idAideDemandee');
+    setWithoutNull($instruct, $aide, 'idInstruct');
+    setWithoutNull($etat, $aide, 'etat');
+    setWithoutNull($proposition, $aide, 'proposition');
+    setWithoutNull($idIndividu, $aide, 'idIndividu');
+    setWithoutNull($organisme, $aide, 'idOrganisme');
+    setWithoutNull($urgence, $aide, 'aideUrgente');
     $aide->save();
 //    createPDFRapportSocial($idIndividu);
 }
 
 function createAideExterne($typeAide, $date, $instruct, $nature, $idDistrib, $etat, $idIndividu, $organisme, $urgence, $montantDemande) {
     $aide = new AideExterne();
-    if($date != 0) {
-        $date1 = explode('/', $date);
-        $aide->dateDemande = mktime(0, 0, 0, $date[1], $date1[0], $date1[2]);
-    } else {
-        $aide->dateDemande = 0;
-    }
-    $aide->nature = $nature;
-    $aide->idAideDemandee = $typeAide;
-    $aide->idInstruct = $instruct;
-    $aide->etat = $etat;
-    $aide->idDistrib = $idDistrib;
-    $aide->idIndividu = $idIndividu;
-    $aide->idOrganisme = $organisme;
-    $aide->aideUrgente = $urgence;
-    $aide->montantDemande = $montantDemande;
+    setDateWithoutNull($date, $aide, 'dateDemande');
+    setWithoutNull($nature, $aide, 'nature');
+    setWithoutNull($typeAide, $aide, 'idAideDemandee');
+    setWithoutNull($instruct, $aide, 'idInstruct');
+    setWithoutNull($etat, $aide, 'etat');
+    setWithoutNull($idDistrib, $aide, 'idDistrib');
+    setWithoutNull($idIndividu, $aide, 'idIndividu');
+    setWithoutNull($organisme, $aide, 'idOrganisme');
+    setWithoutNull($urgence, $aide, 'aideUrgente');
+    setWithoutNull($montantDemande, $aide, 'montantDemande');
     $aide->save();
     
     include_once('./pages/historique.php');
@@ -577,22 +567,17 @@ function createAideExterne($typeAide, $date, $instruct, $nature, $idDistrib, $et
 function updateDecisionInterne() {
     include_once('./lib/config.php');
     $aide = Doctrine_Core::getTable('aideinterne')->find($_POST['idAide']);
-    $aide->idAideAccordee = $_POST['aide'];
-    if($_POST['date'] != 0) {
-        $date1 = explode('/', $_POST['date']);
-        $aide->dateDecision = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    } else {
-        $aide->dateDecision = 0;
-    }
-    $aide->avis = $_POST['avis'];
-    $aide->vigilance = $_POST['vigilance'];
-    $aide->commentaire = $_POST['commentaire'];
-    $aide->rapport = $_POST['rapport'];
-    $aide->idDecideur = $_POST['decideur'];
+    setWithoutNull($_POST['aide'], $aide, 'idAideAccordee');
+    setDateWithoutNull($_POST['date'], $aide, 'dateDecision');
+    setWithoutNull($_POST['avis'], $aide, 'avis');
+    setWithoutNull($_POST['vigilance'], $aide, 'vigilance');
+    setWithoutNull($_POST['commentaire'], $aide, 'commentaire');
+    setWithoutNull($_POST['rapport'], $aide, 'rapport');
+    setWithoutNull($_POST['decideur'], $aide, 'idDecideur');
+    setWithoutNull($_POST['montant'], $aide, 'montant');
+    setWithoutNull($_POST['montanttotal'], $aide, 'montanttotal');
+    setWithoutNull($_POST['quantite'], $aide, 'quantite');
     $aide->etat = 'Terminé';
-    $aide->montant = $_POST['montant'];
-    $aide->montanttotal = $_POST['montanttotal'];
-    $aide->quantite = $_POST['quantite'];
     $aide->save();
     
     include_once('./pages/historique.php');
@@ -606,15 +591,10 @@ function updateDecisionInterne() {
 function updateDecisionExterne() {
     include_once('./lib/config.php');
     $aide = Doctrine_Core::getTable('aideexterne')->find($_POST['idAide']);
-    $aide->montantPercu = $_POST['montantPercu'];
-    if($_POST['dateDecision'] != 0) {
-        $date1 = explode('/', $_POST['dateDecision']);
-        $aide->dateDecision = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    } else {
-        $aide->dateDecision = 0;
-    }
-    $aide->avis = $_POST['avis'];
-    $aide->commentaire = $_POST['commentaire'];
+    setWithoutNull($_POST['montantPercu'], $aide, 'montantPercu');
+    setDateWithoutNull($_POST['dateDecision'], $aide, 'dateDecision');
+    setWithoutNull($_POST['avis'], $aide, 'avis');
+    setWithoutNull($_POST['commentaire'], $aide, 'commentaire');
     $aide->etat = 'Terminé';
     $aide->save();
     
@@ -629,21 +609,13 @@ function updateDecisionExterne() {
 function addBonInterne($idAide, $idInstruct, $datePrevue, $dateEffective, $montant, $commentaire, $typeBon) {
     include_once('./lib/config.php');
     $bon = new BonAide();
-    $bon->idAideInterne = $idAide;
-    $bon->idInstruct = $idInstruct;
-    if($datePrevue != 0) {
-        $date1 = explode('/', $datePrevue);
-        $bon->dateRemisePrevue = mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
-    } else {
-        $bon->dateRemisePrevue = 0;
-    }
-    if($dateEffective != 0) {
-        $date2 = explode('/', $dateEffective);
-        $bon->dateRemiseEffective = mktime(0, 0, 0, $date2[1], $date2[0], $date2[2]);
-    }
-    $bon->montant = $montant;
-    $bon->commentaire = $commentaire;
-    $bon->typeBon = $typeBon;
+    setWithoutNull($idAide, $bon, 'idAideInterne');
+    setWithoutNull($idInstruct, $bon, 'idInstruct');
+    setDateWithoutNull($datePrevue, $bon, 'dateRemisePrevue');
+    setDateWithoutNull($dateEffective, $bon, 'dateRemiseEffective');
+    setWithoutNull($montant, $bon, 'montant');
+    setWithoutNull($commentaire, $bon, 'commentaire');
+    setWithoutNull($typeBon, $bon, 'typeBon');
     $bon->save();
     
     include_once('./pages/historique.php');
