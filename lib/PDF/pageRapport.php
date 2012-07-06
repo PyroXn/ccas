@@ -175,7 +175,7 @@
             <td>Invalidité</td>
             <td><?php echo $ressource->pensionInvalide; ?></td>
             <td class="large"><b>TOTAL CHARGES MENSUELLES (A)</b></td>
-            <td class="large"><b><?php echo array_sum(array($depense->loyer, $depense->gaz, $depense->electricite, $depense->eau, $depense->mutuelle, $depense->impotRevenu, $depense->autreDepense, $depense->impotLocaux, $depense->pensionAlim, $depense->telephonie, $depense->assuranceVoiture, $depense->assuranceHabitation, $depense->autreDepense)); ?></b></td>
+            <td class="large"><b><?php echo array_sum(array($depense->loyer, $depense->gaz, $depense->electricite, $depense->eau, $depense->mutuelle, $depense->impotRevenu, $depense->impotLocaux, $depense->pensionAlim, $depense->telephonie, $depense->assuranceVoiture, $depense->assuranceHabitation, $depense->autreDepense)); ?></b></td>
         </tr>
         <tr>
             <td>Pension alimentaire</td>

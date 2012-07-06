@@ -173,6 +173,10 @@ function detailAideInterne() {
     $typesaides = Doctrine_Core::getTable('type')->findByidlibelletype(1);
     $decideurs = Doctrine_Core::getTable('decideur')->findAll();
     
+    $organismes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(5);
+    $natures = Doctrine_Core::getTable('type')->findByidlibelletype(5); //nature
+    $allinstructs =  Doctrine_Core::getTable('instruct')->findByActifAndInterne(1, 1);
+    
     $testaffichage = '
         <div class="colonne_classique">
             <div class="affichage_classique">
@@ -182,7 +186,7 @@ function detailAideInterne() {
             <div class="affichage_classique">
                 <h2>Instructeur : </h2>
                 <div class="aff">
-                    <div class="select classique" role="select_instruct2">
+                    <div class="select classique" role="select_instruct2" disabled>
                         <div id="instruct" class="option">'.$aideInterne->instruct->nom.'</div>
                         <div class="fleche_bas"> </div>
                     </div>
@@ -190,14 +194,14 @@ function detailAideInterne() {
             </div>
             <div class="affichage_classique">
                 <h2>Date demande : </h2>
-                <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDemande" size="10" '.getDatebyTimestampInput($aideInterne->dateDemande).'></div>
+                <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDemande" size="10" '.getDatebyTimestampInput($aideInterne->dateDemande).' disabled></div>
             </div>
         </div>
         <div class="colonne_classique">
             <div class="affichage_classique">
                 <h2>Aide demandée : </h2>
                 <div class="aff">
-                    <div class="select classique" role="select_typeaide_interne">
+                    <div class="select classique" role="select_typeaide_interne" disabled>
                         <div id="typeaideinterne" class="option">'.$aideInterne->typeAideDemandee->libelle.'</div>
                         <div class="fleche_bas"> </div>
                     </div>
@@ -206,7 +210,7 @@ function detailAideInterne() {
             <div class="affichage_classique">
                 <h2>Organisme : </h2>
                 <div class="aff">
-                    <div class="select classique" role="select_orga">
+                    <div class="select classique" role="select_orga" disabled>
                         <div id="orga" class="option requis">'.$aideInterne->organisme->appelation.'</div>
                         <div class="fleche_bas"> </div>
                     </div>
@@ -215,7 +219,7 @@ function detailAideInterne() {
             <div class="affichage_classique">
                 <h2>Nature : </h2>
                 <div class="aff">
-                    <div class="select classique" role="select_nature_interne">
+                    <div class="select classique" role="select_nature_interne" disabled>
                         <div id="nature" class="option requis">'.$aideInterne->natureAide->libelle.'</div>
                         <div class="fleche_bas"> </div>
                     </div>
@@ -226,7 +230,7 @@ function detailAideInterne() {
             <div class="affichage_classique">
                 <h2>Etat : </h2>
                 <div class="aff">
-                    <div class="select classique" role="select_etat">
+                    <div class="select classique" role="select_etat" disabled>
                         <div id="etat" class="option requis">'.$aideInterne->etat.'</div>
                         <div class="fleche_bas"> </div>
                     </div>
@@ -236,23 +240,27 @@ function detailAideInterne() {
                 <h2>Aide urgente : </h2>
                 <div class="aff">';
                 if($aideInterne->aideUrgente == 1) {
-                    $testaffichage .= '<span id="aideUrgente" class="checkbox checkbox_active" value="1"></span>';
+                    $testaffichage .= '<span id="aideUrgente" class="checkbox checkbox_active" value="1" disabled></span>';
                 } else {
-                    $testaffichage .= '<span id="aideUrgente" class="checkbox" value="0"></span>';
+                    $testaffichage .= '<span id="aideUrgente" class="checkbox" value="0" disabled></span>';
                 }
                 $testaffichage .='</div>
             </div>
             <div class="affichage_classique">
                 <h2>Proposition : </h2>
                 <div class="aff">
-                    <input class="contour_field input_num" type="text" id="quantiteaide" value="'. $aideInterne->proposition .'">
+                    <input class="contour_field input_num" type="text" id="quantiteaide" value="'. $aideInterne->proposition .'" disabled>
                 </div>
             </div>
-        </div>
-                         ';
+        </div>';
     
-    $contenu = "<h3>Fiche d'aide interne :</h3>";
-    $contenu .= '<ul class="list_classique"><li class="ligne_list_classique">'.$testaffichage.'</li></ul>';
+    $contenu = "<div><h3><span>Fiche d'aide interne :</span><span class='edit'></span></h3>";
+    $contenu .= '<ul class="list_classique"><li class="ligne_list_classique">'.$testaffichage.'</li></ul>
+                <div value="updateDetailAideInterne" class="bouton modif update">
+                    <i class="icon-save"></i>
+                    <span>Enregistrer</span>
+                </div>
+                <div class="clearboth"></div></div>';
             
         if($aideInterne->avis == null) {
             if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_APPORTER_DECISION)) {
@@ -443,6 +451,36 @@ function detailAideInterne() {
                 <div value="Refusé">Refusé</div>
             </li>
         </ul>';
+    $contenu .= '
+        <ul class="select_etat">
+            <li>
+                <div value="En cours">En cours</div>
+            </li>
+            <li>
+                <div value="Terminé">Terminé</div>
+            </li>
+        </ul>';
+    $contenu .= '<ul class="select_instruct2">';
+    foreach($allinstructs as $allinstruct) {
+        $contenu .= '<li>
+                                <div value="'.$allinstruct->id.'">'.$allinstruct->nom.'</div>
+                           </li>';
+    }
+    $contenu .= '</ul>';
+    $contenu .= '<ul class="select_nature_interne">';
+    foreach($natures as $nature) {
+    $contenu .= '<li>
+                                <div value="'.$nature->id.'">'.$nature->libelle.'</div>
+                            </li>';
+    }
+    $contenu .= '</ul>';
+    $contenu .= '<ul class="select_orga">';
+    foreach($organismes as $organisme) {
+    $contenu .= '<li>
+                                <div value="'.$organisme->id.'">'.$organisme->appelation.'</div>
+                            </li>';
+    }
+    $contenu .= '</ul>';
     $contenu .= '<ul class="select_typeaide_interne">';
     foreach($typesaides as $type) {
     $contenu .= '<li>
@@ -838,7 +876,7 @@ function aideExterne() {
 function detailAideExterne() {
     $aideExterne = Doctrine_Core::getTable('aideexterne')->findOneById($_POST['idAide']);
     
-    $contenu = "<h3>Fiche d'aide externe :</h3>";
+    $contenu = "<h3><span>Fiche d'aide externe :</span><span class='edit'></span></h3>";
     $contenu .= '<ul class="list_classique">
                     <li class="ligne_list_classique">
                         <div class="colonne_classique">
@@ -848,7 +886,12 @@ function detailAideExterne() {
                             </div>
                             <div class="affichage_classique">
                                 <h2>Instructeur : </h2>
-                                <div class="aff">'.$aideExterne->instruct->nom.'</div>
+                                <div class="aff">
+                                    <div class="select classique" role="select_instruct" disabled>
+                                        <div id="instructexterne" class="option">'.$aideExterne->instruct->nom.'</div>
+                                        <div class="fleche_bas"> </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="affichage_classique">
                                 <h2>Date demande : </h2>
@@ -893,7 +936,12 @@ function detailAideExterne() {
                                 <div class="aff">'.$aideExterne->distrib->appelation.'</div>
                             </div>
                         </div>
-                    </li></ul>';
+                    </li></ul>
+                    <div value="updateDetailAideInterne" class="bouton modif update">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div class="clearboth"></div></div>';
         if($aideExterne->avis == null) {
             if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_APPORTER_DECISION)) {
                 $contenu .= '
