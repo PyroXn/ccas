@@ -1084,9 +1084,10 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
     $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($idIndividu);
     $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($idIndividu);
     $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($idIndividu);
-    $credit = Doctrine_Core::getTable('credit')->find($idIndividu);
+    $credit = Doctrine_Core::getTable('credit')->findByIdindividu($idIndividu);
     $famille = $individu->foyer->individu;
     $salaireEnfant = 0;
+    $creditMensuel = 0;
     $totalCredit = 0;
     $nbEnfant = 0; 
     $salaireConjoint = 0;
@@ -1096,7 +1097,8 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
     }
     if($credit != null) {
         foreach($credit as $c) {
-            $totalCredit += $c->mensualite;
+            $creditMensuel += $c->mensualite;
+            $totalCredit += $c->totalRestant;
         }
     }
     foreach($famille as $f) {

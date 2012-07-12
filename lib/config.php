@@ -86,7 +86,7 @@ function getAnneeAndMois($arrayTimestamp) {
 }
 
 function executeQueryFile($filesql) {
-                   mysql_connect("localhost", "root", "");
+                   mysql_connect("localhost", "root", "root");
                    mysql_select_db("ccas");
 	$query = file_get_contents($filesql);
 	$array = explode(";\n", $query);

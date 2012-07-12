@@ -185,30 +185,30 @@
         <tr>
             <td>Autres ressources</td>
             <td><?php echo $ressource->autreRevenu; ?></td>
-            <td class="top left" rowspan="2">Total des crédits :</td>
-            <td rowspan="2"><?php echo $totalCredit; ?></td>
+            <td><b>TOTAL CREDITS MENSUELS (B)</b></td>
+            <td><b><?php echo $creditMensuel; ?></b></td>
         </tr>
         <tr>
             <td><b>TOTAL RESSOURCES (A)</b></td>
             <td><b><?php echo array_sum(array($ressource->salaire, $salaireConjoint, $salaireEnfant, $ressource->ijss, $ressource->rsaSocle, $ressource->rsaActivite, $ressource->aah, $ressource->chomage, $ressource->pensionRetraite, $ressource->retraitComp, $ressource->pensionInvalide, $ressource->pensionAlim, $ressource->autreRevenu)); ?></b></td>
+            <td>Total credits</td>
+            <td><?php echo $totalCredit; ?></td>
         </tr>
         <tr>
             <td>Prestations familiales</td>
             <td><?php echo $ressource->revenuAlloc; ?></td>
-            <td><b>TOTAL CREDITS (B)</b></td>
-            <td><b><?php echo $totalCredit; ?></b></td>
+            <td>Total dettes</td>
+            <td><?php echo $totalDette; ?></td>
         </tr>
         <tr>
             <td>AL ou APL</td>
             <td><?php echo $ressource->aideLogement; ?></td>
-            <td><b>TOTAL DETTES (C)</b></td>
-            <td><b><?php echo $totalDette; ?></b></td>
+            <td><b>TOTAL CHARGES (A) + (B)</b></td>
+            <td><b><?php echo $totalCharge = array_sum(array($creditMensuel, $depense->loyer, $depense->gaz, $depense->electricite, $depense->eau, $depense->mutuelle, $depense->impotRevenu, $depense->autreDepense, $depense->impotLocaux, $depense->pensionAlim, $depense->telephonie, $depense->assuranceVoiture, $depense->assuranceHabitation, $depense->autreDepense)); ?></b></td>
         </tr>
         <tr>
             <td><b>TOTAL PRESTATIONS (B)</b></td>
-            <td><b><?php echo $ressource->revenuAlloc+$ressource->aideLogement; ?></b></td>
-            <td><b>TOTAL CHARGES (A) + (B) + (C)</b></td>
-            <td><b><?php echo $totalCharge = array_sum(array($totalCredit, $totalDette, $depense->loyer, $depense->gaz, $depense->electricite, $depense->eau, $depense->mutuelle, $depense->impotRevenu, $depense->autreDepense, $depense->impotLocaux, $depense->pensionAlim, $depense->telephonie, $depense->assuranceVoiture, $depense->assuranceHabitation, $depense->autreDepense)); ?></b></td>
+            <td><b><?php echo $ressource->revenuAlloc+$ressource->aideLogement; ?></b></td>            
         </tr>
         <tr>
             <td><b>TOTAL GENERAL (A) + (B)</b></td>

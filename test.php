@@ -1,25 +1,20 @@
 <?php
 
-//include_once('./lib/config.php');
-//include_once('./lib/PDF/generateTabCommission.php');
-
-$t = '30/06/2012';
-$date1 = explode('/', $t);
-echo $t;
-echo '<br />';
-echo $date1[0];
-echo '<br />';
-echo $date1[1];
-echo '<br />';
-echo $date1[2];
-echo '<br />';
-echo mktime(0, 0, 0, $date1[1], $date1[0], $date1[2]);
 include_once('./lib/config.php');
 //include_once('./lib/PDF/generateTabCommission.php');
-$instructs = Doctrine_Core::getTable('instruct')->findByInterneAndActif(1, 1); // Instruct interne
-foreach($instructs as $instruct) {
-        echo $instruct->nom;
+
+$credit = Doctrine_Core::getTable('credit')->findByIdindividu(7);
+
+$creditMensuel = 0;
+$totalCredit = 0;
+    foreach($credit as $c) {
+        $creditMensuel += $c->mensualite;
+        $totalCredit += $c->totalRestant;
     }
+
+
+echo $creditMensuel;
+echo $totalCredit;
     
 //    $retour = '';
 //    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accept�'));
