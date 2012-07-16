@@ -3,33 +3,37 @@
 include_once('./lib/config.php');
 //include_once('./lib/PDF/generateTabCommission.php');
 
-$dateDebut = date('d/m/Y', time());
-$dateFin = date('d/m/Y', time() + 604800);
+$aide = Doctrine_Core::getTable('aideexterne')->find(63);
 
-$dateDebut = explode('/', $dateDebut);
-$dateFin = explode('/', $dateFin);
-
-$req = Doctrine_Query::create()
-    ->from('aideinterne')
-    ->where('avis = ""')
-    ->andWhere('dateDemande BETWEEN '.mktime(0, 0, 0, $dateDebut[1], $dateDebut[0], $dateDebut[2]).' AND '.mktime(0, 0, 0, $dateFin[1], $dateFin[0], $dateFin[2]));
-       
-    
-//    $req = 'SELECT distinct(datedecision)
-//            FROM aideinterne ai
-//            ORDER BY datedecision DESC
-//            LIMIT 6';
-//    $con = Doctrine_Manager::getInstance()->connection();
-    $st = $req->getSqlQuery();//execute();
-    echo $st.'</br>';
-    
-    foreach($req->execute() as $c) {
-        echo $c->id.'</br>';
-        echo $c->individu->nom.'</br>';
-        echo $c->individu->foyer->numRue.'</br>';
-    }
-
-
+echo $aide->delete();
+//
+//$dateDebut = date('d/m/Y', time());
+//$dateFin = date('d/m/Y', time() + 604800);
+//
+//$dateDebut = explode('/', $dateDebut);
+//$dateFin = explode('/', $dateFin);
+//
+//$req = Doctrine_Query::create()
+//    ->from('aideinterne')
+//    ->where('avis = ""')
+//    ->andWhere('dateDemande BETWEEN '.mktime(0, 0, 0, $dateDebut[1], $dateDebut[0], $dateDebut[2]).' AND '.mktime(0, 0, 0, $dateFin[1], $dateFin[0], $dateFin[2]));
+//       
+//    
+////    $req = 'SELECT distinct(datedecision)
+////            FROM aideinterne ai
+////            ORDER BY datedecision DESC
+////            LIMIT 6';
+////    $con = Doctrine_Manager::getInstance()->connection();
+//    $st = $req->getSqlQuery();//execute();
+//    echo $st.'</br>';
+//    
+//    foreach($req->execute() as $c) {
+//        echo $c->id.'</br>';
+//        echo $c->individu->nom.'</br>';
+//        echo $c->individu->foyer->numRue.'</br>';
+//    }
+//
+//
 
 
 //$credit = Doctrine_Core::getTable('credit')->findByIdindividu(7);

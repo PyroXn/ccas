@@ -3,18 +3,14 @@ function aide() {
     $contenu = aideInterne();
     include_once('./pages/aideExterne.php');
     $contenu .= aideExterne();
-    
     return $contenu;
 }
 
 function aideInterne() {
-    $organismes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(5);
-    $natures = Doctrine_Core::getTable('type')->findByidlibelletype(5);
-    $typesaides = Doctrine_Core::getTable('type')->findByidlibelletype(1);
-    $allinstructs =  Doctrine_Core::getTable('instruct')->findByActifAndInterne(1, 1);
+    $contenu = createCombo();
     $aidesInternes = Doctrine_Core::getTable('aideinterne')->findByIdIndividu($_POST['idIndividu']);
     $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $contenu = '';
+    $contenu .= '';
     if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_CREATION_AIDE_INTERNE)) {
         $contenu .= '
             <div id="createAideInterne" class="bouton ajout" style="margin-right: 20px;">
@@ -68,7 +64,7 @@ function aideInterne() {
                                     } else {
                                         $contenu .= '<td></td>';
                                     }
-                                    $contenu .= '<td><span class="edit_aide_interne" original-title="Afficher toutes les informations"></span> '.rapportExist($chemin, $aideInterne->id).' <span class="delete_aide" original-title="Supprimer l\'aide"></span></td>
+                                    $contenu .= '<td><span class="edit_aide_interne" original-title="Afficher toutes les informations"></span> '.rapportExist($chemin, $aideInterne->id).' <span class="delete_aide aideInterne" original-title="Supprimer l\'aide"></span></td>
                                     
                         </tr>';
         }
@@ -127,59 +123,22 @@ function aideInterne() {
 
        </div>
 </div>';
-    // COMBO BOX
-    $contenu .= '<ul class="select_orga">';
-foreach($organismes as $organisme) {
-    $contenu .= '<li>
-                                <div value="'.$organisme->id.'">'.$organisme->appelation.'</div>
-                            </li>';
-    }
-    $contenu .= '</ul>';
-    $contenu .= '
-        <ul class="select_etat">
-            <li>
-                <div value="En cours">En cours</div>
-            </li>
-            <li>
-                <div value="Terminé">Terminé</div>
-            </li>
-        </ul>';
-    $contenu .= '<ul class="select_typeaide_interne">';
-foreach($typesaides as $type) {
-    $contenu .= '<li>
-                                <div value="'.$type->id.'">'.$type->libelle.'</div>
-                            </li>';
-    }
-    $contenu .= '</ul>';
-    $contenu .= '<ul class="select_instruct2">';
-    foreach($allinstructs as $allinstruct) {
-        $contenu .= '<li>
-                                <div value="'.$allinstruct->id.'">'.$allinstruct->nom.'</div>
-                           </li>';
-    }
-    $contenu .= '</ul>';
-    $contenu .= '<ul class="select_nature_interne">';
-foreach($natures as $nature) {
-    $contenu .= '<li>
-                                <div value="'.$nature->id.'">'.$nature->libelle.'</div>
-                            </li>';
-    }
-    $contenu .= '</ul>';
     return $contenu;
-
 }
 
 function detailAideInterne() {
     $aideInterne = Doctrine_Core::getTable('aideinterne')->findOneById($_POST['idAide']);
-    $retour = headerAideInterne($aideInterne);
+    $retour = headerAideInterne($aideInterne, false);
     $retour .= decisionAideInterne($aideInterne);
     $retour .= createCombo();
     return $retour;
 }
 
 
-function headerAideInterne($aideInterne) {
-    createCombo();
+function headerAideInterne($aideInterne, $chargerCombo) {
+    if ($chargerCombo) {
+        createCombo();
+    }
         $testaffichage = '
         <div class="colonne_classique">
             <div class="affichage_classique">
@@ -482,12 +441,13 @@ function decisionAideInterne($aideInterne) {
 
 function createCombo() {
     $typesaides = Doctrine_Core::getTable('type')->findByidlibelletype(1);
-    $decideurs = Doctrine_Core::getTable('decideur')->findAll();
-    
     $organismes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(5);
     $natures = Doctrine_Core::getTable('type')->findByidlibelletype(5); //nature
     $allinstructs =  Doctrine_Core::getTable('instruct')->findByActifAndInterne(1, 1);
     
+    //decision aideinterne
+    $decideurs = Doctrine_Core::getTable('decideur')->findAll();
+   
     $contenu = '<ul class="select_decideur">';
     foreach($decideurs as $decideur) {
     $contenu .= '<li>
@@ -645,7 +605,7 @@ function updateDetailAideInterne() {
     include_once('./pages/historique.php');
     createHistorique(Historique::$Modification, 'aide interne', $_SESSION['userId'], $aide->idIndividu);
     
-    $retours = headerAideInterne($aide);
+    $retours = headerAideInterne($aide, true);
     $retour = array('aide' => $retours);
     echo json_encode($retour);  
 }
@@ -914,7 +874,12 @@ function docRemis() {
 
 function deleteAide() {
     $idAide = $_POST['idAide'];
-    $aide = Doctrine_Core::getTable('aideinterne')->find($idAide);
+    $interne = $_POST['interne'];
+    if ($interne == 'true') {
+        $aide = Doctrine_Core::getTable('aideinterne')->find($idAide);
+    } else {
+        $aide = Doctrine_Core::getTable('aideexterne')->find($idAide);
+    }
     $aide->delete();
     $aide = aide();
     echo $aide;  

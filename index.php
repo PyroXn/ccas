@@ -242,6 +242,10 @@ switch (@$_GET['p']) {
         include_once('./pages/aideInterne.php');
         updateDetailAideInterne();
         break;
+    case 'updateDetailAideExterne':
+        include_once('./pages/aideExterne.php');
+        updateDetailAideExterne();
+        break;
     default:
         home();
         break;

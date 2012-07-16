@@ -347,7 +347,6 @@ $(function() {
                 });
             }
         } else if(value == 'updateDetailAideInterne') {
-            console.log('updateDetailAideInterne');
             if(findRequis($('#headerAideInterne'))) {
                 var aideUrgente = 0;
                 if($('#aideUrgente').hasClass('checkbox_active')) {
@@ -362,7 +361,6 @@ $(function() {
                 datastring += '&dateDemande='+$('#dateDemande').val();
                 datastring += '&nature='+$('#nature').attr('value');
                 datastring += '&proposition='+$('#proposition').attr('value');
-                console.log(datastring);
                 $.ajax({
                     type: 'post',
                     dataType:'json',
@@ -374,6 +372,37 @@ $(function() {
                     },
                     error: function(aideinterne) {
                         $("#headerAideInterne").html(aideinterne.responseText);
+                    }
+                });
+            }
+        } else if(value == 'updateDetailAideExterne') {
+            if(findRequis($('#headerAideExterne'))) {
+                var aideUrgenteExt = 0;
+                if($('#aideUrgente').hasClass('checkbox_active')) {
+                    aideUrgenteExt = 1;
+                }
+                datastring = 'idIndividu='+idIndividu;
+                datastring += '&idAide='+$('#idAide').attr('value');
+                datastring += '&instructexterne='+$('#instructexterne').attr('value');
+                datastring += '&dateDemande='+$('#dateDemande').val();
+                datastring += '&montantDemande='+$('#montantDemande').val();
+                datastring += '&typeaideexterne='+$('#typeaideexterne').attr('value');
+                datastring += '&orga='+$('#orga').attr('value');
+                datastring += '&nature='+$('#nature').attr('value');
+                datastring += '&etat='+$('#etat').attr('value');
+                datastring += '&aideUrgenteExt='+aideUrgenteExt;
+                datastring += '&distrib='+$('#distrib').attr('value');
+                $.ajax({
+                    type: 'post',
+                    dataType:'json',
+                    data: datastring,
+                    url: './index.php?p=updateDetailAideExterne',
+                    cache: false,
+                    success: function(aideexterne) {
+                        $('#headerAideExterne').html(aideexterne.aide);
+                    },
+                    error: function(aideexterne) {
+                        $("#headerAideExterne").html(aideexterne.responseText);
                     }
                 });
             }
@@ -1273,7 +1302,9 @@ $(function() {
     $('.delete_aide').live("click", function() {
         var idAide = $(this).parent().parent().attr('name');
         var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
-        datastring = 'idAide='+idAide+'&idIndividu='+idIndividu;
+        var interne = $(this).hasClass('aideInterne');
+        var datastring = 'idAide='+idAide+'&idIndividu='+idIndividu+'&interne='+interne;
+        console.log(datastring);
          $.ajax ({
             type: 'post',
             data: datastring,

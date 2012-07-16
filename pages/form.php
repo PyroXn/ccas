@@ -50,6 +50,7 @@ function form() {
             echo json_encode($retour);
             break;
         case 'creation_aide_externe':
+            include_once('./pages/aideInterne.php');
             include_once('./pages/aideExterne.php');
             createAideExterne($_POST['typeaideexterne'], $_POST['date'], $_POST['instruct'], $_POST['natureexterne'], $_POST['distrib'], $_POST['etat'], $_POST['idIndividu'], $_POST['orgaext'], $_POST['urgence'], $_POST['montantDemande']);
             $aide = aide();

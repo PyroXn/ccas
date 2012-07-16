@@ -2,13 +2,7 @@
 
 function aideExterne() {
     $aidesExternes = Doctrine_Core::getTable('aideexterne')->findByIdIndividu($_POST['idIndividu']);
-    $organismesExternes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(6);
-    $naturesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(6);
-    $typesAidesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(7);
-    $instructs =  Doctrine_Core::getTable('instruct')->findByActif(1);
-    $individu = Doctrine_Core::getTable('individu')->find($_POST['idIndividu']);
-    $distributeurs = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(3);
-    $contenu = '';
+    $contenu = createComboExterne();
     $contenu .= '
         <h3>Aides Externes :</h3>
             <div class="bubble tableau_classique_wrapper">
@@ -39,7 +33,7 @@ function aideExterne() {
                                     <td> '.$aideExterne->avis.'</td>
                                     <td> '.$aideExterne->montantPercu.' €</td>
                                     <td> '.getDatebyTimestamp($aideExterne->dateDecision).'</td>
-                                    <td><span class="edit_aide_externe" original-title="Afficher toutes les informations"></span></td>
+                                    <td><span class="edit_aide_externe" original-title="Afficher toutes les informations"></span><span class="delete_aide" original-title="Supprimer l\'aide" aideExterne></span></td>
                         </tr>';
             $i++;
         }
@@ -105,8 +99,189 @@ function aideExterne() {
                         </div>
                    </div>
              </div>';
+    return $contenu;
+}
+
+function detailAideExterne() {
+    $aideExterne = Doctrine_Core::getTable('aideexterne')->findOneById($_POST['idAide']);
+    $retour = headerAideExterne($aideExterne, false);
+    $retour .= decisionAideExterne($aideExterne);
+    $retour .= createComboExterne();
+    return $retour;
+        
+}
+
+function headerAideExterne($aideExterne, $chargerCombo) {
+    if ($chargerCombo) {
+        createComboExterne();
+    }
+    $contenu = "<div id='headerAideExterne'><h3><span>Fiche d'aide externe :</span><span class='edit'></span></h3>";
+    $contenu .= '<ul class="list_classique">
+                    <li class="ligne_list_classique">
+                        <div class="colonne_classique">
+                            <div class="affichage_classique">
+                                <h2>Demandeur : </h2>
+                                <div class="aff">'.$aideExterne->individu->nom.' '.$aideExterne->individu->prenom.'</div>
+                            </div>
+                            <div class="affichage_classique">
+                                <h2>Instructeur : </h2>
+                                <div class="aff">
+                                    <div class="select classique" role="select_instruct" disabled>
+                                        <div id="instructexterne" class="option requis" value="'.$aideExterne->instruct->id.'">'.$aideExterne->instruct->nom.'</div>
+                                        <div class="fleche_bas"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="affichage_classique">
+                                <h2>Date demande : </h2>
+                                <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDemande" size="10" '.getDatebyTimestampInput($aideExterne->dateDemande).' disabled></div>
+                            </div>
+                            <div class="affichage_classique">
+                                <h2>Montant demandé : </h2>
+                                <div class="aff">
+                                    <input class="contour_field input_num requis" type="text" id="montantDemande" value="'. $aideExterne->montantDemande .'" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="colonne_classique">
+                            <div class="affichage_classique">
+                                <h2>Aide demandée : </h2>
+                                <div class="aff">
+                                    <div class="select classique" role="select_typeaide_externe" disabled>
+                                        <div id="typeaideexterne" class="option requis" value="'.$aideExterne->typeAideDemandee->id.'">'.$aideExterne->typeAideDemandee->libelle.'</div>
+                                        <div class="fleche_bas"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="affichage_classique">
+                                <h2>Organisme : </h2>
+                                <div class="aff">
+                                    <div class="select classique requis" role="select_orga_ext" disabled>
+                                        <div id="orga" class="option requis" value="'.$aideExterne->organisme->id.'">'.$aideExterne->organisme->appelation.'</div>
+                                        <div class="fleche_bas"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="affichage_classique">
+                                <h2>Nature : </h2>
+                                <div class="aff">
+                                    <div class="select classique requis" role="select_nature_externe" disabled>
+                                        <div id="nature" class="option requis" value="'.$aideExterne->natureAide->id.'">'.$aideExterne->natureAide->libelle.'</div>
+                                        <div class="fleche_bas"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="colonne_classique">
+                            <div class="affichage_classique">
+                                <h2>Etat : </h2>
+                                <div class="aff">
+                                    <div class="select classique requis" role="select_etat" disabled>
+                                        <div id="etat" class="option requis" value="'.$aideExterne->etat.'">'.$aideExterne->etat.'</div>
+                                        <div class="fleche_bas"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="affichage_classique">
+                                <h2>Aide urgente : </h2>
+                                <div class="aff">';
+                                if($aideExterne->aideUrgente == 1) {
+                                    $contenu .= '<span id="aideUrgente" class="checkbox checkbox_active" value="1" disabled></span>';
+                                } else {
+                                    $contenu .= '<span id="aideUrgente" class="checkbox" value="0" disabled></span>';
+                                }
+                                $contenu .='</div>
+                            </div>
+                            <div class="affichage_classique">
+                                <h2>Distributeur : </h2>
+                                <div class="aff">
+                                    <div class="select classique requis" role="select_distrib" disabled>
+                                        <div id="distrib" class="option requis" value="'.$aideExterne->distrib->id.'">'.$aideExterne->distrib->appelation.'</div>
+                                        <div class="fleche_bas"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li></ul>
+                    <div value="updateDetailAideExterne" class="bouton modif update">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div class="clearboth"></div></div>';
+                                
+    return $contenu;
+}
+
+function decisionAideExterne($aideExterne) {
+    $contenu = '';
+    if($aideExterne->avis == null) {
+            if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_APPORTER_DECISION)) {
+                $contenu .= '
+                    <div id="updateDecision" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Apporter une décision</span>
+                    </div>';
+            }
+            $contenu .= '<div id="decision">';
+        }
+        $contenu .= '<div id="decisionAideExterne"><h3 id="idAide" value="'.$aideExterne->id.'">Décision :</h3>
+                     <ul id="decisionRequis" class="list_classique">
+                        <li class="ligne_list_classique">
+                            <div class="colonne_classique">
+                                <div class="affichage_classique">
+                                    <h2>Montant per&ccedil;u : </h2>
+                                    <div class="aff"><input class="contour_field input_num requis" type="text" id="montantPercu"  value="'.$aideExterne->montantPercu.'"></div>
+                                </div>
+
+                                <div class="affichage_classique">
+                                    <h2>Commentaire : </h2>
+                                    <div class="aff"><textarea class="contour_field input_char" type="text" id="commentaire">'.$aideExterne->commentaire.'</textarea></div>
+                                </div>
+                            </div>
+                            <div class="colonne_classique">
+                                <div class="affichage_classique">
+                                    <h2>Date décision : </h2>
+                                    <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideExterne->dateDecision).'></div>
+                                 </div>
+                            </div>
+                            <div class="colonne_classique">
+                                <div class="affichage_classique">
+                                    <h2>Avis : </h2>
+                                    <div class="aff">
+                                        <div class="select classique" role="select_avis">';
+            $contenu .= $aideExterne->avis == null ? '<div id="avis" class="option requis">-------</div>' : '<div id="avis" class="option requis" value="'. $aideExterne->avis.'">'.$aideExterne->avis.'</div>';  
+            $contenu .= '                  
+                                            <div class="fleche_bas"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li></ul>
+        <div class="sauvegarder_annuler">
+            <div value="updateDecisionExterne" class="bouton modif">
+                <i class="icon-save"></i>
+                <span>Enregistrer</span>
+            </div>
+            <div value="cancelDecisionExterne" class="bouton classique">
+                <i class="icon-cancel icon-black"></i>
+                <span>Annuler</span>
+            </div>
+        </div>';
+    if($aideExterne->avis == null) {
+        $contenu .= '</div>';
+    }
+    $contenu .= '</div>';
+    return $contenu;
+}
+
+function createComboExterne() {
+    $organismesExternes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(6);
+    $naturesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(6);
+    $typesAidesExternes = Doctrine_Core::getTable('type')->findByidlibelletype(7);
+    $instructs =  Doctrine_Core::getTable('instruct')->findByActif(1);
+    $distributeurs = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(3);
     
-    $contenu .= '<ul class="select_orga_ext">';
+    $contenu = '<ul class="select_orga_ext">';
     foreach($organismesExternes as $organismeExterne) {
         $contenu .= '<li>
                         <div value="'.$organismeExterne->id.'">'.$organismeExterne->appelation.'</div>
@@ -154,136 +329,6 @@ function aideExterne() {
                      </li>';
     }
     $contenu .= '</ul>';
-    
-    return $contenu;
-}
-
-
-function detailAideExterne() {
-    $aideExterne = Doctrine_Core::getTable('aideexterne')->findOneById($_POST['idAide']);
-    
-    $contenu = "<h3><span>Fiche d'aide externe :</span><span class='edit'></span></h3>";
-    $contenu .= '<ul class="list_classique">
-                    <li class="ligne_list_classique">
-                        <div class="colonne_classique">
-                            <div class="affichage_classique">
-                                <h2>Demandeur : </h2>
-                                <div class="aff">'.$aideExterne->individu->nom.' '.$aideExterne->individu->prenom.'</div>
-                            </div>
-                            <div class="affichage_classique">
-                                <h2>Instructeur : </h2>
-                                <div class="aff">
-                                    <div class="select classique" role="select_instruct" disabled>
-                                        <div id="instructexterne" class="option">'.$aideExterne->instruct->nom.'</div>
-                                        <div class="fleche_bas"> </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="affichage_classique">
-                                <h2>Date demande : </h2>
-                                <div class="aff">'.getDatebyTimestamp($aideExterne->dateDemande).'</div>
-                            </div>
-                            <div class="affichage_classique">
-                                <h2>Montant demandé : </h2>
-                                <div class="aff">'.$aideExterne->montantDemande.'</div>
-                            </div>
-                        </div>
-                        <div class="colonne_classique">
-                            <div class="affichage_classique">
-                                <h2>Aide demandée : </h2>
-                                <div class="aff">'.$aideExterne->typeAideDemandee->libelle.'</div>
-                            </div>
-                            <div class="affichage_classique">
-                                <h2>Organisme : </h2>
-                                <div class="aff">'.$aideExterne->organisme->appelation.'</div>
-                            </div>
-                            <div class="affichage_classique">
-                                <h2>Nature : </h2>
-                                <div class="aff">'.$aideExterne->natureAide->libelle.'</div>
-                            </div>
-                        </div>
-                        <div class="colonne_classique">
-                            <div class="affichage_classique">
-                                <h2>Etat : </h2>
-                                <div class="aff">'.$aideExterne->etat.'</div>
-                            </div>
-                            <div class="affichage_classique">
-                                <h2>Aide urgente : </h2>
-                                <div class="aff">';
-                                if($aideExterne->aideUrgente == 1) {
-                                    $contenu .= '<span id="aideUrgente" class="checkbox checkbox_active" value="1" disabled></span>';
-                                } else {
-                                    $contenu .= '<span id="aideUrgente" class="checkbox" value="0" disabled></span>';
-                                }
-                                $contenu .='</div>
-                            </div>
-                            <div class="affichage_classique">
-                                <h2>Distributeur : </h2>
-                                <div class="aff">'.$aideExterne->distrib->appelation.'</div>
-                            </div>
-                        </div>
-                    </li></ul>
-                    <div value="updateDetailAideInterne" class="bouton modif update">
-                        <i class="icon-save"></i>
-                        <span>Enregistrer</span>
-                    </div>
-                    <div class="clearboth"></div></div>';
-        if($aideExterne->avis == null) {
-            if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_APPORTER_DECISION)) {
-                $contenu .= '
-                    <div id="updateDecision" class="bouton modif">
-                        <i class="icon-save"></i>
-                        <span>Apporter une décision</span>
-                    </div>';
-            }
-            $contenu .= '<div id="decision">';
-        }
-        $contenu .= '<h3 id="idAide" value="'.$aideExterne->id.'">Décision :</h3>
-                     <ul id="decisionRequis" class="list_classique">
-                        <li class="ligne_list_classique">
-                            <div class="colonne_classique">
-                                <div class="affichage_classique">
-                                    <h2>Montant per&ccedil;u : </h2>
-                                    <div class="aff"><input class="contour_field input_num requis" type="text" id="montantPercu"  value="'.$aideExterne->montantPercu.'"></div>
-                                </div>
-
-                                <div class="affichage_classique">
-                                    <h2>Commentaire : </h2>
-                                    <div class="aff"><textarea class="contour_field input_char" type="text" id="commentaire">'.$aideExterne->commentaire.'</textarea></div>
-                                </div>
-                            </div>
-                            <div class="colonne_classique">
-                                <div class="affichage_classique">
-                                    <h2>Date décision : </h2>
-                                    <div class="aff"><input class="contour_field input_date requis" type="text" id="dateDecision" size="10" '.getDatebyTimestampInput($aideExterne->dateDecision).'></div>
-                                 </div>
-                            </div>
-                            <div class="colonne_classique">
-                                <div class="affichage_classique">
-                                    <h2>Avis : </h2>
-                                    <div class="aff">
-                                        <div class="select classique" role="select_avis">';
-            $contenu .= $aideExterne->avis == null ? '<div id="avis" class="option requis">-------</div>' : '<div id="avis" class="option requis" value="'. $aideExterne->avis.'">'.$aideExterne->avis.'</div>';  
-            $contenu .= '                  
-                                            <div class="fleche_bas"> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li></ul>
-        <div class="sauvegarder_annuler">
-            <div value="updateDecisionExterne" class="bouton modif">
-                <i class="icon-save"></i>
-                <span>Enregistrer</span>
-            </div>
-            <div value="cancelDecisionExterne" class="bouton classique">
-                <i class="icon-cancel icon-black"></i>
-                <span>Annuler</span>
-            </div>
-        </div>';
-    if($aideExterne->avis == null) {
-        $contenu .= '</div>';
-    }
     $contenu .= '
         <ul class="select_avis">
             <li>
@@ -295,7 +340,6 @@ function detailAideExterne() {
         </ul>';
     return $contenu;
 }
-
 
 function createAideExterne($typeAide, $date, $instruct, $nature, $idDistrib, $etat, $idIndividu, $organisme, $urgence, $montantDemande) {
     $aide = new AideExterne();
@@ -329,8 +373,33 @@ function updateDecisionExterne() {
     include_once('./pages/historique.php');
     createHistorique(Historique::$Modification, 'aide externe', $_SESSION['userId'], $aide->idIndividu);
     
+    include_once('./pages/aideInterne.php');
     $retours = aide();
     $retour = array('aide' => $retours);
     echo json_encode($retour);  
 }
+
+function updateDetailAideExterne() {
+    include_once('./lib/config.php');
+    $aide = Doctrine_Core::getTable('aideexterne')->find($_POST['idAide']);
+    setWithoutNull($_POST['idIndividu'], $aide, 'idIndividu');
+    setWithoutNull($_POST['instructexterne'], $aide, 'idInstruct');
+    setDateWithoutNull($_POST['dateDemande'], $aide, 'dateDemande');
+    setWithoutNull($_POST['montantDemande'], $aide, 'montantDemande');
+    setWithoutNull($_POST['typeaideexterne'], $aide, 'idAideDemandee');
+    setWithoutNull($_POST['orga'], $aide, 'idOrganisme');
+    setWithoutNull($_POST['nature'], $aide, 'nature');
+    setWithoutNull($_POST['etat'], $aide, 'etat');
+    setWithoutNull($_POST['aideUrgenteExt'], $aide, 'aideUrgente');
+    setWithoutNull($_POST['distrib'], $aide, 'idDistrib');
+    $aide->save();
+    
+    include_once('./pages/historique.php');
+    createHistorique(Historique::$Modification, 'aide externe', $_SESSION['userId'], $aide->idIndividu);
+    
+    $retours = headerAideExterne($aide, true);
+    $retour = array('aide' => $retours);
+    echo json_encode($retour);  
+}
+
 ?>
