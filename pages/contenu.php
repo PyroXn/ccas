@@ -39,7 +39,7 @@ function contenu() {
             echo manageUser();
             break;
         case 'statistique' :
-            include_once('./pages/admin.php');
+            include_once('./pages/statistiques.php');
             echo statistique();
             break;
         case 'managerole' :

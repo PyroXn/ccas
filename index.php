@@ -75,7 +75,7 @@ switch (@$_GET['p']) {
         removeRole();
         break;
     case 'genererStat':
-        include_once('./pages/admin.php');
+        include_once('./pages/statistiques.php');
         genererStat();
         break;
     case 'ecranTabCommission':
@@ -87,7 +87,7 @@ switch (@$_GET['p']) {
         genererTabCommission();
         break;
     case 'genererPeriode':
-        include_once('./pages/admin.php');
+        include_once('./pages/statistiques.php');
         genererPeriode();
         break;
     case 'updateChefDeFamille':

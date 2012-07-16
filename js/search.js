@@ -24,8 +24,8 @@ $(function() {
                 n'est en cours, si le nombre d'individu affiché est supérieur 
                 à 100 et si tout les individus ne sont pas affichés, alors on 
                 lance la fonction. */
-        console.log("\n offset.top" + offset + "\n " + "Height" + $("#side_individu").height() + "\n " + "scrollTop" + $(this)[0].scrollTop
-            + "\n " + "total = " + (offset-$("#side_individu").height() <= $(this)[0].scrollTop));
+//        console.log("\n offset.top" + offset + "\n " + "Height" + $("#side_individu").height() + "\n " + "scrollTop" + $(this)[0].scrollTop
+//            + "\n " + "total = " + (offset-$("#side_individu").height() <= $(this)[0].scrollTop));
 
         if((offset-$("#side_individu").height() <= $(this)[0].scrollTop) 
             && load==false && ($('.individu').size()>=100) && 
@@ -80,8 +80,6 @@ $(function() {
             $(this).addClass('current');
             var idFoyer = $(this).children().attr('id_foyer');
             var idIndividu = $(this).children().attr('id_individu');
-            console.log(idIndividu);
-            console.log(idFoyer);
             $.ajax({
                 type: "POST",
                 dataType:'json',
@@ -90,7 +88,6 @@ $(function() {
                 cache: false,
                 success: function(html)
                 {
-                    console.log(html);
                     $("#list_individu").html(html.listeIndividu);
                     $("#page_header_navigation").html(html.menu);
                     $('#contenu').html(html.contenu);
@@ -120,13 +117,12 @@ $(function() {
     });  
     
     $('#page_header_navigation > div').live("click", function() {
-        console.log($(this));
+        $('#ecran_gris').hide();
         $('.active').toggleClass('active');
         $(this).toggleClass('active');
         var idMenu = $(this).attr("id");
         var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
         var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
-        console.log(idIndividu);
         $.ajax({
             type: "POST",
             url: "./index.php?p=contenu",
@@ -144,7 +140,6 @@ $(function() {
     
     $('.edit_aide_interne').live("click", function() {
         var idAide = $(this).parent().parent().attr('name');
-        console.log(idAide);
         $.ajax({
             type: "POST",
             url: "./index.php?p=detailaideinterne",
@@ -163,7 +158,6 @@ $(function() {
     });
     $('.edit_aide_externe').live("click", function() {
         var idAide = $(this).parent().parent().attr('name');
-        console.log(idAide);
         $.ajax({
             type: "POST",
             url: "./index.php?p=detailaideexterne",
@@ -236,8 +230,6 @@ $(function() {
             switch(codeTouche) {
                 case 13:
                     var selection = $('.selection');
-                    
-                    console.log(selection);
                     if(selection.length != 0) {
                         var parent = selection.parent();
                         var table = parent.attr('table');
@@ -245,33 +237,26 @@ $(function() {
                         selectionList(selection, table, champ);
                     }
                     //Touche entrée
-                    console.log("Touche entrée");
                     break;
                 case 40:
                     var selection = $('.selection');
-                    console.log(selection);
                     if(selection.length != 0) {
-                        console.log('after ' + $(selection).next());
                         $(selection).toggleClass('selection');
                         $(selection).next().toggleClass('selection');
                     } else {
                         $('.liste_suggestion > li:first').toggleClass('selection');
                     }
                     //fleche bas
-                    console.log("Fleche bas");
                     break;
                 case 38:
                     var selection = $('.selection');
-                    console.log(selection);
                     if(selection.length != 0) {
-                        console.log('before ' + $(selection).prev());
                         $(selection).toggleClass('selection');
                         $(selection).prev().toggleClass('selection');
                     } else {
                         $('.liste_suggestion > li:last').toggleClass('selection');
                     }
                     //fleche haut
-                    console.log("Fleche haut");
                     break;
                 default:
                     var table = $(this).attr('table');
@@ -281,22 +266,18 @@ $(function() {
                     var menu = $('#menu_gauche').outerWidth();
                     var header = $('#page_header').outerHeight();
                     var bar = $('#navigationbar').outerHeight();
-                    console.log(this);
                     var x = $(this).offset();
                     var h = $(this).outerHeight();
                     var l = $(this).outerWidth();
                     //les -2 correspondent à la bordure de 1px de chacun des 2 cotés
                     $('#suggestion').css("min-width", l-2);
                     var lAttr = $('#suggestion').outerWidth();
-                    console.log('#suggestion');
 //                    $('#suggestion').offset({
 //                        top:x.top+h,
 //                        left:x.left+l-lAttr
 //                    });
 //                    var x = $(this).offset();
-//                    var h = $(this).outerHeight();     
-                    console.log('TOP : '+x.top);
-                    console.log('LEFT : '+x.left);
+//                    var h = $(this).outerHeight();
                     $('#suggestion').css("top", x.top-bar+h-header);
                     $('#suggestion').css("left", x.left-menu+1);
                     $('#suggestion').css("display", "block");
@@ -312,9 +293,6 @@ $(function() {
         var parent = $(this).parent();
         var table = parent.attr('table');
         var champ = parent.attr('champ');
-        console.log('parent ' + parent);
-        console.log('table ' + table);
-        console.log('champ ' + champ);
         selectionList(focus, table, champ);
     });
     
@@ -334,7 +312,6 @@ $(function() {
             } else {
                 datastring += '&global=false';
             }
-            console.log(datastring);
             $.ajax({
                 type: "POST",
                 url: "./index.php?p=afficherArchive",
@@ -389,7 +366,6 @@ function searchTableHistorique() {
         }
     });
         
-    console.log(datastring);
     $.ajax({
         type: 'post',
         data: datastring,
@@ -397,7 +373,6 @@ function searchTableHistorique() {
         cache: false,
         //Succés de la requête
         success: function(tableHistorique) {
-            //                console.log(tableStatique);
             $("#contenu_table_historique").html(tableHistorique);
         },
         error: function(tableHistorique) {
@@ -430,9 +405,6 @@ function autoComplete(searchbox, table, champ) {
  * fonction qui fait les operations lors de la selection dans un autocomplete
  */
 function selectionList(focus, table, champ) {
-    console.log('focus ' + focus);
-    console.log('table ' + table);
-    console.log('champ ' + champ);
     $('.autoComplete[table="' + table + '"][champ="' + champ + '"]').val(focus.text());
     $('.autoComplete[table="' + table + '"][champ="' + champ + '"]').attr("valeur", focus.attr("valeur"));
     $('#suggestion').css("display", "none"); 
@@ -461,31 +433,4 @@ function calculTailleInputSearch() {
         "width" : $('#menu_gauche').outerWidth() - $('.add').outerWidth(true) 
         - parseInt($('#search').css("margin-left")) - 1
     });
-}
-
-
-function genererGraphstat() {
-    if ($('input[type=radio][name=groupe1]:checked').length != 0 &&
-        $('input[type=radio][name=groupe2]:checked').length != 0 &&
-        $('input[type=radio][name=groupe3]:checked').length != 0) {
-            var t = $(this).parent().parent().parent();
-            var datastring = 'groupe1=' + $("input[type=radio][name=groupe1]:checked").val() 
-                           + '&groupe2=' + $("input[type=radio][name=groupe2]:checked").val()
-                           + '&groupe3=' + $("input[type=radio][name=groupe3]:checked").val()
-                           + '&datedebut=' + $('#datedebut').val() + '&datefin=' + $('#datefin').val();
-            console.log(datastring);
-            $.ajax({
-                type: 'POST',
-                data: datastring,
-                url: './index.php?p=genererStat',
-                cache: false,
-                //Succ�s de la requ�te
-                success: function(graph) {
-                    $('#graph_stat').html(graph);
-                },
-                error: function() {
-                    $("#graph_stat").html();
-                }
-            });
-    }
 }
