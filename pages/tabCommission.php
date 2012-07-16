@@ -1,23 +1,22 @@
 <?php
 function ecranTabCommission() {
-    $req = 'SELECT distinct(datedecision)
-            FROM aideinterne ai
-            ORDER BY datedecision DESC
-            LIMIT 6';
-    $con = Doctrine_Manager::getInstance()->connection();
-    $st = $con->execute($req);
-    $result = $st->fetchAll();
-    $firstdate = '';
-    $listedate = '';
+    $requete = Doctrine_Query::create()
+        ->select('dateDecision')
+        ->from('aideinterne')
+        ->distinct(true)
+        ->orderBy('dateDecision DESC')
+        ->groupBy('dateDecision')
+        ->limit(6);
+        $result = $requete->execute();
+        $firstdate = '';
+        $listedate = '';
     
     foreach ($result as $ligne) {
         if ($firstdate == '') {
-            $firstdate = getDatebyTimestampInput($ligne["datedecision"]);
+            $firstdate = getDatebyTimestampInput($ligne->dateDecision);
         }
-        $listedate .= '-  '.getDatebyTimestamp($ligne["datedecision"]).'<br/>';
+        $listedate .= '-  '.getDatebyTimestamp($ligne->dateDecision).'<br/>';
     }
-    
-    
     
     $retour = '<div class="colonne_large">
                    <h3>Demandes pour la periode du :</h3>
@@ -81,38 +80,22 @@ function genererTabCommission() {
             
     if($withDecission == "1") {
         $dateCommission = explode('/', $_POST['datecommission']);
-        $req = 'SELECT i.id, i.nom, i.prenom, f.numrue, r.rue, t.libelle aidedemandee, ai.proposition, ai.avis, SUM(ba.montant) montant_total, count(ba.id) quantite, ai.commentaire
-                FROM individu i
-                INNER JOIN foyer f on f.id = i.idfoyer
-                INNER JOIN rue r on r.id = f.idrue
-                INNER JOIN aideinterne ai on ai.idindividu = i.id
-                INNER JOIN type t on t.id = ai.idaidedemandee
-                LEFT JOIN bonaide ba on ba.idaideinterne = ai.id
-                WHERE ai.avis <> ""
-                AND datedecision = '.mktime(0, 0, 0, $dateCommission[1], $dateCommission[0], $dateCommission[2]).'
-                GROUP BY ai.id';
-        $con = Doctrine_Manager::getInstance()->connection();
-        $st = $con->execute($req);
-        $result = $st->fetchAll();
+        $req = Doctrine_Query::create()
+            ->from('aideinterne')
+            ->where('avis <> ""')
+            ->andWhere('dateDecision = '.mktime(0, 0, 0, $dateCommission[1], $dateCommission[0], $dateCommission[2]));
+        $result = $req->execute();
         $titre = 'Demandes passées à la commission du '.$dateCommission[0].'/'.$dateCommission[1].'/'.$dateCommission[2];
     } else {
         $dateDebut = explode('/', $_POST['datedebut']);
         $dateFin = explode('/', $_POST['datefin']);
-        $req = 'SELECT i.id, i.nom, i.prenom, f.numrue, r.rue, t.libelle aidedemandee, ai.proposition, ai.avis, ai.commentaire
-                FROM individu i
-                INNER JOIN foyer f on f.id = i.idfoyer
-                INNER JOIN rue r on r.id = f.idrue
-                INNER JOIN aideinterne ai on ai.idindividu = i.id
-                INNER JOIN type t on t.id = ai.idaidedemandee
-                WHERE ai.avis = ""
-                AND datedemande BETWEEN '.mktime(0, 0, 0, $dateDebut[1], $dateDebut[0], $dateDebut[2]).' AND '.mktime(0, 0, 0, $dateFin[1], $dateFin[0], $dateFin[2]).' 
-                GROUP BY i.id';
-        $con = Doctrine_Manager::getInstance()->connection();
-        $st = $con->execute($req);
-        $result = $st->fetchAll();
+        $req = Doctrine_Query::create()
+            ->from('aideinterne')
+            ->where('avis = ""')
+            ->andWhere('dateDemande BETWEEN '.mktime(0, 0, 0, $dateDebut[1], $dateDebut[0], $dateDebut[2]).' AND '.mktime(0, 0, 0, $dateFin[1], $dateFin[0], $dateFin[2]));
+        $result = $req->execute();
         $titre = 'Demandes pour la période du '.$dateDebut[0].'/'.$dateDebut[1].'/'.$dateDebut[2].' au '.$dateFin[0].'/'.$dateFin[1].'/'.$dateFin[2];
     }
-//    echo $req;
     include_once('./lib/PDF/generateTabCommission.php');
 }
 ?>

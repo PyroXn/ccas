@@ -645,8 +645,9 @@ $(function() {
                     url: './index.php?p=genererTabCommission',
                     cache: false,
                     success: function(retour) {
+                        console.log("SUCCESS troll commission");
                         $('#dialogTab').html(retour);
-                        $('#iPDF').dialog({position: ['center',100], width: 500, height: 500});
+//                        $('#iPDF').dialog({position: ['center',100], width: 500, height: 500});
                     },
                     error: function(data) {
                         $("#contenu").html(data.responseText);
@@ -668,7 +669,7 @@ $(function() {
                     cache: false,
                     success: function(retour) {
                         $('#dialogTab').html(retour);
-                        $('#iPDF').dialog({position: ['center',100], width: 500, height: 500});
+//                        $('#iPDF').dialog({position: ['center',100], width: 500, height: 500});
                     },
                     error: function(data) {
                         $("#contenu").html(data.responseText);

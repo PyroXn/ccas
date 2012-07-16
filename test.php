@@ -3,18 +3,47 @@
 include_once('./lib/config.php');
 //include_once('./lib/PDF/generateTabCommission.php');
 
-$credit = Doctrine_Core::getTable('credit')->findByIdindividu(7);
+$dateDebut = date('d/m/Y', time());
+$dateFin = date('d/m/Y', time() + 604800);
 
-$creditMensuel = 0;
-$totalCredit = 0;
-    foreach($credit as $c) {
-        $creditMensuel += $c->mensualite;
-        $totalCredit += $c->totalRestant;
+$dateDebut = explode('/', $dateDebut);
+$dateFin = explode('/', $dateFin);
+
+$req = Doctrine_Query::create()
+    ->from('aideinterne')
+    ->where('avis = ""')
+    ->andWhere('dateDemande BETWEEN '.mktime(0, 0, 0, $dateDebut[1], $dateDebut[0], $dateDebut[2]).' AND '.mktime(0, 0, 0, $dateFin[1], $dateFin[0], $dateFin[2]));
+       
+    
+//    $req = 'SELECT distinct(datedecision)
+//            FROM aideinterne ai
+//            ORDER BY datedecision DESC
+//            LIMIT 6';
+//    $con = Doctrine_Manager::getInstance()->connection();
+    $st = $req->getSqlQuery();//execute();
+    echo $st.'</br>';
+    
+    foreach($req->execute() as $c) {
+        echo $c->id.'</br>';
+        echo $c->individu->nom.'</br>';
+        echo $c->individu->foyer->numRue.'</br>';
     }
 
 
-echo $creditMensuel;
-echo $totalCredit;
+
+
+//$credit = Doctrine_Core::getTable('credit')->findByIdindividu(7);
+//
+//$creditMensuel = 0;
+//$totalCredit = 0;
+//    foreach($credit as $c) {
+//        $creditMensuel += $c->mensualite;
+//        $totalCredit += $c->totalRestant;
+//    }
+//
+//
+//echo $creditMensuel;
+//echo $totalCredit;
     
 //    $retour = '';
 //    $aides = Doctrine_Core::getTable('aideinterne')->findByAvis(utf8_encode('Accept�'));
