@@ -171,12 +171,9 @@ foreach($natures as $nature) {
 
 function detailAideInterne() {
     $aideInterne = Doctrine_Core::getTable('aideinterne')->findOneById($_POST['idAide']);
-    $retour = '<div>';
-    
-    $retour .= headerAideInterne($aideInterne);
+    $retour = headerAideInterne($aideInterne);
     $retour .= decisionAideInterne($aideInterne);
     $retour .= createCombo();
-    $retour .= '</div>';
     return $retour;
 }
 
@@ -193,7 +190,7 @@ function headerAideInterne($aideInterne) {
                 <h2>Instructeur : </h2>
                 <div class="aff">
                     <div class="select classique" role="select_instruct2" disabled>
-                        <div id="instruct" class="option requis">'.$aideInterne->instruct->nom.'</div>
+                        <div id="instruct" class="option requis" value="'.$aideInterne->instruct->id.'">'.$aideInterne->instruct->nom.'</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -208,7 +205,7 @@ function headerAideInterne($aideInterne) {
                 <h2>Aide demandée : </h2>
                 <div class="aff">
                     <div class="select classique" role="select_typeaide_interne" disabled>
-                        <div id="typeaideinterne" class="option requis">'.$aideInterne->typeAideDemandee->libelle.'</div>
+                        <div id="typeaideinterne" class="option requis" value="'.$aideInterne->typeAideDemandee->id.'">'.$aideInterne->typeAideDemandee->libelle.'</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -217,7 +214,7 @@ function headerAideInterne($aideInterne) {
                 <h2>Organisme : </h2>
                 <div class="aff">
                     <div class="select classique requis" role="select_orga" disabled>
-                        <div id="orga" class="option requis">'.$aideInterne->organisme->appelation.'</div>
+                        <div id="orga" class="option requis" value="'.$aideInterne->organisme->id.'">'.$aideInterne->organisme->appelation.'</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -226,7 +223,7 @@ function headerAideInterne($aideInterne) {
                 <h2>Nature : </h2>
                 <div class="aff">
                     <div class="select classique requis" role="select_nature_interne" disabled>
-                        <div id="nature" class="option requis">'.$aideInterne->natureAide->libelle.'</div>
+                        <div id="nature" class="option requis" value="'.$aideInterne->natureAide->id.'">'.$aideInterne->natureAide->libelle.'</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -237,7 +234,7 @@ function headerAideInterne($aideInterne) {
                 <h2>Etat : </h2>
                 <div class="aff">
                     <div class="select classique requis" role="select_etat" disabled>
-                        <div id="etat" class="option requis">'.$aideInterne->etat.'</div>
+                        <div id="etat" class="option requis" value="'.$aideInterne->etat.'">'.$aideInterne->etat.'</div>
                         <div class="fleche_bas"> </div>
                     </div>
                 </div>
@@ -260,7 +257,7 @@ function headerAideInterne($aideInterne) {
             </div>
         </div>';
     
-    $contenu = "<div><h3><span>Fiche d'aide interne :</span><span class='edit'></span></h3>";
+    $contenu = "<div id='headerAideInterne'><h3><span>Fiche d'aide interne :</span><span class='edit'></span></h3>";
     $contenu .= '<ul class="list_classique"><li class="ligne_list_classique">'.$testaffichage.'</li></ul>
                 <div value="updateDetailAideInterne" class="bouton modif update">
                     <i class="icon-save"></i>
@@ -283,7 +280,7 @@ function decisionAideInterne($aideInterne) {
             $contenu .= '<div id="decision">';
         }
         // Decision de l'aide
-        $contenu .= '<h3 id="idAide" value="'.$aideInterne->id.'">Décision :</h3>
+        $contenu .= '<div id="decisionAideInterne"><h3 id="idAide" value="'.$aideInterne->id.'">Décision :</h3>
                      <ul id="decisionRequis" class="list_classique">
                          <li class="ligne_list_classique">
                             <div class="colonne_classique">
@@ -445,6 +442,7 @@ function decisionAideInterne($aideInterne) {
         $contenu .= '</div>';
     }
     
+     $contenu .= '</div>';
     // FORMULAIRE
     $contenu .= '<div class="formulaire" action="addBonInterne" idAide="'.$aideInterne->id.'">
         <h2>Bon interne</h2>
@@ -646,7 +644,10 @@ function updateDetailAideInterne() {
     
     include_once('./pages/historique.php');
     createHistorique(Historique::$Modification, 'aide interne', $_SESSION['userId'], $aide->idIndividu);
-    echo json_encode($retour);
+    
+    $retours = headerAideInterne($aide);
+    $retour = array('aide' => $retours);
+    echo json_encode($retour);  
 }
 
 

@@ -347,7 +347,8 @@ $(function() {
                 });
             }
         } else if(value == 'updateDetailAideInterne') {
-            if(findRequis($('#decisionRequis'))) {
+            console.log('updateDetailAideInterne');
+            if(findRequis($('#headerAideInterne'))) {
                 var aideUrgente = 0;
                 if($('#aideUrgente').hasClass('checkbox_active')) {
                     aideUrgente = 1;
@@ -361,6 +362,7 @@ $(function() {
                 datastring += '&dateDemande='+$('#dateDemande').val();
                 datastring += '&nature='+$('#nature').attr('value');
                 datastring += '&proposition='+$('#proposition').attr('value');
+                console.log(datastring);
                 $.ajax({
                     type: 'post',
                     dataType:'json',
@@ -368,10 +370,10 @@ $(function() {
                     url: './index.php?p=updateDetailAideInterne',
                     cache: false,
                     success: function(aideinterne) {
-                        $('#contenu').html(aideinterne.aide);
+                        $('#headerAideInterne').html(aideinterne.aide);
                     },
                     error: function(aideinterne) {
-                        $("#contenu").html(aideinterne.responseText);
+                        $("#headerAideInterne").html(aideinterne.responseText);
                     }
                 });
             }
