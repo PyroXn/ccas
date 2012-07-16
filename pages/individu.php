@@ -27,18 +27,12 @@ function createIndividu($idFoyer, $civilite, $nom, $prenom, $dateNaissance, $idL
     include_once('./pages/foyer.php');
     
     $individu = new Individu();
-    $individu->civilite = $civilite;
-    $individu->nom = $nom;
-    $individu->prenom = $prenom;
-    $individu->idFoyer = $idFoyer;
-    if ($dateNaissance != 0) {
-        $date = explode('/', $dateNaissance);
-        $individu->dateNaissance = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
-    } else {
-        $individu->dateNaissance = 0;
-    }
-    
-    $individu->idLienFamille = $idLienFamille;
+    setWithoutNull($civilite, $individu, 'civilite');
+    setWithoutNull($nom, $individu, 'nom');
+    setWithoutNull($prenom, $individu, 'prenom');
+    setWithoutNull($idFoyer, $individu, 'idFoyer');
+    setDateWithoutNull($dateNaissance, $individu, 'dateNaissance');
+    setWithoutNull($idLienFamille, $individu, 'idLienFamille');
     $individu->save();
     
     include_once('./pages/historique.php');

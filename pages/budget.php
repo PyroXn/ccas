@@ -450,11 +450,11 @@ function createDette($idIndividu) {
 function createCredit($idIndividu, $organisme, $mensualite, $duree, $total) {
     include_once('./lib/config.php');
     $credit = new Credit();
-    $credit->organisme = $organisme;
-    $credit->mensualite = $mensualite;
-    $credit->dureeMois = $duree;
-    $credit->totalRestant = $total;
-    $credit->idIndividu = $idIndividu;
+    setWithoutNull($organisme, $credit, 'organisme');
+    setWithoutNull($mensualite, $credit, 'mensualite');
+    setWithoutNull($duree, $credit, 'dureeMois');
+    setWithoutNull($total, $credit, 'totalRestant');
+    setWithoutNull($idIndividu, $credit, 'idIndividu');
     $credit->dateAjout = time();
     $credit->save();
     
@@ -465,20 +465,20 @@ function createCredit($idIndividu, $organisme, $mensualite, $duree, $total) {
 function updateRessource() {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('ressource')->getLastFicheRessource($_POST['idIndividu']);
-    $individu->salaire = $_POST['salaire'];
-    $individu->chomage = $_POST['chomage'];
-    $individu->revenuAlloc = $_POST['revenuAlloc'];
-    $individu->ass = $_POST['ass'];
-    $individu->aah = $_POST['aah'];
-    $individu->rsaSocle = $_POST['rsaSocle'];
-    $individu->rsaActivite = $_POST['rsaActivite'];
-    $individu->retraitComp = $_POST['retraitComp'];
-    $individu->pensionAlim = $_POST['pensionAlim'];
-    $individu->pensionInvalide = $_POST['pensionInvalide'];
-    $individu->pensionRetraite = $_POST['pensionRetraite'];
-    $individu->ijss = $_POST['ijss'];
-    $individu->autreRevenu = $_POST['autreRevenu'];
-    $individu->natureAutre = $_POST['natureAutre'];
+    setWithoutNull($_POST['salaire'], $individu, 'salaire');
+    setWithoutNull($_POST['chomage'], $individu, 'chomage');
+    setWithoutNull($_POST['revenuAlloc'], $individu, 'revenuAlloc');
+    setWithoutNull($_POST['ass'], $individu, 'ass');
+    setWithoutNull($_POST['aah'], $individu, 'aah');
+    setWithoutNull($_POST['rsaSocle'], $individu, 'rsaSocle');
+    setWithoutNull($_POST['rsaActivite'], $individu, 'rsaActivite');
+    setWithoutNull($_POST['retraitComp'], $individu, 'retraitComp');
+    setWithoutNull($_POST['pensionAlim'], $individu, 'pensionAlim');
+    setWithoutNull($_POST['pensionInvalide'], $individu, 'pensionInvalide');
+    setWithoutNull($_POST['pensionRetraite'], $individu, 'pensionRetraite');
+    setWithoutNull($_POST['ijss'], $individu, 'ijss');
+    setWithoutNull($_POST['autreRevenu'], $individu, 'autreRevenu');
+    setWithoutNull($_POST['natureAutre'], $individu, 'natureAutre');
     $individu->dateCreation = time();
     $individu->save();
     
@@ -489,21 +489,21 @@ function updateRessource() {
 function updateDepense() {
     include_once('./lib/config.php');
     $individu = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
-    $individu->impotRevenu = $_POST['impotRevenu'];
-    $individu->impotLocaux = $_POST['impotLocaux'];
-    $individu->pensionAlim = $_POST['pensionAlim'];
-    $individu->mutuelle = $_POST['mutuelle'];
-    $individu->electricite = $_POST['electricite'];
-    $individu->gaz = $_POST['gaz'];
-    $individu->eau = $_POST['eau'];
-    $individu->chauffage = $_POST['chauffage'];
-    $individu->telephonie = $_POST['telephonie'];
-    $individu->internet = $_POST['internet'];
-    $individu->television = $_POST['television'];
-    $individu->autreDepense = $_POST['autreDepense'];
-    $individu->natureDepense = $_POST['natureDepense'];
-    $individu->assuranceVoiture = $_POST['assuranceVoiture'];
-    $individu->assuranceHabitation = $_POST['assuranceHabitation'];
+    setWithoutNull($_POST['impotRevenu'], $individu, 'impotRevenu');
+    setWithoutNull($_POST['impotLocaux'], $individu, 'impotLocaux');
+    setWithoutNull($_POST['pensionAlim'], $individu, 'pensionAlim');
+    setWithoutNull($_POST['mutuelle'], $individu, 'mutuelle');
+    setWithoutNull($_POST['electricite'], $individu, 'electricite');
+    setWithoutNull($_POST['gaz'], $individu, 'gaz');
+    setWithoutNull($_POST['eau'], $individu, 'eau');
+    setWithoutNull($_POST['chauffage'], $individu, 'chauffage');
+    setWithoutNull($_POST['telephonie'], $individu, 'telephonie');
+    setWithoutNull($_POST['internet'], $individu, 'internet');
+    setWithoutNull($_POST['television'], $individu, 'television');
+    setWithoutNull($_POST['autreDepense'], $individu, 'autreDepense');
+    setWithoutNull($_POST['natureDepense'], $individu, 'natureDepense');
+    setWithoutNull($_POST['assuranceVoiture'], $individu, 'assuranceVoiture');
+    setWithoutNull($_POST['assuranceHabitation'], $individu, 'assuranceHabitation');
     $individu->dateCreation = time();
     $individu->save();
     
@@ -514,14 +514,13 @@ function updateDepense() {
 function updateDette() {
     include_once('./lib/config.php');
     $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($_POST['idIndividu']);
-    $dette->arriereLocatif = $_POST['arriereLocatif'];
-    $dette->fraisHuissier = $_POST['fraisHuissier'];
-    $dette->autreDette = $_POST['autreDette'];
-    $dette->natureDette = $_POST['natureDette'];
-    $dette->arriereElectricite = $_POST['arriereElec'];
-    $dette->prestaElec = $_POST['prestaElec'];
-    $dette->arriereGaz = $_POST['arriereGaz'];
-    $dette->prestaGaz = $_POST['prestaGaz'];
+    setWithoutNull($_POST['arriereLocatif'], $dette, 'arriereLocatif');
+    setWithoutNull($_POST['fraisHuissier'], $dette, 'fraisHuissier');
+    setWithoutNull($_POST['autreDette'], $dette, 'autreDette');
+    setWithoutNull($_POST['natureDette'], $dette, 'natureDette');
+    setWithoutNull($_POST['arriereElec'], $dette, 'arriereElectricite');
+    setWithoutNull($_POST['arriereGaz'], $dette, 'arriereGaz');
+    setWithoutNull($_POST['prestaGaz'], $dette, 'prestaGaz');
     $dette->dateCreation = time();
     $dette->save();
     
@@ -532,11 +531,11 @@ function updateDette() {
 function updateDepenseHabitation() {
     include_once('./lib/config.php');
     $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($_POST['idIndividu']);
-    $ressource->aideLogement = $_POST['apl'];
+    setWithoutNull($_POST['apl'], $ressource, 'aideLogement');
     $ressource->save();
     
     $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($_POST['idIndividu']);
-    $depense->loyer = $_POST['loyer'];
+    setWithoutNull($_POST['loyer'], $depense, 'loyer');
     $depense->save();
     
     include_once('./pages/historique.php');
