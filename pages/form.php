@@ -43,21 +43,21 @@ function form() {
             echo json_encode($retour);
             break;
         case 'creation_aide_interne':
-            include_once('./pages/aide.php');
+            include_once('./pages/aideInterne.php');
             createAideInterne($_POST['typeaide'], $_POST['date'], $_POST['instruct'], $_POST['nature'], $_POST['proposition'], $_POST['etat'], $_POST['idIndividu'], $_POST['orga'], $_POST['urgence']);
             $aide = aide();
             $retour = array('aide' => $aide);
             echo json_encode($retour);
             break;
         case 'creation_aide_externe':
-            include_once('./pages/aide.php');
+            include_once('./pages/aideExterne.php');
             createAideExterne($_POST['typeaideexterne'], $_POST['date'], $_POST['instruct'], $_POST['natureexterne'], $_POST['distrib'], $_POST['etat'], $_POST['idIndividu'], $_POST['orgaext'], $_POST['urgence'], $_POST['montantDemande']);
             $aide = aide();
             $retour = array('aide' => $aide);
             echo json_encode($retour);
             break;
         case 'addBonInterne':
-            include_once('./pages/aide.php');
+            include_once('./pages/aideInterne.php');
             addBonInterne($_POST['idAide'], $_POST['instruct'], $_POST['dateprevue'], $_POST['dateeffective'], $_POST['montant'], $_POST['commentaire'], $_POST['typebon']);
             $detail = detailAideInterne();
             $retour = array('detail' => $detail);

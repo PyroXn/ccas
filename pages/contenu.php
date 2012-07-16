@@ -16,7 +16,7 @@ function contenu() {
             echo budget();
             break;
         case 'aides':
-            include_once './pages/aide.php';
+            include_once './pages/aideInterne.php';
             echo aide();
             break;
         case 'historique':

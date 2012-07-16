@@ -217,13 +217,12 @@ function graphTypeAideInterne() {
     $x[strlen($x)] = ']';
     $s1[strlen($s1)] = ']';
     $s2[strlen($s2)] = ']';
-
     $retour = '<div id="graphTypeAideInterne" style="height:250px;width:800px; "></div>';
     $retour .= "
      <script type='text/javascript'>
-        var s1 = ".(int)$s1.";
-        var s2 = ".(int)$s2.";
-        var ticks = ".(int)$x.";
+        var s1 = ".$s1.";
+        var s2 = ".$s2.";
+        var ticks = ".$x.";
 
     plot2 = $.jqplot('graphTypeAideInterne', [s1, s2], {
         title: 'Répartition des aides internes les plus demandés',

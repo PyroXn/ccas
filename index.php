@@ -51,11 +51,11 @@ switch (@$_GET['p']) {
         deconnexion();
         break;
     case 'detailaideinterne':
-        include_once('./pages/aide.php');
+        include_once('./pages/aideInterne.php');
         echo detailAideInterne();
         break;
     case 'detailaideexterne':
-        include_once('./pages/aide.php');
+        include_once('./pages/aideExterne.php');
         echo detailAideExterne();
         break;
     case 'deleteUser':
@@ -191,15 +191,15 @@ switch (@$_GET['p']) {
         deleteAction();
         break;
     case 'updatedecisioninterne':
-        include_once('./pages/aide.php');
+        include_once('./pages/aideInterne.php');
         updateDecisionInterne();
         break;
     case 'updatedecisionexterne':
-        include_once('./pages/aide.php');
+        include_once('./pages/aideExterne.php');
         updateDecisionExterne();
         break;
     case 'createPDF':
-        include_once('./pages/aide.php');
+        include_once('./pages/aideInterne.php');
         createPDF($_POST['idBon']);
         break;
     case 'afficherArchive':
@@ -215,11 +215,11 @@ switch (@$_GET['p']) {
         changeGraphInstruct();
         break;
     case 'createrapport':
-        include_once('./pages/aide.php');
+        include_once('./pages/aideInterne.php');
         createPDFRapportSocial($_POST['idIndividu'], $_POST['motif'], $_POST['evaluation'], $_POST['idAide']);
         break;
     case 'rapportsocial':
-        include_once('./pages/aide.php');
+        include_once('./pages/aideInterne.php');
         rapportSocial($_POST['idAide']);
         break;
     case 'deletedoc':
@@ -227,16 +227,20 @@ switch (@$_GET['p']) {
         destroyFile($_POST['file']);
         break;
     case 'cancelrapport':
-        include_once('./pages/aide.php');
+        include_once('./pages/aideInterne.php');
         cancelRapport();
         break;
     case 'docremis':
-        include_once('./pages/aide.php');
+        include_once('./pages/aideInterne.php');
         docRemis();
         break;
     case 'deleteaide':
-        include_once('./pages/aide.php');
+        include_once('./pages/aideInterne.php');
         deleteAide();
+        break;
+    case 'updateDetailAideInterne':
+        include_once('./pages/aideInterne.php');
+        updateDetailAideInterne();
         break;
     default:
         home();

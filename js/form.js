@@ -331,11 +331,41 @@ $(function() {
                 datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
                 datastring += '&rapport='+$('#rapport').val()+'&decideur='+$('#decideur').attr('value');
                 datastring += '&montant='+$('#montantaide').val()+'&montanttotal='+$('#montanttotalaide').val()+'&quantite='+$('#quantiteaide').val();
+                console.log($('#quantiteaide').val());
                 $.ajax({
                     type: 'post',
                     dataType:'json',
                     data: datastring,
                     url: './index.php?p=updatedecisioninterne',
+                    cache: false,
+                    success: function(aideinterne) {
+                        $('#contenu').html(aideinterne.aide);
+                    },
+                    error: function(aideinterne) {
+                        $("#contenu").html(aideinterne.responseText);
+                    }
+                });
+            }
+        } else if(value == 'updateDetailAideInterne') {
+            if(findRequis($('#decisionRequis'))) {
+                var aideUrgente = 0;
+                if($('#aideUrgente').hasClass('checkbox_active')) {
+                    aideUrgente = 1;
+                }
+                datastring = 'idIndividu='+idIndividu+'&typeaideinterne='+$('#typeaideinterne').attr('value');
+                datastring += '&idAide='+$('#idAide').attr('value');
+                datastring += '&etat='+$('#etat').attr('value');
+                datastring += '&instruct='+$('#instruct').attr('value');
+                datastring += '&orga='+$('#orga').attr('value');
+                datastring += '&aideUrgente='+aideUrgente;
+                datastring += '&dateDemande='+$('#dateDemande').val();
+                datastring += '&nature='+$('#nature').attr('value');
+                datastring += '&proposition='+$('#proposition').attr('value');
+                $.ajax({
+                    type: 'post',
+                    dataType:'json',
+                    data: datastring,
+                    url: './index.php?p=updateDetailAideInterne',
                     cache: false,
                     success: function(aideinterne) {
                         $('#contenu').html(aideinterne.aide);
