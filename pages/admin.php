@@ -1,18 +1,23 @@
 <?php
 
 function homeAdmin() {
-    $title = 'Accueil';
-    $contenu = '
-        <div id="menu_gauche"></div>
-                <div id="page_header">
-                    <div id="page_header_navigation">
-                        ' . generationHeaderNavigation('admin') . '
+    if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_ADMIN)) { 
+        $title = 'Accueil';
+        $contenu = '
+            <div id="menu_gauche"></div>
+                    <div id="page_header">
+                        <div id="page_header_navigation">
+                            ' . generationHeaderNavigation('admin') . '
+                        </div>
                     </div>
-                </div>
-                <div id="contenu_wrapper">
-                    <div id="contenu">' . manageRole() . '</div>
-                </div>
-                ';
+                    <div id="contenu_wrapper">
+                        <div id="contenu">' . manageRole() . '</div>
+                    </div>
+                    ';
+    } else {
+        $title = 'Acces restreint';
+        $contenu = "Vous n'avez pas les droits";
+    }
     display($title, $contenu);
 }
 

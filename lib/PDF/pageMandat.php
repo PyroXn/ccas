@@ -40,7 +40,7 @@
                                                 <?php echo $ville; ?><br />
             </td>
             <td>
-                &nbsp;Montant attribué : <?php echo $bon->montant; ?>
+                &nbsp;Montant attribué : <?php echo $bon->montant; ?> &euro;
             </td>
             <td colspan="2"></td>
         </tr>
@@ -50,8 +50,8 @@
         </tr>
         <tr>
             <td>&nbsp;Vu, bon &agrave; payer ou &agrave; virer<br />&nbsp;pour la somme de :</td>
-            <td>&nbsp;Somme nette &agrave; payer ou &agrave;<br />&nbsp;virer :</td>
-            <td colspan="2"><?php echo $bon->montant; ?></td>
+            <td>&nbsp;Somme nette &agrave; payer ou &agrave;<br />&nbsp;virer : <?php echo $bon->montant; ?> &euro;</td>
+            <td colspan="2"></td>
         </tr>
         <tr>
             <td>&nbsp;Pour acquit de la somme<br />
@@ -117,7 +117,7 @@
                                                 <?php echo $ville; ?><br />
             </td>
             <td>
-                &nbsp;Montant attribué : <?php echo $bon->montant; ?>
+                &nbsp;Montant attribué : <?php echo $bon->montant; ?> &euro;
             </td>
             <td colspan="2"></td>
         </tr>
@@ -127,8 +127,8 @@
         </tr>
         <tr>
             <td>&nbsp;Vu, bon &agrave; payer ou &agrave; virer<br />&nbsp;pour la somme de :</td>
-            <td>&nbsp;Somme nette &agrave; payer ou &agrave;<br />&nbsp;virer :</td>
-            <td colspan="2"><?php echo $bon->montant; ?></td>
+            <td>&nbsp;Somme nette &agrave; payer ou &agrave;<br />&nbsp;virer : <?php echo $bon->montant; ?> &euro;</td>
+            <td colspan="2"></td>
         </tr>
         <tr>
             <td>&nbsp;Pour acquit de la somme<br />

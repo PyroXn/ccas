@@ -36,16 +36,16 @@
         <?php 
             foreach ($result as $ligne) {
                 $retour = '<tr>
-                          <td>'.$ligne->individu->nom.' '.$ligne->individu->prenom.'<br/>
+                          <td height="100">'.$ligne->individu->nom.' '.$ligne->individu->prenom.'<br/>
                               '.$ligne->individu->foyer->numRue.' '.$ligne->individu->foyer->rue->rue.'
                           </td>
                           <td>'.$ligne->typeAideDemandee->libelle.'
                           </td>
-                          <td  width="300">'.$ligne->proposition.'
+                          <td  width="300">'.str_replace('à', '&agrave;', $ligne->proposition).'
                           </td>';
                 if ($withDecission == 1) {
                           $retour .= '<td width="300"><b>Avis:</b> '.$ligne->avis.'<br/><b>Quantité:</b> '.$ligne->quantite.'<br/><b>Montant total:</b> '.$ligne->montanttotal.' €
-                              <br/><b>Commentaires:</b> '.$ligne->commentaire.'
+                              <br/><b>Commentaires:</b> '.str_replace('à', '&agrave;', $ligne->commentaire).'
                           </td>';
                 } else {
                     $retour .= '<td></td>';

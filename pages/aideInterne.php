@@ -755,6 +755,8 @@ function createPDF($idBon) {
 
 function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
     include_once('./lib/config.php');
+    $motif = str_replace('à', '&agrave;', $motif);
+    $evaluation = str_replace('à', '&agrave;', $evaluation);
     $individu = Doctrine_Core::getTable('individu')->find($idIndividu);
     $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($idIndividu);
     $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($idIndividu);
