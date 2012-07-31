@@ -208,16 +208,21 @@ function headerAideInterne($aideInterne, $chargerCombo) {
                 }
                 $testaffichage .='</div>
             </div>
-            <div class="affichage_classique">
-                <h2>Proposition : </h2>
-                <div class="aff">
-                    <input class="contour_field input_num" type="text" id="proposition" value="'. $aideInterne->proposition .'" disabled>
-                </div>
-            </div>
         </div>';
     
     $contenu = "<div id='headerAideInterne'><h3><span>Fiche d'aide interne :</span><span class='edit'></span></h3>";
-    $contenu .= '<ul class="list_classique"><li class="ligne_list_classique">'.$testaffichage.'</li></ul>
+    $contenu .= '
+        <ul class="list_classique">
+            <li class="ligne_list_classique">'.$testaffichage.'</li>
+            <li class="ligne_list_classique">
+                <div class="affichage_classique">
+                    <h2>Proposition : </h2>
+                    <div class="aff">
+                        <textarea class="contour_field input_char" type="text" id="proposition" disabled>'. $aideInterne->proposition .'</textarea>
+                    </div>
+                </div>
+            </li>
+        </ul>
                 <div value="updateDetailAideInterne" class="bouton modif update">
                     <i class="icon-save"></i>
                     <span>Enregistrer</span>
