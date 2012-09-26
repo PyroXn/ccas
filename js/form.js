@@ -1242,6 +1242,8 @@ $(function() {
         var loc = $(this);
         var name = $(this).attr('name');
         var datastring = "idBon=" + $(this).attr('idBon');
+        var idAide = $('#idAide').attr('value');
+        var idBon = $(this).attr('idBon');
         $.ajax({
             type: 'post',
             data: datastring,
@@ -1251,7 +1253,9 @@ $(function() {
                 $(".tipsy").remove();
                 loc.attr('href', name);
                 loc.attr('target','_blank');
-                loc.attr('class', 'open_doc')
+                loc.attr('class', 'open_doc');
+                loc.attr('original-title', 'Ouvrir le document');
+                loc.parent().append(' - <a id="bonRemis" idbon="'+ idBon +'" idaide="' + idAide + '" class="doc_remis" original-title="Ce document a été remis"></a>');
             },
             error: function(data) {
                 $("#contenu").html(data.responseText);
