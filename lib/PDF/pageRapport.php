@@ -204,7 +204,7 @@
             <td>AL ou APL</td>
             <td><?php echo $ressource->aideLogement; ?></td>
             <td><b>TOTAL CHARGES (A) + (B)</b></td>
-            <td><b><?php echo $totalCharge = array_sum(array($creditMensuel, $depense->loyer, $depense->gaz, $depense->electricite, $depense->eau, $depense->mutuelle, $depense->impotRevenu, $depense->autreDepense, $depense->impotLocaux, $depense->pensionAlim, $depense->telephonie, $depense->assuranceVoiture, $depense->assuranceHabitation, $depense->autreDepense)); ?></b></td>
+            <td><b><?php echo $totalCharge = array_sum(array($creditMensuel, $depense->loyer, $depense->gaz, $depense->electricite, $depense->eau, $depense->mutuelle, $depense->impotRevenu, $depense->autreDepense, $depense->impotLocaux, $depense->pensionAlim, $depense->telephonie, $depense->assuranceVoiture, $depense->assuranceHabitation)); ?></b></td>
         </tr>
         <tr>
             <td><b>TOTAL PRESTATIONS (B)</b></td>
