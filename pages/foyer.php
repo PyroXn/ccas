@@ -121,7 +121,7 @@ function generateInfoFoyer($foyer) {
     $secteurs = Doctrine_Core::getTable('secteur')->findAll();
     $types =  Doctrine_Core::getTable('type')->findAll();
     $bailleurs =  Doctrine_Core::getTable('bailleur')->findAll();
-    $instructs =  Doctrine_Core::getTable('instruct')->findByActifAndInterne(1, 1);
+    $instructs =  Doctrine_Core::getTable('instruct')->findByActif(1);
     $sitfams = Doctrine_Core::getTable('situationfamiliale')->findAll();
     $retour = '';
     $retour .= '

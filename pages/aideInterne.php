@@ -448,7 +448,7 @@ function createCombo() {
     $typesaides = Doctrine_Core::getTable('type')->findByidlibelletype(1);
     $organismes = Doctrine_Core::getTable('organisme')->findByIdLibelleOrganisme(5);
     $natures = Doctrine_Core::getTable('type')->findByidlibelletype(5); //nature
-    $allinstructs =  Doctrine_Core::getTable('instruct')->findByActifAndInterne(1, 1);
+    $allinstructs =  Doctrine_Core::getTable('instruct')->findByActif(1);
     
     //decision aideinterne
     $decideurs = Doctrine_Core::getTable('decideur')->findAll();
