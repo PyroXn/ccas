@@ -195,7 +195,7 @@ function getDocumentIndividu() {
             <h2>Ajouter un document</h2>
             <div class="colonne_droite">
                 <div id="upload">
-                    <label>Fichier : </label><input name="fichier" type="file" placeholder="test"><br>
+                    <label>Fichier : </label><input name="fichier" type="file">
                     <input type="hidden" name="chemin" value="' . $dir_nom . '">
                     <input type="hidden" name="idIndividu" value="' . $_POST['idIndividu'] . '">
                     <input type="hidden" name="idFoyer" value="' . $_POST['idFoyer'] . '">
@@ -234,12 +234,13 @@ function getDocumentIndividu() {
                         <tbody>
                         </tbody>
                     </table>';
-$contenu .= '<div class="formulaire" action="ajout_doc">
+$contenu .= '
+    <div class="formulaire" action="ajout_doc">
         <form action="#" method="post">
             <h2>Ajouter un document</h2>
             <div class="colonne_droite">
                 <div id="upload">
-                    <label>Fichier : </label><input name="fichier" type="file" placeholder="test"><br>
+                    <label>Fichier : </label><input name="fichier" type="file">
                     <input type="hidden" name="chemin" value="' . $dir_nom . '">
                     <input type="hidden" name="idIndividu" value="' . $_POST['idIndividu'] . '">
                     <input type="hidden" name="idFoyer" value="' . $_POST['idFoyer'] . '">
@@ -250,13 +251,14 @@ $contenu .= '<div class="formulaire" action="ajout_doc">
                     <i class="icon-save"></i>
                     <span>Envoyer</span>
                 </div>
-                 <div value="cancel" class="bouton classique">
-                        <i class="icon-cancel icon-black"></i>
-                        <span>Annuler</span>
-                    </div>
+                <div value="cancel" class="bouton classique">
+                    <i class="icon-cancel icon-black"></i>
+                    <span>Annuler</span>
+                </div>
+            </div>
         </form>
-        </div>';
-            return $contenu;
+    </div>';
+        return $contenu;
     }
 }
 
@@ -331,20 +333,25 @@ function getDocument() {
     $contenu .= '</tbody></table>';
     $contenu .= '
         <div class="formulaire" action="ajout_doc_type">
-        <form action="#" method="post">
-            <div id="upload">
-                <label>Fichier : </label><input name="fichier" type="file"><br>
-                <input type="hidden" name="chemin" value="' . $dir_nom . '">
-            </div>
-            <div value="ajout_doc_type" class="bouton modif">
-                <i class="icon-save"></i>
-                <span>Enregistrer</span>
-            </div>
-			<div value="cancel" class="bouton classique">
-				<i class="icon-cancel icon-black"></i>
-			<span>Annuler</span>
+            <form action="#" method="post">
+                <h2>Ajouter un document</h2>
+                <div class="colonne_droite">
+                    <div id="upload">
+                        <label>Fichier : </label><input name="fichier" type="file">
+                        <input type="hidden" name="chemin" value="' . $dir_nom . '">
                     </div>
-        </form>
+                </div>
+                <div class="sauvegarder_annuler">
+                    <div value="ajout_doc_type" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
+                </div>
+            </form>
         </div>';
     echo $contenu;
 }
