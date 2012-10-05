@@ -108,107 +108,107 @@
         </tr>
         <tr>
             <td>Salaire du demandeur</td>
-            <td><?php echo $ressource->salaire; ?></td>
+            <td><?php echo $salaireIndividu; ?></td>
             <td>Loyer (taux plein)</td>
-            <td><?php echo $depense->loyer; ?></td>
+            <td><?php echo $loyerFamille; ?></td>
         </tr>
         <tr>
             <td>Salaire du conjoint</td>
             <td><?php echo $salaireConjoint; ?></td>
             <td>Gaz</td>
-            <td><?php echo $depense->gaz; ?></td>
+            <td><?php echo $gazFamille; ?></td>
         </tr>
         <tr>
             <td>Salaire des enfants</td>
             <td><?php echo $salaireEnfant; ?></td>
             <td>Electricité</td>
-            <td><?php echo $depense->electricite; ?></td>
+            <td><?php echo $elecFamille; ?></td>
         </tr>
         <tr>
             <td>IJSS</td>
-            <td><?php echo $ressource->ijss; ?></td>
+            <td><?php echo $ijssFamille; ?></td>
             <td>EAU</td>
-            <td><?php echo $depense->eau; ?></td>
+            <td><?php echo $eauFamille; ?></td>
         </tr>
         <tr>
             <td>RSA socle</td>
-            <td><?php echo $ressource->rsaSocle; ?></td>
+            <td><?php echo $rsaSocleFamille; ?></td>
             <td>Téléphone</td>
-            <td><?php echo $depense->telephonie; ?></td>
+            <td><?php echo $telFamille; ?></td>
         </tr>
         <tr>
            <td>RSA activité</td>
-            <td><?php echo $ressource->rsaActivite; ?></td>
+            <td><?php echo $rsaActiviteFamille; ?></td>
             <td>Assurance voiture</td>
-            <td><?php echo $depense->assuranceVoiture; ?></td>
+            <td><?php echo $assuranceVoitureFamille; ?></td>
         </tr>
         <tr>
             <td>AAH</td>
-            <td><?php echo $ressource->aah; ?></td>
+            <td><?php echo $aahFamille; ?></td>
             <td>Assurance habitation</td>
-            <td><?php echo $depense->assuranceHabitation; ?></td>
+            <td><?php echo $assuranceHabitationFamille; ?></td>
         </tr>
         <tr>
              <td>Chomage</td>
-            <td><?php echo $ressource->chomage; ?></td>
+            <td><?php echo $chomageFamille; ?></td>
             <td>Mutuelle</td>
-            <td><?php echo $depense->mutuelle; ?></td>
+            <td><?php echo $mutuelleFamille; ?></td>
         </tr>
         <tr>
             <th colspan="2">Pensions</th>
             <td>Impôts sur le revenu</td>
-            <td><?php echo $depense->impotRevenu; ?></td>
+            <td><?php echo $impotRevenuFamille; ?></td>
         </tr>
         <tr>
             <td class="large">Retraite</td>
-            <td class="large"><?php echo $ressource->pensionRetraite; ?></td>
+            <td class="large"><?php echo $retraiteFamille; ?></td>
             <td>Impôts locaux</td>
-            <td><?php echo $depense->impotLocaux; ?></td>
+            <td><?php echo $impotLocauxFamille; ?></td>
         </tr>
         <tr>
             <td class="large">Complémentaires</td>
-            <td class="large"><?php echo $ressource->retraitComp; ?></td>
+            <td class="large"><?php echo $complementaireFamille; ?></td>
             <td class="large">Autres</td>
-            <td class="large"><?php echo $depense->autreDepense; ?></td>
+            <td class="large"><?php echo $autresChargeFamille; ?></td>
         </tr>
         <tr>
             <td>Invalidité</td>
-            <td><?php echo $ressource->pensionInvalide; ?></td>
+            <td><?php echo $invaliditeFamille; ?></td>
             <td class="large"><b>TOTAL CHARGES MENSUELLES (A)</b></td>
-            <td class="large"><b><?php echo array_sum(array($depense->loyer, $depense->gaz, $depense->electricite, $depense->eau, $depense->mutuelle, $depense->impotRevenu, $depense->impotLocaux, $depense->pensionAlim, $depense->telephonie, $depense->assuranceVoiture, $depense->assuranceHabitation, $depense->autreDepense)); ?></b></td>
+            <td class="large"><b><?php echo $totalCharges; ?></b></td>
         </tr>
         <tr>
             <td>Pension alimentaire</td>
-            <td><?php echo $ressource->pensionAlim; ?></td>
+            <td><?php echo $pensionAlimFamille; ?></td>
             <th colspan="2">Crédits</th>
         </tr>
         <tr>
             <td>Autres ressources</td>
-            <td><?php echo $ressource->autreRevenu; ?></td>
+            <td><?php echo $autresRessourceFamille; ?></td>
             <td><b>TOTAL CREDITS MENSUELS (B)</b></td>
             <td><b><?php echo $creditMensuel; ?></b></td>
         </tr>
         <tr>
             <td><b>TOTAL RESSOURCES (A)</b></td>
-            <td><b><?php echo array_sum(array($ressource->salaire, $salaireConjoint, $salaireEnfant, $ressource->ijss, $ressource->rsaSocle, $ressource->rsaActivite, $ressource->aah, $ressource->chomage, $ressource->pensionRetraite, $ressource->retraitComp, $ressource->pensionInvalide, $ressource->pensionAlim, $ressource->autreRevenu)); ?></b></td>
+            <td><b><?php echo $totalRessource; ?></b></td>
             <td>Total credits</td>
             <td><?php echo $totalCredit; ?></td>
         </tr>
         <tr>
             <td>Prestations familiales</td>
-            <td><?php echo $ressource->revenuAlloc; ?></td>
+            <td><?php echo $prestationFamille; ?></td>
             <td>Total dettes</td>
             <td><?php echo $totalDette; ?></td>
         </tr>
         <tr>
             <td>AL ou APL</td>
-            <td><?php echo $ressource->aideLogement; ?></td>
+            <td><?php echo $alFamille; ?></td>
             <td><b>TOTAL CHARGES (A) + (B)</b></td>
-            <td><b><?php echo $totalCharge = array_sum(array($creditMensuel, $depense->loyer, $depense->gaz, $depense->electricite, $depense->eau, $depense->mutuelle, $depense->impotRevenu, $depense->autreDepense, $depense->impotLocaux, $depense->pensionAlim, $depense->telephonie, $depense->assuranceVoiture, $depense->assuranceHabitation)); ?></b></td>
+            <td><b><?php echo $totalCharge = array_sum(array($creditMensuel, $totalCharges)); ?></b></td>
         </tr>
         <tr>
             <td><b>TOTAL PRESTATIONS (B)</b></td>
-            <td><b><?php echo $ressource->revenuAlloc+$ressource->aideLogement; ?></b></td>            
+            <td><b><?php echo $totalPrestation; ?></b></td>            
         </tr>
         <tr>
             <td><b>TOTAL GENERAL (A) + (B)</b></td>
