@@ -11,6 +11,12 @@ class LienFamille extends Doctrine_Record {
         $this->option('orderBy', 'lien ASC');
     }
 
+    public static $Epouse = 3;
+    public static $Compagne = 5;
+    public static $Epoux = 12;
+    public static $Compagnon = 16;
+    public static $ChefLuiMeme = 2;
+    
 }
 
 ?>

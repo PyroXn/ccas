@@ -770,7 +770,7 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
 //    $credit = Doctrine_Core::getTable('credit')->findByIdindividu($idIndividu);
     $famille = $individu->foyer->individu;
     $salaireIndividu = $ressource->salaire;
-    $salaireAutre = -$salaireIndividu;
+    $salaireAutre = 0;
     $creditMensuel = 0;
     $totalCredit = 0;
     $nbEnfant = 0; 
@@ -862,23 +862,24 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
             $prestationFamille += $ressource->revenuAlloc;
             $alFamille += $ressource->aideLogement;
         }
-         
-        if($f->idLienFamille == 3 || $f->idLienFamille == 5 || $f->idLienFamille == 12 || $f->idLienFamille == 16) {
-            $conjoint =  Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
-            if(count($conjoint) < 1) {
-                $salaireConjoint = 0;
-            } else {
+        
+        if ($individu->id != $f->id) {
+            if($f->idLienFamille == LienFamille::$Epouse || $f->idLienFamille == LienFamille::$Compagne 
+                    || $f->idLienFamille == LienFamille::$Epoux || $f->idLienFamille == LienFamille::$Compagnon 
+                    || $f->idLienFamille == LienFamille::$ChefLuiMeme) {
+                $conjoint =  Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
+               
                 if(isset($conjoint->salaire) && $conjoint->salaire > 0) {
-                    $salaireConjoint = $conjoint->salaire;
+                    $salaireConjoint += $conjoint->salaire;
                 }
-            }
-        } else {
-            if ($f->idLienFamille == 1) {
-                $nbEnfant += 1;
-            }
-            $ressourceAutre = Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
-            if($ressourceAutre != null) {
-                $salaireAutre += $ressourceAutre->salaire;
+            } else {
+                if ($f->idLienFamille == 1) {
+                    $nbEnfant += 1;
+                }
+                $ressourceAutre = Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
+                if($ressourceAutre != null) {
+                    $salaireAutre += $ressourceAutre->salaire;
+                }
             }
         }
    }
