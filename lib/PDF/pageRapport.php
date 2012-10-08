@@ -119,8 +119,8 @@
             <td><?php echo $gazFamille; ?></td>
         </tr>
         <tr>
-            <td>Salaire des enfants</td>
-            <td><?php echo $salaireEnfant; ?></td>
+            <td>Salaire autres membres</td>
+            <td><?php echo $salaireAutre; ?></td>
             <td>Electricité</td>
             <td><?php echo $elecFamille; ?></td>
         </tr>
@@ -133,90 +133,102 @@
         <tr>
             <td>RSA socle</td>
             <td><?php echo $rsaSocleFamille; ?></td>
+            <td>Chauffage</td>
+            <td><?php echo $chauffageFamille; ?></td>
+        </tr>
+        <tr>
+            <td>RSA activité</td>
+            <td><?php echo $rsaActiviteFamille; ?></td>
             <td>Téléphone</td>
             <td><?php echo $telFamille; ?></td>
         </tr>
         <tr>
-           <td>RSA activité</td>
-            <td><?php echo $rsaActiviteFamille; ?></td>
+            <td>AAH</td>
+            <td><?php echo $aahFamille; ?></td>
+            <td>Télévision</td>
+            <td><?php echo $televisionFamille; ?></td>
+        </tr>
+        <tr>
+            <td>ASS</td>
+            <td><?php echo $assFamille; ?></td>
+            <td>Internet</td>
+            <td><?php echo $internetFamille; ?></td>
+        </tr>
+        <tr>
+            <td>Chomage</td>
+            <td><?php echo $chomageFamille; ?></td>
             <td>Assurance voiture</td>
             <td><?php echo $assuranceVoitureFamille; ?></td>
         </tr>
         <tr>
-            <td>AAH</td>
-            <td><?php echo $aahFamille; ?></td>
+            <th colspan="2">Pensions</th>
             <td>Assurance habitation</td>
             <td><?php echo $assuranceHabitationFamille; ?></td>
         </tr>
         <tr>
-             <td>Chomage</td>
-            <td><?php echo $chomageFamille; ?></td>
+            <td>Retraite</td>
+            <td><?php echo $retraiteFamille; ?></td>
             <td>Mutuelle</td>
             <td><?php echo $mutuelleFamille; ?></td>
         </tr>
         <tr>
-            <th colspan="2">Pensions</th>
+            <td>Complémentaires</td>
+            <td><?php echo $complementaireFamille; ?></td>
             <td>Impôts sur le revenu</td>
             <td><?php echo $impotRevenuFamille; ?></td>
         </tr>
         <tr>
-            <td class="large">Retraite</td>
-            <td class="large"><?php echo $retraiteFamille; ?></td>
+            <td>Invalidité</td>
+            <td><?php echo $invaliditeFamille; ?></td>
             <td>Impôts locaux</td>
             <td><?php echo $impotLocauxFamille; ?></td>
         </tr>
         <tr>
-            <td class="large">Complémentaires</td>
-            <td class="large"><?php echo $complementaireFamille; ?></td>
-            <td class="large">Autres</td>
-            <td class="large"><?php echo $autresChargeFamille; ?></td>
-        </tr>
-        <tr>
-            <td>Invalidité</td>
-            <td><?php echo $invaliditeFamille; ?></td>
-            <td class="large"><b>TOTAL CHARGES MENSUELLES (A)</b></td>
-            <td class="large"><b><?php echo $totalCharges; ?></b></td>
-        </tr>
-        <tr>
             <td>Pension alimentaire</td>
             <td><?php echo $pensionAlimFamille; ?></td>
-            <th colspan="2">Crédits</th>
+            <td>Pension alimentaire</td>
+            <td><?php echo $pensionAlimChargeFamille; ?></td>
         </tr>
         <tr>
             <td>Autres ressources</td>
             <td><?php echo $autresRessourceFamille; ?></td>
-            <td><b>TOTAL CREDITS MENSUELS (B)</b></td>
-            <td><b><?php echo $creditMensuel; ?></b></td>
+            <td>Autres charges</td>
+            <td><?php echo $autresChargeFamille; ?></td>
         </tr>
         <tr>
             <td><b>TOTAL RESSOURCES (A)</b></td>
             <td><b><?php echo $totalRessource; ?></b></td>
-            <td>Total credits</td>
-            <td><?php echo $totalCredit; ?></td>
+            <td><b>TOTAL CHARGES MENSUELLES (A)</b></td>
+            <td><b><?php echo $totalCharges; ?></b></td>
         </tr>
         <tr>
             <td>Prestations familiales</td>
             <td><?php echo $prestationFamille; ?></td>
-            <td>Total dettes</td>
-            <td><?php echo $totalDette; ?></td>
+            <th colspan="2">Crédits</th>
         </tr>
         <tr>
             <td>AL ou APL</td>
             <td><?php echo $alFamille; ?></td>
-            <td><b>TOTAL CHARGES (A) + (B)</b></td>
-            <td><b><?php echo $totalCharge = array_sum(array($creditMensuel, $totalCharges)); ?></b></td>
+            <td><b>TOTAL CREDITS MENSUELS (B)</b></td>
+            <td><b><?php echo $creditMensuel; ?></b></td>
         </tr>
         <tr>
             <td><b>TOTAL PRESTATIONS (B)</b></td>
-            <td><b><?php echo $totalPrestation; ?></b></td>            
+            <td><b><?php echo $totalPrestation; ?></b></td>
+            <td>Total credits</td>
+            <td><?php echo $totalCredit; ?></td>
         </tr>
         <tr>
             <td><b>TOTAL GENERAL (A) + (B)</b></td>
-            <td><b><?php echo $totalG = array_sum(array($ressource->revenuAlloc, $ressource->aideLogement, $ressource->salaire, $salaireConjoint, $salaireEnfant, $ressource->ijss, $ressource->rsaSocle, $ressource->rsaActivite, $ressource->aah, $ressource->chomage, $ressource->pensionRetraite, $ressource->retraitComp, $ressource->pensionInvalide, $ressource->pensionAlim, $ressource->autreRevenu)); ?></b></td>
+            <td><b><?php echo $totalG = array_sum(array($totalRessource, $totalPrestation)); ?></b></td>
+            <td>Total dettes</td>
+            <td><?php echo $totalDette; ?></td>
         </tr>
         <tr>
             <td><b>RESTE A VIVRE</b></td>
-            <td><b><?php echo $totalG - $totalCharge; ?></b></td>
+            <td><b><?php $totalCharge = array_sum(array($creditMensuel, $totalCharges)); echo $totalG - $totalCharge; ?></b></td>
+            <td><b>TOTAL CHARGES (A) + (B)</b></td>
+            <td><b><?php echo $totalCharge; ?></b></td>
        </tr>
     </table>
 </page>

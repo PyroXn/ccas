@@ -770,7 +770,7 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
 //    $credit = Doctrine_Core::getTable('credit')->findByIdindividu($idIndividu);
     $famille = $individu->foyer->individu;
     $salaireIndividu = $ressource->salaire;
-    $salaireEnfant = 0;
+    $salaireAutre = -$salaireIndividu;
     $creditMensuel = 0;
     $totalCredit = 0;
     $nbEnfant = 0; 
@@ -781,6 +781,7 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
     $rsaSocleFamille = 0;
     $rsaActiviteFamille = 0;
     $aahFamille = 0;
+    $assFamille = 0;
     $chomageFamille = 0;
     $retraiteFamille = 0;
     $complementaireFamille = 0;
@@ -794,11 +795,15 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
     $elecFamille = 0;
     $eauFamille = 0;
     $telFamille = 0;
+    $chauffageFamille = 0;
+    $televisionFamille = 0;
+    $internetFamille = 0;
     $assuranceVoitureFamille = 0;
     $assuranceHabitationFamille = 0;
     $mutuelleFamille = 0;
     $impotRevenuFamille = 0;
     $impotLocauxFamille = 0;
+    $pensionAlimChargeFamille = 0;
     $autresChargeFamille = 0;
     
     $totalChargesMensuelle = 0;
@@ -808,41 +813,46 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
     $totalGeneral = 0;
     $resteAVivre = 0;
     
-    foreach(famille as $f) {
-        $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($f->idIndividu);
+    foreach($famille as $f) {
+        $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($f->id);
         if ($dette != null) {
             $totalDette += array_sum(array($dette->arriereLocatif, $dette->fraisHuissier, $dette->arriereElectricite, $dette->arriereGaz, $dette->autreDette));
         }
         
-         $credit = Doctrine_Core::getTable('credit')->findByIdindividu($f->idIndividu);
-         if ($credit != null) {
+        $credit = Doctrine_Core::getTable('credit')->findByIdindividu($f->id);
+        if ($credit != null) {
             foreach($credit as $c) {
                 $creditMensuel += $c->mensualite;
                 $totalCredit += $c->totalRestant;
             }
-         }
+        }
          
-         $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($f->idIndividu);
-         if ($depense != null) {
+        $depense = Doctrine_Core::getTable('depense')->getLastFicheDepense($f->id);
+        if ($depense != null) {
             $loyerFamille += $depense->loyer;
             $gazFamille += $depense->gaz;
             $elecFamille += $depense->electricite;
             $eauFamille += $depense->eau;
             $telFamille += $depense->telephonie;
+            $chauffageFamille += $depense->chauffage;
+            $televisionFamille += $depense->television;
+            $internetFamille += $depense->internet;
             $assuranceVoitureFamille += $depense->assuranceVoiture;
             $assuranceHabitationFamille += $depense->assuranceHabitation;
             $mutuelleFamille += $depense->mutuelle;
             $impotRevenuFamille += $depense->impotRevenu;
             $impotLocauxFamille += $depense->impotLocaux;
+            $pensionAlimChargeFamille += $depense->pensionAlim;
             $autresChargeFamille += $depense->autreDepense;
-         }
+        }
          
-         $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->idIndividu);
-         if ($ressource != null) {
+        $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
+        if ($ressource != null) {
             $ijssFamille += $ressource->ijss;
             $rsaSocleFamille += $ressource->rsaSocle;
             $rsaActiviteFamille += $ressource->rsaActivite;
             $aahFamille += $ressource->aah;
+            $assFamille += $ressource->ass;
             $chomageFamille += $ressource->chomage;
             $retraiteFamille += $ressource->pensionRetraite;
             $complementaireFamille += $ressource->retraitComp;
@@ -851,18 +861,8 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
             $autresRessourceFamille += $ressource->autreRevenu;
             $prestationFamille += $ressource->revenuAlloc;
             $alFamille += $ressource->aideLogement;
-         }
-   }
-//    if($dette != null) {
-//            $totalDette = array_sum(array($dette->arriereLocatif, $dette->fraisHuissier, $dette->arriereElectricite, $dette->arriereGaz, $dette->autreDette));
-//    }
-//    if($credit != null) {
-//        foreach($credit as $c) {
-//            $creditMensuel += $c->mensualite;
-//            $totalCredit += $c->totalRestant;
-//        }
-//    }
-    foreach($famille as $f) {
+        }
+         
         if($f->idLienFamille == 3 || $f->idLienFamille == 5 || $f->idLienFamille == 12 || $f->idLienFamille == 16) {
             $conjoint =  Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
             if(count($conjoint) < 1) {
@@ -872,23 +872,25 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
                     $salaireConjoint = $conjoint->salaire;
                 }
             }
-        } elseif ($f->idLienFamille == 1) {
-            $nbEnfant += 1;
-            $ressourceEn = Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
-            if($ressourceEn != null) {
-                $salaireEnfant = $salaireEnfant + $ressourceEn->salaire;
+        } else {
+            if ($f->idLienFamille == 1) {
+                $nbEnfant += 1;
+            }
+            $ressourceAutre = Doctrine_Core::getTable('ressource')->getLastFicheRessource($f->id);
+            if($ressourceAutre != null) {
+                $salaireAutre += $ressourceAutre->salaire;
             }
         }
-    }
+   }
     
-    $totalCharges = array_sum(array($loyerFamille, $gazFamille, $elecFamille, $eauFamille, $telFamille, $assuranceVoitureFamille, 
-        $assuranceHabitationFamille, $mutuelleFamille, $impotLocauxFamille, $impotRevenuFamille, $autresChargeFamille));
+    $totalCharges = array_sum(array($loyerFamille, $gazFamille, $elecFamille, $eauFamille, $telFamille, $chauffageFamille, $televisionFamille, $internetFamille, 
+        $assuranceVoitureFamille, $assuranceHabitationFamille, $mutuelleFamille, $impotLocauxFamille, $impotRevenuFamille, $pensionAlimChargeFamille, $autresChargeFamille));
     
-    $totalRessource = array_sum(array($salaireIndividu, $salaireConjoint, $salaireEnfant, $ijssFamille, $rsaActiviteFamille, 
-        $rsaSocleFamille, $aahFamille, $chomageFamille, $retraiteFamille, $complementaireFamille, $invaliditeFamille, 
+    $totalRessource = array_sum(array($salaireIndividu, $salaireConjoint, $salaireAutre, $ijssFamille, $rsaActiviteFamille, 
+        $rsaSocleFamille, $aahFamille, $assFamille, $chomageFamille, $retraiteFamille, $complementaireFamille, $invaliditeFamille, 
         $pensionAlimFamille, $autresRessourceFamille));
     
-    $totalPrestation = array_sum(array($prestationFamille, $pensionAlimFamille));
+    $totalPrestation = array_sum(array($prestationFamille, $alFamille));
     
 
     $idFoyer = $individu->idFoyer;
