@@ -155,11 +155,10 @@ function genererStat() {
             $titre = 'Nombre d\'aide demandée ';
             break;
         case 'montant' : 
-            $select .= ' SUM(montant) as montant';
-            $join .= ' INNER JOIN aideinterne ai on ai.idindividu = i.id 
-                       INNER JOIN bonaide ba on ba.idaideinterne = ai.id ';
+            $select .= ' SUM(ai.montanttotal) as montant';
+            $join .= ' INNER JOIN aideinterne ai on ai.idindividu = i.id and ai.avis = "Accepté" ';
             $orderby .= ' montant';
-            $nomColDate = 'dateremiseeffective';
+            $nomColDate = 'datedecision';
             $titre = 'Montant total des aides accordées ';
             break;
     }
@@ -251,9 +250,9 @@ function genererStat() {
 
     $req = $select.$from.$join.$where.$wheresuite.$groupby.$orderby;
     
-    echo 'TITRE   :   '.$titre.'<br/><br/>';
-    echo $req;
-    echo "<br/>";
+//    echo 'TITRE   :   '.$titre.'<br/><br/>';
+//    echo $req;
+//    echo "<br/>";
     
     $con = Doctrine_Manager::getInstance()->connection();
     $st = $con->execute($req);
@@ -334,4 +333,11 @@ function genererPeriode() {
                </table>
            </div>';
 }
+
+
+
+
+
+
+
 ?>
