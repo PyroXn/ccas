@@ -510,6 +510,17 @@ legend {
     vertical-align: middle;
 }
 
+.reload_rapport  {
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    top: 4px;
+    left: 3px;
+    cursor: pointer;
+    background-image: url("img/reload.png");
+}
+
 .doc_remis {
     background: url('./img/check.png') transparent no-repeat;
     width: 16px;

@@ -527,17 +527,19 @@ function createCombo() {
 }
 
 function rapportSocial($idAide) {
+    include_once('lib/config.php');
+    $aide = Doctrine_Core::getTable('aideinterne')->find($idAide);
     $retour = '<h2 id="numAide" idAide="'.$idAide.'">Création du rapport social</h2>';
     $retour .= '<h3>Motif de la demande</h3>
                         <ul class="list_classique">
                             <li class="ligne_list_classique">
-                                <span><textarea rows="8" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="motif" ></textarea></span>
+                                <span><textarea rows="8" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="motif" >'.$aide->motifDemande.'</textarea></span>
                             </li>
                        </ul>
                        <h3>Evaluation sociale</h3>
                        <ul class="list_classique">
                             <li class="ligne_list_classique">
-                                <span><textarea rows="14" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="evaluation" ></textarea></span>
+                                <span><textarea rows="14" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="evaluation" >'.$aide->evaluationSociale.'</textarea></span>
                             </li>
                         </ul>
                         <div class="sauvegarder_annuler">
@@ -692,7 +694,7 @@ function creationPDFBonInterne($bon) {
 
 function rapportExist($chemin, $idAide) { // $chemin == ./IdFoyer/IdIndividu
     if(is_dir($chemin) && file_exists($chemin.'/RapportSocial_'.$idAide.'.pdf')) {
-        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank" class="open_doc" original-title="Ouvrir le rapport social"></a>';
+        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank" class="open_doc" original-title="Ouvrir le rapport social"></a><span class="reload_rapport" original-title="Regénérer l\'aide"></span>';
     } else {
         return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" idAide="'.$idAide.'" class="create_rapport_social creer" original-title="Créer le rapport social"></a>';
     }
@@ -763,6 +765,12 @@ function createPDFRapportSocial($idIndividu, $motif, $evaluation, $idAide) {
     include_once('./lib/config.php');
     $motif = str_replace('à', '&agrave;', $motif);
     $evaluation = str_replace('à', '&agrave;', $evaluation);
+    
+    $aide = Doctrine_Core::getTable('aideinterne')->find($idAide);
+    $aide->motifDemande = $motif;
+    $aide->evaluationSociale = $evaluation;
+    $aide->save();
+    
     $individu = Doctrine_Core::getTable('individu')->find($idIndividu);
     $ressource = Doctrine_Core::getTable('ressource')->getLastFicheRessource($idIndividu);
 //    $dette = Doctrine_Core::getTable('dette')->getLastFicheDette($idIndividu);

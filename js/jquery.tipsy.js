@@ -247,4 +247,5 @@
     $(".addElem").tipsy({live: true});
     $("#bonRemis").tipsy({live: true});
     $(".create_bon_interne").tipsy({live: true});
+    $(".reload_rapport").tipsy({live: true});
 })(jQuery);

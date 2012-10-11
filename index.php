@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors','On');
+//error_reporting(E_ALL);
+//ini_set('display_errors','On');
 
 include_once('./lib/config.php');
 
@@ -241,6 +241,10 @@ switch (@$_GET['p']) {
     case 'updateDetailAideInterne':
         include_once('./pages/aideInterne.php');
         updateDetailAideInterne();
+        break;
+    case 'reloadRapport':
+        include_once('./pages/document.php');
+        reloadRapport();
         break;
     case 'updateDetailAideExterne':
         include_once('./pages/aideExterne.php');

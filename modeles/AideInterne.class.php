@@ -25,6 +25,8 @@ class AideInterne extends Doctrine_Record {
         $this->hasColumn('montant', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('montanttotal', 'float', null, array('type' => 'float', 'default' => 0));
         $this->hasColumn('quantite', 'integer', 10, array('default' => '0'));
+        $this->hasColumn('motifDemande', 'text');
+        $this->hasColumn('evaluationSociale', 'text');
         $this->option('orderBy', 'id DESC');
     }
 

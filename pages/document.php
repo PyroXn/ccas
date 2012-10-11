@@ -532,4 +532,16 @@ function destroyFile($path) {
     echo $doc;
 }
 
+function reloadRapport() {
+    $path = $_POST['path'];
+    $idAide = $_POST['idAide'];
+    include_once('pages/aideInterne.php');
+    if(file_exists($path)) {
+        unlink($path);
+    }
+    echo rapportSocial($idAide);
+    
+    
+}
+
 ?>

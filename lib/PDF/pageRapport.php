@@ -54,7 +54,7 @@
         <tr>
             <th class="left top" width="745" height="70">
                 &nbsp;<b>Motif de la demande</b><br />
-                &nbsp;<?php echo $motif; ?>
+                &nbsp;<?php echo $aide->motifDemande; ?>
             </th>
         </tr>
     </table>
@@ -234,5 +234,5 @@
 </page>
 <page>
     <div id="titre" class="left"><u>Evalutation sociale :</u></div>
-    <div class="verylarge largeur"><?php echo $evaluation; ?></div>
+    <div class="verylarge largeur"><?php echo $aide->evaluationSociale; ?></div>
 </page>

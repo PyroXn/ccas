@@ -156,6 +156,30 @@ $(function() {
             }
         });
     });
+    
+    $('.reload_rapport').live("click", function() {
+        var idAide = $(this).parent().parent().attr('name');
+        var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
+        var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
+        var datastring = 'idAide=' + idAide + '&path=./document/' + idFoyer + '/' + idIndividu + '/RapportSocial_' + idAide + '.pdf';
+        console.debug(datastring);
+        $.ajax({
+            type: "POST",
+            url: "./index.php?p=reloadRapport",
+            data: datastring,
+            cache: false,
+            success: function(html)
+            {
+                $(".tipsy").remove();
+                $("#contenu").html(html);
+                
+            },
+            error: function(html) {
+                $("#contenu").html(html.responseText);
+            }
+        });
+    });
+    
     $('.edit_aide_externe').live("click", function() {
         var idAide = $(this).parent().parent().attr('name');
         $.ajax({
