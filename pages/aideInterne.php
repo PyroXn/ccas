@@ -694,7 +694,7 @@ function creationPDFBonInterne($bon) {
 
 function rapportExist($chemin, $idAide) { // $chemin == ./IdFoyer/IdIndividu
     if(is_dir($chemin) && file_exists($chemin.'/RapportSocial_'.$idAide.'.pdf')) {
-        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank" class="open_doc" original-title="Ouvrir le rapport social"></a><span class="reload_rapport" original-title="Regénérer l\'aide"></span>';
+        return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" href="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" target="_blank" class="open_doc" original-title="Ouvrir le rapport social"></a><span class="reload_rapport" original-title="Regénérer le rapport"></span>';
     } else {
         return '<a name="'.$chemin.'/RapportSocial_'.$idAide.'.pdf" idAide="'.$idAide.'" class="create_rapport_social creer" original-title="Créer le rapport social"></a>';
     }
