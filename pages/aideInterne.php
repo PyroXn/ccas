@@ -385,11 +385,14 @@ function decisionAideInterne($aideInterne) {
     }
     $contenu .= '</tbody></table></div>';
     }
-     $contenu .= '<h3>Rapport :</h3>
+	
+    $contenu .= '<h3>Rapport :</h3>
                      <ul class="list_classique">
                          <li class="ligne_list_classique">
-                            <span><textarea rows="8" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="rapport" >'.$aideInterne->rapport.'</textarea></span>
-                         </li>
+                            <span><textarea rows="8" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="rapport" >'.$aideInterne->rapport.'</textarea></span>';
+
+
+			$contenu .=	 '</li>
                      </ul>';
     $contenu .= '
         <div class="sauvegarder_annuler">
@@ -402,6 +405,17 @@ function decisionAideInterne($aideInterne) {
                 <span>Annuler</span>
             </div>
         </div>';
+	
+	$filename = './document/'.$aideInterne->individu->foyer->id.'/'.$aideInterne->individu->id.'/RapportSocial_'.$aideInterne->id.'.pdf';
+	
+	if (file_exists($filename)) {
+		$contenu .= '<h3>Prévisualisation du rapport :</h3>
+						 <ul class="list_classique">
+						 <li class="ligne_list_classique">
+							<iframe id="iPDF" width="100%" height="500" src="'.$filename.'"></iframe>
+						</li>
+					 </ul>';
+	}
     if($aideInterne->avis == null) {
         $contenu .= '</div>';
     }
