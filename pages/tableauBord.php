@@ -29,7 +29,7 @@ function graphNewUsager() {
     $x[strlen($x)] = ']';
     $s1[strlen($s1)] = ']';
     
-    $retour = '<div id="graphNewUsager" style="height:250px;width:800px; "></div>';
+    $retour = '<div id="graphNewUsager" style="height:250px;width:820px; "></div>';
         $retour .= "
          <script type='text/javascript'>
             var s1 = ".$s1.";
@@ -109,7 +109,19 @@ function graphTypeAction() {
         $s1 = '[';
         $i = 0;
         foreach($tab as $key => $value) {
-            if($i < 12) {
+            $trouve = false;
+            $u = 8; // On recherche un espace vide a partir du 8e caractere
+            if($i < 12) { // On ressort les 12 dernieres qctions
+                if (strlen($key) > 15) { // Si taille de la key > 12 caractere
+                    while (!$trouve && $u < strlen($key)) {
+                        if ($key[$u] != ' ') {
+                            $u++;
+                        } else {
+                            $key = substr_replace($key, "<br />", $u, 0);
+                            $trouve = true;
+                        }
+                    }
+                }
                 $x = $x.'"'.$key.'", ';
                 $s1 = $s1.''.$value.', ';
                 $i++;
@@ -139,7 +151,7 @@ function graphTypeAction() {
         }
         
         
-        $retour .= '<div id="graphTypeAction" style="height:250px;width:800px; "></div>';
+        $retour .= '<div id="graphTypeAction" style="height:250px;width:820px; "></div>';
             $retour .= "
             <script type='text/javascript'>
                 var s1 = ".$s1.";
@@ -217,7 +229,7 @@ function graphTypeAideInterne() {
     $x[strlen($x)] = ']';
     $s1[strlen($s1)] = ']';
     $s2[strlen($s2)] = ']';
-    $retour = '<div id="graphTypeAideInterne" style="height:250px;width:800px; "></div>';
+    $retour = '<div id="graphTypeAideInterne" style="height:250px;width:820px; "></div>';
     $retour .= "
      <script type='text/javascript'>
         var s1 = ".$s1.";
