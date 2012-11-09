@@ -39,6 +39,9 @@ function comboTableStatique() {
                 <div>secteur</div>
             </li>
             <li>
+                <div>situationfamiliale</div>
+            </li>
+            <li>
                 <div>situationmatri</div>
             </li>
             <li>
