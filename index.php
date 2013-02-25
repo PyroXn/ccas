@@ -539,12 +539,12 @@ function accueilContenu() {
                     </tr>
                 </thead>
                 <tbody id="contenu_table_historique">';
-    foreach($historique as $histo) {
+  foreach($historique as $histo) {
         if ($histo->typeAction == Historique::$Archiver) {
             $q = Doctrine_Query::create()
-                ->from($historique->objet)
-                ->where('datecreation < ?', $historique->date)
-                ->andWhere('idIndividu = ?', $historique->idIndividu)
+                ->from($histo->objet)
+                ->where('datecreation < ?', $histo->date)
+                ->andWhere('idIndividu = ?', $histo->idIndividu)
                 ->orderBy('datecreation DESC')
                 ->fetchOne();
             $retour .= '<tr class="afficherArchivage" idObjet='.$q->id.' table='.$histo->objet.'>';
