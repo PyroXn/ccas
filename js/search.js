@@ -172,6 +172,7 @@ $(function() {
             {
                 $(".tipsy").remove();
                 $("#contenu").html(html);
+                bbcode();
                 
             },
             error: function(html) {

@@ -50,10 +50,12 @@
         <script type="text/javascript" src="./js/jqplotPlugins/jqplot.categoryAxisRenderer.min.js"></script>
         <script type="text/javascript" src="./js/jqplotPlugins/jqplot.barRenderer.min.js"></script>
        
+        <script type="text/javascript" src="./js/jquery.wysiwyg.js"></script>
+        <script type="text/javascript" src="./js/wysiwyg.i18n.js"></script>
+        <script type="text/javascript" src="./js/lang.fr.js"></script>
     
-    
-<script src="./js/jquery-ui-1.8.18.custom.min.js"></script>
-<script src="./js/jquery.ui.datepicker-fr.js"></script>
+        <script src="./js/jquery-ui-1.8.18.custom.min.js"></script>
+        <script src="./js/jquery.ui.datepicker-fr.js"></script>
 
     </body>
 </html>

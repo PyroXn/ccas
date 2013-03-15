@@ -50,14 +50,8 @@
         </tr>
     </table>
     <div class="espace"></div>
-    <table>
-        <tr>
-            <th class="left top" width="745" height="70">
-                &nbsp;<b>Motif de la demande</b><br />
-                &nbsp;<?php echo $aide->motifDemande; ?>
-            </th>
-        </tr>
-    </table>
+    <div id="titre" class="left"><u>Motif de la demande :</u></div><br />
+    <div class="verylarge largeur"><?php echo $aide->motifDemande; ?></div>
     <div class="espace"></div>
     <table>
         <tr>
@@ -233,6 +227,6 @@
     </table>
 </page>
 <page>
-    <div id="titre" class="left"><u>Evalutation sociale :</u></div>
+    <div id="titre" class="left"><u>Evalutation sociale :</u></div><br />
     <div class="verylarge largeur"><?php echo $aide->evaluationSociale; ?></div>
 </page>

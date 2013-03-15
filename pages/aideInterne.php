@@ -547,13 +547,13 @@ function rapportSocial($idAide) {
     $retour .= '<h3>Motif de la demande</h3>
                         <ul class="list_classique">
                             <li class="ligne_list_classique">
-                                <span><textarea rows="8" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="motif" >'.$aide->motifDemande.'</textarea></span>
+                                <span><textarea rows="8" class="contour_field input_char bbcode" style="width:99%; max-width:99%" type="text" id="motif" >'.$aide->motifDemande.'</textarea></span>
                             </li>
                        </ul>
                        <h3>Evaluation sociale</h3>
                        <ul class="list_classique">
                             <li class="ligne_list_classique">
-                                <span><textarea rows="14" class="contour_field input_char" style="width:99%; max-width:99%" type="text" id="evaluation" >'.$aide->evaluationSociale.'</textarea></span>
+                                <span><textarea rows="14" class="contour_field input_char bbcode" style="width:99%; max-width:99%" type="text" id="evaluation" >'.$aide->evaluationSociale.'</textarea></span>
                             </li>
                         </ul>
                         <div class="sauvegarder_annuler">

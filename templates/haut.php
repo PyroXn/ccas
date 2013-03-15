@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="./templates/form.css" class="switchable" />
         <link rel="stylesheet" type="text/css" href="./templates/ui-lightness/jquery-ui-1.8.18.custom.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./templates/jquery.jqplot.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./templates/jquery.wysiwyg.css" media="screen" />
     </head>
     <body>
         <div id="navigationbar">

@@ -58,7 +58,7 @@ th, td {
 }
 
 .verylarge {
-    height: 500px;
+    max-width: 100%;
 }
 
 .largeur {

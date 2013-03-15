@@ -647,7 +647,13 @@ $(function() {
             }
         } else if(value == 'create_rapport') {
             var aide = $('#numAide').attr('idAide');
-            datastring = 'motif='+$('#motif').val()+'&evaluation='+$('#evaluation').val()+'&idIndividu='+idIndividu+'&idAide='+aide;
+            var reg = new RegExp('&nbsp;', 'g')
+            var motif = $('#motif').val();
+            motif = motif.replace(reg, ' ');
+            var evaluation = $('#evaluation').val();
+            evaluation = evaluation.replace(reg, ' ');
+            datastring = 'motif='+motif+'&evaluation='+evaluation+'&idIndividu='+idIndividu+'&idAide='+aide;
+            console.log(datastring);
             $.ajax({
                 type: 'post',
                 data: datastring,
@@ -1276,6 +1282,7 @@ $(function() {
             success: function(retour) {
                 $(".tipsy").remove();
                 $('#contenu').html(retour);
+                bbcode();
             },
             error: function(data) {
                 $("#contenu").html(data.responseText);
@@ -1324,7 +1331,6 @@ $(function() {
         });
     });
 });
-
 function relockAll(loc) {
     loc.parent().find('input').attr('disabled','');
     loc.parent().find('[class^=select]').attr('disabled','');
@@ -1354,7 +1360,7 @@ function searchTableStatique() {
         error: function(tableStatique) {
             $("#contenu_table_statique").html(tableStatique.responseText);
         }
-    });
+    });   
 }
 
 function slideBouton(update) {
@@ -1384,4 +1390,34 @@ function findRequis(select) {
                 }
     });
     return traitement;
+}
+
+function bbcode() {
+    $('.bbcode').wysiwyg({
+        rmUnusedControls: true,
+        plugins: {
+            autoload: true,
+            i18n: {lang: "fr"},
+            rmFormat: {rmMsWordMarkup: true}
+        },
+        controls: {
+            bold: {visible : true},
+            italic: {visible : true},
+            underline: {visible : true},
+            justifyLeft: {visible : true},
+            justifyCenter: {visible : true},
+            justifyRight: {visible : true},
+            justifyFull: {visible : true},
+            indent: {visible : true},
+            outdent: {visible : true},
+            undo: {visible : true},
+            redo: {visible : true},
+            cut: {visible : true},
+            copy: {visible : true},
+            paste: {visible : true},
+            html: {visible : true},
+            removeFormat: {visible : true}
+        },
+        initialContent: ""
+    });
 }
