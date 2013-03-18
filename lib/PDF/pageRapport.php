@@ -51,7 +51,7 @@
     </table>
     <div class="espace"></div>
     <div id="titre" class="left"><u>Motif de la demande :</u></div><br />
-    <div class="verylarge largeur"><?php echo $aide->motifDemande; ?></div>
+    <div class="verylarge"><?php echo $aide->motifDemande; ?></div>
     <div class="espace"></div>
     <table>
         <tr>
@@ -228,5 +228,5 @@
 </page>
 <page>
     <div id="titre" class="left"><u>Evalutation sociale :</u></div><br />
-    <div class="verylarge largeur"><?php echo $aide->evaluationSociale; ?></div>
+    <div class="verylarge"><?php echo $aide->evaluationSociale; ?></div>
 </page>

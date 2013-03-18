@@ -10,6 +10,10 @@ page {
     line-height: 24px;
 }
 
+span, div {
+    width: 745px;
+}
+
 .espace {
     height: 25px;
     width: 100%;
@@ -58,10 +62,6 @@ th, td {
 }
 
 .verylarge {
-    max-width: 100%;
-}
-
-.largeur {
     width: 100%;
 }
 
