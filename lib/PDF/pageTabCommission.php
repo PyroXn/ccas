@@ -25,10 +25,10 @@
             <th width="200">
                 Demande
             </th>
-            <th width="325">
+            <th width="305">
                 Propositions
             </th>
-            <th width="325">
+            <th width="305">
                 Décision de la commission
             </th>
         </tr>
@@ -41,10 +41,10 @@
                           </td>
                           <td>'.$ligne->typeAideDemandee->libelle.'
                           </td>
-                          <td  width="325">'.str_replace('à', '&agrave;', $ligne->proposition).'
+                          <td  width="305">'.str_replace('à', '&agrave;', $ligne->proposition).'
                           </td>';
                 if ($withDecission == 1) {
-                          $retour .= '<td width="325"><b>Avis:</b> '.$ligne->avis.'<br/><b>Quantité:</b> '.$ligne->quantite.'<br/><b>Montant total:</b> '.$ligne->montanttotal.' €
+                          $retour .= '<td width="305"><b>Avis:</b> '.$ligne->avis.'<br/><b>Quantité:</b> '.$ligne->quantite.'<br/><b>Montant total:</b> '.$ligne->montanttotal.' €
                               <br/><b>Commentaires:</b> '.str_replace('à', '&agrave;', $ligne->commentaire).'
                           </td>';
                 } else {
