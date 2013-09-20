@@ -178,6 +178,19 @@ $(function() {
         $('.en_attente').attr('value', $(this).children().attr('value'));
         $('.en_attente').toggleClass('en_attente');
         $('.en_execution').toggleClass('en_execution');
+        if ($(this).parent().hasClass("select_pic")) {
+            var datastring = 'idType=' + $('#choixTableAide').attr('value');
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=generateBeneficiaireAide',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $("#beneficiaire").html(data);
+                }
+            });
+        }
         if ($(this).parent().hasClass("select_table_statique")) {
             var datastring = 'table=' + $('#choixTableStatique').text();
             $.ajax({
@@ -1081,6 +1094,17 @@ $(function() {
                 },
                 error: function(data) {
                     $("#contenu").html(data.responseText);
+                }
+            });
+        }
+        else if (value == 'recapAidesGlobal') {
+            $.ajax({
+                type: 'post',
+                url: './index.php?p=recapAides',
+                cache: false,
+                //Succés de la requête
+                success: function(data) {
+                    $('#beneficiaire').html(data);
                 }
             });
         }

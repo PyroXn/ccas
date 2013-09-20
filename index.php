@@ -250,6 +250,14 @@ switch (@$_GET['p']) {
         include_once('./pages/aideExterne.php');
         updateDetailAideExterne();
         break;
+    case 'generateBeneficiaireAide':
+        include_once('./pages/recapAides.php');
+        echo generateBeneficiaireAide($_POST['idType']);
+        break;
+    case 'recapAides':
+        include_once('./pages/recapAides.php');
+        echo recapGlobal();
+        break;
     default:
         home();
         break;
@@ -418,10 +426,13 @@ function generationHeaderNavigation($mode) {
                     <span class="label">Statistiques</span>
                 </div>';
                 if(Droit::isAcces($_SESSION['permissions'], Droit::$DROIT_ACCES_TAB_COM)) { 
-                $retour .= '<div id="tabcommission" class="page_header_link">
-                    <span class="label">Tableau de commission</span>
-                </div>';
+                    $retour .= '<div id="tabcommission" class="page_header_link">
+                        <span class="label">Tableau de commission</span>
+                    </div>';
                 }
+                $retour .= '<div id="recapAides" class="page_header_link">
+                    <span class="label">Récapitulatif des aides</span>
+                </div>';
                 $retour .= '<div id="historiqueGlobal" class="page_header_link">
                     <span class="label">Historique</span>
                 </div>';

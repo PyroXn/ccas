@@ -70,6 +70,10 @@ function contenu() {
             include_once './pages/tableauBord.php';
             echo tableauBord();
             break;
+        case 'recapAides':
+            include_once './pages/recapAides.php';
+            echo recapAides();
+            break;
     }
 }
 ?>
