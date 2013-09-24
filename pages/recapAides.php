@@ -22,7 +22,7 @@ function recapAides() {
 
 function generateBeneficiaireAide($idType) {
     $type = Doctrine_Core::getTable('type')->find($idType);
-    $retour = '<h3>Bénéficiaires</h3>';
+    $retour = '<h3>Bénéficiaires : '.$type->libelle.'</h3>';
     $aides;
     //aide interne
     if ($type->idlibelletype == 1) {
@@ -73,12 +73,11 @@ function generateBeneficiaireAide($idType) {
 
 
 function recapGlobal() {
-    // relever le point de départ
     $timestart=microtime(true);
     $findaide = 0;
     $findfamille = 0;
     $findville = 0;
-    //METTRE UN FUCKING LOADING (freeze all apli lors de l'utilisation, mange ta bdd)
+    
     $typesaides = Doctrine_Core::getTable('type')->findByidlibelletypeOridlibelletype(1,7); 
     $retour = '
         <h3>Recap global</h3>
@@ -175,6 +174,10 @@ function recapGlobal() {
     $retour .= "<br>Recherche des familles executées en " . $findfamille . " sec";
     return $retour;
 }
+
+
+
+
 
 //LENT
 function recapGlobal2() {
