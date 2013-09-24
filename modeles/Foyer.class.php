@@ -11,7 +11,7 @@ class Foyer extends Doctrine_Record {
         $this->hasColumn('numRue', 'integer', 10, array('default' => '0'));
         $this->hasColumn('idRue', 'integer', 10);
         $this->hasColumn('idSecteur', 'integer', 10);
-        $this->hasColumn('idVille', 'integer', 10);
+        $this->hasColumn('idVille', 'integer', 10, array('default' => '0'));
         $this->hasColumn('idBailleur', 'integer', 10);
         $this->hasColumn('dateInscription', 'integer', 20, array('default' => '0')); // timestamp
         $this->hasColumn('typeLogement', 'integer', 5);

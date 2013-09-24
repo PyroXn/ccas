@@ -125,6 +125,11 @@ class Individu extends Doctrine_Record
             'foreign' => 'idIndividu'
                 )
         );
+        $this->hasMany('aideexterne as aideexterne', array(
+            'local' => 'id',
+            'foreign' => 'idIndividu'
+                )
+        );
     }
 }
 ?>
