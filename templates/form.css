@@ -438,6 +438,7 @@ table {
 .page.gradient {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F8F8F8), to(#E9E9E9));
     background: -moz-linear-gradient(0% 0% 270deg,#F8F8F8, #E9E9E9);
+    cursor: pointer;
 }
 
 .page.active {

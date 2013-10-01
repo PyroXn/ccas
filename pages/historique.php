@@ -15,11 +15,19 @@ function affichageHistoriqueByIndividu() {
     $contenu = creationRecherche(false);
     //trop lent
 //    $historiques = Doctrine_Core::getTable('historique')->findByIdIndividuAndD($_POST['idIndividu']);
-    $historiques = Doctrine_Query::create()
-        ->from('historique')
-        ->where('idIndividu = ?', $_POST['idIndividu'])
-        ->andWhere('date >= ?', mktime(0, 0, 0, date('m'), date('d'), date('Y')))
-        ->execute();
+//    $historiques = Doctrine_Query::create()
+//        ->from('historique')
+//        ->where('idIndividu = ?', $_POST['idIndividu'])
+//        ->andWhere('date >= ?', mktime(0, 0, 0, date('m'), date('d'), date('Y')))
+//        ->execute();
+    $pager = new Doctrine_Pager(
+            Doctrine_Query::create()->from('historique')
+            ->where('idIndividu = ?', $_POST['idIndividu'])
+            ->andWhere('date >= ?', mktime(0, 0, 0, date('m'), date('d'), date('Y'))),
+            1, // Current page of request
+            15 // (Optional) Number of results per page. Default is 25
+        );
+    $historiques = $pager->execute();
     $contenu .= '<div><h3>Historique</h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
@@ -34,7 +42,8 @@ function affichageHistoriqueByIndividu() {
                 </thead>
                 <tbody id="contenu_table_historique">';
                                 
-    $contenu .= generateContenuTableHistorique($historiques, false).'</tbody></table></div>';
+    $contenu .= generateContenuTableHistorique($historiques, false).'</tbody></table>';
+    $contenu .= generatePagination($pager).'</div>';
     return $contenu;
 }
 
@@ -42,10 +51,17 @@ function affichageHistorique() {
     $contenu = creationRecherche(true);
     //trop lent
 //    $historiques = Doctrine_Core::getTable('historique')->findAll();
-    $historiques = Doctrine_Query::create()
-        ->from('historique')
-        ->where('date >= ?', mktime(0, 0, 0, date('m'), date('d'), date('Y')))
-        ->execute();
+//    $historiques = Doctrine_Query::create()
+//        ->from('historique')
+//        ->where('date >= ?', mktime(0, 0, 0, date('m'), date('d'), date('Y')))
+//        ->execute();
+    $pager = new Doctrine_Pager(
+            Doctrine_Query::create()->from('historique')
+            ->where('date >= ?', mktime(0, 0, 0, date('m'), date('d'), date('Y'))),
+            1, // Current page of request
+            15 // (Optional) Number of results per page. Default is 25
+        );
+    $historiques = $pager->execute();
     $contenu .= '<div><h3>Historique</h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
@@ -60,7 +76,8 @@ function affichageHistorique() {
                     </tr>
                 </thead>
                 <tbody id="contenu_table_historique">';     
-    $contenu .= generateContenuTableHistorique($historiques, true).'</tbody></table></div>';
+    $contenu .= generateContenuTableHistorique($historiques, true).'</tbody></table>';
+    $contenu .= generatePagination($pager).'</div>';
     return $contenu;
 }
 
@@ -218,17 +235,72 @@ function searchHistorique() {
         $premierPassage = false;
     }
     if ($req == '') {
-        $search = $tableHistorique->findAll();
+        $pager = new Doctrine_Pager(
+            Doctrine_Query::create()->from('historique'),
+            isset ($_POST['page']) ? $_POST['page'] : 1, // Current page of request
+            15 // (Optional) Number of results per page. Default is 25
+        );
+        $search = $pager->execute();
     } else {
-        $search = $tableHistorique->findByDql($req, $param);
+        $pager = new Doctrine_Pager(
+            Doctrine_Query::create()->from('historique')->where($req, $param),
+            isset ($_POST['page']) ? $_POST['page'] : 1, // Current page of request
+            15 // (Optional) Number of results per page. Default is 25
+        );
+        $search = $pager->execute();
     }
     if (isset ($_POST['global']) && $_POST['global'] == 'true') {
         $global = true;
     } else {
         $global = false;
     }
-        
-    echo generateContenuTableHistorique($search, $global);
+    
+//    echo $pager->getQuery().'</br>';
+    
+    $contenuTableHistorique = generateContenuTableHistorique($search, $global, $pager);
+    $pagination = generatePagination($pager);
+    $retour = array('contenu' => $contenuTableHistorique, 'pagination' => $pagination);
+    echo json_encode($retour);
+}
+
+function generatePagination($pager) {
+    $retour = '<div class="pagination">';
+    $current = $pager->getPage();
+    $maxPerPage = $pager->getMaxPerPage();
+    $numResult = $pager->getNumResults();
+    $numPage = ceil($numResult / $maxPerPage);
+    
+    if ($pager->haveToPaginate()) {
+        $retour .= '<span class="page gradient paginationHistorique" value="1"><<</span>
+            <span class="page gradient paginationHistorique" value="'.$pager->getPreviousPage().'"><</span>';
+        if ($numPage > 5) {
+            if ($numPage - 2 < $current) {
+                $retour .= numeroPagination($numPage - 4, $numPage, $current);
+            } else if ($current < 3) {
+                $retour .= numeroPagination(1, 5, $current);
+            } else {
+                $retour .= numeroPagination($current - 2, $current + 2, $current);
+            }
+        } else {
+            $retour .= numeroPagination(1, $numPage, $current);      
+        }
+        $retour .= '<span class="page gradient paginationHistorique" value="'.$pager->getNextPage().'">></span>
+            <span class="page gradient paginationHistorique" value="'.$numPage.'">>></span></div>';
+    }
+    $retour .= $numResult.' résultats sur '.$numPage.' pages</div>';
+    return $retour;
+}
+
+function numeroPagination($debutCompteur, $finCompteur, $current) {
+    $retour = '';
+    for ($i = $debutCompteur; $i <= $finCompteur; $i++) {
+        if ($i == $current) {
+            $retour .= '<span class="page active">'.$current.'</span>';
+        }   else {
+            $retour .= '<span class="page gradient paginationHistorique" value="'.$i.'">'.$i.'</span>';
+        }
+    }
+    return $retour;
 }
 
 function affichageArchive() {

@@ -348,7 +348,7 @@ $(function() {
                 datastring += '&vigilance='+vigilance+'&commentaire='+$('#commentaire').val();
                 datastring += '&rapport='+$('#rapport').val()+'&decideur='+$('#decideur').attr('value');
                 datastring += '&montant='+$('#montantaide').val()+'&montanttotal='+$('#montanttotalaide').val()+'&quantite='+$('#quantiteaide').val();
-                console.log($('#quantiteaide').val());
+//                console.log($('#quantiteaide').val());
                 $.ajax({
                     type: 'post',
                     dataType:'json',
@@ -670,7 +670,7 @@ $(function() {
             var evaluation = $('#evaluation').val();
             evaluation = evaluation.replace(reg, ' ');
             datastring = 'motif='+motif+'&evaluation='+evaluation+'&idIndividu='+idIndividu+'&idAide='+aide;
-            console.log(datastring);
+//            console.log(datastring);
             $.ajax({
                 type: 'post',
                 data: datastring,
@@ -1347,7 +1347,7 @@ $(function() {
         var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
         var interne = $(this).hasClass('aideInterne');
         var datastring = 'idAide='+idAide+'&idIndividu='+idIndividu+'&interne='+interne;
-        console.log(datastring);
+//        console.log(datastring);
          $.ajax ({
             type: 'post',
             data: datastring,

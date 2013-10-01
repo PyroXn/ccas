@@ -162,7 +162,7 @@ $(function() {
         var idIndividu = $('#list_individu').children('.current').children().attr('id_individu');
         var idFoyer = $('#list_individu').children('.current').children().attr('id_foyer');
         var datastring = 'idAide=' + idAide + '&path=./document/' + idFoyer + '/' + idIndividu + '/RapportSocial_' + idAide + '.pdf';
-        console.debug(datastring);
+//        console.debug(datastring);
         $.ajax({
             type: "POST",
             url: "./index.php?p=reloadRapport",
@@ -362,15 +362,19 @@ $(function() {
     $('.rechercheHistorique').live("change", function() {
         searchTableHistorique();
     });
+    $('.paginationHistorique').live("click", function() {
+        var page = $(this).attr('value');
+        searchTableHistorique(page);
+    });
     
     $('#montantaide, #quantiteaide').live("change", function() {
-        console.log("calcul");
-         console.log($('#montantaide').val());
-            console.log($('#quantiteaide').val());
+//        console.log("calcul");
+//         console.log($('#montantaide').val());
+//            console.log($('#quantiteaide').val());
         if ($('#montantaide').val() != '' && $('#montantaide').val() != 0 && $('#quantiteaide').val() != '' && $('#quantiteaide').val() != 0) {
            
             $('#montanttotalaide').val($('#montantaide').val() * $('#quantiteaide').val());
-            console.log($('#montanttotalaide').val());
+//            console.log($('#montanttotalaide').val());
         }
     })
     
@@ -384,6 +388,9 @@ function searchTableHistorique() {
     } else {
         datastring += '&idIndividu='+$('#list_individu').children('.current').children().attr('id_individu');
     }
+    if (arguments[0]) {
+        datastring += '&page=' + arguments[0];
+    }
     $('#ligneRechercheTableHistorique').find('[columnName]').each(function(){
         if($(this).is('div')) {
             if($(this).text() != '--------') {
@@ -395,15 +402,16 @@ function searchTableHistorique() {
             }
         }
     });
-        
     $.ajax({
         type: 'post',
+        dataType:'json',
         data: datastring,
         url: './index.php?p=searchTableHistorique',
         cache: false,
         //Succés de la requête
         success: function(tableHistorique) {
-            $("#contenu_table_historique").html(tableHistorique);
+            $("#contenu_table_historique").html(tableHistorique.contenu);
+            $(".pagination").html(tableHistorique.pagination);
         },
         error: function(tableHistorique) {
             $("#contenu_table_historique").html(tableHistorique.responseText);
