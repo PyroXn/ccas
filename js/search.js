@@ -412,6 +412,7 @@ function searchTableHistorique() {
         success: function(tableHistorique) {
             $("#contenu_table_historique").html(tableHistorique.contenu);
             $(".pagination").html(tableHistorique.pagination);
+            $(".numero_page").html(tableHistorique.numero_page);
         },
         error: function(tableHistorique) {
             $("#contenu_table_historique").html(tableHistorique.responseText);

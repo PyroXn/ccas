@@ -28,7 +28,7 @@ function affichageHistoriqueByIndividu() {
             15 // (Optional) Number of results per page. Default is 25
         );
     $historiques = $pager->execute();
-    $contenu .= '<div><h3>Historique</h3>';
+    $contenu .= '<div><h3>Historique'.generateNumeroPage($pager).'</h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
             <table class="tableau_classique" cellpadding="0" cellspacing="0">
@@ -62,7 +62,7 @@ function affichageHistorique() {
             15 // (Optional) Number of results per page. Default is 25
         );
     $historiques = $pager->execute();
-    $contenu .= '<div><h3>Historique</h3>';
+    $contenu .= '<div><h3>Historique'.generateNumeroPage($pager).'</h3>';
     $contenu .= '
         <div class="bubble tableau_classique_wrapper">
             <table class="tableau_classique" cellpadding="0" cellspacing="0">
@@ -259,7 +259,8 @@ function searchHistorique() {
     
     $contenuTableHistorique = generateContenuTableHistorique($search, $global, $pager);
     $pagination = generatePagination($pager);
-    $retour = array('contenu' => $contenuTableHistorique, 'pagination' => $pagination);
+    $numeroPage = generateNumeroPage($pager);
+    $retour = array('contenu' => $contenuTableHistorique, 'pagination' => $pagination, 'numero_page' => $numeroPage);
     echo json_encode($retour);
 }
 
@@ -287,7 +288,6 @@ function generatePagination($pager) {
         $retour .= '<span class="page gradient paginationHistorique" value="'.$pager->getNextPage().'">></span>
             <span class="page gradient paginationHistorique" value="'.$numPage.'">>></span></div>';
     }
-    $retour .= $numResult.' résultats sur '.$numPage.' pages</div>';
     return $retour;
 }
 
@@ -300,6 +300,18 @@ function numeroPagination($debutCompteur, $finCompteur, $current) {
             $retour .= '<span class="page gradient paginationHistorique" value="'.$i.'">'.$i.'</span>';
         }
     }
+    return $retour;
+}
+
+function generateNumeroPage($pager) {
+    $retour = '<span class="numero_page">';
+    $current = $pager->getPage();
+    $maxPerPage = $pager->getMaxPerPage();
+    $numResult = $pager->getNumResults();
+    if ($numResult!=0) {
+        $retour .= min(($current*$maxPerPage-$maxPerPage+1),$numResult).'-'.min(($current*$maxPerPage),$numResult).' sur '.$numResult;
+    }
+    $retour .= '</span>';
     return $retour;
 }
 

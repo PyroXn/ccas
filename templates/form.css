@@ -471,3 +471,7 @@ table {
     height: 32px;
     background: transparent url('./img/ajax-loader.gif') no-repeat;
 }
+
+.numero_page {
+    float: right;
+}
