@@ -212,7 +212,8 @@ function affichagePermissions() {
         $retour .= '
             <tr>
                 <td>' . $r->designation . '</td>
-                <td>' . count($r->user) . '</td>
+                    
+                <td>' . count(Doctrine_Core::getTable('user')->findByidroleAndactif($r->id, 1)) . '</td>
                 <td class="icon"><span idRole="'.$r->id.'" class="delete_role"></span></td>
             </tr>';
     }
