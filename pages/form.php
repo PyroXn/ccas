@@ -21,6 +21,13 @@ function form() {
              $retour = array('tableau' =>$page);
              echo json_encode($retour);
              break;
+         case 'edit_pwd':
+             include_once('./pages/admin.php');
+             editPwd($_POST['pwd']);
+             $page = manageUser();
+             $retour = array('tableau' =>$page);
+             echo json_encode($retour);
+             break;
         case 'creation_individu':
             include_once('./pages/individu.php');
             $newIndividu = createIndividu($_POST['idFoyer'], $_POST['civilite'], $_POST['nom'], $_POST['prenom'], $_POST['naissance'], $_POST['idlienfamille']);

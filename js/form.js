@@ -7,7 +7,9 @@ $(function() {
     });
     
     $('#newUser').live("click", function() {
-        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_utilisateur"]'))
+        creationForm($(this).offset(), $(this).outerHeight(), $('.formulaire[action="creation_utilisateur"]'));
+        $('#newpwd').show();
+        $('#newpwd').addClass('requis');
     });
     
     $('#newIndividu').live("click", function() {
@@ -47,6 +49,18 @@ $(function() {
         form.find('#newlogin').val(ligne.find('[login]').text());
         form.find('#newnomcomplet').val(ligne.find('[nomcomplet]').text());
         form.find('#newrole').text(ligne.find('[role]').text());
+        form.attr('iduser', $(this).attr('idUser'));
+        $('#newpwd').hide();
+        $('#newpwd').removeClass('requis');
+    });
+    
+    $('.edit_pwd').live("click",function() {
+        var form = $('.formulaire[action="edit_pwd"]');
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - $(form).width()/2;
+        newPosition.top = $(window).height()/2 - $(form).height();
+        creationForm(newPosition, $(this).outerHeight(), $(form));
+        $('#edit_pwdLogin').val($(this).attr('login'));
         form.attr('iduser', $(this).attr('idUser'));
     });
     
@@ -553,6 +567,13 @@ $(function() {
                             datastring += '&iduser='+iduser;
                         }
                         break;
+                    case 'edit_pwd':
+                        datastring += '&pwd='+$('#editPwd').val();
+                        var iduser = formActuel.attr('iduser');
+                        if (typeof iduser !== 'undefined' && iduser !== false) {
+                            datastring += '&iduser='+iduser;
+                        }
+                        break;
                     case 'creation_individu':
                         datastring += '&idFoyer=' + $('#list_individu').children('.current').children().attr('id_foyer');
                         datastring += '&idIndividuCourant=' + $('#list_individu').children('.current').children().attr('id_individu');
@@ -639,6 +660,9 @@ $(function() {
                                 $('#contenu').html(data.contenu);
                                 break;
                             case 'creation_utilisateur':
+                                $("#contenu").html(data.tableau);
+                                break;
+                            case 'edit_pwd':
                                 $("#contenu").html(data.tableau);
                                 break;
                             case 'creation_individu':

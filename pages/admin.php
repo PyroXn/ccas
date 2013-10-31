@@ -75,6 +75,7 @@ function manageUser() {
                         <th>Rôle</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -85,11 +86,32 @@ function manageUser() {
                 <td login>' . $user->login . '</td>
                 <td role>' . $user->role->designation . '</td>
                 <td  class="icon"><span class="edit_user" original-title="Modifier le compte" idUser="' . $user->id . '"></span></td>
+                <td  class="icon"><span class="edit_pwd" login="' . $user->login . '" original-title="Modifier le mot de passe" idUser="' . $user->id . '"></span></td>
                 <td  class="icon"><span class="delete_user" login="' . $user->login . '" original-title="Désactiver ' . $user->login . '" idUser="' . $user->id . '"></span></td>
-                
             </tr>';
     }
     $contenu .= '</tbody></table>';
+    $contenu .= '<div class="formulaire" action="edit_pwd">
+            <h2>Utilisateur</h2>
+            <div class="colonne_droite">
+                <div class="input_text">
+                    <input class="contour_field" type="text" title="Login" placeholder="Login" name="login" id="edit_pwdLogin" disabled>
+                </div>
+                <div class="input_text">
+                    <input class="contour_field requis" type="password" title="Password" placeholder="Password" name="pwd" id="editPwd">
+                </div>
+                <div class="sauvegarder_annuler">
+                    <div value="save" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Annuler</span>
+                    </div>
+                </div>
+            </div>
+        </div>';
     $contenu .= '<div class="formulaire" action="suppression_user">
             <h2>Utilisateur</h2>
             <div class="colonne_droite">
@@ -317,13 +339,22 @@ function createUser($login, $password, $nomcomplet, $role) {
         $user = Doctrine_Core::getTable('user')->find($_POST['iduser']);
     } else {
         $user = new User();
+        $user->password = md5($password);
     }
     $role = Doctrine_Core::getTable('role')->findOneByDesignation($role);
     $user->login = $login;
-    $user->password = md5($password);
     $user->nomcomplet = $nomcomplet;
     $user->idRole = $role->id;
     $user->save();
+}
+
+function editPwd($password) {
+    include_once('./lib/config.php');
+    if (isset ($_POST['iduser'])) {
+        $user = Doctrine_Core::getTable('user')->find($_POST['iduser']);
+        $user->password = md5($password);
+        $user->save();
+    }
 }
 
 function deleteUser() {

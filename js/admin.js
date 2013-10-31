@@ -1,21 +1,4 @@
 $(function() {
-//    $('.delete_user').live("click",function() {
-//        var idUser = $(this).attr('idUser');
-//        $.ajax({
-//            url: './index.php?p=deleteUser',
-//            type:'POST',
-//            data: "idUser="+idUser,
-//            cache: false,
-//            //Succés de la requête
-//            success: function(user) {
-//                $('#contenu').html(user);
-//            },
-//            error: function(user) {
-//                $("#contenu").html(user.responseText);
-//            }
-//        });
-//    });
-    
     $('#permissions_configurator_tabs > li').live("click",function() {
         var pane = "#"+$('.selected').attr('id') + "_pane";
         var currentPane = "#"+$(this).attr('id') + "_pane";
