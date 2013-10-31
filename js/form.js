@@ -218,6 +218,15 @@ $(function() {
         if ($(this).parent().hasClass("select_historique_type_action")) {
             searchTableHistorique();
         }
+        if ($(this).parent().hasClass("select_secteur")) {
+            if ($(this).children().attr('value') != 6) {
+                $('#ville').attr('value', 'HAYANGE');
+                $('#ville').attr('valeur', 20);
+            } else {
+                $('#ville').attr('value', '');
+                $('#ville').attr('valeur', 0);
+            }
+        }
         if($(this).parent().hasClass("select_graph_instruct")) {
             var stringdata = 'id='+$(this).children().attr('value');
             $.ajax({
