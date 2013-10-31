@@ -1056,6 +1056,43 @@ $(function() {
                 }
             });
         }
+        else if (value == 'delete_role') {
+            var idRoleADelete = formActuel.attr('idRoleADelete');
+            datastring = 'idRole=' + idRoleADelete;
+            $.ajax({
+                type: 'post',
+                data: datastring,
+                url: './index.php?p=removeRole',
+                cache: false,
+                //Succés de la requête
+                success: function(role) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $('#contenu').html(role);
+                },
+                error: function(role) {
+                    $("#contenu").html(role.responseText);
+                }
+            });
+        }
+        else if (value == 'delete_user') {
+            var idUserADelete = formActuel.attr('idUserADelete');
+            $.ajax({
+                url: './index.php?p=deleteUser',
+                type:'POST',
+                data: "idUser="+idUserADelete,
+                cache: false,
+                //Succés de la requête
+                success: function(user) {
+                    $('#ecran_gris').toggle();
+                    formActuel.toggle();
+                    $('#contenu').html(user);
+                },
+                error: function(user) {
+                    $("#contenu").html(user.responseText);
+                }
+            });
+        }
         else if (value == 'archive_ressource') {
             datastring = 'idIndividu='+idIndividu;
             $.ajax({
@@ -1208,6 +1245,28 @@ $(function() {
         var idFoyer = $(this).parent().parent().attr('id_foyer');
         form.attr('idIndividuADelete', idIndividuADelete);
         form.attr('idFoyer', idFoyer);
+    });
+    
+    $('.delete_role').live("click", function() {
+        var form = $('.formulaire[action="suppression_role"]');
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        creationForm(newPosition, $(this).outerHeight(), form);
+        var idRoleADelete = $(this).attr('idrole');
+        form.attr('idRoleADelete', idRoleADelete);
+        $('#answer').text("Le rôle " + $(this).attr('designation') + " est lié à " + $(this).attr('nbUser') + " utilisateur(s), etes-vous sur de vouloir le supprimer?");
+    });
+    
+    $('.delete_user').live("click", function() {
+        var form = $('.formulaire[action="suppression_user"]');
+        var newPosition = new Object();
+        newPosition.left = $(window).width()/2 - form.width()/2;
+        newPosition.top = $(window).height()/2 - form.height();
+        creationForm(newPosition, $(this).outerHeight(), form);
+        var idUserADelete = $(this).attr('iduser');
+        form.attr('idUserADelete', idUserADelete);
+        $('#answer').text("Etes-vous sur de vouloir supprimer l'utilisateur " + $(this).attr('login') + "?");
     });
     
     $('.delete_ligne').live("click", function() {

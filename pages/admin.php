@@ -85,11 +85,27 @@ function manageUser() {
                 <td login>' . $user->login . '</td>
                 <td role>' . $user->role->designation . '</td>
                 <td  class="icon"><span class="edit_user" original-title="Modifier le compte" idUser="' . $user->id . '"></span></td>
-                <td  class="icon"><span class="delete_user" original-title="Désactiver ' . $user->login . '" idUser="' . $user->id . '"></span></td>
+                <td  class="icon"><span class="delete_user" login="' . $user->login . '" original-title="Désactiver ' . $user->login . '" idUser="' . $user->id . '"></span></td>
                 
             </tr>';
     }
     $contenu .= '</tbody></table>';
+    $contenu .= '<div class="formulaire" action="suppression_user">
+            <h2>Utilisateur</h2>
+            <div class="colonne_droite">
+                <span id="answer">Etes-vous sur de vouloir supprimer cet utilisateur.</span>
+                <div class="sauvegarder_annuler">
+                    <div value="delete_user" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Oui</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Non</span>
+                    </div>
+                </div>
+            </div>
+        </div>';
     return $contenu;
 }
 
@@ -209,15 +225,32 @@ function affichagePermissions() {
                 </thead>
                 <tbody>';
     foreach ($roles as $r) {
+        $nbUser = count(Doctrine_Core::getTable('user')->findByidroleAndactif($r->id, 1));
         $retour .= '
             <tr>
                 <td>' . $r->designation . '</td>
                     
-                <td>' . count(Doctrine_Core::getTable('user')->findByidroleAndactif($r->id, 1)) . '</td>
-                <td class="icon"><span idRole="'.$r->id.'" class="delete_role"></span></td>
+                <td>' . $nbUser . '</td>
+                <td class="icon"><span designation="'.$r->designation.'" nbUser="'.$nbUser.'" idRole="'.$r->id.'" class="delete_role"></span></td>
             </tr>';
     }
     $retour .= '</tbody></table>';
+    $retour .= '<div class="formulaire" action="suppression_role">
+            <h2>Rôle</h2>
+            <div class="colonne_droite">
+                <span id="answer">Etes-vous sur de vouloir supprimer le rôle.</span>
+                <div class="sauvegarder_annuler">
+                    <div value="delete_role" class="bouton modif">
+                        <i class="icon-save"></i>
+                        <span>Oui</span>
+                    </div>
+                    <div value="cancel" class="bouton classique">
+                        <i class="icon-cancel icon-black"></i>
+                        <span>Non</span>
+                    </div>
+                </div>
+            </div>
+        </div>';
     return $retour;
 }
 

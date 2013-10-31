@@ -1,20 +1,20 @@
 $(function() {
-    $('.delete_user').live("click",function() {
-        var idUser = $(this).attr('idUser');
-        $.ajax({
-            url: './index.php?p=deleteUser',
-            type:'POST',
-            data: "idUser="+idUser,
-            cache: false,
-            //Succés de la requête
-            success: function(user) {
-                $('#contenu').html(user);
-            },
-            error: function(user) {
-                $("#contenu").html(user.responseText);
-            }
-        });
-    });
+//    $('.delete_user').live("click",function() {
+//        var idUser = $(this).attr('idUser');
+//        $.ajax({
+//            url: './index.php?p=deleteUser',
+//            type:'POST',
+//            data: "idUser="+idUser,
+//            cache: false,
+//            //Succés de la requête
+//            success: function(user) {
+//                $('#contenu').html(user);
+//            },
+//            error: function(user) {
+//                $("#contenu").html(user.responseText);
+//            }
+//        });
+//    });
     
     $('#permissions_configurator_tabs > li').live("click",function() {
         var pane = "#"+$('.selected').attr('id') + "_pane";
@@ -61,24 +61,6 @@ $(function() {
         }
     });
     
-    $('.delete_role').live("click", function(){
-        var datastring = 'idRole=' + $(this).attr('idRole');
-        $.ajax({
-            type: 'post',
-            data: datastring,
-            url: './index.php?p=removeRole',
-            cache: false,
-            //Succés de la requête
-            success: function(role) {
-                $('#contenu').html(role);
-            },
-            error: function(role) {
-                $("#contenu").html(role.responseText);
-            }
-        });
-    });
-    
-
     $('.radio_stat').live('change', function(){
         if ($("input[type=radio][name=groupe3]:checked").val() != "periode") {
                     $.ajax({
