@@ -74,6 +74,10 @@ function contenu() {
             include_once './pages/recapAides.php';
             echo recapAides();
             break;
+        case 'gestionPass':
+            include_once './pages/gestionCompte.php';
+            echo gestionPass();
+            break;
     }
 }
 ?>

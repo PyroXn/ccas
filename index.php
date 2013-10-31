@@ -47,6 +47,14 @@ switch (@$_GET['p']) {
         include_once('./pages/admin.php');
         homeAdmin();
         break;
+    case 'gestionCompte':
+        include_once('./pages/gestionCompte.php');
+        gestionCompte();
+        break;
+    case 'updatePwdPersonnel':
+        include_once('./pages/gestionCompte.php');
+        echo editPassword();
+        break;
     case 'deconnexion':
         deconnexion();
         break;
@@ -497,6 +505,12 @@ function generationHeaderNavigation($mode) {
             $retour .= '
                 <div id="ecranTableStatique" href="#" class="page_header_link active">
                     <span class="label">Tables statique</span>
+                </div>';
+            break;
+        case 'gestionCompte' :
+            $retour .= '
+                <div id="gestionPass" href="#" class="page_header_link active">
+                    <span class="label">Gestion du mot de passe</span>
                 </div>';
             break;
     }

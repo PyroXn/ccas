@@ -5,29 +5,35 @@
 function form() {
     $table = $_POST['table'];
     switch ($table) {
-         case 'creation_foyer':
-             include_once('./pages/foyer.php');
-             $tab = creationFoyer($_POST['civilite'], $_POST['nom'], $_POST['prenom']);
-             $listeIndividu = creationListeByFoyer($tab['idFoyer'], $tab['idIndividu']);
-             $menu = generationHeaderNavigation('foyer');
-             $contenu = foyerContenu($tab['idFoyer']);
-             $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu, 'contenu' => $contenu);
-             echo json_encode($retour);
-             break;
-         case 'creation_utilisateur':
-             include_once('./pages/admin.php');
-             createUser($_POST['login'], $_POST['pwd'], $_POST['nomcomplet'], $_POST['role']);
-             $page = manageUser();
-             $retour = array('tableau' =>$page);
-             echo json_encode($retour);
-             break;
-         case 'edit_pwd':
-             include_once('./pages/admin.php');
-             editPwd($_POST['pwd']);
-             $page = manageUser();
-             $retour = array('tableau' =>$page);
-             echo json_encode($retour);
-             break;
+        case 'creation_foyer':
+            include_once('./pages/foyer.php');
+            $tab = creationFoyer($_POST['civilite'], $_POST['nom'], $_POST['prenom']);
+            $listeIndividu = creationListeByFoyer($tab['idFoyer'], $tab['idIndividu']);
+            $menu = generationHeaderNavigation('foyer');
+            $contenu = foyerContenu($tab['idFoyer']);
+            $retour = array('listeIndividu' => $listeIndividu, 'menu' => $menu, 'contenu' => $contenu);
+            echo json_encode($retour);
+            break;
+        case 'creation_utilisateur':
+            include_once('./pages/admin.php');
+            createUser($_POST['login'], $_POST['pwd'], $_POST['nomcomplet'], $_POST['role']);
+            $page = manageUser();
+            $retour = array('tableau' =>$page);
+            echo json_encode($retour);
+            break;
+        case 'edit_pwd':
+            include_once('./pages/admin.php');
+            editPwd($_POST['pwd']);
+            $page = manageUser();
+            $retour = array('tableau' =>$page);
+            echo json_encode($retour);
+            break;
+        case 'edit_pwdPersonnel':
+            include_once('./pages/gestionCompte.php');
+            $page = gestionCompte();
+            $retour = array('tableau' =>$page);
+            echo json_encode($retour);
+            break;
         case 'creation_individu':
             include_once('./pages/individu.php');
             $newIndividu = createIndividu($_POST['idFoyer'], $_POST['civilite'], $_POST['nom'], $_POST['prenom'], $_POST['naissance'], $_POST['idlienfamille']);

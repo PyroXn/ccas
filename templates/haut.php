@@ -33,7 +33,7 @@
                         <a href="#" rel="./templates/form2.css" rel2="./templates/ccas2.css" class="css_switch cssform2" title="Thème en couleur"></a>
                     </li>
                     <li class="navigationligne">
-                        <span class="categorie"><a href="mailto:contact@mydevhouse.com" class="contact"></a></span>
+                        <span class="categorie"><a href="mailto:pierre.charrasse@gmail.com" class="contact"></a></span>
                     </li>
                     <li class="navigationligne">
                         <a class="lien_navigation" href="index.php" title="Accueil">
@@ -49,6 +49,7 @@
                             ?>
                         </a>
                     </li>
+                    <?php if(isset($_SESSION['userId'])) { ?>
                     <li class="navigationligne">
                         <a id="lien_option" name="passive" class="lien_navigation actif" href="#" title="Options">
                             <span class="border_top"></span>
@@ -57,20 +58,18 @@
                         <div class="menu_option">
                             <ul class="liste_menu_option">
                                 <?php
-                                include_once('./pages/Droit.class.php');
-                                if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_CONFIG)) {
-                                    echo '<li><a clas="" href="index.php?p=config">Configuration</a></li>';
-                                }
-                                if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_ADMIN)) { 
-                                    echo '<li><a class="" href="index.php?p=admin" >Administration</a></li>';
-                                }
-                                ?>
-                                <li>
-                                    <a class="deconnexion" href="index.php?p=deconnexion" >Deconnexion</a>
-                                </li>
+                                    include_once('./pages/Droit.class.php');
+                                    if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_CONFIG)) {
+                                        echo '<li><a class="" href="index.php?p=config">Configuration</a></li>';
+                                    }
+                                    if(Droit::isAcces($_SESSION['permissions'], Droit::$ACCES_ADMIN)) { 
+                                        echo '<li><a class="" href="index.php?p=admin" >Administration</a></li>';
+                                    }
+                                    echo '<li><a class="" href="index.php?p=gestionCompte">Gestion du compte</a></li>';
+                                    echo '<li><a class="deconnexion" href="index.php?p=deconnexion" >Deconnexion</a></li>
                             </ul>
                         </div>
-                    </li>
+                    </li>';}?>
                 </ul>
             </div>
         </div>

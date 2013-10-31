@@ -54,7 +54,7 @@ $(function() {
         $('#newpwd').removeClass('requis');
     });
     
-    $('.edit_pwd').live("click",function() {
+    $('.edit_pwd' ).live("click",function() {
         var form = $('.formulaire[action="edit_pwd"]');
         var newPosition = new Object();
         newPosition.left = $(window).width()/2 - $(form).width()/2;
@@ -1017,6 +1017,29 @@ $(function() {
                 }
             });
         }
+        else if(value == 'updatePwd') {
+            datastring = 'oldPwd='+$('#oldPwd').attr('value');
+            datastring += '&newPwd='+$('#newPwd').attr('value');
+            datastring += '&newPwdVerif='+$('#newPwdVerif').attr('value');
+            datastring += '&iduser='+$('#login').attr('iduser');
+            if (findRequis($('#updatePwdPerso'))) {
+                console.log(datastring);
+                $.ajax({
+                    type: 'post',
+                    data: datastring,
+                    url: './index.php?p=updatePwdPersonnel',
+                    cache: false,
+                    //Succés de la requête
+                    success: function(data) {
+                        console.log("OK");
+                        $("#contenu").html(data);
+                    },
+                    error: function(contenu) {
+                        $("#contenu").html(contenu.responseText);
+                    }
+                });
+            }
+        }
         else if(value == 'updateInfoPerso') {
             datastring = 'idIndividu='+idIndividu+'&nom='+$('#nom').val();
             datastring += '&prenom='+$('#prenom').val()+'&situation='+$('#situation').attr('value');
@@ -1207,7 +1230,7 @@ $(function() {
             left:x.left
         });
     }
-    
+      
     $('.edit').live("click", function() {
         var attr = $(this).parent().next().children().find('input').attr('disabled');
         if (typeof attr !== 'undefined' && attr !== false) {
