@@ -529,6 +529,24 @@ legend {
     vertical-align: middle;
 }
 
+.expandall {
+    background: url('./img/expandall.gif') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.collapseall {
+    background: url('./img/collapseall.gif') transparent no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
 .open_doc {
     background: url('./img/open.png') transparent no-repeat;
     width: 16px;

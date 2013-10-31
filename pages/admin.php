@@ -182,6 +182,7 @@ function affichagePermissions() {
         <div id="permissions_configurator_tabs_panes" class="permission_list">
             <div id="configurator_tab_general_pane" class="tab_pane">
                 <ul>
+                    <li></span><span class="collapseall"></span><span class="expandall"></li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$ACCES_ADMIN) . '</span>' . listRole($roles, Droit::$ACCES_ADMIN) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$ACCES_CONFIG) . '</span>' . listRole($roles, Droit::$ACCES_CONFIG) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_ACCES_TAB_COM) . '</span>' . listRole($roles, Droit::$DROIT_ACCES_TAB_COM) . '</li>
@@ -189,6 +190,7 @@ function affichagePermissions() {
             </div>
             <div id="configurator_tab_documents_pane" class="tab_pane" style="display: none;">
                 <ul>
+                    <li></span><span class="collapseall"></span><span class="expandall"></li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$ACCES_DOCUMENT) . '</span>' . listRole($roles, Droit::$ACCES_DOCUMENT) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_AJOUT_DOCUMENT) . '</span>' . listRole($roles, Droit::$DROIT_AJOUT_DOCUMENT) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_TELECHARGEMENT_DOCUMENT) . '</span>' . listRole($roles, Droit::$DROIT_TELECHARGEMENT_DOCUMENT) . '</li>
@@ -200,6 +202,7 @@ function affichagePermissions() {
             </div>
             <div id="configurator_tab_individu_pane" class="tab_pane" style="display: none;">
                 <ul>
+                    <li></span><span class="collapseall"></span><span class="expandall"></li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$ACCES_FOYER) . '</span>' . listRole($roles, Droit::$ACCES_FOYER) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$ACCES_GENERALITES) . '</span>' . listRole($roles, Droit::$ACCES_GENERALITES) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$ACCES_BUDGET) . '</span>' . listRole($roles, Droit::$ACCES_BUDGET) . '</li>
@@ -211,6 +214,7 @@ function affichagePermissions() {
             </div>
             <div id="configurator_tab_modif_creation_pane" class="tab_pane" style="display: none;">
                 <ul>
+                    <li></span><span class="collapseall"></span><span class="expandall"></li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_CREATION_FOYER) . '</span>' . listRole($roles, Droit::$DROIT_CREATION_FOYER) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_CREATION_INDIVIDU) . '</span>' . listRole($roles, Droit::$DROIT_CREATION_INDIVIDU) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_MODIFICATION_FOYER) . '</span>' . listRole($roles, Droit::$DROIT_MODIFICATION_FOYER) . '</li>
@@ -224,6 +228,7 @@ function affichagePermissions() {
             </div>
             <div id="configurator_tab_aide_pane" class="tab_pane" style="display: none;">
                 <ul>
+                    <li></span><span class="collapseall"></span><span class="expandall"></li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_CREATION_AIDE_INTERNE) . '</span>' . listRole($roles, Droit::$DROIT_CREATION_AIDE_INTERNE) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_CREATION_AIDE_EXTERNE) . '</span>' . listRole($roles, Droit::$DROIT_CREATION_AIDE_EXTERNE) . '</li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_APPORTER_DECISION) . '</span>' . listRole($roles, Droit::$DROIT_APPORTER_DECISION) . '</li>
@@ -232,6 +237,7 @@ function affichagePermissions() {
             </div>
             <div id="configurator_tab_tableaubord_pane" class="tab_pane" style="display: none;">
                 <ul>
+                    <li></span><span class="collapseall"></span><span class="expandall"></li>
                     <li><span class="permission">' . Droit::getStaticDesignation(Droit::$DROIT_ACCES_GRAPH_INSTRUCT) . '</span>' . listRole($roles, Droit::$DROIT_ACCES_GRAPH_INSTRUCT) . '</li>
                 </ul>
             </div>

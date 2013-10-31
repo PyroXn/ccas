@@ -8,6 +8,14 @@ $(function() {
         $(pane).toggle();
     });
     
+    $('.expandall').live("click",function() {
+        $('.rounded_box').show();
+    });
+    
+    $('.collapseall').live("click",function() {
+        $('.rounded_box').hide();
+    });
+    
     $('.permission').live("click",function() {
         $(this).next().toggle();
     });
