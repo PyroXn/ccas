@@ -371,7 +371,7 @@ $(function() {
 //        console.log("calcul");
 //         console.log($('#montantaide').val());
 //            console.log($('#quantiteaide').val());
-        if ($('#montantaide').val() != '' && $('#montantaide').val() != 0 && $('#quantiteaide').val() != '' && $('#quantiteaide').val() != 0) {
+        if ($('#montantaide').val() != '' && $('#quantiteaide').val() != '') {
            
             $('#montanttotalaide').val($('#montantaide').val() * $('#quantiteaide').val());
 //            console.log($('#montanttotalaide').val());
