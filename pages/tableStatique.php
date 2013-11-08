@@ -4,51 +4,51 @@
 function comboTableStatique() {
     $retour = '
         <div class="select classique court" role="select_table_statique">
-            <div id="choixTableStatique" class="option">bailleur</div>
+            <div id="choixTableStatique" class="option" value="bailleur">Bailleurs</div>
             <div class="fleche_bas"> </div>
         </div>
         <ul class="select_table_statique">
             <li>
-                <div>bailleur</div>
+                <div table="bailleur">Bailleurs</div>
             </li>
             <li>
-                <div>decideur</div>
+                <div table="decideur">Decideurs</div>
             </li>
             <li>
-                <div>etude</div>
+                <div table="etude">Etudes</div>
             </li>
             <li>
-                <div>instruct</div>
+                <div table="instruct">Instructeurs</div>
             </li>
             <li>
-                <div>lienfamille</div>
+                <div table="lienfamille">Liens familiaux</div>
             </li>
             <li>
-                <div>nationalite</div>
+                <div table="nationalite">Nationalites</div>
             </li>
             <li>
-                <div>organisme</div>
+                <div table="organisme">Organismes</div>
             </li>
             <li>
-                <div>profession</div>
+                <div table="profession">Professions</div>
             </li>
             <li>
-                <div>rue</div>
+                <div table="rue">Rues</div>
             </li>
             <li>
-                <div>secteur</div>
+                <div table="secteur">Secteurs</div>
             </li>
             <li>
-                <div>situationfamiliale</div>
+                <div table="situationfamiliale">Situations familiales</div>
             </li>
             <li>
-                <div>situationmatri</div>
+                <div table="situationmatri">Situations matrimoniales</div>
             </li>
             <li>
-                <div>type</div>
+                <div table="type">Types</div>
             </li>
             <li>
-                <div>ville</div>
+                <div table="ville">Villes</div>
             </li> 
         </ul>';
     $retour .= generateEcranStatiqueEnTab('bailleur');

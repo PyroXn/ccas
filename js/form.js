@@ -210,7 +210,9 @@ $(function() {
             });
         }
         if ($(this).parent().hasClass("select_table_statique")) {
-            var datastring = 'table=' + $('#choixTableStatique').text();
+            $('#choixTableStatique').text($(this).children().text());
+            $('#choixTableStatique').attr('value', $(this).children().attr('table'));
+            var datastring = 'table=' + $('#choixTableStatique').attr('value');
             $.ajax({
                 type: 'post',
                 data: datastring,
